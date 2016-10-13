@@ -1,0 +1,22 @@
+Please proceed the following steps to Install
+---------------------------------------------
+Requirements:
+
+	a) Must be a Linux/Unix/POSIX server
+	b) Must need root shell(bash) access
+	c) Must need 200 MB of free space in your server
+	
+i) Check if yum in installed or not in the server. If there is no yum,
+ please make sure automake,autoconf and libtools are installed.
+ It is reccommend to configure the distribution specific  yum.	
+
+i) Download the latest version of tar ball ffmpeginstaller.X.X.X.tar.gz , where X.X.X is the version
+	# tar -xvzf ffmpeginstaller.X.X.X.tar.gz
+	#cd ffmpeginstaller.X.X.X/
+	# ./install
+ 
+
+Project Home Page: http://www.ffmpeginstaller.com/
+TECHNICAl SUPPORT:
+	Get free forum support from http://forum.syslint.com/forum/20/help-and-tech-support/
+
