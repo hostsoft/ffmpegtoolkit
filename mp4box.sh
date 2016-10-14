@@ -30,7 +30,7 @@ echo -e $RED"Installation of $_package ....... started"$RESET
 cd $INSTALL_SDIR/
 rm -rf gpac gpac*
 if [ -e "/etc/yum.conf" ];then
-yum -y install freetype-devel SDL-devel freeglut-devel
+yum -y install freetype-devel SDL-devel freeglut-devel openssl-devel
 fi
 
 export PKG_CONFIG_PATH=/usr/local/cpffmpeg/lib/pkgconfig
