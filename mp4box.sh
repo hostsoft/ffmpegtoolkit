@@ -46,3 +46,10 @@ ln -sf /usr/local/cpffmpeg/bin/MP4Box /usr/local/bin/MP4Box
 ln -sf /usr/local/cpffmpeg/bin/MP4Box /usr/bin/MP4Box
 echo -e $RED"Installation of $_package ....... Completed"$RESET
 sleep 2
+
+
+#
+# rpm -ivh http://negativo17.org/repos/HandBrake/epel-7/x86_64/gpac-0.6.1-3.el7.x86_64.rpm
+# rpm -ivh http://negativo17.org/repos/HandBrake/epel-7/x86_64/gpac-libs-0.6.1-3.el7.x86_64.rpm
+# rpm -ivh http://negativo17.org/repos/HandBrake/epel-7/x86_64/gpac-devel-0.6.1-3.el7.x86_64.rpm
+
