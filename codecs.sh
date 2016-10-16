@@ -34,7 +34,7 @@ ldconfig
    cd $INSTALL_SDIR
 echo "removing old source"
    rm -fr all* 
-   wget $SOURCE_URL/$codec_source
+   wget http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20110131.tar.bz2
    tar -xvjf $codec_source
    chown -R root.root all-20110131/
    mkdir -pv $INSTALL_DDIR/lib/codecs/
