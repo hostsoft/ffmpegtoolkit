@@ -23,16 +23,16 @@ SOURCE_URL='http://mirror.ffmpeginstaller.com/source/fdkaac'
 INSTALL_DDIR='/usr/local/cpffmpeg'
 export cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
 export TMPDIR=$HOME/tmp
-_package='fdk-aac-0.1.3.tar.gz'
+_package='v0.1.4.tar.gz'
 clear
 sleep 2
 echo -e $RED"Installation of $_package ....... started"$RESET
 
 cd $INSTALL_SDIR/
 rm -rf fdk-aac*
-wget $SOURCE_URL/$_package
+wget https://github.com/mstorsjo/fdk-aac/archive/v0.1.4.tar.gz
 tar -xvzf $_package
-cd fdk-aac-0.1.3/
+cd fdk-aac-0.1.4/
 	./configure  --prefix=$INSTALL_DDIR
 	make -j$cpu
 	make install
