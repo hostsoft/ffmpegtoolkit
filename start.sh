@@ -81,6 +81,9 @@ cat >>/etc/ld.so.conf <<EOF
 EOF
 ldconfig
 
+#Re insert
+cd /usr/local/src/ffmpeginstaller
+
 #addon
 #sh presetup2.sh
 #free type
