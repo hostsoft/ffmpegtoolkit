@@ -1,21 +1,4 @@
 #!/bin/bash
-#FFMPEG installation script
-
-#  Copyright (C) 2007-2014 Sherin.co.in. All rights reserved.
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 RED='\033[01;31m'
 RESET='\033[0m'
 INSTALL_SDIR='/usr/src/ffmpegscript'
@@ -26,17 +9,19 @@ export TMPDIR=$HOME/tmp
 export LD_LIBRARY_PATH=/usr/local/cpffmpeg/lib:/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=/usr/local/cpffmpeg/lib:/usr/lib:/usr/local/lib:$LIBRARY_PATH
 export CPATH=/usr/local/cpffmpeg/include:/usr/include/:usr/local/include:$CPATH
+
 #presetup
 sh presetup.sh
 
 if [ -e "/etc/yum.conf" ];then
+        echo "Installer EPEL Release ........"
+	yum install -y epel-release
         echo "Ensuring required RPM ........"
-        yum install gcc gcc-c++ libgcc gd gd-devel gettext freetype \
-        	freetype-devel ImageMagick ImageMagick-devel libjpeg libjpeg-devel \
-        	libpng libpng-devel libstdc++* libstdc++-devel* libtiff* \
-        	libtiff-devel* libtool*  libxml* libxml2* \
-        	libxml2-devel* zlib* zlib-devel automake autoconf samba-common* \
-		ncurses-devel ncurses mercurial patch make cmake apr-util giflib-devel giflib neon expat expat-devel alsa-lib -y
+        yum install -y \
+        gcc gcc-c++ libgcc unzip make cmake automake autoconf patch git ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib \
+        zlib zlib-devel libjpeg libjpeg-devel libpng libpng-devel gd gd-devel gettext freetype freetype-devel ImageMagick ImageMagick-devel \
+        libstdc++ libstdc++-devel numactl numactl-devel opus opus-devel mediainfo re2c giflib-devel giflib libtiff libtiff-devel libtool  libxml libxml2 libxml2-devel \
+        #yum install samba-common* apr-util -y
 	rpm -e alsa-lib --nodeps
 	export ARCH=$(arch)
 fi
@@ -44,7 +29,6 @@ fi
 if [ -e "/etc/csf/csf.conf" ];then
 	csf -x
 fi
-
 
 if [ -e "/etc/debian_version" ];then
 	echo "Ensuring Debian packages ....."
@@ -81,10 +65,24 @@ else
         exit
 fi 
 
+cd $INSTALL_SDIR/
+wget ftp://ftp6.nero.com/tools/NeroDigitalAudio.zip
+unzip NeroDigitalAudio.zip -d nero
+cd nero/linux
+install -D -m755 neroAacEnc /usr/bin
 
+cat >>/etc/ld.so.conf <<EOF
+/usr/lib
+/usr/lib64
+/usr/local/lib
+/usr/local/lib64
+/usr/local/cpffmpeg/lib
+/usr/local/cpffmpeg/lib64
+EOF
+ldconfig
 
 #addon
-sh presetup2.sh
+#sh presetup2.sh
 #free type
 sh freetype.sh
 #libwmf
