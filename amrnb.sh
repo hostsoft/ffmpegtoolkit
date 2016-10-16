@@ -32,7 +32,7 @@ ldconfig
    cd $INSTALL_SDIR
 echo "removing old source"
    rm -vrf amrnb*
-   wget $SOURCE_URL/$amr
+   wget http://www.penguin.cz/~utx/ftp/amr/amrnb-11.0.0.0.tar.bz2
    tar -xvjf $amr
    cd amrnb-11.0.0.0/
    ./configure --prefix=$INSTALL_DDIR
