@@ -44,7 +44,7 @@ if [ -e "/usr/bin/git" ]; then
 else
         echo " "
         echo " "
-        echo -e $RED"   Git client  installation Failed. Git is required for ffmpeg and mplayer . Please install it and run this script"$RESET
+        echo -e $RED" Git client  installation Failed. Git is required for ffmpeg and mplayer . Please install it and run this script"$RESET
         echo " "
         echo " "
         exit
@@ -158,7 +158,7 @@ if [ -e "/usr/local/cpffmpeg/bin/mplayer" ]; then
 else
         echo " "
         echo " "
-        echo -e $RED"   Mplayer installation Failed :( ,  please contact  professional support sales@syslint.com"$RESET
+        echo -e $RED"   Mplayer installation Failed :( "$RESET
         echo " "
         echo " "
         exit
@@ -171,7 +171,7 @@ if [ -e "/usr/local/cpffmpeg/bin/ffmpeg" ]; then
 else
         echo " "
         echo " "
-        echo -e $RED"   FFMPEG installation Failed :( ,  please contact  professional support sales@syslint.com"$RESET
+        echo -e $RED"   FFMPEG installation Failed :( "$RESET
         echo " "
         echo " "
         exit
@@ -186,7 +186,7 @@ if [ -e "/usr/local/cpffmpeg/bin/mplayer" ]; then
 else
         echo " "
         echo " "
-        echo -e $RED"   Mplayer installation Failed :( , please contact  professional support sales@syslint.com"$RESET
+        echo -e $RED"   Mplayer installation Failed :( "$RESET
         echo " "
         echo " "
         exit
