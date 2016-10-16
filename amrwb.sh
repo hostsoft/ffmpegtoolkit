@@ -31,7 +31,7 @@ ldconfig
    cd $INSTALL_SDIR
 echo "removing old source"
    rm -vrf amrwb*
-   wget $SOURCE_URL/$amrwb
+   wget http://www.penguin.cz/~utx/ftp/amr/amrwb-11.0.0.0.tar.bz2
    tar -xvjf $_package
    cd amrwb-11.0.0.0/
    ./configure --prefix=$INSTALL_DDIR
