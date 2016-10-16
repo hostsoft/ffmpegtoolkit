@@ -19,12 +19,12 @@
 RED='\033[01;31m'
 RESET='\033[0m'
 INSTALL_SDIR='/usr/src/ffmpegscript'
-SOURCE_URL='http://mirror.ffmpeginstaller.com/source/ruby'
+SOURCE_URL='https://cache.ruby-lang.org/pub/ruby/2.3'
 INSTALL_DDIR='/usr/local/cpffmpeg'
 export cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
 export TMPDIR=$HOME/tmp
-_package='ruby-1.8.7.tar.gz' 
-ruby='ruby-1.8.7.tar.gz'
+_package='ruby-2.3.1.tar.gz' 
+ruby='ruby-2.3.1.tar.gz'
 clear
 sleep 2
 echo -e $RED"Installation of $_package ....... started"$RESET
@@ -42,7 +42,7 @@ else
    	rm -vrf ruby*
    	wget $SOURCE_URL/$ruby
    	tar -xvzf  $ruby
-   	cd ruby-1.8.7/
+   	cd ruby-2.3.1/
    	./configure --prefix=$INSTALL_DDIR
 	make 
 	make install
