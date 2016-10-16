@@ -31,9 +31,9 @@ ldconfig
 cd $INSTALL_SDIR
 echo "removing old source"
    rm -vrf freetype*
-   wget $SOURCE_URL/$_package
+   wget http://download.savannah.gnu.org/releases/freetype/freetype-2.7.tar.gz
    tar -zxvf $_package
-   cd freetype-2.5.2/
+   cd freetype-2.7/
    ./configure --prefix=$INSTALL_DDIR 
 
 make -j$cpu
