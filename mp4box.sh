@@ -12,6 +12,7 @@ sleep 2
 echo -e $RED"Installation of $_package ....... started"$RESET
 
 cd $INSTALL_SDIR/
+
 rm -rf gpac gpac*
 if [ -e "/etc/yum.conf" ];then
 yum -y install freetype-devel SDL-devel freeglut-devel openssl-devel
@@ -20,8 +21,12 @@ fi
 export PKG_CONFIG_PATH=/usr/local/cpffmpeg/lib/pkgconfig
 ldconfig
 
-git clone https://github.com/gpac/gpac.git
-cd gpac
+#Fix lastest bug
+#git clone https://github.com/gpac/gpac.git
+#cd gpac
+wget https://github.com/gpac/gpac/archive/v0.6.1.tar.gz
+tar xfz v0.6.1.tar.gz
+cd gpac-0.6.1
 ./configure --prefix=/usr/local/cpffmpeg/ --extra-cflags=-I/usr/local/cpffmpeg/include/ \
 --extra-ldflags=-L/usr/local/cpffmpeg/lib  --disable-wx --static-mp4box
 make 
