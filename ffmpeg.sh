@@ -23,17 +23,17 @@ ldconfig
 ./configure --prefix=$INSTALL_DDIR \
 --pkg-config-flags="--static" \
 --enable-gpl --enable-shared --enable-nonfree \
---enable-pthreads  --enable-libopencore-amrnb \
---enable-libopencore-amrwb  --enable-libmp3lame --enable-libvpx \
+--enable-pthreads  --enable-libopencore-amrnb --enable-libopencore-amrwb \
+--enable-libmp3lame --enable-libvpx --enable-libfdk-aac --enable-libfreetype \
 --enable-libtheora --enable-libvorbis  --enable-libx264 --enable-libx265 --enable-libxvid \
---enable-libfdk-aac --enable-libfreetype \
 --enable-postproc --enable-swscale --enable-avfilter --enable-runtime-cpudetect \
 --extra-cflags=-I/usr/local/cpffmpeg/include/ --extra-ldflags=-L/usr/local/cpffmpeg/lib \
- --enable-version3
+--enable-version3
 
 make -j4
 make tools/qt-faststart
 make install
+
 cp -vf tools/qt-faststart /usr/local/cpffmpeg/bin/
 ln -sf /usr/local/cpffmpeg/bin/ffmpeg /usr/local/bin/ffmpeg
 ln -sf /usr/local/cpffmpeg/bin/ffmpeg /usr/bin/ffmpeg
@@ -44,6 +44,7 @@ ln -sf /usr/local/cpffmpeg/bin/qt-faststart /usr/bin/qt-faststart
 ln -sf /usr/bin/flvtool2 /usr/local/bin/flvtool2
 ln -sf /usr/bin/mediainfo   /usr/local/bin/mediainfo
 ln -sf /usr/bin/neroAacEnc   /usr/local/bin/neroAacEnc
+
 ldconfig
 /usr/bin/ffmpeg -formats
 
