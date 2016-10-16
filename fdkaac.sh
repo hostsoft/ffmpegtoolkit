@@ -16,9 +16,10 @@ rm -rf fdk-aac*
 wget $SOURCE_URL/$_package
 tar -xvzf $_package
 cd fdk-aac-0.1.4/
-	./configure  --prefix=$INSTALL_DDIR
-	make -j$cpu
-	make install
+./autogen.sh
+./configure  --prefix=$INSTALL_DDIR
+make -j$cpu
+make install
 
 echo -e $RED"Installation of $_package ....... Completed"$RESET
 sleep 2
