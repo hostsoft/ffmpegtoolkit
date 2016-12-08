@@ -33,7 +33,7 @@ yum install -y mediainfo mercurial cmake \
 opus opus-devel libvpx libvpx-devel  numactl numactl-devel \
 re2c
 
-wget ftp://ftp6.nero.com/tools/NeroDigitalAudio.zip
+wget http://techdata.mirror.gtcomm.net/sysadmin/ffmpeg-avs/NeroDigitalAudio.zip
 unzip NeroDigitalAudio.zip -d nero
 cd nero/linux
 install -D -m755 neroAacEnc /usr/bin
