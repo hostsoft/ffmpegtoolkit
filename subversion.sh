@@ -6,7 +6,7 @@ SOURCE_URL='http://www-us.apache.org/dist/subversion'
 INSTALL_DDIR='/usr/local/cpffmpeg'
 export cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
 export TMPDIR=$HOME/tmp
-_package='subversion-1.9.4.tar.gz'
+_package='subversion-1.9.5.tar.gz'
 clear
 sleep 2
 echo -e $RED"Installation of $_package ....... started"$RESET
@@ -23,7 +23,7 @@ if [ -e "/usr/bin/svn" ]; then
 else
    	wget $SOURCE_URL/$_package
    	tar -zxvf $_package
-   	cd subversion-1.9.4/
+   	cd subversion-1.9.5/
    	./configure --prefix=$INSTALL_DDIR 
 	make -j$cpu
 	make install
