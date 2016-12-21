@@ -66,10 +66,11 @@ else
 fi 
 
 cd $INSTALL_SDIR/
-wget ftp://ftp6.nero.com/tools/NeroDigitalAudio.zip
+wget http://techdata.mirror.gtcomm.net/sysadmin/ffmpeg-avs/NeroDigitalAudio.zip
 unzip NeroDigitalAudio.zip -d nero
 cd nero/linux
 install -D -m755 neroAacEnc /usr/bin
+install -D -m755 neroAacEnc /usr/local/bin
 
 cat >>/etc/ld.so.conf <<EOF
 /usr/lib
