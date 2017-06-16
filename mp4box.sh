@@ -24,9 +24,9 @@ ldconfig
 #Fix lastest bug
 #git clone https://github.com/gpac/gpac.git
 #cd gpac
-wget https://github.com/gpac/gpac/archive/v0.6.1.tar.gz
-tar xfz v0.6.1.tar.gz
-cd gpac-0.6.1
+wget https://github.com/gpac/gpac/archive/v0.7.1.tar.gz
+tar xfz v0.7.1.tar.gz
+cd gpac-0.7.1
 ./configure --prefix=/usr/local/cpffmpeg/ --extra-cflags=-I/usr/local/cpffmpeg/include/ \
 --extra-ldflags=-L/usr/local/cpffmpeg/lib  --disable-wx --static-mp4box
 make 
