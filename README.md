@@ -9,6 +9,7 @@ it's free
  * working CentOS 7.* 64bit, other not testing
 
 ### Update
+ * add NVIDIA CUDA   
  * add libvpx
  * add x265
  * update something soft version
