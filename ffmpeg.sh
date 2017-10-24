@@ -22,6 +22,7 @@ export PKG_CONFIG_PATH=/usr/local/cpffmpeg/lib/pkgconfig
 ldconfig
 ./configure --prefix=$INSTALL_DDIR \
 --pkg-config-flags="--static" \
+--extra-libs=-lpthread \
 --enable-gpl --enable-shared --enable-nonfree \
 --enable-pthreads  --enable-libopencore-amrnb --enable-libopencore-amrwb \
 --enable-libmp3lame --enable-libvpx --enable-libfdk-aac --enable-libfreetype \
