@@ -14,7 +14,7 @@ cd $INSTALL_SDIR/
 rm -rf x265*
 hg clone https://bitbucket.org/multicoreware/x265
 cd x265/build/linux
-cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$INSTALL_DDIR -DENABLE_SHARED:bool=off ../../source
+PATH="$HOME/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$INSTALL_DDIR -DENABLE_SHARED:bool=off ../../source
 make
 make install
 
