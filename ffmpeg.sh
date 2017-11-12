@@ -27,10 +27,11 @@ ldconfig
 --enable-gpl --enable-shared --enable-nonfree \
 --enable-pthreads  --enable-libopencore-amrnb --enable-libopencore-amrwb \
 --enable-libmp3lame --enable-libvpx --enable-libfdk-aac --enable-libfreetype \
---enable-libtheora --enable-libvorbis  --enable-libx264 --enable-libx265 --enable-libxvid \
+--enable-libtheora --enable-libvorbis  --enable-libx264 --enable-libxvid \
 --enable-postproc --enable-swscale --enable-avfilter --enable-runtime-cpudetect \
 --extra-cflags=-I/usr/local/cpffmpeg/include/ --extra-ldflags=-L/usr/local/cpffmpeg/lib \
 --enable-version3
+# --enable-libx265
 
 make -j4
 make tools/qt-faststart
