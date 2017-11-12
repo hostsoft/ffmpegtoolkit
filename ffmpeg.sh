@@ -19,6 +19,7 @@ rm -vrf ffmpeg*
 git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg
 cd ffmpeg/
 export PKG_CONFIG_PATH=/usr/local/cpffmpeg/lib/pkgconfig
+PKG_CONFIG_PATH=/usr/local/cpffmpeg/lib/pkgconfig
 ldconfig
 ./configure --prefix=$INSTALL_DDIR \
 --pkg-config-flags="--static" \
