@@ -40,6 +40,7 @@ cd MPlayer-1.3.0
 		--with-freetype-config=/usr/local/cpffmpeg/bin/freetype-config   --yasm=/usr/local/cpffmpeg/bin/yasm
 make -j$cpu
 make install
+mkdir -p $INSTALL_DDIR/etc/mplayer/
 cp -f etc/codecs.conf $INSTALL_DDIR/etc/mplayer/codecs.conf
 ln -sf /usr/local/cpffmpeg/bin/mplayer /usr/local/bin/mplayer
 ln -sf /usr/local/cpffmpeg/bin/mplayer /usr/bin/mplayer
