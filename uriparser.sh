@@ -29,11 +29,9 @@ sleep 2
 echo -e $RED"Installation of $_package ....... started"$RESET
 cd $INSTALL_SDIR/
 rm -rf uriparser*
-
-yum -y install doxygen graphviz-devel graphviz expat expat-devel
-wget -c $SOURCE_URL/$_package
-tar -xvjf $_package
-cd uriparser-0.8.0/
+yum -y install unzip doxygen graphviz-devel graphviz expat expat-devel qt-devel qt5-qhelpgenerator
+wget https://nchc.dl.sourceforge.net/project/uriparser/Sources/0.8.4/uriparser-0.8.4.zip
+unzip uriparser-0.8.4.zip
 ./configure  --prefix=/usr/local/cpffmpeg --disable-test
 make 
 make install
