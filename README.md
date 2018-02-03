@@ -20,9 +20,9 @@ it's free
 ```
 yum install git wget -y 
 cd /opt
-git clone https://github.com/hostsoft/ffmpeginstaller.git ffmpeginstaller  
-cd ffmpeginstaller  
-sh latest.sh  
+git clone https://github.com/hostsoft/ffmpegtookit.git ffmpegtookit
+cd ffmpegtookit
+sh latest.sh
 ```
   
 ### Check Path  , Included  *ImageMagick*
