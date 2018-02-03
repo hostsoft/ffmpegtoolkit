@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function _install_faac() {
+	clear
+	_file="faac-1.29.9.tar.gz"
+	_package="FAAC"
+	echo -e $RED"Installation of $_package ....... started"$RESET
+
+	cd $SOURCE_DIR/
+	if [ -f "$_file" ]
+	then
+		echo "$_file found, Skip Downloads"
+	else
+		echo "$_file not found, Try Downloading......"
+	        wget https://ftp.osuosl.org/pub/blfs/conglomeration/faac/$_file
+	fi
+	tar -xvzf $_file
+	cd faac-1.29.9/
+	./bootstrap
+	./configure --prefix=$INSTALL_DIR  --with-mp4v2
+	make -j$cpu
+	make install
+
+	echo -e $RED"Installation of $_package ....... Completed"$RESET
+	cd $SOURCE_DIR/
+}
+
+_install_faac
