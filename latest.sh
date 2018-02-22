@@ -15,11 +15,16 @@
 #
 #################################################################################
 
-export SOURCE_URL='http://download.latest.com'  ## Not Used At This Time
+SOURCE_URL='http://download.latest.com'
+SOURCE_DIR='/opt/ffmpegtoolkit_source'
+INSTALL_DIR='/usr/local/ffmpegtoolkit'
+cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
+TMPDIR=$HOME/tmp
+
+export $SOURCE_URL  ## Not Used At This Time
 export SOURCE_DIR='/opt/ffmpegtoolkit_source'
 export INSTALL_DIR='/usr/local/ffmpegtoolkit'
 export cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
-export TMPDIR=$HOME/tmp
 export LD_LIBRARY_PATH=/usr/local/ffmpegtoolkit/lib:/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=/usr/local/ffmpegtoolkit/lib:/usr/lib:/usr/local/lib:$LIBRARY_PATH
 export CPATH=/usr/local/ffmpegtoolkit/include:/usr/include/:usr/local/include:$CPATH
