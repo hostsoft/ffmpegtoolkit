@@ -16,13 +16,13 @@
 #################################################################################
 
 SOURCE_URL='http://download.latest.com'
-SOURCE_DIR='/opt/ffmpegtoolkit_source'
+SOURCE_DIR='/opt/ffmpegtoolkit'
 INSTALL_DIR='/usr/local/ffmpegtoolkit'
 cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
 TMPDIR=$HOME/tmp
 
 export SOURCE_URL='http://download.latest.com'  ## Not Used At This Time
-export SOURCE_DIR='/opt/ffmpegtoolkit_source'
+export SOURCE_DIR='/opt/ffmpegtoolkit'
 export INSTALL_DIR='/usr/local/ffmpegtoolkit'
 export cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
 export LD_LIBRARY_PATH=/usr/local/ffmpegtoolkit/lib:/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
@@ -49,10 +49,10 @@ if [ -e "/etc/yum.conf" ];then
 	export ARCH=$(arch)
 fi
 
-mkdir -p /opt/ffmpegtoolkit_source
+mkdir -p /opt/ffmpegtoolkit
 mkdir -p /usr/local/ffmpegtoolkit/{bin,lib}
 mkdir -p $TMPDIR
-cd /opt/ffmpegtoolkit_source
+cd /opt/ffmpegtoolkit
 
 cat >>/etc/ld.so.conf <<EOF
 /usr/lib
