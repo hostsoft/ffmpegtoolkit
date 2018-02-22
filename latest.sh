@@ -21,7 +21,7 @@ INSTALL_DIR='/usr/local/ffmpegtoolkit'
 cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
 TMPDIR=$HOME/tmp
 
-export $SOURCE_URL  ## Not Used At This Time
+export SOURCE_URL='http://download.latest.com'  ## Not Used At This Time
 export SOURCE_DIR='/opt/ffmpegtoolkit_source'
 export INSTALL_DIR='/usr/local/ffmpegtoolkit'
 export cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
@@ -52,7 +52,7 @@ fi
 mkdir -p /opt/ffmpegtoolkit_source
 mkdir -p /usr/local/ffmpegtoolkit/{bin,lib}
 mkdir -p $TMPDIR
-cd $SOURCE_DIR
+cd /opt/ffmpegtoolkit_source
 
 cat >>/etc/ld.so.conf <<EOF
 /usr/lib
