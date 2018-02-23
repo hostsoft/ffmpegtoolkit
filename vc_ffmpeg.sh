@@ -9,6 +9,7 @@ function _install_ffmpeg() {
 	rm -vrf ffmpeg*
 	git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg
 	cd ffmpeg/
+	export PKG_CONFIG_LIBDIR=/usr/share/pkgconfig/:/usr/lib64/pkgconfig/:/usr/local/lib/pkgconfig/:/usr/lib/pkgconfig/:/usr/local/ffmpegtoolkit/lib/pkgconfig/
 	ldconfig
 	./configure --prefix=$INSTALL_DIR \
 	--pkg-config-flags="--static" \
