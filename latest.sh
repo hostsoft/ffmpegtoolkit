@@ -127,4 +127,3 @@ echo "ImageMagick Command Path"
 which {identify,convert}
 
 ### /opt/ffmpegtoolkit_source
-
