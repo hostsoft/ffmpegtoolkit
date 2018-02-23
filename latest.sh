@@ -93,6 +93,7 @@ sh ac_libfishsound.sh
 sh ac_libopus.sh
 
 #### Video Package ####
+sh vc_vpx.sh
 sh vc_libtheora.sh
 sh vc_xvid.sh
 sh vc_x264.sh
