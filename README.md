@@ -20,7 +20,7 @@ it's free
 ```
 yum install git wget -y 
 cd /opt
-git clone https://github.com/hostsoft/ffmpegtookit.git ffmpegtoolkit
+git clone https://github.com/hostsoft/ffmpegtoolkit.git ffmpegtoolkit
 cd ffmpegtoolkit
 sh latest.sh
 ```
