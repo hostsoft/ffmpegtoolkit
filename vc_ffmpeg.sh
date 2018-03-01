@@ -9,8 +9,11 @@ function _install_ffmpeg() {
 	rm -vrf ffmpeg*
 	git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg
 	cd ffmpeg/
-	export PKG_CONFIG_LIBDIR=/usr/share/pkgconfig/:/usr/lib64/pkgconfig/:/usr/local/lib/pkgconfig/:/usr/lib/pkgconfig/:/usr/local/ffmpegtoolkit/lib/pkgconfig/
 	ldconfig
+        export LD_LIBRARY_PATH=/usr/local/ffmpegtoolkit/lib:/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
+        export LIBRARY_PATH=/usr/local/ffmpegtoolkit/lib:/usr/lib:/usr/local/lib:$LIBRARY_PATH
+        export CPATH=/usr/local/ffmpegtoolkit/include:/usr/include/:usr/local/include:$CPATH
+	export PKG_CONFIG_LIBDIR=/usr/share/pkgconfig/:/usr/lib64/pkgconfig/:/usr/local/lib/pkgconfig/:/usr/lib/pkgconfig/:/usr/local/ffmpegtoolkit/lib/pkgconfig/
 	./configure --prefix=$INSTALL_DIR \
 	--pkg-config-flags="--static" \
 	--extra-libs=-lpthread \
