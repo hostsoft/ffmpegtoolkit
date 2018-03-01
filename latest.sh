@@ -39,15 +39,20 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if [ -e "/etc/yum.conf" ];then
-        echo "Installer EPEL Release ........"
-	yum install -y epel-release
-        echo "Ensuring required RPM ........"
-        yum install -y \
-        gcc gcc-c++ git libgcc glib glib2 bzip2 xz unzip make cmake automake autoconf patch ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib \
-        zlib zlib-devel libjpeg libjpeg-devel libpng libpng-devel gd gd-devel gettext freetype freetype-devel ImageMagick ImageMagick-devel \
-        libstdc++ libstdc++-devel numactl numactl-devel mediainfo re2c giflib-devel giflib libtiff libtiff-devel libtool libxml2 libxml2-devel \
-	subversion doxygen SDL-devel freeglut-devel openssl-devel openjpeg-devel
-	export ARCH=$(arch)
+echo "Fix cPanel Yum Cache Bug..."
+package-cleanup --dupes
+package-cleanup --cleandupes
+yum clean all
+yum update
+echo "Installer EPEL Release ........"
+yum install -y epel-release
+echo "Ensuring required RPM ........"
+yum install -y \
+gcc gcc-c++ git libgcc glib glib2 bzip2 xz unzip make cmake automake autoconf patch ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib \
+zlib zlib-devel libjpeg libjpeg-devel libpng libpng-devel gd gd-devel gettext freetype freetype-devel ImageMagick ImageMagick-devel \
+libstdc++ libstdc++-devel numactl numactl-devel mediainfo re2c giflib-devel giflib libtiff libtiff-devel libtool libxml2 libxml2-devel \
+subversion doxygen SDL-devel freeglut-devel openssl-devel openjpeg-devel
+export ARCH=$(arch)
 fi
 
 mkdir -p /opt/ffmpegtoolkit
