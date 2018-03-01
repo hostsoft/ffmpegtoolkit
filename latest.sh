@@ -54,7 +54,7 @@ mkdir -p /usr/local/ffmpegtoolkit/{bin,lib}
 mkdir -p $TMPDIR
 cd /opt/ffmpegtoolkit
 
-cat >>/etc/ld.so.conf <<EOF
+cat >/etc/ld.so.conf.d/ffmpegtoolkit.conf <<EOF
 /usr/lib
 /usr/lib64
 /usr/local/lib
