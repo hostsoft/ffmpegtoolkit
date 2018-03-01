@@ -19,12 +19,13 @@ SOURCE_URL='http://download.latest.com'
 SOURCE_DIR='/opt/ffmpegtoolkit'
 INSTALL_DIR='/usr/local/ffmpegtoolkit'
 cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
-TMPDIR=$HOME/tmp
+TMPDIR=~/tmp
 
 export SOURCE_URL='http://download.latest.com'  ## Not Used At This Time
 export SOURCE_DIR='/opt/ffmpegtoolkit'
 export INSTALL_DIR='/usr/local/ffmpegtoolkit'
 export cpu=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
+export TMPDIR=~/tmp
 export LD_LIBRARY_PATH=/usr/local/ffmpegtoolkit/lib:/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=/usr/local/ffmpegtoolkit/lib:/usr/lib:/usr/local/lib:$LIBRARY_PATH
 export CPATH=/usr/local/ffmpegtoolkit/include:/usr/include/:usr/local/include:$CPATH
