@@ -12,7 +12,7 @@ function _install_liba52() {
 		echo "$_file found, Skip Downloads"
 	else
 		echo "$_file not found, Try Downloading......"
-	        wget http://liba52.sourceforge.net/files/$_file
+	        wget https://ftp.osuosl.org/pub/blfs/conglomeration/a52dec/$_file
 	fi
 	tar -xvzf $_file
 	cd a52dec-0.7.4/
