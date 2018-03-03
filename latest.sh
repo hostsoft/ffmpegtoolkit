@@ -43,7 +43,7 @@ echo "Fix cPanel Yum Cache Bug..."
 package-cleanup --dupes
 package-cleanup --cleandupes
 yum clean all
-yum update
+yum update -y
 echo "Installer EPEL Release ........"
 yum install -y epel-release
 echo "Ensuring required RPM ........"
