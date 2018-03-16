@@ -11,6 +11,7 @@ it's free
  * working CentOS 7.* 64bit, other not testing
 
 ### Update
+ * add libass support (16/03/2018)
  * add NVIDIA CUDA   (New versions wait add it)
  * add libvpx
  * add x265
