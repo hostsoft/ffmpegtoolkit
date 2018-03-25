@@ -30,6 +30,7 @@ sh latest.sh
 ```
 which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc}  
 ```
+
 ```
 [root@dev ~]# which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc,x264,x265}
 /usr/local/bin/ffmpeg
@@ -44,10 +45,12 @@ which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediai
 /usr/local/bin/neroAacEnc
 /usr/local/bin/x264
 /usr/local/bin/x265
+      
 [root@dev ~]# echo "ImageMagick Command Path"
 ImageMagick Command Path
-[root@dev ~]# which {identify,convert}
+[root@dev ~]# which {identify,convert,composite}
 /usr/bin/identify
 /usr/bin/convert
+/usr/bin/composite
 
 ```
