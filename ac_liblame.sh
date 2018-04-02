@@ -2,7 +2,7 @@
 
 function _install_lame() {
 	clear
-	_file="lame-3.99.5.tar.gz"
+	_file="lame-3.100.tar.gz"
 	_package="Lame MP3 Lib"
 	echo -e $RED"Installation of $_package ....... started"$RESET
 
@@ -12,11 +12,11 @@ function _install_lame() {
 		echo "$_file found, Skip Downloads"
 	else
 		echo "$_file not found, Try Downloading......"
-	        wget https://nchc.dl.sourceforge.net/project/lame/lame/3.99/$_file
+	        wget https://ftp.osuosl.org/pub/blfs/conglomeration/lame/$_file
 	fi
 
 	tar -zxvf $_file
-	cd lame-3.99.5/
+	cd lame-3.100/
 	./configure --prefix=$INSTALL_DIR --enable-mp3x --enable-mp3rtp
 	make -j $cpu
 	make install
