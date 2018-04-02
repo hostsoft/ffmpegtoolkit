@@ -109,6 +109,8 @@ sh vc_mplayer_codecs.sh
 sh vc_mplayer.sh
 sh vc_ffmpeg.sh
 
+ldconfig
+
 echo "Create Links"
 ln -sf /usr/local/ffmpegtoolkit/bin/ffmpeg /usr/local/bin/ffmpeg
 ln -sf /usr/local/ffmpegtoolkit/bin/ffprobe /usr/local/bin/ffprobe
