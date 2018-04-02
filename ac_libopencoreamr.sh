@@ -12,11 +12,11 @@ function _install_opencoreamr() {
 		echo "$_file found, Skip Downloads"
 	else
 		echo "$_file not found, Try Downloading......"
-	        wget https://nchc.dl.sourceforge.net/project/opencore-amr/opencore-amr/$_file
+	        wget http://sourceforge.mirrorservice.org/o/op/opencore-amr/opencore-amr/$_file
 	fi
 	tar -zxvf $_file
 	cd opencore-amr-0.1.5/
-	./configure --prefix=$INSTALL_DIR 
+        ./configure --prefix=$INSTALL_DIR
 	make -j $cpu
 	make install
 
