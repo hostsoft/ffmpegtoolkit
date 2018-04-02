@@ -131,6 +131,6 @@ echo "That's Path"
 which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc,x264,x265}
 
 echo "ImageMagick Command Path"
-which {identify,convert}
+which {identify,convert,composite}
 
 ### /opt/ffmpegtoolkit_source
