@@ -61,8 +61,7 @@ try this below
 ---------------------
 
 if you want remove, just use
-------------------------------
-
+```
 array=( /lib /usr/lib /usr/local/lib /lib64 /usr/lib64 /usr/local/lib64  )
 for i in "${array[@]}"
 do
@@ -98,3 +97,4 @@ rm -rf /opt/ffmpegtoolkit
 rm -rf /usr/local/ffmpegtoolkit
 rm -rf ~/tmp
 mkdir -p ~/tmp
+```
