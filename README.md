@@ -6,7 +6,7 @@
 ```
 find
 
-git clone -b 'n3.37' --single-branch --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
+git clone -b 'n3.2.10' --single-branch --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
 change to
 git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg
 
