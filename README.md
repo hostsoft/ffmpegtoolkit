@@ -54,3 +54,47 @@ ImageMagick Command Path
 /usr/bin/composite
 
 ```
+To remove - Uninstall
+
+try this below
+
+---------------------
+
+if you want remove, just use
+------------------------------
+
+array=( /lib /usr/lib /usr/local/lib /lib64 /usr/lib64 /usr/local/lib64  )
+for i in "${array[@]}"
+do
+echo "Start Remove......"
+rm -rf "$i/liba52*"
+rm -rf "$i//libamr*"
+rm -rf "$i//libavcodec*"
+rm -rf "$i//libavformat*"
+rm -rf "$i//libavutil*"
+rm -rf "$i//libdha*"
+rm -rf "$i//libfaac*"
+rm -rf "$i//libfaad*"
+rm -rf "$i//libmp3lame*"
+rm -rf "$i//libmp4v2*"
+rm -rf "$i//libogg*"
+rm -rf "$i//libtheora*"
+rm -rf "$i//libvorbis*"
+echo "Remove Done!"
+done
+
+array=( /bin /usr/bin /usr/local/bin  )
+for i in "${array[@]}"
+do
+echo "Start Remove......"
+rm -rf "$i/ffmpeg"
+rm -rf "$i/mplayer"
+rm -rf "$i/mencoder"
+rm -rf "$i/flvtool2"
+echo "Remove Done!"
+done
+
+rm -rf /opt/ffmpegtoolkit
+rm -rf /usr/local/ffmpegtoolkit
+rm -rf ~/tmp
+mkdir -p ~/tmp
