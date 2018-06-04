@@ -1,6 +1,21 @@
 
-##  FFMPEG Toolkit v1  
-  
+##  FFMPEG Toolkit v1  this will install ffmpeg version N 3.37
+# if you want custom version
+# edit the vc_ffmpeg.sh
+
+find
+
+git clone -b 'n3.37' --single-branch --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
+change to
+git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg
+
+reinstall
+
+the n4.0 is versions tag
+you can find it in https://github.com/FFmpeg/FFmpeg/tags
+EG: you like 3.* , just replace n4.0 to n3.37
+
+
 # Automatically installer ffmpeg on you system
 it's free  
 
@@ -21,7 +36,7 @@ it's free
 ```
 yum install git wget -y 
 cd /opt
-git clone https://github.com/hostsoft/ffmpegtoolkit.git ffmpegtoolkit
+git clone https://github.com/spirogg/ffmpegtoolkit.git ffmpegtoolkit
 cd ffmpegtoolkit
 sh latest.sh
 ```
