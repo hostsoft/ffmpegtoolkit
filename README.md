@@ -34,7 +34,7 @@ it's free
  * add x265
  * update something soft to latest version
 
-### Installer  
+### Install Instructions  
 ```
 yum install git wget -y 
 cd /opt
