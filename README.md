@@ -9,13 +9,14 @@ find
 git clone -b 'n3.2.10' --single-branch --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
 change to
 git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg
+this will install latest version og ffmpeg
 
-reinstall
-
-the n4.0 is versions tag
+or you can search here (https://github.com/FFmpeg/FFmpeg/tags) to find the version you need and make changes
+the n3.2.10 is versions tag
 you can find it in https://github.com/FFmpeg/FFmpeg/tags
-EG: you like n3.* , just replace n4.0 to n3.* (example n3.2.10 or n2.8 etc..) 
+EG: if you like n3.* or n4.* (just replace n3.2.10 to n3.* or n4.* (example n3.2.10 change to n2.8 or n4.0 etc..) 
 ```
+Then follow install instructions
 
 # Automatically installer ffmpeg on you system
 it's free  
