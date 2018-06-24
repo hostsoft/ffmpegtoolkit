@@ -16,9 +16,9 @@ the n3.2.10 is versions tag
 you can find it in https://github.com/FFmpeg/FFmpeg/tags
 EG: if you like n3.* or n4.* (just replace n3.2.10 to n3.* or n4.* (example n3.2.10 change to n2.8 or n4.0 etc..) 
 ```
-Then follow install instructions
+** Then follow install instructions **
 
-# Automatically installer ffmpeg on you system
+# Automatically install ffmpeg on your system
 it's free  
 
  * install ffmpeg ffprobe qt-faststart
