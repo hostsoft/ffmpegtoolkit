@@ -1,5 +1,5 @@
 
-##  FFMPEG Toolkit v1  this will install ffmpeg version N 3.37
+##  FFMPEG Toolkit v1  this will install ffmpeg version N 3.2.10
 ## if you want custom version
 ## edit the vc_ffmpeg.sh
 
@@ -14,7 +14,7 @@ reinstall
 
 the n4.0 is versions tag
 you can find it in https://github.com/FFmpeg/FFmpeg/tags
-EG: you like 3.* , just replace n4.0 to n3.37
+EG: you like n3.* , just replace n4.0 to n3.* (example n3.2.10 or n2.8 etc..) 
 ```
 
 # Automatically installer ffmpeg on you system
