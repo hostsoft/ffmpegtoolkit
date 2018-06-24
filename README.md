@@ -14,7 +14,7 @@ this will install latest version of ffmpeg
 find another version you may need: 
 
 you can search https://github.com/FFmpeg/FFmpeg/tags
-to find the version you need and make changes like above.
+to find the version you need and make changes by renaming n3.2.10 to your version.
 
 *the n3.2.10 is versions tag
 
