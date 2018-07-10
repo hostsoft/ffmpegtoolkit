@@ -1,12 +1,12 @@
 
-##  FFMPEG Toolkit v1  this will install ffmpeg version N 3.2.10
+##  FFMPEG Toolkit v1  this will install ffmpeg version N 3.2.11
 ## if you want custom version
 ## edit the vc_ffmpeg.sh
 
 ```
 find
 
-git clone -b 'n3.2.10' --single-branch --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
+git clone -b 'n3.2.11' --single-branch --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
 change to
 git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg
 this will install latest version of ffmpeg
@@ -16,7 +16,7 @@ find another version you may need:
 you can search https://github.com/FFmpeg/FFmpeg/tags
 to find the version you need and make changes by renaming n3.2.10 to your version.
 
-*the n3.2.10 is versions tag
+*the n3.2.11 is versions tag
 
 you can find it in https://github.com/FFmpeg/FFmpeg/tags
 
