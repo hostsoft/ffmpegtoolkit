@@ -54,11 +54,11 @@ libstdc++ libstdc++-devel numactl numactl-devel mediainfo re2c giflib-devel gifl
 subversion doxygen SDL-devel freeglut-devel openssl-devel openjpeg-devel  fribidi-devel fribidi
 
 echo "Update GCC to GCC7"
-yum install centos-release-scl -y
-yum install devtoolset-7-gcc* -y
-scl enable devtoolset-7 bash
-which gcc
-gcc --version
+#yum install centos-release-scl -y
+#yum install devtoolset-7-gcc* -y
+#scl enable devtoolset-7 bash
+#which gcc
+#gcc --version
 export ARCH=$(arch)
 fi
 
@@ -112,7 +112,7 @@ sh vc_libtheora.sh
 sh vc_xvid.sh
 sh vc_x264.sh
 sh vc_x265.sh
-sh vc_aom.sh
+#sh vc_aom.sh
 sh vc_mplayer_codecs.sh
 sh vc_mplayer.sh
 sh vc_ffmpeg.sh
