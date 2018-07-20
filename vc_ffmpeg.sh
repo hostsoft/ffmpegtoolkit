@@ -6,7 +6,9 @@ function _install_ffmpeg() {
 	_package=""
 	echo -e $RED"Installation of $_package ....... started"$RESET
 	cd $SOURCE_DIR/
-	rm -vrf ffmpeg*
+	rm -rf ffmpeg*
+		
+	echo "Install FFMPEG Waiting....."
 	git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg
 	cd ffmpeg/
 	ldconfig
