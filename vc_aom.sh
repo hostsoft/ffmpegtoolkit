@@ -8,7 +8,7 @@ function _install_aom() {
 	cd $SOURCE_DIR/
 	[ -d "aom" ] && rm -rf "aom"
   git clone https://aomedia.googlesource.com/aom && \
-  cmake ./aom && \
+  cmake3 ./aom && \
   make && \
   make install
 	echo -e $RED"Installation of $_package ....... Completed"$RESET
