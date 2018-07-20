@@ -15,6 +15,7 @@ it's free
  * working CentOS 7.* 64bit, other not testing
 
 ### Update
+ * add AV1 /AM support (20/07/2018)
  * add libass support (16/03/2018)
  * add NVIDIA CUDA   (New versions wait add it)
  * add libvpx
