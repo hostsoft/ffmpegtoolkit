@@ -105,6 +105,7 @@ sh vc_libtheora.sh
 sh vc_xvid.sh
 sh vc_x264.sh
 sh vc_x265.sh
+sh vc_aom.sh
 sh vc_mplayer_codecs.sh
 sh vc_mplayer.sh
 sh vc_ffmpeg.sh
