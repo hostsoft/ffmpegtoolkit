@@ -14,13 +14,13 @@ this will install latest version of ffmpeg
 find another version you may need: 
 
 you can search https://github.com/FFmpeg/FFmpeg/tags
-to find the version you need and make changes by renaming n3.2.10 to your version.
+to find the version you need and make changes by renaming n3.2.11 to your version.
 
 *the n3.2.11 is versions tag
 
 you can find it in https://github.com/FFmpeg/FFmpeg/tags
 
-EG: if you like n3.* or n4.* (just replace n3.2.10 to n3.* or n4.* (example n3.2.10 change to n2.8 or n4.0 etc..) 
+EG: if you like n3.* or n4.* (just replace n3.2.11 to n3.* or n4.* (example n3.2.11 change to n2.8 or n4.0 etc..) 
 save the file then proceed to install :)
 ```
 ** Then follow install instructions **
@@ -32,7 +32,7 @@ it's free
  * install mplayer mencoder
  * install mp4box flvtool2 yamdi
  * install mediainfo neroaccenc 
- * working CentOS 7.* 64bit, other not testing
+ * working CentOS 7.* 64bit, other not tested
 
 ### Update
  * add libass support (16/03/2018)
