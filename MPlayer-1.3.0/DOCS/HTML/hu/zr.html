@@ -1,0 +1,78 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.17. Zr</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="mpeg_decoders.html" title="6.16. MPEG dekóderek"><link rel="next" href="blinkenlights.html" title="6.18. Blinkenlights"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.17. Zr</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mpeg_decoders.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="blinkenlights.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="zr"></a>6.17. Zr</h2></div></div></div><p>
+Ez egy képernyő-vezérlő (<tt class="option">-vo zr</tt>) számos MJPEG
+mentő/lejátszó kártyához (DC10+ és Buz-zal tesztelve, és működnie kell
+LML33, a DC10 esetén is). A vezérlő úgy működik, hogy kódolja a képkockát
+JPEG-be majd kiküldi a kártyára. A JPEG kódoláshoz a
+<code class="systemitem">libavcodec</code>-et használja, ami
+ezért szükséges hozzá. Egy speciális <span class="emphasis"><em>cinerama</em></span> móddal
+igazi nagyképernyőn nézhetsz filmeket, feltéve, hogy két felvevőd és két
+MJPEG kártyád van. A felbontástól és a minőségi beállításoktól függően ez
+a vezérlő rengeteg CPU erőt igényel, ne felejtsd el megadni a
+<tt class="option">-framedrop</tt> kapcsolót, ha lassú a géped. Megjegyzés: Az
+én AMD K6-2 350MHz-es gépem (<tt class="option">-framedrop</tt>-pal) eléggé
+elfogadható volt VCD méretű anyag nézésekor és leméretezett filmnél.
+</p><p>
+Ez a vezérlő a
+<a class="ulink" href="http://mjpeg.sf.net" target="_top">http://mjpeg.sf.net</a> címen található kernel
+vezérlővel társalog, így először ezt kell beizzítanod. Az MJPEG kártya
+jelenléte automatikusan detektálva lesz a <tt class="filename">configure</tt>
+script által, ha ez nem sikerül, kényszerítsd a detektálásra a
+</p><pre class="screen">./configure --enable-zr</pre><p> kapcsolóval.
+</p><p>
+A kimenet számos kapcsolóval szabályozható, a kapcsolók hosszú leírással
+megtalálhatóak a man oldalon, egy rövidebb listát a
+</p><pre class="screen">mplayer -zrhelp</pre><p>
+parancs lefuttatásával kaphatsz.
+</p><p>
+Az olyan dolgokat, mint méretezés és OSD (on screen display) ez a vezérlő
+nem kezeli, de megoldhatóak videó szűrőkkel. Például tegyük fel, hogy van
+egy filmed 512x272-es felbontással és teljes képernyőn akarod nézni a
+DC10+-eden. Három lehetőséged van, méretezned kell a filmet 768, 384 vagy
+192-es szélességre. Teljesítmény és minőségi okokból én a 384x204-re való
+méretezést választanám, gyors bilineáris szoftveres méretező használatával.
+A parancssor:
+</p><pre class="screen">
+mplayer -vo zr -sws 0 -vf scale=384:204 <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+A levágás a <tt class="option">crop</tt> szűrő segítségével valósítható meg és
+magával a vezérlővel. Feltéve, hogy a film túl széles a megjelenítéshez
+a Buz-odon és hogy a <tt class="option">-zrcrop</tt>-ot akarod használni a film
+szűkítéséhez, a következő parancs a te barátod:
+</p><pre class="screen">
+mplayer -vo zr -zrcrop 720x320+80+0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Ha használni akarod a <tt class="option">crop</tt> szűrőt, ez kell:
+</p><pre class="screen">
+mplayer -vo zr -vf crop=720:320:80:0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Extra esetben a <tt class="option">-zrcrop</tt> meghívja a
+<span class="emphasis"><em>cinerama</em></span> módot, pl. a filmet több TV vagy beamer
+között sugározhatod egy nagyobb kép létrehozásához. Feltéve, hogy két
+beamer-ed van. A bal oldali a Buz-odhoz csatlakozik a
+<tt class="filename">/dev/video1</tt>-en, a jobb oldali a DC10+-odhoz a
+<tt class="filename">/dev/video0</tt>-án. A film felbontása 704x288. Továbbá
+tegyük fel azt is, hogy a jobb beamer-t fekete-fehéren szeretnéd, a
+balnak pedig 10-es minőségű JPEG képeket kell adnia. Ekkor a következő
+parancsot kell használnod:
+</p><pre class="screen">
+mplayer -vo zr -zrdev /dev/video0 -zrcrop 352x288+352+0 -zrxdoff 0 -zrbw \
+    -zrcrop 352x288+0+0 -zrdev /dev/video1 -zrquality 10 \
+    <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+Láthatod, hogy a második <tt class="option">-zrcrop</tt> előtt feltűnő opciók
+csak a DC10+-re, a második <tt class="option">-zrcrop</tt> után lévők csak a
+Buz-ra vonatkoznak. A <span class="emphasis"><em>cinerama</em></span>-ban használható
+MJPEG kártyák maximális száma négy, így egy 2x2-es vidi-falat
+építhetsz.
+</p><p>
+Végül egy fontos megjegyzés: Ne indítsd el vagy állítsd meg a XawTV-t a lejátszó
+eszközön a lejátszás alatt, ez összeomlasztja a számítógépedet. Legjobb
+<span class="bold"><strong>ELŐSZÖR</strong></span> elindítani a XawTV-t,
+<span class="bold"><strong>EZUTÁN</strong></span> elindítani az <span class="application">MPlayer</span>t,
+várni, míg az <span class="application">MPlayer</span>
+végez, és <span class="bold"><strong>EZUTÁN</strong></span> megállítani a XawTV-t.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mpeg_decoders.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="blinkenlights.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.16. MPEG dekóderek </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.18. Blinkenlights</td></tr></table></div></body></html>

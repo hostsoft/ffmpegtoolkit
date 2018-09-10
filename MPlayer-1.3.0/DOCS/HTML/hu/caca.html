@@ -1,0 +1,47 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.10. libcaca - Színes ASCII Art függvénykönyvtár</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="aalib.html" title="6.9. AAlib – szöveges módú megjelenítés"><link rel="next" href="vesa.html" title="6.11. VESA - kimenet a VESA BIOS-hoz"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10. 
+<code class="systemitem">libcaca</code> - Színes ASCII Art függvénykönyvtár
+</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="aalib.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="vesa.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="caca"></a>6.10. 
+<code class="systemitem">libcaca</code> - Színes ASCII Art függvénykönyvtár
+</h2></div></div></div><p>
+A <a class="ulink" href="http://sam.zoy.org/projects/libcaca/" target="_top"><code class="systemitem">libcaca</code></a>
+függvénykönyvtár egy grafikus könyvtár, ami szöveget jelenít meg pixelek helyett, így
+működik régebbi videó kártyákkal vagy szöveges terminálokon is. Hasonló a népszerű
+<code class="systemitem">AAlib</code> könyvtárhoz.
+A <code class="systemitem">libcaca</code>-nak egy terminál kell a működéshez, így
+bármilyen Unix rendszeren (beleértve a Mac OS X-et) működik, vagy a
+<code class="systemitem">slang</code> vagy az
+<code class="systemitem">ncurses</code> vagy DOS alatt a
+<code class="systemitem">conio.h</code> illetve Windows rendszereken
+akár a <code class="systemitem">slang</code> vagy az
+<code class="systemitem">ncurses</code> (Cygwin emuláción keresztül) vagy
+a <code class="systemitem">conio.h</code> könyvtárak használatával. Ha
+a <tt class="filename">./configure</tt>
+megtalálja a <code class="systemitem">libcaca</code>-t, a caca libvo vezérlő
+elkészül.
+</p><div class="itemizedlist"><p class="title"><b>A különbség az <code class="systemitem">AAlib</code>-hez képest
+  a következőek:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+   16 elérhető szín a karakter kimenetre (256 színű párok)
+</p></li><li class="listitem"><p>
+   színes kép dithering
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>De a <code class="systemitem">libcaca</code>-nak megvan az
+  alábbi korlátja:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+   nincs fényerő, kontraszt és gamma támogatás
+</p></li></ul></div><p>
+Pár billentyűvel szabályozhatod a caca ablakban a renderelés opcióit:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Gomb</th><th>Művelet</th></tr></thead><tbody><tr><td><span class="keycap"><b>d</b></span></td><td>
+  Váltás a <code class="systemitem">libcaca</code> dithering metódusai között.
+</td></tr><tr><td><span class="keycap"><b>a</b></span></td><td>
+  A <code class="systemitem">libcaca</code> antialiasing ki-/bekapcsolása.
+</td></tr><tr><td><span class="keycap"><b>b</b></span></td><td>
+  A <code class="systemitem">libcaca</code> háttérbe küldése.
+</td></tr></tbody></table></div><div class="variablelist"><p class="title"><b>A <code class="systemitem">libcaca</code> figyel pár
+  környezeti változót is:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">CACA_DRIVER</tt></span></dt><dd><p>
+    Állítsd be a javasolt caca vezérlőt, pl. ncurses, slang, x11.
+  </p></dd><dt><span class="term"><tt class="option">CACA_GEOMETRY (csak X11)</tt></span></dt><dd><p>
+    Megadja a sorok és oszlopok számát, pl. 128x50.
+  </p></dd><dt><span class="term"><tt class="option">CACA_FONT (csak X11)</tt></span></dt><dd><p>
+    Megadja a használni kívánt betűtípust, pl. fixed, nexus.
+  </p></dd></dl></div><p>
+Használd a <tt class="option">-framedrop</tt> kapcsolót ha a számítógéped nem elég
+gyors az összes képkocka rendeléséhez.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="aalib.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="vesa.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.9. AAlib – szöveges módú megjelenítés </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.11. VESA - kimenet a VESA BIOS-hoz</td></tr></table></div></body></html>

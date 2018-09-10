@@ -1,0 +1,67 @@
+\section{Building on Win32}
+\label{group__win32}\index{Building on Win32@{Building on Win32}}
+\subsection{R\-E\-A\-D\-M\-E.\-Win32}\label{group__win32_win32}
+
+\begin{DoxyCodeInclude}
+The /Win32 directory contains everything necessary to compile
+libfishsound under windows and create:
+
+- libfishsound.dll
+- identify.exe
+- encode.exe
+- decode.exe
+
+Building with the Makefile
+==========================
+
+Here\textcolor{stringliteral}{'s what you need to do:}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{1) Install libogg.dll, libvorbis.dll, and libspeex.dll.}
+\textcolor{stringliteral}{   (you can get them from http://www.xiph.org/ogg/vorbis/ }
+\textcolor{stringliteral}{    and http://www.speex.org/ ). encode and decode will}
+\textcolor{stringliteral}{   additionally require libsndfile to be installed (see}
+\textcolor{stringliteral}{   http://www.mega-nerd.com/libsndfile/).}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{2) cd win32 subdirectory}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{3) Use "nmake" to create library and executable.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{4) Install libfishsound.dll and the include files from the}
+\textcolor{stringliteral}{   /include/fishsound/ directory.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{5) You can test the library with the "identify.exe" program}
+\textcolor{stringliteral}{   also found in the win32 subdirectory.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{Visual Studio.NET 2003 Installation}
+\textcolor{stringliteral}{===================================}
+\textcolor{stringliteral}{NOTE: For lack of platform, we were not able to keep the solution}
+\textcolor{stringliteral}{files up-to-date. Please use the Visual Studio Version 6 files}
+\textcolor{stringliteral}{instead or send us an updated version if you'}re \textcolor{keyword}{using} these.
+
+
+IMPORTANT: The solution files were built \textcolor{keywordflow}{for} VS.NET 2003 and can\textcolor{stringliteral}{'t be}
+\textcolor{stringliteral}{opened by VS.NET 2002. If you use VS.NET 2002 you should use the VS6}
+\textcolor{stringliteral}{workspace files and they will be automatically converted to the new}
+\textcolor{stringliteral}{format.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{Also included in the solution is a setup and deployment project that}
+\textcolor{stringliteral}{will package and create an installer for the binary output of this}
+\textcolor{stringliteral}{project.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{You will need to install the libogg, libvoribs, and libspeex libraries}
+\textcolor{stringliteral}{separately. If you wish to create a debug build and wish to have the}
+\textcolor{stringliteral}{debugger load the symbols for these libraries, you should also include}
+\textcolor{stringliteral}{their project source files. By default the compiler and linker will}
+\textcolor{stringliteral}{look for them in the same parent directory as libfishsound. However}
+\textcolor{stringliteral}{you can install them wherever you choose and must modify the include}
+\textcolor{stringliteral}{directories for the linker and compiler in your projects properties.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{Visual Studio Version 6 Installation}
+\textcolor{stringliteral}{====================================}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{There is also a Visual C++ V 6.0 workspace file in the Win32 directory}
+\textcolor{stringliteral}{in case you have not upgraded to Visual Studio.NET.}
+\end{DoxyCodeInclude}
+ 

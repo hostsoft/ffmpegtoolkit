@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.6. RTC</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="install.html" title="Kapitel 2. Installation"><link rel="prev" href="codec-installation.html" title="2.5. Codec Installation"><link rel="next" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.6. RTC</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="codec-installation.html">Zurück</a> </td><th width="60%" align="center">Kapitel 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="usage.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="rtc"></a>2.6. RTC</h2></div></div></div><p>
+      Es gibt drei Zeitgebermethoden in <span class="application">MPlayer</span>.
+
+      </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+            <span class="bold"><strong>Um die alte Methode zu verwenden</strong></span>, musst du
+            gar nichts machen. Diese benutzt <code class="systemitem">usleep()</code>, um
+            A/V-Synchronisation abzustimmen, mit +/- 10ms Genauigkeit. Trotzdem muss manchmal
+            die Synchronisation noch feiner abgestimmt werden.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>Der neue Zeitgeber</strong></span>-Code benutzt RTC (RealTime Clock, Echtzeituhr)
+            für diese Aufgabe, da dieser präzise 1ms-Timer besitzt.
+            Die Option <tt class="option">-rtc</tt> aktivert diesen, es ist jedoch ein hierfür speziell konfigurierter
+            Kernel erforderlich.
+            Wenn du Kernel 2.4.19pre8 oder neuer laufen hast, kannst du die maximale RTC-Frequenz
+            für normale Benutzer durch das <code class="systemitem">/proc</code>-Dateisystem
+            festlegen.
+            Benutze einen der folgenden Befehle, um RTC für normale Benutzer zu aktivieren:
+            </p><pre class="screen">echo 1024 &gt; /proc/sys/dev/rtc/max-user-freq</pre><p>
+            </p><pre class="screen">sysctl dev/rtc/max-user-freq=1024</pre><p>
+            Die kannst diese Einstellung permanent machen, indem du letzteren Befehl der Datei
+            <tt class="filename">/etc/sysctl.conf</tt> hinzufügst.
+          </p><p>
+            Du kannst die Effizienz des neuen Zeitgebers in der Statuszeile sehen.
+            Die Power Management-Funktionen der BIOSse mancher Notebooks mit speedstep-CPUs
+            vertragen sich nicht gut mit RTC. Audio und Video könnten Synchronisation verlieren.
+            Die externe Stromversorgung anzuschließen, bevor du dein Notebook einschaltest,
+            scheint zu helfen.
+            Bei manchen Hardwarekombinationen (bestätigt
+            während des Gebrauchs eines Nicht-DMA-DVD-Laufwerks auf einem ALi1541-Board)
+            führt der Gebrauch des RTC-Zeitgebers zu sprunghafter Wiedergabe. Es wird empfohlen,
+            in solchen Fällen die dritte Methode zu verwenden.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>Der Code des dritten Zeitgebers</strong></span> wird mit der Option
+            <tt class="option">-softsleep</tt> aktiviert. Der hat die Effizienz von RTC, benutzt RTC aber nicht.
+            Auf der anderen Seite benötigt er mehr CPU.
+          </p></li></ul></div><p>
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="codec-installation.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="usage.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">2.5. Codec Installation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> Kapitel 3. Gebrauch</td></tr></table></div></body></html>

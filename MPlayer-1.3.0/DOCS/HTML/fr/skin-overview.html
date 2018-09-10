@@ -1,0 +1,114 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.1. Aperçu</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="prev" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="next" href="skin-file.html" title="B.2. Le fichier skin"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="skin-overview.html#skin-overview-directories" title="B.1.1. Répertoires"><link rel="subsection" href="skin-overview.html#skin-overview-formats" title="B.1.2. Format d'images"><link rel="subsection" href="skin-overview.html#skin-overview-components" title="B.1.3. Composants d'une skin"><link rel="subsection" href="skin-overview.html#skin-files" title="B.1.4. Fichiers"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.1. Aperçu</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin.html">Précédent</a> </td><th width="60%" align="center">Annexe B. Format de skins <span class="application">MPlayer</span></th><td width="20%" align="right"> <a accesskey="n" href="skin-file.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-overview"></a>B.1. Aperçu</h2></div></div></div><p>
+Ce n'est pas en rapport direct avec le format des skins, mais vous devez savoir
+que <span class="application">MPlayer</span> n'a <span class="bold"><strong>pas</strong></span> de skin par défaut, donc
+<span class="bold"><strong>au moins une skin doit être installée pour pouvoir utiliser
+la GUI.</strong></span>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-directories"></a>B.1.1. Répertoires</h3></div></div></div><p>
+<span class="application">MPlayer</span> cherche des skins dans ces répertoires (dans cet ordre):
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+<tt class="filename">$(DATADIR)/skins/</tt>
+</p></li><li class="listitem"><p>
+<tt class="filename">$(PREFIX)/share/mplayer/skins/</tt>
+</p></li><li class="listitem"><p>
+<tt class="filename">~/.mplayer/skins/</tt>
+</p></li></ol></div><p>
+</p><p>
+Notez que le premier répertoire peut varier suivant la façon dont <span class="application">MPlayer</span> a été
+configuré (voir les arguments <tt class="option">--prefix</tt> et <tt class="option">--datadir</tt>
+du script <span class="command"><strong>configure</strong></span>).
+</p><p>
+Chaque skin est installée dans son propre répertoire sous l'un des répertoires
+listés ci-dessus, par exemple:
+</p><pre class="screen">$(PREFIX)/share/mplayer/skins/default/</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-formats"></a>B.1.2. Format d'images</h3></div></div></div><p>Les images doivent être en truecolor (24 ou 32 bpp) et enregistrées au
+format PNG.</p><p>
+Dans la fenêtre principale et la barre de lecture (c.f. ci-dessous) vous pouvez
+utiliser des images dotées de régions "transparentes": les régions
+remplies avec la couleur #FF00FF (magenta) deviennent transparentes dans <span class="application">MPlayer</span>.
+Cela signifie que vous pouvez obtenir des formes particulières pour vos fenêtres si votre
+serveur X possède l'extension XShape.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-components"></a>B.1.3. Composants d'une skin</h3></div></div></div><p>
+Les skins sont d'un format plutôt libre (contrairement aux formats fixes de
+<span class="application">Winamp</span>/<span class="application">XMMS</span>, par exemple),
+donc il ne tient qu'a vous de créer quelque chose de bien.
+</p><p>
+Actuellement, trois fenêtres doivent être décorées: la
+<a class="link" href="skin-file.html#skin-file-main" title="B.2.1. Fenêtre principale et barre de lecture">fenêtre principale</a>, la
+<a class="link" href="skin-file.html#skin-file-subwindow" title="B.2.2. Sous-fenêtre">sous-fenêtre</a>, la
+<a class="link" href="skin-file.html#skin-file-main" title="B.2.1. Fenêtre principale et barre de lecture">barre de lecture</a>, et le
+<a class="link" href="skin-file.html#skin-file-menu" title="B.2.3. Menu">menu</a> (activable par un clic droit).
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Vous contrôlez <span class="application">MPlayer</span> par la <span class="bold"><strong>fenêtre principale</strong></span>
+  et/ou la <span class="bold"><strong>barre de lecture</strong></span>. L'arrière plan est
+  une image. Divers objets peuvent (et doivent) venir se placer dans cette fenêtre:
+  <span class="emphasis"><em>boutons</em></span>, <span class="emphasis"><em>podomètres</em></span>
+  (sliders) et <span class="emphasis"><em>labels</em></span>. Pour chaque objet, vous devez
+  spécifier sa taille et sa position.
+</p><p>
+  Un <span class="bold"><strong>bouton</strong></span> comprend trois états (pressé, relâché,
+  désactivé), donc l'image doit se diviser en trois parties, verticalement. Voir
+  l'objet <a class="link" href="skin-file.html#skin-button">bouton</a> pour plus de détails.
+</p><p>
+  Un <span class="bold"><strong>podomètre</strong></span> (principalement utilisé pour la
+  barre d'avancement et le contrôle du volume/balance) peut posséder n'importe quel
+  nombre d'états en empilant ces images, verticalement. Voir
+  <a class="link" href="skin-file.html#skin-hpotmeter">hpotmeter</a> pour plus de détails.
+</p><p>
+  Les <span class="bold"><strong>labels</strong></span> sont un peu particuliers : les
+  caractères nécessaires pour les dessiner sont récupérés depuis un fichier image,
+  décrit par un <a class="link" href="skin-fonts.html" title="B.3. Polices">fichier de description de polices</a>.
+  Ce dernier est un fichier texte brut spécifiant la position x,y ainsi que la
+  taille de chaque caractère dans l'image (le fichier image et son descripteur
+  forment une police <span class="emphasis"><em>ensemble</em></span>). Voir <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>
+  et <a class="link" href="skin-file.html#skin-slabel">slabel</a> pour plus de détails.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+  Toutes les images disposent de la couleur de transparence décrite dans la section
+  <a class="link" href="skin-overview.html#skin-overview-formats" title="B.1.2. Format d'images">formats d'images</a>. Si le serveur X ne
+  supporte pas l'extension Xshape, les parties transparentes seront noires. Si vous
+  voulez utiliser cette fonction, la largeur de l'image de la fenêtre principale
+  devra être divisible par 8.
+</p></div></li><li class="listitem"><p>
+  La <span class="bold"><strong>sous-fenêtre</strong></span> contient la vidéo en elle même.
+  Elle peut afficher une image si aucun film n'est chargé (ce n'est jamais plaisant
+  d'avoir une fenêtre vide :-)) <span class="bold"><strong>Note:</strong></span> la couleur
+  de transparence n'est <span class="bold"><strong>pas autorisée</strong></span> ici.
+</p></li><li class="listitem"><p>
+  Le <span class="bold"><strong>menu</strong></span> est simplement un moyen de contrôler
+  <span class="application">MPlayer</span> par des entrées graphiques. Deux images sont nécessaires pour le menu:
+  l'une d'elle, l'image de base, affiche le menu dans son été normal, l'autre est
+  utilisée pour afficher les entrées sélectionnées. Quand vous faites apparaître le
+  menu, la première image s'affiche. Si vous passez la souris sur les entrées du
+  menu, l'entrée sélectionnée est copiée depuis la seconde image, et uniquement la
+  partie concernée par cette sélection (la seconde image ne s'affiche jamais
+  complètement.)
+</p><p>
+  Une entrée de menu se définit par sa position et sa taille dans l'image (voir la
+  section <a class="link" href="skin-file.html#skin-file-menu" title="B.2.3. Menu">menu</a> pour plus de détails).
+</p></li></ul></div><p>
+</p><p>
+  Une chose essentielle n'a pas encore été mentionnée : pour que les boutons,
+  podomètres et entrées du menu fonctionnent, <span class="application">MPlayer</span> doit savoir quoi en faire.
+  Ceci dépend des <a class="link" href="skin-gui.html" title="B.4. Messages de la GUI">messages</a> (events) envoyés. Pour
+  chacun de ces objets vous devez définir le message à afficher quand on clique
+  dessus.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-files"></a>B.1.4. Fichiers</h3></div></div></div><p>
+Vous aurez besoin des fichiers suivants pour construire une skin:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Le fichier de configuration nommé <a class="link" href="skin-file.html" title="B.2. Le fichier skin">skin</a> indique
+  à <span class="application">MPlayer</span> comment assembler les différentes images et comment interpréter les
+  clics de souris sur l'interface.
+</p></li><li class="listitem"><p>
+  L'image de fond de la fenêtre principale.
+</p></li><li class="listitem"><p>
+  Les images correspondants aux objets de la fenêtre principale (y compris une ou
+  plusieurs polices et descripteurs nécessaires à l'affichage des textes).
+</p></li><li class="listitem"><p>
+  L'image affichée dans la sous-fenêtre (optionnel).
+</p></li><li class="listitem"><p>
+  Deux images pour le menu (nécessaires uniquement si vous voulez créer un menu).
+</p></li></ul></div><p>
+  A l'exception du fichier de configuration, vous pouvez nommer les fichiers comme
+  bon vous semble (mais notez que les descripteurs de polices doivent avoir une
+  extension <tt class="filename">.fnt</tt>).
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-file.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">Annexe B. Format de skins <span class="application">MPlayer</span> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> B.2. Le fichier skin</td></tr></table></div></body></html>

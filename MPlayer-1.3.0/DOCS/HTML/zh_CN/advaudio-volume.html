@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.11. Software Volume adjustment</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="usage.html" title="第 3 章 Usage"><link rel="prev" href="advaudio-channels.html" title="3.10. Channel manipulation"><link rel="next" href="tv-input.html" title="3.12. TV input"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.11. Software Volume adjustment</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="advaudio-channels.html">上一页</a> </td><th width="60%" align="center">第 3 章 Usage</th><td width="20%" align="right"> <a accesskey="n" href="tv-input.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="advaudio-volume"></a>3.11. Software Volume adjustment</h2></div></div></div><p>
+Some audio tracks are too quiet to be heard comfortably without amplification.
+This becomes a problem when your audio equipment cannot amplify the signal for
+you. The <tt class="option">-softvol</tt> option directs
+<span class="application">MPlayer</span> to use an internal mixer. You can then use
+the volume adjustment keys (by default <span class="keycap"><b>9</b></span> and
+<span class="keycap"><b>0</b></span>) to reach much higher volume levels. Note that this does not
+bypass your sound card's mixer; <span class="application">MPlayer</span> only
+amplifies the signal before sending it to your sound card.
+The following example is a good start:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>quiet-file</code></em> -softvol -softvol-max 300
+</pre><p>
+The <tt class="option">-softvol-max</tt> option specifies the maximum allowable output
+volume as a percentage of the
+original volume. For example, <tt class="option">-softvol-max 200</tt> would allow the
+volume to be adjusted up to twice its original level.
+It is safe to specify a large value with
+<tt class="option">-softvol-max</tt>; the higher volume will not be used until you
+use the volume adjustment keys. The only disadvantage of a large value is that,
+since <span class="application">MPlayer</span> adjusts volume by a percentage of the
+maximum, you will not have as precise control when using the volume adjustment
+keys. Use a lower value with <tt class="option">-softvol-max</tt> and/or specify
+<tt class="option">-volstep 1</tt> if you need higher precision.
+</p><p>
+The <tt class="option">-softvol</tt> option works by controlling the
+<tt class="option">volume</tt> audio filter. If you want to play a file at a certain
+volume from the beginning you can specify <tt class="option">volume</tt> manually:
+</p><pre class="screen">mplayer <em class="replaceable"><code>quiet-file</code></em> -af volume=10</pre><p>
+This will play the file with a ten decibel gain. Be careful when using the
+<tt class="option">volume</tt> filter - you could easily hurt your ears if you use
+too high a value. Start low and work your way up gradually until you get a feel
+for how much adjustment is required. Also, if you specify excessively high
+values, <tt class="option">volume</tt> may need to clip the signal to avoid sending
+your sound card data that is outside the allowable range; this will result in
+distorted audio.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="advaudio-channels.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="tv-input.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">3.10. Channel manipulation </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 3.12. TV input</td></tr></table></div></body></html>

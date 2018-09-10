@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.9. Extracting DVD subtitles to VOBsub file</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="prev" href="menc-feat-enc-images.html" title="6.8. Encoding from multiple input image files (JPEG, PNG, TGA, etc.)"><link rel="next" href="aspect.html" title="6.10. Preserving aspect ratio"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.9. Extracting DVD subtitles to VOBsub file</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-enc-images.html">Prev</a> </td><th width="60%" align="center">Chapter 6. Basic usage of <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="aspect.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-extractsub"></a>6.9. Extracting DVD subtitles to VOBsub file</h2></div></div></div><p>
+<span class="application">MEncoder</span> is capable of extracting subtitles from
+a DVD into VOBsub formatted files. They consist of a pair of files ending in
+<tt class="filename">.idx</tt> and <tt class="filename">.sub</tt> and are usually
+packaged in a single <tt class="filename">.rar</tt> archive.
+<span class="application">MPlayer</span> can play these with the
+<tt class="option">-vobsub</tt> and <tt class="option">-vobsubid</tt> options.
+</p><p>
+You specify the basename (i.e without the <tt class="filename">.idx</tt> or
+<tt class="filename">.sub</tt> extension) of the output files with
+<tt class="option">-vobsubout</tt> and the index for this subtitle in the
+resulting files with <tt class="option">-vobsuboutindex</tt>.
+</p><p>
+If the input is not from a DVD you should use <tt class="option">-ifo</tt> to
+indicate the <tt class="filename">.ifo</tt> file needed to construct the
+resulting <tt class="filename">.idx</tt> file.
+</p><p>
+If the input is not from a DVD and you do not have the
+<tt class="filename">.ifo</tt> file you will need to use the
+<tt class="option">-vobsubid</tt> option to let it know what language id to put in
+the <tt class="filename">.idx</tt> file.
+</p><p>
+Each run will append the running subtitle if the <tt class="filename">.idx</tt>
+and <tt class="filename">.sub</tt> files already exist. So you should remove any
+before starting.
+</p><div class="example"><a name="copying_two_subtitles_from_a_dvd_while_doing_two_pass_encoding"></a><p class="title"><b>Example 6.5. Copying two subtitles from a DVD while doing two pass encoding</b></p><div class="example-contents"><pre class="screen">
+rm <em class="replaceable"><code>subtitles.idx</code></em> <em class="replaceable"><code>subtitles.sub</code></em>
+mencoder dvd://1 -oac copy -ovc lavc -lavcopts vcodec=mpeg4:vpass=1 \
+    -vobsubout <em class="replaceable"><code>subtitles</code></em> -vobsuboutindex 0 -sid 2
+mencoder dvd://1 -oac copy -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell:vpass=2 \
+    -vobsubout <em class="replaceable"><code>subtitles</code></em> -vobsuboutindex 1 -sid 5</pre></div></div><br class="example-break"><div class="example"><a name="copying_a_french_subtitle_from_an_mpeg_file"></a><p class="title"><b>Example 6.6. Copying a French subtitle from an MPEG file</b></p><div class="example-contents"><pre class="screen">
+rm <em class="replaceable"><code>subtitles.idx</code></em> <em class="replaceable"><code>subtitles.sub</code></em>
+mencoder <em class="replaceable"><code>movie.mpg</code></em> -ifo <em class="replaceable"><code>movie.ifo</code></em> -vobsubout <em class="replaceable"><code>subtitles</code></em> -vobsuboutindex 0 \
+    -vobsuboutid fr -sid 1 -nosound -ovc copy
+</pre></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-enc-images.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="aspect.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.8. Encoding from multiple input image files (JPEG, PNG, TGA, etc.) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 6.10. Preserving aspect ratio</td></tr></table></div></body></html>

@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.3. SVGAlib</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="dga.html" title="6.2. DGA"><link rel="next" href="fbdev.html" title="6.4. Framebuffer kimenet (FBdev)"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.3. SVGAlib</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dga.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="fbdev.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="svgalib"></a>6.3. SVGAlib</h2></div></div></div><p><b>TELEPÍTÉS. </b>
+Telepítened kell az svgalib-et és a fejlesztői csomagjait ahhoz, hogy az
+<span class="application">MPlayer</span> elkészítse az SVGAlib vezérlőjét (automatikusan
+felismeri, de lehet kényszeríteni is rá) és ne felejtsd el átírni a
+<tt class="filename">/etc/vga/libvga.config</tt> fájlt, hogy megfeleljen a kártyádnak
+és a monitorodnak.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+Ne használd a <tt class="option">-fs</tt> kapcsolót, mert bekapcsolja a szoftveres
+méretezést és lassú. Ha tényleg szükség van rá, használd a
+<tt class="option">-sws 4</tt> kapcsolót, ami rossz minőséget ad, de valamivel gyorsabb.
+</p></div><p><b>EGA (4BPP) TÁMOGATÁS. </b>
+Az SVGAlib tartalmazza az EGAlib-et és az <span class="application">MPlayer</span> így
+képes bármely film 16 színben történő megjelenítésére, lehetővé téve az alábbi
+beállítások használatát:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  EGA kártya EGA monitorral: 320x200x4bpp, 640x200x4bpp, 640x350x4bpp
+</p></li><li class="listitem"><p>
+  EGA kártya CGA monitorral: 320x200x4bpp, 640x200x4bpp
+</p></li></ul></div><p>
+A bpp (bit per pixel) értéket kézzel kell 4-re állítanod:
+<tt class="option">-bpp 4</tt>
+</p><p>
+A filmet valószínűleg át kell méretezni, hogy megfeleljen az EGA módnak:
+</p><pre class="screen">-vf scale=640:350</pre><p>
+or
+</p><pre class="screen">-vf scale=320:200</pre><p>
+</p><p>
+Ehhez gyors, de rossz minőséget produkáló méretező rutin kell:
+</p><pre class="screen">-sws 4</pre><p>
+</p><p>
+Talán az automatikus arány-javítást kikapcsolhatod:
+</p><pre class="screen">-noaspect</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+A kísérleteimből úgy tűnik, a legjobb képminőség EGA monitorokon
+a világosság enyhe csökkentésével állítható elő:
+<tt class="option">-vf eq=-20:0</tt>. Nálam szükséges volt az audió mintavételi
+ráta csökkentése is, mert a hang szétesett 44kHz-en:
+<tt class="option">-srate 22050</tt>.
+</p></div><p>
+Csak az <tt class="option">expand</tt> szűrő segítségével tudod bekapcsolni a
+feliratokat és az OSD-t, lásd a man oldalt a megfelelő paraméterekért.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dga.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="fbdev.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.2. DGA </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.4. Framebuffer kimenet (FBdev)</td></tr></table></div></body></html>

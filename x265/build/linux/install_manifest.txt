@@ -1,0 +1,5 @@
+/usr/local/ffmpegtoolkit/lib/libx265.a
+/usr/local/ffmpegtoolkit/include/x265.h
+/usr/local/ffmpegtoolkit/include/x265_config.h
+/usr/local/ffmpegtoolkit/lib/pkgconfig/x265.pc
+/usr/local/ffmpegtoolkit/bin/x265

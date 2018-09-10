@@ -1,0 +1,90 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.4. Czcionki i OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="install.html" title="Rozdział 2. Instalacja"><link rel="prev" href="gui.html" title="2.3. A co z GUI?"><link rel="next" href="codec-installation.html" title="2.5. Codec installation"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="subsection" href="fonts-osd.html#truetype-fonts" title="2.4.1. Czcionki TrueType"><link rel="subsection" href="fonts-osd.html#bitmap-fonts" title="2.4.2. Czcionki bitmapowe"><link rel="subsection" href="fonts-osd.html#osdmenu" title="2.4.3. Menu OSD"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.4. Czcionki i OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="gui.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 2. Instalacja</th><td width="20%" align="right"> <a accesskey="n" href="codec-installation.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fonts-osd"></a>2.4. Czcionki i OSD</h2></div></div></div><p>
+Musisz powiedzieć <span class="application">MPlayerowi</span> której czcionki ma
+używać, by móc cieszyć się OSD i napisami. Działa dowolna czcionka TrueType
+lub specjalne czcionki bitmapowe. Jednakże zalecane są czcionki TrueType,
+ponieważ wyglądają o wiele lepiej, mogą być prawidłowo przeskalowane do
+wielkości filmu i lepiej sobie radzą z różnymi sposobami kodowania.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="truetype-fonts"></a>2.4.1. Czcionki TrueType</h3></div></div></div><p>
+Są dwa sposoby na skłonienie czcionek TrueType do działania. Pierwszy to
+podanie w wierszu poleceń pliku z czcionką TrueType przy pomocy opcji
+<tt class="option">-font</tt>.
+Ta opcja jest też dobrym kandydatem do włożenie w plik konfiguracyjny
+(szczegóły na stronie man).
+Drugi to stworzenie dowiązania symbolicznego (symlink) o nazwie
+<tt class="filename">subfont.ttf</tt> wskazującego na wybraną czcionkę.
+Albo
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>/ścieżka/do/przykładowej_czcionki.ttf</code></em> ~/.mplayer/subfont.ttf
+</pre><p>
+dla każdego użytkownika osobno, albo ogólnosystemowe:
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>/ścieżka/do/przykładowej_czcionki.ttf</code></em> $PREFIX/share/mplayer/subfont.ttf
+</pre><p>
+</p><p>
+Jeśli <span class="application">MPlayer</span> był skompilowany z obsługą
+<code class="systemitem">fontconfig</code>, te metody nie zadziałają,
+zamiast tego <tt class="option">-font</tt> oczekuje nazwy czcionki według
+<code class="systemitem">fontconfig</code> i domyślnie bierze
+czcionkę sans-serif.
+Przykład:
+</p><pre class="screen">
+mplayer -font <em class="replaceable"><code>'Bitstream Vera Sans'</code></em> <em class="replaceable"><code>anime.mkv</code></em>
+</pre><p>
+</p><p>
+Żeby zobaczyć jakie czcionki zna
+<code class="systemitem">fontconfig</code>, użyj
+<span class="command"><strong>fc-list</strong></span>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bitmap-fonts"></a>2.4.2. Czcionki bitmapowe</h3></div></div></div><p>
+Jeśli z jakiegoś powodu chcesz lub musisz użyć czcionek bitmapowych, ściągnij
+zestaw z naszej strony domowej. Możesz wybierać spośród rozmaitych
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/fonts/" target="_top">czcionek ISO</a>
+oraz zestawów czcionek
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/fonts/" target="_top">stworzonych przez użytkowników</a>
+w rozmaitych kodowaniach.
+</p><p>
+Rozpakuj ściągnięty plik do katalogu
+<tt class="filename">~/.mplayer</tt> lub
+<tt class="filename">$PREFIX/share/mplayer</tt>.
+Potem przemianuj lub stwórz dowiązanie symboliczne jednego z rozpakowanych
+katalogów na nazwę
+<tt class="filename">font</tt>, na przykład:
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>~/.mplayer/arial-24</code></em> ~/.mplayer/font
+</pre><p>
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>$PREFIX/share/mplayer/arial-24</code></em> $PREFIX/share/mplayer/font
+</pre><p>
+</p><p>
+Czcionki powinny mieć odpowiedni plik <tt class="filename">font.desc</tt>, który
+przypisuje pozycje czcionek unicode na właściwą stronę kodową napisów.
+Innym rozwiązaniem jest mieć napisy zakodowane w UTF-8 i używać opcji
+<tt class="option">-utf8</tt> albo nazwać plik z napisami tak samo jak film, ale z
+rozszerzeniem <tt class="filename">.utf</tt>
+i mieć go w tym samym katalogu co film.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osdmenu"></a>2.4.3. Menu OSD</h3></div></div></div><p>
+<span class="application">MPlayer</span>
+ma całkowicie definiowalny Interfejs Menu OSD.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Uwaga</h3><p>
+Menu Ustawienia nie jest jeszcze ZAIMPLEMENTOWANE!
+</p></div><div class="orderedlist"><p class="title"><b>Instalacja</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  skompiluj <span class="application">MPlayera</span> z opcją
+  <tt class="option">--enable-menu</tt> dla skryptu <tt class="filename">./configure</tt>
+</p></li><li class="listitem"><p>
+  upewnij się, że masz zainstalowaną czcionkę OSD
+</p></li><li class="listitem"><p>
+  skopiuj plik <tt class="filename">etc/menu.conf</tt> do Twojego katalogu
+  <tt class="filename">.mplayer</tt>
+</p></li><li class="listitem"><p>
+  skopiuj plik <tt class="filename">etc/input.conf</tt> do Twojego katalogu
+  <tt class="filename">.mplayer</tt> lub do ogólnosystemowego
+  katalogu z konfiguracją <span class="application">MPlayera</span> (domyślnie:
+  <tt class="filename">/usr/local/etc/mplayer</tt>)
+</p></li><li class="listitem"><p>
+  sprawdź i ewentualnie przerób plik <tt class="filename">input.conf</tt>,
+  aby określić funkcje klawiszy (wszystko jest tam opisane).
+</p></li><li class="listitem"><p>
+  uruchom <span class="application">MPlayera</span> przykładową komendą:
+  </p><pre class="screen">mplayer -menu <em class="replaceable"><code>plik.avi</code></em></pre><p>
+</p></li><li class="listitem"><p>
+  wciśnij dowolny klawisz, który wcześniej zdefiniowałeś
+</p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="gui.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="codec-installation.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">2.3. A co z GUI? </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 2.5. Codec installation</td></tr></table></div></body></html>

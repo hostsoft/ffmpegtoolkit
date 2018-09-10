@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.1. Linux</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="ports.html" title="Kapitola 5. Porty"><link rel="prev" href="ports.html" title="Kapitola 5. Porty"><link rel="next" href="bsd.html" title="5.2. *BSD"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="linux.html#debian" title="5.1.1. Vytvoření balíčku pro Debian"><link rel="subsection" href="linux.html#rpm" title="5.1.2. Balení RPM"><link rel="subsection" href="linux.html#arm" title="5.1.3. ARM"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.1. Linux</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ports.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 5. Porty</th><td width="20%" align="right"> <a accesskey="n" href="bsd.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="linux"></a>5.1. Linux</h2></div></div></div><p>
+Hlavní vývojovou platformou je Linux na x86, ačkoli
+<span class="application">MPlayer</span> pracuje na mnoha jiných portech Linuxu.
+Binární balíčky <span class="application">MPlayer</span>u jsou dostupné z několika
+zdrojů.
+Nicméně <span class="bold"><strong>není žádný z těchto balíčků podporován</strong></span>.
+Hlaste tedy problémy jejich autorům, nikoli nám.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="debian"></a>5.1.1. Vytvoření balíčku pro Debian</h3></div></div></div><p>
+Pro vytvoření balíčku pro Debian spusťte následující příkaz v adresáři se
+zdrojovým kódem <span class="application">MPlayer</span>u:
+
+</p><pre class="screen">fakeroot debian/rules binary</pre><p>
+
+Pokud chcete předat nějaké volby pro configure, můžete nastavit proměnnou
+prostředí <code class="envar">DEB_BUILD_OPTIONS</code>. Například, pokud chcete GUI a
+podporu OSD menu, měli byste použít:
+
+</p><pre class="screen">DEB_BUILD_OPTIONS="--enable-gui --enable-menu" fakeroot debian/rules binary</pre><p>
+
+Rovněž můžete předat některé proměnné do Makefile. Například, pokud chcete
+kompilovat pomocí gcc 3.4 i v případě, že to není výchozí kompilátor:
+
+</p><pre class="screen">CC=gcc-3.4 DEB_BUILD_OPTIONS="--enable-gui" fakeroot debian/rules binary</pre><p>
+
+K vyčistění zdrojového stromu spusťte následující příkaz:
+
+</p><pre class="screen">fakeroot debian/rules clean</pre><p>
+
+Jako root můžete nainstalovat <tt class="filename">.deb</tt> balíček obvyklým
+způsobem:
+
+</p><pre class="screen">dpkg -i ../mplayer_<em class="replaceable"><code>version</code></em>.deb</pre><p>
+</p><p>
+Christian Marillat vytvářel jistou dobu neoficiální Debianí balíčky
+<span class="application">MPlayer</span>u, <span class="application">MEncoder</span>u a
+našich binárních balíků s kodeky, můžete si je stáhnout (apt-get) z
+<a class="ulink" href="http://www.debian-multimedia.org/" target="_top">jeho domácí stránky</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="rpm"></a>5.1.2. Balení RPM</h3></div></div></div><p>
+Dominik Mierzejewski udržuje oficiální RPM balíčky
+<span class="application">MPlayer</span>u pro Fedora Core. Ty jsou dostupné
+z <a class="ulink" href="http://rpm.livna.org/" target="_top">repozitáře</a>.
+</p><p>
+RPM balíčky pro Mandrake/Mandriva jsou dostupné z
+<a class="ulink" href="http://plf.zarb.org/" target="_top">P.L.F.</a>.
+SuSE zařadilo do své distribuce zmrzačenou verzi
+<span class="application">MPlayer</span>u. V posledních verzích ji odstranili. Funkční
+RPM naleznete na
+<a class="ulink" href="http://packman.links2linux.de/?action=128" target="_top">links2linux.de</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="arm"></a>5.1.3. ARM</h3></div></div></div><p>
+<span class="application">MPlayer</span> pracuje na Linuxových PDA s ARM CPU např.
+Sharp Zaurus, Compaq Ipaq. Nejjednodušší způsob jak si opatřit
+<span class="application">MPlayer</span> je, stáhnout si jej z některého
+<a class="ulink" href="http://www.openzaurus.org" target="_top">OpenZaurus</a> balíčkového kanálu.
+Pokud si jej chcete skompilovat sami, měli byste nahlédnout do adresáře
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/mplayer?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">mplayer</a>
+a
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/libavcodec?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">libavcodec</a>
+v buildroot OpenZaurus distribuce. Zde mají vždy poslední Makefile a patche používané
+pro sestavení SVN verze <span class="application">MPlayer</span>u.
+Pokud potřebujete GUI rozhraní, můžete použít xmms-embedded.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ports.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="bsd.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">Kapitola 5. Porty </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 5.2. *BSD</td></tr></table></div></body></html>

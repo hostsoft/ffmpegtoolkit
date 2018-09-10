@@ -1,0 +1,393 @@
+\section{oggz.\-h File Reference}
+\label{oggz_8h}\index{oggz.\-h@{oggz.\-h}}
+
+
+The liboggz C A\-P\-I.  
+
+
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+{\ttfamily \#include $<$ogg/ogg.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-constants.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-table.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-off\-\_\-t.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-read.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-stream.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-seek.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-write.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-io.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-comments.\-h$>$}\\*
+{\ttfamily \#include $<$oggz/oggz\-\_\-deprecated.\-h$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void {\bf O\-G\-G\-Z}
+\begin{DoxyCompactList}\small\item\em An opaque handle to an Ogg file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf O\-G\-G\-Z} $\ast$ {\bf oggz\-\_\-new} (int flags)
+\begin{DoxyCompactList}\small\item\em Create a new O\-G\-G\-Z object. \end{DoxyCompactList}\item 
+{\bf O\-G\-G\-Z} $\ast$ {\bf oggz\-\_\-open} (const char $\ast$filename, int flags)
+\begin{DoxyCompactList}\small\item\em Open an Ogg file, creating an O\-G\-G\-Z handle for it. \end{DoxyCompactList}\item 
+{\bf O\-G\-G\-Z} $\ast$ {\bf oggz\-\_\-open\-\_\-stdio} (F\-I\-L\-E $\ast$file, int flags)
+\begin{DoxyCompactList}\small\item\em Create an O\-G\-G\-Z handle associated with a stdio stream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-flush} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Ensure any associated io streams are flushed. \end{DoxyCompactList}\item 
+long {\bf oggz\-\_\-run} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Run an O\-G\-G\-Z until completion, or error. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-run\-\_\-set\-\_\-blocksize} ({\bf O\-G\-G\-Z} $\ast$oggz, long blocksize)
+\begin{DoxyCompactList}\small\item\em Set the blocksize to use internally for \doxyref{oggz\-\_\-run()}{p.}{oggz_8h_a0561df532fc37f98725007a79f898356} \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-close} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Close an O\-G\-G\-Z handle. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-get\-\_\-bos} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Determine if a given logical bitstream is at bos (beginning of stream). \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-get\-\_\-eos} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Determine if a given logical bitstream is at eos (end of stream). \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-get\-\_\-numtracks} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Query the number of tracks (logical bitstreams). \end{DoxyCompactList}\item 
+long {\bf oggz\-\_\-serialno\-\_\-new} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Request a new serialno, as required for a new stream, ensuring the serialno is not yet used for any other streams managed by this O\-G\-G\-Z. \end{DoxyCompactList}\item 
+const char $\ast$ {\bf oggz\-\_\-content\-\_\-type} ({\bf Oggz\-Stream\-Content} content)
+\begin{DoxyCompactList}\small\item\em Return human-\/readable string representation of a content type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The liboggz C A\-P\-I. \subsection{Generic semantics}\label{oggz_8h_general}
+All access is managed via an O\-G\-G\-Z handle. This can be instantiated in one of three ways\-:
+
+
+\begin{DoxyItemize}
+\item \doxyref{oggz\-\_\-open()}{p.}{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db} -\/ Open a full pathname
+\item \doxyref{oggz\-\_\-open\-\_\-stdio()}{p.}{oggz_8h_ac49e9de0bc4ef1d91b43b13605f98b19} -\/ Use an already opened F\-I\-L\-E $\ast$
+\item \doxyref{oggz\-\_\-new()}{p.}{oggz_8h_a6eb34d123389ae38d993601f9e7bb9d6} -\/ Create an anonymous O\-G\-G\-Z object, which you can later handle via memory buffers
+\end{DoxyItemize}
+
+To finish using an O\-G\-G\-Z handle, it should be closed with \doxyref{oggz\-\_\-close()}{p.}{oggz_8h_aadcfc04b2930660710bbcbc93140b783}.\subsection{Reading Ogg data}\label{oggz_8h_reading}
+To read from Ogg files or streams you must instantiate an O\-G\-G\-Z handle with flags set to O\-G\-G\-Z\-\_\-\-R\-E\-A\-D, and provide an Oggz\-Read\-Packet callback with \doxyref{oggz\-\_\-set\-\_\-read\-\_\-callback()}{p.}{group__read__api_ga6d5aae4f7f186fffe19d4fd3cd63148d}. See the \doxyref{Oggz Read A\-P\-I}{p.}{group__read__api} section for details.\subsection{Writing Ogg data}\label{oggz_8h_writing}
+To write to Ogg files or streams you must instantiate an O\-G\-G\-Z handle with flags set to O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E, and provide an Oggz\-Write\-Packet callback with oggz\-\_\-set\-\_\-write\-\_\-callback(). See the \doxyref{Oggz Write A\-P\-I}{p.}{group__write__api} section for details.\subsection{Seeking on Ogg data}\label{oggz_8h_seeking}
+To seek while reading Ogg files or streams you must instantiate an O\-G\-G\-Z handle for reading, and ensure that an \doxyref{Oggz\-Metric }{p.}{group__metric} function is defined to translate packet positions into units such as time. See the \doxyref{Oggz Seek A\-P\-I}{p.}{group__seek__api} section for details.\subsection{Overriding the I\-O methods}\label{oggz_8h_io}
+When an O\-G\-G\-Z handle is instantiated by \doxyref{oggz\-\_\-open()}{p.}{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db} or \doxyref{oggz\-\_\-open\-\_\-stdio()}{p.}{oggz_8h_ac49e9de0bc4ef1d91b43b13605f98b19}, Oggz uses stdio functions internally to access the raw data. However for some applications, the raw data cannot be accessed via stdio -- this commonly occurs when integrating with media frameworks. For such applications, you can provide Oggz with custom I\-O methods that it should use to access the raw data. Oggz will then use these custom methods, rather than using stdio methods, to access the raw data internally.
+
+For details, see \doxyref{$<$oggz/oggz\-\_\-io.\-h$>$ }{p.}{oggz__io_8h}.\subsection{Headers}\label{oggz_8h_headers}
+\doxyref{oggz.\-h}{p.}{oggz_8h} provides direct access to libogg types such as ogg\-\_\-packet, defined in $<$ogg/ogg.\-h$>$. 
+
+\subsection{Typedef Documentation}
+\index{oggz.\-h@{oggz.\-h}!O\-G\-G\-Z@{O\-G\-G\-Z}}
+\index{O\-G\-G\-Z@{O\-G\-G\-Z}!oggz.h@{oggz.\-h}}
+\subsubsection[{O\-G\-G\-Z}]{\setlength{\rightskip}{0pt plus 5cm}typedef void {\bf O\-G\-G\-Z}}\label{oggz_8h_a672d218df13da45a4b41d5366211bfee}
+
+
+An opaque handle to an Ogg file. 
+
+This is returned by \doxyref{oggz\-\_\-open()}{p.}{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db} or \doxyref{oggz\-\_\-new()}{p.}{oggz_8h_a6eb34d123389ae38d993601f9e7bb9d6}, and is passed to all other oggz\-\_\-$\ast$ functions. 
+
+\subsection{Function Documentation}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-close@{oggz\-\_\-close}}
+\index{oggz\-\_\-close@{oggz\-\_\-close}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-close}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-close (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_aadcfc04b2930660710bbcbc93140b783}
+
+
+Close an O\-G\-G\-Z handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M} & System error; check errno for details \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-content\-\_\-type@{oggz\-\_\-content\-\_\-type}}
+\index{oggz\-\_\-content\-\_\-type@{oggz\-\_\-content\-\_\-type}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-content\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ oggz\-\_\-content\-\_\-type (
+\begin{DoxyParamCaption}
+\item[{{\bf Oggz\-Stream\-Content}}]{content}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_ab1b16dec307b6544b5f82a60a14c8518}
+
+
+Return human-\/readable string representation of a content type. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & the name of the content type \\
+\hline
+{\em N\-U\-L\-L} & {\itshape content} invalid \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-flush@{oggz\-\_\-flush}}
+\index{oggz\-\_\-flush@{oggz\-\_\-flush}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-flush}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-flush (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_a8090c7e886af90dbea4dd5df8035dbf3}
+
+
+Ensure any associated io streams are flushed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M} & System error; check errno for details \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-get\-\_\-bos@{oggz\-\_\-get\-\_\-bos}}
+\index{oggz\-\_\-get\-\_\-bos@{oggz\-\_\-get\-\_\-bos}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-get\-\_\-bos}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-get\-\_\-bos (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_a357244f9e73d219015d9ce8260ee08d3}
+
+
+Determine if a given logical bitstream is at bos (beginning of stream). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz}, or -\/1 to query if all logical bitstreams in {\itshape oggz} are at bos \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 1} & The given stream is at bos \\
+\hline
+{\em 0} & The given stream is not at bos \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-get\-\_\-eos@{oggz\-\_\-get\-\_\-eos}}
+\index{oggz\-\_\-get\-\_\-eos@{oggz\-\_\-get\-\_\-eos}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-get\-\_\-eos}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-get\-\_\-eos (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_aee6a754e123ec0fd347d1ed0d4d4b3b7}
+
+
+Determine if a given logical bitstream is at eos (end of stream). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz}, or -\/1 to query if all logical bitstreams in {\itshape oggz} are at eos \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 1} & The given stream is at eos \\
+\hline
+{\em 0} & The given stream is not at eos \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-get\-\_\-numtracks@{oggz\-\_\-get\-\_\-numtracks}}
+\index{oggz\-\_\-get\-\_\-numtracks@{oggz\-\_\-get\-\_\-numtracks}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-get\-\_\-numtracks}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-get\-\_\-numtracks (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_a0dd3be49fc94531e35546318c14b64e7}
+
+
+Query the number of tracks (logical bitstreams). 
+
+When reading, this number is incremented every time a new track is found, so the returned value is only correct once the O\-G\-G\-Z is no longer at bos (beginning of stream)\-: see \doxyref{oggz\-\_\-get\-\_\-bos()}{p.}{oggz_8h_a357244f9e73d219015d9ce8260ee08d3} for determining this. 
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of tracks in O\-G\-G\-Z 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-new@{oggz\-\_\-new}}
+\index{oggz\-\_\-new@{oggz\-\_\-new}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}{\bf O\-G\-G\-Z}$\ast$ oggz\-\_\-new (
+\begin{DoxyParamCaption}
+\item[{int}]{flags}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_a6eb34d123389ae38d993601f9e7bb9d6}
+
+
+Create a new O\-G\-G\-Z object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flags} & O\-G\-G\-Z\-\_\-\-R\-E\-A\-D or O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new O\-G\-G\-Z object 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & on system error; check errno for details \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-open@{oggz\-\_\-open}}
+\index{oggz\-\_\-open@{oggz\-\_\-open}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-open}]{\setlength{\rightskip}{0pt plus 5cm}{\bf O\-G\-G\-Z}$\ast$ oggz\-\_\-open (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{filename, }
+\item[{int}]{flags}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db}
+
+
+Open an Ogg file, creating an O\-G\-G\-Z handle for it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The file to open \\
+\hline
+{\em flags} & O\-G\-G\-Z\-\_\-\-R\-E\-A\-D or O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new O\-G\-G\-Z handle 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & System error; check errno for details \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-open\-\_\-stdio@{oggz\-\_\-open\-\_\-stdio}}
+\index{oggz\-\_\-open\-\_\-stdio@{oggz\-\_\-open\-\_\-stdio}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-open\-\_\-stdio}]{\setlength{\rightskip}{0pt plus 5cm}{\bf O\-G\-G\-Z}$\ast$ oggz\-\_\-open\-\_\-stdio (
+\begin{DoxyParamCaption}
+\item[{F\-I\-L\-E $\ast$}]{file, }
+\item[{int}]{flags}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_ac49e9de0bc4ef1d91b43b13605f98b19}
+
+
+Create an O\-G\-G\-Z handle associated with a stdio stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & An open F\-I\-L\-E handle \\
+\hline
+{\em flags} & O\-G\-G\-Z\-\_\-\-R\-E\-A\-D or O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new O\-G\-G\-Z handle 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & System error; check errno for details \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-run@{oggz\-\_\-run}}
+\index{oggz\-\_\-run@{oggz\-\_\-run}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-run}]{\setlength{\rightskip}{0pt plus 5cm}long oggz\-\_\-run (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_a0561df532fc37f98725007a79f898356}
+
+
+Run an O\-G\-G\-Z until completion, or error. 
+
+This is a convenience function which repeatedly calls \doxyref{oggz\-\_\-read()}{p.}{group__read__api_ga3ce7a31de5da56375057436c6b5108f2} or \doxyref{oggz\-\_\-write()}{p.}{group__write__api_ga3c97d94ea425d64546adf9c368b71904} as appropriate. For an O\-G\-G\-Z opened for reading, an Oggz\-Read\-Packet or Oggz\-Read\-Page callback should have been set before calling this function. For an O\-G\-G\-Z opened for writing, either an Oggz\-Hungry callback should have been set before calling this function, or you can use this function to write out all unwritten Ogg pages which are pending. 
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle previously opened for either reading or writing \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M} & System error; check errno for details \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K} & Operation was stopped by a user callback returning O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R} & Operation was stopped by a user callback returning O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-R\-E\-C\-U\-R\-S\-I\-V\-E\-\_\-\-W\-R\-I\-T\-E} & Attempt to initiate writing from within an Oggz\-Hungry callback \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-run\-\_\-set\-\_\-blocksize@{oggz\-\_\-run\-\_\-set\-\_\-blocksize}}
+\index{oggz\-\_\-run\-\_\-set\-\_\-blocksize@{oggz\-\_\-run\-\_\-set\-\_\-blocksize}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-run\-\_\-set\-\_\-blocksize}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-run\-\_\-set\-\_\-blocksize (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{blocksize}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_ad500c8ed7147f7fb1ddc6c915a6c10d7}
+
+
+Set the blocksize to use internally for \doxyref{oggz\-\_\-run()}{p.}{oggz_8h_a0561df532fc37f98725007a79f898356} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle previously opened for either reading or writing \\
+\hline
+{\em blocksize} & The blocksize to use within \doxyref{oggz\-\_\-run()}{p.}{oggz_8h_a0561df532fc37f98725007a79f898356} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Invalid blocksize ({\itshape run\-\_\-blocksize} $<$= 0) \\
+\hline
+\end{DoxyRetVals}
+\index{oggz.\-h@{oggz.\-h}!oggz\-\_\-serialno\-\_\-new@{oggz\-\_\-serialno\-\_\-new}}
+\index{oggz\-\_\-serialno\-\_\-new@{oggz\-\_\-serialno\-\_\-new}!oggz.h@{oggz.\-h}}
+\subsubsection[{oggz\-\_\-serialno\-\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}long oggz\-\_\-serialno\-\_\-new (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz_8h_aaf89877e3e89408387d422f487bcf094}
+
+
+Request a new serialno, as required for a new stream, ensuring the serialno is not yet used for any other streams managed by this O\-G\-G\-Z. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new serialno, not already occuring in any logical bitstreams in {\itshape oggz}. 
+\end{DoxyReturn}

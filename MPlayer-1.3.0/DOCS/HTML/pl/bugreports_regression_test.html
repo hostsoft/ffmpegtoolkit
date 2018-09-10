@@ -1,0 +1,65 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. Jak wykonać test regresji za pomocą Subversion</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="prev" href="bugreports_fix.html" title="A.2. Jak poprawiać błędy"><link rel="next" href="bugreports_report.html" title="A.4. Jak zgłaszać błędy"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. Jak wykonać test regresji za pomocą Subversion</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">Poprzedni</a> </td><th width="60%" align="center">Dodatek A. Jak zgłaszać błędy</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. Jak wykonać test regresji za pomocą Subversion</h2></div></div></div><p>
+Czasami zdarza się problem typu "wcześniej działało, a teraz przestało...".
+Tutaj znajduje się, opisana krok po kroku, procedura, której celem jest próba
+znalezienia źródła problemu.
+<span class="bold"><strong>Nie jest</strong></span> ona przeznaczona
+dla przeciętnego użytkownika.
+</p><p>
+Najpierw należy pobrać źródła MPlayera z SVN.
+Więcej szczegółów na ten temat znajduje się w
+<a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html#svn" target="_top">sekcji o Subversion strony pobierania</a>.
+</p><p>
+W rezultacie w katalogu mplayer/ znajdzie się obraz drzewa Subversion, po stronie klienta.
+Teraz zaktualizuj ten obraz do daty, która Cię interesuje:
+</p><pre class="screen">
+cd mplayer/
+svn update -r {"2004-08-23"}
+</pre><p>
+Format daty to RRRR-MM-DD GG:MM:SS.
+Używając takiego formatu daty masz pewność, że będziesz w stanie wyciągać łatki
+zgodnie z datą, gdy zostały dodane, dokładnie tak jak w przypadku
+<a class="ulink" href="http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">archiwum listy MPlayer-cvslog</a>.
+</p><p>
+Następnie postępuj tak jak w przypadku normalnej aktualizacji:
+</p><pre class="screen">
+./configure
+make
+</pre><p>
+</p><p>
+Jeżeli czytasz ten dokument, a nie jesteś programistą, najszybszym
+sposobem na dotarcie do miejsca w którym pojawi się problem jest
+użycie binarnego wyszukiwania — tzn. szukania daty
+pojawienia się problemu poprzez dzielenie interwału czasowego na pół
+przy każdym kolejnym wyszukiwaniu.
+Przykładowo, jeżeli problem wystąpił w 2003, spróbuj najpierw szukać
+problemu w wydaniu z połowy roku. Jeżeli będzie obecny, cofnij się
+do pierwszego kwietnia; jeżeli nie, przejdź do pierwszego października itd.
+</p><p>
+Jeżeli masz dużo wolnego miejsca na twardym dysku (pełna kompilacja
+zajmuje aktualnie 100 MB albo około 300-350 MB jeżeli uaktywnione
+jest debuggowanie), skopiuj najstarszą działającą wersję zanim dokonasz
+aktualizacji; oszczędzi to sporo czasu, jeżeli zajdzie potrzeba powrotu
+do starszej wersji.
+(Zazwyczaj konieczne jest uruchomienie 'make distclean' przed
+rekompilacją wcześniejszej wersji, więc jeżeli nie zrobisz kopii zapasowej
+oryginalnego drzewa, będziesz musiał wszystko rekompilować, jeśli
+będziesz chciał wrócić do aktualnej wersji.)
+</p><p>
+Kiedy znajdziesz dzień w którym pojawił się problem, kontynuuj szukanie
+używając archiwum mplayer-cvslog (uporządkowane wg daty) i bardziej
+precyzyjnych aktualizacji svn obejmujących godziny, minuty i sekundy:
+</p><pre class="screen">
+svn update -r {"2004-08-23 15:17:25"}
+</pre><p>
+To pomoże ci łatwo znaleźć łatkę, która jest winowajcą.
+</p><p>
+Jeżeli znajdziesz łatkę, która jest źródłem problemu, to znaczy, że już
+prawie osiągnąłeś sukces; wyślij informację o niej na
+<a class="ulink" href="http://bugzilla.mplayerhq.hu/" target="_top">MPlayer Bugzilla</a>
+lub zapisz się na listę
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-users</a>
+i tam wyślij raport.
+Istnieje szansa, że autor łatki zasugeruje w jaki sposób rozwiązać problem.
+Możesz też wpatrywać się w łatkę tak długo, aż nie będzie mogła wytrzymać
+i wyjawi ci lokalizację błędu:-).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. Jak poprawiać błędy </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> A.4. Jak zgłaszać błędy</td></tr></table></div></body></html>

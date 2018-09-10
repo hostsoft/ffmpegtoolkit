@@ -1,0 +1,71 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.7. Воспроизведение VCD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="dvd.html" title="3.6. Воспроизведение DVD"><link rel="next" href="edl.html" title="3.8. Редактируемые списки решений [Edit Decision Lists] (EDL)"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.7. Воспроизведение VCD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dvd.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="edl.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vcd"></a>3.7. Воспроизведение VCD</h2></div></div></div><p>
+Полный список возможных опций можно прочитать в man. Синтаксис для обычного
+Видео-CD (VCD):
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>&lt;дорожка&gt;</code></em> [-cdrom-device <em class="replaceable"><code>&lt;устройство&gt;</code></em>]</pre><p>
+Пример:
+</p><pre class="screen">mplayer vcd://2 -cdrom-device /dev/hdc</pre><p>
+Устройство VCD по умолчанию — <tt class="filename">/dev/cdrom</tt>. Если Ваши
+настройки отличаются, создайте символическую ссылку добавьте правильное название
+в командной строке после опции <tt class="option">-cdrom-device</tt>.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+По крайней мере Plextor'ы и некоторые Toshiba SCSI CD-ROM приводы показывают
+ужасную производительность при чтении VCD'ов. Это объясняется тем, что
+CDROMREADRAW <code class="systemitem">ioctl</code> на этих приводах реализован не полностью.
+Если Вы имеете некоторые познания в сфере программирования SCSI, пожалуйста
+<a class="ulink" href="../../tech/patches.txt" target="_top">помогите нам</a> в написании поддержки
+SCSI generic для VCD.
+</p></div><p>
+В настоящий момент Вы можете извлечь данные с VCD, используя
+<a class="ulink" href="http://ftp.ntut.edu.tw/ftp/OS/Linux/packages/X/viewers/readvcd/" target="_top">
+readvcd</a>, и воспроизвести получившийся файл <span class="application">MPlayer
+</span>'ом.
+</p><p><b>Структура VCD. </b>
+VCD составлен из секторов CD-ROM XA, т.е. дорожек CD-ROM mode 2 form 1 и form 2:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Первая дорожка записана в mode 2 form 2 формате, что, в частности, означает
+  использование коррекции ошибок L2. Дорожка содержит файловую систему ISO-9660 с
+  секторами по 2048 байт. Там содержатся метаданные VCD,
+  и картинки, часто использующиеся в меню. Здесь также могут храниться
+  фрагменты MPEG для меню, но каждый из них должен быть разбит на кусочки по
+  150 секторов. Еще файловая система может хранить файлы или программы,
+  не имеющие отношения к работе с VCD.
+</p></li><li class="listitem"><p>
+  Вторая и остальные дорожки содержат MPEG-поток секторами по 2324 байта, по
+  одному пакету MPEG PS на сектор вместо файловой системы. Это дорожки в формате
+  mode 2 form 1 и хранят больше информации на один сектор за счет потери возможности
+  некоторой коррекции ошибок. После первой дорожки также допустимо присутствие
+  дорожки CD-DA. В некоторых ОС используются различные трюки, чтобы сделать  эти
+  не-ISO-9660 дорожки видимыми  в файловой системе. Но Linux
+  — это не тот случай (пока).
+  Здесь MPEG данные <span class="bold"><strong>не могут быть смонтированы</strong></span>.
+  (Вы когда-нибудь монтировали аудио диск
+  для того, чтобы его воспроизвести?) Так как большинство фильмов находится именно на
+  таких дорожках, попробуйте сначала <tt class="option">vcd://2</tt>.
+</p></li><li class="listitem"><p>
+  Существуют VCD диски без первой дорожки (единственная дорожка без файловой
+  системы). Они проигрываются, но не монтируются.
+</p></li><li class="listitem"><p>
+  Описание стандарта Video CD называется
+  Philips "White Book" и, как правило, недоступна в онлайн, т.к. должна приобретаться
+  у Philips. Более подробная информация о Video CD может быть найдена в
+  <a class="ulink" href="http://www.vcdimager.org/pub/vcdimager/manuals/0.7/vcdimager.html#SEC4" target="_top">документации vcdimager</a>.
+</p></li></ul></div><p>
+</p><p><b>Про файлы .DAT. </b>
+Файл примерно в 600 мегабайт на первой дорожке не настоящий! Это так
+называемый ISO-переход, созданный, чтобы позволить Windows обрабатывать эти
+дорожки (Windows вообще запрещает приложениям использовать прямой доступ
+к устройствам). Под Linux Вы не можете копировать эти файлы (они выглядят, как
+мусор). Под Windows это возможно, поскольку там iso9660 эмулирует прямой доступ
+к дорожкам через этот файл. Чтобы проигрывать .DAT файл Вам нужен драйвер,
+из Linux версии PowerDVD. Это модифицированный драйвер
+iso9660 файловой системы (<tt class="filename">vcdfs/isofs-2.4.X.o</tt>), который
+способен эмулировать прямой доступ к дорожкам через этот файл. Если Вы
+замонтируете диск, используя их драйвер, Вы можете копировать и даже проигрывать
+.DAT файлы <span class="application">MPlayer</span>'ом. Но это не будет работать со
+стандартным драйвером iso9660 из ядра Linux! Используйте вместо этого
+<tt class="option">vcd://</tt>. Альтернативами для копирования VCD может послужить новый
+драйвер <a class="ulink" href="http://www.elis.rug.ac.be/~ronsse/cdfs/" target="_top">cdfs</a> (не
+входит в официальное ядро) который показывает дорожки[сессии] на диске как файлы
+образов и <a class="ulink" href="http://cdrdao.sf.net/" target="_top">cdrdao</a>, приложение для
+побитового чтения/копирования CD.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dvd.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="edl.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">3.6. Воспроизведение DVD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 3.8. Редактируемые списки решений [Edit Decision Lists] (EDL)</td></tr></table></div></body></html>

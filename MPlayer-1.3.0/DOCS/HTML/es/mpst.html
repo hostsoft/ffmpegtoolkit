@@ -1,0 +1,38 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.4. Flujos remotos</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="usage.html" title="Capítulo 3. Uso"><link rel="prev" href="streaming.html" title="3.3. Streaming desde la red o tuberías"><link rel="next" href="drives.html" title="3.5. Unidades de CD/DVD"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="mpst.html#compile_mpst_server" title="3.4.1. Compilando el servidor"><link rel="subsection" href="mpst.html#use_mpst" title="3.4.2. Usando flujos remotos"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.4. Flujos remotos</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="streaming.html">Anterior</a> </td><th width="60%" align="center">Capítulo 3. Uso</th><td width="20%" align="right"> <a accesskey="n" href="drives.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mpst"></a>3.4. Flujos remotos</h2></div></div></div><p>
+Los flujos remotos le permiten acceder a la mayoría de los tipos de flujo
+para <span class="application">MPlayer</span> desde un host remoto. El propósito
+principal de esta característica es hacer posible la reproducción directa
+usando CD o DVD de otro ordenador a través de la red (suponiendo que tiene
+el ancho de banda requerido). En el lado bajo algunos tipos de flujos
+(actualmente TV y MF) no se pueden usar de manera remota debido a que
+están implementados a nivel de demultiplexor. De todos modos para MF y TV
+debería de tener una cantidad insana de ancho de banda.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="compile_mpst_server"></a>3.4.1. Compilando el servidor</h3></div></div></div><p>
+Después de que tenga <span class="application">MPlayer</span> compilado
+vaya a <tt class="filename">TOOLS/netstream</tt> para compilar el binario
+del servidor. Puede hacer una copia del binario de
+<span class="application">netstream</span> al lugar correcto en su
+sistema (normalmente <tt class="filename">/usr/local/bin</tt>
+en Linux).
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="use_mpst"></a>3.4.2. Usando flujos remotos</h3></div></div></div><p>
+Lo primero que tiene que hacer es iniciar el servidor en el ordenador
+al que quiere hacer el acceso remoto. Actualmente el servidor es muy básico
+y no tiene ningún argumento en la línea de órdenes nada más que escribir
+<tt class="filename">netstream</tt>. Ahora puede por ejemplo reproducir una
+segunda pista de un VCD en el servidor con :
+</p><pre class="screen">
+mplayer -cache 5000 <em class="replaceable"><code>mpst://nombre-servidor/vcd://2</code></em>
+</pre><p>
+También puede acceder a los archivos en este servidor :
+</p><pre class="screen">
+  mplayer -cache 5000 <em class="replaceable"><code>mpst://nombre-servidor//usr/local/peliculas/lol.avi</code></em>
+</pre><p>
+Note que las rutas que no empiezan con un / deben ser relativas
+al directorio donde el servidor está corriendo. La opción <tt class="option">-cache</tt>
+no es necesaria pero es altamente recomendable.
+</p><p>
+Tenga cuidado con que actualmente el servidor no es para nada seguro.
+No se queje de la cantidad tan numerosa de fallos de seguridad que es
+posible que tenga. En lugar de eso, envíe algunos (buenos) parches para
+mejorarlo o escriba su propio servidor.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="streaming.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="drives.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">3.3. Streaming desde la red o tuberías </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 3.5. Unidades de CD/DVD</td></tr></table></div></body></html>

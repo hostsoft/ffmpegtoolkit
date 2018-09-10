@@ -1,0 +1,112 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.9. Surround/Multichannel playback</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="Chapter 3. Usage"><link rel="prev" href="networksync.html" title="3.8. Synchronized playback over a network"><link rel="next" href="advaudio-channels.html" title="3.10. Channel manipulation"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-DVD" title="3.9.1. DVDs"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-stereoinfour" title="3.9.2. Playing stereo files to four speakers"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-passthrough" title="3.9.3. AC-3/DTS Passthrough"><link rel="subsection" href="advaudio-surround.html#hwmpa-surround-passthrough" title="3.9.4. MPEG audio Passthrough"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-matrix" title="3.9.5. Matrix-encoded audio"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-hrtf" title="3.9.6. Surround emulation in headphones"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-troubleshooting" title="3.9.7. Troubleshooting"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.9. Surround/Multichannel playback</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="networksync.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Usage</th><td width="20%" align="right"> <a accesskey="n" href="advaudio-channels.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="advaudio-surround"></a>3.9. Surround/Multichannel playback</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-DVD"></a>3.9.1. DVDs</h3></div></div></div><p>
+Most DVDs and many other files include surround sound.
+<span class="application">MPlayer</span> supports surround playback but does not
+enable it by default because stereo equipment is by far more common. To play a
+file that has more than two channels of audio use <tt class="option">-channels</tt>.
+For example, to play a DVD with 5.1 audio:
+</p><pre class="screen">mplayer dvd://1 -channels 6</pre><p>
+Note that despite the name "5.1" there are actually six discrete channels.
+If you have surround sound equipment it is safe to put the
+<tt class="option">channels</tt> option in your <span class="application">MPlayer</span>
+configuration file <tt class="filename">~/.mplayer/config</tt>. For example, to make
+quadraphonic playback the default, add this line:
+</p><pre class="programlisting">channels=4</pre><p>
+<span class="application">MPlayer</span> will then output audio in four channels when
+all four channels are available.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-stereoinfour"></a>3.9.2. Playing stereo files to four speakers</h3></div></div></div><p>
+<span class="application">MPlayer</span> does not duplicate any channels by default,
+and neither do most audio drivers. If you want to do that manually:
+</p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af channels=2:2:0:1:0:0</pre><p>
+See the section on
+<a class="link" href="advaudio-channels.html#advaudio-channels-copying" title="3.10.3. Channel copying/moving">channel copying</a> for an
+explanation.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-passthrough"></a>3.9.3. AC-3/DTS Passthrough</h3></div></div></div><p>
+DVDs usually have surround audio encoded in AC-3 (Dolby Digital) or DTS
+(Digital Theater System) format. Some modern audio equipment is capable of
+decoding these formats internally. <span class="application">MPlayer</span> can be
+configured to relay the audio data without decoding it. This will only work if
+you have a S/PDIF (Sony/Philips Digital Interface) jack in your sound card, or
+if you are passing audio over HDMI.
+</p><p>
+If your audio equipment can decode both AC-3 and DTS, you can safely enable
+passthrough for both formats. Otherwise, enable passthrough for only the format
+your equipment supports.
+</p><div class="itemizedlist"><p class="title"><b>To enable passthrough on the command line:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  For AC-3 only, use <tt class="option">-ac hwac3</tt>
+</p></li><li class="listitem"><p>
+  For DTS only, use <tt class="option">-ac hwdts</tt>
+</p></li><li class="listitem"><p>
+  For both AC-3 and DTS, use <tt class="option">-afm hwac3</tt>
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>To enable passthrough in the <span class="application">MPlayer</span>
+  configuration file: </b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  For AC-3 only, use <tt class="option">ac=hwac3,</tt>
+</p></li><li class="listitem"><p>
+  For DTS only, use <tt class="option">ac=hwdts,</tt>
+</p></li><li class="listitem"><p>
+  For both AC-3 and DTS, use <tt class="option">afm=hwac3</tt>
+</p></li></ul></div><p>
+Note that there is a comma (",") at the end of
+<tt class="option">ac=hwac3,</tt> and <tt class="option">ac=hwdts,</tt>. This will make
+<span class="application">MPlayer</span> fall back on the codecs it normally uses when
+playing a file that does not have AC-3 or DTS audio.
+<tt class="option">afm=hwac3</tt> does not need a comma;
+<span class="application">MPlayer</span> will fall back anyway when an audio family
+is specified.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="hwmpa-surround-passthrough"></a>3.9.4. MPEG audio Passthrough</h3></div></div></div><p>
+Digital TV transmissions (such as DVB and ATSC) and some DVDs usually have
+MPEG audio streams (in particular MP2).
+Some MPEG hardware decoders such as full-featured DVB cards and DXR2
+adapters can natively decode this format.
+<span class="application">MPlayer</span> can be configured to relay the audio data
+without decoding it.
+</p><p>
+To use this codec:
+</p><pre class="screen"> mplayer -ac hwmpa </pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-matrix"></a>3.9.5. Matrix-encoded audio</h3></div></div></div><p>
+<span class="emphasis"><em>***TODO***</em></span>
+</p><p>
+This section has yet to be written and cannot be completed until somebody
+provides sample files for us to test. If you have any matrix-encoded audio
+files, know where to find some, or have any information that could be helpful,
+please send a message to the
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-docs" target="_top">MPlayer-DOCS</a>
+mailing list. Put "[matrix-encoded audio]" in the subject line.
+</p><p>
+If no files or further information are forthcoming this section will be dropped.
+</p><p>
+Good links:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <a class="ulink" href="http://electronics.howstuffworks.com/surround-sound5.htm" target="_top">http://electronics.howstuffworks.com/surround-sound5.htm</a>
+</p></li><li class="listitem"><p>
+  <a class="ulink" href="http://www.extremetech.com/article2/0,1697,1016875,00.asp" target="_top">http://www.extremetech.com/article2/0,1697,1016875,00.asp</a>
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-hrtf"></a>3.9.6. Surround emulation in headphones</h3></div></div></div><p>
+<span class="application">MPlayer</span> includes an HRTF (Head Related Transfer
+Function) filter based on an
+<a class="ulink" href="http://sound.media.mit.edu/KEMAR.html" target="_top">MIT project</a>
+wherein measurements were taken from microphones mounted on a dummy human head.
+</p><p>
+Although it is not possible to exactly imitate a surround system,
+<span class="application">MPlayer</span>'s HRTF filter does provide more spatially
+immersive audio in 2-channel headphones. Regular downmixing simply combines all
+the channels into two; besides combining the channels, <tt class="option">hrtf</tt>
+generates subtle echoes, increases the stereo separation slightly, and alters
+the volume of some frequencies. Whether HRTF sounds better may be dependent on
+the source audio and a matter of personal taste, but it is definitely worth
+trying out.
+</p><p>
+To play a DVD with HRTF:
+</p><pre class="screen">mplayer dvd://1 -channels 6 -af hrtf</pre><p>
+</p><p>
+<tt class="option">hrtf</tt> only works well with 5 or 6 channels. Also,
+<tt class="option">hrtf</tt> requires 48 kHz audio. DVD audio is already 48 kHz, but if
+you have a file with a different sampling rate that you want to play using
+<tt class="option">hrtf</tt> you must resample it:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>filename</code></em> -channels 6 -af resample=48000,hrtf
+</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-troubleshooting"></a>3.9.7. Troubleshooting</h3></div></div></div><p>
+If you do not hear any sound out of your surround channels, check your mixer
+settings with a mixer program such as <span class="application">alsamixer</span>;
+audio outputs are often muted and set to zero volume by default.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="networksync.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio-channels.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.8. Synchronized playback over a network </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.10. Channel manipulation</td></tr></table></div></body></html>

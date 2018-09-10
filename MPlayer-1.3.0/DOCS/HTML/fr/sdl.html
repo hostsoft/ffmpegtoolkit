@@ -1,0 +1,33 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.4. SDL</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="prev" href="dga.html" title="4.3. DGA"><link rel="next" href="svgalib.html" title="4.5. SVGAlib"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.4. SDL</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dga.html">Précédent</a> </td><th width="60%" align="center">Chapitre 4. Sorties vidéo</th><td width="20%" align="right"> <a accesskey="n" href="svgalib.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sdl"></a>4.4. SDL</h2></div></div></div><p>
+<acronym class="acronym">SDL</acronym> (Simple Directmedia Layer) est fondamentalement une
+interface
+vidéo/audio unifiée. Les programmes qui l'utilisent connaissent uniquement
+SDL, et pas
+quels pilotes vidéo ou audio SDL utilise lui-même. Par exemple, un portage de
+Doom
+utilisant SDL peut tourner avec svgalib, aalib, X, fbdev et autres, vous devez
+seulement
+spécifier (par exemple) le pilote vidéo à utiliser avec la variable
+d'environnement
+<code class="envar">SDL_VIDEOpilote</code>. Enfin, en théorie.
+</p><p>
+Avec <span class="application">MPlayer</span>, nous avons utilisé le
+redimensionnement
+logiciel de ses pilotes X11 pour les cartes qui ne supportent pas XVideo,
+jusqu'à ce
+que nous fassions notre propre "dimensionneur" logiciel (plus rapide, plus
+agréable).
+Nous avons également utilisé sa sortie aalib, mais maintenant nous avons la
+nôtre qui
+est plus confortable. Son support DGA était meilleur que le nôtre, jusqu'à
+récemment.
+Vous comprenez maintenant? :)
+</p><p>
+Cela aide également avec certains pilotes/cartes boguées si la vidéo est
+saccadée
+(pas de problème de lenteur du système), ou si l'audio est retardé.
+</p><p>
+La sortie vidéo de SDL supporte l'affichage des sous-titres sous le film, dans
+les
+bandes noires (si elles sont présentes).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dga.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="svgalib.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">4.3. DGA </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 4.5. SVGAlib</td></tr></table></div></body></html>

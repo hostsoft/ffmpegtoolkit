@@ -1,0 +1,208 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.3. DGA</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="prev" href="xv.html" title="4.2. Xv"><link rel="next" href="sdl.html" title="4.4. SDL"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.3. DGA</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="xv.html">Zurück</a> </td><th width="60%" align="center">Kapitel 4. Videoausgabegeräte</th><td width="20%" align="right"> <a accesskey="n" href="sdl.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dga"></a>4.3. DGA</h2></div></div></div><p><b>PRÄAMBEL. </b>
+  Dieser Abschnitt versucht, in wenigen Worten zu beschreiben, was DGA
+  generell ist und was der DGA-Videotreiber in <span class="application">MPlayer</span>
+  erreichen kann, und was nicht.
+</p><p><b>WAS IST DGA? </b>
+  <acronym class="acronym">DGA</acronym> ist die Abkürzung für
+  <span class="emphasis"><em>Direct Graphics Access</em></span> (direkter Zugriff auf die
+  Grafikhardware) und gibt Programmen die Möglichkeit, unter Umgehung
+  des X-Servers direkt den Framebuffer der Grafikkarte zu verändern.
+  Technisch gesehen wird das dadurch realisiert, dass der
+  Framebuffer-Speicher in den virtuellen Adressraum des jeweiligen Prozesses
+  abgebildet wird. Das wird vom Kernel aber nur dann zugelassen, wenn der
+  Prozess Superuserprivilegien besitzt. Dazu musst du dich entweder als
+  <code class="systemitem">root</code> anmelden oder das SUID-bit
+  des <span class="application">MPlayer</span>-Binaries setzen (was
+  <span class="bold"><strong>nicht empfohlen wird</strong></span>).
+</p><p>
+  Von DGA gibt es zwei Versionen: DGA1 kommt mit XFree 3.x.x, und DGA2
+  wurde mit XFree 4.0.1 eingeführt.
+</p><p>
+  DGA1 bietet nur den oben beschriebenen Zugriff auf den Framebuffer. Die
+  Umschaltung des Videomodus klappt nur mit der XVidMode-Erweiterung.
+</p><p>
+  DGA2 beinhaltet die Features der XVidMode-Erweiterung und erlaubt
+  außerdem, die Farbtiefe zu ändern. Damit kannst du also auf 32bit
+  Farbtiefe umschalten, auch wenn der X-Server gerade mit 15bit Farbtiefe
+  läuft und umgekehrt.
+</p><p>
+  DGA hat aber auch ein paar Nachteile. Die Funktionsweise scheint ein wenig
+  von der Grafikkarte und der Implementierung des Grafikkartentreibers
+  im X-Server abhängig zu sein, der diesen Chip kontrolliert.
+  Es fuktioniert also nicht auf jedem System...
+</p><p><b>DGA-UNTERSTÜTZUNG FÜR MPLAYER INSTALLIEREN. </b>
+  Stelle als erstes sicher, dass X die DGA-Erweiterung lädt. Schau
+  in <tt class="filename">/var/log/XFree86.0.log</tt> nach:
+
+</p><pre class="programlisting">(II) Loading extension XFree86-DGA</pre><p>
+
+  Wie du siehst, ist XFree86 4.0.x oder neuer
+  <span class="bold"><strong>sehr zu empfehlen</strong></span>!
+  <span class="application">MPlayer</span>s DGA-Treiber wird von
+  <tt class="filename">./configure</tt> automatisch erkannt. Alternativ
+  kannst du seine Compilierung mit <tt class="option">--enable-dga</tt> erzwingen.
+</p><p>
+  Falls der Treiber nicht zu einer kleineren Auflösung wechseln
+  konnte, dann experimentiere mit den Optionen <tt class="option">-vm</tt> (nur bei
+  X 3.3.x), <tt class="option">-fs</tt>, <tt class="option">-bpp</tt>,
+  <tt class="option">-zoom</tt> herum, um einen Videomodus zu finden,
+  in den der Film reinpasst. Momentan gibt es keinen Konverter :(
+</p><p>
+  Werde <code class="systemitem">root</code>.
+  DGA braucht <code class="systemitem">root</code>-Privilegien,
+  um direkt in den Grafikspeicher zu schreiben. Wenn du MPlayer als
+  normaler Nutzer starten möchtest, dann installiere
+  <span class="application">MPlayer</span> mit dem SUID-Bit:
+
+</p><pre class="screen">
+chown root <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod 750 <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod +s <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+</pre><p>
+
+  Jetzt funktioniert es auch als normaler Benutzer.
+</p><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warnung: Sicherheitsrisiko!</h3><p>
+  Dieses ist ein <span class="bold"><strong>großes</strong></span> Sicherheitsloch.
+  Tu das <span class="bold"><strong>niemals</strong></span> auf einem Server oder
+  auf einem Computer, auf den auch andere Leute Zugriff haben, da sie durch einen
+  SUID-<code class="systemitem">root</code>-<span class="application">MPlayer</span>
+  <code class="systemitem">root</code>-Privilegien erlangen können.
+</p></div><p>
+  Benutze jetzt die Option <tt class="option">-vo dga</tt>, und ab geht's (hoffe ich
+  zumindest :))! Du solltest auch ausprobieren, ob bei dir die Option
+  <tt class="option">-vo sdl:dga</tt> funktioniert. Sie ist viel schneller.
+</p><p><a name="dga-modelines"></a><b>ÄNDERN DER AUFLÖSUNG. </b>
+  Der DGA-Treiber ermöglicht es, die Auflösung des Output-Signals zu ändern.
+  Damit entfällt die Notwendigkeit der (langsamen) Softwareskalierung und
+  bietet gleichzeitig ein Vollbild. Idealerweise würde DGA in die gleiche
+  Auflösung schalten, die das Video (natürlich unter Beachtung des
+  Höhen-/Breitenverhältnisses) hat, aber der X-Server lässt nur
+  Auflösungen zu, die vorher in der <tt class="filename">/etc/X11/XF86Config</tt> bzw.
+  <tt class="filename">/etc/X11/XF86Config-4</tt> definiert wurden, bezüglich XFree 4.X.X.
+  Diese werden durch sogenannte Modelines festgelegt und hängen von den Fähigkeiten
+  deiner Grafikhardware ab. Der X-Server liest diese Konfigurationsdatei beim
+  Start ein und deaktiviert alle Modelines, die sich nicht mit deiner Hardware
+  vertragen. Du kannst die überlebenden Modelines anhand der X11-Logdatei
+  herausfinden (normalerweise <tt class="filename">/var/log/XFree86.0.log</tt>).
+</p><p>
+  Diese Einträge funktionieren mit einem Riva128-Chip und dem
+  nv.o-X-Server-Treibermodul.
+</p><pre class="programlisting">
+Section "Modes"
+  Identifier "Modes[0]"
+  Modeline "800x600"  40     800 840 968 1056  600 601 605 628
+  Modeline "712x600"  35.0   712 740 850 900   400 410 412 425
+  Modeline "640x480"  25.175 640 664 760 800   480 491 493 525
+  Modeline "400x300"  20     400 416 480 528   300 301 303 314 Doublescan
+  Modeline "352x288"  25.10  352 368 416 432   288 296 290 310
+  Modeline "352x240"  15.750 352 368 416 432   240 244 246 262 Doublescan
+  Modeline "320x240"  12.588 320 336 384 400   240 245 246 262 Doublescan
+EndSection
+</pre><p><b>DGA &amp; MPLAYER. </b>
+  DGA wird bei <span class="application">MPlayer</span> an zwei Stellen benutzt:
+  beim SDL-Treiber mit (<tt class="option">-vo sdl:driver=dga</tt>) oder beim
+  DGA-Treiber selbst (<tt class="option">-vo dga</tt>).
+  Das oben gesagte gilt für beide Treiber. In den folgenden Abschnitten
+  erkläre ich, wie der DGA-Treiber von <span class="application">MPlayer</span>
+  selber arbeitet.
+</p><p><b>FEATURES DES DGA-TREIBERS. </b>
+  Der DGA-Treiber wird durch die Option <tt class="option">-vo dga</tt> aktiviert.
+  Sein Standardverhalten sieht vor, dass er in die Auflösung schaltet, die
+  der Videoauflösung am nächsten kommt. Der Treiber ignoriert absichtlich
+  die Optionen <tt class="option">-vm</tt> (Videomodusumschaltung aktivieren) und
+  <tt class="option">-fs</tt> (Vollbildmodus erzwingen) - er versucht immer, so viel
+  Bildfläche wie möglich durch eine Änderung der Auflösung zu bedecken.
+  Dadurch wird nicht ein einziger weiterer CPU-Takt für die Skalierung des
+  Bildes verwendet. Wenn du mit dem Modus nicht zufrieden bist, den der Treiber
+  gewählt hat, dann kannst du ihn zwingen, denjenigen Modus zu
+  wählen, der am besten zu dem mit den Optionen <tt class="option">-x</tt> und
+  <tt class="option">-y</tt> angegebenen Werten passt. Die Option <tt class="option">-v</tt>
+  veranlasst den DGA-Treiber, neben einigen anderen Dingen auch alle von deiner
+  <tt class="filename">XF86Config</tt>-Datei unterstützen Videomodi aufzulisten.
+  Wenn DGA2 verwendet wird, dann kannst du mit der Option <tt class="option">-bpp</tt> die
+  Verwendung einer bestimmten Farbtiefe erzwingen. Gültige Werte sind 15,
+  16, 24 und 32. Es hängt dann von deiner Hardware ab, ob der Modus nativ
+  unterstützt wird oder ob eine (möglicherweise langsame)
+  Konvertierung stattfindet.
+</p><p>
+  Wenn du Glück hast und dir genug unbenutzter Grafikspeicher zur
+  Verfügung steht, um ein komplettes Bild aufzunehmen, dann wird der
+  DGA-Treiber Doppelpufferung verwenden, was zu einer regelmäßigeren
+  Wiedergabe führt. Der DGA-Treiber wird dir mitteilen, ob Doppelpufferung
+  angeschaltet ist oder nicht.
+</p><p>
+  Doppelpufferung bedeutet, dass das nächste Bild deines Videos bereits
+  an einer anderen Stelle im Grafikspeicher aufgebaut wird, während das
+  aktuelle Bild angezeigt wird. Ist das nächste Bild fertig, so wird
+  dem Grafikchip nur noch mitgeteilt, wo er das neue Bild im Speicher finden
+  kann. Somit holt sich der Chip seine Daten einfach von dort. In der
+  Zwischenzeit wird der andere, jetzt unbenutze Puffer wieder mit neuen
+  Videodaten gefüllt.
+</p><p>
+  Doppelpufferung kann mit der Option <tt class="option">-double</tt> aktiviert und mit
+  <tt class="option">-nodouble</tt> deaktiviert werden. Momentan ist die Doppelpufferung
+  per Voreinstellung deaktiviert. Wird der DGA-Treiber verwendet,
+  dann funktioniert das Onscreen-Display (ODS) nur dann, wenn auch die
+  Doppelpufferung aktiviert ist. Andererseits kann die Doppelpufferung auch
+  einen großen Geschwindigkeitseinbruch hervorrufen, was stark von
+  der DGA-Implementierung der Treiber für deine Hardware abhängt (auf
+  meinem K6-II+ 525 benötigt Doppelpufferung weitere 20% CPU-Zeit!).
+</p><p><b>PUNKTE BEZÜGLICH DER GESCHWINDIGKEIT. </b>
+  Generell gesehen sollte der Zugriff auf den DGA-Framebuffer genauso
+  schnell sein wie der X11-Treiber, wobei man zusätzlich noch ein Vollbild
+  erhält. Die prozentualen Geschwindigkeitswerte, die <span class="application">MPlayer</span>
+  ausgibt, müssen mit Vorsicht genossen werden, da sie z.B. beim X11-Treiber
+  nicht die Zeit beinhalten, die der X-Server tatsächlich zum
+  Anzeigen des Bildes benötigt. Klemm ein Terminal an deinen seriellen
+  Port und starte <span class="command"><strong>top</strong></span>, wenn du wissen willst, wie's wirklich mit
+  der Geschwindigkeit aussieht.
+</p><p>
+  Allgemein betrachtet hängt die Geschwindigkeitsverbesserung von DGA
+  gegenüber dem 'normalen' X11-Treiber sehr von deiner Grafikkarte und
+  davon ab, wie gut das X-Servermodul optimiert ist.
+</p><p>
+  Wenn du ein langsames System hast, dann benutz besser eine Farbtiefe von
+  15 oder 16bit, da sie nur die halbe Bandbreite des 32bit-Farbmodus
+  benötigen.
+</p><p>
+  Einge gute Idee ist auch die Verwendung von 24bit Farbtiefe, selbst dann,
+  wenn deine Grafikkarte nativ nur 32bit unterstützt, da bei 24bit 25%
+  weniger Daten im Vergleich zum 32/32-Modus über den Bus transferiert
+  werden müssen.
+</p><p>
+  Ich habe schon gesehen, wie einige AVI-Dateien auf einem Pentium MMX 266
+  wiedergegeben werden konnten. AMD K6-2-CPUs werden ab ca. 400 MHz oder
+  höher funktionieren.
+</p><p><b>BEKANNTE FEHLER. </b>
+  Die Entwickler von XFree sagen selbst, dass DGA ein ganz schönes
+  Monstrum ist. Sie raten eher davon ab, es zu benutzen, da seine
+  Implementierung in einige Chipset-Treiber für XFree nicht immer
+  ganz fehlerfrei war.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Bei der Kombination aus XFree 4.0.3 und dem
+  <tt class="filename">nv.o</tt>-Treiber gibt es einen Fehler, der zu
+  merkwürdigen Farben führt.
+</p></li><li class="listitem"><p>
+  Die ATI-Treiber müssen den Videomodus mehrmals zurückstellen,
+  nachdem der DGA-Modus verlassen wurde.
+  </p></li><li class="listitem"><p>
+  Einige Treiber schaffen es manchmal einfach nicht, in die vorherige
+  Auflösung zurückzuschalten. Benutze in solch einem Fall
+  <span class="keycap"><b>Strg</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad +</b></span> und
+  <span class="keycap"><b>Strg</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad -</b></span>,
+  um manuell die Auflösung zu ändern.
+</p></li><li class="listitem"><p>
+  Einige Treiber zeigen einfach nur merkwürdige Farben an.
+</p></li><li class="listitem"><p>
+  Manche Treiber lügen, was die von ihnen in den Prozessorspeicher
+  eingeblendete Menge Grafikspeicher anbelangt, weswegen vo_dga
+  nicht die Doppelpufferung verwendet (SIS?).
+</p></li><li class="listitem"><p>
+  Einige Treiber schaffen es nicht einmal, auch nur einen einzigen
+  gültigen Grafikmodus bereitzustellen. In solchen Fällen
+  gibt der DGA-Treiber schwachsinnige Modi wie z.B. 100000x100000 oder
+  so ähnlich aus.
+</p></li><li class="listitem"><p>
+  Das OSD funktioniert nur, wenn auch die Doppelpufferung aktiviert
+  ist (sonst flimmert es).
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="xv.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="sdl.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">4.2. Xv </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 4.4. SDL</td></tr></table></div></body></html>

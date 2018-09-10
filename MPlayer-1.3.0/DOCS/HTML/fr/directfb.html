@@ -1,0 +1,21 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.16. DirectFB</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="prev" href="vidix.html" title="4.15. VIDIX"><link rel="next" href="dfbmga.html" title="4.17. DirectFB/Matrox (dfbmga)"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.16. DirectFB</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vidix.html">Précédent</a> </td><th width="60%" align="center">Chapitre 4. Sorties vidéo</th><td width="20%" align="right"> <a accesskey="n" href="dfbmga.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="directfb"></a>4.16. DirectFB</h2></div></div></div><div class="blockquote"><blockquote class="blockquote"><p>
+"DirectFB est une librairie graphique conçue pour les systèmes embarqués. Il
+offre
+des performances d'accélération matérielle maximum pour un minimum
+d'utilisation des
+ressources et de charge." - citation de <a class="ulink" href="http://www.directfb.org" target="_top">http://www.directfb.org</a>
+</p></blockquote></div><p>J'exclurai les fonctionnalités de DirectFB dans cette section.</p><p>
+Bien que <span class="application">MPlayer</span> ne soit pas supporté en tant que
+"fournisseur vidéo" dans DirectFB, ce pilote de sortie activera la lecture
+vidéo au travers de DirectFB. Il sera - bien sûr - accéléré, sur ma Matrox
+G400 la
+vitesse de DirectFB était la même que celle de XVideo.
+</p><p>
+Essayez toujours d'utiliser la dernière version de DirectFB. Vous pouvez
+utiliser les
+options DirectFB en ligne de commande, en utilisant l'option
+<tt class="option">-dfbopts</tt>.
+La sélection de couche peut être faite par la méthode sous-périphérique, par
+exemple : <tt class="option">-vo directfb:2</tt>
+(couche -1 par défaut : autodétection)
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vidix.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="dfbmga.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">4.15. VIDIX </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 4.17. DirectFB/Matrox (dfbmga)</td></tr></table></div></body></html>

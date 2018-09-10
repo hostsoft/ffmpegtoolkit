@@ -1,0 +1,116 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.1. Обзор</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="prev" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="next" href="skin-file.html" title="B.2. Файл skin"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="skin-overview.html#skin-overview-directories" title="B.1.1. Каталоги"><link rel="subsection" href="skin-overview.html#skin-overview-formats" title="B.1.2. Форматы изображений"><link rel="subsection" href="skin-overview.html#skin-overview-components" title="B.1.3. Компоненты скина"><link rel="subsection" href="skin-overview.html#skin-files" title="B.1.4. Файлы"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.1. Обзор</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin.html">Пред.</a> </td><th width="60%" align="center">Приложение B. Формат скинов <span class="application">MPlayer</span></th><td width="20%" align="right"> <a accesskey="n" href="skin-file.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-overview"></a>B.1. Обзор</h2></div></div></div><p>
+На самом деле с форматом скинов уже нет необходимости что-либо делать, но вам
+следует знать, что <span class="application">MPlayer</span>
+<span class="bold"><strong>не имеет</strong></span> встроенного скина, так что
+<span class="bold"><strong>как минимум один скин должен быть установлен, для
+возможности использовать GUI.</strong></span>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-directories"></a>B.1.1. Каталоги</h3></div></div></div><p>
+Скины ищутся в следующих каталогах (по порядку):
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  <tt class="filename">$(DATADIR)/skins/</tt>
+</p></li><li class="listitem"><p>
+  <tt class="filename">$(PREFIX)/share/mplayer/skins/</tt>
+</p></li><li class="listitem"><p>
+  <tt class="filename">~/.mplayer/skins/</tt>
+</p></li></ol></div><p>
+</p><p>
+Имейте в виду, что первый путь может меняться в соответствии с конфигурацией
+<span class="application">MPlayer</span> (смотрите аргументы скрипта
+<span class="command"><strong>configure</strong></span> <tt class="option">--prefix</tt> и <tt class="option">--datadir</tt>).
+</p><p>
+Каждый скин устанавливается в его собственный подкаталог, в одном из указанных выше
+каталогов, например:
+</p><pre class="screen">$(PREFIX)/share/mplayer/skins/default/</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-formats"></a>B.1.2. Форматы изображений</h3></div></div></div><p>Изображениями должны быть truecolor (24 или 32 бит/пиксел) PNG.</p><p>
+В главном окне и полосе воспроизведения (смотрите ниже) можно использовать
+изображения с 'прозрачностью': Области, заполненные цветом #FF00FF (magenta) полностью
+прозрачны при просмотре программой <span class="application">MPlayer</span>. Это значит, что
+если ваш X сервер поддерживает расширение XShape, вы сможете получить даже
+окна произвольной формы.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-components"></a>B.1.3. Компоненты скина</h3></div></div></div><p>
+Скины имеют достаточно свободный формат (в отличие,например, от скинов
+<span class="application">Winamp</span>/<span class="application">XMMS</span>,
+имеющих формат фиксированный), так что зависит исключительно от вас, выйдет ли
+у вас что-то грандиозное.
+</p><p>
+В данный момент могут быть оформлены четыре окна:
+<a class="link" href="skin-file.html#skin-file-main" title="B.2.1. Главное окно и полоса воспроизведения">главное окно</a>,
+<a class="link" href="skin-file.html#skin-file-subwindow" title="B.2.2. Вспомогательное окно">вспомогательное окно</a>,
+<a class="link" href="skin-file.html#skin-file-main" title="B.2.1. Главное окно и полоса воспроизведения">полоса воспроизведения</a>, and the
+<a class="link" href="skin-file.html#skin-file-menu" title="B.2.3. Меню со скинами">меню со скинами</a> (активирующееся правым щелчком
+мыши).
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Главное окно</strong></span> и/или
+  <span class="bold"><strong>полоса воспроизведения</strong></span> - те, через которые вы
+  управляете <span class="application">MPlayer</span>. Фон окна - это изображение.
+  Различные элементы могут (и должны) размещаться в окне:
+  <span class="emphasis"><em>кнопки</em></span>,   <span class="emphasis"><em>ползунки</em></span> и
+  <span class="emphasis"><em>надписи</em></span>.
+  Для каждого элемента должен быть задан размер и положение.
+  </p><p>
+  <span class="bold"><strong>Кнопка</strong></span> имеет три состояния (нажата, отпущена,
+  отключена), таким образом, ее изображение должно быть разделено вертикально на три части.
+  Смотрите элемент <a class="link" href="skin-file.html#skin-button">кнопка</a> для подробностей.
+  </p><p>
+  <span class="bold"><strong>Ползунок</strong></span> (в основном используется для полосы перемещения
+  и управления громкостью/балансом) может иметь любое количество положений, задаваемых делением
+  его изображения на различные части одна под другой. Смотрите
+  <a class="link" href="skin-file.html#skin-hpotmeter">hpotmeter</a> для подробностей.
+  </p><p>
+  <span class="bold"><strong>Надписи</strong></span> чуть особеннее: Символы, необходимые для их
+  отрисовки, берутся из графического файла, и задаются
+  <a class="link" href="skin-fonts.html" title="B.3. Шрифты">файлом описания шрифта</a>.
+  Последний - это текстовый файл, указывающий x,y положения и размер каждого символа
+  в файле с изображением (файл изображения и файл описания шрифта
+  <span class="emphasis"><em>вместе</em></span> формируют шрифт). Смотрите
+  <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>
+  и <a class="link" href="skin-file.html#skin-slabel">slabel</a> для подробностей.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>Все изображения могут быть полностью прозрачными, как описано в разделе,
+  посвященном <a class="link" href="skin-overview.html#skin-overview-formats" title="B.1.2. Форматы изображений">форматам изображений</a>. Если X
+  сервер не поддерживает расширение XShape, части, помеченные как прозрачные, будут черными.
+  Если вам нравится использовать эту возможность, ширина фона главного окна должна
+  делиться на 8.
+  </p></div></li><li class="listitem"><p>
+  <span class="bold"><strong>Вспомогательное окно</strong></span>  - это то, где появляется фильм.
+  Оно может отображать указанную картинку, если  никакого фильма не загружено (пустое окно
+  немного надоедает :-)) <span class="bold"><strong>Замечание:</strong></span> прозрачность здесь
+  <span class="bold"><strong>не допускается</strong></span>.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Меню со скинами</strong></span> - всего лишь способ управлять
+  <span class="application">MPlayer</span> в понятиях элементов меню. Для меню требуются
+  два изображения: одно из них - основное, показывает меню в обычном режиме,
+  другое используется для отображения выбранных элементов. Когда появляется меню,
+  отображается первое. Если вы перемещаете мышь над элементами меню,
+  выбранный элемент копируется из второго изображения поверх элемента меню под указателем мыши
+  (второе изображение никогда не отображается целиком).
+  </p><p>
+  Элемент меню определяется его позицией и размером изображения (смотрите раздел,
+  посвященный <a class="link" href="skin-file.html#skin-file-menu" title="B.2.3. Меню со скинами">меню со скинами</a> для подробностей).
+  </p></li></ul></div><p>
+</p><p>
+Важная вещь, не упомянутая выше: Чтобы работали кнопки, ползунки и элементы меню,
+<span class="application">MPlayer</span> должен знать, что делать, если на них
+щелкнули мышью. Это делается при помощи <a class="link" href="skin-gui.html" title="B.4. GUI сообщения">сообщений</a>
+(событий). Для этих элементов вы должны определить сообщения, генерируемые, когда
+на них щелкают мышью.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-files"></a>B.1.4. Файлы</h3></div></div></div><p>
+Вам нужны следующие файлы для создания скина:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Файл конфигурации, называющийся <a class="link" href="skin-file.html" title="B.2. Файл skin">skin</a> говорит
+  <span class="application">MPlayer</span> как совместить разные части скина воедино,
+  и что делать, если производится щелчок где-нибудь в окне.
+</p></li><li class="listitem"><p>
+  Фоновое изображение главного окна.
+</p></li><li class="listitem"><p>
+  Изображения элементов главного окна (включая один или более файлов описания шрифтов,
+  необходимых для отрисовки надписей.
+</p></li><li class="listitem"><p>
+  Изображение, показываемое во вспомогательном окне (необязательно).
+</p></li><li class="listitem"><p>
+  Два изображения для меню со скинами (нужны, только если вы хотите создавать меню).
+</p></li></ul></div><p>
+  Все файлы, за исключением skin, могут быть названы так, как вам захочется
+  (но заметьте, что файлы описания шрифтов должны иметь расширение
+  a <tt class="filename">.fnt</tt>).
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-file.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">Приложение B. Формат скинов <span class="application">MPlayer</span> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> B.2. Файл skin</td></tr></table></div></body></html>

@@ -1,0 +1,78 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.17. Zr</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="Chapter 4. Video output devices"><link rel="prev" href="mpeg_decoders.html" title="4.16. MPEG decoders"><link rel="next" href="blinkenlights.html" title="4.18. Blinkenlights"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.17. Zr</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mpeg_decoders.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="blinkenlights.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="zr"></a>4.17. Zr</h2></div></div></div><p>
+This is a display-driver (<tt class="option">-vo zr</tt>) for a number of MJPEG
+capture/playback cards (tested for DC10+ and Buz, and it should work for the
+LML33, the DC10). The driver works by encoding the frame to JPEG and then
+sending it to the card. For the JPEG encoding
+<code class="systemitem">libavcodec</code>
+is used, and required. With the special <span class="emphasis"><em>cinerama</em></span> mode,
+you can watch movies in true wide screen provided that you have two beamers
+and two MJPEG cards. Depending on resolution and quality settings, this driver
+may require a lot of CPU power, remember to specify <tt class="option">-framedrop</tt>
+if your machine is too slow. Note: My AMD K6-2 350MHz is (with
+<tt class="option">-framedrop</tt>) quite adequate for watching VCD sized material and
+downscaled movies.
+</p><p>
+This driver talks to the kernel driver available at
+<a class="ulink" href="http://mjpeg.sf.net" target="_top">http://mjpeg.sf.net</a>, so
+you must get it working first. The presence of an MJPEG card is autodetected by
+the <tt class="filename">configure</tt> script, if autodetection fails, force
+detection with
+</p><pre class="screen">./configure --enable-zr</pre><p>
+</p><p>
+The output can be controlled by several options, a long description of the
+options can be found in the man page, a short list of options can be viewed
+by running
+</p><pre class="screen">mplayer -zrhelp</pre><p>
+</p><p>
+Things like scaling and the OSD (on screen display) are not handled by
+this driver but can be done using the video filters. For example, suppose
+that you have a movie with a resolution of 512x272 and you want to view it
+fullscreen on your DC10+. There are three main possibilities, you may scale
+the movie to a width of 768, 384 or 192. For performance and quality reasons,
+I would choose to scale the movie to 384x204 using the fast bilinear software
+scaler. The command line is
+</p><pre class="screen">
+mplayer -vo zr -sws 0 -vf scale=384:204 <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+Cropping can be done by the <tt class="option">crop</tt> filter and by this
+driver itself. Suppose that a movie is too wide for display on your Buz and
+that you want to use <tt class="option">-zrcrop</tt> to make the movie less wide,
+then you would issue the following command
+</p><pre class="screen">
+mplayer -vo zr -zrcrop 720x320+80+0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+if you want to use the <tt class="option">crop</tt> filter, you would do
+</p><pre class="screen">
+mplayer -vo zr -vf crop=720:320:80:0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Extra occurrences of <tt class="option">-zrcrop</tt> invoke
+<span class="emphasis"><em>cinerama</em></span> mode, i.e. you can distribute the movie over
+several TVs or beamers to create a larger screen.
+Suppose you have two beamers. The left one is connected to your
+Buz at <tt class="filename">/dev/video1</tt> and the right one is connected to
+your DC10+ at <tt class="filename">/dev/video0</tt>. The movie has a resolution
+of 704x288. Suppose also that you want the right beamer in black and white and
+that the left beamer should have JPEG frames at quality 10, then you would
+issue the following command
+</p><pre class="screen">
+mplayer -vo zr -zrdev /dev/video0 -zrcrop 352x288+352+0 -zrxdoff 0 -zrbw \
+    -zrcrop 352x288+0+0 -zrdev /dev/video1 -zrquality 10 \
+        <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+You see that the options appearing before the second <tt class="option">-zrcrop</tt>
+only apply to the DC10+ and that the options after the second
+<tt class="option">-zrcrop</tt> apply to the Buz. The maximum number of MJPEG cards
+participating in <span class="emphasis"><em>cinerama</em></span> is four, so you can build a
+2x2 vidiwall.
+</p><p>
+Finally an important remark: Do not start or stop XawTV on the playback device
+during playback, it will crash your computer. It is, however, fine to
+<span class="bold"><strong>FIRST</strong></span> start XawTV,
+<span class="bold"><strong>THEN</strong></span> start <span class="application">MPlayer</span>,
+wait for <span class="application">MPlayer</span>
+to finish and <span class="bold"><strong>THEN</strong></span> stop XawTV.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mpeg_decoders.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="blinkenlights.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4.16. MPEG decoders </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4.18. Blinkenlights</td></tr></table></div></body></html>

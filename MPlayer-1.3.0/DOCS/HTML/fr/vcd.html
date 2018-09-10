@@ -1,0 +1,81 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.8. Lecture de VCDs</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="usage.html" title="Chapitre 3. Utilisation"><link rel="prev" href="dvd.html" title="3.7. Lecture de DVD"><link rel="next" href="edl.html" title="3.9. Listes d'Edition de Décision (EDL)"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.8. Lecture de VCDs</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dvd.html">Précédent</a> </td><th width="60%" align="center">Chapitre 3. Utilisation</th><td width="20%" align="right"> <a accesskey="n" href="edl.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vcd"></a>3.8. Lecture de VCDs</h2></div></div></div><p>
+Pour voir la liste complète des options disponibles, veuillez lire la page de man.
+La syntaxe pour lire un Vidéo CD standard (VCD) est la suivante :
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>&lt;piste&gt;</code></em> [-cdrom-device <em class="replaceable"><code>&lt;périphérique&gt;</code></em>]</pre><p>
+Exemple :
+</p><pre class="screen">mplayer vcd://2 -cdrom-device /dev/hdc</pre><p>
+Le périphérique VCD par défaut est <tt class="filename">/dev/cdrom</tt>. Si votre installation diffère,
+faites un lien symbolique (symlink) ou spécifiez le bon périphérique en ligne de commande avec l'option
+<tt class="option">-cdrom-device</tt>.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+Les CD-ROM SCSI Plextor et certains Toshiba, entre autres, ont d'horribles
+performances durant la lecture de VCDs.
+C'est parce que l'<code class="systemitem">ioctl</code> CDROMREADRAW n'est pas
+complètement implémenté pour ces lecteurs.
+Si vous avez des connaissances en programmation SCSI, merci de
+<a class="ulink" href="../../tech/patches.txt" target="_top">nous aider</a> à implémenter un
+support SCSI générique pour les VCDs.
+</p></div><p>
+En attendant vous pouvez extraire des données d'un VCD avec
+<a class="ulink" href="http://ftp.ntut.edu.tw/ftp/OS/Linux/packages/X/viewers/readvcd/" target="_top">readvcd</a>
+et lire le fichier obtenu avec <span class="application">MPlayer</span>.
+</p><p><b>Structure d'un VCD. </b>
+Un CD Video (VCD) est constitué de secteurs CD-ROM XA, c'est-à-dire des
+pistes CD-ROM mode 2 forme 1 et 2 :
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+La première piste est en mode 2 forme 2 ce qui signifie qu'elle utilise une
+correction d'erreur L2. La piste contient un système de fichiers ISO-9660 avec 2048
+octets/secteur. Ce système de fichiers contient des informations VCD meta-donnée, aussi
+bien que les images fixes souvent utilisées dans les menus. Les segments MPEG pour les menus
+peuvent aussi être stockés dans la première piste, mais les données MPEG doivent être cassées
+en séries de bouts de 150 secteurs. Le système de fichiers ISO-9660 peut contenir d'autres
+fichiers ou programmes qui ne sont pas essentiels pour les
+opérations VCD.
+</p></li><li class="listitem"><p>
+La seconde piste et les suivantes sont des pistes MPEG brutes (film) à 2324 octets/secteur,
+contenant un paquet de données MPEG PS par secteur. Celles-ci sont formatées selon le mode 2 forme 1,
+elles stockent donc plus de données par secteur au détriment de la correction d'erreur.
+Il est aussi permis d'avoir des pistes CD-DA dans un VCD après la première piste.
+Sur certains systèmes d'exploitation, il y a quelques astuces qui permettent de faire
+apparaître ces pistes non-ISO-9660 dans un système de fichiers. Sur d'autres systèmes
+d'exploitation comme GNU/Linux cela n'est pas le cas (pas encore).
+Ici les données MPEG <span class="bold"><strong>ne peuvent être montées</strong></span>.
+Comme la plupart des films sont à l'intérieur de ce genre de piste, vous devrez
+tout d'abord essayer <tt class="option">vcd://2</tt>.
+</p></li><li class="listitem"><p>
+Il existe également certains disques VCD sans la première piste (une seule piste et pas de système de
+fichier du tout). Ils sont quand même lisibles, mais ne peuvent pas être montés.
+</p></li><li class="listitem"><p>La définition du standard Video CD est appelée le
+"Livre Blanc" Philips et n'est généralement pas disponible en ligne, étant donné
+qu'elle doit être achetée auprès de Philips. Une information plus détaillée sur le Video
+CD peut être trouvée dans la
+<a class="ulink" href="http://www.vcdimager.org/pub/vcdimager/manuals/0.7/vcdimager.html#SEC4" target="_top">documentation de vcdimager</a>.
+</p></li></ul></div><p>
+</p><p><b>À propos des fichiers .DAT : </b>
+Le fichier de ~600 Mo visible sur la première piste d'un VCD monté n'est
+pas un vrai fichier !
+C'est ce qu'on appelle une passerelle ISO, créée pour permettre à Windows
+de gérer de telles pistes (Windows n'autorise pas du tout l'accès brut au
+périphérique).
+Sous linux, vous ne pouvez pas copier ou lire de telles pistes (elle
+contiennent des informations parasites).
+Sous Windows c'est possible car son pilote iso9660 émule la lecture brute
+des pistes dans ce fichier.
+Pour lire un fichier .DAT vous avez besoin d'un pilote noyau qui peut
+être trouvé dans la version Linux de <span class="application">PowerDVD</span>.
+Il possède un pilote de système de fichier iso9660 modifié
+(<tt class="filename">vcdfs/isofs-2.4.X.o</tt>), qui est capable d'émuler
+les pistes brutes au travers de ce fichier .DAT fantôme.
+Si vous montez le disque en utilisant leur pilote, vous pouvez
+copier et même lire les fichiers .DAT avec <span class="application">MPlayer</span>.
+Mais cela ne fonctionnera pas avec le pilote iso9660 standard du
+noyau !
+Il est recommandé d'utiliser l'option <tt class="option">vcd://</tt>
+à la place.
+D'autres possibilités pour la copie de VCD sont le nouveau pilote noyau
+<a class="ulink" href="http://www.elis.rug.ac.be/~ronsse/cdfs/" target="_top">cdfs</a>
+(qui ne fait pas partie du noyau officiel) qui montre les sessions du CD
+en temps que fichier image et
+<a class="ulink" href="http://cdrdao.sf.net/" target="_top">cdrdao</a>, une application
+d'enregistrement/copie bit-à-bit).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dvd.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="edl.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">3.7. Lecture de DVD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 3.9. Listes d'Edition de Décision (EDL)</td></tr></table></div></body></html>

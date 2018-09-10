@@ -1,0 +1,22 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.3. E relativamente alla GUI?</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="install.html" title="Capitolo 2. Installazione"><link rel="prev" href="features.html" title="2.2. Caratteristiche"><link rel="next" href="fonts-osd.html" title="2.4. Font e OSD"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.3. E relativamente alla GUI?</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="features.html">Indietro</a> </td><th width="60%" align="center">Capitolo 2. Installazione</th><td width="20%" align="right"> <a accesskey="n" href="fonts-osd.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gui"></a>2.3. E relativamente alla GUI?</h2></div></div></div><p>
+La GUI abbisogna di GTK 1.2.x o GTK 2.0 (non è completamente in GTK, ma i
+pannelli lo sono), per cui le <code class="systemitem">GTK</code> (e
+le controparti di sviluppo, solitamente chiamate
+<code class="systemitem">gtk-dev</code>) devono essere installate.
+Puoi compilare la GUI specificando <tt class="option">--enable-gui</tt> quando esegui
+<tt class="filename">./configure</tt>.
+Poi, per girare in modalità GUI, devi lanciare il binario
+<span class="command"><strong>gmplayer</strong></span>.
+</p><p>
+Siccome <span class="application">MPlayer</span> non ha una skin inclusa, devi
+scaricarne una se vuoi usare la GUI. Vedi la
+<a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">pagina di download</a>.
+Dovrebbe essere decompressa nella directory di sistema (<tt class="filename">$PREFIX/share/mplayer/skins</tt>) o dell'utente
+<tt class="filename">$HOME/.mplayer/skins</tt>.
+<span class="application">MPlayer</span> di default cerca in questi percorsi una
+directory chiamata <tt class="filename">default</tt>, ma puoi
+usare l'opzione <tt class="option">-skin <em class="replaceable"><code>nomeskin</code></em></tt>,
+o la voce <code class="literal">skin=nomeskin</code> nel file di configurazione, per
+utilizzare la skin nella directory
+<tt class="filename">*/skins/nomeskin</tt>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="features.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="fonts-osd.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">2.2. Caratteristiche </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 2.4. Font e OSD</td></tr></table></div></body></html>

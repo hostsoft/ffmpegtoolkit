@@ -1,0 +1,32 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.5. instalación de codecs</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="install.html" title="Capítulo 2. Instalación"><link rel="prev" href="subosd.html" title="2.4. Subtítulos y OSD"><link rel="next" href="rtc.html" title="2.6. RTC"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="codec-installation.html#xvid" title="2.5.1. XviD"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.5. instalación de codecs</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="subosd.html">Anterior</a> </td><th width="60%" align="center">Capítulo 2. Instalación</th><td width="20%" align="right"> <a accesskey="n" href="rtc.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="codec-installation"></a>2.5. instalación de codecs</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="xvid"></a>2.5.1. XviD</h3></div></div></div><p>
+<a class="ulink" href="http://www.xvid.org" target="_top">XviD</a> es una derivación del desarrollo
+del codec OpenDivX. Esto ocurrió cuando ProjectMayo cambió OpenDivX a código
+cerrado DivX4 (ahora DivX5), y la gente del no-ProjectMayo que trabajaba
+en OpenDivX se cabreó, e inició XviD. Este es el motivo de que ambos proyectos
+tengan el mismo origen.
+</p><div class="procedure"><a name="idp70983408"></a><p class="title"><b>INSTALANDO XVID CVS</b></p><p>
+  Actualmente está disponible solo desde CVS. Aquí tiene instrucciones para
+  descargarlo e instalarlo (necesita al menos autoconf 2.50, automake y libtool):
+</p><ol class="procedure" type="1"><li class="step"><p>
+  </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid login</pre><p>
+  </p></li><li class="step"><p>
+  </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid co xvidcore</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">cd xvidcore/build/generic</pre><p>
+  </p></li><li class="step"><p>
+  </p><pre class="screen">./bootstrap.sh</pre><p>
+  </p></li><li class="step"><p>
+  </p><pre class="screen">./configure</pre><p>
+  Puede añadir algunas opciones (examine la salida de
+  </p><pre class="screen">./configure --help</pre><p>).
+  </p></li><li class="step"><p>
+  </p><pre class="screen">make &amp;&amp; make install</pre><p>
+  </p></li><li class="step"><p>
+  Si ha especificado <tt class="option">--enable-divxcompat</tt>,
+  copie <tt class="filename">../../src/divx4.h</tt> a
+  <tt class="filename">/usr/local/include/</tt>.
+  </p></li><li class="step"><p>
+  Recompile <span class="application">MPlayer</span> con
+  <tt class="option">--with-xvidlibdir=<em class="replaceable"><code>/ruta/a/</code></em>libxvidcore.a</tt>
+  <tt class="option">--with-xvidincdir=<em class="replaceable"><code>/ruta/a/</code></em>xvid.h</tt>
+  </p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="subosd.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="rtc.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">2.4. Subtítulos y OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 2.6. RTC</td></tr></table></div></body></html>

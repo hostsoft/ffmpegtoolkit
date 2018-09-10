@@ -1,0 +1,60 @@
+The /Win32 directory contains everything necessary to compile
+libfishsound under windows and create:
+
+- libfishsound.dll
+- identify.exe
+- encode.exe
+- decode.exe
+
+Building with the Makefile
+==========================
+
+Here's what you need to do:
+
+1) Install libogg.dll, libvorbis.dll, and libspeex.dll.
+   (you can get them from http://www.xiph.org/ogg/vorbis/ 
+    and http://www.speex.org/ ). encode and decode will
+   additionally require libsndfile to be installed (see
+   http://www.mega-nerd.com/libsndfile/).
+
+2) cd win32 subdirectory
+
+3) Use "nmake" to create library and executable.
+
+4) Install libfishsound.dll and the include files from the
+   /include/fishsound/ directory.
+
+5) You can test the library with the "identify.exe" program
+   also found in the win32 subdirectory.
+
+
+Visual Studio.NET 2003 Installation
+===================================
+NOTE: For lack of platform, we were not able to keep the solution
+files up-to-date. Please use the Visual Studio Version 6 files
+instead or send us an updated version if you're using these.
+
+
+IMPORTANT: The solution files were built for VS.NET 2003 and can't be
+opened by VS.NET 2002. If you use VS.NET 2002 you should use the VS6
+workspace files and they will be automatically converted to the new
+format.
+
+Also included in the solution is a setup and deployment project that
+will package and create an installer for the binary output of this
+project.
+
+You will need to install the libogg, libvoribs, and libspeex libraries
+separately. If you wish to create a debug build and wish to have the
+debugger load the symbols for these libraries, you should also include
+their project source files. By default the compiler and linker will
+look for them in the same parent directory as libfishsound. However
+you can install them wherever you choose and must modify the include
+directories for the linker and compiler in your projects properties.
+
+
+Visual Studio Version 6 Installation
+====================================
+
+There is also a Visual C++ V 6.0 workspace file in the Win32 directory
+in case you have not upgraded to Visual Studio.NET.

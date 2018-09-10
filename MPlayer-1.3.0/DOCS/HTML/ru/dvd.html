@@ -1,0 +1,53 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.6. Воспроизведение DVD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="drives.html" title="3.5. Приводы CD/DVD"><link rel="next" href="vcd.html" title="3.7. Воспроизведение VCD"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="dvd.html#region_code" title="3.6.1. Региональный код"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.6. Воспроизведение DVD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="drives.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="vcd.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dvd"></a>3.6. Воспроизведение DVD</h2></div></div></div><p>
+Полный список возможных опций можно прочитать в man странице.
+Синтаксис для воспроизведения стандартного DVD таков:
+</p><pre class="screen">mplayer dvd://<em class="replaceable"><code>&lt;ролик&gt;</code></em> [-dvd-device <em class="replaceable"><code>устройство</code></em>]</pre><p>
+</p><p>
+Пример:
+</p><pre class="screen">mplayer dvd://1 -dvd-device /dev/hdc</pre><p>
+</p><p>
+Если вы собрали <span class="application">MPlayer</span> с поддержкой dvdnav, синтаксис тот же,
+просто укажите dvdnav:// вместо dvd://.
+</p><p>
+Устройство DVD по умолчанию — это <tt class="filename">/dev/dvd</tt>. Если Ваши
+настройки отличаются, создайте символическую ссылку или укажите правильное
+устройство в командной строке, используя опцию <tt class="option">-dvd-device</tt>.
+</p><p>
+<span class="application">MPlayer</span> использует библиотеки <code class="systemitem">libdvdread
+</code> и <code class="systemitem">libdvdcss</code> для воспроизведения и расшифровки DVD.
+Эти две библиотеки содержатся в дереве исходного кода
+<span class="application">MPlayer</span>'а, так что отдельно устанавливать их не нужно.
+Вы также можете использовать уже установленные в системе версии библиотек, но это
+<span class="bold"><strong>не рекомендуется</strong></span>, так как может приводить к
+ошибкам, несовместимости и потере скорости.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+В случае проблем с декодированием DVD, попробуйте отключить supermount или
+другие подобные удобства. Некоторые RPC-2 устройства могут требовать
+уcтановку кода региона.
+</p></div><p><b>Расшифровка DVD. </b>
+Расшифровка DVD осуществляется библиотекой <code class="systemitem">libdvdcss</code>.
+Метод может быть указан переменной окружения <code class="envar">DVDCSS_METHOD</code>,
+подробную информацию смотрите на странице руководства man.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="region_code"></a>3.6.1. Региональный код</h3></div></div></div><p>
+Современные DVD приводы имеют дурацкое ограничение, называемое
+<a class="ulink" href="http://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B4_%D0%B7%D0%BE%D0%BD%D1%8B_DVD" target="_top">региональным кодом</a>.
+Это — способ заставить DVD приводы воспроизводить DVD диски, созданные для одного из
+шести различных регионов, на которые разделен мир.
+Как может группа людей сесть за стол, придумать подобное и
+при этом ожидать, что мир 21-го века поклонится их воле — это
+за пределами человеческого понимания.
+</p><p>
+Приводы, реализующие региональную защиту исключительно при помощи
+программного обеспечения, известны как RPC-1 приводы, реализующие ее
+аппаратно — RPC-2. RPC-2 приводы позволяют пять раз изменить код региона,
+после чего он фиксируется навсегда. В Linux Вы можете воспользоваться
+утилитой <a class="ulink" href="http://linvdr.org/projects/regionset/" target="_top">regionset</a>
+для установки регионального кода Вашего DVD привода.
+</p><p>
+К счастью, возможна переделка RPC-2 приводов в RPC-1, через
+обновление прошивки. Укажите модель Вашего DVD привода в Вашем любимом
+поисковике или посмотрите на форуме и разделах загрузок на
+<a class="ulink" href="http://www.rpc1.org/" target="_top">"Странице прошивок"</a>.
+Хотя обычные предостережения, касающиеся обновления прошивки, остаются в силе,
+опыт избавления от региональной защиты в основном положителен.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="drives.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="vcd.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">3.5. Приводы CD/DVD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 3.7. Воспроизведение VCD</td></tr></table></div></body></html>

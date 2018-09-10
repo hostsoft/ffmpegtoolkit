@@ -1,0 +1,166 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.4. Encodage avec le codec Xvid</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="prev" href="menc-feat-enc-libavcodec.html" title="7.3. Encodage avec la famille de codec libavcodec"><link rel="next" href="menc-feat-x264.html" title="7.5. Encodage avec le codec x264"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="menc-feat-xvid.html#menc-feat-xvid-intro" title="7.4.1. Quelles options devrais-je utiliser pour avoir les meilleurs résultats ?"><link rel="subsection" href="menc-feat-xvid.html#menc-feat-xvid-encoding-options" title="7.4.2. Options d'encodage de Xvid"><link rel="subsection" href="menc-feat-xvid.html#menc-feat-xvid-encoding-profiles" title="7.4.3. Profils d'encodage"><link rel="subsection" href="menc-feat-xvid.html#menc-feat-xvid-example-settings" title="7.4.4. Exemples de paramètres d'encodage"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.4. Encodage avec le codec <code class="systemitem">Xvid</code></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-enc-libavcodec.html">Précédent</a> </td><th width="60%" align="center">Chapitre 7. L'encodage avec <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-x264.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-xvid"></a>7.4. Encodage avec le codec <code class="systemitem">Xvid</code></h2></div></div></div><p>
+ <code class="systemitem">Xvid</code> est une bibliothèque libre pour
+ encoder les flux vidéo MPEG-4 ASP.
+ Avant de commencer à encoder, vous avez besoin de <a class="link" href="codec-installation.html#xvid" title="2.5.1. Xvid">
+ paramétrer <span class="application">MEncoder</span> pour qu'il la supporte.</a>.
+</p><p>
+ Ce guide a pour principal objectif de fournir le même genre d'information que
+ le guide d'encodage avec x264. Par conséquent, commencez par lire
+ <a class="link" href="menc-feat-x264.html#menc-feat-x264-encoding-options-intro" title="7.5.1.1. Introduction">la première partie</a>
+ de ce guide.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-xvid-intro"></a>7.4.1. Quelles options devrais-je utiliser pour avoir les meilleurs
+résultats ?</h3></div></div></div><p>
+ Commencez par passer en revue la section <code class="systemitem">Xvid</code>
+ de la page man de <span class="application">MPlayer</span>.
+ Cette section est prévue pour être un supplément de la page man.
+</p><p>
+ Les paramètrages par défaut de Xvid donnent déjà un bon compromis entre
+ vitesse et qualité, vous pouvez donc sans risque vous en contenter
+ si la section suivante vous laisse perplexe.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-xvid-encoding-options"></a>7.4.2. Options d'encodage de <code class="systemitem">Xvid</code></h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+ <span class="bold"><strong>vhq</strong></span>
+  Ce paramètre affecte l'algorithme de choix de macrobloc, plus la valeur
+  du paramètre est élevée, meilleure sera la décision.
+  Le paramètrage par défaut peut être utilisé de façon sûre pour tous les encodages,
+  alors que des valeurs plus élevées améliorent toujours le PSNR mais rendent l'encodage significativement
+  plus lent.
+  Veuillez noter qu'un meilleur PSNR ne veut pas forcément dire que l'image
+  sera meilleure, mais vous informe qu'elle est plus proche de l'originale.
+  Désactiver l'option accélére de façon notable l'encodage; si la vitesse est un point
+  critique pour vous, cela peut valoir le coup.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>bvhq</strong></span>
+  Cela a le même effet que vhq, mais agit sur les images B.
+  L'impact sur la vitesse est négligeable et la qualité est légèrement améliorée
+  (environ +0.1dB PSNR).
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>max_bframes</strong></span>
+  Permettre un plus grand nombre d'images B consécutives améliore habituellement
+  la compressibilité bien que cela puisse également entraîner plus d'artefacts de blocs.
+  Le paramétrage par défaut est un bon compromis entre compressibilité et qualité,
+  mais vous pouvez l'augmenter jusqu'à 3 si vous êtes obnubilé par le débit.
+  Vous pouvez aussi le réduire à 1 ou 0 si vous aspirez à la perfection, même si dans
+  ce cas vous deviez vous assurer que le débit cible est suffisament élevé pour que
+  l'encodeur n'ait pas à augmenter les quantificateurs pour l'atteindre.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>bf_threshold</strong></span>
+  Ceci contrôle la sensibilité de l'encodeur pour les images B, où une plus haute
+  valeur amène à ce que plus d'images B soient utilisées (et vice versa).
+  Ce paramètre est fait pour être utilisé avec <tt class="option">max_bframes</tt>;
+  si vous êtes obnubilé par le débit, vous devez augmenter à la fois <tt class="option">max_bframes</tt>
+  et <tt class="option">bf_threshold</tt>, tandis que vous pouvez augmenter <tt class="option">max_bframes</tt>
+  et baisser <tt class="option">bf_threshold</tt> de façon à ce que l'encodeur puisse utiliser plus d'images B
+  uniquement aux endroits qui en ont <span class="bold"><strong>vraiment</strong></span> besoin.
+  Un faible nombre de <tt class="option">max_bframes</tt> et une valeur élevée de <tt class="option">bf_threshold</tt>
+  n'est probablement pas un choix avisé vu qu'il obligera l'encodeur à mettre
+  des images B en des endroits qui n'en tireront pas de bénéfice et donc réduiront la qualité visuelle.
+  Cependant, si vous avez besoin d'être compatible avec des lecteurs qui
+  supportent seulement de vieilles versions DivX (qui ne supportent pas plusieurs images B consécutives),
+  ce serait votre seul possibilité pour augmenter la compressibilité en utilisant les images B.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>trellis</strong></span>
+  Optimise la procédure de quantification pour obtenir un compromis optimal
+  entre le PSNR et le débit, ce qui permet une économie significative de bits.
+  Ces bits seront en retour utilisés autre part dans la vidéo, augmentant
+  la qualité visuelle globale.
+  Vous devriez toujours l'utiliser étant donné son énorme impact sur la qualité.
+  Même si vous recherchez de la vitesse, ne le désactivez pas avant d'avoir
+  réduit <tt class="option">vhq</tt> et toutes les autres options plus gourmandes
+  en ressource à leur minimum.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>hq_ac</strong></span>
+  Active une meilleure méthode d'estimation des coefficients AC, ce qui réduit
+  légèrement la taille de fichier d'environ 0.15 à 0.19% (ce qui correspond
+  à moins de 0.01dB PSNR d'augmentation), tandis qu'elle a un impact négligeable
+  sur la vitesse. Il est donc recommandé de toujours la laisser activée.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>cartoon</strong></span>
+  Faite pour un meilleur encodage des dessins animés, n'a pas d'impact
+  sur la vitesse étant donné qu'elle règle juste les heuristiques de décision
+  pour ce type de contenu.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>me_quality</strong></span>
+  Ce paramètre contrôle la précision de l'estimation de mouvement.
+  Plus <tt class="option">me_quality</tt> est élevé, plus
+  l'estimation du mouvement d'origine est précise et donc mieux l'encodage final
+  rendra le mouvement d'origine.
+ </p><p>
+  Le paramètrage par défaut est le meilleur dans tous les cas; ainsi il est
+  recommandé de ne pas le désactiver à moins que vous ne recherchiez vraiment
+  la rapidité, vu que tout les bits économisés par une bonne estimation du
+  mouvement seraient dépensés autre part, augmentant la qualité générale.
+  Donc, n'allez pas plus bas que 5, et encore, seulement en dernier recours.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>chroma_me</strong></span>
+  Améliore l'estimation de mouvement en prenant aussi en compte l'information
+  de la chrominance (couleur), alors que <tt class="option">me_quality</tt> seule
+  utilise uniquement la luminance (niveaux de gris).
+  Cela ralentit l'encodage de 5-10% mais améliore sensiblement la qualité visuelle
+  en réduisant les effets de bloc et cela réduit aussi la taille des fichiers d'environ 1.3%.
+  Si vous cherchez de la vitesse, vous devriez désactiver cette option avant de
+  penser à la réduction de <tt class="option">me_quality</tt>.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>chroma_opt</strong></span>
+    A pour objectif d'améliorer la qualité de la chrominance de l'image à proximité
+    des bords totalement blancs ou noirs, plutôt que d'améliorer la compression.
+    Ceci peut aider à réduire l'effet "d'escalier rouge".
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>lumi_mask</strong></span>
+    Tente de donner moins de débit à une partie de l'image que l'oeil humain
+    ne peut pas très bien voir, ce qui devrait permettre à l'encodeur de dépenser
+    les bits économisés sur des parties plus importantes de l'image.
+    La qualité de l'encodage liée à cette option dépend grandement des
+    préférences personnelles et du type de moniteur ainsi que de son réglage
+    (typiquement, cela ne semblera pas si bien si le réglage est lumineux
+    ou si c'est un moniteur TFT).
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>qpel</strong></span>
+    Augmente le nombre de vecteurs de mouvement candidats en augmentant la
+    précision de l'estimation de mouvement de halfpel (demi-pixel) à quarterpel (quart de pixel).
+    L'idée est de trouver de meilleurs vecteurs de mouvement pour
+    réduire le débit (donc augmenter la qualité à débit constant).
+    Cependant, les vecteurs de mouvement avec une précision quarterpel requièrent
+    quelques bits en plus à coder et les vecteurs candidats ne donnent pas
+    toujours de résultats (vraiment) meilleurs.
+    Assez souvent, le codec dépense des bits pour une plus grande précision,
+    mais en retour il n'y a que peu ou pas d'amélioration de la qualité.
+    Malheureusement, il n'y a aucun moyen de prédire les possibles avantages de
+    <tt class="option">qpel</tt>, donc en fait, vous devez l'encoder avec
+    et sans pour en être sûr.
+  </p><p>
+    <tt class="option">qpel</tt> peut quasiment doubler la durée d'encodage, et
+    nécessiter jusqu'à 25% de puissance processeur en plus pour le décodage.
+    Il n'est pas supporté par tous les lecteurs.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>gmc</strong></span>
+    Essaye d'économiser des bits sur des scènes panoramiques en employant un
+    unique vecteur de mouvement pour l'image entière.
+    Cela augmente presque toujours le PSNR, mais ralentit l'encodage
+    significativement (ainsi que le décodage).
+    Par conséquent, vous devriez seulement l'employer si vous avez
+    réglé <tt class="option">vhq</tt> au maximum.
+    Le GMC de <code class="systemitem">Xvid</code> est plus sophistiqué
+    que celui de DivX, mais il est seulement supporté par quelques lecteurs.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-xvid-encoding-profiles"></a>7.4.3. Profils d'encodage</h3></div></div></div><p>
+  Xvid supporte des profils d'encodage via l'option <tt class="option">profile</tt>,
+  ce qui est utilisé pour imposer des restrictions sur les propriétés du flux
+  vidéo Xvid pour qu'il puisse être relu sur tout ce qui supporte le profil
+  choisi.
+  Les restrictions sont en rapport avec les résolutions, les débits et certaines
+  fonctionnalités MPEG-4.
+  La table suivante montre ce que chaque profil supporte.
+</p><div class="informaltable"><table border="1"><colgroup><col align="center" class="col1"><col align="center" class="col2"><col align="center" class="col3"><col align="center" class="col4"><col align="center" class="col5"><col align="center" class="col6"><col align="center" class="col7"><col align="center" class="col8"><col align="center" class="col9"><col align="center" class="col10"><col align="center" class="col11"><col align="center" class="col12"><col align="center" class="col13"><col align="center" class="col14"><col align="center" class="col15"><col align="center" class="col16"></colgroup><tbody><tr><td align="center"> </td><td colspan="4" align="center">Simple</td><td colspan="6" align="center">Simple avancé</td><td colspan="6" align="center">DivX</td></tr><tr><td align="center">Nom de profil</td><td align="center">0</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">0</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">De poche</td><td align="center">NTSC Portable</td><td align="center">PAL Portable</td><td align="center">NTSC Home Cinéma</td><td align="center">PAL Home Cinéma</td><td align="center">TV Haute Définition</td></tr><tr><td align="center">Largeur [pixels]</td><td align="center">176</td><td align="center">176</td><td align="center">352</td><td align="center">352</td><td align="center">176</td><td align="center">176</td><td align="center">352</td><td align="center">352</td><td align="center">352</td><td align="center">720</td><td align="center">176</td><td align="center">352</td><td align="center">352</td><td align="center">720</td><td align="center">720</td><td align="center">1280</td></tr><tr><td align="center">Hauteur [pixels]</td><td align="center">144</td><td align="center">144</td><td align="center">288</td><td align="center">288</td><td align="center">144</td><td align="center">144</td><td align="center">288</td><td align="center">288</td><td align="center">576</td><td align="center">576</td><td align="center">144</td><td align="center">240</td><td align="center">288</td><td align="center">480</td><td align="center">576</td><td align="center">720</td></tr><tr><td align="center">Images par seconde</td><td align="center">15</td><td align="center">15</td><td align="center">15</td><td align="center">15</td><td align="center">30</td><td align="center">30</td><td align="center">15</td><td align="center">30</td><td align="center">30</td><td align="center">30</td><td align="center">15</td><td align="center">30</td><td align="center">25</td><td align="center">30</td><td align="center">25</td><td align="center">30</td></tr><tr><td align="center">Débit moyen max [kbit/s]</td><td align="center">64</td><td align="center">64</td><td align="center">128</td><td align="center">384</td><td align="center">128</td><td align="center">128</td><td align="center">384</td><td align="center">768</td><td align="center">3000</td><td align="center">8000</td><td align="center">537.6</td><td align="center">4854</td><td align="center">4854</td><td align="center">4854</td><td align="center">4854</td><td align="center">9708.4</td></tr><tr><td align="center">Débit moyen maximal au delà de 3 secs [kbit/s]</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">800</td><td align="center">8000</td><td align="center">8000</td><td align="center">8000</td><td align="center">8000</td><td align="center">16000</td></tr><tr><td align="center">Images B maxi</td><td align="center">0</td><td align="center">0</td><td align="center">0</td><td align="center">0</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">0</td><td align="center">1</td><td align="center">1</td><td align="center">1</td><td align="center">1</td><td align="center">2</td></tr><tr><td align="center">Quantification MPEG</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td></tr><tr><td align="center">Quantification adaptative</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td></tr><tr><td align="center">Encodage entrelacé</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td></tr><tr><td align="center">Quaterpixel</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td></tr><tr><td align="center">Compensation globale du mouvement</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td></tr></tbody></table></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-xvid-example-settings"></a>7.4.4. Exemples de paramètres d'encodage</h3></div></div></div><p>
+  Les paramètres suivant sont des exemples de différentes combinaisons
+  d'option d'encodage qui affectent le compromis entre la vitesse et
+  la qualité pour le même débit cible.
+</p><p>
+  Tous les paramètrages d'encodage ont été testés sur un échantillon vidéo en
+  720x448 à 30000/1001 images par seconde, le débit cible était de 900kbit/s, et la machine était un
+  AMD-64 3400+ à 2400 MHz en mode 64 bits.
+  Chaque exemple d'encodage est donné avec la vitesse d'encodage mesurée (en
+  images par seconde) et la perte en PSNR (en dB) par rapport au réglage de "très
+  haute qualité". Sachez que selon votre video source, votre machine et les derniers développements,
+  vous pourrez obtenir des résultats très différents.
+</p><p>
+</p><div class="informaltable"><table border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Description</th><th>Options d'encodage</th><th>vitesse (en images par secondes)</th><th>Perte PSNR relative (en dB)</th></tr></thead><tbody><tr><td>Très haute qualité</td><td><tt class="option">chroma_opt:vhq=4:bvhq=1:quant_type=mpeg</tt></td><td>16</td><td>0dB</td></tr><tr><td>Haute qualité</td><td><tt class="option">vhq=2:bvhq=1:chroma_opt:quant_type=mpeg</tt></td><td>18</td><td>-0.1dB</td></tr><tr><td>Rapide</td><td><tt class="option">turbo:vhq=0</tt></td><td>28</td><td>-0.69dB</td></tr><tr><td>Temps réel</td><td><tt class="option">turbo:nochroma_me:notrellis:max_bframes=0:vhq=0</tt></td><td>38</td><td>-1.48dB</td></tr></tbody></table></div><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-enc-libavcodec.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-x264.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">7.3. Encodage avec la famille de codec <code class="systemitem">libavcodec</code> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 7.5. Encodage avec le codec <code class="systemitem">x264</code></td></tr></table></div></body></html>

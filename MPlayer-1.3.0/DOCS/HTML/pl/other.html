@@ -1,0 +1,86 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.4. Inny sprzęt do wizualizacji</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="prev" href="mpeg_decoders.html" title="4.3. Dekodery MPEG"><link rel="next" href="tvout.html" title="4.5. Obsługa wyjścia TV"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="subsection" href="other.html#zr" title="4.4.1. Zr"><link rel="subsection" href="other.html#blinkenlights" title="4.4.2. Blinkenlights"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.4. Inny sprzęt do wizualizacji</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mpeg_decoders.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 4. Urządzenia wyjścia video</th><td width="20%" align="right"> <a accesskey="n" href="tvout.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="other"></a>4.4. Inny sprzęt do wizualizacji</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="zr"></a>4.4.1. Zr</h3></div></div></div><p>
+Jest to sterownik wyświetlania (<tt class="option">-vo zr</tt>) dla wielu kart
+służących do przechwytywania/odtwarzania MJPEG (testowane z DC10+ i Buz,
+powinien także działać dla LML33 oraz DC10). Sterownik koduje ramkę na JPEG i
+wysyła ją do karty. Do konwersji na JPEG używany i wymagany jest
+<code class="systemitem">libavcodec</code>. Korzystając ze specjalnego
+trybu <span class="emphasis"><em>cinerama</em></span>
+możesz oglądać filmy w formacie panoramicznym (wide screen), zakładając że masz
+dwa ekrany i dwie karty MJPEG. W zależności od rozdzielczości i ustawień
+jakości, sterownik ten może wymagać sporo mocy CPU. Pamiętaj, aby użyć
+<tt class="option">-framedrop</tt>, jeżeli Twoja maszyna jest zbyt wolna. Info: Mój AMD
+K6-2 350MHz jest (z <tt class="option">-framedrop</tt>) całkiem wystarczający do
+oglądania materiałów o rozmiarach VCD, oraz przeskalowanych w dół filmów.
+</p><p>
+Sterownik ten "rozmawia" ze sterownikiem jądra dostępnym na
+<a class="ulink" href="http://mjpeg.sf.net" target="_top">http://mjpeg.sf.net</a>, musisz więc go najpierw uruchomić.
+Obecność karty MJPEG jest wykrywana automatycznie przez skrypt
+<tt class="filename">configure</tt>. Jeżeli autodetekcja zawiedzie, wymuś wykrywanie
+używając </p><pre class="screen">./configure --enable-zr</pre><p>
+</p><p>
+Wyjście można kontrolować licznymi opcjami. Obszerny opis opcji można znaleźć na
+stronie man, krótki poprzez wywołanie
+</p><pre class="screen">mplayer -zrhelp</pre><p>
+</p><p>
+Rzeczy takie, jak skalowanie i OSD (wyświetlanie na ekranie) nie są obsługiwane
+przez ten sterownik, ale można je uzyskać poprzez filtry video. Załóżmy, że
+masz film w rozdzielczości 512x272 i chciałbyś go wyświetlić na pełnym
+ekranie, używając swojego DC10+. Istnieją trzy główne możliwości - możesz
+przeskalować film do szerokości 768, 384 lub 192. Ze względu na wydajność i
+jakość, wybrałbym przeskalowanie filmu do 384x204 używając szybkiego
+programowego skalowania w trybie bilinear. Polecenie wygląda w ten sposób:
+</p><pre class="screen">
+mplayer -vo zr -sws 0 -vf scale=384:204 <em class="replaceable"><code>film.avi</code></em>
+</pre><p>
+</p><p>
+Kadrowania można dokonać filtrem <tt class="option">crop</tt> albo tym
+sterownikiem. Załóżmy, że Twój film jest zbyt szeroki, aby go wyświetlić na
+Twoim Buz i chcesz użyć <tt class="option">-zrcrop</tt>, aby uczynić film mniej
+szerokim.
+Powinieneś użyć takiego polecenia:
+</p><pre class="screen">
+mplayer -vo zr -zrcrop 720x320+80+0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Jeżeli chcesz użyć filtru <tt class="option">crop</tt>, wykonaj:
+</p><pre class="screen">
+mplayer -vo zr -vf crop=720:320:80:0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Dodatkowe wystąpienia <tt class="option">-zrcrop</tt> wywołują tryb
+<span class="emphasis"><em>cinerama</em></span>. Możesz na przykład rozdzielić obraz na kilka TV
+lub projektorów, uzyskując w ten sposób większy ekran. Powiedzmy, że masz dwa
+projektory, lewy podłączony do karty Buz na <tt class="filename">/dev/video1</tt>
+a prawy do DC10+ na <tt class="filename">/dev/video0</tt>. Film jest w
+rozdzielczości 704x288. Załóżmy także, że chcesz, aby obraz z prawego projektora
+był czarno-biały oraz aby ramki jpeg wyświetlane z lewego projektora były
+jakości 10. Aby uzyskać taki efekt powinieneś wydać następujące polecenie:
+</p><pre class="screen">
+mplayer -vo zr -zrdev /dev/video0 -zrcrop 352x288+352+0 -zrxdoff 0 -zrbw \
+          -zrcrop 352x288+0+0 -zrdev /dev/video1 -zrquality 10 \
+          <em class="replaceable"><code>film.avi</code></em>
+</pre><p>
+</p><p>
+Jak pewnie zauważyłeś, opcje przed drugim <tt class="option">-zrcrop</tt> odnoszą się
+tylko do DC10+, a opcje po drugim <tt class="option">-zrcrop</tt> odnoszą się do Buz.
+Ilość kart uczestniczących w <span class="emphasis"><em>cinerama</em></span> ograniczona jest do
+czterech, więc możesz zbudować ekran (ścianę video:) 2x2.
+</p><p>
+Na koniec - ważna uwaga: Nie włączaj ani nie wyłączaj XawTV na urządzeniu
+odtwarzającym w trakcie odtwarzania - zawiesisz swój komputer. Można natomiast
+<span class="bold"><strong>NAJPIERW</strong></span> włączyć XawTV,
+<span class="bold"><strong>NASTĘPNIE</strong></span> włączyć <span class="application">MPlayera</span>,
+poczekać, aż <span class="application">MPlayer</span> zakończy działanie i
+<span class="bold"><strong>POTEM</strong></span> wyłączyć XawTV.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="blinkenlights"></a>4.4.2. Blinkenlights</h3></div></div></div><p>
+Ten sterownik zdolny jest do odtwarzanie używając protokołu UDP Blinkenlights
+(mrugające światła - przyp. tłum.). Jeżeli nie wiesz, czym jest
+<a class="ulink" href="http://www.blinkenlights.de/" target="_top">Blinkenlights</a>
+lub jego następca - <a class="ulink" href="http://www.blinkenlights.de/arcade/" target="_top">Arcade</a>,
+dowiedz się. Pomimo, że prawdopodobnie jest to najrzadziej używane wyjście
+video, z pewnością jest najfajniejszym jakie <span class="application">MPlayer</span>
+ma do zaoferowania. Po prostu pooglądaj kilka
+<a class="ulink" href="http://www.blinkenlights.de/video.en.html" target="_top">dokumentacyjnych filmów
+Blinkenlights</a>. Na filmie Arcade możesz zobaczyć sterownik wyjściowy
+Blinkenlights w akcji w 00:07:50.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mpeg_decoders.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="tvout.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">4.3. Dekodery MPEG </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 4.5. Obsługa wyjścia TV</td></tr></table></div></body></html>

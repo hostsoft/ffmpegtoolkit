@@ -1,0 +1,110 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.4. Windows</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="ports.html" title="Chapitre 5. Ports"><link rel="prev" href="unix.html" title="5.3. Unix Commercial"><link rel="next" href="macos.html" title="5.5. Mac OS"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="windows.html#cygwin" title="5.4.1. Cygwin"><link rel="subsection" href="windows.html#mingw" title="5.4.2. MinGW"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.4. Windows</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="unix.html">Précédent</a> </td><th width="60%" align="center">Chapitre 5. Ports</th><td width="20%" align="right"> <a accesskey="n" href="macos.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="windows"></a>5.4. Windows</h2></div></div></div><p>Oui, MPlayer tourne sous Windows via
+  <a class="ulink" href="http://www.cygwin.com/" target="_top">Cygwin</a> et
+  <a class="ulink" href="http://www.mingw.org/" target="_top">MinGW</a>.
+  Il n'a pas encore de GUI, mais la version en ligne de commande est
+  complètement opérationnelle. Vous devriez jeter un oeil à la liste de diffusion
+  <a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-cygwin/" target="_top">Mplayer-cygwin</a>
+  pour obtenir de l'aide et les dernières informations.
+  Les binaires officiels de Windows peuvent être récupérés sur la
+  <a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html" target="_top">page de téléchargement</a>.
+  Les paquetages d'installation et de simple frontends GUI sont disponibles à partir de sources
+  externe, nous avons collecté ensuite dans la section Windows de notre
+  <a class="ulink" href="http://www.mplayerhq.hu/design7/projects.html#windows" target="_top">page de projets</a>.
+</p><p>
+Si vous souhaitez éviter d'utiliser la commande en ligne, une astuce
+toute simple est de mettre un raccourci sur votre bureau qui contient
+quelque chose comme ce qui suit dans la section d'execution :
+</p><pre class="screen"><em class="replaceable"><code>c:\chemin\vers\</code></em>mplayer.exe %1</pre><p>
+Cela va faire lire à <span class="application">MPlayer</span> n'importe quel
+film qui est laché sur le raccourci.
+Ajoutez <tt class="option">-fs</tt> pour le mode plein écran.
+</p><p>
+  Les meilleurs résultats sont obtenus avec le codec vidéo DirectX natif
+  (<tt class="option">-vo directx</tt>). Vous pouvez aussi utiliser OpenGL et SDL,
+  mais les performances d'OpenGL sont très variables suivant les systèmes
+  et SDL est connu pour distordre l'image ou planter sur certains systèmes.
+  Si l'image est distordue, essayez de désactiver l'accélération matérielle avec
+  <tt class="option">-vo directx:noaccel</tt>. Téléchargez les
+  <a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/contrib/dx7headers.tgz" target="_top">fichiers d'entête DirectX 7</a>
+  pour compiler le pilote de sortie vidéo DirectX. De plus vous devez
+  avoir DirectX 7 ou supérieur pour que ce pilote fonctionne.</p><p>
+<a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a> fonctionne maintenant sous Windows avec
+<tt class="option">-vo winvidix</tt>, bien que ce soit toujours expérimental
+et que cela requiert une configuration manuelle. Téléchargez
+  <a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/dhahelperwin/dhahelper.sys" target="_top">dhahelper.sys</a> ou
+  <a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/dhahelperwin/withmtrr/dhahelper.sys" target="_top">dhahelper.sys (avec support des MTRR)</a>
+  et copiez le dans le répertoire
+  <tt class="filename">libdha/dhahelperwin</tt> de votre arborescence
+  <span class="application">MPlayer</span>.
+  Ouvrez une console et tapez
+  </p><pre class="screen">make install-dhahelperwin</pre><p>
+  en tant qu'Administrateur. Ensuite vous devez rebooter.
+</p><p>Pour de meilleurs résultats <span class="application">MPlayer</span> devrait
+utiliser une palette que votre carte graphique supporte de façon matérielle.
+Malheureusement, de nombreux pilotes graphiques Windows renvoient certaines palettes alors que la carte ne le supporte pas. Pour le vérifier, essayez
+</p><pre class="screen">
+mplayer -benchmark -nosound -frames 100 -vf format=<em class="replaceable"><code>palette</code></em> <em class="replaceable"><code>film</code></em>
+</pre><p>
+
+  où <em class="replaceable"><code>palette</code></em> peut être n'importe quelle palette
+  affichée par l'option <tt class="option">-vf format=fmt=help</tt>. Si vous
+  trouvez une palette que votre carte gère particulièrement mal,
+  <tt class="option">-vf noformat=<em class="replaceable"><code>palette</code></em></tt>
+  l'empèchera d'être utilisée. Ajouter cela à votre fichier de conf pour
+  ne plus l'utiliser de façon permanente.
+</p><p>
+Il y a des paquetages de codec spécial pour Windows disponible sur notre
+<a class="ulink" href="http://www.mplayerhq.hu/design7/codecs.html" target="_top">page de codecs</a>
+pour permettre de jouer les formats qui ne sont pas encore nativement
+supportés.
+Placez les codecs quelque part dans votre path ou passez
+<tt class="option">--codecsdir=<em class="replaceable"><code>c:/chemin/de/vos/codecs</code></em></tt>
+(éventuellement
+<tt class="option">--codecsdir=<em class="replaceable"><code>/chemin/de/vos/codecs</code></em></tt>
+uniquement sous <span class="application">Cygwin</span>) à <tt class="filename">configure</tt>.
+Nous avons eu quelques retours indiquant que les DLLs Real doivent être
+accessibles en écriture pour l'utilisateur ayant lancé
+<span class="application">MPlayer</span>, mais seulement sur certains systèmes
+(NT4).
+Essayez de les rendre accessibles en écriture si vous avez des problèmes.
+</p><p>
+  Vous pouvez lire des VCDs en jouant les fichiers
+  <tt class="filename">.DAT</tt> ou <tt class="filename">.MPG</tt> que Windows affiche
+  sur les VCDs. Cela fonctionne tout simplement comme cela (changez la lettre
+  de votre lecteur de CD-ROM) :
+</p><pre class="screen">mplayer <em class="replaceable"><code>d:/mpegav/avseq01.dat</code></em></pre><p>
+Vous pouvez aussi lire une piste VCD directement en utilisant :
+</p><pre class="screen"> mplayer vcd://<em class="replaceable"><code>&lt;track&gt;</code></em> -cdrom-device <em class="replaceable"><code>d:</code></em></pre><p>
+Les DVDs fonctionnent également, ajustez <tt class="option">-dvd-device</tt> à la lettre de votre lecteur DVD-ROM :
+</p><pre class="screen">mplayer dvd://<em class="replaceable"><code>&lt;titre&gt;</code></em> -dvd-device <em class="replaceable"><code>d</code></em>:</pre><p>
+La console <span class="application">Cygwin</span>/<span class="application">MinGW</span>
+est plutôt lente. Il semble que rediriger la sortie ou utiliser l'option
+<tt class="option">-quiet</tt> améliore les performances. Le rendu direct
+(<tt class="option">-dr</tt>) peut également aider.  Si la lecture est erratique,
+essayez <tt class="option">-autosync 100</tt>. Si certaines de ces options vous sont
+utiles, vous pouvez les placer dans votre fichier de config.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Si vous avez un Pentium 4 et que vous expériencez un plantage lors de l'utilisation
+des codecs RealPlayer vous pourriez vouloir désactiver le support hyperthreading.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="cygwin"></a>5.4.1. <span class="application">Cygwin</span></h3></div></div></div><p>
+Vous devez utiliser <span class="application">Cygwin</span> 1.5.0 ou supérieur
+pour pouvoir compiler <span class="application">MPlayer</span>.</p><p>
+Les fichiers d'entête DirectX doivent être décompressés dans
+<tt class="filename">/usr/include/</tt> ou dans
+<tt class="filename">/usr/local/include/</tt>.
+</p><p>
+Les instructions et les fichiers pour faire tourner SDL sous Cygwin
+peuvent être trouvés sur le
+<a class="ulink" href="http://www.libsdl.org/extras/win32/cygwin/" target="_top">site de libsdl</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mingw"></a>5.4.2. <span class="application">MinGW</span></h3></div></div></div><p>Installer une version de <span class="application">MinGW</span> qui puisse
+  compiler <span class="application">MPlayer</span> était considéré comme compliqué,
+  mais fonctionne désormais sans modifications. Installez simplement
+  <span class="application">MinGW</span> 3.1.0 ou plus récent et MSYS 1.0.9 ou plus
+  récent et dites au postinstall de MSYS que <span class="application">MinGW</span>
+  est installé.</p><p>Décompressez les fichiers d'entête de DirectX dans <tt class="filename">/mingw/include/</tt>.</p><p>Le support des entêtes compressées MOV requiert
+  <a class="ulink" href="http://www.gzip.org/zlib/" target="_top">zlib</a>, que
+  <span class="application">MinGW</span> ne fournit pas par défaut.
+  Configurez-le avec <tt class="option">--prefix=/mingw</tt> et installez-le
+  avant de compiler <span class="application">MPlayer</span>.</p><p>De complètes instructions pour compiler <span class="application">MPlayer</span>
+et les librairies nécessaires sont disponibles sur
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/contrib/MPlayer-MinGW-Howto.txt" target="_top">MPlayer
+MinGW HOWTO</a>.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="unix.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="macos.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">5.3. Unix Commercial </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 5.5. Mac OS</td></tr></table></div></body></html>

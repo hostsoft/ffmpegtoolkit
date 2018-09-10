@@ -1,0 +1,25 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.4. 编码为Sony PSP视频格式</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="prev" href="menc-feat-mpeg4.html" title='6.3. 编码为双通道MPEG-4 ("DivX")'><link rel="next" href="menc-feat-mpeg.html" title="6.5. 编码为MPEG格式"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.4. 编码为Sony PSP视频格式</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-mpeg4.html">上一页</a> </td><th width="60%" align="center">第 6 章 <span class="application">MEncoder</span>的基础用法</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-handheld-psp"></a>6.4. 编码为Sony PSP视频格式</h2></div></div></div><p>
+<span class="application">MEncoder</span>支持到Sony PSP的视频格式转换，但是依赖于
+PSP软件修改，对不同软件限制也许会有不同。
+如果你遵守如下守则，你将不会遇到什么问题：
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>比特律</strong></span>：不应超过每秒1500kb，然而过去的版本
+  几乎支持任何比特律只要头文件声明其不是太高。
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>维数</strong></span>：PSP视频的长宽应是16的倍数，并且长*宽的
+  积应&lt;= 64000。
+  在一些情况下，PSP可能播放更高分辨率的文件。
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>音频</strong></span>：其采样率针对MPEG-4应为24kHz，针对H.264
+  为48kHz。
+</p></li></ul></div><p>
+</p><div class="example"><a name="encode_for_psp"></a><p class="title"><b>例 6.4. 编码到PSP</b></p><div class="example-contents"><p>
+</p><pre class="screen">
+mencoder -ofps 30000/1001 -af lavcresample=24000 -vf harddup -oac lavc \
+    -ovc lavc -lavcopts aglobal=1:vglobal=1:vcodec=mpeg4:acodec=libfaac \
+    -of lavf -lavfopts format=psp \
+    <em class="replaceable"><code>input.video</code></em> -o <em class="replaceable"><code>output.psp</code></em>
+</pre><p>
+注意你可以通过
+<tt class="option">-info name=<em class="replaceable"><code>MovieTitle</code></em></tt>为视频摄者标题。
+</p></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-mpeg4.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">6.3. 编码为双通道MPEG-4 ("DivX") </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 6.5. 编码为MPEG格式</td></tr></table></div></body></html>

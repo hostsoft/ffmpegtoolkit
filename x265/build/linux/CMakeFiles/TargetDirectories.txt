@@ -1,0 +1,6 @@
+/opt/ffmpegtoolkit/x265/build/linux/CMakeFiles/clean-generated.dir
+/opt/ffmpegtoolkit/x265/build/linux/CMakeFiles/cli.dir
+/opt/ffmpegtoolkit/x265/build/linux/common/CMakeFiles/common.dir
+/opt/ffmpegtoolkit/x265/build/linux/encoder/CMakeFiles/encoder.dir
+/opt/ffmpegtoolkit/x265/build/linux/CMakeFiles/uninstall.dir
+/opt/ffmpegtoolkit/x265/build/linux/CMakeFiles/x265-static.dir

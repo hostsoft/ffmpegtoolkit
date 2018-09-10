@@ -1,0 +1,64 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. Hogyan tesztelj a Subversion segítségével</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="prev" href="bugreports_fix.html" title="A.2. Hogyan javíts hibákat"><link rel="next" href="bugreports_report.html" title="A.4. Hogyan jelentsd a hibákat"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. Hogyan tesztelj a Subversion segítségével</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">Vissza</a> </td><th width="60%" align="center">A. függelék - Hogyan jelentsd a hibákat</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. Hogyan tesztelj a Subversion segítségével</h2></div></div></div><p>
+Egy néha előforduló probléma, hogy "régen még működött, de most már nem...".
+Következzék hát egy lépésenkénti leírás, mely segít a probléma
+megtalálásában. Ez <span class="bold"><strong>nem</strong></span> az átlagos
+felhasználóknak szól.
+</p><p>
+Először is, be kell szerezned az MPlayer forrás fáját a Subversionből.
+Az utasításokat megtalálod a
+<a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html#svn" target="_top">letöltési oldal Subversion részében</a>.
+</p><p>
+Ezután lesz az mplayer/ könyvtárban a Subversion fáról egy pillanatképed,
+a kliens oldalon. Ezután frissítsd ezt a kívánt dátumúra:
+</p><pre class="screen">
+cd mplayer/
+svn update -r {"2004-08-23"}
+</pre><p>
+A dátum formátum YYYY-MM-DD HH:MM:SS.
+Ezen dátum formátum használata biztosítja, hogy benne legyen minden olyan
+javítás, ami az adott dátumig commit-olva lett és bekerült az
+<a class="ulink" href="http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">MPlayer-cvslog archívumába</a>.
+</p><p>
+Majd folytasd, mint egy normális frissítést:
+</p><pre class="screen">
+./configure
+make
+</pre><p>
+</p><p>
+Ha olyan olvassa ezt, aki nem programozó, annak gyorsabb megkeresni a
+probléma forrását bináris keresés használatával — ekkor
+a hiba helyét a keresési intervallum ismételt felezéseivel határozza
+meg.
+Például a probléma előfordult 2003 közepén, akkor kérdezd meg, hogy
+"Már ott volt a hiba?".
+Ha igen, akkor menj vissza április elsejére; ha nem, menj október elsejére,
+és így tovább.
+</p><p>
+Ha nagyon sok hely van a merevlemezeden (egy teljes fordítás jelenleg 100 MB
+és 300-350 MB körül van a hibakereső szimbólumokkal), másold át a
+legrégebbi tudvalevőleg működő verziót, mielőtt frissítenél; ezzel időt
+spórolsz, ha vissza kell lépned.
+(Általában le kell futtatni a 'make distclean'-t egy régi verzió újrafordítása
+előtt, így ha nem készítesz mentést az eredeti forrás fádról, újra kell fordítanod
+mindent, ha visszajössz a jelenbe.)
+Alternatívaként használhatod a <a class="ulink" href="http://ccache.samba.org/" target="_top">ccache</a>-t
+a fordítás felgyorsítására.
+</p><p>
+Ha megvan a nap, amikor a probléma megjelent, folytasd a keresést az
+mplayer-cvslog archívum segítségével (dátum szerint rendezve) és egy sokkal
+precízebb svn update-tel, melybe órát, percet és másodpercet is írsz:
+</p><pre class="screen">
+svn update -r {"2004-08-23 15:17:25"}
+</pre><p>
+Így könnyen megtalálod azt a javítást, ami okozta.
+</p><p>
+Ha megvan a javítás, ami a problémát okozta, majdnem győztél is;
+jelentsd az
+<a class="ulink" href="http://bugzilla.mplayerhq.hu/" target="_top">MPlayer Bugzilla</a>-n vagy
+iratkozz fel az
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-users</a>
+listára és küldd el oda.
+Valószínűleg a szerző jelentkezni fog javítási ötlettel.
+Addig azonban a javításra is gyanakodva tekint, amíg nem tiszta, hogy hol
+is van a hiba :-).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. Hogyan javíts hibákat </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> A.4. Hogyan jelentsd a hibákat</td></tr></table></div></body></html>

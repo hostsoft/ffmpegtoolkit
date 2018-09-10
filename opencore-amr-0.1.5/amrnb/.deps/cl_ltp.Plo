@@ -1,0 +1,103 @@
+cl_ltp.lo: ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/cl_ltp.cpp \
+ /usr/include/stdc-predef.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/cl_ltp.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/typedef.h \
+ ../oscl/oscl_base_macros.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/gsm_amr_typedefs.h \
+ ../oscl/oscl_base.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ /usr/include/stdint.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h /usr/include/bits/wchar.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/mode.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/pitch_fr.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/ton_stab.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/cnst.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/basicop_malloc.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/typedef.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/convolve.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/g_pitch.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/pred_lt.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/enc_lag3.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/enc_lag6.h \
+ ../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/q_gain_p.h \
+ ../oscl/oscl_mem.h /usr/include/stdlib.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
+ /usr/include/bits/stdlib-float.h /usr/include/string.h \
+ /usr/include/bits/string.h /usr/include/bits/string2.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h
+
+/usr/include/stdc-predef.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/cl_ltp.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/typedef.h:
+
+../oscl/oscl_base_macros.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/gsm_amr_typedefs.h:
+
+../oscl/oscl_base.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/features.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/include/bits/wchar.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/mode.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/pitch_fr.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/ton_stab.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/cnst.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/basicop_malloc.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/typedef.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/convolve.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/g_pitch.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/common/include/pred_lt.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/enc_lag3.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/enc_lag6.h:
+
+../opencore/codecs_v2/audio/gsm_amr/amr_nb/enc/src/q_gain_p.h:
+
+../oscl/oscl_mem.h:
+
+/usr/include/stdlib.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+
+/usr/include/bits/stdlib-float.h:
+
+/usr/include/string.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:

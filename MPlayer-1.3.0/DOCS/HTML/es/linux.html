@@ -1,0 +1,47 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.1. Linux</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="prev" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="next" href="bsd.html" title="5.2. *BSD"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="linux.html#debian" title="5.1.1. Empaquetado para Debian"><link rel="subsection" href="linux.html#rpm" title="5.1.2. Empaquetado RPM"><link rel="subsection" href="linux.html#arm_linux" title="5.1.3. ARM Linux"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.1. Linux</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ports.html">Anterior</a> </td><th width="60%" align="center">Capítulo 5. Adaptaciones</th><td width="20%" align="right"> <a accesskey="n" href="bsd.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="linux"></a>5.1. Linux</h2></div></div></div><p>
+La principal plataforma de desarrollo es Linux en x86, sin embargo
+<span class="application">MPlayer</span> funciona en muchas otras adaptaciones de
+Linux. Los paquetes binarios de <span class="application">MPlayer</span> están
+disponibles desde muchos sitios. Sin embargo <span class="bold"><strong>ninguno
+de estos paquetes tiene soporte</strong></span>. Reporte los problemas a sus
+autores, no a nosotros.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="debian"></a>5.1.1. Empaquetado para Debian</h3></div></div></div><p>
+Para construir un paquete de Debian, ejecute la siguiente órden en el directorio
+de fuentes de <span class="application">MPlayer</span>:
+</p><pre class="screen">fakeroot debian/rules binary</pre><p>
+Y después puede instalar el paquete <tt class="filename">.deb</tt> como root de la
+manera habitual:
+</p><pre class="screen">dpkg -i ../mplayer_<em class="replaceable"><code>version</code></em>.deb</pre><p>
+</p><p>
+Christian Marillat ha hecho los paquetes no oficiales de
+<span class="application">MPlayer</span> para Debian, de
+<span class="application">MEncoder</span> y de tipografías para que en un momento,
+pueda (apt-)obtenerlos desde su <a class="ulink" href="http://marillat.free.fr/" target="_top">página
+personal</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="rpm"></a>5.1.2. Empaquetado RPM</h3></div></div></div><p>
+Dominik Mierzejewski ha creado y mantiene los paquetes oficiales RPM para Red Hat de
+<span class="application">MPlayer</span>. Están disponibles en su
+<a class="ulink" href="http://greysector.rangers.eu.org/mplayer.html" target="_top">página personal</a>.
+</p><p>
+Los paquetes RPM para Mandrake están disponibles en el
+<a class="ulink" href="http://plf.zarb.org/" target="_top">P.L.F.</a>.
+SuSE los usa para incluir una versión mutilada de
+<span class="application">MPlayer</span> en su distribución.
+Esta versión será eliminada en sus próximas liberaciones. Puede obtener RPMs
+que funcionan desde
+<a class="ulink" href="http://packman.links2linux.de/?action=128" target="_top">links2linux.de</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="arm_linux"></a>5.1.3. ARM Linux</h3></div></div></div><p>
+<span class="application">MPlayer</span> funciona en PDAs con Linux en CPU ARM p.e.
+Sharp Zaurus, Compaq Ipaq. La manera más facil de obtener
+<span class="application">MPlayer</span> es bajarlo desde uno de los sitios de
+paquetes de <a class="ulink" href="http://www.openzaurus.org" target="_top">OpenZaurus</a>. Si
+desea compilarlo usted mismo, debe mirar en
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/mplayer?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">mplayer</a>
+y el directorio
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/libavcodec?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">libavcodec</a>
+en el raiz de la distribución de OpenZaurus. Ahí siempre tienen los Makefile
+y parches más recientes usados para construir un
+<span class="application">MPlayer</span> desde CVS con
+<code class="systemitem">libavcodec</code>.
+Si necesita un entorno GUI, puede usar xmms-embebido.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ports.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="bsd.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">Capítulo 5. Adaptaciones </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 5.2. *BSD</td></tr></table></div></body></html>

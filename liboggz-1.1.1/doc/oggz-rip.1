@@ -1,0 +1,86 @@
+.TH "oggz-rip" "1" 
+.SH "NAME" 
+oggz-rip \(em Extract one or more logical bitstreams from an Ogg file. 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-rip\fR [\-o \fBfilename\fR  | \-\-output \fBfilename\fR ] filename  
+.PP 
+\fBoggz-rip\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-rip\fR extracts one or more tracks from an Ogg file. 
+In Ogg terminology, \fBoggz-rip\fR extracts one or more logical bitstreams. 
+ 
+.PP 
+For example, to extract just the Vorbis audio track from any Ogg file: 
+ 
+.PP 
+\fBoggz-rip \-c vorbis input.ogx > output.ogg\fR      
+.PP 
+This will removed any other tracks: Skeleton, Theora, image, etc. 
+The output will be a valid Ogg Vorbis I file, suitable for use on 
+hardware players that do not support multiplexed (ie. multi-track) 
+Ogg files. If the input file contains multiple Vorbis, the desired 
+once can be specified by serialno with the \fB-s\fR option. 
+Use \fBoggz-info\fR to view the serialno of each track in a file. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-rip\fR accepts the following options: 
+ 
+.SS "Miscellaneous options" 
+.IP "\-o \fBfilename\fR, \-\-output \fBfilename\fR" 10 
+Write output to the specified 
+\fBfilename\fR instead of printing it to 
+standard output. 
+ 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+.SS "Filter options" 
+.PP 
+These options can be used multiple times. Pages matching ANY of 
+the filter options will be included into the output. 
+ 
+.IP "\-s \fBserialno\fR, \-\-serialno \fBserialno\fR" 10 
+Output streams with given serialno. 
+.IP "\-i \fBindex\fR, \-\-stream-index \fBindex\fR" 10 
+Filter by stream index. These are assigned to 
+streams in the order of their BOS pages, 
+starting at 0. 
+ 
+.IP "\-c \fBcontent-type\fR \-\-content-type \fBcontent-type\fR" 10 
+Filter by content-type.
+Run \fBoggz-known-codecs\fP\fB(1)\fP for a full list
+of codecs known by the installed version of oggz.
+
+.SH EXAMPLES
+.PP
+Extract all bitstreams from file.ogg:
+.PP
+.RS
+\f(CWoggz rip \-o output.ogg file.ogg\fP
+.RE
+.PP
+Extract only the Theora bitstream from file.ogv:
+.PP
+.RS
+\f(CWoggz rip \-c theora \-o output.ogv file.ogv\fP
+.RE
+ 
+.SH "AUTHOR" 
+.PP 
+David Kuehling        January  1, 2005;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2005 CSIRO Australia 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-merge\fP\fB(1)\fP, 
+\fBoggz-chop\fP\fB(1)\fP, 
+\fBoggz-dump\fP\fB(1)\fP, 
+\fBoggz-diff\fP\fB(1)\fP       \fBhogg\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

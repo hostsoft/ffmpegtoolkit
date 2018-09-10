@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.2. Selecting input file or device</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="prev" href="menc-feat-selecting-codec.html" title="6.1. Selecting codecs and container formats"><link rel="next" href="menc-feat-mpeg4.html" title='6.3. Encoding two pass MPEG-4 ("DivX")'><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. Selecting input file or device</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Prev</a> </td><th width="60%" align="center">Chapter 6. Basic usage of <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-input"></a>6.2. Selecting input file or device</h2></div></div></div><p>
+<span class="application">MEncoder</span> can encode from files or directly
+from a DVD or VCD disc.
+Simply include the filename on the command line to encode from a file,
+or <tt class="option">dvd://</tt><em class="replaceable"><code>titlenumber</code></em> or
+<tt class="option">vcd://</tt><em class="replaceable"><code>tracknumber</code></em> to encode
+from a DVD title or VCD track.
+If you have already copied a DVD to your hard drive (you can use a tool
+such as <span class="application">dvdbackup</span>, available on most systems),
+and wish to encode from the copy, you should still use the
+<tt class="option">dvd://</tt> syntax, along with <tt class="option">-dvd-device</tt>
+followed by the path to the copied DVD root.
+
+The <tt class="option">-dvd-device</tt> and <tt class="option">-cdrom-device</tt>
+options can also be used to override the paths to the device nodes
+for reading directly from disc, if the defaults of
+<tt class="filename">/dev/dvd</tt> and <tt class="filename">/dev/cdrom</tt> do
+not work on your system.
+</p><p>
+When encoding from DVD, it is often desirable to select a chapter or
+range of chapters to encode.
+You can use the <tt class="option">-chapter</tt> option for this purpose.
+For example, <tt class="option">-chapter</tt> <em class="replaceable"><code>1-4</code></em>
+will only encode chapters 1 through 4 from the DVD.
+This is especially useful if you will be making a 1400 MB encode
+targeted for two CDs, since you can ensure the split occurs exactly
+at a chapter boundary rather than in the middle of a scene.
+</p><p>
+If you have a supported TV capture card, you can also encode from the
+TV-in device.
+Use <tt class="option">tv://</tt><em class="replaceable"><code>channelnumber</code></em> as
+the filename, and <tt class="option">-tv</tt> to configure various capture
+settings.
+DVB input works similarly.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. Selecting codecs and container formats </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 6.3. Encoding two pass MPEG-4 ("DivX")</td></tr></table></div></body></html>

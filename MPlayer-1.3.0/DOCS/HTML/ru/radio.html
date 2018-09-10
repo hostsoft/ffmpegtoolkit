@@ -1,0 +1,63 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.12. Радио</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="tv-teletext.html" title="3.11. Телетекст"><link rel="next" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="radio.html#radio-input" title="3.12.1. Радио вход"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.12. Радио</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-teletext.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="video.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="radio"></a>3.12. Радио</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-input"></a>3.12.1. Радио вход</h3></div></div></div><p>
+В этой секции описывается как включить прослушивание
+радио при помощи V4L совместимого Радио тюнера. Смотрите man страницу для
+описания  опций и кнопок управления.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-compilation"></a>3.12.1.1. Компиляция</h4></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Во-первых, вам необходимо перекомпилировать <span class="application">MPlayer</span>
+  при помощи <tt class="filename">./configure</tt> с указанием опций
+  <tt class="option">--enable-radio</tt> и (если хотите включить поддержку записи)
+  <tt class="option">--enable-radio-capture</tt>.
+</p></li><li class="step"><p>
+  Убедитесь, что ваш тюнер работает с другими приложениями в Linux, например
+  <span class="application">XawTV</span>.
+</p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-tips"></a>3.12.1.2. Советы по использованию</h4></div></div></div><p>
+Полный список опций доступен на страницах руководства (man).
+Вот всего несколько советов:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Использование <tt class="option">channels</tt> опции. Пример:
+  </p><pre class="screen">-radio channels=104.4-Sibir,103.9-Maximum</pre><p>
+  Объяснение: при указании этой опции, будут доступны только радиостанции
+  104.4 и 103.9. Кроме того, будет приятный OSD текст при переключении между каналами,
+  отображающий название канала. Пробелы в названиях каналов должны быть заменены
+  символом "_"
+</p></li><li class="listitem"><p>
+  Есть несколько путей захвата аудио. Вы можете получить звук, либо используя Вашу
+  звуковую карту и внешний кабель, соединяющий видео карту и линейный вход[line-in],
+  либо используя встроенный ADC на в чипе saa7134. В этом случае, Вы должны
+  загрузить драйвер <code class="systemitem">saa7134-alsa</code> или
+  <code class="systemitem">saa7134-oss</code>.
+</p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span> не может быть использован для захвата звука,
+  поскольку он требует обязательного наличия видео-потока.Таким образом, вы можете
+  производит захват либо используя программу <span class="application">arecord</span>
+  из проекта ALSA, либо используя
+  <tt class="option">-ao pcm:file=file.wav</tt>. Во втором случае вы не будете слышать ничего во
+  время захвата (за исключение случая, когда вы используете line-in кабель, и слушаете
+  звук непосредственно с линейного входа).
+</p></li></ul></div><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-examples"></a>3.12.1.3. Примеры</h4></div></div></div><div class="informalexample"><p>
+Вход со стандартного V4L (используя line-in кабель, запись отключена.):
+</p><pre class="screen">mplayer radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+Вход со стандартного V4L (используя line-in кабель, запись отключена. Используется интерфейс
+V4Lv1):
+</p><pre class="screen">mplayer -radio driver=v4l radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+прослушивание второй радиостанции из списка:
+</p><pre class="screen">mplayer -radio channels=104.4=Sibir,103.9=Maximm  radio://2</pre><p>
+</p></div><div class="informalexample"><p>
+Получение звука через шину pci с внутреннего ADC радио тюнера. В этом примере
+тюнер используется как вторая звуковая карта (ALSA устройство hw:1,0).
+Для карт, основанных на saa7134, либо
+<code class="systemitem">saa7134-alsa</code>, либо <code class="systemitem">saa7134-oss</code>
+модуль должен быть загружен.
+</p><pre class="screen">
+mplayer -rawaudio rate=32000 radio://2/capture \
+    -radio adevice=hw=1.0:arate=32000:channels=104.4=Sibir,103.9=Maximm
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+При использовании имен устройств ALSA, двоеточия необходимо заменить на
+равенства, запятые - на точки.
+</p></div><p>
+</p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-teletext.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="video.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">3.11. Телетекст </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> Глава 4. Устройства вывода видео</td></tr></table></div></body></html>

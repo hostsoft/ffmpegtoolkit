@@ -1,0 +1,81 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.3. Управление</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="subosd.html" title="3.2. Субтитры и OSD"><link rel="next" href="streaming.html" title="3.4. Сетевые потоки и каналы"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="control.html#ctrl-cfg" title="3.3.1. Конфигурация управления"><link rel="subsection" href="control.html#lirc" title="3.3.2. Управление через LIRC"><link rel="subsection" href="control.html#slave-mode" title='3.3.3. Подчинённый ("рабский") режим'></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.3. Управление</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="subosd.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="streaming.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="control"></a>3.3. Управление</h2></div></div></div><p>
+<span class="application">MPlayer</span> использует полностью конфигурируемый,
+основанный на понятии команды, уровень управления, позволяющий манипулировать
+<span class="application">MPlayer</span>'ом с клавиатуры, мышью, джойстиком или
+с пульта дистанционного управления (используя LIRC). Полный список кнопок
+для управления с клавиатуры см. на man-странице.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ctrl-cfg"></a>3.3.1. Конфигурация управления</h3></div></div></div><p>
+<span class="application">MPlayer</span> позволяет повесить любую MPlayer'овскую
+команду на любую кнопку, используя простой конфигурационный файл. Синтаксис
+файла состоит из имени кнопки, сопровождающегося командой. По умолчанию
+конфигурационный файл находится в <tt class="filename">$HOME/.mplayer/input.conf</tt>,
+но это можно изменить, указав опцию
+<tt class="option">-input <em class="replaceable"><code>conf</code></em></tt>
+(относительный путь указывается относительно <tt class="filename">$HOME/.mplayer</tt>).
+</p><div class="example"><a name="input_control_file"></a><p class="title"><b>Пример 3.1. Простой файл конфигурации ввода</b></p><div class="example-contents"><pre class="programlisting">
+##
+## MPlayer input control file
+##
+
+RIGHT seek +10
+LEFT seek -10
+- audio_delay 0.100
++ audio_delay -0.100
+q quit
+&gt; pt_step 1
+&lt; pt_step -1
+ENTER pt_step 1 1</pre></div></div><br class="example-break"></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="lirc"></a>3.3.2. Управление через LIRC</h3></div></div></div><p>
+Linux Infrared Remote Control[Инфракрасное Удалённое Управление Linux'ом]
+— используйте легко собираемый в домашних условиях IR-приёмник, (почти)
+любой пульт управления и управляйте с их помощью Вашей Linux машиной.
+Подробности на <a class="ulink" href="http://www.lirc.org" target="_top">www.lirc.org</a>.
+</p><p>
+Если у Вас установлен ракет lirc, configure само его обнаружит. Если Всё прошло
+хорошо, <span class="application">MPlayer</span> при старте напечатает сообщение,
+похожее на "<code class="computeroutput">Setting up lirc support...</code>".
+Если произошла ошибка, он Вам сообщит. Если он не говорит ничего про LIRC,
+то поддержка LIRC не была скомпилирована. Вот так :-)
+</p><p>
+Имя приложения для <span class="application">MPlayer</span> — угадайте —
+<tt class="filename">mplayer</tt>.  Вы можете использовать все команды mplayer'а и
+даже можете использовать более одной команды, разделив их символами
+<code class="literal">\n</code>. Не забудьте включить флаг repeat[повтор] в
+<tt class="filename">.lircrc</tt>, когда это имеет смысл (перемещение, громкость
+и т.п.). Вот выдержка из моего <tt class="filename">.lircrc</tt>:
+</p><pre class="programlisting">
+begin
+     button = VOLUME_PLUS
+     prog = mplayer
+     config = volume 1
+     repeat = 1
+end
+
+begin
+    button = VOLUME_MINUS
+    prog = mplayer
+    config = volume -1
+    repeat = 1
+end
+
+begin
+    button = CD_PLAY
+    prog = mplayer
+    config = pause
+end
+
+begin
+    button = CD_STOP
+    prog = mplayer
+    config = seek 0 1\npause
+end</pre><p>
+Если Вам не нравится стандартное место Вашего конфигурационного файла lirc
+(<tt class="filename">~/.lircrc</tt>), используйте опцию <tt class="option">-lircconf
+<em class="replaceable"><code>filename</code></em></tt>, чтобы указать другой файл.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="slave-mode"></a>3.3.3. Подчинённый ("рабский") режим</h3></div></div></div><p>
+Наличие подчинённого режима позволяет Вам создавать простые приложения к
+<span class="application">MPlayer</span>'у. Когда режим включён (опцией
+<tt class="option">-slave</tt>), <span class="application">MPlayer</span> читает со
+стандартного входа команды, разделяемые символом конца строки (\n).
+Команды документированы в файле
+<a class="ulink" href="../../tech/slave.txt" target="_top">slave.txt</a>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="subosd.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="streaming.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">3.2. Субтитры и OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 3.4. Сетевые потоки и каналы</td></tr></table></div></body></html>

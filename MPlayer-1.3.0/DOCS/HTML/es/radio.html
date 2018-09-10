@@ -1,0 +1,57 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.10. Radio</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="usage.html" title="Capítulo 3. Uso"><link rel="prev" href="tv-input.html" title="3.9. Entrada de TV"><link rel="next" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="radio.html#radio-tips" title="3.10.1. Usage tips"><link rel="subsection" href="radio.html#radio-examples" title="3.10.2. Examples"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.10. Radio</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-input.html">Anterior</a> </td><th width="60%" align="center">Capítulo 3. Uso</th><td width="20%" align="right"> <a accesskey="n" href="video-dev.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="radio"></a>3.10. Radio</h2></div></div></div><p>
+This section is about how to enable listening to radio from
+a V4L-compatible radio tuner. See the man page for a
+description of radio options and keyboard controls.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-tips"></a>3.10.1. Usage tips</h3></div></div></div><p>
+The full listing of the options is available in the manual page.
+Here are just a few tips:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Make sure your tuner works with another radio software in Linux, for
+  example <span class="application">XawTV</span>.
+</p></li><li class="listitem"><p>
+  Use the <tt class="option">channels</tt> option. An example:
+  </p><pre class="screen">-radio channels=104.4-Sibir,103.9-Maximum</pre><p>
+  Explanation: With this option, only the 104.4 and 103.9 radio stations
+  will be usable. There will be a nice OSD text upon channel switching,
+  displaying the channel's name. Spaces in the channel name must be
+  replaced by the "_" character.
+</p></li><li class="listitem"><p>
+  There are several ways of capturing audio. You can grab the sound either using
+  your sound card via an external cable connection between video card and
+  line-in, or using the built-in ADC in the saa7134 chip. In the latter case,
+  you have to load the <code class="systemitem">saa7134-alsa</code> or
+  <code class="systemitem">saa7134-oss</code> driver.
+</p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span> cannot be used for audio capture,
+  because it requires a video stream to work. So your can either use
+  <span class="application">arecord</span> from ALSA project or
+  use <tt class="option">-ao pcm:file=file.wav</tt>. In the latter case you
+  will not hear any sound (unless you are using a line-in cable and
+  have switched line-in mute off).
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-examples"></a>3.10.2. Examples</h3></div></div></div><div class="informalexample"><p>
+Input from standard V4L (using line-in cable, capture switched off):
+</p><pre class="screen">mplayer radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+Input from standard V4L (using line-in cable, capture switched off,
+V4Lv1 interface):
+</p><pre class="screen">mplayer -radio driver=v4l radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+Playing second channel from channel list:
+</p><pre class="screen">mplayer -radio channels=104.4=Sibir,103.9=Maximm radio://2</pre><p>
+</p></div><div class="informalexample"><p>
+Passing sound over the PCI bus from the radio card's internal ADC.
+In this example the tuner is used as a second sound card
+(ALSA device hw:1,0). For saa7134-based cards either the
+<code class="systemitem">saa7134-alsa</code> or <code class="systemitem">saa7134-oss</code>
+module must be loaded.
+</p><pre class="screen">
+mplayer -rawaudio rate=32000 radio://2/capture \
+    -radio adevice=hw=1.0:arate=32000:channels=104.4=Sibir,103.9=Maximm
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+When using ALSA device names colons must be replaced
+by equal signs, commas by periods.
+</p></div><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-input.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="video-dev.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">3.9. Entrada de TV </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> Capítulo 4. Dispositivos de salida de video</td></tr></table></div></body></html>

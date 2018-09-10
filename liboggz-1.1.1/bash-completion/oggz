@@ -1,0 +1,229 @@
+# Bash completion support for oggz.
+# Conrad Parker, Aug 3 2008
+
+# Copyright (C) 2008 Annodex Association
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# - Redistributions of source code must retain the above copyright
+# notice, this list of conditions and the following disclaimer.
+#
+# - Redistributions in binary form must reproduce the above copyright
+# notice, this list of conditions and the following disclaimer in the
+# documentation and/or other materials provided with the distribution.
+#
+# - Neither the name of the Annodex Association nor the names of its
+# contributors may be used to endorse or promote products derived from
+# this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+# PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE ASSOCIATION OR
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+# PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+OGGZ_COMMANDS="chop codecs comment diff dump help info known-codecs merge rip scan sort validate"
+
+__oggzcomp ()
+{
+    COMPREPLY=( $( compgen -W '$*' -- $cur ))
+
+    return
+}
+
+__oggz_commands ()
+{
+    __oggzcomp $OGGZ_COMMANDS
+}
+
+__oggz_known_codecs ()
+{
+    local cur=$1
+
+    cur_LOWERCASE=$(echo $cur | tr '[:upper:]' '[:lower:]')
+
+    KNOWN=$(oggz-known-codecs)
+    KNOWN_LOWERCASE=$(echo $KNOWN | tr '[:upper:]' '[:lower:]')
+
+    # If the user has typed nothing, or lowercase, complete on lowercased
+    # codec names
+    if [ -z $cur -o $cur = $cur_LOWERCASE ] ; then
+      __oggzcomp "$KNOWN_LOWERCASE"
+    else
+      __oggzcomp "$KNOWN"
+    fi
+}
+
+# See http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
+_oggz_filedir ()
+{
+    _filedir '@(ogx|ogv|oga|ogg|spx|anx|axv|axa)'
+}
+
+_oggz_ctype_cmd ()
+{
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    local command=$1
+
+    case "$prev" in
+    -c|--content-type)
+        __oggz_known_codecs $cur
+        return ;;
+    esac
+
+    case "$cur" in
+    -*)
+        __oggzcomp $($command -?)
+        return ;;
+    *)  _oggz_filedir
+        return ;;
+    esac
+}
+
+_oggz_basic_cmd ()
+{
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+
+    local command=$1
+
+    case "$cur" in
+    -*)
+        __oggzcomp $($command -?)
+        return ;;
+    *)  _oggz_filedir
+        return ;;
+    esac
+}
+
+_oggz_chop ()
+{
+    _oggz_basic_cmd oggz-chop
+}
+
+_oggz_comment ()
+{
+    _oggz_ctype_cmd oggz-comment
+}
+
+_oggz_diff ()
+{
+    _oggz_ctype_cmd oggz-diff
+}
+
+_oggz_dump ()
+{
+    _oggz_ctype_cmd oggz-dump
+}
+
+_oggz_info ()
+{
+    _oggz_basic_cmd oggz-info
+}
+
+_oggz_known_codecs ()
+{
+    _oggz_basic_cmd oggz-known-codecs
+}
+
+_oggz_merge ()
+{
+    _oggz_basic_cmd oggz-merge
+}
+
+_oggz_rip ()
+{
+    _oggz_ctype_cmd oggz-rip
+}
+
+_oggz_scan ()
+{
+    _oggz_basic_cmd oggz-scan
+}
+
+_oggz_sort ()
+{
+    _oggz_basic_cmd oggz-sort
+}
+
+_oggz_validate ()
+{
+    _oggz_basic_cmd oggz-validate
+}
+
+_oggz_codecs ()
+{
+    _oggz_basic_cmd oggz-codecs
+}
+
+_oggz_help ()
+{
+    __oggz_commands
+}
+
+_oggz ()
+{
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local prev="${COMP_WORDS[COMP_CWORD-1]}"
+    local i c=1 command
+
+    while [ $c -lt $COMP_CWORD ]; do
+        i="${COMP_WORDS[c]}"
+        case "$i" in
+        --version|--help) ;;
+        *) command="$i"; break ;;
+        esac
+        c=$((++c))
+    done
+
+    if [ $c -eq $COMP_CWORD -a -z "$command" ]; then
+        case "${COMP_WORDS[COMP_CWORD]}" in
+        --*) COMPREPLY=() ;;
+        *) __oggz_commands ;;
+        esac
+        return
+    fi
+
+    case "$command" in
+    chop)	_oggz_chop ;;
+    comment)	_oggz_comment ;;
+    diff)	_oggz_diff ;;
+    dump)	_oggz_dump ;;
+    help)	_oggz_help ;;
+    info)	_oggz_info ;;
+    known-codecs)	_oggz_known-codecs ;;
+    merge)	_oggz_merge ;;
+    rip)	_oggz_rip ;;
+    scan)	_oggz_scan ;;
+    sort)	_oggz_sort ;;
+    validate)	_oggz_validate ;;
+    codecs)	_oggz_codecs ;;
+    *)		COMPREPLY=() ;;
+    esac
+}
+
+# Completion for wrapper oggz tool
+complete -o filenames -F _oggz oggz
+
+# Completions for commands
+complete -o filenames -F _oggz_chop oggz-chop
+complete -o filenames -F _oggz_comment oggz-comment
+complete -o filenames -F _oggz_diff oggz-diff
+complete -o filenames -F _oggz_dump oggz-dump
+complete -o filenames -F _oggz_info oggz-info
+complete -o default -F _oggz_known-codecs oggz-known-codecs
+complete -o filenames -F _oggz_merge oggz-merge
+complete -o filenames -F _oggz_rip oggz-rip
+complete -o filenames -F _oggz_scan oggz-scan
+complete -o filenames -F _oggz_sort oggz-sort
+complete -o filenames -F _oggz_validate oggz-validate
+complete -o filenames -F _oggz_codecs oggz-codecs

@@ -1,0 +1,30 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.10. Beibehalten des Seitenverhältnisses</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="prev" href="menc-feat-extractsub.html" title="6.9. Extrahieren von DVD-Untertiteln in eine VOBsub-Datei"><link rel="next" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10. Beibehalten des Seitenverhältnisses</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Zurück</a> </td><th width="60%" align="center">Kapitel 6. Allgemeiner Gebrauch von <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="encoding-guide.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aspect"></a>6.10. Beibehalten des Seitenverhältnisses</h2></div></div></div><p>
+      Dateien von DVDs und SVCDs (z.B. MPEG1/2) enthalten einen Wert für das
+      Seitenverhältnis, welcher beschreibt, wie der Player den Videostream
+      skalieren soll, damit Menschen keine Eierköpfe kriegen
+      (Beispiel: 480x480 + 4:3 = 640x480). Beim Encodieren zu AVI-(DivX)-Dateien
+      musst du dir bewusst sein, dass AVI-Header diesen Wert nicht abspeichern.
+      Das Reskalieren des Films ist ätzend und zeitaufwändig, da muss es doch
+      einen besseren Weg geben!
+    </p><p>Es gibt ihn.</p><p>
+      MPEG4 besitzt ein einzigartiges Feature: Der Video-Stream kann sein
+      benötigtes Seitenverhältnis enthalten. Ja, genau wie MPEG1/2 (DVD, SVCD)
+      und H.263 Dateien. Bedauerlicherweise gibt es abgesehen von
+      <span class="application">MPlayer</span> wenige Video-Player, die dieses
+      MPEG4-Attribut unterstützen.
+    </p><p>
+      Dieses Feature kann nur mit dem <code class="systemitem">mpeg4</code>-Codec von
+      <code class="systemitem">libavcodec</code>
+      verwendet werden. Vergiss nicht: Obwohl <span class="application">MPlayer</span>
+      die erzeugte Datei korrekt abspielen wird, könnten andere Player das verkehrte
+      Seitenverhältnis benutzen.
+    </p><p>
+      Du solltest auf jeden Fall die schwarzen Bänder oberhalb und unterhalb des
+      Filmbildes abschneiden.
+      In der Manpage steht mehr zur Verwendung der Filter <code class="systemitem">cropdetect</code>
+      und <code class="systemitem">crop</code>.
+    </p><p>
+      Anwendung:
+</p><pre class="screen">mencoder <em class="replaceable"><code>sample-svcd.mpg</code></em> -vf crop=714:548:0:14 -oac copy -ovc lavc \
+    -lavcopts vcodec=mpeg4:mbd=2:trell:autoaspect -o <em class="replaceable"><code>output.avi</code></em></pre><p>
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="encoding-guide.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">6.9. Extrahieren von DVD-Untertiteln in eine VOBsub-Datei </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> Kapitel 7. Encodieren mit <span class="application">MEncoder</span></td></tr></table></div></body></html>

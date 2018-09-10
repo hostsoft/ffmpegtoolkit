@@ -1,0 +1,77 @@
+
+2008-09-17 - Version 1.3.3.0
+
+    - neroAacEnc:
+        - Improved multichannel encoding
+        - Solved compatibility issues with some hardware devices
+        - Improved CBR bitrate control
+        - Ignore wave file length of 0 on -ignorelength
+        - Solved issue with very long files and -2pass
+        - Removed special SSE compile,
+          all optimizations have been merged with the normal compile
+        - Linux version speed optimized
+        - Encoder exits gracefully and writes valid MP4 file on ctrl+c
+
+    - neroAacDec:
+        - Fixed incorrect channel output for 7.1 encodings
+
+    - neroAacTag:
+        - Linux version available
+
+
+2007-08-06 - Version 1.1.34.2
+
+    - neroAacEnc:
+        - Linux version
+        - New q value mappings
+        - Retuning of almost all bitrates
+        - Fix in HEv2 encoder/decoder delay
+        - Fixed incorrect streamlength written in MP4 files
+        - Significant speedup
+        - Removed -hinttrack option
+
+    - neroAacDec:
+        - Linux version
+        - Fixed a memory leak
+
+    - neroAacTag:
+        - Added -hinttrack option
+
+
+2007-02-13 - Version 1.0.7.0
+
+    - neroAacEnc:
+        - Quality tuning for some bitrates
+        - Added support for 16 and 22.05 kHz samplerates for HE AAC
+        - Fixed HE AAC configuration problems for 5.1 files (at q=0.0)
+        - Temporary file handling fixed on Windows Vista
+        - Various speed optimisations
+
+    - neroAacDec:
+        - Small speedups
+        - Reduced memory usage
+
+    - neroAacTag:
+        - No changes
+
+
+2006-05-18 - Version 1.0.0.2:
+
+    - neroAacEnc:
+        - Added progress display
+        - Writes mpeg-4 tags at the beginning of the MP4/3GP files
+        - Supports multiple input files (-if) and produces a multichapter MP4
+          file when more than one input file is present
+        - Added backwards compatible signalling of SBR and PS Audio Object Types
+          (also when LC is used for encoding) for improved 3GPP Compatibility
+
+    - neroAacDec:
+        - changed to new faster AAC/HE-AAC/HE-AAC v2 decoder
+        - Added support for the backwards compatible signalling and
+          corresponding behaviour
+
+    - neroAacTag.exe:
+        - Added this for Nero Digital Audio Tagging
+
+
+2006-05-01 - Version 1.0.0.0 - Initial Release

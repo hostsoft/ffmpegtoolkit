@@ -1,0 +1,83 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.19. Другое оборудование вывода видео</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="mpeg_decoders.html" title="4.18. MPEG декодеры"><link rel="next" href="tvout.html" title="4.20. Поддержка TV-выхода"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="other.html#zr" title="4.19.1. Zr"><link rel="subsection" href="other.html#blinkenlights" title="4.19.2. Blinkenlights[Мерцающие огни?]"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.19. Другое оборудование вывода видео</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mpeg_decoders.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="tvout.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="other"></a>4.19. Другое оборудование вывода видео</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="zr"></a>4.19.1. Zr</h3></div></div></div><p>
+Это видеодрайвер (<tt class="option">-vo zr</tt>) для некоторого количества MJPEG карт
+захвата/воспроизведения (тестировался на DC10+ и Buz, но также должен работать для
+LML33, DC10). Драйвер работает, кодируя кадр в JPEG, и отправляя его карте.
+Для кодирования JPEG используется и требуется библиотека
+<code class="systemitem">libavcodec</code>.
+Со специальным режимом <span class="emphasis"><em>cinerama</em></span>,
+вы можете смотреть фильмы на действительно широком экране, который можно получить,
+иемя два проектора и две MJPEG карты.  В зависимости от разрешения
+и настроек качества, этот драйвер может потребовать существенной мощности CPU,
+не забывайте указывать <tt class="option">-framedrop</tt>, если маша машина
+слишком медленная. Замечание: Мой AMD K6-2 350МГц является (с
+<tt class="option">-framedrop</tt>) вполне подходящим для просмотра материала размера VCD,
+и фильмов с уменьшенным разрешением.
+</p><p>
+Этот драйвер общается с драйвером ядра, доступном на
+<a class="ulink" href="http://mjpeg.sf.net" target="_top">http://mjpeg.sf.net</a>, так что сначала должен корректно заработать  второй.
+Наличие MJPEG карты автоматически определяется скриптом
+<tt class="filename">configure</tt>, если этого не происходит, включите принудительное определение
+при помощи
+</p><pre class="screen">./configure --enable-zr</pre><p>
+</p><p>
+Вывод может управляться несколькими опциями, подробные описания можно найти
+на странице руководства man, короткий список опций получите, выполнив
+</p><pre class="screen">mplayer -zrhelp</pre><p>
+</p><p>
+Такие вещи как масштабирование и OSD не осуществляются этим
+драйвером, но могут быть сделаны, используя видеоплагины. Например, предположим, что
+вы имеете фильм с разрешением 512x272 и хотите просмотреть эго в полноэкранном
+режиме на DC10+. Есть три главные возможности: вы можете отмасштабировать фильм
+до ширины 768, 384 или 192. По причинам производительности и качества я бы
+выбрал масштабирование до 384x204, используя быстрый билинейный программный
+модуль. Командная строка:
+</p><pre class="screen">
+mplayer -vo zr -sws 0 -vf scale=384:204 <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+Обрезка может быть выполнена плагином <tt class="option">crop</tt> и самим драйвером.
+Предполагая, что фильм слишком широк для отображения на Buz, и вы хотите
+использовать <tt class="option">-zrcrop</tt> для уменьшения ширины, то необходимо применить
+следующую команду:
+</p><pre class="screen">
+mplayer -vo zr -zrcrop 720x320+80+0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Если вы хотите использовать плагин <tt class="option">crop</tt>, выполните
+</p><pre class="screen">
+mplayer -vo zr -vf crop=720:320:80:0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Дополнительное указание <tt class="option">-zrcrop</tt> активизирует
+режим <span class="emphasis"><em>cinerama</em></span>, т.е. вы можете распределить фильм на несколько
+TV или проекторов для создания большего экрана. Предположим у вас два проектора.
+Левый подключен к Buz на <tt class="filename">/dev/video1</tt>,а правый подключен
+к DC10+ на <tt class="filename">/dev/video0</tt>. Фильм имеет разрешение 704x288.
+Также предположим, что вы хотите выводить на правый проектор в черно-белом цвете, а
+левый должен иметь JPEG кадры качества 10. в этом случае вы должны указать:
+</p><pre class="screen">
+mplayer -vo zr -zrdev /dev/video0 -zrcrop 352x288+352+0 -zrxdoff 0 -zrbw \
+    -zrcrop 352x288+0+0 -zrdev /dev/video1 -zrquality 10 \
+        <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+Можно видеть, что опции, встречающиеся до второго <tt class="option">-zrcrop</tt>, применяются
+только к DC10+, а опции после второго применяются только к Buz.
+Максимальное количество карт для режима <span class="emphasis"><em>cinerama</em></span> равно
+четырем, так что вы можете построить 2x2 видеостену.
+</p><p>
+Наконец важное замечание: Не запускайте и не останавливайте XawTV на устройстве
+воспроизведения, это может подвесить ваш компьютер. Тем не менее, можно прекрасно
+<span class="bold"><strong>СНАЧАЛА</strong></span> запустить XawTV, <span class="bold"><strong>ЗАТЕМ</strong></span>
+запустить <span class="application">MPlayer</span>, подождать, пока <span class="application">MPlayer</span>
+завершит работу и <span class="bold"><strong>ЗАТЕМ</strong></span> остановить XawTV.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="blinkenlights"></a>4.19.2. Blinkenlights[Мерцающие огни?]</h3></div></div></div><p>
+Этот драйвер способен воспроизводить, используя Blinkenlights UDP протокол. Если не
+знаете, что такое <a class="ulink" href="http://www.blinkenlights.de/" target="_top">Blinkenlights</a>
+или его преемник <a class="ulink" href="http://www.blinkenlights.de/arcade/" target="_top">Arcade</a>,
+выясните это. Хотя это, возможно, реже всего используемый драйвер, без сомнения,
+это самая клевая вещь, предлагаемая <span class="application">MPlayer</span>. Просто
+посмотрите некоторые из
+<a class="ulink" href="http://www.blinkenlights.de/video.en.html" target="_top">видеороликов документации Blinkenlights</a>.
+На видео Arcade вы можете видеть драйвер видеовывода Blinkenlights в действии в 00:07:50.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mpeg_decoders.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="tvout.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.18. MPEG декодеры </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.20. Поддержка TV-выхода</td></tr></table></div></body></html>

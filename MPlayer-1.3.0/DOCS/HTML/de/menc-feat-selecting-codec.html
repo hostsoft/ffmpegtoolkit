@@ -1,0 +1,70 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.1. Auswahl der Codecs und Containerformate</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="prev" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="next" href="menc-feat-selecting-input.html" title="6.2. Auswahl von Eingabedatei oder -gerät"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.1. Auswahl der Codecs und Containerformate</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mencoder.html">Zurück</a> </td><th width="60%" align="center">Kapitel 6. Allgemeiner Gebrauch von <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-selecting-input.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-codec"></a>6.1. Auswahl der Codecs und Containerformate</h2></div></div></div><p>
+      Audio- und Videocodecs für die Encodierung werden mit den Optionen
+      <tt class="option">-oac</tt> und <tt class="option">-ovc</tt> respektive gewählt.
+      Gib zum Beispiel folgendes ein:
+      </p><pre class="screen">mencoder -ovc help</pre><p>
+      um alle von der <span class="application">MEncoder</span>-Version auf deinem Rechner
+      unterstützten Video-Codecs aufzulisten.
+      Die folgenden Wahlmöglichkeiten stehen zur Verfügung:
+    </p><p>
+      Audiocodecs:
+
+      </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Audiocodecname</th><th>Beschreibung</th></tr></thead><tbody><tr><td>mp3lame</td><td>encodiere nach VBR-, ABR- oder CBR-MP3 mittels LAME</td></tr><tr><td>lavc</td><td>verwende einen der Audiocodecs von
+                <a class="link" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-audio-codecs" title="7.3.2. Audiocodecs von libavcodec"><code class="systemitem">libavcodec</code></a>
+              </td></tr><tr><td>faac</td><td>FAAC AAC Audio-Encoder</td></tr><tr><td>toolame</td><td>MPEG Audio Layer 2 Encoder</td></tr><tr><td>twolame</td><td>MPEG Audio Layer 2 Encoder basierend auf tooLAME</td></tr><tr><td>pcm</td><td>unkomprimiertes PCM-Audio</td></tr><tr><td>copy</td><td>nicht neu codieren, kopiere einfach nur komprimierte Frames</td></tr></tbody></table></div><p>
+    </p><p>
+      Video-Codecs:
+      </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Videocodecname</th><th>Beschreibung</th></tr></thead><tbody><tr><td>lavc</td><td>Verwende einen der Video-Codecs von
+                <a class="link" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-video-codecs" title="7.3.1. Videocodecs von libavcodec"><code class="systemitem">libavcodec</code></a>
+              </td></tr><tr><td>xvid</td><td>Xvid, MPEG-4 Advanced Simple Profile (ASP) Codec</td></tr><tr><td>x264</td><td>x264, MPEG-4 Advanced Video Coding (AVC), AKA H.264 Codec</td></tr><tr><td>nuv</td><td>NuppelVideo, von Echtzeit-Anwendungen verwendet</td></tr><tr><td>raw</td><td>unkomprimierte Video-Frames</td></tr><tr><td>copy</td><td>nicht neu codieren, kopiere einfach nur komprimierte Frames</td></tr><tr><td>frameno</td><td>verwendet für 3-pass-Encodierung (nicht empfohlen)</td></tr></tbody></table></div><p>
+    </p><p>
+      Ausgabe-Containerformate werden mittels der Option <tt class="option">-of</tt> gewählt.
+      Gib folgendes ein
+      </p><pre class="screen">mencoder -of help</pre><p>
+      um alle von der <span class="application">MEncoder</span>-Version auf deinem Rechner
+      unterstützten Videocodecs aufzulisten.
+      Die folgenden Wahlmöglichkeiten stehen zur Verfügung:
+    </p><p>
+      Containerformate:
+      </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Name des Containerformats</th><th>Beschreibung</th></tr></thead><tbody><tr><td>lavf</td><td>einer der von
+                <code class="systemitem">libavformat</code>
+                unterstützten Container</td></tr><tr><td>avi</td><td>Audio-Video Interleaved</td></tr><tr><td>mpeg</td><td>MPEG-1 und MPEG-2 PS</td></tr><tr><td>rawvideo</td><td>raw-Video-Stream (kein Muxen - nur ein Video-Stream)</td></tr><tr><td>rawaudio</td><td>raw-Audio-Stream (kein Muxen - nur ein Audio-Stream)</td></tr></tbody></table></div><p>
+      Der AVI-Container ist das ursprüngliche Containerformat für
+      <span class="application">MEncoder</span>, was bedeutet, dass es der am besten
+      gehandhabte ist und derjenige, für welchen <span class="application">MEncoder</span>
+      entworfen wurde.
+      Wie oben angemerkt können weitere Containerformate verwendet werden, jedoch
+      kann es bei deren Gebrauch zu Problemen kommen.
+    </p><p>
+      <code class="systemitem">libavformat</code>-Container:
+    </p><p>
+      Wenn du für das Muxen der Ausgabedatei
+      <code class="systemitem">libavformat</code> verwendest
+      (mittels <tt class="option">-of lavf</tt>),
+      wird das passende Containerformat entsprechend der Erweiterung der Ausgabedatei
+      ermittelt.
+      Du kannst ein bestimmtes Containerformat mit Hilfe der Option
+      <tt class="option">format</tt> von <code class="systemitem">libavformat</code>
+      erzwingen.
+
+      </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th><code class="systemitem">libavformat</code> Containername</th><th>Beschreibung</th></tr></thead><tbody><tr><td>mpg</td><td>MPEG-1 und MPEG-2 PS</td></tr><tr><td>asf</td><td>Advanced Streaming Format</td></tr><tr><td>avi</td><td>Audio-Video Interleaved</td></tr><tr><td>wav</td><td>Waveform Audio</td></tr><tr><td>swf</td><td>Macromedia Flash</td></tr><tr><td>flv</td><td>Macromedia Flash Video</td></tr><tr><td>rm</td><td>RealMedia</td></tr><tr><td>au</td><td>SUN AU</td></tr><tr><td>nut</td><td>NUT offener Container (experimentell und noch nicht Spec-konform)</td></tr><tr><td>mov</td><td>QuickTime</td></tr><tr><td>mp4</td><td>MPEG-4 Format</td></tr><tr><td>dv</td><td>Sony Digital Video Container</td></tr></tbody></table></div><p>
+      Wie du siehst, erlaubt <code class="systemitem">libavformat</code>
+      <span class="application">MEncoder</span>, in eine beachtliche Vielfalt an Containern
+      zu muxen.
+      Leider solltest du wirklich Paranoia angesichts der resultierenden Datei schieben,
+      da <span class="application">MEncoder</span> nicht von Anfang an für die Unterstützung
+      anderer Containerformate als AVI entworfen wurde.
+
+      Überprüfe bitte sicherheitshalber, ob die Audio-/Video-Synchronisierung in Ordnung ist
+      und ob die Datei von anderen Playern als <span class="application">MPlayer</span>
+      wiedergegeben werden kann.
+    </p><div class="example"><a name="encode_to_macromedia_flash_format"></a><p class="title"><b>Beispiel 6.1. Encodieren in das Macromedia Flash-Format</b></p><div class="example-contents"><p>
+        Erzeugen eines Macromedia Flash Videos, das in einem Web-Browser mit dem
+        Macromedia Flash Plugin abgespielt werden kann:
+        </p><pre class="screen">
+          mencoder <em class="replaceable"><code>input.avi</code></em> -o <em class="replaceable"><code>output.flv</code></em> -of lavf \
+          -oac mp3lame -lameopts abr:br=56 -ovc lavc \
+          -lavcopts vcodec=flv:vbitrate=500:mbd=2:mv0:trell:v4mv:cbp:last_pred=3 \
+          -srate 22050
+        </pre><p>
+      </p></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mencoder.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-selecting-input.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">Kapitel 6. Allgemeiner Gebrauch von <span class="application">MEncoder</span> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 6.2. Auswahl von Eingabedatei oder -gerät</td></tr></table></div></body></html>

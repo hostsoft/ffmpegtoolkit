@@ -1,0 +1,62 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.2. Feliratok és OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="3. fejezet - Használat"><link rel="prev" href="commandline.html" title="3.1. Parancssor"><link rel="next" href="control.html" title="3.3. Vezérlés"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. Feliratok és OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="commandline.html">Vissza</a> </td><th width="60%" align="center">3. fejezet - Használat</th><td width="20%" align="right"> <a accesskey="n" href="control.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="subosd"></a>3.2. Feliratok és OSD</h2></div></div></div><p>
+Az <span class="application">MPlayer</span> feliratokat is meg tud jeleníteni a
+filmekkel együtt. Jelenleg a következő formátumok támogatottak:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>VOBsub</p></li><li class="listitem"><p>OGM</p></li><li class="listitem"><p>CC (closed caption)</p></li><li class="listitem"><p>MicroDVD</p></li><li class="listitem"><p>SubRip</p></li><li class="listitem"><p>SubViewer</p></li><li class="listitem"><p>Sami</p></li><li class="listitem"><p>VPlayer</p></li><li class="listitem"><p>RT</p></li><li class="listitem"><p>SSA</p></li><li class="listitem"><p>PJS (Phoenix Japanimation Society)</p></li><li class="listitem"><p>MPsub</p></li><li class="listitem"><p>AQTitle</p></li><li class="listitem"><p>
+    <a class="ulink" href="http://unicorn.us.com/jacosub/" target="_top">JACOsub</a>
+  </p></li></ul></div><p>
+</p><p>
+Az <span class="application">MPlayer</span> az előzőleg felsorolt felirat
+formátumokat (<span class="bold"><strong>az első három kivételével</strong></span>)
+át is tudja konvertálni az alábbi formátumokba, a megadott kapcsolókkal:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>MPsub: <tt class="option">-dumpmpsub</tt></p></li><li class="listitem"><p>SubRip: <tt class="option">-dumpsrtsub</tt></p></li><li class="listitem"><p>MicroDVD: <tt class="option">-dumpmicrodvdsub</tt></p></li><li class="listitem"><p>JACOsub: <tt class="option">-dumpjacosub</tt></p></li><li class="listitem"><p>Sami: <tt class="option">-dumpsami</tt></p></li></ul></div><p>
+</p><p>
+A <span class="application">MEncoder</span> el tudja menteni a DVD feliratokat
+<a class="link" href="menc-feat-extractsub.html" title="8.9. DVD felirat elmentése VOBsub fájlba">VOBsub</a> formában.
+</p><p>
+A parancssori kapcsolók eléggé különböznek az az egyes formátumoknál:
+</p><p><b>VOBsub feliratok. </b>
+A VOBsub feliratok egy nagy (néhány megabájtos) <tt class="filename">.SUB</tt>
+fájlból és opcionálisan egy <tt class="filename">.IDX</tt> és/vagy
+<tt class="filename">.IFO</tt> fájlból állnak.  Ha olyan fájlaid vannak, hogy
+<tt class="filename"><em class="replaceable"><code>sample.sub</code></em></tt>,
+<tt class="filename"><em class="replaceable"><code>sample.ifo</code></em></tt> (opcionális),
+<tt class="filename"><em class="replaceable"><code>sample.idx</code></em></tt> - meg kell adnod az
+<span class="application">MPlayer</span>nek a <tt class="option">-vobsub sample
+[-vobsubid <em class="replaceable"><code>id</code></em>]</tt> kapcsolót
+(teljes elérési út is megadható). A <tt class="option">-vobsubid</tt> kapcsoló olyan,
+mint a <tt class="option">-sid</tt> a DVD-knél, segítségével felirat sávok (nyelvek)
+közül választhatsz. Abban az esetben, ha elfelejted a <tt class="option">-vobsubid</tt>
+kapcsolót, az <span class="application">MPlayer</span> a <tt class="option">-slang</tt>
+kapcsolóval megadott nyelveket próbálja használni, és a
+<code class="systemitem">langidx</code>-re ugrik az <tt class="filename">.IDX</tt> fájlban,
+hogy beállítsa a felirat nyelvét. Ha ez nem sikerül, nem lesz felirat.
+</p><p><b>Egyéb feliratok. </b>
+A többi formátum egy sima szöveges fájlból áll, mely tartalmazza az időzítést,
+a pozícionálást és a szöveget. Használata: ha van egy olyan fájlod, mint pl.
+<tt class="filename"><em class="replaceable"><code>sample.txt</code></em></tt>,
+akkor a <tt class="option">-sub <em class="replaceable"><code>sample.txt</code></em></tt> kapcsolóval
+tudod megadni (teljes elérési út is megadható).
+</p><div class="variablelist"><p class="title"><b>Felirat időzítés és pozícionálás beállítása:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-subdelay <em class="replaceable"><code>mp</code></em></tt></span></dt><dd><p>
+    Késlelteti a feliratot <tt class="option"><em class="replaceable"><code>mp</code></em></tt> másodperccel.
+    Lehet negatív is. Az érték a film időpozíciójának számlálójához adódik hozzá.
+  </p></dd><dt><span class="term"><tt class="option">-subfps <em class="replaceable"><code>RÁTA</code></em></tt></span></dt><dd><p>
+    Megadhatod a felirat fájl képkocka/mp rátáját (lebegőpontos szám).
+  </p></dd><dt><span class="term"><tt class="option">-subpos <em class="replaceable"><code>0-100</code></em></tt></span></dt><dd><p>
+    A felirat pozícióját adhatod meg.
+  </p></dd></dl></div><p>
+Ha MicroDVD felirat fájl használa közben egyre növekvő csúszást tapasztalsz a
+film és a felirat között, akkor a legvalószínűbb, hogy a film és a felirat frame
+rátája különböző. Jegyezd meg, hogy a MicroDVD felirat formátum abszolút képkocka
+számokat használ az időzítéshez, és nincs benne fps információ, emiatt a
+<tt class="option">-subfps</tt> kapcsoló használata javasolt ezzel a formátummal. Ha
+végleg meg akarod oldani ezt a problémát, kézzel kell átkonvertálnod a felirat
+fájl frame rátáját.
+Az <span class="application">MPlayer</span> el tudja végezni ezt a konverziót neked:
+
+</p><pre class="screen">
+mplayer -dumpmicrodvdsub -fps <em class="replaceable"><code>subtitles_fps</code></em> -subfps <em class="replaceable"><code>avi_fps</code></em> \
+    -sub <em class="replaceable"><code>subtitle_filename</code></em> <em class="replaceable"><code>dummy.avi</code></em>
+</pre><p>
+</p><p>
+A DVD feliratokról a <a class="link" href="dvd.html" title="3.5. DVD lejátszás">DVD</a> fejezetben olvashatsz bővebben.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="commandline.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="control.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. Parancssor </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 3.3. Vezérlés</td></tr></table></div></body></html>

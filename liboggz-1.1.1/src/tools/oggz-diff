@@ -1,0 +1,214 @@
+#!/bin/sh
+
+## Copyright (C) 2003 Commonwealth Scientific and Industrial Research
+## Organisation (CSIRO) Australia
+##
+## Redistribution and use in source and binary forms, with or without
+## modification, are permitted provided that the following conditions
+## are met:
+##
+## - Redistributions of source code must retain the above copyright
+## notice, this list of conditions and the following disclaimer.
+##
+## - Redistributions in binary form must reproduce the above copyright
+## notice, this list of conditions and the following disclaimer in the
+## documentation and/or other materials provided with the distribution.
+##
+## - Neither the name of CSIRO Australia nor the names of its
+## contributors may be used to endorse or promote products derived from
+## this software without specific prior written permission.
+##
+## THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+## ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+## LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+## PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE ORGANISATION OR
+## CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+## EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+## PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+## PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+## LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+## NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+## SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+version () {
+  echo >&2 "oggz-diff version "1.1.1
+  exit 1
+}
+
+usage () {
+  echo >&2 "oggz-diff, diff oggz-dumps of two Ogg files."
+  echo >&2
+  echo >&2 "Usage: oggz-diff [options] [OGGZDUMP_OPTIONS] [DIFF_OPTIONS] file1.ogg file2.ogg"
+  echo >&2
+  echo >&2 "options: [--verbose] [-v | --version] [-h | --help]"
+  echo >&2
+  echo >&2 "Supported oggz-dump and diff options:"
+  echo >&2
+  echo >&2 "OGGZDUMP_OPTIONS: [-b | --binary] [-x | --hexadecimal]"
+  echo >&2 "    [-O | --hide-offset] [-S | --hide-serialno] [-G | --hide-granulepos]"
+  echo >&2 "    [-P | --hide-packetno] [-s serialno | --serialno serialno]"
+  echo >&2 "    [-c content-type | --content-type content-type]"
+  echo >&2
+  echo >&2 "DIFF_OPTIONS: [-q | --brief] [-C NUM | --context[=NUM]]"
+  echo >&2 "     [-u | -U NUM | --unified[=NUM]] [-e | -ed] [--normal] [--rcs]"
+  echo >&2 "     [-y | --side-by-side] [-l | --paginate]"
+  echo >&2
+  exit 1
+}
+
+GETOPTEST=`getopt --version`
+case $GETOPTEST in
+getopt*) # GNU getopt
+  GETOPTARGS="-l verbose -l version -l brief -l context:: -l unified:: -l ed -l normal -l rcs -l side-by-side -l paginate -l binary -l hexadecimal -l serialno: -l content-type: -l hide-offset -l hide-serialno -l hide-granulepos -l hide-packetno -l help -- +qC:uU:eylbxs:c:OSGPhv"
+  QARGS="--verbose --version --brief --context --unified --ed --normal --rcs --side-by-side --paginate --binary --hexadecimal --serialno --content-type --hide-offset --hide-serialno --hide-granulepos --hide-packetno --help -q -C -u -U -e -y -l -b -x -s -c -O -S -G -P -h -v"
+  ;;
+*) # POSIX getopt ?
+  GETOPTARGS="qC:uU:eylbxs:c:OSGPhv"
+  QARGS="-q -C -u -U -e -y -l -b -x -s -c -O -S -G -P -h -v"
+  ;;
+esac
+
+# First check for -? option
+if test "X$1" = "X-?"; then
+  exit 0
+fi
+
+TEMP=`getopt $GETOPTARGS "$@"`
+
+if test "$?" != "0"; then
+  usage
+fi
+
+eval set -- "$TEMP"
+
+DIFFOPTS="-w" # -w, --ignore-all-space
+DUMPOPTS=""
+VERBOSE=""
+
+while test "X$1" != "X--"; do
+  case "$1" in
+    -q|--brief)
+      DIFFOPTS=$DIFFOPTS" -q"
+      ;;
+    -C)
+      shift
+      DIFFOPTS=$DIFFOPTS" -C $1"
+      ;;
+    --context)
+      shift
+      if test "x$1" = "x"; then
+        DIFFOPTS=$DIFFOPTS" --context"
+      else
+        DIFFOPTS=$DIFFOPTS" --context=$1"
+      fi
+      ;;
+    -u)
+      DIFFOPTS=$DIFFOPTS" -u"
+      ;;
+    -U)
+      shift
+      DIFFOPTS=$DIFFOPTS" -U $1"
+      ;;
+    --unified)
+      shift
+      if test "x$1" = "x"; then
+        DIFFOPTS=$DIFFOPTS" --unified"
+      else
+        DIFFOPTS=$DIFFOPTS" --unified=$1"
+      fi
+      ;;
+    -e|--ed)
+      DIFFOPTS=$DIFFOPTS" -e"
+      ;;
+    --normal)
+      DIFFOPTS=$DIFFOPTS" --normal"
+      ;;
+    --rcs)
+      DIFFOPTS=$DIFFOPTS" --rcs"
+      ;;
+    -y|--side-by-side)
+      DIFFOPTS=$DIFFOPTS" -y"
+      ;;
+    -l|--paginate)
+      DIFFOPTS=$DIFFOPTS" -l"
+      ;;
+    -b|--binary)
+      DUMPOPTS=$DUMPOPTS" -b"
+      ;;
+    -x|--hexadecimal)
+      DUMPOPTS=$DUMPOPTS" -x"
+      ;;
+    -s|--serialno)
+      shift
+      DUMPOPTS=$DUMPOPTS" -s $1"
+      ;;
+    -c)
+      shift
+      DUMPOPTS=$DUMPOPTS" -c $1"
+      ;;
+    -O|--hide-offset)
+      DUMPOPTS=$DUMPOPTS" -O"
+      ;;
+    -S|--hide-serialno)
+      DUMPOPTS=$DUMPOPTS" -S"
+      ;;
+    -G|--hide-granulepos)
+      DUMPOPTS=$DUMPOPTS" -G"
+      ;;
+    -P|--hide-packetno)
+      DUMPOPTS=$DUMPOPTS" -P"
+      ;;
+    --verbose)
+      VERBOSE="y"
+      ;;
+    -v|--version)
+      version
+      ;;
+    -h|--help)
+      usage
+      ;;
+  esac
+  shift
+done
+
+# Check that all options parsed ok
+if test "x$1" != "x--"; then
+  usage
+fi
+shift #get rid of the '--'
+
+if test "x$1" = "x"; then
+  usage
+fi
+if test "x$2" = "x"; then
+  usage
+fi
+
+if test "x$VERBOSE" != "x"; then
+  echo >&2 "OGGZDUMP_OPTIONS: " $DUMPOPTS
+  echo >&2 "DIFF_OPTIONS: " $DIFFOPTS
+fi
+
+FIFO1="${TMPDIR:-/tmp}/`basename $1`.dump-1-$$"
+FIFO2="${TMPDIR:-/tmp}/`basename $2`.dump-2-$$"
+
+exec 5>$FIFO1
+exec 6>$FIFO2
+
+oggz-dump $DUMPOPTS $1 >&5
+if test "$?" != "0"; then
+  exit 1
+fi
+
+oggz-dump $DUMPOPTS $2 >&6
+if test "$?" != "0"; then
+  exit 1
+fi
+
+diff $DIFFOPTS $FIFO1 $FIFO2
+ret=$?
+
+rm $FIFO1 $FIFO2
+
+exit $ret
+

@@ -1,0 +1,65 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.9. AAlib – szöveges módú megjelenítés</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="opengl.html" title="6.8. OpenGL kimenet"><link rel="next" href="caca.html" title="6.10. libcaca - Színes ASCII Art függvénykönyvtár"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.9. AAlib – szöveges módú megjelenítés</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="opengl.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="caca.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aalib"></a>6.9. AAlib – szöveges módú megjelenítés</h2></div></div></div><p>
+Az AAlib egy függvény könyvtár grafika karakteres módban történő megjelenítéséhez,
+egy nagyszerű ASCII renderelő segítségével. Már jelenleg is <span class="emphasis"><em>rengeteg</em></span>
+program támogatja, például a Doom, Quake, stb. Az <span class="application">MPlayer</span>ben
+is van egy roppant jól használható vezérlő hozzá. Ha a <tt class="filename">./configure</tt>
+talál telepített aalib-et, az aalib libvo vezérlő alapértelmezett lesz.
+</p><p>
+Pár billentyű segítségével állíthatod a renderelési opciókat az AA Ablakban:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Gomb</th><th>Művelet</th></tr></thead><tbody><tr><td><span class="keycap"><b>1</b></span></td><td>
+  kontraszt csökkentése
+</td></tr><tr><td><span class="keycap"><b>2</b></span></td><td>
+  kontraszt növelése
+</td></tr><tr><td><span class="keycap"><b>3</b></span></td><td>
+  fényerő csökkentése
+</td></tr><tr><td><span class="keycap"><b>4</b></span></td><td>
+  fényerő növelése
+</td></tr><tr><td><span class="keycap"><b>5</b></span></td><td>
+  gyors renderelés be/kikapcsolása
+</td></tr><tr><td><span class="keycap"><b>6</b></span></td><td>
+  dithering módjának beállítása (nincs, hiba eloszlás, Floyd Steinberg)
+</td></tr><tr><td><span class="keycap"><b>7</b></span></td><td>
+  kép megfordítása
+</td></tr><tr><td><span class="keycap"><b>8</b></span></td><td>
+  váltás az aa és az <span class="application">MPlayer</span> vezérlése között
+</td></tr></tbody></table></div><div class="variablelist"><p class="title"><b>A következő parancssori kapcsolókat használhatod:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aaosdcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    OSD színének megváltoztatása
+  </p></dd><dt><span class="term"><tt class="option">-aasubcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    Felirat színének megváltoztatása
+    </p><p>
+    ahol a <em class="replaceable"><code>V</code></em> lehet:
+    <code class="literal">0</code> (normális),
+    <code class="literal">1</code> (sötét),
+    <code class="literal">2</code> (vastag),
+    <code class="literal">3</code> (félkövér betű),
+    <code class="literal">4</code> (ellentétes),
+    <code class="literal">5</code> (speciális).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Maga az AAlib számtalan lehetőséget biztosít. Itt van pár fontosabb:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aadriver</tt></span></dt><dd><p>
+    Beállítja a javasolt aa vezérlőt (X11, curses, Linux).
+  </p></dd><dt><span class="term"><tt class="option">-aaextended</tt></span></dt><dd><p>
+    Mind a 256 karakter használata.
+  </p></dd><dt><span class="term"><tt class="option">-aaeight</tt></span></dt><dd><p>
+    Nyolc bites ASCII.
+  </p></dd><dt><span class="term"><tt class="option">-aahelp</tt></span></dt><dd><p>
+    Kiírja az összes aalib kapcsolót.
+  </p></dd></dl></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+A renderelés nagyon CPU igényes, különösen ha AA-on-X-et
+(aalib használata X alatt) használsz, a legalacsonyabb a standard,
+nem framebuffer-es konzolon. Használd az SVGATextMode-ot a nagy
+felbontás beállításához, és élvezd! (másodlagos Hercules kártyák a
+sirályak :)) (de SZVSZ használhatod a
+<tt class="option">-vf 1bpp</tt> kapcsolót is a hgafb-en megjelenő grafikához :)
+</p></div><p>
+A <tt class="option">-framedrop</tt> kapcsoló használatát javasoljuk, ha nem
+elég gyors a géped az összes képkocka rendeléséhez!
+</p><p>
+Terminálon lejátszva jobb sebességet és minőséget kapsz a Linux vezérlővel,
+mint a curses-szal (<tt class="option">-aadriver linux</tt>). De ehhez írási joggal
+kell rendelkezned a <tt class="filename">/dev/vcsa<em class="replaceable"><code>&lt;terminal&gt;</code></em></tt>
+fájlhoz! Ezt az aalib nem ismeri fel magától, de a vo_aa megpróbálja
+megtalálni a legjobb módot.
+Lásd a <a class="ulink" href="http://aa-project.sf.net/tune" target="_top">http://aa-project.sf.net/tune</a> oldalt a további
+tuningolási dolgokhoz.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="opengl.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="caca.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.8. OpenGL kimenet </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.10. 
+<code class="systemitem">libcaca</code> - Színes ASCII Art függvénykönyvtár
+</td></tr></table></div></body></html>

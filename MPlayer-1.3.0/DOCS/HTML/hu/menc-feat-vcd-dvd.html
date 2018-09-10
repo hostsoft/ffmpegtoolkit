@@ -1,0 +1,315 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>9.8. A MEncoder használata VCD/SVCD/DVD-kompatibilis fájlok készítéséhez.</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="prev" href="menc-feat-quicktime-7.html" title="9.7. QuickTime-kompatibilis fájlok készítése a MEncoder használatával"><link rel="next" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-constraints" title="9.8.1. Formátum korlátok"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-output" title="9.8.2. Kimeneti opciók"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-lavc" title="9.8.3. A libavcodec használata VCD/SVCD/DVD kódoláshoz"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-audio" title="9.8.4. Audió kódolása"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-all" title="9.8.5. Mindent összevetve"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">9.8. A <span class="application">MEncoder</span>
+  használata VCD/SVCD/DVD-kompatibilis fájlok készítéséhez.</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-quicktime-7.html">Vissza</a> </td><th width="60%" align="center">9. fejezet - Kódolás a <span class="application">MEncoder</span>rel</th><td width="20%" align="right"> <a accesskey="n" href="faq.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-vcd-dvd"></a>9.8. A <span class="application">MEncoder</span>
+  használata VCD/SVCD/DVD-kompatibilis fájlok készítéséhez.</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-constraints"></a>9.8.1. Formátum korlátok</h3></div></div></div><p>
+A <span class="application">MEncoder</span> képes VCD, SCVD és DVD formátumú
+MPEG fájlok létrehozására a
+<code class="systemitem">libavcodec</code> könyvtár segítségével.
+Ezek a fájlok a
+<a class="ulink" href="http://www.gnu.org/software/vcdimager/vcdimager.html" target="_top">vcdimager</a>-rel
+vagy a
+<a class="ulink" href="http://dvdauthor.sourceforge.net/" target="_top">dvdauthor</a>-ral
+együttműködve felhasználhatók szabványos lejátszókban lejátszható
+lemezek készítéséhez.
+</p><p>
+A DVD, SVCD és VCD formátumok súlyos korlátokkal rendelkeznek.
+A kódolt képméretekből és a képarányokból csak nagyon kevés áll
+rendelkezésre.
+Ha a filmed nem felel meg ezeknek a követelményeknek, méretezned,
+vágnod vagy fekete keretet kell hozzáadnod a képhez, hogy kompatibilis
+legyen.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-constraints-resolution"></a>9.8.1.1. Formátum korlátok</h4></div></div></div><div class="informaltable"><table border="1"><colgroup><col><col><col><col><col><col><col><col><col></colgroup><thead><tr><th>Formátum</th><th>Felbontás</th><th>V. Codec</th><th>V. Bitráta</th><th>Mintavételi ráta</th><th>A. Codec</th><th>A. Bitráta</th><th>FPS</th><th>Arány</th></tr></thead><tbody><tr><td>NTSC DVD</td><td>720x480, 704x480, 352x480, 352x240</td><td>MPEG-2</td><td>9800 kbps</td><td>48000 Hz</td><td>AC-3,PCM</td><td>1536 kbps (max)</td><td>30000/1001, 24000/1001</td><td>4:3, 16:9 (csak 720x480-nál)</td></tr><tr><td>NTSC DVD</td><td>352x240<a href="#ftn.fn-rare-resolutions" class="footnote" name="fn-rare-resolutions"><sup class="footnote">[a]</sup></a></td><td>MPEG-1</td><td>1856 kbps</td><td>48000 Hz</td><td>AC-3,PCM</td><td>1536 kbps (max)</td><td>30000/1001, 24000/1001</td><td>4:3, 16:9</td></tr><tr><td>NTSC SVCD</td><td>480x480</td><td>MPEG-2</td><td>2600 kbps</td><td>44100 Hz</td><td>MP2</td><td>384 kbps (max)</td><td>30000/1001</td><td>4:3</td></tr><tr><td>NTSC VCD</td><td>352x240</td><td>MPEG-1</td><td>1150 kbps</td><td>44100 Hz</td><td>MP2</td><td>224 kbps</td><td>24000/1001, 30000/1001</td><td>4:3</td></tr><tr><td>PAL DVD</td><td>720x576, 704x576, 352x576, 352x288</td><td>MPEG-2</td><td>9800 kbps</td><td>48000 Hz</td><td>MP2,AC-3,PCM</td><td>1536 kbps (max)</td><td>25</td><td>4:3, 16:9 (csak 720x576-nál)</td></tr><tr><td>PAL DVD</td><td>352x288<a href="menc-feat-vcd-dvd.html#ftn.fn-rare-resolutions" class="footnoteref"><sup class="footnoteref">[a]</sup></a></td><td>MPEG-1</td><td>1856 kbps</td><td>48000 Hz</td><td>MP2,AC-3,PCM</td><td>1536 kbps (max)</td><td>25</td><td>4:3, 16:9</td></tr><tr><td>PAL SVCD</td><td>480x576</td><td>MPEG-2</td><td>2600 kbps</td><td>44100 Hz</td><td>MP2</td><td>384 kbps (max)</td><td>25</td><td>4:3</td></tr><tr><td>PAL VCD</td><td>352x288</td><td>MPEG-1</td><td>1152 kbps</td><td>44100 Hz</td><td>MP2</td><td>224 kbps</td><td>25</td><td>4:3</td></tr></tbody><tbody class="footnotes"><tr><td colspan="9"><div id="ftn.fn-rare-resolutions" class="footnote"><p><a href="#fn-rare-resolutions" class="para"><sup class="para">[a] </sup></a>
+  Ezek a felbontások ritkán használatosak a DVD-ken, mert elég
+  alacsony minőségűek.</p></div></td></tr></tbody></table></div><p>
+Ha a filmednek 2.35:1 méretaránya van (a legtöbb akció film), fekete
+keretet kell hozzáadnod vagy le kell vágnod a filmet 16:9-es méretarányra
+DVD vagy VCD készítéshez.
+Ha fekete keretet adsz hozzá, próbáld meg 16 pixel-es határra igazítani
+őket a kódolási teljesítményre való hatásuk minimalizálásához.
+Szerencsére a DVD-nek eléggé magas a bitrátája, nem kell aggódnod
+túlságosan a kódolás hatékonysága miatt, de az SVCD és a VCD
+bitráta-szegény, ezért erőfeszítéseket kell tenni az elfogadható
+minőségért is.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-constraints-gop"></a>9.8.1.2. GOP méret határok</h4></div></div></div><p>
+A DVD, VCD és SVCD eléggé alacsony GOP (Group of Pictures)
+méret értékekre korlátoz le.
+Egy 30 fps-es anyagnál a legnagyobb megengedett GOP méret 18.
+25 vagy 24 fps-nél a maximum 15.
+A GOP méretét a <tt class="option">keyint</tt> opcióval lehet beállítani.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-constraints-bitrate"></a>9.8.1.3. Bitráta korlátok</h4></div></div></div><p>
+A VCD videónak CBR-esnek kell lennie 1152 kbps-en.
+Ehhez a nagyon erős megkötéshez egy extrém alacsony, 327 kilobit-es vbv
+buffer méret társul.
+Az SVCD megengedi a bitráta változtatását 2500 kbps-ig és kicsit kevésbé
+korlátozó, 917 kilobit-es vbv buffer méretet engedélyez.
+A DVD videó bitrátája bárhol lehet 9800 kbps-ig (bár az általános
+bitráták ennek felénél vannak) és a vbv buffer méret is 1835 kilobit.
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-output"></a>9.8.2. Kimeneti opciók</h3></div></div></div><p>
+A <span class="application">MEncoder</span> rendelkezik a kimeneti formátumot
+beállító kapcsolókkal.
+Ezen opciók használatával utasíthatod, hogy helyes típusú fájlt
+készítsen.
+</p><p>
+A VCD és SVCD opciókat xvcd-nek és xsvcd-nek hívják, mert kiterjesztett
+formátumúak.
+Nem teljesen kompatibilisek, főként mivel a kimenet nem tartalmaz
+scan offszet-eket.
+Ha SVCD CD képet kell készítened, add át a kimeneti fájlt a
+<a class="ulink" href="http://www.gnu.org/software/vcdimager/vcdimager.html" target="_top">vcdimager</a>-nek.
+</p><p>
+VCD:
+</p><pre class="screen">-of mpeg -mpegopts format=xvcd</pre><p>
+</p><p>
+SVCD:
+</p><pre class="screen">-of mpeg -mpegopts format=xsvcd</pre><p>
+</p><p>
+DVD (minden kockánál időbélyeggel, ha lehetséges):
+</p><pre class="screen">-of mpeg -mpegopts format=dvd:tsaf</pre><p>
+</p><p>
+DVD NTSC Pullup-pal:
+</p><pre class="screen">-of mpeg -mpegopts format=dvd:tsaf:telecine -ofps 24000/1001</pre><p>
+Ez engedélyezi a 24000/1001 fps-es progresszív tartalom 30000/1001
+fps-sel történő kódolását a DVD-előírások betartásával.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-output-aspect"></a>9.8.2.1. Képarány</h4></div></div></div><p>
+A <tt class="option">-lavcopts</tt> aspect argumentuma használható a fájl
+képarányának elkódolásához.
+Lejátszás közben a képarányt a videó megfelelő méretűre állításához
+használják.
+</p><p>
+16:9 vagy "Widescreen"
+</p><pre class="screen">-lavcopts aspect=16/9</pre><p>
+</p><p>
+4:3 vagy "Fullscreen"
+</p><pre class="screen">-lavcopts aspect=4/3</pre><p>
+</p><p>
+2.35:1 vagy "Cinemascope" NTSC
+</p><pre class="screen">-vf scale=720:368,expand=720:480 -lavcopts aspect=16/9</pre><p>
+A helyes méretarány kiszámításához használd a 854/2.35 = 368-as kibővített
+NTSC szélességet.
+</p><p>
+2.35:1 vagy "Cinemascope" PAL
+</p><pre class="screen">-vf scale=720:432,expand=720:576 -lavcopts aspect=16/9</pre><p>
+A helyes méretarány kiszámításához használd a 1024/2.35 = 432-es kibővített
+PAL szélességet.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-a-v-sync"></a>9.8.2.2. A/V szinkron megtartása</h4></div></div></div><p>
+Az audió/videó szinkronizáció kódolás közbeni megtartásához a
+<span class="application">MEncoder</span>nek el kell dobni vagy meg kell
+duplázni képkockákat. Ez jobban működik ha AVI fájlba keversz, de
+majdnem biztosan sikertelen az A/V szinkron megtartása más muxer-ekkel,
+mint pl. az MPEG. Ezért van, hogy a <tt class="option">harddup</tt> videó
+szűrőt hozzá kell csatolni a szűrőlánc végéhez ezen problémák
+elkerüléséhez.
+A <tt class="option">harddup</tt>-ról további információkat a
+<a class="link" href="menc-feat-dvd-mpeg4.html#menc-feat-dvd-mpeg4-muxing-filter-issues" title="9.1.12.1. A keverés és az A/V szinkron megbízhatóságának növelése">muxálás és az A/V szinkron megbízhatósága</a>
+című fejezetben találsz vagy a man oldalon.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-output-srate"></a>9.8.2.3. Mintavételi ráta konvertálás</h4></div></div></div><p>
+Ha az eredeti fájl audió mintavételi rátája nem ugyan olyan, mint ami
+a cél formátumban szükséges, mintavételi ráta konvertálást kell
+végrehajtani.
+Ez a <tt class="option">-srate</tt> és <tt class="option">-af lavcresample</tt>
+kapcsolók együttes használatával érhető el.
+</p><p>
+DVD:
+</p><pre class="screen">-srate 48000 -af lavcresample=48000</pre><p>
+</p><p>
+VCD és SVCD:
+</p><pre class="screen">-srate 44100 -af lavcresample=44100</pre><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-lavc"></a>9.8.3. A libavcodec használata VCD/SVCD/DVD kódoláshoz</h3></div></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-lavc-intro"></a>9.8.3.1. Bevezetés</h4></div></div></div><p>
+  A <code class="systemitem">libavcodec</code> használható
+  VCD/SVCD/DVD kompatibilis videó készítéséhez a megfelelő opciókkal.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-lavc-options"></a>9.8.3.2. lavcopts</h4></div></div></div><p>
+Következzék egy lista a <tt class="option">-lavcopts</tt>-ban használható
+mezőkről, amiknek a megváltoztatására szükséged lehet a VCD, SVCD,
+vagy DVD kompatibilis film készítésekor:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>acodec</strong></span>:
+  <tt class="option">mp2</tt> a VCD-hez, SVCD-hez vagy PAL DVD-hez;
+  <tt class="option">ac3</tt> a leggyakoribb DVD-hez.
+  PCM audió is használható DVD-hez, de legtöbbször csak helypazarlás.
+  Figyelj rá, hogy az MP3 audió ezen formátumok egyikével sem
+  kompatibilis, de a lejátszóknak gyakran semmi gondot nem okoz a
+  lejátszása.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>abitrate</strong></span>:
+  224 VCD-nél; 384-ig SVCD-nél; 1536-ig DVD-nél, de általában a használt
+  értékek a sztereónál 192 kbps-étől az 5.1 csatornás hang 384 kbps-éig
+  változnak.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vcodec</strong></span>:
+  <tt class="option">mpeg1video</tt> VCD-hez;
+  <tt class="option">mpeg2video</tt> SVCD-hez;
+  <tt class="option">mpeg2video</tt> használatos általában a DVD-hez, de lehet
+  <tt class="option">mpeg1video</tt> is a CIF felbontásokhoz.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>keyint</strong></span>:
+  A GOP méret beállításához használható.
+  18 a 30fps-es anyagé vagy 15 a 25/24 fps-esé.
+  A kereskedelmi előállítók a 12-es kulcskocka intervallumot preferálják.
+  Lehetséges ezen érték nagyobbra állítása is a legtöbb lejátszóval való
+  kompatibiliítás megtartása mellett.
+  A 25-ös <tt class="option">keyint</tt> soha nem okoz problémát.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vrc_buf_size</strong></span>:
+  327 VCD-nél, 917 SVCD-nél és 1835 DVD-nél.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vrc_minrate</strong></span>:
+  1152 VCD-nél. Elhagyható SVCD és DVD esetében.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vrc_maxrate</strong></span>:
+  1152 VCD-nél; 2500 SVCD-nél; 9800 DVD-nél.
+  SVCD-hez és DVD-hez az egyéni kívánalmaidnak és igényeidnek megfelelően
+  használhatsz magasabb értékeket is.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vbitrate</strong></span>:
+  1152 VCD-nél;
+  legfeljebb 2500 SVCD-nél;
+  legfeljebb 9800 DVD-nél.
+  Az utóbbi két formátumnál a vbitrate egyéni igények szerint állítható
+  be.
+  Például szeretnéd, hogy 20 óra vagy akörüli anyag felférjen egy
+  DVD-re, használhatod a vbitrate=400-at.
+  Az eredmény videó minősége valószínűleg elég rossz lesz.
+  Ha megpróbálod kisakkozni a lehető legjobb minőséget a DVD-n, használd
+  a vbitrate=9800-at, de emlékezz rá, hogy emiatt kevesebb, mint egy
+  órányi videód lehet egy egyrétegű DVD-n.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vstrict</strong></span>:
+  <tt class="option">vstrict</tt>=0 ajánlott DVD-k készítéséhez.
+  Ezen opció nélkül a <span class="application">MEncoder</span> egy olyan
+  folyamot készít, amit néhány asztali lejátszó nem tud helyesen
+  dekódolni.
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-lavc-examples"></a>9.8.3.3. Példák</h4></div></div></div><p>
+Általában ez a minimum <tt class="option">-lavcopts</tt> egy videó elkódolásához:
+</p><p>
+VCD:
+</p><pre class="screen">
+-lavcopts vcodec=mpeg1video:vrc_buf_size=327:vrc_minrate=1152:\
+vrc_maxrate=1152:vbitrate=1152:keyint=15:acodec=mp2
+</pre><p>
+</p><p>
+SVCD:
+</p><pre class="screen">
+-lavcopts vcodec=mpeg2video:vrc_buf_size=917:vrc_maxrate=2500:vbitrate=1800:\
+keyint=15:acodec=mp2
+</pre><p>
+</p><p>
+DVD:
+</p><pre class="screen">
+-lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:\
+keyint=15:vstrict=0:acodec=ac3
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-lavc-advanced"></a>9.8.3.4. Haladó opciók</h4></div></div></div><p>
+Jobb minőségű kódoláshoz valószínűleg használni szeretnéd a lavcopts
+minőség-javító opcióit is, mint például a <tt class="option">trell</tt>,
+<tt class="option">mbd=2</tt>, vagy mások.
+Figyelj rá, hogy a <tt class="option">qpel</tt> és a <tt class="option">v4mv</tt>
+bár gyakran hasznosak MPEG-4 esetén, nem használhatóak MPEG-1 vagy
+MPEG-2-vel. Ha nagyon jó minőségű DVD kódolást akarsz készíteni,
+hasznos lehet a <tt class="option">dc=10</tt> opció hozzáadása a lavcopts-hoz.
+Ez segíti csökkenteni a blokkosodást a színtelen részeknél. Mindezt
+összerakva, itt egy példa jó minőségű DVD készítéséhez szükséges
+lavcopts-ra:
+</p><p>
+</p><pre class="screen">
+-lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=8000:\
+keyint=15:trell:mbd=2:precmp=2:subcmp=2:cmp=2:dia=-10:predia=-10:cbp:mv0:\
+vqmin=1:lmin=1:dc=10:vstrict=0
+</pre><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-audio"></a>9.8.4. Audió kódolása</h3></div></div></div><p>
+A VCD és az SVCD támogatja az MPEG-1 layer II audiót, a
+<code class="systemitem">toolame</code>,
+<code class="systemitem">twolame</code>,
+vagy a <code class="systemitem">libavcodec</code> MP2
+kódolójának felhasználásával.
+A libavcodec MP2 messze nincs olyan jó, mint a másik két könyvtár,
+azonban az mindig elérhető és használható.
+A VCD csak konstans bitrátájú audiót (CBR) támogat, míg az SVCD
+tudja a változó bitrátát (VBR) is.
+De vigyázz a VBR-rel, mert néhány hibás asztali lejátszó sem támogatja.
+</p><p>
+A DVD audióhoz a <code class="systemitem">libavcodec</code>
+AC-3 codec-je használható.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-audio-toolame"></a>9.8.4.1. toolame</h4></div></div></div><p>
+VCD-hez és SVCD-hez:
+</p><pre class="screen">-oac toolame -toolameopts br=224</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-audio-twolame"></a>9.8.4.2. twolame</h4></div></div></div><p>
+VCD-hez és SVCD-hez:
+</p><pre class="screen">-oac twolame -twolameopts br=224</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-audio-lavc"></a>9.8.4.3. libavcodec</h4></div></div></div><p>
+DVD-hez két csatornás hanggal:
+</p><pre class="screen">-oac lavc -lavcopts acodec=ac3:abitrate=192</pre><p>
+</p><p>
+DVD-hez 5.1 csatornás hanggal:
+</p><pre class="screen">-channels 6 -oac lavc -lavcopts acodec=ac3:abitrate=384</pre><p>
+</p><p>
+VCD-hez és SVCD-hez:
+</p><pre class="screen">-oac lavc -lavcopts acodec=mp2:abitrate=224</pre><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-all"></a>9.8.5. Mindent összevetve</h3></div></div></div><p>
+Ez a rész néhány teljes parancsot mutat a VCD/SVCD/DVD kompatibilis
+videók készítéséhez.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-pal-dvd"></a>9.8.5.1. PAL DVD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=dvd:tsaf \
+  -vf scale=720:576,harddup -srate 48000 -af lavcresample=48000 \
+  -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:\
+keyint=15:vstrict=0:acodec=ac3:abitrate=192:aspect=16/9 -ofps 25 \
+  -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-ntsc-dvd"></a>9.8.5.2. NTSC DVD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=dvd:tsaf \
+  -vf scale=720:480,harddup -srate 48000 -af lavcresample=48000 \
+  -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:\
+keyint=18:vstrict=0:acodec=ac3:abitrate=192:aspect=16/9 -ofps 30000/1001 \
+  -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-pal-ac3-copy"></a>9.8.5.3. AC-3 Audiót tartalmazó PAL AVI DVD-re</h4></div></div></div><p>
+Ha a forrás már AC-3 audióval rendelkezik, használd a -oac copy kapcsolót az
+újrakódolása helyett.
+</p><pre class="screen">
+mencoder -oac copy -ovc lavc -of mpeg -mpegopts format=dvd:tsaf \
+  -vf scale=720:576,harddup -ofps 25 \
+  -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:\
+keyint=15:vstrict=0:aspect=16/9 -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-ntsc-ac3-copy"></a>9.8.5.4. AC-3 Audiót tartalmazó NTSC AVI DVD-re</h4></div></div></div><p>
+Ha a forrás már AC-3 audiót tartalmaz és NTSC @ 24000/1001 fps:
+</p><pre class="screen">
+mencoder -oac copy -ovc lavc -of mpeg -mpegopts format=dvd:tsaf:telecine \
+  -vf scale=720:480,harddup -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:\
+  vrc_maxrate=9800:vbitrate=5000:keyint=15:vstrict=0:aspect=16/9 -ofps 24000/1001 \
+  -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-pal-svcd"></a>9.8.5.5. PAL SVCD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=xsvcd -vf \
+    scale=480:576,harddup -srate 44100 -af lavcresample=44100 -lavcopts \
+    vcodec=mpeg2video:mbd=2:keyint=15:vrc_buf_size=917:vrc_minrate=600:\
+vbitrate=2500:vrc_maxrate=2500:acodec=mp2:abitrate=224:aspect=16/9 -ofps 25 \
+    -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+  </pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-ntsc-svcd"></a>9.8.5.6. NTSC SVCD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=xsvcd  -vf \
+    scale=480:480,harddup -srate 44100 -af lavcresample=44100 -lavcopts \
+    vcodec=mpeg2video:mbd=2:keyint=18:vrc_buf_size=917:vrc_minrate=600:\
+vbitrate=2500:vrc_maxrate=2500:acodec=mp2:abitrate=224:aspect=16/9 -ofps 30000/1001 \
+    -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-pal-vcd"></a>9.8.5.7. PAL VCD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=xvcd -vf \
+    scale=352:288,harddup -srate 44100 -af lavcresample=44100 -lavcopts \
+    vcodec=mpeg1video:keyint=15:vrc_buf_size=327:vrc_minrate=1152:\
+vbitrate=1152:vrc_maxrate=1152:acodec=mp2:abitrate=224:aspect=16/9 -ofps 25 \
+    -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-ntsc-vcd"></a>9.8.5.8. NTSC VCD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=xvcd -vf \
+    scale=352:240,harddup -srate 44100 -af lavcresample=44100 -lavcopts \
+    vcodec=mpeg1video:keyint=18:vrc_buf_size=327:vrc_minrate=1152:\
+vbitrate=1152:vrc_maxrate=1152:acodec=mp2:abitrate=224:aspect=16/9 -ofps 30000/1001 \
+    -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-quicktime-7.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="faq.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">9.7. <span class="application">QuickTime</span>-kompatibilis fájlok
+készítése a <span class="application">MEncoder</span> használatával </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 10. fejezet - Gyakran ismételt kérdések</td></tr></table></div></body></html>

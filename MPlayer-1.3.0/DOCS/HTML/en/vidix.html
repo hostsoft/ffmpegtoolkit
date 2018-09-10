@@ -1,0 +1,144 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.13. VIDIX</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="Chapter 4. Video output devices"><link rel="prev" href="x11.html" title="4.12. X11"><link rel="next" href="directfb.html" title="4.14. DirectFB"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="vidix.html#svgalib_helper" title="4.13.1. svgalib_helper"><link rel="subsection" href="vidix.html#vidix-ati" title="4.13.2. ATI cards"><link rel="subsection" href="vidix.html#vidix-mga" title="4.13.3. Matrox cards"><link rel="subsection" href="vidix.html#vidix-trident" title="4.13.4. Trident cards"><link rel="subsection" href="vidix.html#vidix-3dlabs" title="4.13.5. 3DLabs cards"><link rel="subsection" href="vidix.html#vidix-nvidia" title="4.13.6. nVidia cards"><link rel="subsection" href="vidix.html#vidix-sis" title="4.13.7. SiS cards"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.13. VIDIX</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="x11.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="directfb.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vidix"></a>4.13. VIDIX</h2></div></div></div><p><b>PREAMBLE. </b>
+<acronym class="acronym">VIDIX</acronym> is the abbreviation for
+<span class="bold"><strong>VID</strong></span>eo
+<span class="bold"><strong>I</strong></span>nterface
+for *ni<span class="bold"><strong>X</strong></span>.
+VIDIX was designed and introduced as an interface for fast user-space drivers
+providing such video performance as mga_vid does for Matrox cards. It's also
+very portable.
+</p><p>
+This interface was designed as an attempt to fit existing video
+acceleration interfaces (known as mga_vid, rage128_vid, radeon_vid,
+pm3_vid) into a fixed scheme. It provides a high level interface to chips
+which are known as BES (BackEnd scalers) or OV (Video Overlays). It doesn't
+provide low level interface to things which are known as graphics servers.
+(I don't want to compete with X11 team in graphics mode switching). I.e.
+main goal of this interface is to maximize the speed of video playback.
+</p><div class="itemizedlist"><p class="title"><b>USAGE</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  You can use standalone video output driver: <tt class="option">-vo xvidix</tt>.
+  This driver was developed as X11's front end to VIDIX technology. It
+  requires X server and can work only under X server. Note that, as it directly
+  accesses the hardware and circumvents the X driver, pixmaps cached in the
+  graphics card's memory may be corrupted. You can prevent this by limiting
+  the amount of video memory used by X with the XF86Config option "VideoRam"
+  in the device section. You should set this to the amount of memory installed
+  on your card minus 4MB. If you have less than 8MB of video ram, you can use
+  the option "XaaNoPixmapCache" in the screen section instead.
+</p></li><li class="listitem"><p>
+  There is a console VIDIX driver: <tt class="option">-vo cvidix</tt>.
+  This requires a working and initialized framebuffer for most cards (or else
+  you'll just mess up the screen), and you'll have a similar effect as with
+  <tt class="option">-vo mga</tt> or <tt class="option">-vo fbdev</tt>. nVidia cards however
+  are able to output truly graphical video on a real text console. See the
+  <a class="link" href="vidix.html#vidix-nvidia" title="4.13.6. nVidia cards">nvidia_vid</a> section for more information.
+  To get rid of text on the borders and the blinking cursor, try something like
+  </p><pre class="screen">setterm -cursor off &gt; /dev/tty9</pre><p>
+  (assuming <code class="systemitem">tty9</code> is unused so far) and then
+  switch to <code class="systemitem">tty9</code>.
+  On the other hand, <tt class="option">-colorkey 0</tt> should give you a video
+  running in the "background", though this depends on the colorkey
+  functionality to work right.
+  </p></li><li class="listitem"><p>
+  You can use VIDIX subdevice which was applied to several video output
+  drivers, such as: <tt class="option">-vo vesa:vidix</tt>
+  (<span class="bold"><strong>Linux only</strong></span>) and
+  <tt class="option">-vo fbdev:vidix</tt>.
+</p></li></ul></div><p>
+Indeed it doesn't matter which video output driver is used with
+<span class="bold"><strong>VIDIX</strong></span>.
+</p><div class="itemizedlist"><p class="title"><b>REQUIREMENTS</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Video card should be in graphics mode (except nVidia cards with the
+  <tt class="option">-vo cvidix</tt> output driver).
+</p></li><li class="listitem"><p>
+  <span class="application">MPlayer</span>'s video output driver should know
+  active video mode and be able to tell to VIDIX subdevice some video
+  characteristics of server.
+</p></li></ul></div><p><b>USAGE METHODS. </b>
+When VIDIX is used as <span class="bold"><strong>subdevice</strong></span> (<tt class="option">-vo
+vesa:vidix</tt>) then video mode configuration is performed by video
+output device (<span class="bold"><strong>vo_server</strong></span> in short). Therefore you can
+pass into command line of <span class="application">MPlayer</span> the same keys
+as for vo_server. In addition it understands <tt class="option">-double</tt> key
+as globally visible parameter. (I recommend using this key with VIDIX at
+least for ATI's card). As for <tt class="option">-vo xvidix</tt>, currently it
+recognizes the following options: <tt class="option">-fs -zoom -x -y -double</tt>.
+</p><p>
+Also you can specify VIDIX's driver directly as third subargument in
+command line:
+</p><pre class="screen">
+mplayer -vo xvidix:mga_vid.so -fs -zoom -double <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+or
+</p><pre class="screen">
+mplayer -vo vesa:vidix:radeon_vid.so -fs -zoom -double -bpp 32 <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+But it's dangerous, and you shouldn't do that. In this case given driver
+will be forced and result is unpredictable (it may
+<span class="bold"><strong>freeze</strong></span> your computer). You should do that
+ONLY if you are absolutely sure it will work, and
+<span class="application">MPlayer</span> doesn't do it automatically. Please tell
+about it to the developers. The right way is to use VIDIX without arguments
+to enable driver autodetection.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="svgalib_helper"></a>4.13.1. svgalib_helper</h3></div></div></div><p>
+Since VIDIX requires direct hardware access you can either run it as root
+or set the SUID bit on the <span class="application">MPlayer</span> binary
+(<span class="bold"><strong>Warning: This is a security risk!</strong></span>).
+Alternatively, you can use a special kernel module, like this:
+</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Download the
+  <a class="ulink" href="http://www.arava.co.il/matan/svgalib/" target="_top">development version</a>
+  of svgalib (1.9.x).
+</p></li><li class="step"><p>
+  Compile the module in the
+  <tt class="filename">svgalib_helper</tt> directory (it can be
+  found inside the
+  <tt class="filename">svgalib-1.9.17/kernel/</tt> directory if
+  you've downloaded the source from the svgalib site) and insmod it.
+</p></li><li class="step"><p>
+  To create the necessary devices in the
+  <tt class="filename">/dev</tt> directory, do a
+  </p><pre class="screen">make device</pre><p> in the
+  <tt class="filename">svgalib_helper</tt> dir, as root.
+</p></li><li class="step"><p>
+  Then run <tt class="filename">configure</tt> again and pass the parameter
+  <tt class="option">--enable-svgalib_helper</tt> as well as
+  <tt class="option">--extra-cflags=<em class="replaceable"><code>/path/to/svgalib_helper/sources/</code></em>kernel/svgalib_helper</tt>,
+  where <em class="replaceable"><code>/path/to/svgalib_helper/sources/</code></em> has to be
+  adjusted to wherever you extracted svgalib_helper sources.
+</p></li><li class="step"><p>
+  Recompile.
+</p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-ati"></a>4.13.2. ATI cards</h3></div></div></div><p>
+Currently most ATI cards are supported natively, from Mach64 to the
+newest Radeons.
+</p><p>
+There are two compiled binaries: <tt class="filename">radeon_vid</tt> for Radeon and
+<tt class="filename">rage128_vid</tt> for Rage 128 cards. You may force one or let
+the VIDIX system autoprobe all available drivers.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-mga"></a>4.13.3. Matrox cards</h3></div></div></div><p>
+Matrox G200, G400, G450 and G550 have been reported to work.
+</p><p>
+The driver supports video equalizers and should be nearly as fast as the
+<a class="link" href="mga_vid.html" title="4.5. Matrox framebuffer (mga_vid)">Matrox framebuffer</a>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-trident"></a>4.13.4. Trident cards</h3></div></div></div><p>
+There is a driver available for the Trident Cyberblade/i1 chipset, which
+can be found on VIA Epia motherboards.
+</p><p>
+The driver was written and is maintained by
+<a class="ulink" href="http://www.blackfiveservices.co.uk/EPIAVidix.shtml" target="_top">Alastair M. Robinson</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-3dlabs"></a>4.13.5. 3DLabs cards</h3></div></div></div><p>
+Although there is a driver for the 3DLabs GLINT R3 and Permedia3 chips, no one
+has tested it, so reports are welcome.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-nvidia"></a>4.13.6. nVidia cards</h3></div></div></div><p>
+An unique feature of the nvidia_vid driver is its ability to display video on
+<span class="bold"><strong>plain, pure, text-only console</strong></span> - with no
+framebuffer or X magic whatsoever. For this purpose, we'll have to use the
+<tt class="option">cvidix</tt> video output, as the following example shows:
+</p><pre class="screen">mplayer -vo cvidix <em class="replaceable"><code>example.avi</code></em></pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-sis"></a>4.13.7. SiS cards</h3></div></div></div><p>
+This is very experimental code, just like nvidia_vid.
+</p><p>
+It's been tested on SiS 650/651/740 (the most common chipsets used in the
+SiS versions of the "Shuttle XPC" barebones boxes out there)
+</p><p>
+Reports awaited!
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="x11.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="directfb.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4.12. X11 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4.14. DirectFB</td></tr></table></div></body></html>

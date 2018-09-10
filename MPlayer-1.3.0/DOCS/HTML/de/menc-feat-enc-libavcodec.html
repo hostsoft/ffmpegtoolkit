@@ -1,0 +1,395 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.3. Encodieren mit der libavcodec Codecfamilie</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="prev" href="menc-feat-telecine.html" title="7.2. Wie mit telecine und interlacing in NTSC-DVDs umgehen"><link rel="next" href="menc-feat-xvid.html" title="7.4. Encodieren mit dem Xvid-Codec"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-video-codecs" title="7.3.1. Videocodecs von libavcodec"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-audio-codecs" title="7.3.2. Audiocodecs von libavcodec"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-dvd-mpeg4-lavc-encoding-options" title="7.3.3. Encodieroptionen von libavcodec"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-mpeg4-lavc-example-settings" title="7.3.4. Beispiele für Encodierungseinstellungen"><link rel="subsection" href="menc-feat-enc-libavcodec.html#custommatrices" title="7.3.5. Maßgeschneiderte inter/intra-Matrizen"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-dvd-mpeg4-example" title="7.3.6. Beispiel"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.3. Encodieren mit der <code class="systemitem">libavcodec</code>
+      Codecfamilie</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-telecine.html">Zurück</a> </td><th width="60%" align="center">Kapitel 7. Encodieren mit <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-xvid.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-enc-libavcodec"></a>7.3. Encodieren mit der <code class="systemitem">libavcodec</code>
+      Codecfamilie</h2></div></div></div><p>
+      <code class="systemitem">libavcodec</code>
+      stellt einfache Encodierung für eine Menge interessanter Video- und Audioformate
+      zur Verfügung.
+      Du kannst folgende Codecs encodieren (mehr oder weniger aktuell):
+    </p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-enc-libavcodec-video-codecs"></a>7.3.1. Videocodecs von <code class="systemitem">libavcodec</code></h3></div></div></div><p>
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Name des Videocodecs</th><th>Beschreibung</th></tr></thead><tbody><tr><td>mjpeg</td><td>
+                  Motion-JPEG
+                </td></tr><tr><td>ljpeg</td><td>
+                  Verlustfreies JPEG
+                </td></tr><tr><td>jpegls</td><td>
+                  JPEG LS
+                </td></tr><tr><td>targa</td><td>
+                  Targa-Bild
+                </td></tr><tr><td>gif</td><td>
+                  GIF-Bild
+                </td></tr><tr><td>png</td><td>
+                  PNG-Bild
+                </td></tr><tr><td>bmp</td><td>
+                  BMP-Bild
+                </td></tr><tr><td>h261</td><td>
+                  H.261
+                </td></tr><tr><td>h263</td><td>
+                  H.263
+                </td></tr><tr><td>h263p</td><td>
+                  H.263+
+                </td></tr><tr><td>mpeg4</td><td>
+                  ISO Standard MPEG-4 (DivX, Xvid-kompatibel)
+                </td></tr><tr><td>msmpeg4</td><td>
+                  Pre-Standard MPEG-4 Variante von MS, v3 (AKA DivX3)
+                </td></tr><tr><td>msmpeg4v1</td><td>
+                  Pre-Standard MPEG-4 von MS, v1
+                </td></tr><tr><td>msmpeg4v2</td><td>
+                  Pre-Standard MPEG-4 von MS, v2 (in alten ASF-Dateien verwendet)
+                </td></tr><tr><td>wmv1</td><td>
+                  Windows Media Video, Version 1 (AKA WMV7)
+                </td></tr><tr><td>wmv2</td><td>
+                  Windows Media Video, Version 2 (AKA WMV8)
+                </td></tr><tr><td>rv10</td><td>
+                  RealVideo 1.0
+                </td></tr><tr><td>rv20</td><td>
+                  RealVideo 2.0
+                </td></tr><tr><td>mpeg1video</td><td>
+                  MPEG-1 Video
+                </td></tr><tr><td>mpeg2video</td><td>
+                  MPEG-2 Video
+                </td></tr><tr><td>huffyuv</td><td>
+                  Verlustfreie (lossless) Kompression
+                </td></tr><tr><td>ffvhuff</td><td>
+                  FFmpeg-modifizierter huffyuv, verlustfrei
+                </td></tr><tr><td>asv1</td><td>
+                  ASUS Video v1
+                </td></tr><tr><td>asv2</td><td>
+                  ASUS Video v2
+                </td></tr><tr><td>vcr1</td><td>
+                  ATI VCR1 codec
+                </td></tr><tr><td>ffv1</td><td>
+                  FFmpeg's verlustfreier (lossless) Videocodec
+                </td></tr><tr><td>svq1</td><td>
+                  Sorenson Video 1
+                </td></tr><tr><td>flv</td><td>
+                  Sorenson H.263, der in Flash Video benutzt wird
+                </td></tr><tr><td>flashsv</td><td>
+                  Flash Screen Video
+                </td></tr><tr><td>dvvideo</td><td>
+                  Sony Digital Video
+                </td></tr><tr><td>snow</td><td>
+                  FFmpeg's experimenteller Wavelet-basierter Codec
+                </td></tr><tr><td>zbmv</td><td>
+                  Zip Blocks Motion Video
+                </td></tr><tr><td>cljr</td><td>
+                  Cirrus Logic AccuPak Codec
+                </td></tr></tbody></table></div><p>
+
+        Die erste Spalte enthält die Codecnamen, die nach der Konfiguration
+        <code class="literal">vcodec</code> übergeben werden müssen, wie:
+        <tt class="option">-lavcopts vcodec=msmpeg4</tt>
+      </p><div class="informalexample"><p>
+          Ein Beispiel mit MJPEG-Komprimierung:
+          </p><pre class="screen">mencoder dvd://2 -o title2.avi -ovc lavc -lavcopts vcodec=mjpeg -oac copy</pre><p>
+        </p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-enc-libavcodec-audio-codecs"></a>7.3.2. Audiocodecs von <code class="systemitem">libavcodec</code></h3></div></div></div><p>
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Name des Audiocodecs</th><th>Beschreibung</th></tr></thead><tbody><tr><td>ac3</td><td>Dolby Digital (AC-3)</td></tr><tr><td>adpcm_*</td><td>Adaptive PCM-Formate - siehe begleitende Tabelle</td></tr><tr><td>flac</td><td>Free Lossless Audio Codec (FLAC)</td></tr><tr><td>g726</td><td>G.726 ADPCM</td></tr><tr><td>libamr_nb</td><td>3GPP Adaptive Multi-Rate (AMR) narrow-band</td></tr><tr><td>libamr_wb</td><td>3GPP Adaptive Multi-Rate (AMR) wide-band</td></tr><tr><td>libfaac</td><td>Advanced Audio Coding (AAC) - verwendet FAAC</td></tr><tr><td>libgsm</td><td>ETSI GSM 06.10 full rate</td></tr><tr><td>libgsm_ms</td><td>Microsoft GSM</td></tr><tr><td>libmp3lame</td><td>MPEG-1 audio layer 3 (MP3) - verwendet LAME</td></tr><tr><td>mp2</td><td>MPEG-1 Audio Layer 2</td></tr><tr><td>pcm_*</td><td>PCM-Formate - siehe begleitende Tabelle</td></tr><tr><td>roq_dpcm</td><td>Id Software RoQ DPCM</td></tr><tr><td>sonic</td><td>experimenteller verlustbehafteter FFmpeg-Codec</td></tr><tr><td>sonicls</td><td>experimenteller verlustfreier FFmpeg-Codec</td></tr><tr><td>vorbis</td><td>Vorbis</td></tr><tr><td>wma1</td><td>Windows Media Audio v1</td></tr><tr><td>wma2</td><td>Windows Media Audio v2</td></tr></tbody></table></div><p>
+
+        Die erste Spalte enthält die Codecnamen, die nach der Konfiguration
+        <code class="literal">acodec</code> übergeben werden müssen, wie:
+        <tt class="option">-lavcopts acodec=ac3</tt>
+      </p><div class="informalexample"><p>
+          Ein Beispiel mit AC3-Kompression:
+          </p><pre class="screen">mencoder dvd://2 -o title2.avi -oac lavc -lavcopts acodec=ac3 -ovc copy</pre><p>
+        </p></div><p>
+        Im Gegensatz zu den Videocodecs von <code class="systemitem">libavcodec</code>
+        machen dessen Audiocodecs keinen weisen Gebrauch von den Bits, die ihnen übergeben
+        werden, da es ihnen an einem minimalen psychoakustischen Modell fehlt (falls
+        überhaupt eins vorhanden ist), wodurch sich die meisten anderen
+        Codec-Implementierungen auszeichnen.
+        Beachte jedoch, dass all diese Audiocodecs sehr schnell sind und überall dort
+        hervorragend arbeiten, wo <span class="application">MEncoder</span> mit
+        <code class="systemitem">libavcodec</code> kompiliert wurde (was
+        meistens der Fall ist) und nicht von externen Programmbibliotheken abhängt.
+      </p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-enc-libavcodec-audio-codecs-pcmadpcm"></a>7.3.2.1. PCM/ADPCM-Format, begleitende Tabelle</h4></div></div></div><p>
+        </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>PCM/ADPCM Codecname</th><th>Beschreibung</th></tr></thead><tbody><tr><td>pcm_s32le</td><td>signed 32-bit little-endian</td></tr><tr><td>pcm_s32be</td><td>signed 32-bit big-endian</td></tr><tr><td>pcm_u32le</td><td>unsigned 32-bit little-endian</td></tr><tr><td>pcm_u32be</td><td>unsigned 32-bit big-endian</td></tr><tr><td>pcm_s24le</td><td>signed 24-bit little-endian</td></tr><tr><td>pcm_s24be</td><td>signed 24-bit big-endian</td></tr><tr><td>pcm_u24le</td><td>unsigned 24-bit little-endian</td></tr><tr><td>pcm_u24be</td><td>unsigned 24-bit big-endian</td></tr><tr><td>pcm_s16le</td><td>signed 16-bit little-endian</td></tr><tr><td>pcm_s16be</td><td>signed 16-bit big-endian</td></tr><tr><td>pcm_u16le</td><td>unsigned 16-bit little-endian</td></tr><tr><td>pcm_u16be</td><td>unsigned 16-bit big-endian</td></tr><tr><td>pcm_s8</td><td>signed 8-bit</td></tr><tr><td>pcm_u8</td><td>unsigned 8-bit</td></tr><tr><td>pcm_alaw</td><td>G.711 A-LAW </td></tr><tr><td>pcm_mulaw</td><td>G.711 μ-LAW</td></tr><tr><td>pcm_s24daud</td><td>signed 24-bit D-Cinema Audioformat</td></tr><tr><td>pcm_zork</td><td>Activision Zork Nemesis</td></tr><tr><td>adpcm_ima_qt</td><td>Apple QuickTime</td></tr><tr><td>adpcm_ima_wav</td><td>Microsoft/IBM WAVE</td></tr><tr><td>adpcm_ima_dk3</td><td>Duck DK3</td></tr><tr><td>adpcm_ima_dk4</td><td>Duck DK4</td></tr><tr><td>adpcm_ima_ws</td><td>Westwood Studios</td></tr><tr><td>adpcm_ima_smjpeg</td><td>SDL Motion JPEG</td></tr><tr><td>adpcm_ms</td><td>Microsoft</td></tr><tr><td>adpcm_4xm</td><td>4X Technologies</td></tr><tr><td>adpcm_xa</td><td>Phillips Yellow Book CD-ROM eXtended Architecture</td></tr><tr><td>adpcm_ea</td><td>Electronic Arts</td></tr><tr><td>adpcm_ct</td><td>Creative 16-&gt;4-bit</td></tr><tr><td>adpcm_swf</td><td>Adobe Shockwave Flash</td></tr><tr><td>adpcm_yamaha</td><td>Yamaha</td></tr><tr><td>adpcm_sbpro_4</td><td>Creative VOC SoundBlaster Pro 8-&gt;4-bit</td></tr><tr><td>adpcm_sbpro_3</td><td>Creative VOC SoundBlaster Pro 8-&gt;2.6-bit</td></tr><tr><td>adpcm_sbpro_2</td><td>Creative VOC SoundBlaster Pro 8-&gt;2-bit</td></tr><tr><td>adpcm_thp</td><td>Nintendo GameCube FMV THP</td></tr><tr><td>adpcm_adx</td><td>Sega/CRI ADX</td></tr></tbody></table></div><p>
+        </p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-dvd-mpeg4-lavc-encoding-options"></a>7.3.3. Encodieroptionen von libavcodec</h3></div></div></div><p>
+        Idealerweise möchtest du eventuell in der Lage sein, dem Encoder einfach zu sagen,
+        er soll in den "hochqualitativen" Modus wechseln und weiter machen.
+        Das wäre vermutlich nett, aber unglücklicherweise schwer zu implementieren, da
+        verschiedene Encodieroptionen unterschiedliche Qualitätsresultate hervorbringen,
+        abhängig vom Quellmaterial.
+        Das liegt daran, dass die Komprimierung von den visuellen Eigenschaften des fraglichen Videos abhängt.
+        Zum Beispiel haben Anime und Live-Action sehr unterschiedliche Eigenschaften und
+        benötigen aus diesm Grund verschiedene Optionen, um optimale Encodierung zu erreichen.
+        Die gute Neuigkeit ist, dass einige Optionen wie <tt class="option">mbd=2</tt>,
+        <tt class="option">trell</tt> und <tt class="option">v4mv</tt> nie ausgelassen werden sollten.
+        Siehe unten nach der detaillierten Beschreibung allgemeiner Encodieroptionen.
+      </p><div class="itemizedlist"><p class="title"><b>Anzupassende Optionen:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+            <span class="bold"><strong>vmax_b_frames</strong></span>: 1 oder 2 ist gut, abhängig vom Film.
+            Beachte, dass du, falls deine Encodierung von DivX5 decodierbar sein muss, den
+            Support für "closed GOP" aktivieren musst, indem du die
+            <code class="systemitem">libavcodec</code>-Option <tt class="option">cgop</tt>
+            verwendest, du musst jedoch Szenenerkennung deaktivieren, was wiederum keine gute
+            Idee ist, da es die Ecodierungseffizienz etwas angreift.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>vb_strategy=1</strong></span>: hilft in Szenen mit viel
+            Bewegung (high-motion).
+            Bei manchen Videos wird vmax_b_frames der Qualität schaden, vmax_b_frames=2
+            zusammen mit vb_strategy=1 hilft jedoch.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>dia</strong></span>: Bewegungssuchbereich. Größer ist besser
+            als kleiner.
+            Negative Werte sind ein komplett anderer Maßstab.
+            Gute Werte sind -1 für ein schnelle oder 2-4 für langsame Encodierung.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>predia</strong></span>: Bewegungssuche Vorabdurchlauf (pre-pass).
+            Nicht so wichtig wie dia. Gute Werte sind 1 (Standard) bis 4. Erfordert preme=2, um
+            wirklich was zu nützen.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>cmp, subcmp, precmp</strong></span>: Vergleichsfunktion zur
+            Bewegungseinschätzung.
+            Experimentiere mit Werten von 0 (Standard), 2 (hadamard), 3 (dct) und
+            6 (Ratenverzerrung).
+            0 ist am schnellsten und ausreichend für precmp.
+            Für cmp und subcmp ist 2 gut bei Anime, und 3 ist gut bei Live-Action.
+            6 kann leicht besser sein oder auch nicht, ist aber langsam.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>last_pred</strong></span>: Anzahl der Bewegungsvorhersagen, die
+            vom vorherigen Frame genommen werden sollen.
+            1-3 oder so hilft bei geringer Geschwindigkeitseinbuße.
+            Höhere Werte sind langsam bei keinerlei Zusatzgewinn.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>cbp, mv0</strong></span>: Kontrolliert die Auswahl von Macroblöcken.
+            Kleine Geschwindigkeitseinbußen bei kleinem Qualitätsgewinn.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>qprd</strong></span>: adaptive Quantisierung basierend auf der
+            Komplexität des Macroblocks.
+            Kann hilfreich sein oder schaden, abhängig vom Video und anderen Optionen.
+            Dies kann Artefakte verursachen, es sei denn, du setzt vqmax auf einen halbwegs
+            kleinen Wert (6 ist gut, vielleicht so langsam wie 4); vqmin=1 sollte ebenfalls
+            helfen.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>qns</strong></span>: sehr langsam, speziell wenn kombiniert
+            mit qprd.
+            Diese Option veranlasst den Encoder, durch Kompressionsartefakte entstandenes
+            Rauschen zu minimieren anstatt das encodierte Video strikt der Quelle anzupassen.
+            Verwende dies nicht, es sei denn du, hast bereits alles andere so weit wie möglich
+            optimiert und die Resultate sind immer noch nicht gut genug.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>vqcomp</strong></span>: Frequenzkontrolle optimieren.
+            Welche Werte gut sind, hängt vom Film ab.
+            Du kannst dies sicher so lassen wie es ist, wenn du willst.
+            Wird vqcomp verringert, werden mehr Bits auf Szenen mit geringer Komlexität
+            gelegt, wird es erhöht, legt es diese Bits auf Szenen mit hoher Komlexität
+            (Standard: 0.5, Bereich: 0-1. empfohlener Bereich: 0.5-0.7).
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>vlelim, vcelim</strong></span>: Setzt die Schwelle für die
+            Eliminierung einzelner Koeffizienten bei Helligkeits- und Farbanteilen.
+            Sie werden in allen MPEG-ähnlichen Algorithmen getrennt encodiert.
+            Die Idee hinter diesen Optionen ist, einige gute Heuristiken zu verwenden,
+            um zu bestimmen, wenn ein Wechsel innerhalb eines Blocks kleiner als der
+            der von dir festgelegte Schwellenwert ist und in solch einem Fall den
+            Block einfach so zu encodieren als fände "kein Wechsel" statt.
+            Das spart Bits und beschleunigt womöglich die Encodierunng. vlelim=-4 und vcelim=9
+            scheinen gut für Live-Filme zu sein, helfen aber scheinbar nicht bei Anime;
+            beim Encodieren einer Animation solltest du sie womöglich unverändert lassen.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>qpel</strong></span>: Bewegungsabschätzung auf ein viertel
+            Pixel (quarter pel).
+            MPEG-4 verwendet als Voreinstellung eine Halbpixel-Genauigkeit für die Bewegungssuche,
+            deswegen hat diese Option einen Overhead, da mehr Informationen in der
+            encodierte Datei untergebracht werden.
+            Der Kompressionsgewinn/-verlust hängt vom Film ab, ist aber in der Regel nicht
+            sonderlich effektiv bei Anime.
+            qpel zieht immer eine signifikante Erhöhung der CPU-Decodierzeit nach
+            sich (+25% in der Praxis).
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>psnr</strong></span>: wirkt sich eigentlich nicht auf
+            das Encodieren aus, schreibt jedoch eine Log-Datei mit Typ/Größe/Qualität
+            jedes Frames und gibt am Ende die Summe des PSNR Signal-zu-Rauschabstands
+            (Peak Signal to Noise Ratio) aus.
+          </p></li></ul></div><div class="itemizedlist"><p class="title"><b>Optionen, mit denen besser nicht herumgespielt werden sollte:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+            <span class="bold"><strong>vme</strong></span>: Der Standardwert ist der beste.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>lumi_mask, dark_mask</strong></span>: Psychovisuell adaptive
+            Quantisierung.
+            Du solltest nicht im Traum daran denken, mit diesen Optionen herumzuspielen,
+            wenn dir Qualität wichtig ist.
+            Vernünftige Werte mögen in deinem Fall effektiv sein, aber sei gewarnt,
+            dies ist sehr subjektiv.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>scplx_mask</strong></span>: Versucht, Blockartefakte
+            zu verhindern, Postprocessing ist aber besser.
+          </p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-mpeg4-lavc-example-settings"></a>7.3.4. Beispiele für Encodierungseinstellungen</h3></div></div></div><p>
+        Die folgenden Einstellungen sind Beispiele verschiedener Kombinationen
+        von Encodierungsoptionen, die den Kompromiss Geschwindigkeit gegenüber
+        Qualität bei gleicher Zielbitrate beeinflussen.
+      </p><p>
+        Alle Encodierungseinstellungen wurden auf einem Beispielvideo
+        mit 720x448 @30000/1001 fps getestet, die Zielbitrate war 900kbps und
+        der Rechner war ein AMD-64 3400+ mit 2400 MHz im 64bit-Modus.
+        Jede Encodiereinstellung zeichnet sich aus durch die gemessene
+        Encodiergeschwindigkeit (in Frames pro Sekunde) und den PSNR-Verlust
+        (in dB) im Vergleich zu Einstellungen für "sehr hohe Qualität".
+        Bitte habe Verständnis, dass du abhängig von deiner Quelldatei,
+        deinem Rechnertyp und Entwicklungsfortschritten sehr unterschiedliche
+        Resultate erzielen wirst.
+      </p><p>
+        </p><div class="informaltable"><table border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Beschreibung</th><th>Encodieroptionen</th><th>Geschwindigkeit (in fps)</th><th>Relativer PSNR-Verlust (in dB)</th></tr></thead><tbody><tr><td>Sehr hohe Qualität</td><td><tt class="option">vcodec=mpeg4:mbd=2:mv0:trell:v4mv:cbp:last_pred=3:predia=2:dia=2:vmax_b_frames=2:vb_strategy=1:precmp=2:cmp=2:subcmp=2:preme=2:qns=2</tt></td><td>6fps</td><td>0dB</td></tr><tr><td>Hohe Qualität</td><td><tt class="option">vcodec=mpeg4:mbd=2:trell:v4mv:last_pred=2:dia=-1:vmax_b_frames=2:vb_strategy=1:cmp=3:subcmp=3:precmp=0:vqcomp=0.6:turbo</tt></td><td>15fps</td><td>-0.5dB</td></tr><tr><td>Schnell</td><td><tt class="option">vcodec=mpeg4:mbd=2:trell:v4mv:turbo</tt></td><td>42fps</td><td>-0.74dB</td></tr><tr><td>Echtzeit</td><td><tt class="option">vcodec=mpeg4:mbd=2:turbo</tt></td><td>54fps</td><td>-1.21dB</td></tr></tbody></table></div><p>
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="custommatrices"></a>7.3.5. Maßgeschneiderte inter/intra-Matrizen</h3></div></div></div><p>
+        Mit diesem Feature von <code class="systemitem">libavcodec</code>
+        bist du in der Lage, eigene inter- (I-Frames/Keyframes) und intra-Matrizen
+        (P-Frames/predicted Frames) zu setzen. Es wird von vielen Codecs unterstützt:
+        <code class="systemitem">mpeg1video</code> und <code class="systemitem">mpeg2video</code>
+        sollen damit funktionieren.
+      </p><p>
+        Eine typische Anwendung dieses Features ist, die von den
+        <a class="ulink" href="http://www.kvcd.net/" target="_top">KVCD</a>-Specifikationen
+        bevorzugten Matrizen zu setzen.
+      </p><p>
+        Die <span class="bold"><strong>KVCD "Notch" Quantisierungsmatrix:</strong></span>
+      </p><p>
+        Intra:
+</p><pre class="screen">8  9 12 22 26 27 29 34
+9 10 14 26 27 29 34 37
+12 14 18 27 29 34 37 38
+22 26 27 31 36 37 38 40
+26 27 29 36 39 38 40 48
+27 29 34 37 38 40 48 58
+29 34 37 38 40 48 58 69
+34 37 38 40 48 58 69 79</pre><p>
+
+        Inter:
+</p><pre class="screen">16 18 20 22 24 26 28 30
+18 20 22 24 26 28 30 32
+20 22 24 26 28 30 32 34
+22 24 26 30 32 32 34 36
+24 26 28 32 34 34 36 38
+26 28 30 32 34 36 38 40
+28 30 32 34 36 38 42 42
+30 32 34 36 38 40 42 44</pre><p>
+      </p><p>
+        Anwendung:
+        </p><pre class="screen">$ mencoder <em class="replaceable"><code>input.avi</code></em> -o <em class="replaceable"><code>output.avi</code></em> -oac copy -ovc lavc -lavcopts inter_matrix=...:intra_matrix=... </pre><p>
+      </p><p>
+</p><pre class="screen">$ mencoder <em class="replaceable"><code>input.avi</code></em> -ovc lavc -lavcopts
+vcodec=mpeg2video:intra_matrix=8,9,12,22,26,27,29,34,9,10,14,26,27,29,34,37,
+12,14,18,27,29,34,37,38,22,26,27,31,36,37,38,40,26,27,29,36,39,38,40,48,27,
+29,34,37,38,40,48,58,29,34,37,38,40,48,58,69,34,37,38,40,48,58,69,79
+:inter_matrix=16,18,20,22,24,26,28,30,18,20,22,24,26,28,30,32,20,22,24,26,
+28,30,32,34,22,24,26,30,32,32,34,36,24,26,28,32,34,34,36,38,26,28,30,32,34,
+36,38,40,28,30,32,34,36,38,42,42,30,32,34,36,38,40,42,44 -oac copy -o svcd.mpg</pre><p>
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-dvd-mpeg4-example"></a>7.3.6. Beispiel</h3></div></div></div><p>
+        Jetzt hast du gerade eben deine brandneue Kopie von Harry Potter und die
+        Kammer des Schreckens gekauft (natürlich die Breitbildedition), und du
+        willst diese DVD so rippen, dass du sie deinem Home Theatre PC hinzufügen
+        kannst. Dies ist eine Region-1-DVD, also ist sie NTSC. Das unten stehende
+        Beispiel wird auch auf PAL zutreffen, nur dass du
+        <tt class="option">-ofps 24000/1001</tt> weglässt (weil die Ausgabeframerate die
+        gleiche ist wie die Eingabeframerate), und logischerweise werden die
+        Ausschnittsabmessungen anders sein.
+      </p><p>
+        Nach dem Start von <tt class="option">mplayer dvd://1</tt>, verfolgen wir den
+        detailliert in der Sektion <a class="link" href="menc-feat-telecine.html" title="7.2. Wie mit telecine und interlacing in NTSC-DVDs umgehen">Wie mit telecine
+          und interlacing in NTSC-DVDs umgehen</a> beschriebenen Prozess und
+        entdecken, dass es progressive Video mit 24000/1001 fps ist, was bedeutet, dass
+        wir keinen inverse telecine-Filter wie <tt class="option">pullup</tt> oder
+        <tt class="option">filmdint</tt> anwenden müssen.
+      </p><p><a name="menc-feat-dvd-mpeg4-example-crop"></a>
+        Als Nächstes wollen wir das passende Ausschnittsrechteck bestimmen, also
+        verwenden wir den cropdetect-Filter:
+
+        </p><pre class="screen">mplayer dvd://1 -vf cropdetect</pre><p>
+
+        Stelle sicher, dass du einen voll gefüllten Frame anstrebst (wie zum
+        Beispiel eine helle Szene, nach den Eröffnungs-Credits und Filmlogos),
+        und dass du diese Ausgabe in <span class="application">MPlayer</span>s Konsole siehst:
+
+        </p><pre class="screen">crop area: X: 0..719  Y: 57..419  (-vf crop=720:362:0:58)</pre><p>
+
+        Wir spielen den Film dann mit diesem Filter ab, um seine Korrektheit zu testen:
+
+        </p><pre class="screen">mplayer dvd://1 -vf crop=720:362:0:58</pre><p>
+
+        Und wir sehen, dass er einfach perfekt aussieht. Als Nächstes vergewissern wir
+        uns, dass Breite und Höhe ein Vielfaches von 16 sind. Die Breite ist gut,
+        aber die Höhe ist es nicht. Da wir in der 7-ten Klasse in Mathe nicht gefehlt
+        haben, wissen wir, dass das am nähesten liegende Vielfache von 16 kleiner
+        als 362 der Wert 352 ist (Taschenrechner ist erlaubt).
+      </p><p>
+        Wir könnten einfach <tt class="option">crop=720:352:0:58</tt> verwenden, aber es wäre
+        nett, ein bisschen von oben und ein bisschen von unten wegzunehmen, sodass
+        wir zentriert bleiben. Wir haben die Höhe um 10 Pixel schrumpfen lassen, aber
+        wir wollen das y-Offset nicht um 5 Pixel erhöhen, da dies eine ungerade Zahl
+        ist und die Qualität nachteilig beeinflussen würde. Statt dessen werden wir
+        das y-Offset um 4 Pixel erhöhen:
+
+        </p><pre class="screen">mplayer dvd://1 -vf crop=720:352:0:62</pre><p>
+
+        Ein anderer Grund, Pixel von beidem - oben und unten - abzuschnipseln ist,
+        dass wir sicher gehen wollen, jegliches halbschwarze Pixel eliminiert zu
+        haben, falls welche existieren. Beachte, falls das Video telecined
+        ist, stelle sicher, dass der <tt class="option">pullup</tt>-Filter (oder für
+        welchen umgekehrten telecine-Filter auch immer du dich entschieden hast)
+        in der Filterkette auftaucht, bevor du zuschneidest. Ist es interlaced,
+        deinterlace es vor dem Zuschneiden.
+        (Wenn du dich entscheidest, interlaced Video beizubehalten, dann vergewissere dich, dass
+        das vertikale crop-Offset ein Vielfaches von 4 ist.)
+      </p><p>
+        Wenn du wirklich besorgt um den Verlust dieser 10 Pixel bist, ziehst du
+        statt dessen etwa das Herunterskalieren der Abmessungen auf das am nächsten
+        liegende Vielfache von 16 vor.
+        Die Filterkette würde dann etwa so aussehen:
+
+        </p><pre class="screen">-vf crop=720:362:0:58,scale=720:352</pre><p>
+
+        Das Video auf diese Art herunter zu skalieren wird bedeuten, dass eine
+        kleine Menge Details verloren geht, obwohl es vermutlich nicht wahrnehmbar
+        sein wird. Hoch zu skalieren führt zu niedrigerer Qualität (es sei denn,
+        du erhöhst die Bitrate). Ausschneiden sondert sämtliche dieser Pixel
+        aus. Es ist ein Kompromiss, den du unter allen Umständen
+        in Betracht ziehen solltest. Zum Beispiel, wenn das DVD-Video für das Fernsehen
+        hergestellt wurde, solltest du vertikales Skalieren vermeiden, da das
+        Zeilensampling mit der Art und Weise korrespondiert, für die der Inhalt
+        ursprünglich aufgenommen wurde.
+      </p><p>
+        Bei der Überprüfung sehen wir, dass unser Film ordentlich Action enthält
+        und sehr viele Details, also wählen wir 2400Kbit für unsere Bitrate.
+      </p><p>
+        Wir sind nun bereit, die 2-pass Encodierung durchzuführen. Erster Durchlauf:
+
+</p><pre class="screen">mencoder dvd://1 -ofps 24000/1001 -oac copy -vf pullup,softskip,crop=720:352:0:62,hqdn3d=2:1:2 -ovc lavc \
+  -lavcopts vcodec=mpeg4:vbitrate=2400:v4mv:mbd=2:trell:cmp=3:subcmp=3:mbcmp=3:autoaspect:vpass=1 \
+  -o Harry_Potter_2.avi</pre><p>
+
+        Und der zweite Durchlauf ist derselbe, außer dass wir <tt class="option">vpass=2</tt>
+        festlegen:
+
+</p><pre class="screen">mencoder dvd://1 -ofps 24000/1001 -oac copy -vf pullup,softskip,crop=720:352:0:62,hqdn3d=2:1:2 -ovc lavc \
+  -lavcopts vcodec=mpeg4:vbitrate=2400:v4mv:mbd=2:trell:cmp=3:subcmp=3:mbcmp=3:autoaspect:vpass=2 \
+  -o Harry_Potter_2.avi</pre><p>
+      </p><p>
+        Die Optionen <tt class="option">v4mv:mbd=2:trell</tt> werden die Qualität
+        außerordentlich erhöhen, auf Kosten der Encodierdauer. Es gibt
+        einen kleinen Grund, diese Optionen auszulassen, wenn das Primärziel
+        die Qualität ist. Die Optionen
+        <tt class="option">cmp=3:subcmp=3:mbcmp=3</tt> wählen eine Vergleichsfunktion,
+        die eine höhere Qualität liefert als die Standardeinstellungen.
+        Du darfst mit diesem Parameter rumexperimentieren (ziehe die Manpage
+        zu möglichen Werten zu Rate) da verschiedene Funktionen abhängig vom
+        Quellmaterial einen starken Einfluss auf die Qualität haben. Wenn du zum Beispiel
+        meinst, dass <code class="systemitem">libavcodec</code> zu
+        viele Blockartefakte produziert, könntest du ja das experimentelle
+        NSSE als Vergleichsfunktion via <tt class="option">*cmp=10</tt> wählen.
+      </p><p>
+        Für diesen Film wird das resultierende AVI 138 Minuten lang und nahezu
+        3GB groß sein. Und weil du erzählt hast, dass eine große Datei nichts
+        ausmacht, ist dies eine perfekt akzeptierbare Größe. Wolltest du sie aber
+        kleiner haben, könntest du eine niedrigere Bitrate hernehmen. Erhöhte
+        Bitraten haben verminderte Rückgaben, während wir also deutlich eine
+        Verbesserung von 1800Kbit nach 2000Kbit sehen, ist es oberhalb 2000Kbit
+        nicht so auffällig. Fühl dich frei solange herum zu experimentieren bis
+        du glücklich bist.
+      </p><p>
+        Weil wir das Quellvideo durch einen Denoise-Filter geschickt haben,
+        könntest du einige davon während des Playbacks wieder hinzufügen wollen.
+        Dies zusammen mit dem Nachbearbeitungsfilter <tt class="option">spp</tt>
+        verbessert die Wahrnehmung der Qualität drastisch und hilft dabei,
+        blockhafte Artefakte aus dem Video zu eliminieren.
+        Mit <span class="application">MPlayer</span>s Option <tt class="option">autoq</tt>
+        kannst du den Nachbearbeitungsaufwand des spp-Filters abhängig von der
+        verfügbaren CPU variieren. An dieser Stelle kannst du auch Gamma- und/oder
+        Farbkorrektur zur besten Anpassung an dein Display verwenden, wenn du willst.
+        Zum Beispiel:
+
+        </p><pre class="screen">mplayer Harry_Potter_2.avi -vf spp,noise=9ah:5ah,eq2=1.2 -autoq 3</pre><p>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-telecine.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-xvid.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">7.2. Wie mit telecine und interlacing in NTSC-DVDs umgehen </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 7.4. Encodieren mit dem <code class="systemitem">Xvid</code>-Codec</td></tr></table></div></body></html>

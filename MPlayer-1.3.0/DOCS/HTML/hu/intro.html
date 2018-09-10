@@ -1,0 +1,82 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>1. fejezet - Bevezetés</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="index.html" title="MPlayer - The Movie Player"><link rel="prev" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="next" href="install.html" title="2. fejezet - Telepítés"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">1. fejezet - Bevezetés</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="howtoread.html">Vissza</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="install.html">Előre</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="intro"></a>1. fejezet - Bevezetés</h1></div></div></div><p>
+Az <span class="application">MPlayer</span> egy Linuxon működő videolejátszó (fut
+számos más Unix-on és nem-x86 processzorokon is, lásd <a class="xref" href="ports.html" title="7. fejezet - Portok">Ports</a>).
+Le tudja játszani a legtöbb MPEG, VOB, AVI, Ogg/OGM, VIVO, ASF/WMA/WMV, QT/MOV/MP4,
+FLI, RM, NuppelVideo, yuv4mpeg, FILM, RoQ, PVA, és Matroska file-t, és ezekhez
+felsorakoztat jónéhány natív, XAnim, RealPlayer és Win32 DLL codecet. Nézhetsz vele
+Video CD-t, SVCD-t, DVD-t, 3ivx, RealMedia, Sorenson, Theora
+és MPEG-4 (DivX) filmet is. Az <span class="application">MPlayer</span>
+másik nagy előnye a megjelenítési módok széles választékában rejlik.
+Működik X11, Xv, DGA, OpenGL, SVGAlib,
+fbdev, AAlib, libcaca, DirectFB, sőt SDL-lel vagy GGI-vel is (beleértve ezáltal
+az SDL/GGI drivereit is), és néhány alacsony szintű kártyaspecifikus vezérlő
+(Matrox, 3dfx, Radeon, Mach64, Permedia3) is használható!
+Legtöbbjük támogat szoftveres vagy hardveres nagyítást, így a teljesképernyős
+mód is elérhető. Az <span class="application">MPlayer</span> támogat továbbá hardveres
+MPEG kártyákkal történő dekódolást/megjelenítést, így például a
+<a class="link" href="mpeg_decoders.html#dvb" title="6.16.1. DVB kimenet és bemenet">DVB</a> és <a class="link" href="mpeg_decoders.html#dxr3" title="6.16.3. DXR3/Hollywood+">DXR3/Hollywood+</a>
+kártyákon!
+És még nem is szóltam a szép, élsímított, árnyékolt feliratozásról
+(14 támogatott típus!), ami támogat európai/ISO-88592-1,2 (magyar, angol, cseh,
+stb), cirill és koreai fontokat, valamint az OSD-ről!
+</p><p>
+A lejátszó sziklaszilárdan játszik le hibás MPEG file-okat (hasznos néhány
+VCD-nél), és minden olyan hibás AVI-t, amit a csodás
+<span class="application">Windows Media Player</span> nem.
+Még az index chunk nélküli AVI-k is lejátszhatók, sőt az indexet ideiglenesen
+fel is lehet építeni az <tt class="option">-idx</tt> opcióval (vagy véglegesen a
+<span class="application">MEncoder</span>rel), így tekerni is lehet bennük! Amint
+az látszik, a stabilitás és a minőség a legfontosabb szempontok, de a sebesség
+terén sem szenved hátrányt. Valamint rendelkezik egy szűrő rendszerrel is a
+videó-audió szerkesztéshez.
+</p><p>
+A <span class="application">MEncoder</span> (<span class="application">MPlayer's</span> Movie
+Encoder) egy egyszerű film kódoló, az <span class="application">MPlayer</span> által
+ismert formátumok
+(AVI/ASF/OGG/DVD/VCD/VOB/MPG/MOV/VIV/FLI/RM/NUV/NET/PVA)
+más <span class="application">MPlayer</span> által lejátszható formátumokba való
+átalakításához (lásd lejjebb).
+Sokféle codec-kel tud kódolni, például MPEG-4-gyel (DivX4)
+(egy vagy két menetes), a <code class="systemitem">libavcodec</code>-et
+alkotó codec-ekkel, audiót tekintve pedig PCM/MP3/VBR MP3 a választék.
+</p><div class="itemizedlist"><p class="title"><b>Az <span class="application">MEncoder</span> előnyei</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Az <span class="application">MPlayer</span> által támogatott
+  összes formátumból lehet kódolni
+</p></li><li class="listitem"><p>
+  Az FFmpeg <code class="systemitem">libavcodec</code>
+  által támogatott összes formátumba tud tömöríteni
+</p></li><li class="listitem"><p>
+  Videó grabbelés V4L kompatibilis TV tunerekről
+</p></li><li class="listitem"><p>
+  Helyes index-szel rendelkező AVI fájlok kódolása/multiplexelése
+</p></li><li class="listitem"><p>
+  Opcionálisan külső audio stream használata
+</p></li><li class="listitem"><p>
+  1, 2 vagy 3 menetes kódolás
+</p></li><li class="listitem"><p>
+  VBR MP3 audió
+  </p><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Fontos</h3><p>
+  a VBR-es MP3-akat nem minden Windows rendszerre elérhető lejátszó kezeli helyesen!
+  </p></div><p>
+</p></li><li class="listitem"><p>
+  PCM audió
+</p></li><li class="listitem"><p>
+  Stream másolás
+</p></li><li class="listitem"><p>
+  Bemeneti file A/V szinkronizálása (pts-alapú, az
+  <tt class="option">-mc 0</tt> opcióval kikapcsolható)
+</p></li><li class="listitem"><p>
+  fps javítás az <tt class="option">-ofps</tt> opcióval (hasznos ha
+  30000/1001 fps-es VOB-ot kódolsz 24000/1001 fps-es AVI-ba)
+</p></li><li class="listitem"><p>
+  Roppant jó szűrő rendszer használata (crop, expand, flip, postprocess,
+  rotate, scale, RGB/YUV konverzió)
+</p></li><li class="listitem"><p>
+  A kimeneti fájlba bele tudja kódolni mind a DVD/VOBsub, mind a
+  szöveges feliratokat
+</p></li><li class="listitem"><p>
+  DVD feliratok külső VOBsub fájlba történő rippelése
+</p></li></ul></div><p>
+Az <span class="application">MPlayer</span> és <span class="application">MEncoder</span>
+a GNU General Public License v2 értelmében terjeszthető.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="howtoread.html">Vissza</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="install.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">Hogyan olvasd ezt a dokumentációt </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 2. fejezet - Telepítés</td></tr></table></div></body></html>

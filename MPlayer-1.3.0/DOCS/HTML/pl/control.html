@@ -1,0 +1,87 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.3. Sterowanie</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="prev" href="subosd.html" title="3.2. Napisy i OSD"><link rel="next" href="streaming.html" title="3.4. Strumieniowanie z sieci i potoków"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="subsection" href="control.html#ctrl-cfg" title="3.3.1. Konfiguracja sterowania"><link rel="subsection" href="control.html#lirc" title="3.3.2. Sterowanie poprzez LIRC"><link rel="subsection" href="control.html#slave-mode" title="3.3.3. Tryb sługi"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.3. Sterowanie</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="subosd.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 3. Sposób użycia</th><td width="20%" align="right"> <a accesskey="n" href="streaming.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="control"></a>3.3. Sterowanie</h2></div></div></div><p>
+<span class="application">MPlayer</span> posiada w pełni konfigurowalną, opartą na
+komendach warstwę sterowania, która pozwala na sterowanie
+<span class="application">MPlayerem</span> za pomocą klawiatury, myszki, joysticka lub
+zdalnego sterowania (za pomocą LIRC). Zajrzyj na stronę man w celu przejrzenia
+pełnej listy skrótów klawiszowych.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ctrl-cfg"></a>3.3.1. Konfiguracja sterowania</h3></div></div></div><p>
+<span class="application">MPlayer</span> pozwala Ci przypisać dowolny klawisz/przycisk
+do dowolnego polecenia za pomocą prostego pliku konfiguracyjnego. Składnia tego
+pliku to nazwa klawisza, po której znajduje się komenda. Domyślny plik
+konfiguracyjny znajduje się w <tt class="filename">$HOME/.mplayer/input.conf</tt>, ale
+można podać także inny za pomocą opcji
+<tt class="option">-input <em class="replaceable"><code>plik</code></em></tt>
+(ścieżki względne są względem <tt class="filename">$HOME/.mplayer</tt>).
+</p><p>
+Możesz uzyskać pełną listę obsługiwanych klawiszy uruchamiając
+<span class="command"><strong>mplayer -input keylist</strong></span>
+i pełną listę dostępnych komend za pomocą
+<span class="command"><strong>mplayer -input cmdlist</strong></span>.
+</p><div class="example"><a name="input_control_file"></a><p class="title"><b>Przykład 3.1. Przykładowy plik konfiguracji sterowania</b></p><div class="example-contents"><pre class="programlisting">
+##
+## Plik konfiguracji sterowania MPlayera
+##
+
+RIGHT seek +10
+LEFT seek -10
+- audio_delay 0.100
++ audio_delay -0.100
+q quit
+&gt; pt_step 1
+&lt; pt_step -1
+ENTER pt_step 1 1</pre></div></div><br class="example-break"></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="lirc"></a>3.3.2. Sterowanie poprzez LIRC</h3></div></div></div><p>
+Linux Infrared Remote Control - użyj łatwego do własnoręcznego zbudowania
+odbiornika podczerwieni i (prawie) dowolnego pilota zdalnego sterowania i
+steruj nim swoim Linuksem!
+Więcej informacji na <a class="ulink" href="http://www.lirc.org" target="_top">stronie domowej LIRC</a>.
+</p><p>
+Jeśli zainstalowałeś pakiet LIRC, <tt class="filename">configure</tt> automatycznie go
+wykryje. Jeśli wszystko pójdzie dobrze, <span class="application">MPlayer</span>
+wypisze przy starcie "<code class="systemitem">Setting up LIRC support...</code>".
+Jeśli wystąpi błąd, powiadomi Cię o tym. Jeśli nic nie powie Ci na
+temat LIRC, to znaczy, że jego obsługa nie została wkompilowana. Proste :-)
+</p><p>
+Nazwa aplikacji dla <span class="application">MPlayer</span> to - niespodzianka -
+<tt class="filename">mplayer</tt>. Możesz używać dowolnych komend
+<span class="application">MPlayera</span>, a nawet podać więcej niż jedną
+komendę na raz oddzielając je za pomocą <code class="literal">\n</code>.
+Nie zapomnij o włączeniu flagi repeat w <tt class="filename">.lircrc</tt> jeśli
+ma to sens (skoki, głośność itp). To jest fragment przykładowego
+<tt class="filename">.lircrc</tt>:
+</p><pre class="programlisting">
+begin
+     button = VOLUME_PLUS
+     prog = mplayer
+     config = volume 1
+     repeat = 1
+end
+
+begin
+    button = VOLUME_MINUS
+    prog = mplayer
+    config = volume -1
+    repeat = 1
+end
+
+begin
+    button = CD_PLAY
+    prog = mplayer
+    config = pause
+end
+
+begin
+    button = CD_STOP
+    prog = mplayer
+    config = seek 0 1\npause
+end</pre><p>
+Jeśli nie lubisz standardowej lokalizacji pliku lirc-config
+(<tt class="filename">~/.lircrc</tt>), użyj opcji <tt class="option">-lircconf
+<em class="replaceable"><code>nazwa_pliku</code></em></tt> by podać inny plik.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="slave-mode"></a>3.3.3. Tryb sługi</h3></div></div></div><p>
+Tryb sługi pozwala Ci na utworzenie prostej nakładki na
+<span class="application">MPlayera</span>. Po uruchomieniu z opcją
+<tt class="option">-slave</tt> <span class="application">MPlayer</span> będzie czytał
+ze standardowego wejścia komendy oddzielone znakami nowego wiersza (\n).
+Komendy zostały udokumentowane w pliku
+<a class="ulink" href="../../tech/slave.txt" target="_top">slave.txt</a>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="subosd.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="streaming.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">3.2. Napisy i OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 3.4. Strumieniowanie z sieci i potoków</td></tr></table></div></body></html>

@@ -1,0 +1,92 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.4. GUI üzenetek</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="prev" href="skin-fonts.html" title="B.3. Betűk"><link rel="next" href="skin-quality.html" title="B.5. Minőségi skin-ek készítése"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.4. GUI üzenetek</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-fonts.html">Vissza</a> </td><th width="60%" align="center">B. függelék - <span class="application">MPlayer</span> skin formátum</th><td width="20%" align="right"> <a accesskey="n" href="skin-quality.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-gui"></a>B.4. GUI üzenetek</h2></div></div></div><p>
+Az alábbi üzeneteket generálják a gombok, potméterek és menüpontok.
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evNone</strong></span></span></dt><dd><p>
+  Üres üzenet, nincs hatása (kivéve talán a Subversion verziót :-)).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Lejátszás vezérlése:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evPlay</strong></span></span></dt><dd><p>
+  Lejátszás elindítása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evStop</strong></span></span></dt><dd><p>
+  Lejátszás megállítása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPause</strong></span></span></dt><dd><p>
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPrev</strong></span></span></dt><dd><p>
+  Az előző sávra ugrik a lejátszási listában.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evNext</strong></span></span></dt><dd><p>
+  ugrás a következő sávra a lejátszási listában.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoad</strong></span></span></dt><dd><p>
+  Fájl betöltése (a fájl böngésző ablak megnyitásával, ahol kiválaszthatod a fájlt).
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoadPlay</strong></span></span></dt><dd><p>
+  Ugyan azt csinálja, mint az <code class="literal">evLoad</code>, de automatikusan elkezdi
+  lejátszani a fájlt, miután betöltötte.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoadAudioFile</strong></span></span></dt><dd><p>
+  Audió fájl betöltése (a fájl választóval)
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoadSubtitle</strong></span></span></dt><dd><p>
+  Felirat fájl betöltése (a fájl választóval)
+  </p></dd><dt><span class="term"><span class="bold"><strong>evDropSubtitle</strong></span></span></dt><dd><p>
+  Aktuálisan használt felirat letiltása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPlaylist</strong></span></span></dt><dd><p>
+  Lejátszási lista ablak megnyitása/becsukása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPlayVCD</strong></span></span></dt><dd><p>
+  Megpróbálja megnyitni az adott CD-ROM meghajtóban lévő lemezt.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPlayDVD</strong></span></span></dt><dd><p>
+  Megpróbálja megnyitni az adott DVD-ROM meghajtóban lévő lemezt.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoadURL</strong></span></span></dt><dd><p>
+  Megjeleníti az URL dialógus ablakot.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPlaySwitchToPause</strong></span></span></dt><dd><p>
+  Az <code class="literal">evPauseSwitchToPlay</code> ellentéte. Ez az üzenet elkezdi a
+  lejátszást és megjelenteti az <code class="literal">evPauseSwitchToPlay</code> gomb
+  képét (jelezve ezzel, hogy a gombot meg lehet nyomni a lejátszás megállításához).
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPauseSwitchToPlay</strong></span></span></dt><dd><p>
+  Párt alkot az <code class="literal">evPlaySwitchToPause</code>-val. Egy általános
+  lejátszás/szünet gomb készítéséhez használhatóak fel. Mind a két üzenetet
+  egy olyan gombhoz kell hozzárendelni, ami teljesen ugyan ott jelenik meg az
+  ablakban. Ez az üzenet megállítja a lejátszást és megjelenteti az
+  <code class="literal">evPlaySwitchToPause</code> gombhoz tartozó képet (jelezve
+  ezzel, hogy a gombot meg lehet nyomni a lejátszás folytatásához).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Seeking:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evBackward10sec</strong></span></span></dt><dd><p>
+  Visszalépés 10 másodperccel.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evBackward1min</strong></span></span></dt><dd><p>
+  Visszalépés 1 perccel.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evBackward10min</strong></span></span></dt><dd><p>
+  Visszalépés 10 perccel.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evForward10sec</strong></span></span></dt><dd><p>
+  Előrelépés 10 másodperccel.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evForward1min</strong></span></span></dt><dd><p>
+  Előrelépés 1 perccel.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evForward10min</strong></span></span></dt><dd><p>
+  Előrelépés 10 perccel.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSetMoviePosition</strong></span></span></dt><dd><p>
+  Ugrás a pozícióhoz (potméter tudja használni; a
+  potméter relatív értékét (0-100%) használja).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Videó vezérlés:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evHalfSize</strong></span></span></dt><dd><p>
+  Film ablak méretének felezése.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evDoubleSize</strong></span></span></dt><dd><p>
+  Film ablak méretének duplázása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evFullScreen</strong></span></span></dt><dd><p>
+  Teljes képernyős mód be-/kikapcsolása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evNormalSize</strong></span></span></dt><dd><p>
+  Film ablak normál méretének beállítása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSetAspect</strong></span></span></dt><dd><p>
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Audió vezérlés:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evDecVolume</strong></span></span></dt><dd><p>
+  Hangerő csökkentése.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evIncVolume</strong></span></span></dt><dd><p>
+  Hangerő növelése.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSetVolume</strong></span></span></dt><dd><p>
+  Hangerő beállítása (potméter tudja használni; a
+  potméter relatív értékét (0-100%) használja).
+  </p></dd><dt><span class="term"><span class="bold"><strong>evMute</strong></span></span></dt><dd><p>
+  Hang ki-/bekapcsolása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSetBalance</strong></span></span></dt><dd><p>
+  Balansz beállítása (potméter tudja használni; a
+  potméter relatív értékét (0-100%) használja).
+  </p></dd><dt><span class="term"><span class="bold"><strong>evEqualizer</strong></span></span></dt><dd><p>
+  Equalizer be-/kikapcsolása.
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Vegyes:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evAbout</strong></span></span></dt><dd><p>
+  Programinformációs ablak megnyitása.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPreferences</strong></span></span></dt><dd><p>
+  Megnyitja a beállítások ablakot.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSkinBrowser</strong></span></span></dt><dd><p>
+  Megnyitja a skin böngésző ablakot.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evIconify</strong></span></span></dt><dd><p>
+  Ablak összecsukása kis méretűvé.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evExit</strong></span></span></dt><dd><p>
+  Kilépés a programból.
+  </p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-fonts.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-quality.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">B.3. Betűk </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> B.5. Minőségi skin-ek készítése</td></tr></table></div></body></html>

@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.9. tdfx_vid</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="tdfxfb.html" title="4.8. Podpora 3Dfx YUV"><link rel="next" href="opengl.html" title="4.10. Rozhraní OpenGL"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.9. tdfx_vid</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tdfxfb.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="opengl.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tdfx_vid"></a>4.9. tdfx_vid</h2></div></div></div><p>
+Toto je kombinace Linuxového jaderného modulu a video výstupního
+rozhraní podobného <a class="link" href="mga_vid.html" title="4.7. Matrox framebuffer (mga_vid)">mga_vid</a>.
+Budete potřebovat 2.4.x kernel s <code class="systemitem">agpgart</code>
+ovladačem, jelikož <code class="systemitem">tdfx_vid</code> používá AGP.
+Předejte <tt class="option">--enable-tdfxfb</tt> do <span class="command"><strong>configure</strong></span>
+abyste sestavili video výstupní rozhraní a sestavte jaderný modul pomocí
+následujících instrukcí.
+</p><div class="procedure"><a name="idp67493056"></a><p class="title"><b>Instalace jaderného modulu tdfx_vid.o:</b></p><ol class="procedure" type="1"><li class="step"><p>
+  Kompilace <tt class="filename">tdfx_vid.o</tt>:
+  </p><pre class="screen">
+cd drivers
+make</pre><p>
+</p></li><li class="step"><p>
+  Pak spusťte (jako <code class="systemitem">root</code>)
+  </p><pre class="screen">make install</pre><p>
+  což by mělo nainstalovat modul a vytvořit soubor zařízení.
+  Nahrajte ovladač pomocí
+  </p><pre class="screen">insmod tdfx_vid.o</pre><p>
+</p></li><li class="step"><p>
+  Aby se nahrával a odstraňoval automaticky podle potřeby, vložte nejprve
+  následující řádku na konec <tt class="filename">/etc/modules.conf</tt>:
+
+  </p><pre class="programlisting">alias char-major-178 tdfx_vid</pre><p>
+</p></li></ol></div><p>
+Ve stejném adresáři je testovací aplikace jménem
+<span class="command"><strong>tdfx_vid_test</strong></span>. Měla by vypisovat pár užitečných
+informací, pokud vše dobře pracuje.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tdfxfb.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="opengl.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.8. Podpora 3Dfx YUV </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.10. Rozhraní OpenGL</td></tr></table></div></body></html>

@@ -1,0 +1,26 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.11. Телетекст</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="tv-input.html" title="3.10. TV вход"><link rel="next" href="radio.html" title="3.12. Радио"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="tv-teletext.html#tv-teletext-implementation-notes" title="3.11.1. Замечания реализации"><link rel="subsection" href="tv-teletext.html#tv-teletext-usage" title="3.11.2. Использование телетекста"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.11. Телетекст</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-input.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="radio.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-teletext"></a>3.11. Телетекст</h2></div></div></div><p>
+На данный момент телетекст доступен только в MPlayer для v4l и v4l2 драйверов.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-teletext-implementation-notes"></a>3.11.1. Замечания реализации</h3></div></div></div><p>
+<span class="application">MPlayer</span> поддерживает обычный текст, псевдографику и
+навигационные ссылки.
+К сожалению, цветные страницы поддерживаются пока не полностью - все страницы
+отображаются оттенками серого.
+Страницы с субтитрами (еще известные как Closed Captions) тоже поддерживаются.
+</p><p>
+<span class="application">MPlayer</span> начинает кешировать все страницы телетекста
+с момента начала просмотра TV, так что вам не потребуется ожидать загрузки
+интересующий страницы.
+</p><p>
+Замечание: Использование телетекста с <tt class="option">-vo xv</tt> приводит к появлению странных цветов.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-teletext-usage"></a>3.11.2. Использование телетекста</h3></div></div></div><p>
+Чтобы включить декодирование телетекста, вы должны указать VBI устройство, из которого
+следует читать данные (обычно <tt class="filename">/dev/vbi0</tt> в Linux).
+Это можно сделать, указав <tt class="option">tdevice</tt> в вашем файле конфигурации:
+</p><pre class="screen">tv=tdevice=/dev/vbi0</pre><p>
+</p><p>
+Вам может потребоваться указать код языка телетекста для вашей страны.
+Чтобы получить список всех доступных языковых кодов, используйте
+</p><pre class="screen">tv=tdevice=/dev/vbi0:tlang=<em class="replaceable"><code>-1</code></em></pre><p>
+Вот пример для Русского:
+</p><pre class="screen">tv=tdevice=/dev/vbi0:tlang=<em class="replaceable"><code>33</code></em></pre><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-input.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="radio.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">3.10. TV вход </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 3.12. Радио</td></tr></table></div></body></html>

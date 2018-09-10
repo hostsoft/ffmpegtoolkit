@@ -1,0 +1,60 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.1. Linux</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="ports.html" title="Глава 5. Портинг"><link rel="prev" href="ports.html" title="Глава 5. Портинг"><link rel="next" href="bsd.html" title="5.2. *BSD"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="linux.html#debian" title="5.1.1. Debian пакеты"><link rel="subsection" href="linux.html#rpm" title="5.1.2. RPM пакеты"><link rel="subsection" href="linux.html#arm" title="5.1.3. ARM"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.1. Linux</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ports.html">Пред.</a> </td><th width="60%" align="center">Глава 5. Портинг</th><td width="20%" align="right"> <a accesskey="n" href="bsd.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="linux"></a>5.1. Linux</h2></div></div></div><p>
+Основная платформа разработки — это Linux на x86, хотя
+<span class="application">MPlayer</span> работает под многими другими портами Linux.
+Бинарные пакеты <span class="application">MPlayer</span>'а доступны из нескольких источников.
+Тем не менее,
+<span class="bold"><strong>ни один из этих пакетов не поддерживается</strong></span>.
+Сообщайте о проблемах их авторам, а не нам.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="debian"></a>5.1.1. Debian пакеты</h3></div></div></div><p>
+Чтобы создать Debian пакет, выполните следующие команды в каталоге с исходным
+кодом <span class="application">MPlayer</span>'а:
+</p><pre class="screen">fakeroot debian/rules binary</pre><p>
+
+Если  вы хотите передать дополнительные опции configure, установите
+соответствующее значение переменной окружения <code class="envar">DEB_BUILD_OPTIONS</code>.
+В частности, если хотите поддержку GUI и OSD, укажите:
+
+</p><pre class="screen">DEB_BUILD_OPTIONS="--enable-gui --enable-menu" fakeroot debian/rules binary</pre><p>
+
+Вы также можете передать некоторые переменные в Makefile. Например, если
+желаете компилировать gcc 3.4 даже если это не основной компилятор:
+
+</p><pre class="screen">CC=gcc-3.4 DEB_BUILD_OPTIONS="--enable-gui" fakeroot debian/rules binary</pre><p>
+
+Для очистки дерева исходных текстов воспользуйтесь командой:
+
+</p><pre class="screen">fakeroot debian/rules clean</pre><p>
+
+В качестве root'а Вы затем можете установить <tt class="filename">.deb
+</tt> пакет:
+</p><pre class="screen">dpkg -i ../mplayer_<em class="replaceable"><code>версия</code></em>.deb</pre><p>
+</p><p>
+Какое-то время Christian Marillat собирал неофициальные Debian пакеты с
+<span class="application">MPlayer</span>, <span class="application">MEncoder</span>
+и бинарными кодеками, так что вы можете их скачать (выполнить apt-get)
+с его <a class="ulink" href="http://www.debian-multimedia.org/" target="_top">сайта</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="rpm"></a>5.1.2. RPM пакеты</h3></div></div></div><p>
+Dominik Mierzejewski поддерживает официальные Fedora Core RPM пакеты
+<span class="application">MPlayer</span>'а. Они доступны в
+<a class="ulink" href="http://rpm.livan.org/" target="_top">репозитории Livna</a>.
+</p><p>
+Mandrake/Mandriva RPM пакеты доступны с <a class="ulink" href="http://plf.zarb.org/" target="_top">P.L.F.</a>.
+SuSE включала искалеченную версию <span class="application">MPlayer</span>'а в дистрибутив.
+Из последних релизов они убрали эти пакеты. Вы можете взять
+работающие RPM с
+<a class="ulink" href="http://packman.links2linux.de/?action=128" target="_top">links2linux.de</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="arm"></a>5.1.3. ARM</h3></div></div></div><p>
+<span class="application">MPlayer</span> работает на Linux PDA с ARM процессором,
+например Sharp Zaurus, Compaq Ipaq. Простейший способ получить <span class="application">
+MPlayer</span> — это скачать его с
+пакетных репозиториев
+<a class="ulink" href="http://www.openzaurus.org" target="_top">OpenZaurus</a>. Если Вы хотите
+скомпилировать его самостоятельно, обратите внимание на каталоги
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/mplayer?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">mplayer</a>
+и
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/libavcodec?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">libavcodec</a>
+в корне сборки дистрибутива OpenZaurus. Там всегда найдутся
+свежий Makefile и патчи, используемые для сборки SVN <span class="application">MPlayer</span>'а вместе с
+<code class="systemitem">libavcodec</code>.
+Если Вам нужен GUI, используйте встроенный в xmms
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ports.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="bsd.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">Глава 5. Портинг </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 5.2. *BSD</td></tr></table></div></body></html>

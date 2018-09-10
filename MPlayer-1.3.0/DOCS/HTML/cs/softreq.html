@@ -1,0 +1,49 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.1. Softwarové požadavky</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="install.html" title="Kapitola 2. Instalace"><link rel="prev" href="install.html" title="Kapitola 2. Instalace"><link rel="next" href="features.html" title="2.2. Vlastnosti"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.1. Softwarové požadavky</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="install.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 2. Instalace</th><td width="20%" align="right"> <a accesskey="n" href="features.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="softreq"></a>2.1. Softwarové požadavky</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>binutils</strong></span> – doporučená verze je
+  <span class="bold"><strong>2.11.x</strong></span>.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>gcc</strong></span> – doporučené verze jsou 2.95
+  a 3.4+. 2.96 a 3.0.x jsou známy generováním vadného kódu, 3.1 a
+  3.2 měly rovněž problémy, 3.3 jen okrajově. Na PowerPC použijte 4.x.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Xorg/XFree86</strong></span> – doporučená verze je
+  4.3 a vyšší. Ujistěte se, že máte nainstalovány
+  <span class="bold"><strong>vývojové (dev)  balíčky</strong></span>,
+  jinak to nebude pracovat.
+  Ne vždy potřebujete X, některá výstupní video rozhraní pracují i bez nich.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>make</strong></span> – doporučená verze je
+  3.79.x nebo vyšší. Pro sestavení XML dokumentace potřebujete 3.80.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>FreeType</strong></span> – vyžaduje se aspoň
+  verze 2.0.9 pro OSD a titulky.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>ALSA</strong></span> – volitelnmá, pro podporu zvukového
+  výstupu do ALSA. Vyžaduje se aspoň verze 0.9.0rc4.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libjpeg</strong></span> –
+  vyžadována pro volitelné JPEG video výstupní rozhraní
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libpng</strong></span> –
+  vyžadována pro volitelné PNG video výstupní rozhraní
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>directfb</strong></span> – volitelný, 0.9.13 nebo pozdější
+  vyžadovaný pro directfb video výstupní rozhraní
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>lame</strong></span> – doporučená verze 3.90 a vyšší,
+  vyžadovaný pro enkódování MP3 zvuku v <span class="application">MEncoder</span>u.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>zlib</strong></span> – doporučená, nutná pro komprimovanou
+  MOV hlavičku a podporu PNG.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong><a class="ulink" href="http://www.live555.com/mplayer/" target="_top">LIVE555 Streaming Media</a></strong></span>
+  – volitelná, nutná pro přehrávání RTSP/RTP datových proudů.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>cdparanoia</strong></span> – volitelná, pro podporu CDDA
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libxmms</strong></span> – volitelná, pro podporu XMMS
+  vstupního pluginu.
+  Vyžadujeme aspoň 1.2.7.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libsmb</strong></span> – volitelná, pro podporu SMB sítí.
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="install.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="features.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">Kapitola 2. Instalace </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 2.2. Vlastnosti</td></tr></table></div></body></html>

@@ -1,0 +1,113 @@
+.TH "oggz-diff" "1" 
+.SH "NAME" 
+oggz-diff \(em Hexdump the packets of two Ogg files and output differences 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-diff\fR [options]  [OGGZDUMP_OPTIONS]  [DIFF_OPTIONS] file1.ogg file2.ogg  
+.PP 
+\fB\fBoptions:\fR\fR [\-\-verbose ]  [\-v  | \-\-version ]  [\-h  | \-\-help ]  
+.PP 
+\fB\fBOGGZDUMP_OPTIONS:\fR\fR [\-b  | \-\-binary ]  [\-x  | \-\-hexadecimal ]  [\-c content-type  | \-\-content-type content-type ]  [\-s serialno  | \-\-serialno serialno ]  [\-O  | \-\-hide-offset ]  [\-S  | \-\-hide-serialno ]  [\-G  | \-\-hide-granulepos ]  [\-P  | \-\-hide-packetno ]  
+.PP 
+\fB\fBDIFF_OPTIONS:\fR\fR [\-q  | \-\-brief ]  [\-C NUM  | \-\-context[=NUM] ]  [\-u  | \-U NUM  | \-\-unified[=NUM] ]  [\-e  | \-\-ed ]  [\-\-normal ]  [\-\-rcs ]  [\-y  | \-\-side-by-side ]  [\-l  | \-\-paginate ]  
+.SH "Description" 
+.PP 
+\fBoggz-diff\fR is a \fBsh\fR script which 
+uses \fBoggz-dump\fR to generate hexadecimal packet dumps 
+of each input file, then outputs the difference between these dumps 
+using \fBdiff\fR. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-diff\fR forwards a subset of options 
+accepted by \fBoggz-dump\fR and \fBdiff\fR. 
+See 
+\fBoggz-dump\fP\fB(1)\fP and 
+\fBdiff\fP\fB(1)\fP for more detail. 
+ 
+.SS "oggz-dump format options" 
+.IP "\-b, \-\-binary" 10 
+Generate a binary dump of each packet 
+ 
+.IP "\-x, \-\-hexadeciaml" 10 
+Generate a hexadecimal dump of each packet 
+ 
+.SS "oggz-dump filtering options" 
+.IP "\-c \fBcontent-type\fR, \-\-content-type \fBcontent-type\fR" 10 
+Dump only the logical bitstreams for a specific 
+\fBcontent-type\fR.
+Run \fBoggz-known-codecs\fP\fB(1)\fP for a full list
+of codecs known by the installed version of oggz.
+ 
+.IP "\-s \fBserialno\fR, \-\-serialno \fBserialno\fR" 10 
+Dump only the logical bitstream with specified 
+\fBserialno\fR. 
+ 
+.IP "\-O, \-\-hide-offset" 10 
+Hide the byte offset field of the preamble for 
+each packet dumped. This is particularly useful when comparing 
+Ogg bitstreams that differ only in page structure. 
+ 
+.IP "\-S, \-\-hide-serialno" 10 
+Hide the serialno field of the preamble for 
+each packet dumped. This is particularly useful when comparing 
+Ogg bitstreams that differ only in serialno assignment. 
+ 
+.IP "\-G, \-\-hide-granulepos" 10 
+Hide the granulepos field of the preamble for 
+each packet dumped. 
+ 
+.IP "\-P, \-\-hide-packetno" 10 
+Hide the packetno field of the preamble for 
+each packet dumped. 
+ 
+.SS "diff options" 
+.PP 
+The \-w (\-\-ignore-all-space) option to \fBdiff\fR 	is always implied. 
+ 
+.IP "\-q, \-\-brief" 10 
+Output only whether files differ. 
+ 
+.IP "\-C \fBNUM\fR, \-\-context[=\fBNUM\fR]" 10 
+Output NUM lines of copied context. 
+ 
+.IP "\-u, \-U \fBNUM\fR, \-\-unified[=\fBNUM\fR]" 10 
+Output NUM (default 3) lines of unified context. 
+ 
+.IP "\-e, \-\-ed" 10 
+Output an ed script. 
+ 
+.IP "\-\-normal" 10 
+Output a normal diff. 
+ 
+.IP "\-\-rcs" 10 
+Output an RCS format diff. 
+ 
+.IP "\-y, \-\-side-by-side" 10 
+Output in two columns. 
+ 
+.IP "\-l, \-\-paginate" 10 
+Pass the output through \fBpr\fR to 
+paginate it. 
+ 
+.SS "Miscellaneous options" 
+.IP "\-\-verbose" 10 
+Display verbose messages. 
+.IP "\-v, \-\-version" 10 
+Display version information and exit. 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.SH "AUTHOR" 
+.PP 
+Conrad Parker       
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2003 CSIRO Australia 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-dump\fP\fB(1)\fP, 
+\fBdiff\fP\fB(1)\fP, 
+\fBpatch\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

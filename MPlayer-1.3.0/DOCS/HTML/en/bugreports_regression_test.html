@@ -1,0 +1,66 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. How to do regression testing using Subversion</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="prev" href="bugreports_fix.html" title="A.2. How to fix bugs"><link rel="next" href="bugreports_report.html" title="A.4. How to report bugs"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. How to do regression testing using Subversion</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">Prev</a> </td><th width="60%" align="center">Appendix A. How to report bugs</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. How to do regression testing using Subversion</h2></div></div></div><p>
+A problem that can happen sometimes is 'it used to work before, now it
+doesn't anymore...'.
+Here is a step by step procedure to try to pinpoint when the problem
+occurred. This is <span class="bold"><strong>not</strong></span> for casual users.
+</p><p>
+First, you'd need to fetch MPlayer's source tree from Subversion.
+Instructions can be found in the
+<a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html#svn" target="_top">Subversion section of the download page</a>.
+</p><p>
+You will have now in the mplayer/ directory an image of the Subversion tree, on
+the client side.
+Now update this image to the date you want:
+</p><pre class="screen">
+cd mplayer/
+svn update -r {"2004-08-23"}
+</pre><p>
+The date format is YYYY-MM-DD HH:MM:SS.
+Using this date format ensure that you will be able to extract patches
+according to the date at which they were committed, as in the
+<a class="ulink" href="http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">MPlayer-cvslog archive</a>.
+</p><p>
+Now proceed as for a normal update:
+</p><pre class="screen">
+./configure
+make
+</pre><p>
+</p><p>
+If any non-programmer reads this, the fastest method to get at the point
+where the problem occurred is to use a binary search — that is,
+search the date of the breakage by repeatedly dividing the search
+interval in half.
+For example, if the problem occurred in 2003, start at mid-year, then ask
+"Is the problem already here?".
+If yes, go back to the first of April; if not, go to the first of October,
+and so on.
+</p><p>
+If you have lot of free hard disk space (a full compile currently takes
+100 MB, and around 300-350 MB if debugging symbols are enabled), copy the
+oldest known working version before updating it; this will save time if
+you need to go back.
+(It is usually necessary to run 'make distclean' before recompiling an
+earlier version, so if you do not make a backup copy of your original
+source tree, you will have to recompile everything in it when you come
+back to the present.)
+Alternatively you may use <a class="ulink" href="http://ccache.samba.org/" target="_top">ccache</a>
+to speed up compilation.
+</p><p>
+When you have found the day where the problem happened, continue the search
+using the mplayer-cvslog archive (sorted by date) and a more precise svn
+update including hour, minute and second:
+</p><pre class="screen">
+svn update -r {"2004-08-23 15:17:25"}
+</pre><p>
+This will allow you to easily find the exact patch that did it.
+</p><p>
+If you find the patch that is the cause of the problem, you have almost won;
+report about it on
+<a class="ulink" href="https://trac.mplayerhq.hu/" target="_top">MPlayer's issue tracker</a> or
+subscribe to
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-users</a>
+and post it there.
+There is a chance that the author will jump in to suggest a fix.
+You may also look hard at the patch until it is coerced to reveal where
+the bug is :-).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. How to fix bugs </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> A.4. How to report bugs</td></tr></table></div></body></html>

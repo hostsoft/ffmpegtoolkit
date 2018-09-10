@@ -1,0 +1,340 @@
+\section{Functions Shared by Encode and Decode}
+\label{group__basefuncs}\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsection*{Basic shared functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bf th\-\_\-version\-\_\-string} (void)
+\begin{DoxyCompactList}\small\item\em Retrieves a human-\/readable string to identify the library vendor and version. \end{DoxyCompactList}\item 
+ogg\-\_\-uint32\-\_\-t {\bf th\-\_\-version\-\_\-number} (void)
+\begin{DoxyCompactList}\small\item\em Retrieves the library version number. \end{DoxyCompactList}\item 
+ogg\-\_\-int64\-\_\-t {\bf th\-\_\-granule\-\_\-frame} (void $\ast$\-\_\-encdec, ogg\-\_\-int64\-\_\-t \-\_\-granpos)
+\begin{DoxyCompactList}\small\item\em Converts a granule position to an absolute frame index, starting at {\ttfamily 0}. \end{DoxyCompactList}\item 
+double {\bf th\-\_\-granule\-\_\-time} (void $\ast$\-\_\-encdec, ogg\-\_\-int64\-\_\-t \-\_\-granpos)
+\begin{DoxyCompactList}\small\item\em Converts a granule position to an absolute time in seconds. \end{DoxyCompactList}\item 
+int {\bf th\-\_\-packet\-\_\-isheader} (ogg\-\_\-packet $\ast$\-\_\-op)
+\begin{DoxyCompactList}\small\item\em Determines whether a Theora packet is a header or not. \end{DoxyCompactList}\item 
+int {\bf th\-\_\-packet\-\_\-iskeyframe} (ogg\-\_\-packet $\ast$\-\_\-op)
+\begin{DoxyCompactList}\small\item\em Determines whether a theora packet is a key frame or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions for manipulating header data}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf th\-\_\-info\-\_\-init} ({\bf th\-\_\-info} $\ast$\-\_\-info)
+\begin{DoxyCompactList}\small\item\em Initializes a \doxyref{th\-\_\-info}{p.}{structth__info} structure. \end{DoxyCompactList}\item 
+void {\bf th\-\_\-info\-\_\-clear} ({\bf th\-\_\-info} $\ast$\-\_\-info)
+\begin{DoxyCompactList}\small\item\em Clears a \doxyref{th\-\_\-info}{p.}{structth__info} structure. \end{DoxyCompactList}\item 
+void {\bf th\-\_\-comment\-\_\-init} ({\bf th\-\_\-comment} $\ast$\-\_\-tc)
+\begin{DoxyCompactList}\small\item\em Initialize a \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. \end{DoxyCompactList}\item 
+void {\bf th\-\_\-comment\-\_\-add} ({\bf th\-\_\-comment} $\ast$\-\_\-tc, char $\ast$\-\_\-comment)
+\begin{DoxyCompactList}\small\item\em Add a comment to an initialized \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. \end{DoxyCompactList}\item 
+void {\bf th\-\_\-comment\-\_\-add\-\_\-tag} ({\bf th\-\_\-comment} $\ast$\-\_\-tc, char $\ast$\-\_\-tag, char $\ast$\-\_\-val)
+\begin{DoxyCompactList}\small\item\em Add a comment to an initialized \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. \end{DoxyCompactList}\item 
+char $\ast$ {\bf th\-\_\-comment\-\_\-query} ({\bf th\-\_\-comment} $\ast$\-\_\-tc, char $\ast$\-\_\-tag, int \-\_\-count)
+\begin{DoxyCompactList}\small\item\em Look up a comment value by its tag. \end{DoxyCompactList}\item 
+int {\bf th\-\_\-comment\-\_\-query\-\_\-count} ({\bf th\-\_\-comment} $\ast$\-\_\-tc, char $\ast$\-\_\-tag)
+\begin{DoxyCompactList}\small\item\em Look up the number of instances of a tag. \end{DoxyCompactList}\item 
+void {\bf th\-\_\-comment\-\_\-clear} ({\bf th\-\_\-comment} $\ast$\-\_\-tc)
+\begin{DoxyCompactList}\small\item\em Clears a \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-comment\-\_\-add@{th\-\_\-comment\-\_\-add}}
+\index{th\-\_\-comment\-\_\-add@{th\-\_\-comment\-\_\-add}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-comment\-\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}void th\-\_\-comment\-\_\-add (
+\begin{DoxyParamCaption}
+\item[{{\bf th\-\_\-comment} $\ast$}]{\-\_\-tc, }
+\item[{char $\ast$}]{\-\_\-comment}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga19a1f7b8032db957df151a34e5ac9272}
+
+
+Add a comment to an initialized \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. 
+
+\begin{DoxyNote}{Note}
+Neither \doxyref{th\-\_\-comment\-\_\-add()}{p.}{group__basefuncs_ga19a1f7b8032db957df151a34e5ac9272} nor \doxyref{th\-\_\-comment\-\_\-add\-\_\-tag()}{p.}{group__basefuncs_ga6c5edc201ca220a30787ca6c1ddcaeaf} support comments containing null values, although the bitstream format does support them. To add such comments you will need to manipulate the \doxyref{th\-\_\-comment}{p.}{structth__comment} structure directly. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-tc} & The \doxyref{th\-\_\-comment}{p.}{structth__comment} struct to add the comment to. \\
+\hline
+{\em \-\_\-comment} & Must be a null-\/terminated U\-T\-F-\/8 string containing the comment in \char`\"{}\-T\-A\-G=the value\char`\"{} form. \\
+\hline
+\end{DoxyParams}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-comment\-\_\-add\-\_\-tag@{th\-\_\-comment\-\_\-add\-\_\-tag}}
+\index{th\-\_\-comment\-\_\-add\-\_\-tag@{th\-\_\-comment\-\_\-add\-\_\-tag}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-comment\-\_\-add\-\_\-tag}]{\setlength{\rightskip}{0pt plus 5cm}void th\-\_\-comment\-\_\-add\-\_\-tag (
+\begin{DoxyParamCaption}
+\item[{{\bf th\-\_\-comment} $\ast$}]{\-\_\-tc, }
+\item[{char $\ast$}]{\-\_\-tag, }
+\item[{char $\ast$}]{\-\_\-val}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga6c5edc201ca220a30787ca6c1ddcaeaf}
+
+
+Add a comment to an initialized \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. 
+
+\begin{DoxyNote}{Note}
+Neither \doxyref{th\-\_\-comment\-\_\-add()}{p.}{group__basefuncs_ga19a1f7b8032db957df151a34e5ac9272} nor \doxyref{th\-\_\-comment\-\_\-add\-\_\-tag()}{p.}{group__basefuncs_ga6c5edc201ca220a30787ca6c1ddcaeaf} support comments containing null values, although the bitstream format does support them. To add such comments you will need to manipulate the \doxyref{th\-\_\-comment}{p.}{structth__comment} structure directly. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-tc} & The \doxyref{th\-\_\-comment}{p.}{structth__comment} struct to add the comment to. \\
+\hline
+{\em \-\_\-tag} & A null-\/terminated string containing the tag associated with the comment. \\
+\hline
+{\em \-\_\-val} & The corresponding value as a null-\/terminated string. \\
+\hline
+\end{DoxyParams}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-comment\-\_\-clear@{th\-\_\-comment\-\_\-clear}}
+\index{th\-\_\-comment\-\_\-clear@{th\-\_\-comment\-\_\-clear}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-comment\-\_\-clear}]{\setlength{\rightskip}{0pt plus 5cm}void th\-\_\-comment\-\_\-clear (
+\begin{DoxyParamCaption}
+\item[{{\bf th\-\_\-comment} $\ast$}]{\-\_\-tc}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_gae736c1afa514947a3feb223143af95e3}
+
+
+Clears a \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. 
+
+This should be called on a \doxyref{th\-\_\-comment}{p.}{structth__comment} structure after it is no longer needed. It will free all memory used by the structure members. 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-tc} & The \doxyref{th\-\_\-comment}{p.}{structth__comment} struct to clear. \\
+\hline
+\end{DoxyParams}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-comment\-\_\-init@{th\-\_\-comment\-\_\-init}}
+\index{th\-\_\-comment\-\_\-init@{th\-\_\-comment\-\_\-init}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-comment\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void th\-\_\-comment\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{{\bf th\-\_\-comment} $\ast$}]{\-\_\-tc}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga6c8ab25988e7ea9d7b1e31a54cf58f09}
+
+
+Initialize a \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. 
+
+This should be called on a freshly allocated \doxyref{th\-\_\-comment}{p.}{structth__comment} structure before attempting to use it. 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-tc} & The \doxyref{th\-\_\-comment}{p.}{structth__comment} struct to initialize. \\
+\hline
+\end{DoxyParams}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-comment\-\_\-query@{th\-\_\-comment\-\_\-query}}
+\index{th\-\_\-comment\-\_\-query@{th\-\_\-comment\-\_\-query}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-comment\-\_\-query}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ th\-\_\-comment\-\_\-query (
+\begin{DoxyParamCaption}
+\item[{{\bf th\-\_\-comment} $\ast$}]{\-\_\-tc, }
+\item[{char $\ast$}]{\-\_\-tag, }
+\item[{int}]{\-\_\-count}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga33c8b4f57a03217636d704c2ebb211fa}
+
+
+Look up a comment value by its tag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-tc} & An initialized \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. \\
+\hline
+{\em \-\_\-tag} & The tag to look up. \\
+\hline
+{\em \-\_\-count} & The instance of the tag. The same tag can appear multiple times, each with a distinct value, so an index is required to retrieve them all. The order in which these values appear is significant and should be preserved. Use \doxyref{th\-\_\-comment\-\_\-query\-\_\-count()}{p.}{group__basefuncs_ga81d518dc4426f63ceaedcbe2668679fc} to get the legal range for the {\itshape \-\_\-count} parameter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the queried tag's value. This points directly to data in the \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. It should not be modified or freed by the application, and modifications to the structure may invalidate the pointer. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & If no matching tag is found. \\
+\hline
+\end{DoxyRetVals}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-comment\-\_\-query\-\_\-count@{th\-\_\-comment\-\_\-query\-\_\-count}}
+\index{th\-\_\-comment\-\_\-query\-\_\-count@{th\-\_\-comment\-\_\-query\-\_\-count}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-comment\-\_\-query\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}int th\-\_\-comment\-\_\-query\-\_\-count (
+\begin{DoxyParamCaption}
+\item[{{\bf th\-\_\-comment} $\ast$}]{\-\_\-tc, }
+\item[{char $\ast$}]{\-\_\-tag}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga81d518dc4426f63ceaedcbe2668679fc}
+
+
+Look up the number of instances of a tag. 
+
+Call this first when querying for a specific tag and then iterate over the number of instances with separate calls to \doxyref{th\-\_\-comment\-\_\-query()}{p.}{group__basefuncs_ga33c8b4f57a03217636d704c2ebb211fa} to retrieve all the values for that tag in order. 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-tc} & An initialized \doxyref{th\-\_\-comment}{p.}{structth__comment} structure. \\
+\hline
+{\em \-\_\-tag} & The tag to look up. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number on instances of this particular tag. 
+\end{DoxyReturn}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-granule\-\_\-frame@{th\-\_\-granule\-\_\-frame}}
+\index{th\-\_\-granule\-\_\-frame@{th\-\_\-granule\-\_\-frame}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-granule\-\_\-frame}]{\setlength{\rightskip}{0pt plus 5cm}ogg\-\_\-int64\-\_\-t th\-\_\-granule\-\_\-frame (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{\-\_\-encdec, }
+\item[{ogg\-\_\-int64\-\_\-t}]{\-\_\-granpos}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga95b10e76fc4c05d0240ea2dfd9fd62bd}
+
+
+Converts a granule position to an absolute frame index, starting at {\ttfamily 0}. 
+
+The granule position is interpreted in the context of a given \doxyref{th\-\_\-enc\-\_\-ctx}{p.}{theoraenc_8h_af5cc40472b925456d42526a035d66edd} or \doxyref{th\-\_\-dec\-\_\-ctx}{p.}{theoradec_8h_a843d70bb02563885a8d54b9c1a781729} handle (either will suffice). 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-encdec} & A previously allocated \doxyref{th\-\_\-enc\-\_\-ctx}{p.}{theoraenc_8h_af5cc40472b925456d42526a035d66edd} or \doxyref{th\-\_\-dec\-\_\-ctx}{p.}{theoradec_8h_a843d70bb02563885a8d54b9c1a781729} handle. \\
+\hline
+{\em \-\_\-granpos} & The granule position to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The absolute frame index corresponding to {\itshape \-\_\-granpos}. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em -\/1} & The given granule position was invalid (i.\-e. negative). \\
+\hline
+\end{DoxyRetVals}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-granule\-\_\-time@{th\-\_\-granule\-\_\-time}}
+\index{th\-\_\-granule\-\_\-time@{th\-\_\-granule\-\_\-time}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-granule\-\_\-time}]{\setlength{\rightskip}{0pt plus 5cm}double th\-\_\-granule\-\_\-time (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{\-\_\-encdec, }
+\item[{ogg\-\_\-int64\-\_\-t}]{\-\_\-granpos}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga707e1e281de788af0df39ef00f3fb432}
+
+
+Converts a granule position to an absolute time in seconds. 
+
+The granule position is interpreted in the context of a given \doxyref{th\-\_\-enc\-\_\-ctx}{p.}{theoraenc_8h_af5cc40472b925456d42526a035d66edd} or \doxyref{th\-\_\-dec\-\_\-ctx}{p.}{theoradec_8h_a843d70bb02563885a8d54b9c1a781729} handle (either will suffice). 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-encdec} & A previously allocated \doxyref{th\-\_\-enc\-\_\-ctx}{p.}{theoraenc_8h_af5cc40472b925456d42526a035d66edd} or \doxyref{th\-\_\-dec\-\_\-ctx}{p.}{theoradec_8h_a843d70bb02563885a8d54b9c1a781729} handle. \\
+\hline
+{\em \-\_\-granpos} & The granule position to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The absolute time in seconds corresponding to {\itshape \-\_\-granpos}. This is the \char`\"{}end time\char`\"{} for the frame, or the latest time it should be displayed. It is not the presentation time. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em -\/1} & The given granule position was invalid (i.\-e. negative). \\
+\hline
+\end{DoxyRetVals}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-info\-\_\-clear@{th\-\_\-info\-\_\-clear}}
+\index{th\-\_\-info\-\_\-clear@{th\-\_\-info\-\_\-clear}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-info\-\_\-clear}]{\setlength{\rightskip}{0pt plus 5cm}void th\-\_\-info\-\_\-clear (
+\begin{DoxyParamCaption}
+\item[{{\bf th\-\_\-info} $\ast$}]{\-\_\-info}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_gab3d6441ab4a4969859ef5fd78a9e3c1c}
+
+
+Clears a \doxyref{th\-\_\-info}{p.}{structth__info} structure. 
+
+This should be called on a \doxyref{th\-\_\-info}{p.}{structth__info} structure after it is no longer needed. 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-info} & The \doxyref{th\-\_\-info}{p.}{structth__info} struct to clear. \\
+\hline
+\end{DoxyParams}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-info\-\_\-init@{th\-\_\-info\-\_\-init}}
+\index{th\-\_\-info\-\_\-init@{th\-\_\-info\-\_\-init}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-info\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void th\-\_\-info\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{{\bf th\-\_\-info} $\ast$}]{\-\_\-info}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga430d9c605816a6ca0bdce3a0b965b926}
+
+
+Initializes a \doxyref{th\-\_\-info}{p.}{structth__info} structure. 
+
+This should be called on a freshly allocated \doxyref{th\-\_\-info}{p.}{structth__info} structure before attempting to use it. 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-info} & The \doxyref{th\-\_\-info}{p.}{structth__info} struct to initialize. \\
+\hline
+\end{DoxyParams}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-packet\-\_\-isheader@{th\-\_\-packet\-\_\-isheader}}
+\index{th\-\_\-packet\-\_\-isheader@{th\-\_\-packet\-\_\-isheader}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-packet\-\_\-isheader}]{\setlength{\rightskip}{0pt plus 5cm}int th\-\_\-packet\-\_\-isheader (
+\begin{DoxyParamCaption}
+\item[{ogg\-\_\-packet $\ast$}]{\-\_\-op}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga02f3f38261a9b39452d8a5e6f8737cc1}
+
+
+Determines whether a Theora packet is a header or not. 
+
+This function does no verification beyond checking the packet type bit, so it should not be used for bitstream identification; use \doxyref{th\-\_\-decode\-\_\-headerin()}{p.}{group__decfuncs_ga006d01d36fbe64768c571e6a12b7fc50} for that. As per the Theora specification, an empty (0-\/byte) packet is treated as a data packet (a delta frame with no coded blocks). 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-op} & An {\ttfamily ogg\-\_\-packet} containing encoded Theora data. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 1} & The packet is a header packet \\
+\hline
+{\em 0} & The packet is a video data packet. \\
+\hline
+\end{DoxyRetVals}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-packet\-\_\-iskeyframe@{th\-\_\-packet\-\_\-iskeyframe}}
+\index{th\-\_\-packet\-\_\-iskeyframe@{th\-\_\-packet\-\_\-iskeyframe}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-packet\-\_\-iskeyframe}]{\setlength{\rightskip}{0pt plus 5cm}int th\-\_\-packet\-\_\-iskeyframe (
+\begin{DoxyParamCaption}
+\item[{ogg\-\_\-packet $\ast$}]{\-\_\-op}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_gafe95cfd06f0fef413266c9168a66248a}
+
+
+Determines whether a theora packet is a key frame or not. 
+
+This function does no verification beyond checking the packet type and key frame bits, so it should not be used for bitstream identification; use \doxyref{th\-\_\-decode\-\_\-headerin()}{p.}{group__decfuncs_ga006d01d36fbe64768c571e6a12b7fc50} for that. As per the Theora specification, an empty (0-\/byte) packet is treated as a delta frame (with no coded blocks). 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-op} & An {\ttfamily ogg\-\_\-packet} containing encoded Theora data. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 1} & The packet contains a key frame. \\
+\hline
+{\em 0} & The packet contains a delta frame. \\
+\hline
+{\em -\/1} & The packet is not a video data packet. \\
+\hline
+\end{DoxyRetVals}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-version\-\_\-number@{th\-\_\-version\-\_\-number}}
+\index{th\-\_\-version\-\_\-number@{th\-\_\-version\-\_\-number}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-version\-\_\-number}]{\setlength{\rightskip}{0pt plus 5cm}ogg\-\_\-uint32\-\_\-t th\-\_\-version\-\_\-number (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_gab723a75c0f95b3eb817f7f769846016b}
+
+
+Retrieves the library version number. 
+
+This is the highest bitstream version that the encoder library will produce, or that the decoder library can decode. This number is composed of a 16-\/bit major version, 8-\/bit minor version and 8 bit sub-\/version, composed as follows\-: 
+\begin{DoxyCode}
+* (VERSION\_MAJOR<<16)+(VERSION\_MINOR<<8)+(VERSION\_SUBMINOR)
+* 
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+the version number. 
+\end{DoxyReturn}
+\index{Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}!th\-\_\-version\-\_\-string@{th\-\_\-version\-\_\-string}}
+\index{th\-\_\-version\-\_\-string@{th\-\_\-version\-\_\-string}!Functions Shared by Encode and Decode@{Functions Shared by Encode and Decode}}
+\subsubsection[{th\-\_\-version\-\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ th\-\_\-version\-\_\-string (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{group__basefuncs_ga04846066738d9f2024fc9961162b2dbc}
+
+
+Retrieves a human-\/readable string to identify the library vendor and version. 
+
+\begin{DoxyReturn}{Returns}
+the version string. 
+\end{DoxyReturn}

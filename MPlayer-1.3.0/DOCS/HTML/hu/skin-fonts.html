@@ -1,0 +1,40 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.3. Betűk</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="prev" href="skin-file.html" title="B.2. A skin fájl"><link rel="next" href="skin-gui.html" title="B.4. GUI üzenetek"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Szimbólumok"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.3. Betűk</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-file.html">Vissza</a> </td><th width="60%" align="center">B. függelék - <span class="application">MPlayer</span> skin formátum</th><td width="20%" align="right"> <a accesskey="n" href="skin-gui.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-fonts"></a>B.3. Betűk</h2></div></div></div><p>
+Amint azt már a skin elemeiről szóló részben is említettem, egy betűtípust
+egy kép és egy leíró fájl alkot. A karaktereket bárhová teheted a képen,
+de győződj meg róla, hogy a pozíciójuk és a méretük pontosan meg van adva
+a leíró fájlban.
+</p><p>
+A betű leíró fájl (az <tt class="filename">.fnt</tt> kiterjesztéssel) tartalmazhat
+megjegyzéseket, melyek '<code class="literal">;</code>'-vel kezdődő sorokban kapnak helyet.
+A fájlban kell, hogy szerepeljenek az alábbi sorok:
+<a name="skin-font-image"></a>
+</p><pre class="programlisting">image = <em class="replaceable"><code>image</code></em></pre><p>
+Ahol az <code class="literal"><em class="replaceable"><code>image</code></em></code> a betűhöz használt
+kép fájl neve (nem kell megadnod a kiterjesztést).
+<a name="skin-font-char"></a>
+</p><pre class="programlisting">"char" = X, Y, width, height</pre><p>
+Itt az <code class="literal">X</code> és az <code class="literal">Y</code> a
+<code class="literal">char</code> karakter pozícióját adja meg a képen (<code class="literal">0,0</code>
+a bal felső sarok). A <code class="literal">width</code> és a <code class="literal">height</code>
+a karakter méretei pixelben.
+</p><p>
+Ez a példa az A, B, C karaktereket definiálja a <tt class="filename">font.png</tt>
+felhasználásával.
+</p><pre class="programlisting">
+; Lehet "font" is a "font.png" helyett.
+image = font.png
+
+; Három karakter elég a bemutatáshoz :-)
+"A" =  0,0, 7,13
+"B" =  7,0, 7,13
+"C" = 14,0, 7,13
+</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-fonts-symbols"></a>B.3.1. Szimbólumok</h3></div></div></div><p>
+Néhány karakternek speciális jelentése van, ha <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>-ben
+használva valamelyik változó tér vissza vele. Ezeket a karaktereket
+szimbólumokként kell megjeleníteni, így például egy szép DVD logó jelenhet
+meg a '<code class="literal">d</code>' karakter helyett egy DVD folyam esetén.
+</p><p>
+Az alábbi táblázat a szimbólumként megjeleníthető (és így külön betűtípust
+igénylő) karaktereket tartalmazza.
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Karakter</th><th>Szimbólum</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>lejátszás</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>stop</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>pillanatállj</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>nincs hang</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>mono hang</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>sztereó hang</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>a folyam egy fájl</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>a folyam egy Video CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>a folyam egy DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>a folyam egy URL</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-file.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-gui.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">B.2. A skin fájl </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> B.4. GUI üzenetek</td></tr></table></div></body></html>

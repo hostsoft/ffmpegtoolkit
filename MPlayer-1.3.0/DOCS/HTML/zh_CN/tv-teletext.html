@@ -1,0 +1,25 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.13. Teletext</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="usage.html" title="第 3 章 Usage"><link rel="prev" href="tv-input.html" title="3.12. TV input"><link rel="next" href="radio.html" title="3.14. 广播电台"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"><link rel="subsection" href="tv-teletext.html#tv-teletext-implementation-notes" title="3.13.1. Implementation notes"><link rel="subsection" href="tv-teletext.html#tv-teletext-usage" title="3.13.2. Using teletext"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.13. Teletext</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-input.html">上一页</a> </td><th width="60%" align="center">第 3 章 Usage</th><td width="20%" align="right"> <a accesskey="n" href="radio.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-teletext"></a>3.13. Teletext</h2></div></div></div><p>
+  Teletext is currently available only in <span class="application">MPlayer</span>
+  for v4l and v4l2 drivers.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-teletext-implementation-notes"></a>3.13.1. Implementation notes</h3></div></div></div><p>
+<span class="application">MPlayer</span> supports regular text, graphics and navigation links.
+Unfortunately, colored pages are not fully supported yet - all pages are shown as grayscaled.
+Subtitle pages (also known as Closed Captions) are supported, too.
+</p><p>
+<span class="application">MPlayer</span> starts caching all teletext pages upon
+starting to receive TV input, so you do not need to wait until the requested page is loaded.
+</p><p>
+Note: Using teletext with <tt class="option">-vo xv</tt> causes strange colors.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-teletext-usage"></a>3.13.2. Using teletext</h3></div></div></div><p>
+To enable teletext decoding you must specify the VBI device to get teletext data
+from (usually <tt class="filename">/dev/vbi0</tt> for Linux). This can be done by specifying
+<tt class="option">tdevice</tt> in your configuration file, like shown below:
+</p><pre class="screen">tv=tdevice=/dev/vbi0</pre><p>
+</p><p>
+You might need to specify the teletext language code for your country.
+To list all available country codes use
+</p><pre class="screen">tv=tdevice=/dev/vbi0:tlang=<em class="replaceable"><code>-1</code></em></pre><p>
+Here is an example for Russian:
+</p><pre class="screen">tv=tdevice=/dev/vbi0:tlang=<em class="replaceable"><code>33</code></em></pre><p>
+</p><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-input.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="radio.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">3.12. TV input </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 3.14. 广播电台</td></tr></table></div></body></html>

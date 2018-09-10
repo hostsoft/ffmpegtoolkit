@@ -1,0 +1,75 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.5. Codec Installation</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="install.html" title="Kapitel 2. Installation"><link rel="prev" href="fonts-osd.html" title="2.4. Schriften und OSD"><link rel="next" href="rtc.html" title="2.6. RTC"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="codec-installation.html#xvid" title="2.5.1. Xvid"><link rel="subsection" href="codec-installation.html#x264" title="2.5.2. x264"><link rel="subsection" href="codec-installation.html#amr" title="2.5.3. AMR Codecs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.5. Codec Installation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="fonts-osd.html">Zurück</a> </td><th width="60%" align="center">Kapitel 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="rtc.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="codec-installation"></a>2.5. Codec Installation</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="xvid"></a>2.5.1. Xvid</h3></div></div></div><p>
+        <a class="ulink" href="http://www.xvid.org" target="_top">Xvid</a> ist ein freier MPEG-4 ASP
+        konformer Videocodec. Beachte, dass Xvid nicht benötigt wird, um mit Xvid
+        encodiertes Video zu decodieren. In der Standardkonfiguration wird dafür
+        <code class="systemitem">libavcodec</code> benutzt, da er höhere
+        Geschwindigkeit bietet.
+      </p><div class="procedure"><a name="idp55628672"></a><p class="title"><b>Installation von <code class="systemitem">Xvid</code></b></p><p>
+          Wie die meiste Open-Source-Software gibt es zwei verfügbare Varianten:
+          <a class="ulink" href="http://www.xvid.org/downloads.html" target="_top">offizielle Releases</a>
+          und die CVS-Version.
+          Die CVS-Version ist für die Benutzung normalerweise stabil genug, da es meistens
+          Fehlerbehebungen für Bugs enthält, die im Release vorhanden sind.
+          Hier also, was du zu tun hast, um <code class="systemitem">Xvid</code>
+          vom CVS mit <span class="application">MEncoder</span> ans Laufen zu bringen
+          (du benötigst mindestens <span class="application">autoconf</span> 2.50,
+          <span class="application">automake</span> und <span class="application">libtool</span>):
+        </p><ol class="procedure" type="1"><li class="step"><p>
+            </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid login</pre><p>
+          </p></li><li class="step"><p>
+            </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid co xvidcore</pre><p>
+          </p></li><li class="step"><p>
+            </p><pre class="screen">cd xvidcore/build/generic</pre><p>
+          </p></li><li class="step"><p>
+            </p><pre class="screen">./bootstrap.sh</pre><p>
+          </p></li><li class="step"><p>
+            </p><pre class="screen">./configure</pre><p>
+            Du musst möglicherweise ein paar Optionen hinzuzufügen (schaue dir
+            die Ausgabe von <span class="command"><strong>./configure --help</strong></span> an).
+          </p></li><li class="step"><p>
+            </p><pre class="screen">make &amp;&amp; make install</pre><p>
+          </p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="x264"></a>2.5.2. <code class="systemitem">x264</code></h3></div></div></div><p>
+        <a class="ulink" href="http://developers.videolan.org/x264.html" target="_top"><code class="systemitem">x264</code></a>
+        ist eine Bibliothek für die Erstellung von H.264-Videostreams.
+        <span class="application">MPlayer</span> Sourcen werden auf den neuesten Stand
+        gebracht wenn es an <code class="systemitem">x264</code> API
+        Veränderungen gibt. Deswegen wird empfohlen
+        <span class="application">MPlayer</span> aus dem Subversion zu benutzen.
+      </p><p>
+        Wenn du GIT installiert hast, können die aktuellen x264 Sourcen
+        mit dem folgen Befehl besorgt werden:
+        </p><pre class="screen">git clone git://git.videolan.org/x264.git</pre><p>
+
+        Bau und installier dann nach der Standardformel:
+        </p><pre class="screen">./configure &amp;&amp; make &amp;&amp; make install</pre><p>
+
+        Jetzt nochmal <tt class="filename">./configure</tt> ausführen, damit
+        <span class="application">MPlayer</span> die Unterstützung für
+        <code class="systemitem">x264</code> aktiviert.
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="amr"></a>2.5.3. AMR Codecs</h3></div></div></div><p>
+        Adaptive Multi-Rate Sprachcodec, wird in 3G (UMTS) Mobiltelephonen verwendet.
+        Die Referenzimplementierung ist auf
+        <a class="ulink" href="http://www.3gpp.org" target="_top">The 3rd Generation Partnership Project</a>
+        erhältlich (frei - wie in Freibier - für private Benutzung).
+        Um die Unterstützung zu aktiveren, lade die Bibliotheken für
+        <a class="ulink" href="http://www.penguin.cz/~utx/amr" target="_top">AMR-NB and AMR-WB</a>
+        runter und installiere sie, indem du die Anweisungen auf dieser Seite befolgst.
+        Compiliere MPlayer danach erneut.
+      </p><p>
+        Für Unterstützung müssen die Codecs
+        <a class="ulink" href="http://www.3gpp.org/ftp/Specs/latest/Rel-6/26_series/26104-610.zip" target="_top">AMR-NB</a>
+        und
+        <a class="ulink" href="http://www.3gpp.org/ftp/Specs/latest/Rel-6/26_series/26204-600.zip" target="_top">AMR-WB</a>
+        heruntergeladen und in dasselbe Verzeichnis wie
+        <span class="application">MPlayer</span> verschoben werden.
+        Anschließend folgende Befehle ausführen:
+        </p><pre class="screen">
+unzip 26104-610.zip
+unzip 26104-610_ANSI_C_source_code.zip
+mv c-code libavcodec/amr_float
+unzip 26204-600.zip
+unzip 26204-600_ANSI-C_source_code.zip
+mv c-code libavcodec/amrwb_float</pre><p>
+        Befolge danach einfach das <a class="link" href="features.html" title="2.2. Features">Standardvorgehen für die Compilierung</a> von
+        <span class="application">MPlayer</span>.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="fonts-osd.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="rtc.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">2.4. Schriften und OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 2.6. RTC</td></tr></table></div></body></html>

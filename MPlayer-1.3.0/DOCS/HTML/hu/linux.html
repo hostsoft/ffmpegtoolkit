@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.1. Linux</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="ports.html" title="7. fejezet - Portok"><link rel="prev" href="ports.html" title="7. fejezet - Portok"><link rel="next" href="bsd.html" title="7.2. *BSD"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="linux.html#debian" title="7.1.1. Debian csomagolás"><link rel="subsection" href="linux.html#rpm" title="7.1.2. RedHat csomagolás"><link rel="subsection" href="linux.html#arm_linux" title="7.1.3. ARM Linux"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.1. Linux</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ports.html">Vissza</a> </td><th width="60%" align="center">7. fejezet - Portok</th><td width="20%" align="right"> <a accesskey="n" href="bsd.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="linux"></a>7.1. Linux</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="debian"></a>7.1.1. Debian csomagolás</h3></div></div></div><p>
+Debian csomag készítéséhez futtasd az alábbi parancsot az
+<span class="application">MPlayer</span> forrásának könyvtárában:
+
+</p><pre class="screen">fakeroot debian/rules binary</pre><p>
+
+Ha különleges kapcsolókat akarsz átadni a configure-nak, állítsd be a
+<code class="envar">DEB_BUILD_OPTIONS</code> környezeti változót. például ha
+szeretnél GUI-t és OSD menü támogatást, ezt kell használnod:
+
+</p><pre class="screen">DEB_BUILD_OPTIONS="--enable-gui --enable-menu" fakeroot debian/rules binary</pre><p>
+
+Pár változót is átadhatsz a Makefile-nak. Például ha gcc 3.4-et szeretnél
+használni a fordításhoz annak ellenére, hogy nem az az alapértelmezett
+fordító:
+
+</p><pre class="screen">CC=gcc-3.4 DEB_BUILD_OPTIONS="--enable-gui" fakeroot debian/rules binary</pre><p>
+
+A forrás fa kitakarításához add ki a következő parancsot:
+
+</p><pre class="screen">fakeroot debian/rules clean</pre><p>
+
+Rendszergazdaként a szokásos módszerrel telepíthető a <tt class="filename">.deb</tt> csomag:
+</p><pre class="screen">dpkg -i ../mplayer_<em class="replaceable"><code>verziószám</code></em>.deb</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="rpm"></a>7.1.2. RedHat csomagolás</h3></div></div></div><p>
+Az RPM csomag elkészítéséhez add ki a következő parancsot az
+<span class="application">MPlayer</span> forrás könyvtárában:
+
+</p><pre class="screen">FIXME: megfelelő parancs beszúrása</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="arm_linux"></a>7.1.3. ARM Linux</h3></div></div></div><p>
+Az <span class="application">MPlayer</span> működik ARM CPU-val rendelkező PDA-kon is,
+mint páldául a Sharp Zaurus, vagy a Compaq Ipaq. Megszerzésének legegyszerűbb
+módja az  <a class="ulink" href="http://www.openzaurus.org" target="_top">OpenZaurus</a> webhelyéről
+történő letöltés. Ha saját erődből akarod lefordítani, érdemes körülnézni az
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/mplayer?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">mplayer</a>
+és a
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/libavcodec?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">libavcodec</a>
+Openzaurus buildroot könyvtárakban, ezek ugyanis mindig tartalmazzák a legújabb
+Makefile-okat és patcheket az <span class="application">MPlayer</span> SVN verziójának
+<code class="systemitem">libavcodec</code>-kel történő lefordításához.
+Ha GUI frontend-et is szeretnél, használd az xmms-embedded-et.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ports.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="bsd.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">7. fejezet - Portok </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 7.2. *BSD</td></tr></table></div></body></html>

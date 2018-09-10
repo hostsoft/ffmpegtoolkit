@@ -1,0 +1,62 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.1. Requerimientos de Software</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="install.html" title="Capítulo 2. Instalación"><link rel="prev" href="install.html" title="Capítulo 2. Instalación"><link rel="next" href="caracteristicas.html" title="2.2. Características"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.1. Requerimientos de Software</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="install.html">Anterior</a> </td><th width="60%" align="center">Capítulo 2. Instalación</th><td width="20%" align="right"> <a accesskey="n" href="caracteristicas.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="softreq"></a>2.1. Requerimientos de Software</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>binutils</strong></span> - la versión sugerida es <span class="bold"><strong>2.11.x</strong></span>.
+  Este programa es el responsable de generar instrucciones  MMX/3DNow!/etc,
+  por lo tanto muy importante.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>gcc</strong></span> - versiones recomendadas son
+  2.95 y 3.3+. 2.96 y 3.0.x generan código con fallas, 3.1 y 3.2
+  tambien tuvieron sus problemas.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>XFree86</strong></span> - versión sugerida <span class="bold"><strong>siempre la
+  más nueva</strong></span> (4.3). Normalmente, todos quieren esto, desde XFree 4.0.2,
+  viene con la extensión <a class="link" href="output-trad.html#xv" title="4.2.1. Xv">XVideo</a> (referida en varios
+  lugares como <span class="bold"><strong>Xv</strong></span>) que se usa en efecto para
+  activar la aceleración YUV por hardware (mostrado rápido de imagen) en placas
+  que lo soportan.
+  Asegúrese que el <span class="bold"><strong>paquete de desarrollo</strong></span> este también
+  instalado, de otra manera no funcionará.
+  Para algunas placas de vídeo no se necesita XFree86. Vea el listado abajo.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>make</strong></span> - versión sugerida
+  <span class="bold"><strong>siempre la última</strong></span> (por lo menos la 3.79.x). Esto
+  normalmente no es importante.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>SDL</strong></span> - no es obligatoria, pero puede ayudar
+  en algunos cosas (audio malo, placas de vídeo que sufren retardo extraños
+  con el controlador xv). Siempre use la versión más actual (empezando por
+  1.2.x).
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>libjpeg</strong></span> - decodificador opcional de JPEG, usado por la opción <tt class="option">-mf</tt>
+  y algunos archivos MOV de QT. Útil para ambos <span class="application">MPlayer</span> y
+  <span class="application">MEncoder</span> si planea trabar con archivos jpeg.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>libpng</strong></span> - recomendado y decodificador por omisión de (M)PNG. Necesario para la IGU.
+  Útil para ambos <span class="application">MPlayer</span> y <span class="application">MEncoder</span>.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>lame</strong></span> - recomendado, necesario para codificar audio en  MP3 audio con
+  <span class="application">MEncoder</span>, la versión recomendada es
+  <span class="emphasis"><em>siempre la más nueva</em></span> (por lo menos 3.90).
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>libogg</strong></span> - opcional, necesaria para reproducir archivos con formato OGG.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>libvorbis</strong></span> - opcional, necesario para reproducir archivos de audio OGG Vorbis.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong><a class="ulink" href="http://www.live555.com/mplayer/" target="_top">LIVE.COM Streaming Media</a></strong></span>
+  - opcional, necesario para reproducir flujos RTSP/RTP.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>directfb</strong></span> - opcional, de
+  <a class="ulink" href="http://www.directfb.org" target="_top">http://www.directfb.org</a>
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>cdparanoia</strong></span> - opcional, para soporte de CDDA
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>libfreetype</strong></span> - opcional, para soporte de fuentes TTF
+  Versión mínima requerida es 2.0.9.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>libxmms</strong></span> - opcional, para soporte de plugins de entrada de XMMS
+  La versión mínima necesaria es 1.2.7.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>libsmb</strong></span> - opcional, para soporte Samba.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong><a class="ulink" href="http://www.underbit.com/products/mad/" target="_top">libmad</a></strong></span>
+  - opcional, para decodificación rápida de MP3 en plataformos sin FPU.
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="install.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="caracteristicas.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">Capítulo 2. Instalación </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 2.2. Características</td></tr></table></div></body></html>

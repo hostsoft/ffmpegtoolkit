@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.2. *BSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="ports.html" title="7. fejezet - Portok"><link rel="prev" href="linux.html" title="7.1. Linux"><link rel="next" href="unix.html" title="7.3. Kereskedelmi Unix"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="bsd.html#freebsd" title="7.2.1. FreeBSD"><link rel="subsection" href="bsd.html#openbsd" title="7.2.2. OpenBSD"><link rel="subsection" href="bsd.html#darwin" title="7.2.3. Darwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.2. *BSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="linux.html">Vissza</a> </td><th width="60%" align="center">7. fejezet - Portok</th><td width="20%" align="right"> <a accesskey="n" href="unix.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bsd"></a>7.2. *BSD</h2></div></div></div><p>
+Az <span class="application">MPlayer</span> fut az összes ismert BSD-n.
+Léteznek ports/pkgsrc/fink/stb. verziók az
+<span class="application">MPlayer</span>ből, amelyek nagy valószínűséggel
+egyszerűbben fordíthatóak le, mint a mi nyers forrásaink.
+</p><p>
+Ha az <span class="application">MPlayer</span> nem találja a
+<tt class="filename">/dev/cdrom</tt>-ot vagy a <tt class="filename">/dev/dvd</tt>-t,
+csinálj egy symlinket:
+</p><pre class="screen">ln -s /dev/<em class="replaceable"><code>cdrom_egység</code></em> /dev/cdrom</pre><p>
+</p><p>
+Ha Win32 DLL-eket akarsz használni az <span class="application">MPlayer</span>rel,
+újra kell fordítanod a kernelt "<code class="envar">option USER_LDT</code>"-vel
+(kivéve, ha FreeBSD-CURRENT-et
+használsz, ahol ez az alapállapot).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="freebsd"></a>7.2.1. FreeBSD</h3></div></div></div><p>
+Ha a processzorod támogatja az SSE-t, akkor ezen utasításkészlet kihasználásához
+a kernelt az "<code class="envar">options CPU_ENABLE_SSE</code>" beállítással
+kell fordítani (ehhez FreeBSD-STABLE vagy kernelpatchekre van szükség).
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="openbsd"></a>7.2.2. OpenBSD</h3></div></div></div><p>
+A gas különböző verzióinak hiányosságai miatt (relokáció vs MMX), két
+lépésben kell fordítani: előszőr legyen a nem-natív verzió a <code class="envar">$PATH</code>-ban,
+majd add ki a <span class="command"><strong>gmake -k</strong></span> parancsot, majd a natív verzióval
+<span class="command"><strong>gmake</strong></span>.
+</p><p>
+Az OpenBSD 3.4-től a fenti kavarás már nem szükséges.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="darwin"></a>7.2.3. Darwin</h3></div></div></div><p>
+Lásd a <a class="link" href="macos.html" title="7.5. Mac OS">Mac OS</a> részt.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="linux.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="unix.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">7.1. Linux </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 7.3. Kereskedelmi Unix</td></tr></table></div></body></html>

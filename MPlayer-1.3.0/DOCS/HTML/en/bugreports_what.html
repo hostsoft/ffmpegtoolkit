@@ -1,0 +1,131 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.6. What to report</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="prev" href="bugreports_where.html" title="A.5. Where to report bugs"><link rel="next" href="bugreports_advusers.html" title="A.7. I know what I am doing..."><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="bugreports_what.html#bugreports_system" title="A.6.1. System Information"><link rel="subsection" href="bugreports_what.html#bugreports_hardware" title="A.6.2. Hardware and drivers"><link rel="subsection" href="bugreports_what.html#bugreports_configure" title="A.6.3. Configure problems"><link rel="subsection" href="bugreports_what.html#bugreports_compilation" title="A.6.4. Compilation problems"><link rel="subsection" href="bugreports_what.html#bugreports_playback" title="A.6.5. Playback problems"><link rel="subsection" href="bugreports_what.html#bugreports_crash" title="A.6.6. Crashes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.6. What to report</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_where.html">Prev</a> </td><th width="60%" align="center">Appendix A. How to report bugs</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_what"></a>A.6. What to report</h2></div></div></div><p>
+You may need to include log, configuration or sample files in your bug report.
+If some of them are quite big then it is better to upload them to our
+<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">FTP server</a> in a
+compressed format (gzip and bzip2 preferred) and include only the path and file
+name in your bug report. Our mailing lists have a message size limit of 80k, if
+you have something bigger you have to compress or upload it.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_system"></a>A.6.1. System Information</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Your Linux distribution or operating system and version e.g.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Red Hat 7.1</p></li><li class="listitem"><p>Slackware 7.0 + devel packs from 7.1 ...</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  kernel version:
+  </p><pre class="screen">uname -a</pre><p>
+</p></li><li class="listitem"><p>
+  libc version:
+  </p><pre class="screen">ls -l /lib/libc[.-]*</pre><p>
+</p></li><li class="listitem"><p>
+  gcc and ld versions:
+  </p><pre class="screen">
+gcc -v
+ld -v</pre><p>
+</p></li><li class="listitem"><p>
+  binutils version:
+  </p><pre class="screen">as --version</pre><p>
+</p></li><li class="listitem"><p>
+  If you have problems with fullscreen mode:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Window manager type and version</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  If you have problems with XVIDIX:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>
+    X colour depth:
+    </p><pre class="screen">xdpyinfo | grep "depth of root"</pre><p>
+  </p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  If only the GUI is buggy:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>GTK version</p></li><li class="listitem"><p>GLIB version</p></li><li class="listitem"><p>GUI situation in which the bug occurs</p></li></ul></div><p>
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_hardware"></a>A.6.2. Hardware and drivers</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  CPU info (this works on Linux only):
+  </p><pre class="screen">cat /proc/cpuinfo</pre><p>
+</p></li><li class="listitem"><p>
+  Video card manufacturer and model, e.g.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>ASUS V3800U chip: nVidia TNT2 Ultra pro 32MB SDRAM</p></li><li class="listitem"><p>Matrox G400 DH 32MB SGRAM</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  Video driver type &amp; version, e.g.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>X built-in driver</p></li><li class="listitem"><p>nVidia 0.9.623</p></li><li class="listitem"><p>Utah-GLX CVS 2001-02-17</p></li><li class="listitem"><p>DRI from X 4.0.3</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  Sound card type &amp; driver, e.g.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Creative SBLive! Gold with OSS driver from oss.creative.com</p></li><li class="listitem"><p>Creative SB16 with kernel OSS drivers</p></li><li class="listitem"><p>GUS PnP with ALSA OSS emulation</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  If in doubt include <span class="command"><strong>lspci -vv</strong></span> output on Linux systems.
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_configure"></a>A.6.3. Configure problems</h3></div></div></div><p>
+If you get errors while running <span class="command"><strong>./configure</strong></span>, or autodetection
+of something fails, read <tt class="filename">config.log</tt>. You may find the
+answer there, for example multiple versions of the same library mixed on your
+system, or you forgot to install the development package (those with the -dev
+suffix). If you think there is a bug, include <tt class="filename">config.log</tt>
+in your bug report.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_compilation"></a>A.6.4. Compilation problems</h3></div></div></div><p>
+Please include these files:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>config.h</p></li><li class="listitem"><p>config.mak</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_playback"></a>A.6.5. Playback problems</h3></div></div></div><p>
+Please include the output of <span class="application">MPlayer</span> at verbosity
+level 1, but remember to
+<span class="bold"><strong>not truncate the output</strong></span> when
+you paste it into your mail. The developers need all of the messages to properly
+diagnose a problem. You can direct the output into a file like this:
+</p><pre class="screen">
+mplayer -v <em class="replaceable"><code>options</code></em> <em class="replaceable"><code>filename</code></em> &gt; mplayer.log 2&gt;&amp;1
+</pre><p>
+</p><p>
+If your problem is specific to one or more files,
+then please upload the offender(s) to:
+<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">ftp://upload.mplayerhq.hu/incoming/</a>
+</p><p>
+Also upload a small text file having the same base name as your file with a .txt
+extension. Describe the problem you are having with the particular file there
+and include your email address as well as the output of
+<span class="application">MPlayer</span> at verbosity level 1.
+Usually the first 1-5 MB of a file are enough to reproduce
+the problem, but to be sure we ask you to:
+</p><pre class="screen">
+dd if=<em class="replaceable"><code>yourfile</code></em> of=<em class="replaceable"><code>smallfile</code></em> bs=1024k count=5
+</pre><p>
+It will take the first five megabytes of
+'<span class="bold"><strong>your-file</strong></span>' and write it to
+'<span class="bold"><strong>small-file</strong></span>'. Then try again on
+this small file and if the bug still shows up your sample is sufficient for us.
+Please <span class="bold"><strong>do not ever</strong></span> send such files via mail!
+Upload it, and send only the path/filename of the file on the FTP-server. If the
+file is accessible on the net, then sending the
+<span class="bold"><strong>exact</strong></span> URL is sufficient.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_crash"></a>A.6.6. Crashes</h3></div></div></div><p>
+You have to run <span class="application">MPlayer</span> inside <span class="command"><strong>gdb</strong></span>
+and send us the complete output or if you have a <tt class="filename">core</tt> dump
+of the crash you can extract useful information from the Core file. Here's how:
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_debug"></a>A.6.6.1. How to conserve information about a reproducible crash</h4></div></div></div><p>
+Recompile <span class="application">MPlayer</span> with debugging code enabled:
+</p><pre class="screen">
+./configure --enable-debug=3
+make
+</pre><p>
+and then run <span class="application">MPlayer</span> within gdb using:
+</p><pre class="screen">gdb ./mplayer</pre><p>
+You are now within gdb. Type:
+</p><pre class="screen">
+run -v <em class="replaceable"><code>options-to-mplayer</code></em> <em class="replaceable"><code>filename</code></em>
+</pre><p>
+and reproduce your crash. As soon as you did it, gdb will return you to the
+command line prompt where you have to enter
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+With older gdb versions, use disass $pc-32 $pc+32.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_core"></a>A.6.6.2. How to extract meaningful information from a core dump</h4></div></div></div><p>
+Create the following command file:
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+Then simply execute this command:
+</p><pre class="screen">
+gdb mplayer --core=core -batch --command=command_file &gt; mplayer.bug
+</pre><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_where.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">A.5. Where to report bugs </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> A.7. I know what I am doing...</td></tr></table></div></body></html>

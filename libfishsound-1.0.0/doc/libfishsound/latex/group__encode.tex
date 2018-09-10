@@ -1,0 +1,138 @@
+\section{Encoding audio data}
+\label{group__encode}\index{Encoding audio data@{Encoding audio data}}
+
+
+To encode audio data using libfishsound\-:  
+
+
+To encode audio data using libfishsound\-: 
+\begin{DoxyItemize}
+\item create a Fish\-Sound$\ast$ object with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E, and with a \doxyref{Fish\-Sound\-Info}{p.}{structFishSoundInfo} structure filled in with the required encoding parameters. \doxyref{fish\-\_\-sound\-\_\-new()}{p.}{fishsound_8h_adecddfef35cbbddcc8a76b28c365c527} will return a new Fish\-Sound$\ast$ object initialised for encoding.
+\item provide a Fish\-Sound\-Encoded callback for libfishsound to call when it has a block of encoded audio
+\item feed raw P\-C\-M audio data to libfishsound via fish\-\_\-sound\-\_\-encode\-\_\-$\ast$(). libfishsound will encode the audio for you, calling the Fish\-Sound\-Encoded callback you provided earlier each time it has a block of encoded audio ready.
+\item when finished, call \doxyref{fish\-\_\-sound\-\_\-delete()}{p.}{fishsound_8h_a002e2dee1a7f736699dba5bec0a81426}.
+\end{DoxyItemize}
+
+This procedure is illustrated in src/examples/fishsound-\/encode.\-c. Note that this example additionally\-:
+\begin{DoxyItemize}
+\item uses {\tt libsndfile} to read input from a P\-C\-M audio file (W\-A\-V, A\-I\-F\-F, etc.)
+\item uses {\tt liboggz} to encapsulate the encoded F\-L\-A\-C, Speex or Vorbis data in an Ogg stream.
+\end{DoxyItemize}
+
+Hence this example code demonstrates all that is needed to encode Ogg F\-L\-A\-C, Speex and Ogg Vorbis files\-:
+
+
+\begin{DoxyCodeInclude}
+
+\textcolor{preprocessor}{#include "config.h"}
+\textcolor{preprocessor}{#include "fs\_compat.h"}
+
+\textcolor{preprocessor}{#include <stdio.h>}
+\textcolor{preprocessor}{#include <stdlib.h>}
+\textcolor{preprocessor}{#include <string.h>}
+\textcolor{preprocessor}{#include <time.h>}
+
+\textcolor{preprocessor}{#include <oggz/oggz.h>}
+\textcolor{preprocessor}{#include <fishsound/fishsound.h>}
+\textcolor{preprocessor}{#include <sndfile.h>}
+
+\textcolor{preprocessor}{#define ENCODE\_BLOCK\_SIZE (1152)}
+\textcolor{preprocessor}{}
+\textcolor{keywordtype}{long} serialno;
+\textcolor{keywordtype}{int} b\_o\_s = 1;
+
+\textcolor{keyword}{static} \textcolor{keywordtype}{int}
+encoded (FishSound * fsound, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} * buf, \textcolor{keywordtype}{long} bytes, \textcolor{keywordtype}{void} * user\_data)
+\{
+  OGGZ * oggz = (OGGZ *)user\_data;
+  ogg\_packet op;
+  \textcolor{keywordtype}{int} err;
+
+  op.packet = buf;
+  op.bytes = bytes;
+  op.b\_o\_s = b\_o\_s;
+  op.e\_o\_s = 0;
+  op.granulepos = fish_sound_get_frameno (fsound);
+  op.packetno = -1;
+
+  err = oggz\_write\_feed (oggz, &op, serialno, 0, NULL);
+  \textcolor{keywordflow}{if} (err) printf (\textcolor{stringliteral}{"err: %d\(\backslash\)n"}, err);
+
+  b\_o\_s = 0;
+
+  \textcolor{keywordflow}{return} 0;
+\}
+
+\textcolor{keywordtype}{int}
+main (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} ** argv)
+\{
+  OGGZ * oggz;
+  FishSound * fsound;
+  FishSoundInfo fsinfo;
+  SNDFILE * sndfile;
+  SF\_INFO sfinfo;
+
+  \textcolor{keywordtype}{char} * infilename, * outfilename;
+  \textcolor{keywordtype}{char} * ext = NULL;
+  \textcolor{keywordtype}{int} format = FISH_SOUND_VORBIS;
+
+  \textcolor{keywordtype}{float} pcm[2048];
+
+  \textcolor{keywordflow}{if} (argc < 3) \{
+    printf (\textcolor{stringliteral}{"usage: %s infile outfile\(\backslash\)n"}, argv[0]);
+    printf (\textcolor{stringliteral}{"*** FishSound example program. ***\(\backslash\)n"});
+    printf (\textcolor{stringliteral}{"Opens a PCM audio file and encodes it to an Ogg FLAC, Speex or Ogg Vorbis file.\(\backslash\)n"});
+    exit (1);
+  \}
+
+  infilename = argv[1];
+  outfilename = argv[2];
+
+  sndfile = sf\_open (infilename, SFM\_READ, &sfinfo);
+
+  \textcolor{keywordflow}{if} ((oggz = oggz\_open (outfilename, OGGZ\_WRITE)) == NULL) \{
+    printf (\textcolor{stringliteral}{"unable to open file %s\(\backslash\)n"}, outfilename);
+    exit (1);
+  \}
+
+  serialno = oggz\_serialno\_new (oggz);
+
+  \textcolor{comment}{/* If the given output filename ends in ".spx", encode as Speex,}
+\textcolor{comment}{   * otherwise use Vorbis */}
+  ext = strrchr (outfilename, \textcolor{charliteral}{'.'});
+  \textcolor{keywordflow}{if} (ext && !strncasecmp (ext, \textcolor{stringliteral}{".spx"}, 4))
+    format = FISH_SOUND_SPEEX;
+  \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ext && !strncasecmp (ext, \textcolor{stringliteral}{".oga"}, 4))
+    format = FISH_SOUND_FLAC;   
+  \textcolor{keywordflow}{else}
+    format = FISH_SOUND_VORBIS;
+
+  fsinfo.channels = sfinfo.channels;
+  fsinfo.samplerate = sfinfo.samplerate;
+  fsinfo.format = format;
+
+  fsound = fish_sound_new (FISH_SOUND_ENCODE, &fsinfo);
+  fish_sound_set_encoded_callback (fsound, encoded, oggz);
+
+  fish_sound_set_interleave (fsound, 1);
+
+  fish_sound_comment_add_byname (fsound, \textcolor{stringliteral}{"Encoder"}, \textcolor{stringliteral}{"fishsound-encode"});
+
+  \textcolor{keywordflow}{while} (sf\_readf\_float (sndfile, pcm, ENCODE\_BLOCK\_SIZE) > 0) \{
+    fish_sound_encode (fsound, (\textcolor{keywordtype}{float} **)pcm, ENCODE\_BLOCK\_SIZE);
+    oggz\_run (oggz);
+  \}
+
+  fish_sound_flush (fsound);
+  oggz\_run (oggz);
+
+  oggz\_close (oggz);
+
+  fish_sound_delete (fsound);
+
+  sf\_close (sndfile);
+
+  exit (0);
+\}
+\end{DoxyCodeInclude}
+ 

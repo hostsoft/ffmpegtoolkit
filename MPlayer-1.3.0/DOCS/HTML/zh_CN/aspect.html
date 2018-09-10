@@ -1,0 +1,23 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.10. 保持视频画面比例</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="prev" href="menc-feat-extractsub.html" title="6.9. 将DVD子标题提取到VOBsub文件"><link rel="next" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10. 保持视频画面比例</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">上一页</a> </td><th width="60%" align="center">第 6 章 <span class="application">MEncoder</span>的基础用法</th><td width="20%" align="right"> <a accesskey="n" href="encoding-guide.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aspect"></a>6.10. 保持视频画面比例</h2></div></div></div><p>
+DVD及SVCD(例如MPEG-1/2)文件包含画面比例，此信息可用来指示播放器应如何显示视频流，
+所以显示的人不会有个鸡蛋头（例如480x480 + 4:3 = 640x480）。然而当编码为AVI(DivX)
+文件时，你要小心AVI头信息里没有包含这些值。重新设置这些比例是非常讨厌并且很花时间，
+应该有更好的方法！
+</p><p>还有</p><p>
+MPEG-4有个独特的特点：视频流可以包含它需要的画面比例。是的，正像MPEG-1/2 (DVD,
+SVCD)及H.263文件一样。可惜的是，除了<span class="application">MPlayer</span>几乎没有播放器
+支持这项MPEG-4属性。
+</p><p>
+这种特性之可以与
+<code class="systemitem">libavcodec</code>的
+<code class="systemitem">mpeg4</code>编码器一同使用。记住：虽然
+<span class="application">MPlayer</span>可以正常播放所生成的文件，其他播放器可能使用错误
+的图象比例。
+</p><p>
+你应剪切电影图像上下方的黑条。针对<code class="systemitem">cropdetect</code>及
+<code class="systemitem">crop</code>滤镜的用法参考man页。
+</p><p>
+用法
+</p><pre class="screen">mencoder <em class="replaceable"><code>sample-svcd.mpg</code></em> -vf crop=714:548:0:14 -oac copy -ovc lavc \
+    -lavcopts vcodec=mpeg4:mbd=2:trell:autoaspect -o <em class="replaceable"><code>output.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="encoding-guide.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">6.9. 将DVD子标题提取到VOBsub文件 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 第 7 章 Encoding with <span class="application">MEncoder</span></td></tr></table></div></body></html>

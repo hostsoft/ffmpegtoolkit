@@ -1,0 +1,96 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.4. Mensajes GUI</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="prev" href="skin-fonts.html" title="B.3. Tipografías"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.4. Mensajes GUI</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-fonts.html">Anterior</a> </td><th width="60%" align="center">Apéndice B. Formato del skin de <span class="application">MPlayer</span></th><td width="20%" align="right"> </td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-gui"></a>B.4. Mensajes GUI</h2></div></div></div><p>
+Son los mensajes que pueden ser generados por los botones, potmetros y entradas
+de menú.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Algunos de los mensajes pueden no funcionar como se espera (o ni funcionar).
+Como ya sabe, el GUI está bajo desarrollo.
+</p></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evNone</strong></span></span></dt><dd><p>
+Mensaje vacío, no tiene efecto (excepto quizá en las versiones CVS :-)).
+    </p></dd></dl></div><div class="variablelist"><p class="title"><b>Control de reproducción:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evPlay</strong></span></span></dt><dd><p>
+Inicia la reproducción.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evStop</strong></span></span></dt><dd><p>
+Detiene la reproducción.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evPause</strong></span></span></dt><dd><p>
+    </p></dd><dt><span class="term"><span class="bold"><strong>evPrev</strong></span></span></dt><dd><p>
+Salta a la pista previa en la lista de reproducción.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evNext</strong></span></span></dt><dd><p>
+Salta a la siguiente pista en la lista de reproducción.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evLoad</strong></span></span></dt><dd><p>
+Carga un archivo (abriendo una ventana del navegador de archivos, para que pueda elegir uno).
+    </p></dd><dt><span class="term"><span class="bold"><strong>evLoadPlay</strong></span></span></dt><dd><p>
+Hace lo mismo que <code class="literal">evLoad</code>, pero inicia automáticamente la reproducción
+después de cargar el archivo.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evLoadAudioFile</strong></span></span></dt><dd><p>
+Carga un archivo de audio (con el selector de archivos)
+    </p></dd><dt><span class="term"><span class="bold"><strong>evLoadSubtitle</strong></span></span></dt><dd><p>
+Carga un archivo de subtítulos (con el selector de archivos)
+    </p></dd><dt><span class="term"><span class="bold"><strong>evDropSubtitle</strong></span></span></dt><dd><p>
+Desactiva el uso de subtítulos actual.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evPlaylist</strong></span></span></dt><dd><p>
+Abre/cierra la ventana de lista de reproducción.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evPlayVCD</strong></span></span></dt><dd><p>
+Intenta abrir el disco en la unidad de CD-ROM dada.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evPlayDVD</strong></span></span></dt><dd><p>
+Intenta abrir el disco en la unidad de DVD-ROM dada.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evLoadURL</strong></span></span></dt><dd><p>
+Muestra la ventana de diálogo para URL.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evPlaySwitchToPause</strong></span></span></dt><dd><p>
+Lo contrario a <code class="literal">evPauseSwitchToPlay</code>. Este mensaje inicia
+la reproducción y la imagen para el botón <code class="literal">evPauseSwitchToPlay</code>
+es mostrada (para indicar que el botón puede ser pulsado de nuevo para
+volver a pausar la reproducción).
+    </p></dd><dt><span class="term"><span class="bold"><strong>evPauseSwitchToPlay</strong></span></span></dt><dd><p>
+Forma un cambio junto con <code class="literal">evPlaySwitchToPause</code>. Puede ser
+usado para tener un botón normal de play/pausa. Ambos mensajes deben ser asignados
+a botones que se muestren exactamente en la misma posición en la ventana. Este mensaje
+pausa la reproducción y la imagen para el botón <code class="literal">evPlaySwitchToPause</code>
+es mostrada (para indicar que el botón puede ser pulsado de nuevo para continuar
+la reproducción).
+    </p></dd></dl></div><div class="variablelist"><p class="title"><b>Búsqueda:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evBackward10sec</strong></span></span></dt><dd><p>
+Busca 10 segundos hacia atrás.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evBackward1min</strong></span></span></dt><dd><p>
+Busca 1 minuto hacia atrás.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evBackward10min</strong></span></span></dt><dd><p>
+Busca 10 minutos hacia atrás.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evForward10sec</strong></span></span></dt><dd><p>
+Busca 10 segundos hacia adelante.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evForward1min</strong></span></span></dt><dd><p>
+Busca 1 minuto hacia adelante.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evForward10min</strong></span></span></dt><dd><p>
+Busca 10 minutos hacia adelante.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evSetMoviePosition</strong></span></span></dt><dd><p>
+Busca la posición (puede ser usado por un potmetro; el
+valor relativo (0-100%) del potmetro será el que se use).
+    </p></dd></dl></div><div class="variablelist"><p class="title"><b>Control de video:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evHalfSize</strong></span></span></dt><dd><p>
+    </p></dd><dt><span class="term"><span class="bold"><strong>evDoubleSize</strong></span></span></dt><dd><p>
+Establece doble tamaño para la ventana de la película.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evFullScreen</strong></span></span></dt><dd><p>
+Cambia el modo pantalla completa activado/desactivado.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evNormalSize</strong></span></span></dt><dd><p>
+Establece la ventana de video a tu tamaño normal
+    </p></dd><dt><span class="term"><span class="bold"><strong>evSetAspect</strong></span></span></dt><dd><p>
+    </p></dd></dl></div><div class="variablelist"><p class="title"><b>Control de audio:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evDecVolume</strong></span></span></dt><dd><p>
+Decrementa el volumen.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evIncVolume</strong></span></span></dt><dd><p>
+Incrementa el volumen.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evSetVolume</strong></span></span></dt><dd><p>
+Establece el volumen (puede ser usado por un potmetro; el
+valor relativo (0-100%) del potmetro será el que se use).
+    </p></dd><dt><span class="term"><span class="bold"><strong>evMute</strong></span></span></dt><dd><p>
+Silencia/activa el sonido.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evSetBalance</strong></span></span></dt><dd><p>
+Establece el balance (puede ser usado por un potmetro; el
+valor relativo (0-100%) del potmetro será el que se use).
+    </p></dd><dt><span class="term"><span class="bold"><strong>evEqualizer</strong></span></span></dt><dd><p>
+Activa/desactiva el ecualizador.
+    </p></dd></dl></div><div class="variablelist"><p class="title"><b>Miscelánea:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evAbout</strong></span></span></dt><dd><p>
+Abre la ventana de acerca de.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evPreferences</strong></span></span></dt><dd><p>
+Abre la ventana de preferencias.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evSkinBrowser</strong></span></span></dt><dd><p>
+Abre la ventana del navegador de skins.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evIconify</strong></span></span></dt><dd><p>
+Iconifica la ventana.
+    </p></dd><dt><span class="term"><span class="bold"><strong>evExit</strong></span></span></dt><dd><p>
+Sale del programa.
+    </p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-fonts.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Subir</a></td><td width="40%" align="right"> </td></tr><tr><td width="40%" align="left" valign="top">B.3. Tipografías </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

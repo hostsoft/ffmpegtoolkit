@@ -1,0 +1,82 @@
+.TH "oggz-comment" "1" 
+.SH "NAME" 
+oggz-comment \(em List or edit comments in an Ogg file. 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-comment\fR [\-l  | \-\-list ]  
+.PP 
+\fBoggz-comment\fR [\-o \fBfilename\fR  | \-\-output \fBfilename\fR ]  [\-d  | \-\-delete ]  [\-a  | \-\-all ]  [\-s \fBserialno\fR  | \-\-serialno \fBserialno\fR ]  [\-c \fBcontent-type\fR  | \-\-content-type \fBcontent-type\fR ] filename  
+.PP 
+\fBoggz-comment\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-comment\fR lists or edits the comments of 
+an Ogg file. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-comment\fR accepts the following options: 
+ 
+.SS "Listing options" 
+.IP "\-l, \-\-list" 10 
+List the comments in the given file. 
+.SS "Editing options" 
+.IP "\-o \fBfilename\fR, \-\-output \fBfilename\fR" 10 
+Write output to the specified 
+\fBfilename\fR. 
+ 
+.IP "\-d, \-\-delete" 10 
+Delete comments before editing. 
+.IP "\-a, \-\-all" 10 
+Edit comments for all logical bitstreams. 
+.IP "\-c \fBcontent-type\fR, \-\-content-type \fBcontent-type\fR" 10 
+Edit comments of the logical bitstreams with 
+specified \fBcontent-type\fR. 
+Run \fBoggz-known-codecs\fP\fB(1)\fP for a full list
+of codecs known by the installed version of oggz.
+ 
+.IP "\-s \fBserialno\fR, \-\-serialno \fBserialno\fR" 10 
+Edit comments of the logical bitstream with 
+specified \fBserialno\fR. 
+.SS "Miscellaneous options" 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+
+.SH EXAMPLES
+.PP
+List all comments in file.ogg:
+.PP
+.RS
+\f(CWoggz comment \-l file.ogg\fP
+.RE
+.PP
+List only the comments in the Theora bitstream in file.ogv:
+.PP
+.RS
+\f(CWoggz comment \-l \-c theora file.ogv\fP
+.RE
+.PP
+Add the comment "GENRE=Rock" to the Vorbis bitstream of file.ogv,
+writing output to output.ogv:
+.PP
+.RS
+\f(CWoggz comment \-c vorbis \-o output.ogv file.ogg GENRE=Rock\fP
+.RE
+
+.SH "AUTHOR" 
+.PP 
+Kangyuan Niu        August  5, 2007;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2007 Annodex Association 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBvorbiscomment\fP\fB(1)\fP, 
+\fBogginfo\fP\fB(1)\fP, 
+\fBoggz-info\fP\fB(1)\fP, 
+\fBhogg\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

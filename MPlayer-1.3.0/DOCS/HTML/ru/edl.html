@@ -1,0 +1,40 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.8. Редактируемые списки решений [Edit Decision Lists] (EDL)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="vcd.html" title="3.7. Воспроизведение VCD"><link rel="next" href="advaudio.html" title="3.9. Расширенные возможности аудио"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="edl.html#edl_using" title="3.8.1. Использование EDL файлов"><link rel="subsection" href="edl.html#edl_making" title="3.8.2. Создание EDL файлов"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.8. Редактируемые списки решений [Edit Decision Lists] (EDL)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vcd.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="advaudio.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="edl"></a>3.8. Редактируемые списки решений [Edit Decision Lists] (EDL)</h2></div></div></div><p>
+Система редактируемых списков решений [edit decision list] (EDL) позволяет Вам
+автоматически пропускать или заглушать части при воспроизведении, основываясь
+на специфичном для каждого фильма конфигурационном файле.
+</p><p>
+Это полезно для тех, кто может захотеть посмотреть фильм в "семейном" режиме.
+Вы можете исключить любые проявления насилия, ненормативной лексики,
+Jar-Jar Binks, и т. п. из фильмов, сообразуясь с Вашими личными предпочтениями.
+Помимо этого, существуют другие применения, например автоматический пропуск рекламы
+при просмотре фильмов.
+</p><p>
+Формат EDL файлов пока элементарен. в каждой строке находится одна команда, которая
+указывает, что делать (пропустить/выключить звук) и когда (используя pts в секундах).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_using"></a>3.8.1. Использование EDL файлов</h3></div></div></div><p>
+Включите опцию <tt class="option">-edl &lt;имя_файла&gt;</tt>, когда Вы запускаете
+<span class="application">MPlayer</span>, с именем EDL файла, который Вы хотите
+использовать с видео.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_making"></a>3.8.2. Создание EDL файлов</h3></div></div></div><p>
+Текущий формат файлов EDL:
+</p><pre class="programlisting">[начальная секунда] [конечная секунда] [действие]</pre><p>
+Где секунды - это числа с плавающей точкой (вещественные числа), а действие -
+это или <code class="literal">0</code> для пропуска или <code class="literal">1</code> для
+заглушения звука. Пример:
+</p><pre class="programlisting">
+5.3   7.1    0
+15    16.7   1
+420   422    0
+</pre><p>
+Это вызовет пропуск видео с 5.3 секунды до 7.1 секунды, затем заглушит звук
+на 15 секунде, включит обратно в 16.7 секунд и пропустит видео с 420 по 422
+секунды. Эти действия будут происходить, когда таймер проигрывания достигнет
+указанных в файле значений.
+</p><p>
+Чтобы начать создать EDL файл, используйте опцию <tt class="option">-edlout
+&lt;filename&gt;</tt>. При проигрывании, когда Вы хотите отметить
+предыдущие две секунды для пропуска, нажмите <span class="keycap"><b>i</b></span>.
+Соответствующая запись для этого времени будет добавлена в файл. Затем Вы
+можете вернуться и подстроить сгенерированный EDL файл также как и
+поправить действие по-умолчанию (пропуск блока, указанного в строке).
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vcd.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">3.7. Воспроизведение VCD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 3.9. Расширенные возможности аудио</td></tr></table></div></body></html>

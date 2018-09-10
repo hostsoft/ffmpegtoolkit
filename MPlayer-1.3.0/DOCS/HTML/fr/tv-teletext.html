@@ -1,0 +1,32 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.12. Télétexte</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="usage.html" title="Chapitre 3. Utilisation"><link rel="prev" href="tv-input.html" title="3.11. Entrée TV"><link rel="next" href="radio.html" title="3.13. Radio"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="tv-teletext.html#tv-teletext-implementation-notes" title="3.12.1. Notes d'implantation"><link rel="subsection" href="tv-teletext.html#tv-teletext-usage" title="3.12.2. Using teletext"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.12. Télétexte</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-input.html">Précédent</a> </td><th width="60%" align="center">Chapitre 3. Utilisation</th><td width="20%" align="right"> <a accesskey="n" href="radio.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-teletext"></a>3.12. Télétexte</h2></div></div></div><p>
+Le Télétexte n'est actuellement disponible dans
+<span class="application">MPlayer</span> que pour les drivers v4l et v4l2.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-teletext-implementation-notes"></a>3.12.1. Notes d'implantation</h3></div></div></div><p>
+<span class="application">MPlayer</span> gère les textes, graphiques et
+ liens classiquess.
+ Malheureusement, les pages colorisées ne sont pas encore complètement
+ gérées :  toutes les pages sont affichées en niveau de gris.
+ Les sous-titres (dénommés Closed Captions (CC)) sont aussi  supportées.
+</p><p>
+<span class="application">MPlayer</span> commence à mettre en cache toutes les
+pages Télétexte dès qu'il commence à recevoir du signal TV.  Ainsi, vous
+n'avez pas besoin d'attendre jusqu'à ce que la page requise soit chargée.
+</p><p>
+  Note : Utiliser le Télétexte avec l'option <tt class="option">-vo xv</tt>
+  génère des couleurs bizarres.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-teletext-usage"></a>3.12.2. Using teletext</h3></div></div></div><p>
+Pour pouvoir décoder le tététexte, vous devez spécifier le périphérique VBI
+d'où vous souhaitez extraire les données (normalement
+<tt class="filename">/dev/vbi0</tt> pour Linux).  Ceci peut être fait en
+spécifiant <tt class="option">tdevice</tt> dans votre fichier de configuration
+comme indiqué ci-dessous :
+</p><pre class="screen">tv=tdevice=/dev/vbi0</pre><p>
+</p><p>
+Vous pouvez avoir besoin de spécifier le code de la langue pour
+le Télétexte dans votre pays.  La liste des codes est disponible avec
+l'option :
+</p><pre class="screen">tv=tdevice=/dev/vbi0:tlang=<em class="replaceable"><code>-1</code></em></pre><p>
+
+Voici un exemple pour du Russe :
+</p><pre class="screen">tv=tdevice=/dev/vbi0:tlang=<em class="replaceable"><code>33</code></em></pre><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-input.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="radio.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">3.11. Entrée TV </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 3.13. Radio</td></tr></table></div></body></html>

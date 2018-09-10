@@ -1,0 +1,11 @@
+--- enc_if.c
++++ enc_if.c
+@@ -74,7 +74,7 @@
+ /* overall table with the parameters of the
+    decoder homing frames for all modes */
+ 
+-const Word16 *dhf[10];
++extern const Word16 *dhf[10];
+ 
+ 
+ /*

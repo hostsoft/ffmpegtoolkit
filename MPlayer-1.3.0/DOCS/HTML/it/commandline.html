@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.1. Riga comando</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="prev" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="next" href="subosd.html" title="3.2. Sottotitoli e OSD"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.1. Riga comando</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="usage.html">Indietro</a> </td><th width="60%" align="center">Capitolo 3. Utilizzo</th><td width="20%" align="right"> <a accesskey="n" href="subosd.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="commandline"></a>3.1. Riga comando</h2></div></div></div><p>
+<span class="application">MPlayer</span> usa una sequenza di riproduzione complessa.
+Le opzioni passate sulla riga comando possono venir applicate a tutti i
+file/URL o solo ad alcuni, a seconda della loro posizione. Per esempio
+</p><pre class="screen">mplayer -vfm ffmpeg movie1.avi movie2.avi</pre><p>
+userà i decodificatori FFmpeg per ambedue i file, mentre
+</p><pre class="screen">
+mplayer -vfm ffmpeg <em class="replaceable"><code>movie1.avi</code></em> <em class="replaceable"><code>movie2.avi</code></em> -vfm dmo
+</pre><p>
+riprodurrà il secondo file con un decodificatore DMO.
+</p><p>
+Puoi raggruppare file/URL insieme usando <code class="literal">{</code> e
+<code class="literal">}</code>. Torna utile con l'opzione <tt class="option">-loop</tt>:
+</p><pre class="screen">mplayer { 1.avi -loop 2 2.avi } -loop 3</pre><p>
+Il comando precedente riprodurrà i file in quest'ordine:
+1, 1, 2, 1, 1, 2, 1, 1, 2.
+</p><p>
+Riprodurre un file:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>opzioni</code></em>] [<em class="replaceable"><code>percorso</code></em>/]<em class="replaceable"><code>nomefile</code></em>
+</pre><p>
+</p><p>
+Un altro modo di riprodurre un file:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>opzioni</code></em>] <em class="replaceable"><code>file:///uri-escaped-path</code></em>
+</pre><p>
+</p><p>
+Riprodurre più file:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>opzioni di default</code></em>] [<em class="replaceable"><code>percorso</code></em>/]<em class="replaceable"><code>nomefile1</code></em> [<em class="replaceable"><code>opzioni per nomefile1</code></em>] <em class="replaceable"><code>nomefile2</code></em> [<em class="replaceable"><code>opzioni per nomefile2</code></em>] ...
+</pre><p>
+</p><p>
+Riprodurre VCD:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>opzioni</code></em>] vcd://<em class="replaceable"><code>numerotraccia</code></em> [-cdrom-device <em class="replaceable"><code>/dev/cdrom</code></em>]
+</pre><p>
+</p><p>
+Riprodurre DVD:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>opzioni</code></em>] dvd://<em class="replaceable"><code>numerotitolo</code></em> [-dvd-device <em class="replaceable"><code>/dev/dvd</code></em>]
+</pre><p>
+</p><p>
+Riprodurre da WWW:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>opzioni</code></em>] http://<em class="replaceable"><code>sito.com/file.asf</code></em>
+</pre><p>
+(possono venir usate anche le playlist)
+</p><p>
+Riprodurre da RTSP:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>opzioni</code></em>] rtsp://<em class="replaceable"><code>server.di.esempio.com/nomeFlusso</code></em>
+</pre><p>
+</p><p>
+Esempi:
+</p><pre class="screen">
+mplayer -vo x11 <em class="replaceable"><code>/mnt/Films/Contact/contact2.mpg</code></em>
+mplayer vcd://<em class="replaceable"><code>2</code></em> -cdrom-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -afm 3 <em class="replaceable"><code>/mnt/DVDtrailers/alien4.vob</code></em>
+mplayer dvd://<em class="replaceable"><code>1</code></em> -dvd-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -abs 65536 -delay -0.4 -nobps <em class="replaceable"><code>~/movies/test.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="usage.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="subosd.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">Capitolo 3. Utilizzo </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 3.2. Sottotitoli e OSD</td></tr></table></div></body></html>

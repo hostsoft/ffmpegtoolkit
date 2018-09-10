@@ -1,0 +1,258 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.3. Dekodery MPEG</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="prev" href="output-trad.html" title="4.2. Wyjścia video dla tradycyjnych kart graficznych"><link rel="next" href="other.html" title="4.4. Inny sprzęt do wizualizacji"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="subsection" href="mpeg_decoders.html#dvb" title="4.3.1. Wejście i wyjście DVB"><link rel="subsection" href="mpeg_decoders.html#dxr2" title="4.3.2. DXR2"><link rel="subsection" href="mpeg_decoders.html#dxr3" title="4.3.3. DXR3/Hollywood+"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.3. Dekodery MPEG</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="output-trad.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 4. Urządzenia wyjścia video</th><td width="20%" align="right"> <a accesskey="n" href="other.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mpeg_decoders"></a>4.3. Dekodery MPEG</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dvb"></a>4.3.1. Wejście i wyjście DVB</h3></div></div></div><p>
+<span class="application">MPlayer</span> obsługuje karty z układem Siemens DVB,
+od producentów takich, jak: Siemens, Technotrend, Galaxis czy Hauppauge.
+Najnowsze sterowniki DVB są dostępne na
+<a class="ulink" href="http://www.linuxtv.org" target="_top">stronie Linux TV</a>.
+Jeżeli chcesz programowego transkodowania, powinieneś dysponować procesorem
+z zegarem co najmniej 1GHz.
+</p><p>
+Configure powinien wykryć Twoją kartę DVB. Jeżeli tak się nie stało,
+możesz wymusić obsługę DVB używając
+</p><pre class="screen">./configure --enable-dvb</pre><p>Jeżeli Twoje nagłówki 'ost' znajdują się w niestandardowym miejscu,
+ustaw ścieżkę przy pomocy</p><pre class="screen">./configure --extra-cflags=<em class="replaceable"><code>katalog ze źródłami DVB</code></em>/ost/include</pre><p>Po czym skompiluj i zainstaluj jak zwykle.</p><p><b>ZASTOSOWANIE. </b>
+Sprzętowego dekodowania (odtwarzanie standardowych plików MPEG-1/2)
+można dokonać tą komendą:
+</p><pre class="screen">mplayer -ao mpegpes -vo mpegpes <em class="replaceable"><code>plik.mpg|vob</code></em></pre><p>
+Programowe dekodowanie oraz transkodowanie różnych formatów do MPEG-1
+można uzyskać używając polecenia podobnego do:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes <em class="replaceable"><code>twójplik.roz</code></em>
+mplayer -ao mpegpes -vo mpegpes -vf expand <em class="replaceable"><code>twójplik.roz</code></em>
+</pre><p>
+Zauważ, że karty DVB obsługują tylko rozdzielczość pionową równą 288 i 576 dla
+PAL oraz 240 i 480 dla NTSC.
+<span class="bold"><strong>Musisz</strong></span> przeskalować obraz, dodając
+<tt class="option">scale=szerokość:wysokość</tt>,
+z wybraną wysokością i szerokością do opcji <tt class="option">-vf</tt>.
+Karty DVB akceptują różne szerokości, takie jak 720, 704, 640, 512, 480, 352
+itp. i dokonują sprzętowego skalowania w kierunku horyzontalnym,
+więc w większości przypadków nie musisz skalować horyzontalnie.
+Dla MPEG-4 (DivX) 512x384 (proporcje 4:3) wypróbuj:
+</p><pre class="screen">mplayer -ao mpegpes -vo mpegpes -vf scale=512:576</pre><p>Jeżeli masz film w formacie panoramicznym i nie chcesz go skalować
+do pełnej wysokości, możesz użyć filtru <tt class="option">expand=szer:wys</tt>
+aby dodać czarne paski. Aby wyświetlić MPEG-4 (DivX) 640x384, wypróbuj:
+</p><pre class="screen">mplayer -ao mpegpes -vo mpegpes -vf expand=640:576 <em class="replaceable"><code>plik.avi</code></em>
+</pre><p>Jeżeli twój CPU jest za wolny na pełnowymiarowy MPEG-4 (DivX) 720x576,
+spróbuj przeskalować w dół:</p><pre class="screen">mplayer -ao mpegpes -vo mpegpes -vf scale=352:576 <em class="replaceable"><code>plik.avi</code></em>
+</pre><p>Jeżeli to nie poprawiło szybkości, spróbuj także pionowego
+skalowania w dół:</p><pre class="screen">mplayer -ao mpegpes -vo mpegpes -vf scale=352:288 <em class="replaceable"><code>plik.avi</code></em>
+</pre><p>
+Dla OSD i napisów użyj cechy OSD filtru expand. Zamiast
+<tt class="option">expand=wys:szer</tt> lub
+<tt class="option">expand=wys:szer:x:y</tt>, użyj więc
+<tt class="option">expand=wys:szer:x:y:1</tt> (piąty parametr <tt class="option">:1</tt>
+na końcu umożliwi renderowanie (wyświetlanie) OSD).
+Możesz chcieć przesunąć obraz trochę w górę, aby zyskać więcej miejsca na
+napisy. Możesz także chcieć przesunąć napisy w górę, jeżeli znajdują się poza
+ekranem TV, użyj opcji <tt class="option">-subpos &lt;0-100&gt;</tt>, aby to dopasować
+(<tt class="option">-subpos 80</tt> jest dobrym wyborem).
+</p><p>
+Aby odtwarzać filmy z liczbą klatek na sekundę inną niż 25 na telewizorze PAL
+lub na wolnym CPU, dodaj opcję <tt class="option">-framedrop</tt>.
+</p><p>
+Zachowanie proporcji plików MPEG-4 (DivX) oraz optymalne parametry skalowania
+(sprzętowe poziome i programowe pionowe z zachowaniem odpowiednich proporcji),
+można uzyskać przy użyciu nowego filtru dvbscale:
+</p><pre class="screen">
+dla TV  4:3: -vf dvbscale,scale=-1:0,expand=-1:576:-1:-1:1
+dla TV 16:9: -vf dvbscale=1024,scale=-1:0,expand=-1:576:-1:-1:1
+</pre><p><b>Cyfrowa telewizja (moduł wejścia DVB). </b>Możesz użyć swojej karty DVB do oglądania cyfrowej telewizji.</p><p>
+  Powinieneś mieć zainstalowane programy <span class="command"><strong>scan</strong></span> oraz
+  <span class="command"><strong>szap/tzap/czap/azap</strong></span>; wszystkie są w paczce ze sterownikami.
+</p><p>
+  Sprawdź czy Twoje sterowniki działają prawidłowo używając programu takiego jak
+  <a class="ulink" href="http://sf.net/projects/dvbtools/" target="_top"><span class="command"><strong>dvbstream</strong></span></a>
+  (jest on podstawą modułu wejścia DVB).
+</p><p>
+  Teraz powinieneś ułożyć plik <tt class="filename">~/.mplayer/channels.conf</tt>
+  zgodnie ze składnią akceptowaną przez <span class="command"><strong>szap/tzap/czap/azap</strong></span>
+  lub kazać <span class="command"><strong>scan</strong></span> zrobić to za Ciebie.
+</p><p>
+  Jeżeli masz kartę więcej niż jednego typu (np. ATSC, satelita, kablówka,
+  z nadajnika naziemnego), to możesz zapisać swoje pliki kanałów jako:
+  <tt class="filename">~/.mplayer/channels.conf.sat</tt> (satelita),
+  <tt class="filename">~/.mplayer/channels.conf.ter</tt> (naziemna),
+  <tt class="filename">~/.mplayer/channels.conf.cbl</tt> (kablówka),
+  oraz <tt class="filename">~/.mplayer/channels.conf.atsc</tt>
+  dając w ten sposób <span class="application">MPlayerowi</span> wskazówkę aby
+  używał tych plików zamiast <tt class="filename">~/.mplayer/channels.conf</tt>,
+  a Ty musisz tylko określić, której karty użyć.
+</p><p>
+  Upewnij się, że w <tt class="filename">channels.conf</tt> masz
+  <span class="emphasis"><em>tylko</em></span> kanały niekodowane (Free to Air). W przeciwnym
+  razie <span class="application">MPlayer</span> będzie próbował przeskoczyć do
+  następnego widzialnego kanału, lecz może to zająć trochę czasu jeżeli
+  wystąpuje po sobie wiele kanałów kodowanych.
+</p><p>
+  W polach audio i video możesz użyć rozszerzonej składni:
+  <tt class="option">...:pid[+pid]:...</tt> (każdy maksymalnie dla 6 pidów);
+  W tym przypadku <span class="application">MPlayer</span> uwzględni w strumieniu
+  wszystkie podane pidy, plus pid 0 (zawierający PAT). Zachęcamy do
+  uwzględnienia w każdym wierszu pidu PMT (jeżeli go znasz) dla określanego
+  kanału. Inne możliwe zastosowania: pid televideo, druga ścieżka dźwiękowa,
+  itp.
+</p><p>
+  Jeśli <span class="application">MPlayer</span> często uskarża się na
+  </p><pre class="screen">Too many video/audio packets in the buffer</pre><p>
+  (za dużo pakietów video/audio w buforze) albo jeśli zauważysz rosnący brak
+  synchronizacji między audio a video spróbuj użyć demuksera MPEG-TS
+  z libavformat, dodając
+  <tt class="option">-demuxer lavf -lavfdopts probesize=128</tt>
+  do wiersza poleceń.
+</p><p>
+  Aby wyświetlić pierwszy z kanałów obecnych na Twojej liście, uruchom
+</p><pre class="screen">
+  mplayer dvb://
+</pre><p>
+  Jeżeli chcesz oglądać określony kanał, na przykład R1, uruchom
+</p><pre class="screen">
+  mplayer dvb://R1
+</pre><p>
+  Jeżeli masz więcej niż jedną kartę, będziesz musiał określić numer
+  karty, na której jest widoczny kanał (np. 2), korzystając z następującej
+  składni:
+</p><pre class="screen">
+  mplayer dvb://2@R1
+</pre><p>
+  Aby przełączać kanały używaj klawiszy <span class="keycap"><b>h</b></span> (następny) oraz
+  <span class="keycap"><b>k</b></span> (poprzedni) lub skorzystaj z
+  <a class="link" href="fonts-osd.html#osdmenu" title="2.4.3. Menu OSD">menu OSD</a>).
+</p><p>
+  Jeżeli Twój <tt class="filename">~/.mplayer/menu.conf</tt> zawiera wpis
+  <code class="literal">&lt;dvbsel&gt;</code>, taki jak ten w przykładowym pliku
+  <tt class="filename">etc/dvb-menu.conf</tt> (którym możesz nadpisać
+  <tt class="filename">~/.mplayer/menu.conf</tt>), w menu głównym pokaże się
+  podmenu, które zezwoli Ci na wybór jednego kanału z obecnych w Twoim
+  <tt class="filename">channels.conf</tt>, możliwe, że poprzedzone menu z listą
+  dostępnych kart, jeżeli więcej niż jedna nadaje się do użytku
+  <span class="application">MPlayerem</span>.
+</p><p>
+  Jeżeli chcesz zapisać program (audycję) na dysku, użyj
+</p><pre class="screen">
+  mplayer -dumpfile r1.ts -dumpstream dvb://R1
+</pre><p>
+  Jeżeli chcesz nagrać go w innym formacie (przekodowując go), możesz zamiast
+  tego użyć polecenia podobnego do
+</p><pre class="screen">
+  mencoder -o r1.avi -ovc xvid -xvidencopts bitrate=800 -oac mp3lame -lameopts cbr:br=128 -pp=ci dvb://R1
+</pre><p>
+  Na stronie man znajdziesz listę opcji, które możesz przekazać modułowi wejścia
+  DVB.
+</p><p><b>PRZYSZŁOŚĆ. </b>
+Jeżeli masz pytania lub chcesz otrzymywać przyszłe ogłoszenia,
+a także wziąć udział w dyskusjach na ten temat, przyłącz się do naszej
+listy dyskusyjnej
+<a class="ulink" href="http://mplayerhq.hu/mailman/listinfo/mplayer-dvb" target="_top">MPlayer-DVB</a>.
+Proszę pamiętaj, że językiem listy jest angielski.
+</p><p>
+W przyszłości możesz się spodziewać zdolności wyświetlania OSD i napisów
+przy użyciu wbudowanej obsługi OSD przez karty DVB, a także bardziej płynnego
+odtwarzania filmów innych niż 25fps oraz transkodowania w czasie
+rzeczywistym MPEG-2 i MPEG-4
+(częściowa dekompresja).
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dxr2"></a>4.3.2. DXR2</h3></div></div></div><p><span class="application">MPlayer</span> obsługuje sprzętowo przyśpieszane
+odtwarzanie przy użyciu karty DXR2.</p><p>
+Przede wszystkim będziesz potrzebował poprawnie zainstalowanych sterowników
+DXR2. Sterowniki i instrukcję instalacji możesz znaleźć na stronie
+<a class="ulink" href="http://dxr2.sf.net/" target="_top">Centrum zasobów DXR2 (DXR2 Resource Center)</a>.
+</p><div class="variablelist"><p class="title"><b>ZASTOSOWANIE</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo dxr2</tt></span></dt><dd><p>Włącz wyjście TV.</p></dd><dt><span class="term"><tt class="option">-vo dxr2:x11</tt> lub <tt class="option">-vo dxr2:xv</tt></span></dt><dd><p>Włącz wyjście nakładki w X11.</p></dd><dt><span class="term"><tt class="option">-dxr2 &lt;opcja1:opcja2:...&gt;</tt></span></dt><dd><p>Ta opcja używana jest do sterowania sterownikiem DXR2.</p></dd></dl></div><p>
+Układ nakładki (overlay chipset) używany w DXR2 jest dość kiepskiej jakości,
+ale standardowe ustawienia powinny działać u wszystkich.
+OSD może być użyte z nakładką (nie na TV) poprzez rysowanie go kolorem
+kluczowym (colorkey).
+Ze standardowymi ustawieniami koloru kluczowego możesz uzyskać różne rezultaty,
+zwykle będziesz widział kolor kluczowy dookoła znaków lub inny śmieszny efekt.
+Jeżeli dobrze dostosujesz ustawienia koloru kluczowego, powinieneś uzyskać
+akceptowalne wyniki.
+</p><p>Listę dostępnych opcji znajdziesz na stronie man.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dxr3"></a>4.3.3. DXR3/Hollywood+</h3></div></div></div><p>
+<span class="application">MPlayer</span> obsługuje sprzętowo przyśpieszane
+odtwarzanie na kartach Creative DXR3 oraz Sigma Designs Hollywood Plus.
+Obie te karty używają układu dekodującego em8300 firmy Sigma Designs.
+</p><p>
+Przede wszystkim będziesz potrzebował poprawnie zainstalowanych sterowników
+DXR3/H+ w wersji 0.12.0 lub nowszej.
+Sterowniki i instrukcję ich instalacji możesz znaleźć na stronie
+<a class="ulink" href="http://dxr3.sf.net/" target="_top">DXR3 &amp; Hollywood Plus dla Linuksa</a>.
+<tt class="filename">configure</tt> powinno wykryć Twoją kartę automatycznie,
+kompilacja powinna przebiec bez problemu.
+</p><div class="variablelist"><p class="title"><b>ZASTOSOWANIE</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo dxr3:prebuf:sync:norm=x:<em class="replaceable"><code>device</code></em></tt></span></dt><dd><p>
+<tt class="option">overlay</tt> włącza nakładkę zamiast wyjścia TV.
+Do działania wymaga poprawnie skonfigurowanych ustawień nakładki.
+Najłatwiejszym sposobem konfiguracji nakładki jest odpalenie autocal.
+Następnie uruchom <span class="application">MPlayera</span> z wyjściem dxr3 oraz z
+wyłączoną nakładką; uruchom dxr3view.
+W dxr3view możesz dostrajać ustawienia nakładki i oglądać efekty na bieżąco,
+być może będzie to w przyszłości obsługiwane przez GUI <span class="application">MPlayera</span>.
+Po poprawnym ustawieniu nakładki nie będziesz już musiał używać dxr3view.
+<tt class="option">prebuf</tt> włącza buforowanie z wyprzedzeniem (prebuffering).
+Prebuffering jest możliwością układu em8300, która umożliwia przetrzymywanie
+w pamięci więcej niż jednej ramki video na raz. Oznacza to, że
+<span class="application">MPlayer</span>
+uruchomiony z włączonym prebufferingiem będzie próbował cały czas utrzymywać
+wypełniony bufor. Jeżeli masz wolną maszynę, <span class="application">MPlayer</span>
+będzie używał prawie lub dokładnie 100% CPU. Jest to szczególnie powszechne
+przy odtwarzaniu czystych strumieni MPEG (takich jak DVD, SVCD itd.).
+<span class="application">MPlayer</span> wypełni bufor bardzo szybko, ponieważ nie
+będzie musiał przekodowywać strumienia do MPEG.
+Z prebufferingiem odtwarzanie video jest <span class="bold"><strong>dużo</strong></span>
+mniej wrażliwe na inne programy wykorzystujące CPU. Nie będzie gubił ramek,
+chyba że inne aplikacje będą wykorzystywały CPU przez dłuższy czas.
+Uruchamiany bez prebufferingu, em8300 jest o wiele bardziej wrażliwy na
+obciążenie CPU, włączenie opcji <tt class="option">-framedrop</tt> jest więc wysoce
+wskazane aby uniknąć dalszej utraty synchronizacji.
+<tt class="option">sync</tt> włączy nowy mechanizm synchronizacji (sync-engine). Jest
+to na razie funkcja eksperymentalna. Z włączonym sync wewnętrzny zegar em8300
+będzie cały czas monitorowany. Gdy zacznie się różnić od zegara
+<span class="application">MPlayera</span> zostanie zresetowany, czego skutkiem będzie
+opuszczenie przez em8300 wszystkich opóźnionych
+ramek. <tt class="option">norm=x</tt> ustawi standard TV dla DXR3 bez potrzeby
+używania zewnętrznych narzędzi, takich jak em8300setup. Poprawnymi
+standardami są: 5 = NTSC, 4 = PAL-60, 3 = PAL. Specjalne standardy to
+2 (automatyczne dostrojenie
+używające PAL/PAL-60) oraz 1 (automatyczne dostrojenie używające PAL/NTSC);
+decydują one, którego standardu użyć patrząc na ilość klatek na sekundę filmu.
+norm = 0 (standardowe) nie zmienia bieżącego standardu.
+<tt class="option"><em class="replaceable"><code>device</code></em></tt> = numer urządzenia, którego
+możesz użyć, jeżeli masz więcej niż jedną kartę em8300.
+Każda z tych opcji może być pominięta.
+<tt class="option">:prebuf:sync</tt> spisuje się doskonale przy odtwarzaniu filmów
+MPEG-4 (DivX). Niektórzy miewają problemy podczas odtwarzania plików
+MPEG-1/2 korzystając
+z opcji prebuf. Spróbuj najpierw bez żadnych opcji. Jeżeli będziesz miał
+problemy z synchronizacją lub z napisami DVD, wypróbuj <tt class="option">:sync</tt>.
+</p></dd><dt><span class="term"><tt class="option">-ao oss:/dev/em8300_ma-<em class="replaceable"><code>X</code></em></tt></span></dt><dd><p>
+Ustawia wyjście audio, gdzie <em class="replaceable"><code>X</code></em> jest numerem
+urządzenia (0 jeżeli pojedyncza karta).
+</p></dd><dt><span class="term"><tt class="option">-af resample=<em class="replaceable"><code>xxxxx</code></em></tt></span></dt><dd><p>
+em8300 nie potrafi odgrywać dźwięku o częstotliwości próbkowania niższej niż
+44100Hz. Jeżeli częstotliwość próbkowania jest niższa niż 44100Hz wybierz
+44100HZ lub 48000Hz w zależności, która bardziej pasuje. Na przykład jeżeli film
+używa 22050Hz - wybierz 44100Hz (44100 / 2 = 22050), jeżeli używa 24000Hz -
+wybierz 48000Hz (48000 / 2 = 24000) i tak dalej. Nie działa to z cyfrowym
+wyjściem audio (<tt class="option">-ac hwac3</tt>).
+</p></dd><dt><span class="term"><tt class="option">-vf lavc</tt></span></dt><dd><p>
+Aby oglądać zawartość nie-MPEG na em8300 (np. MPEG-4 (DivX) lub RealVideo)
+będziesz musiał określić filtr video MPEG-1 taki jak
+<code class="systemitem">libavcodec</code> (lavc).
+Spójrz na stronę man, aby uzyskać więcej informacji o <tt class="option">-vf lavc</tt>.
+Obecnie nie istnieje sposób ustawienia współczynnika fps dla
+em8300, co oznacza, że jest on zablokowany na 30000/1001fps. Z tego powodu jest
+bardzo wskazane abyś używał
+<tt class="option">-vf lavc=<em class="replaceable"><code>quality</code></em>:25</tt>, szczególnie
+jeżeli używasz buforowania z wyprzedzeniem. Dlaczego 25 a nie 30000/1001? Cóż,
+przy 30000/1001 odtwarzanie staje się nieco skokowe. Powód tego nie jest nam znany.
+Jeżeli ustawisz fps pomiędzy 25 a 27 obraz stanie się stabilny. W chwili obecnej
+nie możemy zrobić nic poza zaakceptowaniem tego faktu.
+</p></dd><dt><span class="term"><tt class="option">-vf expand=-1:-1:-1:-1:1</tt></span></dt><dd><p>
+Chociaż sterownik DXR3 może wstawić jakieś OSD w obraz MPEG-1/2/4, ma ono
+o wiele niższą jakość niż tradycyjne OSD <span class="application">MPlayera</span>,
+ma także liczne problemy z odświeżaniem. Powyższy wiersz najpierw zamieni
+wejściowe video na MPEG-4 (jest to konieczne, przepraszamy),
+następnie nałoży filtr expand (rozszerzenie), który
+nic nie rozszerzy (-1: domyślne), ale doda normalne OSD do obrazu (robi to ta
+jedynka na końcu).
+</p></dd><dt><span class="term"><tt class="option">-ac hwac3</tt></span></dt><dd><p>
+em8300 obsługuje odtwarzanie AC3 audio (dźwięk przestrzenny) poprzez cyfrowe
+wyjście karty. Spójrz na opcję <tt class="option">-ao oss</tt> powyżej. Musi ona być
+użyta aby określić wyjście DXR3 zamiast tego z karty dźwiękowej.
+</p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="output-trad.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="other.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">4.2. Wyjścia video dla tradycyjnych kart graficznych </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 4.4. Inny sprzęt do wizualizacji</td></tr></table></div></body></html>

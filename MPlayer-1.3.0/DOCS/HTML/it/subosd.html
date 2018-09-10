@@ -1,0 +1,67 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.2. Sottotitoli e OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="prev" href="commandline.html" title="3.1. Riga comando"><link rel="next" href="control.html" title="3.3. Controlli"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. Sottotitoli e OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="commandline.html">Indietro</a> </td><th width="60%" align="center">Capitolo 3. Utilizzo</th><td width="20%" align="right"> <a accesskey="n" href="control.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="subosd"></a>3.2. Sottotitoli e OSD</h2></div></div></div><p>
+<span class="application">MPlayer</span> può visualizzare sottotitoli insieme con i
+file video.
+Attualmente sono supportati i seguenti formati:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>VOBsub</p></li><li class="listitem"><p>OGM</p></li><li class="listitem"><p>CC (closed caption)</p></li><li class="listitem"><p>MicroDVD</p></li><li class="listitem"><p>SubRip</p></li><li class="listitem"><p>SubViewer</p></li><li class="listitem"><p>Sami</p></li><li class="listitem"><p>VPlayer</p></li><li class="listitem"><p>RT</p></li><li class="listitem"><p>SSA</p></li><li class="listitem"><p>PJS (Phoenix Japanimation Society)</p></li><li class="listitem"><p>MPsub</p></li><li class="listitem"><p>AQTitle</p></li><li class="listitem"><p>
+    <a class="ulink" href="http://unicorn.us.com/jacosub/" target="_top">JACOsub</a>
+  </p></li></ul></div><p>
+</p><p>
+<span class="application">MPlayer</span> può fare il dump dei suddetti formati di
+sottotitoli (<span class="bold"><strong>tranne i primi tre</strong></span>) nei formati
+di destinazione seguenti, con le rispettive opzioni:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>MPsub: <tt class="option">-dumpmpsub</tt></p></li><li class="listitem"><p>SubRip: <tt class="option">-dumpsrtsub</tt></p></li><li class="listitem"><p>MicroDVD: <tt class="option">-dumpmicrodvdsub</tt></p></li><li class="listitem"><p>JACOsub: <tt class="option">-dumpjacosub</tt></p></li><li class="listitem"><p>Sami: <tt class="option">-dumpsami</tt></p></li></ul></div><p>
+</p><p>
+<span class="application">MEncoder</span> può fare il dump dei sottotitoli DVD nel
+formato <a class="link" href="menc-feat-extractsub.html" title="6.9. Estrarre sottotitoli DVD in un file VOBsub">VOBsub</a>.
+</p><p>
+Le opzioni da riga comando sono leggermente differenti per i diversi formati:
+</p><p><b>Sottotitoli VOBsub. </b>
+I sottotitoli VOBsub consistono in un grande (qualche megabyte) file
+<tt class="filename">.SUB</tt>, e un file <tt class="filename">.IDX</tt> e/o
+<tt class="filename">.IFO</tt> facoltativi. Se hai dei file tipo
+<tt class="filename"><em class="replaceable"><code>esempio.sub</code></em></tt>,
+<tt class="filename"><em class="replaceable"><code>esempio.ifo</code></em></tt> (facoltativo),
+<tt class="filename"><em class="replaceable"><code>esempio.idx</code></em></tt> - devi passare a
+<span class="application">MPlayer</span> le opzioni <tt class="option">-vobsub esempio
+[-vobsubid <em class="replaceable"><code>id</code></em>]</tt>
+(il percorso completo è facoltativo). L'opzione <tt class="option">-vobsubid</tt> è
+come <tt class="option">-sid</tt> per i DVD, con essa puoi scegliere tra le tracce
+(lingue) dei sottotitoli. Nel caso in cui <tt class="option">-vobsubid</tt> sia omessa,
+<span class="application">MPlayer</span> cercherà di utilizzare la lingua
+fornita dall'opzione <tt class="option">-slang</tt> e ricadrà sul
+<code class="systemitem">langidx</code> nel file <tt class="filename">.IDX</tt> per
+impostare la lingua dei sottotitoli. Se fallisce, non ci saranno sottotitoli.
+</p><p><b>Altri sottotitoli. </b>
+Gli altri formati consistono in un file di testo singolo contenente tempo,
+posizionamento e informazioni di testo. Utilizzo: se hai un file tipo
+<tt class="filename"><em class="replaceable"><code>esempio.txt</code></em></tt>, devi passare
+l'opzione <tt class="option">-sub <em class="replaceable"><code>esempio.txt</code></em></tt>
+(il percorso completo è facoltativo).
+</p><div class="variablelist"><p class="title"><b>Regolazione tempi e posizionamento dei sottotitoli:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-subdelay <em class="replaceable"><code>sec</code></em></tt></span></dt><dd><p>
+    Differisce i sottotitoli di <tt class="option"><em class="replaceable"><code>sec</code></em></tt>
+    secondi.
+    Può essere un valore negativo. Il valore viene aggiunto al contatore
+    della posizione nel filmato.
+  </p></dd><dt><span class="term"><tt class="option">-subfps <em class="replaceable"><code>FREQUENZA</code></em></tt></span></dt><dd><p>
+    Specifica la frequenza fotogrammi/secondo del file sottotitoli
+    (valore decimale).
+  </p></dd><dt><span class="term"><tt class="option">-subpos <em class="replaceable"><code>0-100</code></em></tt></span></dt><dd><p>
+    Specifica la posizione dei sottotitoli.
+  </p></dd></dl></div><p>
+Se subisci un ritardo crescente tra il filmato e i sottotitoli quando usi un
+file sottotitoli MicroDVD, molto facilmente la frequenza del filmato e del file
+dei sottotitoli sono diverse. Per favore nota che il formato sottotitoli
+MicroDVD usa numeri assoluti di fotogrammi per la sua temporizzazione, ma non
+vi è alcuna informazione sugli fps, per cui con tale formato bisognerebbe
+usare l'opzione <tt class="option">-subfps</tt>. Se vuoi risolvere questo problema
+permanentemente, devi convertire manualmente la frequenza fotogrammi del file
+dei sottotitoli.
+<span class="application">MPlayer</span> può fare questa conversione per te:
+
+</p><pre class="screen">
+mplayer -dumpmicrodvdsub -fps <em class="replaceable"><code>fps_sottotitoli</code></em> -subfps <em class="replaceable"><code>fps_avi</code></em> \
+    -sub <em class="replaceable"><code>nomefile_sottotitoli</code></em> <em class="replaceable"><code>dummy.avi</code></em>
+</pre><p>
+</p><p>
+Riguardo i sottotitoli DVD, leggi la sezione <a class="link" href="dvd.html" title="3.6. Riproduzione DVD">DVD</a>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="commandline.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="control.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. Riga comando </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 3.3. Controlli</td></tr></table></div></body></html>

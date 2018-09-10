@@ -1,0 +1,439 @@
+\section{oggz\-\_\-comments.\-h File Reference}
+\label{oggz__comments_8h}\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}}
+
+
+Reading of comments.  
+
+
+{\ttfamily \#include $<$oggz/oggz.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Oggz\-Comment}
+\begin{DoxyCompactList}\small\item\em A comment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bf oggz\-\_\-comment\-\_\-get\-\_\-vendor} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Retrieve the vendor string. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-comment\-\_\-set\-\_\-vendor} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, const char $\ast$vendor\-\_\-string)
+\begin{DoxyCompactList}\small\item\em Set the vendor string. \end{DoxyCompactList}\item 
+const {\bf Oggz\-Comment} $\ast$ {\bf oggz\-\_\-comment\-\_\-first} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Retrieve the first comment. \end{DoxyCompactList}\item 
+const {\bf Oggz\-Comment} $\ast$ {\bf oggz\-\_\-comment\-\_\-next} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, const {\bf Oggz\-Comment} $\ast$comment)
+\begin{DoxyCompactList}\small\item\em Retrieve the next comment. \end{DoxyCompactList}\item 
+const {\bf Oggz\-Comment} $\ast$ {\bf oggz\-\_\-comment\-\_\-first\-\_\-byname} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Retrieve the first comment with a given name. \end{DoxyCompactList}\item 
+const {\bf Oggz\-Comment} $\ast$ {\bf oggz\-\_\-comment\-\_\-next\-\_\-byname} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, const {\bf Oggz\-Comment} $\ast$comment)
+\begin{DoxyCompactList}\small\item\em Retrieve the next comment following and with the same name as a given comment. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-comment\-\_\-add} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, {\bf Oggz\-Comment} $\ast$comment)
+\begin{DoxyCompactList}\small\item\em Add a comment. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-comment\-\_\-add\-\_\-byname} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, const char $\ast$name, const char $\ast$value)
+\begin{DoxyCompactList}\small\item\em Add a comment by name and value. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-comment\-\_\-remove} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, {\bf Oggz\-Comment} $\ast$comment)
+\begin{DoxyCompactList}\small\item\em Remove a comment. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-comment\-\_\-remove\-\_\-byname} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Remove all comments with a given name. \end{DoxyCompactList}\item 
+ogg\-\_\-packet $\ast$ {\bf oggz\-\_\-comments\-\_\-generate} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, int F\-L\-A\-C\-\_\-final\-\_\-metadata\-\_\-block)
+\begin{DoxyCompactList}\small\item\em Output a comment packet for the specified stream. \end{DoxyCompactList}\item 
+int {\bfseries oggz\-\_\-comments\-\_\-copy} ({\bf O\-G\-G\-Z} $\ast$src, long src\-\_\-serialno, {\bf O\-G\-G\-Z} $\ast$dest, long dest\-\_\-serialno)\label{oggz__comments_8h_a486cd52284cb03032360265d2027f8db}
+
+\item 
+void {\bf oggz\-\_\-packet\-\_\-destroy} (ogg\-\_\-packet $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Free a packet and its payload. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Reading of comments. Vorbis, Speex and Theora bitstreams use a comment format called \char`\"{}\-Vorbiscomment\char`\"{}, defined {\tt here}. Many standard comment names (such as T\-I\-T\-L\-E, C\-O\-P\-Y\-R\-I\-G\-H\-T and G\-E\-N\-R\-E) are defined in that document.
+
+The following general features of Vorbiscomment are relevant to this A\-P\-I\-:
+\begin{DoxyItemize}
+\item Each stream has one comment packet, which occurs before any encoded audio data in the stream.
+\item When reading, Oggz will decode the comment block before calling the second read() callback for each stream. Hence, retrieving comment data is possible once the read() callback has been called a second time.
+\item When writing, Oggz allows you to set up the comments in memory, and provides a single function to generate a corresponding ogg\-\_\-packet. It is your responsibility to then actually write that packet in sequence.
+\end{DoxyItemize}
+
+Each comment block contains one Vendor string, which can be retrieved with \doxyref{oggz\-\_\-comment\-\_\-get\-\_\-vendor()}{p.}{oggz__comments_8h_ae5d522df5fce262953d8bb5cb8c00b00}.
+
+The rest of a comment block consists of {\itshape name} = {\itshape value} pairs, with the following restrictions\-:
+\begin{DoxyItemize}
+\item Both the {\itshape name} and {\itshape value} must be non-\/empty
+\item The {\itshape name} is case-\/insensitive and must consist of A\-S\-C\-I\-I within the range 0x20 to 0x7\-D inclusive, 0x3\-D ('=') excluded.
+\item The {\itshape name} is not unique; multiple entries may exist with equivalent {\itshape name} within a Vorbiscomment block.
+\item The {\itshape value} may be any U\-T\-F-\/8 string.
+\end{DoxyItemize}\subsection{Reading comments}\label{oggz__comments_8h_comments_get}
+Oggz contains A\-P\-I methods to iterate through all comments associated with the logical bitstreams of an O\-G\-G\-Z$\ast$ handle (\doxyref{oggz\-\_\-comment\-\_\-first()}{p.}{oggz__comments_8h_a306a979d84b61932930d44ea5d4f95d9} and \doxyref{oggz\-\_\-comment\-\_\-next()}{p.}{oggz__comments_8h_a9501d8c166187c8d503e1335827b2d5e}, and to iterate through comments matching a particular name (\doxyref{oggz\-\_\-comment\-\_\-first\-\_\-byname()}{p.}{oggz__comments_8h_a9a3a72be012b6474a1e1d95f7ce7afe8} and \doxyref{oggz\-\_\-comment\-\_\-next\-\_\-byname()}{p.}{oggz__comments_8h_a1dd05e02a121ba639b8012acaa21a37c}). Given that multiple comments may exist with the same {\itshape name}, you should not use \doxyref{oggz\-\_\-comment\-\_\-first\-\_\-byname()}{p.}{oggz__comments_8h_a9a3a72be012b6474a1e1d95f7ce7afe8} as a simple \char`\"{}get\char`\"{} function.\subsection{Writing comments}\label{oggz__comments_8h_comments_set}
+For writing, Oggz contains A\-P\-I methods for adding comments (\doxyref{oggz\-\_\-comment\-\_\-add()}{p.}{oggz__comments_8h_ade23081a738d67bec473bdaf317a68d8} and \doxyref{oggz\-\_\-comment\-\_\-add\-\_\-byname()}{p.}{oggz__comments_8h_ad869a8a7246567ba4162183436127a6f}), for removing comments (\doxyref{oggz\-\_\-comment\-\_\-remove()}{p.}{oggz__comments_8h_a75ca47a020dcddce846a320481120a8e} and \doxyref{oggz\-\_\-comment\-\_\-remove\-\_\-byname()}{p.}{oggz__comments_8h_aa0f3f3a3ea3ca28d8678b94495634876}) and for setting the vendor string (\doxyref{oggz\-\_\-comment\-\_\-set\-\_\-vendor()}{p.}{oggz__comments_8h_a281a0956a9a160337f7d00f102d18131}). 
+
+\subsection{Function Documentation}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-add@{oggz\-\_\-comment\-\_\-add}}
+\index{oggz\-\_\-comment\-\_\-add@{oggz\-\_\-comment\-\_\-add}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-comment\-\_\-add (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{{\bf Oggz\-Comment} $\ast$}]{comment}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_ade23081a738d67bec473bdaf317a68d8}
+
+
+Add a comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle (created with mode O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E) \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em comment} & The comment to add \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape oggz} is not a valid O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-add\-\_\-byname@{oggz\-\_\-comment\-\_\-add\-\_\-byname}}
+\index{oggz\-\_\-comment\-\_\-add\-\_\-byname@{oggz\-\_\-comment\-\_\-add\-\_\-byname}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-add\-\_\-byname}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-comment\-\_\-add\-\_\-byname (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{const char $\ast$}]{name, }
+\item[{const char $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_ad869a8a7246567ba4162183436127a6f}
+
+
+Add a comment by name and value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle (created with mode O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E) \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em name} & The name of the comment to add \\
+\hline
+{\em value} & The contents of the comment to add \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape oggz} is not a valid O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-first@{oggz\-\_\-comment\-\_\-first}}
+\index{oggz\-\_\-comment\-\_\-first@{oggz\-\_\-comment\-\_\-first}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-first}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Oggz\-Comment}$\ast$ oggz\-\_\-comment\-\_\-first (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_a306a979d84b61932930d44ea5d4f95d9}
+
+
+Retrieve the first comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the first comment. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & No comments exist for this O\-G\-G\-Z$\ast$ object, or {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-first\-\_\-byname@{oggz\-\_\-comment\-\_\-first\-\_\-byname}}
+\index{oggz\-\_\-comment\-\_\-first\-\_\-byname@{oggz\-\_\-comment\-\_\-first\-\_\-byname}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-first\-\_\-byname}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Oggz\-Comment}$\ast$ oggz\-\_\-comment\-\_\-first\-\_\-byname (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_a9a3a72be012b6474a1e1d95f7ce7afe8}
+
+
+Retrieve the first comment with a given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em name} & the name of the comment to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the first comment matching the given {\itshape name}. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & No match was found, or {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+If {\itshape name} is N\-U\-L\-L, the behaviour is the same as for \doxyref{oggz\-\_\-comment\-\_\-first()}{p.}{oggz__comments_8h_a306a979d84b61932930d44ea5d4f95d9} 
+\end{DoxyNote}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-get\-\_\-vendor@{oggz\-\_\-comment\-\_\-get\-\_\-vendor}}
+\index{oggz\-\_\-comment\-\_\-get\-\_\-vendor@{oggz\-\_\-comment\-\_\-get\-\_\-vendor}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-get\-\_\-vendor}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ oggz\-\_\-comment\-\_\-get\-\_\-vendor (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_ae5d522df5fce262953d8bb5cb8c00b00}
+
+
+Retrieve the vendor string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the vendor string. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & No vendor string is associated with {\itshape oggz}, or {\itshape oggz} is N\-U\-L\-L, or {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-next@{oggz\-\_\-comment\-\_\-next}}
+\index{oggz\-\_\-comment\-\_\-next@{oggz\-\_\-comment\-\_\-next}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-next}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Oggz\-Comment}$\ast$ oggz\-\_\-comment\-\_\-next (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{const {\bf Oggz\-Comment} $\ast$}]{comment}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_a9501d8c166187c8d503e1335827b2d5e}
+
+
+Retrieve the next comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em comment} & The previous comment. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the comment immediately following the given comment. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-next\-\_\-byname@{oggz\-\_\-comment\-\_\-next\-\_\-byname}}
+\index{oggz\-\_\-comment\-\_\-next\-\_\-byname@{oggz\-\_\-comment\-\_\-next\-\_\-byname}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-next\-\_\-byname}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Oggz\-Comment}$\ast$ oggz\-\_\-comment\-\_\-next\-\_\-byname (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{const {\bf Oggz\-Comment} $\ast$}]{comment}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_a1dd05e02a121ba639b8012acaa21a37c}
+
+
+Retrieve the next comment following and with the same name as a given comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em comment} & A comment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the next comment with the same name as {\itshape comment}. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & No further comments with the same name exist for this O\-G\-G\-Z$\ast$ object, or {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-remove@{oggz\-\_\-comment\-\_\-remove}}
+\index{oggz\-\_\-comment\-\_\-remove@{oggz\-\_\-comment\-\_\-remove}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-remove}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-comment\-\_\-remove (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{{\bf Oggz\-Comment} $\ast$}]{comment}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_a75ca47a020dcddce846a320481120a8e}
+
+
+Remove a comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle (created with O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E) \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em comment} & The comment to remove. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 1} & Success\-: comment removed \\
+\hline
+{\em 0} & No-\/op\-: comment not found, nothing to remove \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape oggz} is not a valid O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-remove\-\_\-byname@{oggz\-\_\-comment\-\_\-remove\-\_\-byname}}
+\index{oggz\-\_\-comment\-\_\-remove\-\_\-byname@{oggz\-\_\-comment\-\_\-remove\-\_\-byname}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-remove\-\_\-byname}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-comment\-\_\-remove\-\_\-byname (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_aa0f3f3a3ea3ca28d8678b94495634876}
+
+
+Remove all comments with a given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle (created with O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E) \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em name} & The name of the comments to remove \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em $>$= 0} & The number of comments removed \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape oggz} is not a valid O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comment\-\_\-set\-\_\-vendor@{oggz\-\_\-comment\-\_\-set\-\_\-vendor}}
+\index{oggz\-\_\-comment\-\_\-set\-\_\-vendor@{oggz\-\_\-comment\-\_\-set\-\_\-vendor}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comment\-\_\-set\-\_\-vendor}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-comment\-\_\-set\-\_\-vendor (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{const char $\ast$}]{vendor\-\_\-string}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_a281a0956a9a160337f7d00f102d18131}
+
+
+Set the vendor string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em vendor\-\_\-string} & The contents of the vendor string to add \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape oggz} is not a valid O\-G\-G\-Z$\ast$ handle \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+The vendor string should identify the library used to produce the stream, e.\-g. libvorbis 1.\-0 used \char`\"{}\-Xiph.\-Org lib\-Vorbis I 20020717\char`\"{}. If copying a bitstream it should be the same as the source. 
+\end{DoxyNote}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-comments\-\_\-generate@{oggz\-\_\-comments\-\_\-generate}}
+\index{oggz\-\_\-comments\-\_\-generate@{oggz\-\_\-comments\-\_\-generate}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-comments\-\_\-generate}]{\setlength{\rightskip}{0pt plus 5cm}ogg\-\_\-packet$\ast$ oggz\-\_\-comments\-\_\-generate (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{int}]{F\-L\-A\-C\-\_\-final\-\_\-metadata\-\_\-block}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_a1ee69481fa517d80e63db962a23d53ae}
+
+
+Output a comment packet for the specified stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & A O\-G\-G\-Z$\ast$ handle (created with O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E) \\
+\hline
+{\em serialno} & Identify a logical bitstream within {\itshape oggz} \\
+\hline
+{\em F\-L\-A\-C\-\_\-final\-\_\-metadata\-\_\-block} & Set this to zero unless the packet\-\_\-type is F\-L\-A\-C, and there are no further metadata blocks to follow. See note below for details. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A comment packet for the stream. When no longer needed it should be freed with \doxyref{oggz\-\_\-packet\-\_\-destroy()}{p.}{oggz__comments_8h_a9301332e99b0397cff54c3593595b809}. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & content type does not support comments, not enough memory or comment was too long for F\-L\-A\-C \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+F\-L\-A\-C streams may contain multiple metadata blocks of different types. When encapsulated in Ogg the first of these must be a Vorbis comment packet but P\-A\-D\-D\-I\-N\-G, A\-P\-P\-L\-I\-C\-A\-T\-I\-O\-N, S\-E\-E\-K\-T\-A\-B\-L\-E, C\-U\-E\-S\-H\-E\-E\-T and P\-I\-C\-T\-U\-R\-E may follow. The last metadata block must have its first bit set to 1. Since liboggz does not know whether you will supply more metadata blocks you must tell it if this is the last (or only) metadata block by setting F\-L\-A\-C\-\_\-final\-\_\-metadata\-\_\-block to 1. \par
+ As F\-L\-A\-C metadata blocks are limited in size to 16\-M\-B minus 1 byte, this function will refuse to produce longer comment packets for F\-L\-A\-C. \par
+ See {\tt http\-://flac.\-sourceforge.\-net/format.\-html} for more details. 
+\end{DoxyNote}
+\index{oggz\-\_\-comments.\-h@{oggz\-\_\-comments.\-h}!oggz\-\_\-packet\-\_\-destroy@{oggz\-\_\-packet\-\_\-destroy}}
+\index{oggz\-\_\-packet\-\_\-destroy@{oggz\-\_\-packet\-\_\-destroy}!oggz_comments.h@{oggz\-\_\-comments.\-h}}
+\subsubsection[{oggz\-\_\-packet\-\_\-destroy}]{\setlength{\rightskip}{0pt plus 5cm}void oggz\-\_\-packet\-\_\-destroy (
+\begin{DoxyParamCaption}
+\item[{ogg\-\_\-packet $\ast$}]{packet}
+\end{DoxyParamCaption}
+)}\label{oggz__comments_8h_a9301332e99b0397cff54c3593595b809}
+
+
+Free a packet and its payload. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & A packet previously returned from a function such as \doxyref{oggz\-\_\-comment\-\_\-generate()}{p.}{oggz__deprecated_8h_aab908fe161372aceb99f98a3be54ead5}. User generated packets should not be passed. \\
+\hline
+\end{DoxyParams}

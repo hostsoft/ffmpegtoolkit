@@ -1,0 +1,20 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.3. Как насчёт GUI?</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="install.html" title="Глава 2. Установка"><link rel="prev" href="features.html" title="2.2. Возможности:"><link rel="next" href="fonts-osd.html" title="2.4. Шрифты и OSD"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.3. Как насчёт GUI?</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="features.html">Пред.</a> </td><th width="60%" align="center">Глава 2. Установка</th><td width="20%" align="right"> <a accesskey="n" href="fonts-osd.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gui"></a>2.3. Как насчёт GUI?</h2></div></div></div><p>
+Для GUI требуется GTK 1.2.x или GTK 2.0 (он не целиком GTK'шный, но панельки - да). Шкуры
+хранятся в PNG формате, поэтому GTK, <code class="systemitem">libpng</code>
+(и их части для разработчиков, обычно они называются
+<code class="systemitem">gtk-dev</code> и
+<code class="systemitem">libpng-dev</code>) должны быть установлены.
+Вы можете собрать GUI, указав <tt class="option">--enable-gui</tt> в <tt class="option">./configure</tt>.
+Затем, чтобы использовать GUI, Вы должны запускать <span class="command"><strong>gmplayer</strong></span>.
+</p><p>
+Поскольку <span class="application">MPlayer</span> не содержит ни одной шкуры, Вы должны скачать
+их, если Вы хотите использовать GUI. См.
+<a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">download page[страницу
+закачек]</a>. Они должны быть извлечены в системный каталог
+(<tt class="filename">$PREFIX/share/mplayer/skins</tt>), или в
+<tt class="filename">$HOME/.mplayer/skins</tt>. По умолчанию, MPlayer ищет
+каталог <tt class="filename">default</tt>
+в этих каталогах, но вы можете использовать опцию <tt class="option">-skin <em class="replaceable"><code>newskin</code></em></tt>,
+или директиву конфигурационного файла <tt class="option">skin=newskin</tt>, чтобы использовать
+шкуру из каталога <tt class="filename">*/skins/newskin</tt>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="features.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="fonts-osd.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">2.2. Возможности: </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 2.4. Шрифты и OSD</td></tr></table></div></body></html>

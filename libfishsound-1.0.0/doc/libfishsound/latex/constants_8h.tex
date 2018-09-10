@@ -1,0 +1,173 @@
+\section{constants.\-h File Reference}
+\label{constants_8h}\index{constants.\-h@{constants.\-h}}
+
+
+Constants used by libfishsound.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum {\bf \-\_\-\-Fish\-Sound\-Mode} {\bf Fish\-Sound\-Mode}\label{constants_8h_a9d9c3b4fa48a4b733a4ea8014fca8d98}
+
+\begin{DoxyCompactList}\small\item\em Mode of operation (encode or decode) \end{DoxyCompactList}\item 
+typedef enum {\bf \-\_\-\-Fish\-Sound\-Codec\-I\-D} {\bf Fish\-Sound\-Codec\-I\-D}\label{constants_8h_aecd02a43422e57cac405a5430289122d}
+
+\begin{DoxyCompactList}\small\item\em Identifiers for supported codecs. \end{DoxyCompactList}\item 
+typedef enum {\bf \-\_\-\-Fish\-Sound\-Stop\-Ctl} {\bf Fish\-Sound\-Stop\-Ctl}\label{constants_8h_a73ef8d2d14c2d8314dff3b8f3fce4b77}
+
+\begin{DoxyCompactList}\small\item\em Decode callback return values. \end{DoxyCompactList}\item 
+typedef enum {\bf \-\_\-\-Fish\-Sound\-Command} {\bf Fish\-Sound\-Command}\label{constants_8h_a18b0ff610b82227e8dced33c6b7944f5}
+
+\begin{DoxyCompactList}\small\item\em Command codes. \end{DoxyCompactList}\item 
+typedef enum {\bf \-\_\-\-Fish\-Sound\-Error} {\bf Fish\-Sound\-Error}\label{constants_8h_a8977064c438e05393156a731c9c8ae86}
+
+\begin{DoxyCompactList}\small\item\em Error values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf \-\_\-\-Fish\-Sound\-Mode} \{ {\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E} = 0x10, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E} = 0x20
+ \}
+\begin{DoxyCompactList}\small\item\em Mode of operation (encode or decode) \end{DoxyCompactList}\item 
+enum {\bf \-\_\-\-Fish\-Sound\-Codec\-I\-D} \{ {\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-U\-N\-K\-N\-O\-W\-N} = 0x00, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-V\-O\-R\-B\-I\-S} = 0x01, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-P\-E\-E\-X} = 0x02, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-F\-L\-A\-C} = 0x03
+ \}
+\begin{DoxyCompactList}\small\item\em Identifiers for supported codecs. \end{DoxyCompactList}\item 
+enum {\bf \-\_\-\-Fish\-Sound\-Stop\-Ctl} \{ {\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E} = 0, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K} = 1, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R} = -\/1
+ \}
+\begin{DoxyCompactList}\small\item\em Decode callback return values. \end{DoxyCompactList}\item 
+enum {\bf \-\_\-\-Fish\-Sound\-Command} \{ \\*
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-M\-M\-A\-N\-D\-\_\-\-N\-O\-P} = 0x0000, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-F\-O} = 0x1000, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E} = 0x2000, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E} = 0x2001, 
+\\*
+{\bfseries F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-E\-T\-\_\-\-E\-N\-C\-O\-D\-E\-\_\-\-V\-B\-R} = 0x4000, 
+{\bfseries F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-M\-M\-A\-N\-D\-\_\-\-M\-A\-X}
+ \}
+\begin{DoxyCompactList}\small\item\em Command codes. \end{DoxyCompactList}\item 
+enum {\bf \-\_\-\-Fish\-Sound\-Error} \{ \\*
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-O\-K} = 0, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C} = -\/1, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} = -\/2, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} = -\/3, 
+\\*
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} = -\/4, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D} = -\/10, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-H\-O\-R\-T\-\_\-\-I\-D\-E\-N\-T\-I\-F\-Y} = -\/20, 
+{\bf F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D} = -\/21
+ \}
+\begin{DoxyCompactList}\small\item\em Error values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Constants used by libfishsound. 
+
+\subsection{Enumeration Type Documentation}
+\index{constants.\-h@{constants.\-h}!\-\_\-\-Fish\-Sound\-Codec\-I\-D@{\-\_\-\-Fish\-Sound\-Codec\-I\-D}}
+\index{\-\_\-\-Fish\-Sound\-Codec\-I\-D@{\-\_\-\-Fish\-Sound\-Codec\-I\-D}!constants.h@{constants.\-h}}
+\subsubsection[{\-\_\-\-Fish\-Sound\-Codec\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf \-\_\-\-Fish\-Sound\-Codec\-I\-D}}\label{constants_8h_aff8c305ecaa5b4dc29894d5d3fefbc08}
+
+
+Identifiers for supported codecs. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-U\-N\-K\-N\-O\-W\-N@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-U\-N\-K\-N\-O\-W\-N}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-U\-N\-K\-N\-O\-W\-N@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-U\-N\-K\-N\-O\-W\-N}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-U\-N\-K\-N\-O\-W\-N\label{constants_8h_aff8c305ecaa5b4dc29894d5d3fefbc08a1d6c7c1c4837bc1953fe3ae1962206cb}
+}]Unknown. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-V\-O\-R\-B\-I\-S@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-V\-O\-R\-B\-I\-S}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-V\-O\-R\-B\-I\-S@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-V\-O\-R\-B\-I\-S}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-V\-O\-R\-B\-I\-S\label{constants_8h_aff8c305ecaa5b4dc29894d5d3fefbc08a219b41711c75ec89b1841e804139ceb1}
+}]Vorbis. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-P\-E\-E\-X@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-P\-E\-E\-X}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-P\-E\-E\-X@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-P\-E\-E\-X}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-P\-E\-E\-X\label{constants_8h_aff8c305ecaa5b4dc29894d5d3fefbc08aa708255d1f23a5a5db6f1c2d60778eb9}
+}]Speex. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-F\-L\-A\-C@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-F\-L\-A\-C}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-F\-L\-A\-C@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-F\-L\-A\-C}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-F\-L\-A\-C\label{constants_8h_aff8c305ecaa5b4dc29894d5d3fefbc08a528dd24db0ba08599924e7476efd0469}
+}]Flac. \end{description}
+\end{Desc}
+\index{constants.\-h@{constants.\-h}!\-\_\-\-Fish\-Sound\-Command@{\-\_\-\-Fish\-Sound\-Command}}
+\index{\-\_\-\-Fish\-Sound\-Command@{\-\_\-\-Fish\-Sound\-Command}!constants.h@{constants.\-h}}
+\subsubsection[{\-\_\-\-Fish\-Sound\-Command}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf \-\_\-\-Fish\-Sound\-Command}}\label{constants_8h_a7a185639e7fea0051f22b28fdb852048}
+
+
+Command codes. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-M\-M\-A\-N\-D\-\_\-\-N\-O\-P@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-M\-M\-A\-N\-D\-\_\-\-N\-O\-P}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-M\-M\-A\-N\-D\-\_\-\-N\-O\-P@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-M\-M\-A\-N\-D\-\_\-\-N\-O\-P}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-M\-M\-A\-N\-D\-\_\-\-N\-O\-P\label{constants_8h_a7a185639e7fea0051f22b28fdb852048aaec6ad00ae908f69f8136e240641d02d}
+}]No operation. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-F\-O@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-F\-O}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-F\-O@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-F\-O}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-F\-O\label{constants_8h_a7a185639e7fea0051f22b28fdb852048acd9f0a7348d01ca7ea3ce461245ac1dd}
+}]Retrieve the \doxyref{Fish\-Sound\-Info}{p.}{structFishSoundInfo}. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-G\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E\label{constants_8h_a7a185639e7fea0051f22b28fdb852048a5c3a09a7d6a091dfeadf3570ec5c946e}
+}]Query if multichannel audio should be interpreted as interleaved. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-E\-T\-\_\-\-I\-N\-T\-E\-R\-L\-E\-A\-V\-E\label{constants_8h_a7a185639e7fea0051f22b28fdb852048ae026d28834d67d6df88e57f1d9f4a031}
+}]Set to 1 to interleave, 0 to non-\/interleave. \end{description}
+\end{Desc}
+\index{constants.\-h@{constants.\-h}!\-\_\-\-Fish\-Sound\-Error@{\-\_\-\-Fish\-Sound\-Error}}
+\index{\-\_\-\-Fish\-Sound\-Error@{\-\_\-\-Fish\-Sound\-Error}!constants.h@{constants.\-h}}
+\subsubsection[{\-\_\-\-Fish\-Sound\-Error}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf \-\_\-\-Fish\-Sound\-Error}}\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235}
+
+
+Error values. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-O\-K@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-O\-K}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-O\-K@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-O\-K}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-O\-K\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235a398c3bfdfe8e7030de26d13393d0f77c}
+}]No error. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235aa80028f76bb6cc1cdd092e9eeef99730}
+}]generic error \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235a96b7865eacdd843cd2b53e6d3427bd26}
+}]Not a valid Fish\-Sound$\ast$ handle. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235aad5c4cda6fecfb092ee39df81795d2a8}
+}]The requested operation is not suitable for this Fish\-Sound$\ast$ handle. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235a0c3f04fa2357d23d7948ef5e8a167273}
+}]Out of memory. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235a6e34ea5172345c82c43437a0708c6567}
+}]Functionality disabled at build time. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-H\-O\-R\-T\-\_\-\-I\-D\-E\-N\-T\-I\-F\-Y@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-H\-O\-R\-T\-\_\-\-I\-D\-E\-N\-T\-I\-F\-Y}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-H\-O\-R\-T\-\_\-\-I\-D\-E\-N\-T\-I\-F\-Y@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-H\-O\-R\-T\-\_\-\-I\-D\-E\-N\-T\-I\-F\-Y}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-H\-O\-R\-T\-\_\-\-I\-D\-E\-N\-T\-I\-F\-Y\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235a03320f8b346b8bcb984421c4c72cf347}
+}]Too few bytes passed to \doxyref{fish\-\_\-sound\-\_\-identify()}{p.}{fishsound_8h_a2776f39cfa1540b1da3c9d423de15ae9} \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D\label{constants_8h_aa31123e4a584a5d35b9ed87c9b43e235a1782c042f659a9fb415292a722b04150}
+}]Comment violates Vorbis\-Comment restrictions. \end{description}
+\end{Desc}
+\index{constants.\-h@{constants.\-h}!\-\_\-\-Fish\-Sound\-Mode@{\-\_\-\-Fish\-Sound\-Mode}}
+\index{\-\_\-\-Fish\-Sound\-Mode@{\-\_\-\-Fish\-Sound\-Mode}!constants.h@{constants.\-h}}
+\subsubsection[{\-\_\-\-Fish\-Sound\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf \-\_\-\-Fish\-Sound\-Mode}}\label{constants_8h_ac949e5a5c7f16cc7fd9d096a39608f34}
+
+
+Mode of operation (encode or decode) 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E\label{constants_8h_ac949e5a5c7f16cc7fd9d096a39608f34a6c1e6f5a1f6342f9c36416d9ee9753ae}
+}]Decode. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E\label{constants_8h_ac949e5a5c7f16cc7fd9d096a39608f34a3270a746cfa774a469f9783b6848279d}
+}]Encode. \end{description}
+\end{Desc}
+\index{constants.\-h@{constants.\-h}!\-\_\-\-Fish\-Sound\-Stop\-Ctl@{\-\_\-\-Fish\-Sound\-Stop\-Ctl}}
+\index{\-\_\-\-Fish\-Sound\-Stop\-Ctl@{\-\_\-\-Fish\-Sound\-Stop\-Ctl}!constants.h@{constants.\-h}}
+\subsubsection[{\-\_\-\-Fish\-Sound\-Stop\-Ctl}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf \-\_\-\-Fish\-Sound\-Stop\-Ctl}}\label{constants_8h_a8c3fed4bcbe1fa029b21e433684d22d9}
+
+
+Decode callback return values. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E\label{constants_8h_a8c3fed4bcbe1fa029b21e433684d22d9a52b16425c46db26ba17e4dc346af4cd0}
+}]Continue calling decode callbacks. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K\label{constants_8h_a8c3fed4bcbe1fa029b21e433684d22d9aee1cd144f456275b2294055ad636e4a0}
+}]Stop calling callbacks, but retain buffered data. \index{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R}!constants.\-h@{constants.\-h}}\index{constants.\-h@{constants.\-h}!F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R@{F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R}}\item[{\em 
+F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R\label{constants_8h_a8c3fed4bcbe1fa029b21e433684d22d9ae25023d0fdd1cc19780661163243f1a2}
+}]Stop calling callbacks, and purge buffered data. \end{description}
+\end{Desc}

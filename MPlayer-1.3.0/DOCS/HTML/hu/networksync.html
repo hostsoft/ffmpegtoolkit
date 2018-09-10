@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.8. Szinkronizált lejátszás hálózaton</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="3. fejezet - Használat"><link rel="prev" href="edl.html" title="3.7. Edit Decision Lists (EDL)"><link rel="next" href="advaudio-surround.html" title="3.9. Térhatású/többcsatornás lejátszás"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.8. Szinkronizált lejátszás hálózaton</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="edl.html">Vissza</a> </td><th width="60%" align="center">3. fejezet - Használat</th><td width="20%" align="right"> <a accesskey="n" href="advaudio-surround.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="networksync"></a>3.8. Szinkronizált lejátszás hálózaton</h2></div></div></div><p>
+Az <span class="application">MPlayer</span> több példánya szinkronizálni tudja a
+lejátszást hálózaton keresztül. EZ hasznos "videó falak" létrehozásakor, amikor
+a több képernyőt külön számítógép vezérel. Minden
+<span class="application">MPlayer</span> példány különböző
+videót tud lejátszani, de megpróbálnak ugyan azon az idő eltoláson maradni
+a fájlban. Javasolt, de nem szükséges, hogy a videó fájlok ugyan azzal a codeccel
+és paraméterekkel legyenek elkódolva.
+</p><p>A vonatkozó opciók az <tt class="option">-udp-master</tt>,
+  <tt class="option">-udp-slave</tt>, <tt class="option">-udp-ip</tt>,
+  <tt class="option">-udp-port</tt> és az <tt class="option">-udp-seek-threshold</tt>.
+</p><p>
+Ha az <tt class="option">-udp-master</tt> meg van adva, az <span class="application">MPlayer</span>
+egy adatcsomagot küld az <tt class="option">-udp-ip</tt> címre (alapértelmezett: 127.0.0.1)
+az <tt class="option">-udp-port</tt> porton (alapértelmezett: 23867) minden egyes kocka
+lejátszása előtt.
+Az adatcsomag a mester pozícióját mutatja a fájlban. Ha az
+<tt class="option">-udp-slave</tt> meg van adva, az <span class="application">MPlayer</span> figyeli az
+<tt class="option">-udp-ip</tt>/<tt class="option">-udp-port</tt>-ot
+és követi a mester pozícióját. Az <tt class="option">-udp-ip</tt> a mester broadcast címére
+történő állításával több kiszolgáló azonos broadcast címen tud szinkronizálni a mesterrel.
+Ne feledd, hogy ez a képesség egy ethernet-szerű, alacsony késleltetésű hálózati kapcsolatot
+feltételez. A működés változhat nagy késleltetésű hálózatokon.
+</p><p>
+Például tegyük fel, hogy 8 számítógép van a hálózaton, 192.168.0.1 és 192.168.0.8
+közötti IP címekkel. Tegyük fel, hogy az első számítógép lesz a mester. A gépeken
+lefuttatott ifconfig "Bcast:192.168.0.255"-öt ír. A mesteren futtasd ezt:
+</p><pre class="screen">
+mplayer -udp-master -udp-ip 192.168.0.255 video1.mpg
+</pre><p>
+A kiszolgálókon pedig ezt:
+</p><pre class="screen">
+mplayer -udp-slave videoN.mpg
+</pre><p>
+A keresés, pillanatállj, sőt még a lejátszás sebességének állítása is
+(lásd az <tt class="option">-input</tt> opciót) végbemehet a mesteren, minden kiszolgáló
+követni fogja. Ha a mester kilép, kiküld egy "bye" üzenetet, aminek a hatására a
+kiszolgálók is kilépnek.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="edl.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio-surround.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">3.7. Edit Decision Lists (EDL) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 3.9. Térhatású/többcsatornás lejátszás</td></tr></table></div></body></html>

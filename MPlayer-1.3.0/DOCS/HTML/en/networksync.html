@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.8. Synchronized playback over a network</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="Chapter 3. Usage"><link rel="prev" href="edl.html" title="3.7. Edit Decision Lists (EDL)"><link rel="next" href="advaudio-surround.html" title="3.9. Surround/Multichannel playback"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.8. Synchronized playback over a network</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="edl.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Usage</th><td width="20%" align="right"> <a accesskey="n" href="advaudio-surround.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="networksync"></a>3.8. Synchronized playback over a network</h2></div></div></div><p>
+Multiple instances of <span class="application">MPlayer</span> can synchronize
+playback over a network. This is useful for creating "video walls" with
+multiple screens controlled by different computers. Each
+<span class="application">MPlayer</span> instance can
+play a different video, but they all will try to stay at the same time offset
+in the file. It is recommended but not necessary to encode the video files
+using the same codec and parameters.
+</p><p>The relevant options are <tt class="option">-udp-master</tt>,
+  <tt class="option">-udp-slave</tt>, <tt class="option">-udp-ip</tt>,
+  <tt class="option">-udp-port</tt>, and <tt class="option">-udp-seek-threshold</tt>.
+</p><p>
+If <tt class="option">-udp-master</tt> is given, <span class="application">MPlayer</span>
+sends a datagram to <tt class="option">-udp-ip</tt> (default: 127.0.0.1)
+on <tt class="option">-udp-port</tt> (default: 23867) just before playing each frame.
+The datagram indicates the master's position in the file. If
+<tt class="option">-udp-slave</tt> is given, <span class="application">MPlayer</span> listens on
+<tt class="option">-udp-ip</tt>/<tt class="option">-udp-port</tt>
+and matches the master's position. Setting <tt class="option">-udp-ip</tt> to the
+master's broadcast address allows multiple slaves having the same broadcast
+address to sync to the master. Note that this feature assumes an
+ethernet-like low-latency network connection. Your mileage may vary on high
+latency networks.
+</p><p>
+For example, assume 8 computers are on a network, with IP addresses 192.168.0.1
+through 192.168.0.8. Assume the first computer is to be the master. Running
+ifconfig on all the machines lists "Bcast:192.168.0.255". On the master, run:
+</p><pre class="screen">
+mplayer -udp-master -udp-ip 192.168.0.255 video1.mpg
+</pre><p>
+On each slave, run:
+</p><pre class="screen">
+mplayer -udp-slave videoN.mpg
+</pre><p>
+Seeking, pausing and even playback speed adjustment (see the
+<tt class="option">-input</tt> option) can be done on the master, and all the slaves
+will follow. When the master exits, it sends out a "bye" message which causes
+the slaves to exit as well.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="edl.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio-surround.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.7. Edit Decision Lists (EDL) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.9. Surround/Multichannel playback</td></tr></table></div></body></html>

@@ -1,0 +1,32 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.2. *BSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="ports.html" title="Kapitel 5. Portierungen"><link rel="prev" href="linux.html" title="5.1. Linux"><link rel="next" href="unix.html" title="5.3. Kommerzielles Unix"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="bsd.html#freebsd" title="5.2.1. FreeBSD"><link rel="subsection" href="bsd.html#openbsd" title="5.2.2. OpenBSD"><link rel="subsection" href="bsd.html#darwin" title="5.2.3. Darwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.2. *BSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="linux.html">Zurück</a> </td><th width="60%" align="center">Kapitel 5. Portierungen</th><td width="20%" align="right"> <a accesskey="n" href="unix.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bsd"></a>5.2. *BSD</h2></div></div></div><p>
+      <span class="application">MPlayer</span> läuft auf allen bekannten BSD-Derivaten.
+      Es stehen ports/pkgsrc/fink/etc-Versionen des <span class="application">MPlayer</span>
+      bereit, die möglicherweise leichter anzuwenden sind als unsere Originalquellen.
+    </p><p>
+      Um <span class="application">MPlayer</span> zu erstellen, brauchst du GNU make
+      (gmake - natives BSD make wird nicht funktionieren) und eine aktuelle Version
+      der binutils.
+    </p><p>
+      Beschwert sich <span class="application">MPlayer</span>, er könne <tt class="filename">/dev/cdrom</tt>
+      oder <tt class="filename">/dev/dvd</tt> nicht finden, erstelle einen geeigneten symbolischen Link:
+      </p><pre class="screen">ln -s /dev/<em class="replaceable"><code>dein_cdrom_geraet</code></em> /dev/cdrom</pre><p>
+    </p><p>
+      Um Win32-DLLs mit <span class="application">MPlayer</span> zu nutzen, musst du
+      den Kernel mit "<code class="envar">option USER_LDT</code>" recompilieren
+      (es sei denn du lässt FreeBSD-CURRENT laufen, wobei dies die
+      Standard-Einstellung ist).
+    </p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="freebsd"></a>5.2.1. FreeBSD</h3></div></div></div><p>
+        Besitzt deine CPU SSE, recompiliere deinen Kernel mit
+        "<code class="envar">options CPU_ENABLE_SSE</code>" (FreeBSD-STABLE oder
+        Kernel-Patches erforderlich).
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="openbsd"></a>5.2.2. OpenBSD</h3></div></div></div><p>
+        Aufgrund von Einschränkungen in verschiedenen Versionen von GAS (der GNU Assembler,
+        Relocation vs MMX), wirst du in zwei Schritten compilieren müssen: Stell als
+        erstes sicher, dass der nicht-native zuvor in deinem <code class="envar">$PATH</code> liegt und
+        führe ein <span class="command"><strong>gmake -k</strong></span> aus. Sorge dann dafür, dass die native Version
+        benutzt wird, und führe <span class="command"><strong>gmake</strong></span> aus.
+      </p><p>
+        Ab OpenBSD 3.4 ist der oben beschriebene Hack nicht länger nötig.
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="darwin"></a>5.2.3. Darwin</h3></div></div></div><p>
+        Siehe Abschnitt <a class="link" href="macos.html" title="5.5. Mac OS">Mac OS</a>.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="linux.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="unix.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">5.1. Linux </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 5.3. Kommerzielles Unix</td></tr></table></div></body></html>

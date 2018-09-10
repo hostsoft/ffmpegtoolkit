@@ -1,0 +1,19 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.6. Ridimensionare filmati</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="prev" href="menc-feat-mpeg.html" title="6.5. Codificare in formato MPEG"><link rel="next" href="menc-feat-streamcopy.html" title="6.7. Copia dei flussi"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.6. Ridimensionare filmati</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-mpeg.html">Indietro</a> </td><th width="60%" align="center">Capitolo 6. Utilizzo base di <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-streamcopy.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-rescale"></a>6.6. Ridimensionare filmati</h2></div></div></div><p>
+Spesso emerge la necessità di ridimensionare le immagini del filmato.
+Le ragioni possono essere molte: diminuire la dimensione del file, la banda di
+rete, etc... Molte persone ridimensionano anche quando convertono DVD o CVD in
+AVI DivX. Se desideri ridimensionare, leggi la sezione
+<a class="link" href="aspect.html" title="6.10. Preservare il rapporto di aspetto">Preservare il rapporto di aspetto</a>.
+</p><p>
+Il processo di ridimensionamento è gestito dal filtro video
+<code class="literal">scale</code>:
+<tt class="option">-vf scale=<em class="replaceable"><code>larghezza</code></em>:<em class="replaceable"><code>altezza</code></em></tt>.
+La sua qualità può essere impostata con l'opzione <tt class="option">-sws</tt>.
+Se non è specificato, <span class="application">MEncoder</span> userà 2: bicubico.
+</p><p>
+Uso:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.mpg</code></em> -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell \
+    -vf scale=640:480 -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-mpeg.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-streamcopy.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">6.5. Codificare in formato MPEG </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 6.7. Copia dei flussi</td></tr></table></div></body></html>

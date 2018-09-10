@@ -1,0 +1,73 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.7. Riproduzione VCD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="prev" href="dvd.html" title="3.6. Riproduzione DVD"><link rel="next" href="edl.html" title="3.8. Edit Decision Lists (EDL) (liste di decisione di modifica)"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.7. Riproduzione VCD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dvd.html">Indietro</a> </td><th width="60%" align="center">Capitolo 3. Utilizzo</th><td width="20%" align="right"> <a accesskey="n" href="edl.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vcd"></a>3.7. Riproduzione VCD</h2></div></div></div><p>
+Per una lista completa delle opzioni disponibili per favore leggi la pagina man.
+La sintassi per riprodurre un Video CD (VCD) normale è la seguente:
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>&lt;traccia&gt;</code></em> [-cdrom-device <em class="replaceable"><code>&lt;dispositivo&gt;</code></em>]</pre><p>
+Esempio:
+</p><pre class="screen">mplayer vcd://2 -cdrom-device /dev/hdc</pre><p>
+Il dispositivo VCD di default è <tt class="filename">/dev/cdrom</tt>. Se la tua
+impostazione è diversa, crea un collegamento simbolico o indica il dispositivo
+giusto dalla riga comando con l'opzione <tt class="option">-cdrom-device</tt>.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Perlomeno i lettori CD-ROM Plextor e alcuni Toshiba SCSI hanno prestazioni
+orribili leggendo i VCD. Questo perché l'<code class="systemitem">ioctl</code>
+CDROMREADRAW non è implementata appieno per questi lettori. Se hai una qualche
+conoscenza della programmazione SCSI, per favore
+<a class="ulink" href="../../tech/patches.txt" target="_top">aiutaci</a> ad implementare un supporto
+SCSI generico per i VCD.
+</p></div><p>
+Nel frattempo puoi estrarre i dati dal VCD con
+<a class="ulink" href="http://ftp.ntut.edu.tw/ftp/OS/Linux/packages/X/viewers/readvcd/" target="_top">readvcd</a>
+e riprodurre con <span class="application">MPlayer</span> il file così ricavato.
+</p><p><b>Struttura VCD. </b>
+Un Video CD (VCD) è fatto di settori CD-ROM XA, per es. tracce CD-ROM mode 2
+form 1 e 2:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  La prima traccia è in formato mode 2 form 2 il che significa che usa una
+  correzione errori L2. La traccia contiene un filesystem ISO-9660 con 2048
+  byte/settore. Il filesystem contiene delle informazioni metadati VCD, così
+  come fermi-immagine spesso usati nei menu. I segmenti MPEG per i menu possono
+  anche essere salvati nella prima traccia, ma gli MPEG devono essere
+  spezzettati in una serie di blocchi di 150 settori. Il filesystem ISO-9660
+  può contenere altri file o programmi che non sono essenziali per le
+  operazioni VCD.
+</p></li><li class="listitem"><p>
+  Le seconde e restanti tracce spesso sono tracce MPEG (filmato) di basso
+  livello di 2324 byte/settore, contenenti un pacchetto dati MPEG PS per
+  settore. Queste sono in formato mode 2 form 1, così da poter archiviare più
+  dati per settore con la perdita di qualche correzione di errore. E' anche
+  valido avere tracce CD-DA in un VCD dopo la prima traccia.
+  In alcuni sistemi operativi c'è qualche trucchetto che fa apparire queste
+  tracce non ISO-9660 in un filesystem. In altri sistemi operativi come
+  GNU/Linux non è (ancora) così. Qui i dati MPEG
+  <span class="bold"><strong>non possono venir montati</strong></span>. Siccome molti
+  film sono dentro questo tipo di tracce, dovresti provare prima
+  <tt class="option">vcd://2</tt>.
+</p></li><li class="listitem"><p>
+  Ci sono dischi VCD senza la prima traccia (traccia singola e proprio nessun
+  filesystem). Essi sono comunque riproducibili, ma non possono essere montati.
+</p></li><li class="listitem"><p>
+  La definizione dello standard VCD viene chiamato il "White Book" Philips, e
+  non è disponibile on-line visto che deve essere acquistato da Philips.
+  Informazioni più dettagliate sui Video CD si possono trovare nella
+  <a class="ulink" href="http://www.vcdimager.org/pub/vcdimager/manuals/0.7/vcdimager.html#SEC4" target="_top">documentazione di vcdimager</a>.
+</p></li></ul></div><p>
+</p><p><b>Riguardo i file .DAT. </b>
+Il file .DAT da ~600MB visibile sulla prima traccia del filsystem VCD montato
+non è un vero file! Viene anche detto "ISO gateway", creato per permettere a
+Windows di gestire tali tracce (Windows non permette alle applicazioni alcun
+accesso di basso livello ai dispositivi). Sotto Linux non puoi copiare o
+riprodurre questi file (contengono spazzatura). Sotto Windows è possibile
+che il driver iso9660 emuli la lettura a basso livello delle tracce nel file.
+Per riprodurre un file .DAT ti serve il driver per il kernel che si può
+trovare nella versione per Linux di PowerDVD. Esso ha un driver modificato per
+il filesystem iso9660 (<tt class="filename">vcdfs/isofs-2.4.X.o</tt>), che è in
+grado di emulare le tracce di basso livello attraverso quel file fantasma .DAT.
+Se monti il disco usando il loro driver, puoi poi copiare e anche riprodurre i
+file .DAT con <span class="application">MPlayer</span>. Ma non funzionerà col driver
+iso9660 standard del kernel Linux! Usa invece <tt class="option">vcd://</tt>.
+Alternative per copiare i VCD sono il nuovo driver del kernel
+<a class="ulink" href="http://www.elis.rug.ac.be/~ronsse/cdfs/" target="_top">cdfs</a> (non incluso
+nel kernel ufficiale), che mostra le sessioni dei CD come file immagine, e
+<a class="ulink" href="http://cdrdao.sf.net/" target="_top">cdrdao</a>, un'applicazione per
+copiare/fare il dump di CD bit-per-bit.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dvd.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="edl.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">3.6. Riproduzione DVD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 3.8. Edit Decision Lists (EDL) (liste di decisione di modifica)</td></tr></table></div></body></html>

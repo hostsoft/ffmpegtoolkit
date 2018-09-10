@@ -1,0 +1,131 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.6. Co nahlásit</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="prev" href="bugreports_where.html" title="A.5. Kam hlásit chyby"><link rel="next" href="bugreports_advusers.html" title="A.7. Vím co dělám..."><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="bugreports_what.html#bugreports_system" title="A.6.1. Systémové informace"><link rel="subsection" href="bugreports_what.html#bugreports_hardware" title="A.6.2. Hardware a rozhraní (ovladače)"><link rel="subsection" href="bugreports_what.html#bugreports_configure" title="A.6.3. Problémy s konfigurací"><link rel="subsection" href="bugreports_what.html#bugreports_compilation" title="A.6.4. Problémy s kompilací"><link rel="subsection" href="bugreports_what.html#bugreports_playback" title="A.6.5. Problémy s přehráváním"><link rel="subsection" href="bugreports_what.html#bugreports_crash" title="A.6.6. Pády"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.6. Co nahlásit</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_where.html">Předcházející</a> </td><th width="60%" align="center">Příloha A. Jak hlásit chyby</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_what"></a>A.6. Co nahlásit</h2></div></div></div><p>
+Bude potřeba připojit log, konfiguraci nebo vzorky souborů ke svému hlášení chyb.
+Pokud jsou některé z nich opravdu velké, pak je raději nahrajte na náš
+<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">FTP server</a>
+v komprimovaném formátu (preferujeme gzip a bzip2) a do zprávy zahrňte pouze
+cestu a název souboru. Naše konference mají limit velikosti zprávy 80k, pokud
+máte něco většího, musíte to zkomprimovat a nahrát na FTP.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_system"></a>A.6.1. Systémové informace</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Vaše Linuxová distribuce nebo operační systém a jeho verze jako:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Red Hat 7.1</p></li><li class="listitem"><p>Slackware 7.0 + devel packs from 7.1 ...</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  verze jádra:
+  </p><pre class="screen">uname -a</pre><p>
+</p></li><li class="listitem"><p>
+  verze libc:
+  </p><pre class="screen">ls -l /lib/libc[.-]*</pre><p>
+</p></li><li class="listitem"><p>
+  verze gcc a ld:
+  </p><pre class="screen">
+gcc -v
+ld -v</pre><p>
+</p></li><li class="listitem"><p>
+  verze binutils:
+  </p><pre class="screen">as --version</pre><p>
+</p></li><li class="listitem"><p>
+  Pokud máte problémy s celoobrazovkovým režimem:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Druh Window manageru a jeho verze</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  Pokud máte problémy s XVIDIX:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>
+    Hloubka barev v X:
+    </p><pre class="screen">xdpyinfo | grep "depth of root"</pre><p>
+  </p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  Pokud je chybné pouze GUI:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>verze GTK</p></li><li class="listitem"><p>verze GLIB</p></li><li class="listitem"><p>GUI situace kdy se chyba projevila</p></li></ul></div><p>
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_hardware"></a>A.6.2. Hardware a rozhraní (ovladače)</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  CPU info (to funguje pouze v Linuxu):
+  </p><pre class="screen">cat /proc/cpuinfo</pre><p>
+</p></li><li class="listitem"><p>
+  Výrobce a model videokarty, např:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>ASUS V3800U chip: nVidia TNT2 Ultra pro 32MB SDRAM</p></li><li class="listitem"><p>Matrox G400 DH 32MB SGRAM</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  Typ video ovladače a jeho verze, např.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>vestavěný ovladač z X</p></li><li class="listitem"><p>nVidia 0.9.623</p></li><li class="listitem"><p>Utah-GLX CVS 2001-02-17</p></li><li class="listitem"><p>DRI z X 4.0.3</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  Typ zvukové karty a ovladač, např.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Creative SBLive! Gold s OSS ovladačem od oss.creative.com</p></li><li class="listitem"><p>Creative SB16 s OSS ovladači z jádra</p></li><li class="listitem"><p>GUS PnP s ALSA OSS emulací</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+  Pokud si nejste jisti a používáte systém Linux, přidejte výstup
+  z <span class="command"><strong>lspci -vv</strong></span>.
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_configure"></a>A.6.3. Problémy s konfigurací</h3></div></div></div><p>
+Pokud nastanou chyby během běhu <span class="command"><strong>./configure</strong></span>, nebo selže
+autodetekce něčeho, prostudujte <tt class="filename">config.log</tt>. Možná
+naleznete odpověď zde. Například několik verzí stejné knihovny v systému, nebo
+jste zapomněli nainstalovat vývojový (devel) balíček (to jsou ty s koncovkou
+-dev). Pokud si myslíte, že je zde chyba, přidejte
+<tt class="filename">config.log</tt> do svého hlášení.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_compilation"></a>A.6.4. Problémy s kompilací</h3></div></div></div><p>
+Zahrňte prosím tyto soubory:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>config.h</p></li><li class="listitem"><p>config.mak</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_playback"></a>A.6.5. Problémy s přehráváním</h3></div></div></div><p>
+Zahrňte prosíme výstup <span class="application">MPlayer</span>u v upovídaném
+režimu úrovně 1 ale dejte pozor, abyste jej
+<span class="bold"><strong>nezkrátili</strong></span>
+při kopírování do mailu. Vývojáři potřebují všechny zprávy pro dobrou diagnózu
+problému. Takto můžete přesměrovat výstup do souboru:
+</p><pre class="screen">
+mplayer -v <em class="replaceable"><code>volby</code></em> <em class="replaceable"><code>film</code></em> &gt; mplayer.log 2&gt;&amp;1
+</pre><p>
+</p><p>
+Pokud se problém vztahuje k jednomu nebo více souborům, pak prosím nahrajte
+potížisty na:
+<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">ftp://upload.mplayerhq.hu/incoming/</a>
+</p><p>
+Rovněž zde nahrajte malý textový soubor se stejným základním jménem a příponou
+.txt. Popište problém který máte s daným souborem a připojte svůj e-mail a také
+výstup <span class="application">MPlayer</span>u v upovídaném režimu úrovně 1.
+Pro reprodukci problému stačí obvykle prvních 1-5 MB souboru, ale pro jistotu
+vás žádáme o:
+</p><pre class="screen">
+dd if=<em class="replaceable"><code>váš_soubor</code></em> of=<em class="replaceable"><code>malý_soubor</code></em> bs=1024k count=5
+</pre><p>
+To vezme prvních pět megabajtů '<span class="bold"><strong>vašeho_souboru</strong></span>'
+a zapíše je do '<span class="bold"><strong>malého_souboru</strong></span>'. Pak znovu
+zkuste tento malý vzorek a pokud se na něm chyba projeví, pak je tento vzorek
+pro nás dostatečný.
+Prosíme <span class="bold"><strong>nikdy</strong></span> neposílejte tyto soubory e-mailem!
+Nahrajte je na FTP a pošlete pouze cestu/název_souboru daného souboru na FTP
+serveru. Pokud je soubor přístupný na internetu, pak stačí poslat
+<span class="bold"><strong>přesnou</strong></span> adresu URL.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_crash"></a>A.6.6. Pády</h3></div></div></div><p>
+Musíte spustit <span class="application">MPlayer</span> z <span class="command"><strong>gdb</strong></span>
+a poslat nám úplný výstup nebo pokud máte <tt class="filename">core</tt> dump
+z pádu, můžete nám vyextrahovat užitečné informace ze souboru Core.
+Jak to udělat:
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_debug"></a>A.6.6.1. Jak uchovat informace o zopakovatelném pádu</h4></div></div></div><p>
+Překompilujte <span class="application">MPlayer</span> se zapnutým debugovacím kódem:
+</p><pre class="screen">
+./configure --enable-debug=3
+make
+</pre><p>
+a spusťte <span class="application">MPlayer</span> z gdb pomocí:
+</p><pre class="screen">gdb ./mplayer</pre><p>
+Nyní jste v gdb. Zadejte:
+</p><pre class="screen">
+run -v <em class="replaceable"><code>volby-pro-mplayer</code></em> <em class="replaceable"><code>soubor</code></em>
+</pre><p>
+a zopakujte pád. Jakmile to dokážete, vrátí se gdb do režimu příkazového řádku,
+kde musíte zadat
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_core"></a>A.6.6.2. Jak získat smysluplné informace z core dump</h4></div></div></div><p>
+Vytvořte následující příkazový řádek:
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+Pak jednoduše spusťte tento příkaz:
+</p><pre class="screen">
+gdb mplayer --core=core -batch --command=příkazový_soubor &gt; mplayer.bug
+</pre><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_where.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">A.5. Kam hlásit chyby </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> A.7. Vím co dělám...</td></tr></table></div></body></html>

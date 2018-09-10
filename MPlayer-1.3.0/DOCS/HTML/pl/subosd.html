@@ -1,0 +1,62 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.2. Napisy i OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="prev" href="commandline.html" title="3.1. Wiersz poleceń"><link rel="next" href="control.html" title="3.3. Sterowanie"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. Napisy i OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="commandline.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 3. Sposób użycia</th><td width="20%" align="right"> <a accesskey="n" href="control.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="subosd"></a>3.2. Napisy i OSD</h2></div></div></div><p>
+<span class="application">MPlayer</span> może wyświetlać napisy podczas odtwarzania
+filmu. Obecnie obsługiwane są następujące formaty:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>VOBsub</p></li><li class="listitem"><p>OGM</p></li><li class="listitem"><p>CC (closed caption)</p></li><li class="listitem"><p>MicroDVD</p></li><li class="listitem"><p>SubRip</p></li><li class="listitem"><p>SubViewer</p></li><li class="listitem"><p>Sami</p></li><li class="listitem"><p>VPlayer</p></li><li class="listitem"><p>RT</p></li><li class="listitem"><p>SSA</p></li><li class="listitem"><p>PJS (Phoenix Japanimation Society)</p></li><li class="listitem"><p>MPsub</p></li><li class="listitem"><p>AQTitle</p></li><li class="listitem"><p>
+    <a class="ulink" href="http://unicorn.us.com/jacosub/" target="_top">JACOsub</a></p></li></ul></div><p>
+</p><p>
+<span class="application">MPlayer</span> może zrzucić wyżej wymienione formaty napisów
+(<span class="bold"><strong>poza pierwszymi trzema</strong></span>) do następujących formatów,
+jeśli podasz odpowiednią opcję:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>MPsub: <tt class="option">-dumpmpsub</tt></p></li><li class="listitem"><p>SubRip: <tt class="option">-dumpsrtsub</tt></p></li><li class="listitem"><p>MicroDVD: <tt class="option">-dumpmicrodvdsub</tt></p></li><li class="listitem"><p>JACOsub: <tt class="option">-dumpjacosub</tt></p></li><li class="listitem"><p>Sami: <tt class="option">-dumpsami</tt></p></li></ul></div><p>
+</p><p>
+<span class="application">MEncoder</span> może zrzucić napisy DVD do formatu
+<a class="link" href="menc-feat-extractsub.html" title="6.9. Wydobywanie napisów z DVD do pliku VOBsub">VOBsub</a>.
+</p><p>
+Opcje wiersza poleceń różnią się nieco dla poszczególnych formatów:
+</p><p><b>Format VOBsub. </b>
+Napisy VOBsub składają się z dużego (kilkumegabajtowego) pliku <tt class="filename">.SUB</tt>
+i opcjonalnych plików <tt class="filename">.IDX</tt> i/lub <tt class="filename">.IFO</tt>.
+Jeżeli masz takie pliki, jak
+<tt class="filename"><em class="replaceable"><code>przykład.sub</code></em></tt>,
+<tt class="filename"><em class="replaceable"><code>przykład.ifo</code></em></tt> (opcjonalne),
+<tt class="filename"><em class="replaceable"><code>przykład.idx</code></em></tt> -
+musisz przekazać <span class="application">MPlayerowi</span> opcje
+<tt class="option">-vobsub przykład [-vobsubid <em class="replaceable"><code>id</code></em>]</tt>
+(pełna ścieżka jest opcjonalna). Parametr <tt class="option">-vobsubid</tt> jest, jak
+<tt class="option">-sid</tt> dla DVD - przy jego pomocy możesz wybierać pomiędzy ścieżkami napisów
+(różne języki). Jeżeli opcja <tt class="option">-vobsubid</tt> jest pominięta,
+<span class="application">MPlayer</span> spróbuje użyć języka podanego przez parametr
+<tt class="option">-slang</tt> i powróci do <code class="systemitem">langidx</code>
+zawartego w pliku<tt class="filename">.IDX</tt>, żeby ustawić język napisów. Jeżeli to
+zakończy się niepowodzeniem, napisy nie będą wyświetlane.
+</p><p><b>Inne formaty napisów. </b>
+Inne formaty składają się z pojedynczego pliku tekstowego zawierającego przedział
+czasowy, rozmieszczenie i sam tekst. Sposób użycia: Jeżeli masz taki plik, jak
+<tt class="filename"><em class="replaceable"><code>przykład.txt</code></em></tt>,
+musisz przekazać opcję <tt class="option">-sub
+<em class="replaceable"><code>przykład.txt</code></em></tt> (pełna ścieżka jest opcjonalna).
+</p><div class="variablelist"><p class="title"><b>Dopasowywanie czasu wyświetlania i położenia napisów:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-subdelay <em class="replaceable"><code>sek</code></em></tt></span></dt><dd><p>
+    Opóźnia wyświetlanie napisów o <tt class="option"><em class="replaceable"><code>sek</code></em></tt> sekund.
+    Może być liczbą ujemną. Wartość jest dodawana do licznika czasu filmu.
+  </p></dd><dt><span class="term"><tt class="option">-subfps <em class="replaceable"><code>ILOŚĆ</code></em></tt></span></dt><dd><p>
+    Określa ilość klatek na sekundę pliku z napisami (liczba rzeczywista).
+  </p></dd><dt><span class="term"><tt class="option">-subpos <em class="replaceable"><code>0-100</code></em></tt></span></dt><dd><p>
+    Określa położenie napisów.
+  </p></dd></dl></div><p>
+Jeżeli podczas używania napisów w formacie MicroDVD zauważysz rosnące opóźnienie
+między nimi a filmem, to prawdopodobnie ilość klatek na sekundę filmu różni się
+od wartości, do której zostały przystosowane napisy.
+Zauważ, że format ten korzysta z bezwzględnych numerów klatek do wyświetlania
+napisów w odpowiednim momencie, ale nie zawiera w sobie informacji o wartości fps,
+dlatego powinieneś skorzystać z opcji <tt class="option">-subfps</tt>.
+Jeżeli chciałbyś trwale rozwiązać ten problem, musisz ręcznie zmienić
+wartość framerate pliku z napisami.
+<span class="application">MPlayer</span> może zrobić to za ciebie:
+
+</p><pre class="screen">
+mplayer -dumpmicrodvdsub -fps <em class="replaceable"><code>fps_napisów</code></em> -subfps <em class="replaceable"><code>fps_filmu</code></em> \
+    -sub <em class="replaceable"><code>zbiór_z_napisami</code></em> <em class="replaceable"><code>atrapa.avi</code></em>
+</pre><p>
+</p><p>
+O napisach DVD przeczytasz w rozdziale <a class="link" href="dvd.html" title="3.7. Odtwarzanie DVD">DVD</a>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="commandline.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="control.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. Wiersz poleceń </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 3.3. Sterowanie</td></tr></table></div></body></html>

@@ -1,0 +1,188 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.2. DGA</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="xv.html" title="6.1. Xv"><link rel="next" href="svgalib.html" title="6.3. SVGAlib"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. DGA</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="xv.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="svgalib.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dga"></a>6.2. DGA</h2></div></div></div><p><b>BEVEZETÉS. </b>
+Ez a dokumentum megpróbálja pár szóban elmagyarázni, hogy mi is az a DGA
+tulajdonképpen és mit tehet a DGA vezérlő az <span class="application">MPlayer</span>nek
+(és mit nem).
+</p><p><b>MI AZ A DGA. </b>
+A <acronym class="acronym">DGA</acronym> a <span class="emphasis"><em>Direct Graphics Access</em></span>
+rövidítése és azt jelenti, hogy egy program az X szerver megkerülésével
+direkt eléréssel módosíthatja a framebuffer memóriát. Gyakorlatilag ez úgy
+történik, hogy a framebuffer memória a processzed memória tartományába
+kerül leképezésre. Ezt a kernel csak superuser jogokkal engedélyezi. Vagy
+<code class="systemitem">root</code> néven történő bejelentkezéssel
+vagy az <span class="application">MPlayer</span> futtatható állományának SUID
+bitjének beállításával juthatsz ilyen jogokhoz. (<span class="bold"><strong>nem
+javasoljuk</strong></span>).
+</p><p>
+Két verziója van a DGA-nak: a DGA1 az XFree 3.x.x-ban volt használatos, a DGA2
+az XFree 4.0.1-ben került bevezetésre.
+</p><p>
+A DGA1 csak direkt framebuffer elérést biztosít a fent leírt módszerrel. A
+videó jel felbontásának megváltoztatásához az XVidMode kiterjesztést kell
+használnod.
+</p><p>
+A DGA2 már tartalmazza az XVidMode kiterjesztés képességeit és a
+képernyő színmélységét is engedi változtatni. Így alaphelyzetben 32
+bites színmélységben futtatott X szervert átállíthatsz 15 bites
+mélységre és vissza.
+</p><p>
+Ennek ellenére a DGA-nak van néhány hátránya. Úgy tűnik ez az általad használt
+grafikus chip-től függ és az ezen chip-et irányító vezérlő X szerverben való
+megvalósításától. Így nem minden rendszeren működik...
+</p><p><b>DGA TÁMOGATÁS TELEPÍTÉSE AZ MPLAYERHEZ. </b>
+Először győződj meg, hogy az X betölti a DGA kiterjesztést: lásd
+a <tt class="filename">/var/log/XFree86.0.log</tt> fájlt:
+
+</p><pre class="programlisting">(II) Loading extension XFree86-DGA</pre><p>
+
+XFree86 4.0.x vagy újabb
+<span class="bold"><strong>nagyon javasolt</strong></span>!
+Az <span class="application">MPlayer</span> DGA vezérlőjét a
+<tt class="filename">./configure</tt> automatikusan megtalálja, de elő is írhatod
+a használatát a <tt class="option">--enable-dga</tt> kapcsolóval.
+</p><p>
+Ha a vezérlő nem tud kisebb felbontásra váltani, kísérletezz a
+<tt class="option">-vm</tt> (csak X 3.3.x esetén), <tt class="option">-fs</tt>,
+<tt class="option">-bpp</tt>, <tt class="option">-zoom</tt> kapcsolókkal a filmnek
+legmegfelelőbb videó mód megtalálásához. Még nincs konverter :(
+</p><p>
+Lépj be <code class="systemitem">root</code>ként. A DGA-hoz root
+elérés kell, hogy közvetlenül tudjon írni a videó memóriába. Ha felhasználóként
+akarod futtatni, telepítsd az <span class="application">MPlayer</span>t SUID root-tal:
+
+</p><pre class="screen">
+chown root <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod 750 <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod +s <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+</pre><p>
+
+Így már egyszerű felhasználók esetében is működik.
+</p><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Biztonsági kockázat</h3><p>
+Ez <span class="bold"><strong>nagy</strong></span> biztonsági kockázatot jelent!
+<span class="bold"><strong>Soha</strong></span> ne csináld ezt meg egy szerveren vagy egy
+olyan számítógépen amihez mások is hozzáférnek, mert root jogokat szerezhetnek
+a SUID root-os <span class="application">MPlayer</span>rel.
+</p></div><p>
+Használd a <tt class="option">-vo dga</tt> kapcsolót, és már megy is! (reméljük:)
+Kipróbálhatod a <tt class="option">-vo sdl:driver=dga</tt> kapcsolót is, hogy működik-e!
+Sokkal gyorsabb!
+</p><p><a name="dga-modelines"></a><b>FELBONTÁS VÁLTÁS. </b>
+A DGA vezérlő lehetővé teszi a kimeneti jel felbontásának megváltoztatását.
+Ezzel elkerülhető a (lassú) szoftveres méretezés és ugyanakkor teljes képernyős
+képet biztosít. Ideális helyzetben pontosan a videó adat felbontására vált
+(kivéve az aspect arányt), de az X szerver csak a
+<tt class="filename">/etc/X11/XF86Config</tt>
+(<tt class="filename">/etc/X11/XF86Config-4</tt> XFree 4.X.X esetén)
+fájlban előírt felbontásokra enged váltani.
+Ezeket modline-oknak nevezik és a videó hardvered tulajdonságain múlik.
+Az X szerver átnézi ezt a konfigurációs fájlt indításkor és letiltja a
+hardverednek nem megfelelőeket.
+Az X11 log fájlból kiderítheted, hogy mely módok engedélyezettek. Megtalálhatóak
+a <tt class="filename">/var/log/XFree86.0.log</tt> fájlban.
+</p><p>
+Ezek a bejegyzések tudvalevőleg működnek Riva128 chip-en, az nv.o X szerver
+vezérlő modul használatával.
+</p><pre class="programlisting">
+Section "Modes"
+  Identifier "Modes[0]"
+  Modeline "800x600"  40     800 840 968 1056  600 601 605 628
+  Modeline "712x600"  35.0   712 740 850 900   400 410 412 425
+  Modeline "640x480"  25.175 640 664 760 800   480 491 493 525
+  Modeline "400x300"  20     400 416 480 528   300 301 303 314 Doublescan
+  Modeline "352x288"  25.10  352 368 416 432   288 296 290 310
+  Modeline "352x240"  15.750 352 368 416 432   240 244 246 262 Doublescan
+  Modeline "320x240"  12.588 320 336 384 400   240 245 246 262 Doublescan
+EndSection
+</pre><p><b>DGA &amp; MPLAYER. </b>
+A DGA két helyen használható az <span class="application">MPlayer</span>ben: Az
+SDL vezérlőnek előírhatod a használatát (<tt class="option">-vo sdl:driver=dga</tt>)
+és a DGA vezérlőben (<tt class="option">-vo dga</tt>). A fent említettek vonatkoznak
+mind a kettőre; a következő részben leírom, hogyan működik az
+<span class="application">MPlayer</span> DGA vezérlője.
+</p><p><b>TULAJDONSÁGOK. </b>
+A DGA vezérlő használatát a <tt class="option">-vo dga</tt> kapcsoló parancssorban
+történő megadásával írhatod elő. Alapértelmezésként az videó eredeti
+felbontásához legközelebb álló felbontásra vált. Szándékosan figyelmen
+kívül hagyja a <tt class="option">-vm</tt> és <tt class="option">-fs</tt> kapcsolókat
+(videó mód váltás engedélyezése és teljes képernyő) - mindig a lehető
+legtöbbet megpróbálja elfedni a képernyődből a videó mód váltásával, így
+megspórolja a képméretezéshez szükséges plusz CPU ciklusokat. Ha nem
+tetszik az általa választott mód, kényszerítheted, hogy az általad megadott
+felbontáshoz legközelebbit keresse meg az <tt class="option">-x</tt> és
+<tt class="option">-y</tt> kapcsolókkal. A <tt class="option">-v</tt> kapcsoló beírásának
+hatására a DGA vezérlő sok egyéb mellett kilistázza az aktuális
+<tt class="filename">XF86Config</tt> fájl által támogatott összes felbontást.
+DGA2 használata esetén előírhatod a színmélységet is a <tt class="option">-bpp</tt>
+kapcsolóval. Az érvényes színmélységek 15, 16, 24 és 32. A hardvereden
+múlik, hogy ezek a színmélységek alapból támogatottak-e vagy (valószínűleg
+lassú) konverziót kell végezni.
+</p><p>
+Ha vagy olyan szerencsés, hogy elegendő memóriád van az egész, nem képernyőn
+lévő kép bemásolásához, a DGA vezérlő dupla bufferelést fog használni, ami
+egyenletesebb film lejátszást eredményez. Kiírja, hogy a dupla bufferelés
+engedélyezett-e vagy sem.
+</p><p>
+A dupla bufferelés azt jelenti,h ogy a videód következő képkockája a memória
+egy nem megjelenített részére másolódik, amíg az aktuális képkocka van a
+képernyőn. Ha kész a következő képkocka, a grafikus chip megkapja az új kép
+memóriabeli helyét, és egyszerűen onnan megjeleníti a képet. Eközben a másik
+buffer ismét feltöltődik új videó adattal.
+</p><p>
+A dupla bufferelés bekapcsolható a <tt class="option">-double</tt> kapcsolóval, vagy
+letiltható a <tt class="option">-nodouble</tt>-lal. A jelenlegi alapértelmezett
+beállítás szerint le van tiltva a dupla bufferelés. DGA vezérlő használata
+esetén az onscreen display (OSD) csak akkor működik, ha a dupla bufferelés
+engedélyezve van. Azonban a dupla bufferelés nagy sebességcsökkenéssel járhat
+(az én K6-II+ 525 gépemen további 20% CPU idő!) a hardvered DGA implementációjától
+függően.
+</p><p><b>SEBESSÉGI ADATOK. </b>
+Általánosságban a DGA framebuffer elérésének legalább olyan gyorsnak
+kell lennie, mint az X11-es vezérlőnek a teljes képernyős képhez szükséges
+kiegészítők használatával. Az <span class="application">MPlayer</span> által kiírt
+százalékos sebesség értékeket azonban fenntartással kezeld, mert például az
+X11-es vezérlő esetén nem tartalmazzák azt az időt, ami az X szervernek kell
+a kirajzoláshoz. Hurkold rá a terminált egy soros vonalra és indítsd el a
+<span class="command"><strong>top</strong></span> programot, akkor megtudod mi is történik valójában a
+dobozodban.
+</p><p>
+Kijelenthetjük, hogy a DGA gyorsítása a 'normális' X11-es használathoz képest
+erőteljesen függ a grafikus kártyádtól és hogy a hozzá tartozó X szerver modul
+mennyire optimalizált.
+</p><p>
+Ha lassú rendszered van, jobb ha 15 vagy 16 bites színmélységet használsz,
+mivel ezek fele akkora memória sávszélességet igényelnek, mint a 32 bites
+megjelenítés.
+</p><p>
+A 24 bites színmélység használata jó ötlet, ha a kártyád natívan támogatja a
+32 bites mélységet, mivel ez is 25%-kal kevesebb adatátvitelt jelent a 32/32
+módhoz képest.
+</p><p>
+Láttam pár AVI fájlt 266-os Pentium MMX-en lejátszva. Az AMD K6-2 CPU-k is
+működnek 400 MHZ vagy afölött.
+</p><p><b>ISMERT HIBÁK. </b>
+Nos, az XFree néhány fejlesztője szerint a DGA egy szörnyeteg. Ők azt mondják,
+jobb ha nem használod. Az implementációja nem mindig tökéletes az XFree-hez
+tartozó chipset vezérlőkkel.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Az XFree 4.0.3 és az <tt class="filename">nv.o</tt> esetén van egy hiba, ami
+  érdekes színeket eredményez.
+</p></li><li class="listitem"><p>
+  ATI vezérlő esetén egynél többször kell visszaváltani a módot a DGA-s
+  lejátszás után.
+</p></li><li class="listitem"><p>
+  Néhány vezérlő egyszerűen képtelen visszaváltani normál felbontásra (használd a
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad +</b></span>
+  és
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad -</b></span>
+  kombinációkat a kézi váltáshoz).
+</p></li><li class="listitem"><p>
+  Néhány vezérlő egyszerűen rossz színeket jelenít meg.
+</p></li><li class="listitem"><p>
+  Néhány vezérlő hamis adatot ad a processz címterébe bemappolt memória méretéről,
+  így a vo_dga nem használ dupla bufferelést (SIS?).
+</p></li><li class="listitem"><p>
+  Néhány vezérlő egy használható módot sem jelez. Ebben az esetben a
+  DGA vezérlő összeomlik és azt írja, hogy 100000x100000-es értelmetlen mód
+  vagy valami hasonló.
+</p></li><li class="listitem"><p>
+  Az OSD csak engedélyezett dupla buffereléssel működik (különben villog).
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="xv.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="svgalib.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. Xv </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.3. SVGAlib</td></tr></table></div></body></html>

@@ -1,0 +1,74 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.4. Polices et OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="install.html" title="Chapitre 2. Installation"><link rel="prev" href="gui.html" title="2.3. À propos de l'interface graphique"><link rel="next" href="codec-installation.html" title="2.5. Installation Codec"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="fonts-osd.html#truetype-fonts" title="2.4.1. Police TrueType"><link rel="subsection" href="fonts-osd.html#bitmap-fonts" title="2.4.2. Polices Bitmap"><link rel="subsection" href="fonts-osd.html#osdmenu" title="2.4.3. Menu OSD"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.4. Polices et OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="gui.html">Précédent</a> </td><th width="60%" align="center">Chapitre 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="codec-installation.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fonts-osd"></a>2.4. Polices et OSD</h2></div></div></div><p>
+Vous devez spécifier à <span class="application">MPlayer</span> quelles polices utiliser
+pour l'OSD et les sous-titres. N'importe quelle police TrueType ou Bitmap devrait
+faire l'affaire. Cependant, les polices TrueType sont recommandés car elles ont
+un bien meilleur aspect, peuvent être mises à l'échelle correctement et gèrent mieux
+les différents jeux de caractères.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="truetype-fonts"></a>2.4.1. Police TrueType</h3></div></div></div><p>
+Il y a deux façons de rendre les polices TrueType opérationnelles. La première
+est de spécifier le nom du fichier de la police TrueType à utiliser grâce à l'option
+<tt class="option">-font</tt>. Il peut être intéressant de placer
+cette option dans votre fichier de configuration (voir la page de manuel pour plus de détails).
+La seconde façon est de créer un lien symbolique (symlink) baptisé <tt class="filename">subfont.ttf</tt> pointant vers le fichier
+contenant la police de votre choix. Pour choisir une police commune à tous les utilisateurs, tapez
+</p><pre class="screen">ln -s <em class="replaceable"><code>/path/to/sample_font.ttf</code></em> $PREFIX/share/mplayer/subfont.ttf</pre><p>
+Pour définir une police propre à chaque utilisateur, tapez
+</p><pre class="screen">ln -s <em class="replaceable"><code>/path/to/sample_font.ttf</code></em> ~/.mplayer/subfont.ttf</pre><p>
+</p><p>
+La compilation de <span class="application">MPlayer</span> avec le support pour
+<code class="systemitem">fontconfig</code> rend les méthodes ci-dessus inopérantes.
+En effet, <span class="application">MPlayer</span> s'attend à ce que <tt class="option">-font</tt> soit
+suivi d'un nom de police compatible avec <code class="systemitem">fontconfig</code>
+et utilisera sans-serif par défaut.
+Un exemple :
+</p><pre class="screen">mplayer -font <em class="replaceable"><code>'Bitstream Vera Sans'</code></em> <em class="replaceable"><code>anime.mkv</code></em></pre><p>
+</p><p>
+Pour obtenir la liste des polices compatibles avec <code class="systemitem">fontconfig</code>,
+executez <span class="command"><strong>fc-list</strong></span> dans la console.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bitmap-fonts"></a>2.4.2. Polices Bitmap</h3></div></div></div><p>
+Si pour une raison quelconque vous souhaitez ou devez employer des polices bitmap, téléchargez en un jeu
+depuis notre page web. Vous avez les choix entre différentes
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/fonts/" target="_top">polices ISO</a> et quelques autres
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/fonts/" target="_top">polices développées par des utilisateurs</a>
+supportant plusieurs encodages.
+</p><p>
+Décompressez le fichier que vous avez téléchargé dans le répertoire
+<tt class="filename">~/.mplayer</tt> ou dans
+<tt class="filename">$PREFIX/share/mplayer</tt>.
+Ensuite, renommez ou créez un lien symbolique de l'un des répertoires ainsi créés vers
+le sous-repertoire
+<tt class="filename">font</tt>. Exemple :
+</p><pre class="screen">ln -s <em class="replaceable"><code>~/.mplayer/arial-24</code></em> ~/.mplayer/font</pre><p>
+</p><pre class="screen">ln -s <em class="replaceable"><code>$PREFIX/share/mplayer/arial-24</code></em> $PREFIX/share/mplayer/font</pre><p>
+</p><p>
+Les polices doivent disposer d'un fichier <tt class="filename">font.desc</tt>
+associant les positions des caractères unicode à l'encodage (NdT: code page) utilisés par le sous-titre.
+Une autre solution est d'encoder les sous-titres en UTF-8 et
+d'utiliser l'option <tt class="option">-utf8</tt> ou de donner au fichier sous-titre
+le même nom qu'au fichier video avec une extension <tt class="filename">.utf</tt> et de le placer
+dans le même répertoire que la vidéo.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osdmenu"></a>2.4.3. Menu OSD</h3></div></div></div><p>
+<span class="application">MPlayer</span> possède une interface de menu OSD complètement modulable.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+Le menu des préférences n'est PAS IMPLÉMENTÉ pour l'instant!
+</p></div><div class="orderedlist"><p class="title"><b>Installation</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  compilez <span class="application">MPlayer</span> en passant le paramètre <tt class="option">--enable-menu</tt>
+  à <tt class="filename">./configure</tt>
+  </p></li><li class="listitem"><p>
+  assurez-vous que les polices OSD sont installées
+  </p></li><li class="listitem"><p>
+  copiez <tt class="filename">etc/menu.conf</tt> dans votre répertoire
+  <tt class="filename">.mplayer</tt>
+  </p></li><li class="listitem"><p>
+  copiez <tt class="filename">etc/input.conf</tt> dans votre répertoire
+  <tt class="filename">.mplayer</tt>, ou dans le fichier de config globale de
+  <span class="application">MPlayer</span> (par défaut: <tt class="filename">/usr/local/etc/mplayer</tt>)
+  </p></li><li class="listitem"><p>
+  trouvez et éditez <tt class="filename">input.conf</tt> pour activer les touches
+  correspondant aux mouvements dans le menu (c'est décrit sur place).
+  </p></li><li class="listitem"><p>
+  lancez <span class="application">MPlayer</span> avec par exemple :
+  </p><pre class="screen">$ mplayer -menu <em class="replaceable"><code>fichier.avi</code></em></pre><p>
+  </p></li><li class="listitem"><p>
+  pressez n'importe laquelle des touches menu que vous avez définies
+  </p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="gui.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="codec-installation.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">2.3. À propos de l'interface graphique </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 2.5. Installation Codec</td></tr></table></div></body></html>

@@ -1,0 +1,81 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.6. DVD-Wiedergabe</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="prev" href="drives.html" title="3.5. CD/DVD-Laufwerke"><link rel="next" href="vcd.html" title="3.7. VCD-Wiedergabe"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.6. DVD-Wiedergabe</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="drives.html">Zurück</a> </td><th width="60%" align="center">Kapitel 3. Gebrauch</th><td width="20%" align="right"> <a accesskey="n" href="vcd.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dvd"></a>3.6. DVD-Wiedergabe</h2></div></div></div><p>
+Für eine komplette Liste der verfügbaren Optionen lies bitte die Manpage.
+Die Syntax für das Abspielen einer Standard-DVD lautet wie folgt:
+</p><pre class="screen">mplayer dvd://<em class="replaceable"><code>&lt;Track&gt;</code></em> [-dvd-device <em class="replaceable"><code>&lt;Gerät&gt;</code></em>]</pre><p>
+</p><p>
+Beispiel:
+</p><pre class="screen">mplayer dvd://1 -dvd-device /dev/hdc</pre><p>
+</p><p>
+Das Standard-DVD-Laufwerk ist <tt class="filename">/dev/dvd</tt>. Wenn deine
+Installation davon abweicht, erstelle einen Symlink oder gib das genaue Gerät auf
+der Kommandozeile an mit der Option <tt class="option">-dvd-device</tt>.
+</p><p>
+<span class="application">MPlayer</span> verwendet <code class="systemitem">libdvdread</code> und
+<code class="systemitem">libdvdcss</code> zur DVD-Wiedergabe und -Entschlüsselung.
+Diese beiden Bibliotheken sind im Unterverzeichnis
+<span class="application">MPlayer</span>-Quelltextbaum,
+du brauchst sie nicht separat zu installieren. Du kannst auch systemweite
+Versionen der beiden Bibliotheken verwenden, diese wird jedoch
+<span class="bold"><strong>nicht</strong></span> empfohlen, da dies zu Bugs,
+Bibliotheksinkompatibilitäten und geringerer Geschwindigkeit führen kann.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Anmerkung</h3><p>
+In Fällen von DVD-Dekodierungs-Problemen versuche Supermount oder solche Hilfen
+zu deaktivieren. Einige RPC-2 Laufwerke können verlangen, dass ein Regionalcode gesetzt ist.
+</p></div><p><b>DVD-Struktur. </b>
+DVDs haben 2048 Bytes pro Sektor mit ECC/CRC. Sie haben üblicherweise
+ein UDF-Dateisystem auf einem einzigem Track, welcher verschiedene Dateien
+(kleine .IFO und .BUK Dateien und große .VOB Dateien) enthält.
+Sie sind echte Dateien und können von einem gemounteten Dateisystem einer
+unentschlüsselten DVD kopiert/abgespielt werden.
+</p><p>
+Die .IFO-Dateien enthalten die Informationen zur Filmnavigation
+(Kapitel/Titel/Blickwinkel, Sprachtabellen etc.) und werden benötigt,
+um den .VOB Inhalt (den Film) zu lesen und zu interpretieren. Die .BUK-Dateien
+sind Backups davon. Sie nutzen überall <span class="bold"><strong>Sektoren</strong></span>,
+so dass du Direktaddressierung von Sektoren auf dem
+Datenträger benötigst, um DVD-Navigation zu implementieren oder den
+Inhalt zu entschlüsseln.
+</p><p>
+DVD-Unterstützung benötigt rohen Sektor-basierten Zugriff auf das
+Laufwerk. Leider musst du (unter Linux) root sein, um die Sektoraddresse einer
+Datei zu erhalten. Das ist der Grund, warum wir nicht den Dateisystemtreiber
+des Kernels nutzen sondern es im Userspace reimplementiert haben.
+<code class="systemitem">libdvdread</code> 0.9.x tut dies.
+Der UDF-Dateisystemtreiber des Kernels wird nicht benötigt, da sie bereits
+einen eigenen eingebauten UDF-Dateisystem-Treiber haben.
+Ebenso muss die DVD nicht gemountet werden, da der direkte Sektor-basierte Zugriff
+genutzt wird.
+</p><p>
+Manchmal kann <tt class="filename">/dev/dvd</tt> nicht von Benutzern gelesen
+werden, deshalb implementierten die Autoren von <code class="systemitem">libdvdread</code>
+einen Emulations-Layer, welcher die Sektorenadressen in Dateinamen+Offsets
+überträgt und Raw-Zugriff auf dem gemounteten Dateisystem oder auch
+auf Festplatten emuliert.
+</p><p>
+<code class="systemitem">libdvdread</code> akzeptiert sogar Mountpoints an Stelle von
+Gerätenamen für Raw-Zugriff und überprüft
+<tt class="filename">/proc/mounts</tt>, um den Gerätenamen herauszufinden.
+Es wurde für Solaris entwickelt, wo Gerätenamen dynamisch
+zugewiesen werden.
+</p><p>
+Wenn du <span class="application">MPlayer</span> mit dvdnav-Unterstützung compiliert hast,
+bleibt die Syntax derselbe, ausgenommen die Verwendung von dvdnav:// an Stelle von dvd://.
+</p><p><b>DVD-Entschlüsselung. </b>
+DVD-Entschlüsselung geschieht durch <code class="systemitem">libdvdcss</code>. Die dafür
+verwendete Methode kann durch Umgebungsvariable <code class="envar">DVDCSS_METHOD</code> festgelegt werden,
+siehe Manpage für Details.
+</p><p>
+
+
+RPC-1 DVD-Laufwerke schützen Regionseinstellunge nur durch Software.
+RPC-2-Laufwerke haben einen Hardwareschutz, welcher nur 5 Änderungen
+erlaubt. Es kann notwendig/empfehlenswert sein, die Firmware auf RPC-1
+zu aktualisieren, wenn du ein RPC-2 DVD-Laufwerk hast.
+Du kannst versuchen ein Firmwareupgrade für dein Laufwerk im Internet zu finden,
+<a class="ulink" href="http://forum.rpc-1.com/dl_all.php" target="_top">dieses Firmware-Forum</a>
+kann ein guter Ausgangspunkt für deine Suche sein.
+Wenn es kein Firmwareupgrade für dein Laufwerk gibt, benutze das
+<a class="ulink" href="http://linvdr.org/projects/regionset/" target="_top">regionset-Tool</a>,
+um den Regionscode deines DVD-Laufwerks (unter Linux) zu setzen.
+<span class="bold"><strong>Warnung</strong></span>: Du kannst nur 5 mal den Regioncode ändern.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="drives.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="vcd.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">3.5. CD/DVD-Laufwerke </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 3.7. VCD-Wiedergabe</td></tr></table></div></body></html>

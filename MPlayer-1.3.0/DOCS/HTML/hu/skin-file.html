@@ -1,0 +1,276 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.2. A skin fájl</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="prev" href="skin-overview.html" title="B.1. Áttekintés"><link rel="next" href="skin-fonts.html" title="B.3. Betűk"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="skin-file.html#skin-file-main" title="B.2.1. Fő ablak és a playbar"><link rel="subsection" href="skin-file.html#skin-file-subwindow" title="B.2.2. Alablak"><link rel="subsection" href="skin-file.html#skin-file-menu" title="B.2.3. Skin menü"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.2. A skin fájl</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-overview.html">Vissza</a> </td><th width="60%" align="center">B. függelék - <span class="application">MPlayer</span> skin formátum</th><td width="20%" align="right"> <a accesskey="n" href="skin-fonts.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-file"></a>B.2. A skin fájl</h2></div></div></div><p>
+Amint fentebb már említettem, ez a skin konfigurációs fájl. Sor-orientált;
+a megjegyzést tartalmazó sorok egy '<code class="literal">;</code>' karakterrel kezdődnek
+(csak szóközök és tab-ok lehetnek a '<code class="literal">;</code>' előtt).
+</p><p>
+A fájl szekciókból áll. Minden szekció a skin egy alkalmazását írja le a
+következő formában:
+</p><pre class="programlisting">
+section = <em class="replaceable"><code>szekció neve</code></em>
+.
+.
+.
+end
+</pre><p>
+</p><p>
+Jelenleg csak egy alkalmazás van, vagyis csak egy szekciót kell készítened:
+a neve <span class="bold"><strong>movieplayer</strong></span>.
+</p><p>
+Ebben a szekcióban minden ablakot egy blokk ír le a következő formában:
+</p><pre class="programlisting">
+window = <em class="replaceable"><code>ablak neve</code></em>
+.
+.
+.
+end
+</pre><p>
+</p><p>
+Ahol az <em class="replaceable"><code>ablak neve</code></em> ezen karakterláncok valamelyike lehet:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>main</strong></span> - a főablak esetében
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>sub</strong></span> - az alablak esetében
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>menu</strong></span> - a skin menü esetében
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>playbar</strong></span> - a playbar esetében
+</p></li></ul></div><p>
+</p><p>
+(Az alablak és menü blokkok opcionálisak - nem kötelező menüt készítened
+vagy kidekorálni az alablakot.)
+</p><p>
+Egy ablak blokkon belül az ablak minden elemét definiálhatod, egyet egy
+sorban, ebbe a formában:
+</p><pre class="programlisting">item = parameter</pre><p>
+Ahol az <code class="literal">item</code> egy karakterlánc, ami azonosítja az adott
+típusú GUI elemet, a <code class="literal">parameter</code> pedig egy numerikus vagy
+szöveges érték (vagy értékek listája vesszővel elválasztva).
+</p><p>
+A fentieket összerakva a teljes fájl valahogy így néz ki:
+</p><pre class="programlisting">
+section = movieplayer
+  window = main
+  ; ... főablak elemei ...
+  end
+
+  window = sub
+  ; ... alablak elemei ...
+  end
+
+  window = menu
+  ; ... menü elemei ...
+  end
+
+  window = playbar
+  ; ... playbar elemei ...
+  end
+end
+</pre><p>
+</p><p>
+Egy kép fájl nevét a hozzá vezető útvonal nélkül kell megadni - a képeknek
+a <tt class="filename">skins</tt> könyvtárban kell lenniük.
+A fájl kiterjesztését megadhatod (de nem kötelező). Ha a fájl nem létezik,
+az <span class="application">MPlayer</span> megpróbálja betölteni a
+<tt class="filename">&lt;filename&gt;.&lt;ext&gt;</tt> fájlt, ahol <code class="literal">png</code>
+és <code class="literal">PNG</code> kerül az <tt class="filename">&lt;ext&gt;</tt> helyére
+(ebben a sorrendben). Az első megtalált fájlt fogja használni.
+</p><p>
+Egy példa a tisztánlátáshoz. Tegyük fel, hogy van egy <tt class="filename">main.png</tt>
+nevű fájlod, amit a fő ablakhoz használsz: </p><pre class="programlisting">base = main, -1, -1</pre><p>
+Az <span class="application">MPlayer</span> megpróbálja betölteni a <tt class="filename">main</tt>,
+<tt class="filename">main.png</tt>, <tt class="filename">main.PNG</tt> fájlokat.
+</p><p>
+Végül pár szó a pozícionálásról. A fő ablak és az alablak a képernyő különböző
+sarkaiba helyezhető az <code class="literal">X</code> és <code class="literal">Y</code> koordináták
+megadásával. A <code class="literal">0</code> fent vagy bal oldalt van, a
+<code class="literal">-1</code> középen és a <code class="literal">-2</code> jobb oldalt vagy lent,
+ahogy az itt is látható:
+</p><div class="informalfigure"><pre class="screen">
+(0, 0)----(-1, 0)----(-2, 0)
+  |          |          |
+  |          |          |
+(0,-1)----(-1,-1)----(-2,-1)
+  |          |          |
+  |          |          |
+(0,-2)----(-1,-2)----(-2,-2)
+</pre></div><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-main"></a>B.2.1. Fő ablak és a playbar</h3></div></div></div><p>
+A következő bejegyzések használhatóak a
+'<code class="literal">window = main</code>' ... '<code class="literal">end</code>',
+és a '<code class="literal">window = playbar</code>' ... '<code class="literal">end</code>'
+blokkokban.
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">
+  <a name="skin-decoration"></a>decoration = enable|disable
+  </code></span></dt><dd><p>
+  Engedélyezi vagy letiltja a főablakban az ablakkezelő dekorációját.
+  Alapértelmezetten <span class="bold"><strong>disable</strong></span>.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+  Ez nem működik a megjelenítő ablakban, nincs rá szükség.
+  </p></div></dd><dt><span class="term"><code class="literal">
+  <a name="skin-main-base"></a>base = image, X, Y
+  </code></span></dt><dd><p>
+  Megadhatod vele a fő ablakban használt háttérképet.
+  Az ablak a megadott <code class="literal">X, Y</code> pozícióban fog megjelenni
+  a képernyőn. Az ablak mérete a kép méretével lesz azonos.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+  Ezek a koordináták jelenleg nem működnek a megjelenítő ablak esetében.
+  </p></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Figyelem</h3><p>A kép transzparens részei (#FF00FF színű) feketeként jelenik meg
+  az XShape kiterjesztés nélküli X szerverek esetében. A kép szélességének 8-cal
+  oszthatónak kell lennie.</p></div></dd><dt><span class="term"><code class="literal">
+  <a name="skin-button"></a>button = image, X, Y, width, height, message
+  </code></span></dt><dd><p>
+  Egy <code class="literal">width</code> * <code class="literal">height</code> méretű gomb
+  megjelenítése az <code class="literal">X, Y</code> pozícióban. A megadott
+  <code class="literal">message</code> üzenet akkor generálódik, amikor a gombot
+  megnyomják. Az <code class="literal">image</code> által megadott képnek három
+  részt kell tartalmaznia egymás alatt (a gomb állapotainak megfelelően), így:
+  </p><div class="informalfigure"><pre class="screen">
++-------------+
+|  benyomott  |
++-------------+
+| felengedett |
++-------------+
+|  letiltott  |
++-------------+</pre></div></dd><dt><span class="term"><code class="literal">
+  <a name="skin-hpotmeter"></a>hpotmeter = button, bwidth, bheight, phases, numphases, default, X, Y, width, height, message
+  </code></span></dt><dd><p>
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-vpotmeter"></a>vpotmeter = button, bwidth, bheight, phases, numphases, default, X, Y, width, height, message
+  </code></span></dt><dd><p>
+  Egy vízszintes (hpotmeter) vagy függőleges (vpotmeter) potméter megjelenítése
+  <code class="literal">width</code> * <code class="literal">height</code> méretben az
+  <code class="literal">X, Y</code> pozícióban. A kép több különböző részre osztható a
+  potméter különböző fázisainak megfelelően (például lehet egy pot-od a hangerő
+  szabályozásához, ami zöldből pirosba vált, ahogy az értéke változik a minimumtól
+  a maximumig). A <code class="literal">hpotmeter</code>-nek lehet egy gombja is, amit
+  vízszintesen lehet húzni. A paraméterek:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+    <code class="literal">button</code> - a gombként használt kép
+    (három részt kell tartalmaznia egymás alatt, mint a
+    <a class="link" href="skin-file.html#skin-button">gomb</a> esetében)
+  </p></li><li class="listitem"><p>
+    <code class="literal">bwidth</code>, <code class="literal">bheight</code> - a gomb
+    mérete
+  </p></li><li class="listitem"><p>
+    <code class="literal">phases</code> - a hpotmeter különböző fázisaiban
+    használt kép neve. Speciális értékként a <code class="literal">NULL</code> is
+    használható, ha nem akarsz ilyen képet. A képet függőlegesen
+    <code class="literal">numphases</code> részre kell felosztani így:
+    </p><div class="informalfigure"><pre class="screen">
++------------+
+|  1. fázis  |
++------------+
+|  2. fázis  |
++------------+
+     ...
++------------+
+|  n. fázis  |
++------------+</pre></div><p>
+  </p></li><li class="listitem"><p>
+    <code class="literal">numphases</code> - a <code class="literal">phases</code> képen
+    lévő fázisok száma
+  </p></li><li class="listitem"><p>
+    <code class="literal">default</code> - a hpotmeter alapértelmezett értéke
+    (<code class="literal">0</code> és <code class="literal">100</code> között)
+  </p></li><li class="listitem"><p>
+    <code class="literal">X</code>, <code class="literal">Y</code> - a hpotmeter pozíciója
+  </p></li><li class="listitem"><p>
+    <code class="literal">width</code>, <code class="literal">height</code> - a
+    <code class="literal">hpotmeter</code> szélessége és magassága
+  </p></li><li class="listitem"><p>
+    <code class="literal">message</code> - az üzenet, ami a
+    <code class="literal">hpotmeter</code> értékének megváltozásakor generálódik
+  </p></li></ul></div><p>
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-font"></a>font = fontfile, fontid
+  </code></span></dt><dd><p>
+  Egy betűt definiál. A <code class="literal">fontfile</code> a betű leíró fájl neve egy
+  <tt class="filename">.fnt</tt> kiterjesztéssel (a kiterjesztést ne add meg itt).
+  A <code class="literal">fontid</code>-t a betűre történő hivatkozásokhoz lehet használni
+  (lásd <a class="link" href="skin-file.html#skin-dlabel">dlabel</a> és
+  <a class="link" href="skin-file.html#skin-slabel">slabel</a>). 25 betűt lehet definiálni.
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-slabel"></a>slabel = X, Y, fontid, "text"
+  </code></span></dt><dd><p>
+  Egy statikus címkét tesz ki az <code class="literal">X, Y</code> pozícióba. A
+  <code class="literal">text</code> szöveget jeleníti meg a <code class="literal">fontid</code>-vel
+  azonosított betűtípussal. A szöveg egyszerű karakterlánc (az <code class="literal">$x</code>
+  változók nem működnek) amit dupla idézőjelek közé kell írni (de a " karakter
+  nem lehet a szöveg része). A címke a <code class="literal">fontid</code>-vel
+  azonosított betűtípussal jelenik meg.
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-dlabel"></a>dlabel = X, Y, width, align, fontid, "text"
+  </code></span></dt><dd><p>
+  Egy dinamikus címkét tesz ki az <code class="literal">X, Y</code> pozícióba. A
+  címke azért dinamikus, mert a szövege periódikusan frissül. A címke
+  maximum hosszát a <code class="literal">width</code> szabályozza (a magassága
+  egy karakter magasságával egyezik meg). Ha a megjelenítendő szöveg
+  szélesebb ennél, scrollozva lesz,
+  különben az <code class="literal">align</code> paraméter által megadott módon
+  pozícionálódik: <code class="literal">0</code> balra, <code class="literal">1</code>
+  középre, <code class="literal">2</code> jobbra igazítva.
+  </p><p>
+  A megjelenítendő szöveget a <code class="literal">text</code> adja meg: dupla
+  idézőjelek közé kell írni (de a " karakter nem lehet része a
+  szövegnek). A címke a <code class="literal">fontid</code> által meghatározott
+  betűtípussal jelenik meg. A szövegben a következő változókat használhatod:
+  </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Változó</th><th>Jelentés</th></tr></thead><tbody><tr><td>$1</td><td>lejátszási idő <span class="emphasis"><em>hh:mm:ss</em></span> formátumban</td></tr><tr><td>$2</td><td>lejátszási idő <span class="emphasis"><em>mmmm:ss</em></span> formátumban</td></tr><tr><td>$3</td><td>lejátszási idő <span class="emphasis"><em>hh</em></span> formátumban (órák)</td></tr><tr><td>$4</td><td>lejátszási idő <span class="emphasis"><em>mm</em></span> formátumban (percek)</td></tr><tr><td>$5</td><td>lejátszási idő <span class="emphasis"><em>ss</em></span> formátumban (másodpercek)</td></tr><tr><td>$6</td><td>film hossza <span class="emphasis"><em>hh:mm:ss</em></span> formátumban</td></tr><tr><td>$7</td><td>film hossza <span class="emphasis"><em>mmmm:ss</em></span> formátumban</td></tr><tr><td>$8</td><td>film hossza <span class="emphasis"><em>h:mm:ss</em></span> formátumban</td></tr><tr><td>$v</td><td>hangerő <span class="emphasis"><em>xxx.xx</em></span>% formátumban</td></tr><tr><td>$V</td><td>hangerő <span class="emphasis"><em>xxx.x</em></span> formátumban</td></tr><tr><td>$U</td><td>hangerő <span class="emphasis"><em>xxx</em></span> formátumban</td></tr><tr><td>$b</td><td>balansz <span class="emphasis"><em>xxx.xx</em></span>% formátumban</td></tr><tr><td>$B</td><td>balansz <span class="emphasis"><em>xxx.x</em></span> formátumban</td></tr><tr><td>$D</td><td>balansz <span class="emphasis"><em>xxx</em></span> formátumban</td></tr><tr><td>$$</td><td>az $ karakter</td></tr><tr><td>$a</td><td>egy karakter az audió típusnak megfelelően (nincs: <code class="literal">n</code>,
+    mono: <code class="literal">m</code>, sztereo: <code class="literal">t</code>)</td></tr><tr><td>$t</td><td>sáv száma (a lejátszási listában)</td></tr><tr><td>$o</td><td>fájlnév</td></tr><tr><td>$f</td><td>fájlnév kisbetűsen</td></tr><tr><td>$F</td><td>fájlnév nagybetűsen</td></tr><tr><td>$T</td><td>
+    egy karakter a folyam típusnak megfelelően (file: <code class="literal">f</code>,
+    Video CD: <code class="literal">v</code>, DVD: <code class="literal">d</code>,
+    URL: <code class="literal">u</code>)
+    </td></tr><tr><td>$p</td><td>a <span class="keycap"><b>p</b></span> karakter (ha a film lejátszás alatt van és a
+    betűtípusban van <span class="keycap"><b>p</b></span> karakter)</td></tr><tr><td>$s</td><td>az <span class="keycap"><b>s</b></span> karakter (ha a film meg van állítva movie és
+    a betűtípusban van <span class="keycap"><b>s</b></span> karakter)</td></tr><tr><td>$e</td><td>az <span class="keycap"><b>e</b></span> karakter (ha a lejátszás szünetel és a
+    betűtípusban van <span class="keycap"><b>e</b></span> karakter)</td></tr><tr><td>$x</td><td>film szélessége</td></tr><tr><td>$y</td><td>film magassága</td></tr><tr><td>$C</td><td>használt codec neve</td></tr></tbody></table></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+  Az <code class="literal">$a, $T, $p, $s</code> és <code class="literal">$e</code>
+  változók mind karakterekkel térnek vissza, amiket speciális szimbólumként kell
+  megjeleníteni (például az <span class="keycap"><b>e</b></span> a pillanatállj szimbóluma, ami
+  általában valami ilyesmi: ||). Szükséged lesz egy normál karaktereket
+  tartalmazó betűtípusra és egy másikra a szimbólumokhoz. Lásd a
+  <a class="link" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Szimbólumok">szimbólumokról</a> szóló részt a
+  további információkért.
+  </p></div></dd></dl></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-subwindow"></a>B.2.2. Alablak</h3></div></div></div><p>
+A következő bejegyzések használhatóak a
+'<code class="literal">window = sub</code>' . . . '<code class="literal">end</code>' blokkban.
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">
+  <a name="skin-sub-base"></a>base = image, X, Y, width, height
+  </code></span></dt><dd><p>
+  Az ablakban megjelenítendő kép. Az ablak a megadott <code class="literal">X, Y</code>
+  pozícióban jelenik meg a képernyőn (<code class="literal">0,0</code> a bal felső
+  sarok). A <code class="literal">-1</code> a középre, a <code class="literal">-2</code>
+  a jobbra (<code class="literal">X</code>) és le (<code class="literal">Y</code>) igazítást
+  jelenti. Az ablak akkora lesz, amekkora a kép. A <code class="literal">width</code>
+  és a <code class="literal">height</code> az ablak méretét írják elő, opcionálisak
+  (ha hiányoznak, az ablak ugyan akkora méretű lesz, mint a kép).
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-background"></a>background = R, G, B
+  </code></span></dt><dd><p>
+  Beállíthatod vele a háttér színét. Hasznos, ha a kép kisebb, mint az
+  ablak mérete. Az <code class="literal">R</code>, <code class="literal">G</code> és
+  <code class="literal">B</code> a szín vörös, zöld és kék komponensét adja meg
+  (mindegyik decimális szám 0-tól 255-ig).
+  </p></dd></dl></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-menu"></a>B.2.3. Skin menü</h3></div></div></div><p>
+Amint korábban már említettem, a menü két kép segítségével kerül megjelenítésre.
+A normál menü bejegyzések a <code class="literal">base</code> elemmel megadott képen
+láthatóak, míg az épp aktuálisan kiválasztott elem megjelenítése a
+<code class="literal">selected</code> elemről történik. Meg kell adnod minden egyes
+menüpont pozícióját és méretét.
+</p><p>
+A következő bejegyzések használhatóak a
+'<code class="literal">window = menu</code>'. . .'<code class="literal">end</code>' blokkban.
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">
+  <a name="skin-menu-base"></a>base = image
+  </code></span></dt><dd><p>
+  A normál menüpontokat tartalmazó kép.
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-selected"></a>selected = image
+  </code></span></dt><dd><p>
+  Az összes menüpontot kiválasztva ábrázoló kép.
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-menu"></a>menu = X, Y, width, height, message
+  </code></span></dt><dd><p>
+  Megadja egy menüelem <code class="literal">X, Y</code> pozícióját és a méretét a képen.
+  A <code class="literal">message</code> egy üzenet, ami az egérgomb menüponton történő
+  felengedésekor generálódik.
+  </p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-overview.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-fonts.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">B.1. Áttekintés </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> B.3. Betűk</td></tr></table></div></body></html>

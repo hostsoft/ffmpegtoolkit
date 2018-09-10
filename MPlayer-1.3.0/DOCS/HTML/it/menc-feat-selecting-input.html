@@ -1,0 +1,34 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.2. Selezionare il file in ingresso o il dispositivo</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="prev" href="menc-feat-selecting-codec.html" title="6.1. Selezionare codec e formati contenitore"><link rel="next" href="menc-feat-mpeg4.html" title='6.3. Codificare MPEG-4 ("DivX") in due passaggi'><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. Selezionare il file in ingresso o il dispositivo</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Indietro</a> </td><th width="60%" align="center">Capitolo 6. Utilizzo base di <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-input"></a>6.2. Selezionare il file in ingresso o il dispositivo</h2></div></div></div><p>
+<span class="application">MEncoder</span> può codificare da file o direttamente da
+un disco DVD o VCD.
+Includi semplicemente nella riga comando il nome file per codificare dal file
+stesso, oppure <tt class="option">dvd://</tt><em class="replaceable"><code>numero_titolo</code></em>
+o <tt class="option">vcd://</tt><em class="replaceable"><code>numero_traccia</code></em> per
+codificare da un titolo DVD o da una traccia VCD.
+Se hai già copiato un DVD sul tuo disco fisso (puoi usare uno strumento come
+<span class="application">dvdbackup</span>, disponibile per la maggior parte dei
+sistemi) e desideri codificare da tale copia, dovresti ancora usare la sintassi
+<tt class="option">dvd://</tt>, insieme con <tt class="option">-dvd-device</tt> seguita dal
+percorso della radice del DVD copiato.
+
+Le opzioni <tt class="option">-dvd-device</tt> e <tt class="option">-cdrom-device</tt>
+possono anche essere usate per reimpostare i percorsi dei dispositivi al fine
+di leggere direttamente dal disco, se i valori di default
+<tt class="filename">/dev/dvd</tt> e <tt class="filename">/dev/cdrom</tt> non funzionano
+sul tuo sistema.
+</p><p>
+Durante la codifica da DVD, spesso si vogliono selezionare un capitolo o una
+serie di capitoli da codificare.
+Per questo fine puoi usare l'opzione <tt class="option">-chapter</tt>.
+Per esempio, <tt class="option">-chapter</tt> <em class="replaceable"><code>1-4</code></em>
+codificherà solo i capitoli dall'1 al 4 dal DVD.
+Questo è particolarmente utile se vuoi fare una codifica in 1400 MB destinata
+a due CD, visto che puoi esser sicuro che il punto di divisione sia proprio tra
+un capitolo e l'altro invece che a metà di una scena.
+</p><p>
+Se hai una scheda di acquisizione TV supportata, puoi anche codificare dal
+dispositivo di ingresso TV.
+Usa <tt class="option">tv://</tt><em class="replaceable"><code>numero_canale</code></em> come
+nome file e <tt class="option">-tv</tt> per configurare varie opzioni di acquisizione.
+L'ingresso DVB funziona in modo simile.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. Selezionare codec e formati contenitore </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 6.3. Codificare MPEG-4 ("DivX") in due passaggi</td></tr></table></div></body></html>

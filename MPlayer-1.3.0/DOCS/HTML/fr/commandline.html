@@ -1,0 +1,62 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.1. Ligne de commande</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="usage.html" title="Chapitre 3. Utilisation"><link rel="prev" href="usage.html" title="Chapitre 3. Utilisation"><link rel="next" href="subosd.html" title="3.2. Sous-titres et OSD"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.1. Ligne de commande</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="usage.html">Précédent</a> </td><th width="60%" align="center">Chapitre 3. Utilisation</th><td width="20%" align="right"> <a accesskey="n" href="subosd.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="commandline"></a>3.1. Ligne de commande</h2></div></div></div><p>
+<span class="application">MPlayer</span> utilise un ordre de lecture complexe.
+Les options globales sont écrites en premier, par exemple
+
+</p><pre class="screen">mplayer -vfm 5</pre><p>
+
+et les options écrites après les noms de fichier s'appliquent
+uniquement au nom de fichier/URL/autre donné, par exemple
+
+</p><pre class="screen">mplayer -vfm 5 <em class="replaceable"><code>film1.avi</code></em> <em class="replaceable"><code>film2.avi</code></em> -vfm 4</pre><p>
+</p><p>
+Vous pouvez regrouper les noms de fichiers/URLs en utilisant <code class="literal">{</code>
+et <code class="literal">}</code>. C'est utile avec l'option <tt class="option">-loop</tt>:
+
+</p><pre class="screen">mplayer { 1.avi - loop 2 2.avi } -loop 3</pre><p>
+
+La commande ci-dessus jouera les fichiers dans cet ordre: 1, 1, 2, 1, 1, 2, 1, 1, 2.
+</p><p>
+Lecture d'un fichier:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>options</code></em>] [<em class="replaceable"><code>chemin</code></em>/]<em class="replaceable"><code>fichier</code></em>
+</pre><p>
+</p><p>
+Autre façon de lire un fichier:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>options</code></em>] <em class="replaceable"><code>file:///chemin-uri-escaped</code></em>
+</pre><p>
+</p><p>
+Lecture de plusieurs fichiers:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>options par défaut</code></em>] [<em class="replaceable"><code>chemin</code></em>/]<em class="replaceable"><code>fichier1</code></em> [<em class="replaceable"><code>options pour fichier1</code></em>] <em class="replaceable"><code>fichier2</code></em> [<em class="replaceable"><code>options pour fichier2</code></em>] ...
+</pre><p>
+</p><p>
+Lecture de VCD:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>options</code></em>] vcd://<em class="replaceable"><code>N°piste</code></em> [-cdrom-device <em class="replaceable"><code>/dev/cdrom</code></em>]
+</pre><p>
+</p><p>
+Lecture de DVD:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>options</code></em>] dvd://<em class="replaceable"><code>N°titre</code></em> [-dvd-device <em class="replaceable"><code>/dev/dvd</code></em>]
+</pre><p>
+</p><p>
+Lecture à partir du web:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>options</code></em>] http://<em class="replaceable"><code>site.com/fichier.asf</code></em>
+</pre><p>
+(les listes de lecture peuvent également être utilisées)
+</p><p>
+Lecture à partir de RTSP:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>options</code></em>] rtsp://<em class="replaceable"><code>serveur.exemple.com/nomFlux</code></em>
+</pre><p>
+</p><p>
+Exemples:
+</p><pre class="screen">
+mplayer -vo x11 <em class="replaceable"><code>/mnt/Films/Contact/contact2.mpg</code></em>
+mplayer vcd://<em class="replaceable"><code>2</code></em> -cd-rom-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -afm 3 <em class="replaceable"><code>/mnt/DVDtrailers/alien4.vob</code></em>
+mplayer dvd://<em class="replaceable"><code>1</code></em> -dvd-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -abs 65536 -delay -0.4 -nobps <em class="replaceable"><code>~/films/test.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="usage.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="subosd.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">Chapitre 3. Utilisation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 3.2. Sous-titres et OSD</td></tr></table></div></body></html>

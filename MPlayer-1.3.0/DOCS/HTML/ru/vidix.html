@@ -1,0 +1,150 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.15. VIDIX</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="x11.html" title="4.14. X11"><link rel="next" href="directfb.html" title="4.16. DirectFB"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="vidix.html#vidix-ati" title="4.15.1. ATI карты"><link rel="subsection" href="vidix.html#vidix-mga" title="4.15.2. Matrox карты"><link rel="subsection" href="vidix.html#vidix-trident" title="4.15.3. Trident карты"><link rel="subsection" href="vidix.html#vidix-3dlabs" title="4.15.4. 3DLabs карты"><link rel="subsection" href="vidix.html#vidix-nvidia" title="4.15.5. nVidia карты"><link rel="subsection" href="vidix.html#vidix-sis" title="4.15.6. SiS карты"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.15. VIDIX</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="x11.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="directfb.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vidix"></a>4.15. VIDIX</h2></div></div></div><p><b>ПРЕАМБУЛА. </b>
+<acronym class="acronym">VIDIX</acronym> - это аббревиатура для
+<span class="bold"><strong>VID</strong></span>eo
+<span class="bold"><strong>I</strong></span>nterface
+for *ni<span class="bold"><strong>X</strong></span>
+(Видео интерфейс для Unix).
+VIDIX разработан и введен как интерфейс для быстрых драйверов пространства
+пользователя[user-space], обеспечивающих такую же производительность, как mga_vid
+для карт Matrox. Они к тому же хорошо переносимы.
+</p><p>
+Этот интерфейс был разработан, чтобы уместить существующие интерфейсы ускорения видео
+(известные как mga_vid, rage128_vid, radeon_vid, pm3_vid) в единую схему.
+Он предоставляет высокоуровневый интерфейс к чипам, известным как
+BES (BackEnd scalers) или OV (Video Overlays). Он не предоставляет низкоуровневого интерфейса
+к вещам, известным как графические серверы (Я не хочу соревноваться с командой X11
+в переключении режимов.) Т.е. основная цель интерфейса - ускорить до максимума
+скорость воспроизведения видео.
+</p><div class="itemizedlist"><p class="title"><b>ИСПОЛЬЗОВАНИЕ</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Вы можете использовать отдельный видеодрайвер: <tt class="option">-vo xvidix</tt>.
+  Этот драйвер был разработан как X11 фронтенд к VIDIX технологии. Он
+  требует X сервер и может работать только под ним.  Имейте ввиду, что
+  поскольку этот драйвер напрямую обращается к оборудованию в обход драйвера X,
+  то могут быть повреждены растровые изображения, кешированные в памяти
+  видеокарты.
+  Вы можете предотвратить это, ограничив размер видеопамяти, используемой X,
+  XF86Config опцией "VideoRam" в разделе устройств. Вам следует установить этот
+  параметр в количество установленной видеопамяти минус 4Мб. Если у вас меньше
+  8Мб видеопамяти, вместо этого можно использовать опцию "XaaNoPixmapCache" в
+  разделе экранов.
+</p></li><li class="listitem"><p>
+  Существует консольный VIDIX драйвер: <tt class="option">-vo cvidix</tt>.
+  Для большинства карт требуется работающий и инициализированный фреймбуфер
+  (в противном случае просто испортите изображение на экране),
+  и вы будете иметь тот же эффект, что и с <tt class="option">-vo mga</tt> или
+  <tt class="option">-vo fbdev</tt>. Карты nVidia, тем не менее, способны выводить
+  полностью графическое видео в настоящей текстовой консоли. Смотрите раздел
+  <a class="link" href="vidix.html#vidix-nvidia" title="4.15.5. nVidia карты">nvidia_vid</a> для более подробной информации.
+  Чтобы избавиться от такста на полях и мерцающего курсора попробуйте нечто подобное
+  </p><pre class="screen">setterm -cursor off &gt; /dev/tty9</pre><p>
+  (предполагая, что <code class="systemitem">tty9</code> ранее не использовался) и затем переключитесь
+  на <code class="systemitem">tty9</code>.
+  С другой стороны, <tt class="option">-colorkey 0</tt> должна дать вам видео, работающее "на фоне",
+  однако правильность работы этого зависит от функцинальности colorkey.
+  </p></li><li class="listitem"><p>
+  Вы можете использовать подустройство VIDIX, примененное к различным
+  драйверам видео вывода, например: <tt class="option">-vo vesa:vidix</tt>
+  (<span class="bold"><strong>только Linux</strong></span>) и
+  <tt class="option">-vo fbdev:vidix</tt>.
+</p></li></ul></div><p>
+Это действительно неважно, какой драйвер вывода видео используется с
+<span class="bold"><strong>VIDIX</strong></span>.
+</p><div class="itemizedlist"><p class="title"><b>ТРЕБОВАНИЯ</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Видеокарта должна находиться в графическом режиме (кроме карт nVidia с
+  драйвером <tt class="option">-vo cvidix</tt>).
+</p></li><li class="listitem"><p>
+  Драйвер вывода видео <span class="application">MPlayer</span> должен знать
+  текущий видеорежим и быть способным сообщить VIDIX некоторые видео характеристики сервера.
+</p></li></ul></div><p><b>СПОСОБЫ ИСПОЛЬЗОВАНИЯ. </b>
+Когда VIDIX используется в качестве <span class="bold"><strong>подустройства</strong></span> (<tt class="option">-vo
+vesa:vidix</tt>), настройка видеорежима производится драйвером вывода видео
+(короче говоря <span class="bold"><strong>vo_server</strong></span>). Следовательно, вы можете
+передать в командную строку <span class="application">MPlayer</span> те же ключи, что и для
+vo_server. Дополнительно он понимает ключ <tt class="option">-double</tt>
+как глобально видимый параметр. (Я рекомендую использовать этот ключ с VIDIX как минимум
+для карт ATI). <tt class="option">-vo xvidix</tt> дополнительно понимает следующие опции:
+<tt class="option">-fs -zoom -x -y -double</tt>.
+</p><p>
+Вы можете напрямую указать  VIDIX драйвер третьим параметром к командной строке:
+</p><pre class="screen">
+mplayer -vo xvidix:mga_vid.so -fs -zoom -double <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+или
+</p><pre class="screen">
+mplayer -vo vesa:vidix:radeon_vid.so -fs -zoom -double -bpp 32 <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+Но это опасно, и вам не следует этого делать. В этом случае принудительно
+запускается указанный драйвер и результат может быть непредсказуемым
+(он может <span class="bold"><strong>подвесить</strong></span> ваш компьютер).
+Вам следует это делать ТОЛЬКО если вы абсолютно уверены, что он работает и
+<span class="application">MPlayer</span> не использует его автоматически.
+Пожалуйста, сообщите об этом разработчикам. Правильный путь - использование
+VIDIX без аргументов для задействования автоопределения драйвера.
+</p><p>
+Поскольку VIDIX требует прямой доступ к оборудованию, вы можете либо
+запускать его от имени root, либо установить SUID бит на исполняемый файл
+<span class="application">MPlayer</span> ((<span class="bold"><strong>Внимание:
+Это большой риск безопасности</strong></span>).
+Как вариант, вы можете использовать специальный модуль ядра, как этот:
+</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+
+  Скачайте <a class="ulink" href="http://www.arava.co.il/matan/svgalib/" target="_top">разрабатываемую версию</a>
+  svgalib (например 1.9.17), <span class="bold"><strong>ИЛИ</strong></span>
+  версию, созданную Alex специально для использования с <span class="application">MPlayer</span>
+  (она не требует наличия исходников svgalib для компиляции)
+  <a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/svgalib/svgalib_helper-1.9.17-mplayer.tar.bz2" target="_top">отсюда</a>.
+</p></li><li class="step"><p>
+  Скомпилируйте модуль в каталоге <tt class="filename">svgalib_helper</tt>
+  (он может быть найден внутри каталога
+  <tt class="filename">svgalib-1.9.17/kernel/</tt>, если вы скачали исходники
+  с сайта svgalib) и выполните insmod для него.
+</p></li><li class="step"><p>
+  Для создания необходимых устройств в каталоге <tt class="filename">/dev</tt>,
+  выполните от имени root команду </p><pre class="screen">make device</pre><p> в
+  <tt class="filename">svgalib_helper</tt>.
+</p></li><li class="step"><p>
+  Переместите каталог <tt class="filename">svgalib_helper</tt> в
+  подкаталог <tt class="filename">vidix</tt> дерева исходных текстов
+  <span class="application">MPlayer</span>.
+</p></li><li class="step"><p>
+  Удалите комментарий перед строкой CFLAGS, содержащий строку "svgalib_helper"
+  в файле <tt class="filename">vidix/Makefile</tt>.
+</p></li><li class="step"><p>
+  Перекомпилируйте.
+  </p></li></ol></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-ati"></a>4.15.1. ATI карты</h3></div></div></div><p>
+В даный момент для большинства карт ATI, начиная от Mach64 и заканчивая последними
+Radeon, имеется встроенная поддержка.
+</p><p>
+Существует два скомпилрованных бинарных файла: <tt class="filename">radeon_vid</tt> для
+Radeon и <tt class="filename">rage128_vid</tt> для карт Rage 128. Вы можете принудительно
+использовать один из них или позволить VIDIX автоматически опробовать все доступные
+драйверы.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-mga"></a>4.15.2. Matrox карты</h3></div></div></div><p>
+Сообщалось, что работают Matrox G200, G400, G450 и G550.
+</p><p>
+
+Драйвер поддерживает видео эквалайзеры и должем быть столь же быстр, как и
+<a class="link" href="mga_vid.html" title="4.7. Matrox фреймбуфер (mga_vid)">Matrox фреймбуфер</a>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-trident"></a>4.15.3. Trident карты</h3></div></div></div><p>
+Существует драйвер для чипсета Trident Cyberblade/i1, который можно найти
+на материнских платах VIA Epia.
+</p><p>
+Драйвер написан и поддерживается
+<a class="ulink" href="http://www.blackfiveservices.co.uk/EPIAVidix.shtml" target="_top">Alastair M. Robinson</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-3dlabs"></a>4.15.4. 3DLabs карты</h3></div></div></div><p>
+Хотя драйвер для чипов 3DLabs GLINT R3 и Permedia3 существует, никто его не
+тестировал, так что отчеты приветствуются.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-nvidia"></a>4.15.5. nVidia карты</h3></div></div></div><p>
+Уникальная особенность драйвера nvidia_vid заключается в способности отображать
+видео в <span class="bold"><strong>простой, чисто текстовой консоли</strong></span> - без
+какого бы то ни было фреймбуфера или магии с X. Для этой цели мы будем использовать
+драйвер вывода видео <tt class="option">cvidix</tt>, как показывет следующий пример:
+</p><pre class="screen">mplayer -vo cvidix <em class="replaceable"><code>example.avi</code></em></pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-sis"></a>4.15.6. SiS карты</h3></div></div></div><p>
+Это, как и nvidia_vid, весьма экспериментальный код.
+</p><p>
+Он тестировался на SiS 650/651/740 (наиболее распространный чипсет, используемый в
+SiS версиях байрбонов[barebones] "Shuttle XPC")
+</p><p>
+Отчеты ожидаются!
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="x11.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="directfb.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.14. X11 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.16. DirectFB</td></tr></table></div></body></html>

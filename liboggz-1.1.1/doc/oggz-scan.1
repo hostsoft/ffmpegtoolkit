@@ -1,0 +1,47 @@
+.TH "oggz-scan" "1" 
+.SH "NAME" 
+oggz-scan \(em Scan an Ogg file and output characteristic landmarks 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-scan\fR [\-k  | \-\-keyframe ]  [\-o \fBfilename\fR  | \-\-output \fBfilename\fR ]  [\-f \fBformat\fR  | \-\-format \fBformat\fR ] filename  
+.PP 
+\fBoggz-scan\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-scan\fR scans the content of an Ogg file and 
+outputs timestamps of characteristic features. 
+.SH "Options" 
+.PP 
+\fBoggz-scan\fR accepts the following options: 
+ 
+.SS "Output options" 
+.IP "\-o \fBfilename\fR, \-\-output \fBfilename\fR" 10 
+Write output to the specified 
+\fBfilename\fR instead of printing it to 
+standard output. 
+.IP "\-f \fBformat\fR, \-\-format \fBformat\fR" 10 
+Write output in the specified 
+\fBformat\fR. Supported formats are plain, cmml, html. (Default: plain) 
+.SS "Feature options" 
+.IP "\-k, \-\-keyframe" 10 
+Display timestamps of unforced Theora keyframes. 
+.SS "Miscellaneous options" 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+.SH "AUTHOR" 
+.PP 
+Silvia Pfeiffer        October 7, 2005;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2005 CSIRO Australia 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-dump\fP\fB(1)\fP, 
+\fBoggz-info\fP\fB(1)\fP, 
+\fBoggz-rip\fP\fB(1)\fP, 
+\fBoggz-validate\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

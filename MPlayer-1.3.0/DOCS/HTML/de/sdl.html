@@ -1,0 +1,27 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.4. SDL</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="prev" href="dga.html" title="4.3. DGA"><link rel="next" href="svgalib.html" title="4.5. SVGAlib"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.4. SDL</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dga.html">Zurück</a> </td><th width="60%" align="center">Kapitel 4. Videoausgabegeräte</th><td width="20%" align="right"> <a accesskey="n" href="svgalib.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sdl"></a>4.4. SDL</h2></div></div></div><p>
+  <acronym class="acronym">SDL</acronym> (Simple Directmedia Layer, einfacher Layer für
+  den direkten Zugriff auf Mediengeräte) bietet grundsätzlich eine einheitliche
+  Schnittstelle zu Audio- und Videogeräten. Programme, die SDL
+  benutzen, kennen nur SDL und brauchen nichts darüber zu wissen, welche
+  Video- oder Audiotreiber SDL tatsächlich benutzt. So kann z.B. eine
+  Doom-Portierung mit SDL die Svgalib, aalib, X11, fbdev und andere Treiber
+  nutzen. Dazu musst du z.B. nur den Videotreiber angeben, indem du die
+  Umgebungsvariable <code class="envar">SDL_VIDEODRIVER</code> setzt.
+  So lautet zumindest die Theorie.
+</p><p>
+  Bei <span class="application">MPlayer</span> benutzten wir damals die
+  Softwareskalierungsroutinen der X11-Treiber von SDL bei Grafikkarten/-treibern,
+  die keine Unterstützung für XVideo hatten, bis wir unsere eigenen schrieben,
+  die schneller und hübscher waren. Wir benutzten damals außerdem SDLs
+  aalib-Ausgabe. Jetzt haben wir unsere eigenen, was wesentlich komfortabler
+  ist. Auch davon haben wir selber eine komfortablere Version geschrieben.
+  SDLs DGA-Code war besser als unserer - zumindest bis vor kurzem.
+  Verstehst du, worauf ich hinauswill? :)
+</p><p>
+  SDL ist auch bei einigen fehlerbehafteten Treibern/Karten nützlich,
+  wenn das Video ruckelig abgespielt wird (und es nicht an einem langsamen
+  System liegt), oder wenn der Ton hinterherhinkt.
+</p><p>
+  Die SDL-Videoausgabe unterstützt die Anzeige von Untertiteln unterhalb
+  des Films auf den schwarzen Balken (sofern diese vorhanden sind).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dga.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="svgalib.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">4.3. DGA </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 4.5. SVGAlib</td></tr></table></div></body></html>

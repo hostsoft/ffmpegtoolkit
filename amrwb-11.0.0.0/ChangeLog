@@ -1,0 +1,108 @@
+2013-04-05  Stanislav Brabec  <utx@penguin.cz>
+
+	* prepare_sources.sh.in, Makefile.am, configure.ac, README,
+	AUTHORS, amrwb.spec.in: Use upstream version 11.0.0 (library
+	version increment not needed).
+
+2012-01-07  Stanislav Brabec  <utx@penguin.cz>
+
+	* prepare_sources.sh.in, Makefile.am, configure.ac, README,
+	AUTHORS: Use upstream version 10.0.0 (library version increment
+	not needed).
+
+	* configure.ac, NEWS: Version 10.0.0.0.
+
+	* COPYING: License change to BSD-3.
+
+	* amrwb-includes.patch, prepare_sources.sh, Makefile.am: Apply new
+	patch.
+
+	* Makefile.am: Make build compatible with the latest make distcheck.
+
+2011-03-17  Stanislav Brabec  <utx@penguin.cz>
+
+	* amrwb-intsizes.patch: Fixed definition of UWord8.
+	* configure.ac, NEWS: Version 7.0.0.4.
+
+2008-05-22  Stanislav Brabec  <utx@penguin.cz>
+
+	* Makefile.am: Dependencies fix.
+	* configure.ac, NEWS: Version 7.0.0.3.
+	* README: Documented build without network.
+	* prepare_sources.sh.in: Sync script with amrnb.
+	
+2007-08-23  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, NEWS: Version 7.0.0.2.
+
+	* Makefile.am, prepare_sources.sh.in: Fixed rules for separate
+	directory build and already unpacked sources.
+
+2007-08-22  Stanislav Brabec  <utx@penguin.cz>
+
+	* Makefile.am: Uncreased library version (should have been done
+	for 7.0.0.0).
+
+	* m4/advanced_shell.m4, m4/downloader_prog.m4: New files and new
+	checks: AC_PARAMETER_EXPANSION_STRING_REPLACE_CAPABLE_SHELL,
+	AC_CHECK_DOWNLOADER_PROG.
+
+	* Makefile.am, prepare_sources.sh.in: Use values from configure.
+
+	* prepare_sources.sh.in: Don't depend on Bash specific features.
+
+2007-06-06  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, NEWS: Version 7.0.0.1.
+
+	* prepare_sources.sh: Use trailing EOL for sed "c" command to get
+	byte equal sources on all platforms.
+
+	* amrwb-dhf-declaration.patch: New patch to fix incorrect
+	declaration of dhf.
+
+2007-04-30  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, NEWS: Version 7.0.0.0.
+
+	* AUTHORS, COPYING, prepare_sources.sh, amrwb.spec,
+	amrwb-any-cflags.patch: Use upstream version 7.0.0.
+
+	* configure.ac: Fail on critical checks.
+
+	* amrwb.spec.in: New file.
+
+	* configure.ac, Makefile.am: Use AC_SEARCH_LIBS instead of
+	explicit -lm.
+
+2007-04-29  Stanislav Brabec  <utx@penguin.cz>
+
+	* Makefile.am: Removed "order only" make targets. Use
+	-no-undefined required for Windows.
+
+	* Makefile.am, amrwb.spec, TODO: Fixed parallel build using
+	readme.txt as reference time stamp.
+
+	* prepare_sources.sh: Use recommended sed syntax. Change
+	readme.txt first in order. Delete corrupted files in case of
+	error.
+
+	* configure.ac: More build checks based on autoscan. Support
+	Windows dll.
+
+	* README, configure.ac, Makefile.am: Use upstream version 7.0.0.
+
+2007-04-13  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac: Version 6.0.0.1.
+
+	* amrwb-intsizes.patch, prepare_sources.sh, Makefile.am: Apply new
+	patch.
+
+	* Makefile.am, amrwb.spec: Do not package 26204-600.doc.
+
+	* configure.ac: Fail if needed binaries are missing.
+
+2007-03-21  Stanislav Brabec  <utx@penguin.cz>
+
+	* New package.

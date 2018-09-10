@@ -1,0 +1,130 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.4. Windows</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="ports.html" title="Kapitola 5. Porty"><link rel="prev" href="unix.html" title="5.3. Komerční Unix"><link rel="next" href="macos.html" title="5.5. Mac OS"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="windows.html#cygwin" title="5.4.1. Cygwin"><link rel="subsection" href="windows.html#mingw" title="5.4.2. MinGW"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.4. Windows</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="unix.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 5. Porty</th><td width="20%" align="right"> <a accesskey="n" href="macos.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="windows"></a>5.4. Windows</h2></div></div></div><p>
+Ano, <span class="application">MPlayer</span> běží na Windows pod
+<a class="ulink" href="http://www.cygwin.com/" target="_top"><span class="application">Cygwin</span></a> a
+<a class="ulink" href="http://www.mingw.org/" target="_top"><span class="application">MinGW</span></a>.
+Nemá zatím oficiální GUI, ale verze pro příkazový řádek je plně funkční.
+Měli byste navštívit konferenci
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-cygwin/" target="_top">MPlayer-cygwin</a>
+pro pomoc a poslední informace.
+Oficiální Windows binárky naleznete na
+<a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html" target="_top">download stránce</a>.
+Instalátor a jednoduché GUI frontendy jsou dostupné z externích zdrojů.
+Odkazy na ně jsme umístili v sekci Windows na naší
+<a class="ulink" href="http://www.mplayerhq.hu/design7/projects.html#windows" target="_top">stránce s
+projekty</a>.
+</p><p>
+Pokud se chcete vyhnout použití příkazové řádky, můžete použít malý trik
+s umístěním zástupce na pracovní plochu, který bude obsahovat v sekci
+spuštění něco takového:
+</p><pre class="screen"><em class="replaceable"><code>c:\cesta\k\</code></em>mplayer.exe %1</pre><p>
+To nechá <span class="application">MPlayer</span> přehrát jakýkoli film, který je
+přetažen na zástupce. Přidejte <tt class="option">-fs</tt> pro celoobrazovkový
+režim.
+</p><p>
+Nejlepších výsledků dosáhnete použitím nativního DirectX video rozhraní
+(<tt class="option">-vo directx</tt>). Alternativami jsou OpenGL a SDL, ale výkon
+OpenGL se velmi různí na jednotlivých systémech a o SDL je známo, že na
+některých systémech drobí video nebo padá. Pokud je obraz rozsypán, zkuste
+vypnout hardwarovou akceleraci pomocí
+<tt class="option">-vo directx:noaccel</tt>. Stáhněte si
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/contrib/dx7headers.tgz" target="_top">hlavičkové soubory DirectX 7</a>
+pro kompilaci výstupního rozhraní DirectX. Navíc budete muset mít
+nainstalovány DirectX 7 nebo vyšší, aby rozhraní pracovalo.
+</p><p>
+<a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a> nyní pracuje pod Windows jako
+<tt class="option">-vo winvidix</tt>, ačkoli je stále experimentální
+a vyžaduje trochu manuálního nastavování. Stáhněte si
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/dhahelperwin/dhahelper.sys" target="_top">dhahelper.sys</a> nebo
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/dhahelperwin/withmtrr/dhahelper.sys" target="_top">dhahelper.sys (s podporou MTRR)</a>
+a zkopírujte jej do adresáře
+<tt class="filename">vidix/dhahelperwin</tt> ve svém stromě se
+zdrojovými kódy <span class="application">MPlayer</span>u.
+Otevřete konzoli a přesuňte se do tohoto adresáře. Pak zadejte
+</p><pre class="screen">gcc -o dhasetup.exe dhasetup.c</pre><p>
+a spusťte
+</p><pre class="screen">dhasetup.exe install</pre><p>
+jako Administrator. Pak budete muset restartovat. Jakmile budete hotovi,
+zkopírujte <code class="systemitem">.so</code> soubory z
+<tt class="filename">vidix/drivers</tt> do adresáře
+<tt class="filename">mplayer/vidix</tt>
+relativního k vašemu <tt class="filename">mplayer.exe</tt>.
+</p><p>
+Pro nejlepší výsledky by měl <span class="application">MPlayer</span> používat
+barevný prostor, který podporuje vaše video karta v hardware. Naneštěstí
+některé Windows ovladače grafických karet špatně hlásí některé barevné
+prostory jako podporované v hardware. Chcete-li zjistit které, zkuste
+</p><pre class="screen">
+mplayer -benchmark -nosound -frames 100 -vf format=<em class="replaceable"><code>barevny_prostor</code></em> <em class="replaceable"><code>film</code></em>
+</pre><p>
+kde <em class="replaceable"><code>barevny_prostor</code></em> může být barevný prostor
+vypsaný volbou <tt class="option">-vf format=fmt=help</tt>. Pokud najdete
+barevný prostor, který vaše karta zvládá zjevně špatně,
+<tt class="option">-vf noformat=<em class="replaceable"><code>barevny_prostor</code></em></tt>
+zakáže jeho použití. Přidejte si to do vašeho konfig souboru, aby zůstal
+zakázán natrvalo.
+</p><p>Pro Windows máme k dispozici speciální balíčky kodeků na naší
+  <a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html" target="_top">download stránce</a>,
+  abyste mohli přehrávat formáty, pro které zatím není nativní podpora.
+  Umístěte kodeky někde do cesty (path), nebo přidejte
+  <tt class="option">--codecsdir=<em class="replaceable"><code>c:/cesta/ke/kodekům</code></em></tt>
+  (případně
+  <tt class="option">--codecsdir=<em class="replaceable"><code>/cesta/ke/kodekům</code></em></tt>
+  používate-li <span class="application">Cygwin</span>) do <tt class="filename">configure</tt>.
+  Máme několik zpráv, že Real DLL musí mít práva zápisu pro uživatele, který
+  pouští <span class="application">MPlayer</span>, ale pouze na některých systémech (NT4).
+  Máte-li potíže, zkuste jim přidat právo zápisu.
+  </p><p>
+Můžete přehrávat VCD přehráváním <tt class="filename">.DAT</tt> nebo
+<tt class="filename">.MPG</tt> souborů, které Windows ukazuje na VCD. Pracuje to
+takto (upravte písmeno disku vaší CD-ROM):
+</p><pre class="screen">mplayer <em class="replaceable"><code>d:/mpegav/avseq01.dat</code></em></pre><p>
+DVD pracují také, upravte <tt class="option">-dvd-device</tt> na písmeno
+DVD-ROM mechaniky:
+</p><pre class="screen">
+mplayer dvd://<em class="replaceable"><code>&lt;titul&gt;</code></em> -dvd-device <em class="replaceable"><code>d</code></em>:
+</pre><p>
+<span class="application">Cygwin</span>/<span class="application">MinGW</span>
+terminál je spíše pomalý. Přesměrování výstupu nebo použití volby
+<tt class="option">-quiet</tt> podle hlášení zvýší výkon na některých systémech.
+Direct rendering (<tt class="option">-dr</tt>) může rovněž pomoci.
+Pokud je přehrávání trhané, zkuste
+<tt class="option">-autosync 100</tt>. Pokud vám některé z těchto voleb pomohly,
+měli byste si je zapsat do konfiguračního souboru.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+Runtime CPU detekce na Windows vypíná podporu SSE kvůli opakovaným a
+těžko vystopovatelným se SSE souvisejícím pádům. Pokud chcete mít podporu
+SSE pod Windows, budete muset kompilovat bez runtime CPU detekce.
+</p><p>
+Máte-li Pentium 4 a dojde k pádu při použití
+RealPlayer kodeků, možná budete muset vypnout podporu hyperthreading.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="cygwin"></a>5.4.1. <span class="application">Cygwin</span></h3></div></div></div><p>
+Musíte používat <span class="application">Cygwin</span> 1.5.0 nebo vyšší,
+abyste mohli kompilovat <span class="application">MPlayer</span>.
+</p><p>
+Hlavičkové soubory DirectX musí být rozbaleny do
+<tt class="filename">/usr/include/</tt> nebo
+<tt class="filename">/usr/local/include/</tt>.
+</p><p>
+Instrukce a soubory nutné pro běh SDL pod
+<span class="application">Cygwin</span> lze nalézt na
+<a class="ulink" href="http://www.libsdl.org/extras/win32/cygwin/" target="_top">libsdl stránkách</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mingw"></a>5.4.2. <span class="application">MinGW</span></h3></div></div></div><p>
+Instalace takové verze <span class="application">MinGW</span>, aby bylo lze
+kompilovat <span class="application">MPlayer</span> byla obtížná, ale nyní
+pracuje bez dalších úprav. Jen nainstalujte <span class="application">MinGW</span>
+3.1.0 nebo vyšší a MSYS 1.0.9 nebo vyšší a zvolte v MSYS postinstall, že je
+<span class="application">MinGW</span> nainstalováno.
+</p><p>
+Rozbalte DirectX hlavičkové soubory do
+<tt class="filename">/mingw/include/</tt>.
+</p><p>
+Podpora MOV compressed header vyžaduje
+<a class="ulink" href="http://www.gzip.org/zlib/" target="_top">zlib</a>,
+kterou <span class="application">MinGW</span> neobsahuje.
+Konfigurujte ji s <tt class="option">--prefix=/mingw</tt> a nainstalujte
+ji před kompilací <span class="application">MPlayer</span>u.
+</p><p>
+Kompletní instrukce pro překlad <span class="application">MPlayer</span>u
+a potřebné knihovny naleznete v
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/contrib/MPlayer-MinGW-Howto.txt" target="_top">MPlayer MinGW HOWTO</a>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="unix.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="macos.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">5.3. Komerční Unix </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 5.5. Mac OS</td></tr></table></div></body></html>

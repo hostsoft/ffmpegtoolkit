@@ -1,0 +1,53 @@
+The /Win32 directory contains everything necessary to compile liboggz
+under windows and create:
+
+- liboggz.dll
+- oggzdump.exe
+- oggzinfo.exe
+- oggzmerge.exe
+- oggzrip.exe
+- oggzscan.exe
+- oggzvalidate.exe
+
+Building with the Makefile
+==========================
+
+Here's what you need to do:
+
+1) Install libogg.dll.
+   (you can get it from http://www.xiph.org/ogg/vorbis/ ).
+
+2) cd win32 subdirectory
+
+3) Use "nmake" to create library and executable.
+
+4) Install oggzdump, oggzinfo, oggzed, liboggz.dll and the
+   include files from the /include/oggz/ directory.
+
+
+Visual Studio.NET 2003 Installation
+===================================
+
+IMPORTANT: The solution files were built for VS.NET 2003 and can't be
+opened by VS.NET 2002. If you use VS.NET 2002 you should use the VS6
+workspace files and they will be automatically converted to the new
+format.
+
+Also included in the solution is a setup and deployment project that
+will package and create an installer for the binary output of this
+project.
+
+You will need to install the libogg library separately. If you wish to
+create a debug build and wish to have the debugger load the symbols
+for this library, you should also include the project source files. By
+default the compiler and linker will look for them in the same parent
+directory as liboggz. However you can install them wherever you choose
+and must modify the include directories for the linker and compiler in
+your projects properties.
+
+
+Visual Studio Version 6 Installation
+====================================
+NOTE: For lack of platform, we were not able to keep the Visual 
+Studio Version 6 project files up-to-date. Send us an updated version 
+if you're using these.

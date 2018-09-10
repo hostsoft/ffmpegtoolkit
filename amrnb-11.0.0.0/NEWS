@@ -1,0 +1,58 @@
+News in version 11.0.0.0
+========================
+* Uses new upstream version 11.0.0 (which does not contain any code changes)
+
+News in version 10.0.0.0
+========================
+* Uses new upstream version 10.0.0 (which does not contain any code changes)
+* License change to BSD-3 that allows 3GPP/Via Licensing contractors to
+  distribute wrapped libraries
+  (thanks to Sergiy Guriev and Michael Militzer).
+* Correct strict aliasing fix.
+
+News in version 7.0.0.2
+=======================
+* Builds with gcc 2 (reported by mimeini).
+* README documents source code work flow.
+
+News in version 7.0.0.1
+=======================
+* Compiles correctly on OS X Leopard (reported by Drew and Thijs van der
+  Vossen).
+
+News in version 7.0.0.0
+=======================
+* Does not depend on Bash specific features (patch from Tatsuki Makino)
+* Checks for more possible downloading programs and allows to specify
+  custom command using --with-downloader.
+* Checks for more possible advanced shells and allows to specify custom
+  shell using --with-parameter-expansion-string-replace-capable-shell.
+* Uses new upstream version 7.0.0
+
+News in version 6.1.0.4
+=======================
+* Builds on FreeBSD and Darwin with strict sed syntax (reported by Mit Rowe)
+
+News in version 6.1.0.3
+=======================
+* Builds on Microsoft Windows (thanks to Colin Daley)
+* Builds with older versions of make (reported by Dan Winchester)
+* Builds with older versions of sed (reported by Colin Daley)
+* Parallel build is now fixed.
+
+News in version 6.1.0.2
+=======================
+* Fixed bug in porting of encoder (thanks to Benoit Fouet).
+
+News in version 6.1.0.1
+=======================
+* Never package 26104-610.doc with a restrictive license.
+* Works correctly on 64 bit platforms (thanks to Scott Manley).
+  Note that ABI could change on 64 bit platforms!
+
+News in version 6.1.0
+=====================
+* Repackaged sources from 3GPP.
+* Build as shared library.
+* Following CFLAGS are supported in compile time: -DIF2 -DETSI -DVAD2
+* Strict aliasing fix.

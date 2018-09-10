@@ -1,0 +1,156 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.2. Control</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="usage.html" title="Capítulo 3. Uso"><link rel="prev" href="commandline.html" title="3.1. Línea de órdenes"><link rel="next" href="streaming.html" title="3.3. Streaming desde la red o tuberías"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="control.html#ctrl-cfg" title="3.2.1. Configuración de los controles"><link rel="subsection" href="control.html#lirc" title="3.2.2. Control desde LIRC"><link rel="subsection" href="control.html#slave-mode" title="3.2.3. Modo esclavo"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. Control</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="commandline.html">Anterior</a> </td><th width="60%" align="center">Capítulo 3. Uso</th><td width="20%" align="right"> <a accesskey="n" href="streaming.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="control"></a>3.2. Control</h2></div></div></div><p>
+<span class="application">MPlayer</span> tiene una capa de control completamente
+configurable, dada por órdenes, que le permite controlar
+<span class="application">MPlayer</span> con el teclado, el ratón, la palanca
+de juegos o el mando a distancia (usando LIRC). Vea la página de manual para
+una lista completa de los controles de teclado.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ctrl-cfg"></a>3.2.1. Configuración de los controles</h3></div></div></div><p>
+<span class="application">MPlayer</span> permite asignar una tecla/botón a
+cualquier órden de <span class="application">MPlayer</span> usando un archivo
+de configuración simple. La sintaxis consiste en un nombre clave seguido
+por la órden. El archivo de configuración por defecto es
+<tt class="filename">$HOME/.mplayer/input.conf</tt> pero puede ser cambiado
+usando la opción <tt class="option">-input <em class="replaceable"><code>conf</code></em></tt>
+(ruta relativa a <tt class="filename">$HOME/.mplayer</tt>).
+</p><div class="example"><a name="input_control_file"></a><p class="title"><b>Ejemplo 3.1. Un archivo de control simple</b></p><div class="example-contents"><pre class="programlisting">
+##
+## Archivo de control de entrada de <span class="application">MPlayer</span>
+##
+
+RIGHT seek +10
+LEFT seek -10
+- audio_delay 0.100
++ audio_delay -0.100
+q quit
+&gt; pt_step 1
+&lt; pt_step -1
+ENTER pt_step 1 1</pre></div></div><br class="example-break"><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ctrl-cfg-keys"></a>3.2.1.1. Nombres clave</h4></div></div></div><p>
+Puede obtener una lista completa ejecutando
+<span class="command"><strong>mplayer -input keylist</strong></span>.
+</p><div class="itemizedlist"><p class="title"><b>Teclado</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Cualquier caracter imprimible</p></li><li class="listitem"><p><code class="literal">SPACE</code></p></li><li class="listitem"><p><code class="literal">ENTER</code></p></li><li class="listitem"><p><code class="literal">TAB</code></p></li><li class="listitem"><p><code class="literal">CTRL</code></p></li><li class="listitem"><p><code class="literal">BS</code></p></li><li class="listitem"><p><code class="literal">DEL</code></p></li><li class="listitem"><p><code class="literal">INS</code></p></li><li class="listitem"><p><code class="literal">HOME</code></p></li><li class="listitem"><p><code class="literal">END</code></p></li><li class="listitem"><p><code class="literal">PGUP</code></p></li><li class="listitem"><p><code class="literal">PGDWN</code></p></li><li class="listitem"><p><code class="literal">ESC</code></p></li><li class="listitem"><p><code class="literal">RIGHT</code></p></li><li class="listitem"><p><code class="literal">LEFT</code></p></li><li class="listitem"><p><code class="literal">UP</code></p></li><li class="listitem"><p><code class="literal">DOWN</code></p></li></ul></div><div class="itemizedlist"><p class="title"><b>Ratón (solo funciona bajo X)</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <code class="literal">MOUSE_BTN0</code> (Botón izquierdo)</p></li><li class="listitem"><p>
+  <code class="literal">MOUSE_BTN1</code> (Botón derecho)</p></li><li class="listitem"><p>
+  <code class="literal">MOUSE_BTN2</code> (Botón central)</p></li><li class="listitem"><p>
+  <code class="literal">MOUSE_BTN3</code> (Rueda)</p></li><li class="listitem"><p>
+  <code class="literal">MOUSE_BTN4</code> (Rueda)</p></li><li class="listitem"><p>...</p></li><li class="listitem"><p><code class="literal">MOUSE_BTN9</code></p></li></ul></div><div class="itemizedlist"><p class="title"><b>Palanca de juegos (para que funcione debe habilitarse durante la compilación)</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <code class="literal">JOY_RIGHT</code> o
+  <code class="literal">JOY_AXIS0_PLUS</code></p></li><li class="listitem"><p>
+  <code class="literal">JOY_LEFT</code> o
+  <code class="literal">JOY_AXIS0_MINUS</code></p></li><li class="listitem"><p>
+  <code class="literal">JOY_UP</code> o
+  <code class="literal">JOY_AXIS1_MINUS</code></p></li><li class="listitem"><p>
+  <code class="literal">JOY_DOWN</code> o
+  <code class="literal">JOY_AXIS1_PLUS</code></p></li><li class="listitem"><p><code class="literal">JOY_AXIS2_PLUS</code></p></li><li class="listitem"><p><code class="literal">JOY_AXIS2_MINUS</code></p></li><li class="listitem"><p>...</p></li><li class="listitem"><p><code class="literal">JOY_AXIS9_PLUS</code></p></li><li class="listitem"><p><code class="literal">JOY_AXIS9_MINUS</code></p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ctrl-cfg-commands"></a>3.2.1.2. Órdenes</h4></div></div></div><p>
+Puede obtener una lista completa de órdenes ejecutando
+<span class="command"><strong>mplayer -input cmdlist</strong></span>.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p><code class="literal">seek</code> (int) val [(int) type=0]</p><p>
+  Se posiciona en un lugar de la película.
+  Tipo <code class="literal">0</code> es posicionamiento relativo en +/- val segundos.
+  Tipo <code class="literal">1</code> se posiciona a un valor en val% de la película.
+  </p></li><li class="listitem"><p><code class="literal">audio_delay</code> (float) val</p><p>
+  Ajusta el retardo de audio en val segundos
+  </p></li><li class="listitem"><p><code class="literal">quit</code></p><p>
+  Salir de <span class="application">MPlayer</span>
+  </p></li><li class="listitem"><p><code class="literal">pause</code></p><p>
+  Pausa/continúa la reproducción
+  </p></li><li class="listitem"><p><code class="literal">grap_frames</code></p><p>
+  ¿Alguien lo sabe?
+  </p></li><li class="listitem"><p><code class="literal">pt_step</code> (int) val [(int) force=0]</p><p>
+  Va a la entrada siguiente/previa en la lista de reproducción. El signo
+  de val dice la dirección. Si no hay otra entrada disponible en la dirección
+  dada no ocurre nada a no ser que force no sea 0.
+  </p></li><li class="listitem"><p><code class="literal">pt_up_step</code> (int) val [(int) force=0]</p><p>
+  Igual que pt_step pero salta a siguiente/previo en la lista actual. Esto
+  es útli para romber bucles internos en el árbol de reproducción.
+  </p></li><li class="listitem"><p><code class="literal">alt_src_step</code> (int) val</p><p>
+  Cuando hay más de una fuente disponible selecciona la siguiente/previa
+  (solo funciona en listas de reproducción asx).
+  </p></li><li class="listitem"><p><code class="literal">sub_delay</code> (float) val [(int) abs=0]</p><p>
+  Ajusta el retardo de subtítulos en +/- val segundos o lo establece en
+  val segundos cuando abs no es cero.
+  </p></li><li class="listitem"><p><code class="literal">osd</code> [(int) level=-1]</p><p>
+  Cambia el modo de osd o establece el invel cuando el nivel &gt; 0.
+  </p></li><li class="listitem"><p><code class="literal">volume</code> (int) dir</p><p>Incrementa/reduce el volumen
+  </p></li><li class="listitem"><p><code class="literal">contrast</code> (int) val [(int) abs=0]
+  </p></li><li class="listitem"><p><code class="literal">brightness</code> (int) val [(int) abs=0]
+  </p></li><li class="listitem"><p><code class="literal">hue</code> (int) val [(int) abs=0]
+  </p></li><li class="listitem"><p><code class="literal">saturation</code> (int) val [(int) abs=0]</p><p>
+  Establece/Ajusta los parámetros de video. Rango de val entre -100 y 100.
+  </p></li><li class="listitem"><p><code class="literal">frame_drop</code> [(int) type=-1]</p><p>
+  Cambia/Establece el modo de salto de marcos.
+  </p></li><li class="listitem"><p><code class="literal">sub_visibility</code></p><p>
+  Ajusta la visibilidad de los subtítulos.
+  </p></li><li class="listitem"><p><code class="literal">sub_pos</code> (int) val</p><p>
+  Ajusta la posición de los subtítulos.
+  </p></li><li class="listitem"><p><code class="literal">vobsub_lang</code></p><p>
+  Cambia el idioma de los subtítulos VobSub.
+  </p></li><li class="listitem"><p><code class="literal">vo_fullscreen</code></p><p>
+  Cambia el modo de pantalla completa.
+  </p></li><li class="listitem"><p><code class="literal">vo_ontop</code></p><p>
+  Cambia siempre-visible. Soportado por controladores que usen X11,
+  excepto SDL, así como directx y gl2 bajo Windows.
+  </p></li><li class="listitem"><p><code class="literal">tv_step_channel</code> (int) dir</p><p>
+  Selecciona el canal de tv siguiente/previo.
+  </p></li><li class="listitem"><p><code class="literal">tv_step_norm</code></p><p>
+  Cambia la norma de TV.
+  </p></li><li class="listitem"><p><code class="literal">tv_step_chanlist</code></p><p>
+  Cambia la lista de canales.
+  </p></li><li class="listitem"><p><code class="literal">gui_loadfile</code></p></li><li class="listitem"><p><code class="literal">gui_loadsubtitle</code></p></li><li class="listitem"><p><code class="literal">gui_about</code></p></li><li class="listitem"><p><code class="literal">gui_play</code></p></li><li class="listitem"><p><code class="literal">gui_stop</code></p></li><li class="listitem"><p><code class="literal">gui_playlist</code></p></li><li class="listitem"><p><code class="literal">gui_preferences</code></p></li><li class="listitem"><p><code class="literal">gui_skinbrowser</code></p><p>
+  Acciones para el GUI
+  </p></li></ul></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="lirc"></a>3.2.2. Control desde LIRC</h3></div></div></div><p>
+Linux Infrared Remote Control - use un receptor-IR facil de hacer y
+fabricar en casa, un (casi) arbitrario control remoto ¡y controle
+su linux con él! Más acerca de esto en
+<a class="ulink" href="http://www.lirc.org" target="_top">www.lirc.org</a>.
+</p><p>
+Si tiene instalado el paquete-lirc, configure lo autodetectará. Si todo
+va bien, <span class="application">MPlayer</span> escribirá un mensaje como
+"<code class="computeroutput">Setting up lirc support...</code>"
+durante su inicio. Si ocurre algún error le informará de ello. Si no le
+dice nada acerca de LIRC es porque se ha compilado sin tenerlo en cuenta.
+Eso es todo :-)
+</p><p>
+El nombre de la aplicación para <span class="application">MPlayer</span> es - oh
+que maravilla - <tt class="filename">mplayer</tt>. Puede usar las órdenes de
+<span class="application">MPlayer</span> e incluso pasar más de una órden
+separándolas con <code class="literal">\n</code>.
+No olvide activar el marcador repeat en <tt class="filename">.lircrc</tt> cuando
+tenga sentido (posición, volumen, etc). Aquí hay un extracto de mi
+<tt class="filename">.lircrc</tt>:
+</p><pre class="programlisting">
+begin
+     button = VOLUME_PLUS
+     prog = mplayer
+     config = volume 1
+     repeat = 1
+end
+
+begin
+    button = VOLUME_MINUS
+    prog = mplayer
+    config = volume -1
+    repeat = 1
+end
+
+begin
+    button = CD_PLAY
+    prog = mplayer
+    config = pause
+end
+
+begin
+    button = CD_STOP
+    prog = mplayer
+    config = seek 0 1\npause
+end</pre><p>
+Si no le gusta la localización estándar del archivo de configuración
+de lirc (<tt class="filename">~/.lircrc</tt>) use el conmutador
+<tt class="option">-lircconf <em class="replaceable"><code>nombre-archivo</code></em></tt>
+para especificar otro archivo.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="slave-mode"></a>3.2.3. Modo esclavo</h3></div></div></div><p>
+El modo esclavo le permite construir una interfaz gráfica de manera
+simple para <span class="application">MPlayer</span>. Cuando se activa
+(con la opción <tt class="option">-slave</tt>) <span class="application">MPlayer</span>
+lee las órdenes separándolsa por el caracter de nueva línea (\n) desde
+la entrada estándar stdin.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="commandline.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="streaming.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. Línea de órdenes </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 3.3. Streaming desde la red o tuberías</td></tr></table></div></body></html>

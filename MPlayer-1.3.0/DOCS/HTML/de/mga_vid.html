@@ -1,0 +1,54 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.7. Matrox-Framebuffer (mga_vid)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="prev" href="fbdev.html" title="4.6. Framebuffer-Ausgabe (FBdev)"><link rel="next" href="tdfxfb.html" title="4.8. 3dfx-YUV-Unterstützung (tdfxfb)"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.7. Matrox-Framebuffer (mga_vid)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="fbdev.html">Zurück</a> </td><th width="60%" align="center">Kapitel 4. Videoausgabegeräte</th><td width="20%" align="right"> <a accesskey="n" href="tdfxfb.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mga_vid"></a>4.7. Matrox-Framebuffer (mga_vid)</h2></div></div></div><p>
+  <code class="systemitem">mga_vid</code> ist eine Kombination aus einem Videoausgabetreiber
+  und Linux-Kernelmodul, das die Matrox G200/G400/G450/G550 Scaler-/Overlay-Einheit
+  verwendet, um YUV-&gt;RGB-Farbraumkonvertierungen und beliebige Videoskalierungen durchzuführen.
+  <code class="systemitem">mga_vid</code> bietet Unterstützung für Hardware-VSYNC und Dreifachpufferung.
+  Dieser Treiber funktioniert sowohl unter der Framebufferconsole als auch unter X,
+  jedoch nur mit Linux 2.4.x.
+</p><p>
+  Für eine Version für Linux 2.6.x gehe auf <a class="ulink" href="http://attila.kinali.ch/mga/" target="_top">http://attila.kinali.ch/mga/</a>.
+</p><div class="procedure"><a name="idp57017392"></a><p class="title"><b>Installation:</b></p><ol class="procedure" type="1"><li class="step"><p>
+  Um den Treiber benutzen zu können, musst du erstmal <tt class="filename">mga_vid.o</tt>
+  compilieren:
+  </p><pre class="screen">
+cd drivers
+make</pre><p>
+  </p></li><li class="step"><p>
+    Führe dann (als <code class="systemitem">root</code>) folgenden Befehl aus:
+    </p><pre class="screen">make install</pre><p>
+    Dies sollte das Modul installieren und das Device-Node für dich erstellen.
+    Lade den Treiber mit
+  </p><pre class="screen">insmod mga_vid.o</pre><p>
+  </p></li><li class="step"><p>
+  Du solltest sicherstellen, dass das Modul die Größe des
+  Grafikkartenspeichers korrekt ermittelt hat. Benutze dazu
+  <span class="command"><strong>dmesg</strong></span>. Wenn die Angabe nicht stimmt, dann gib nach
+  <span class="command"><strong>rmmod mga_vid</strong></span> mit Hilfe der Option
+  <tt class="option">mga_ram_size</tt> die Größe explizit an:
+  </p><pre class="screen">insmod mga_vid.o mga_ram_size=16</pre><p>
+</p></li><li class="step"><p>
+  Wenn das Modul automatisch geladen und entladen werden soll, sobald
+  es benötigt wird, so füge die folgende Zeile in der Datei
+  <tt class="filename">/etc/modules.conf</tt> ein:
+
+  </p><pre class="programlisting">alias char-major-178 mga_vid</pre><p>
+  </p></li><li class="step"><p>
+  Schließlich musst du noch <span class="application">MPlayer</span> (erneut) compilieren.
+  <span class="command"><strong>configure</strong></span> wird automatisch <tt class="filename">/dev/mga_vid</tt>
+  finden und den 'mga'-Treiber erstellen. Die entsprechende Option für
+  <span class="application">MPlayer</span> lautet <tt class="option">-vo mga</tt>, wenn du mit
+  dem matroxfb auf der Console arbeitest, oder <tt class="option">-vo xmga</tt>, wenn du
+  unter XFree 3.x.x oder XFree 4.x.x arbeitest.
+  </p></li></ol></div><p>
+  Der mga_vid-Treiber kooperiert mit Xv.
+</p><p>
+  Das Gerät <tt class="filename">/dev/mga_vid</tt> kann z.B. mit
+  </p><pre class="screen">cat /dev/mga_vid</pre><p>
+  ausgelesen werden, um ein paar Informationen über
+  den aktuellen Zustand zu erhalten. Die Helligkeit kann zusätzlich mit z.B.
+  </p><pre class="screen">echo "brightness=120" &gt; /dev/mga_vid</pre><p>
+  angepasst werden.
+</p><p>
+  Es gibt ein Testprogramm namens <span class="command"><strong>mga_vid_test</strong></span> im selben Verzeichnis.
+  Es sollte 256x256 große Bilder auf den Schirm zeichnen, wenn alles gut funktioniert.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="fbdev.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="tdfxfb.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">4.6. Framebuffer-Ausgabe (FBdev) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 4.8. 3dfx-YUV-Unterstützung (tdfxfb)</td></tr></table></div></body></html>

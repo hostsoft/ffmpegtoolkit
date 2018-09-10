@@ -1,0 +1,113 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.1. Přehled</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="prev" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="next" href="skin-file.html" title="B.2. Soubor skin"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="skin-overview.html#skin-overview-directories" title="B.1.1. Adresáře"><link rel="subsection" href="skin-overview.html#skin-overview-formats" title="B.1.2. Formáty obrázků"><link rel="subsection" href="skin-overview.html#skin-overview-components" title="B.1.3. Součásti skinu"><link rel="subsection" href="skin-overview.html#skin-files" title="B.1.4. Soubory"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.1. Přehled</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin.html">Předcházející</a> </td><th width="60%" align="center">Příloha B. Formát skinů <span class="application">MPlayer</span>u</th><td width="20%" align="right"> <a accesskey="n" href="skin-file.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-overview"></a>B.1. Přehled</h2></div></div></div><p>
+Nemá to sice nic společného s formátem skinu, ale měli byste vědět, že
+<span class="application">MPlayer</span> <span class="bold"><strong>nemá</strong></span>
+vestavěný skin, takže <span class="bold"><strong>si musíte alespoň jeden skin
+nainstalovat, chcete-li používat GUI.</strong></span>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-directories"></a>B.1.1. Adresáře</h3></div></div></div><p>
+Adresáře prohledávané na skiny jsou (v tomto pořadí):
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  <tt class="filename">$(DATADIR)/skins/</tt>
+</p></li><li class="listitem"><p>
+  <tt class="filename">$(PREFIX)/share/mplayer/skins/</tt>
+</p></li><li class="listitem"><p>
+  <tt class="filename">~/.mplayer/skins/</tt>
+</p></li></ol></div><p>
+</p><p>
+Poznamenejme, že první z cest se může lišit podle toho, jak je
+<span class="application">MPlayer</span> zkonfigurován (viz volby  configure skriptu
+<tt class="option">--prefix</tt> a <tt class="option">--datadir</tt>).
+</p><p>
+Každý skin je instalován do vlastního adresáře v některém z výše uvedených.
+Například:
+</p><pre class="screen">$(PREFIX)/share/mplayer/skins/default/</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-formats"></a>B.1.2. Formáty obrázků</h3></div></div></div><p>Obrázky musí být truecolor (24 nebo 32 bpp) PNG.</p><p>
+V hlavním okně a v přehrávači (viz níž) můžete použít obrázky s 'průhledností':
+Oblasti vyplněné barvou #FF00FF (magenta) jsou plně průhledné, pokud jsou
+zobrazovány <span class="application">MPlayer</span>em. To znamená, že můžete mít
+tvarovaná okna, pokud má váš X server XShape rozšíření.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-components"></a>B.1.3. Součásti skinu</h3></div></div></div><p>
+Skiny mají poměrně volný formát (narozdíl například od pevného formátu skinů
+<span class="application">Winamp</span>u/<span class="application">XMMS</span>),
+takže je jen na vás, zda vytvoříte něco skvělého.
+</p><p>
+V současnosti jsou zde čtyři okna, která můžete dekorovat:
+<a class="link" href="skin-file.html#skin-file-main" title="B.2.1. Hlavní okno a ovládací panel">hlavní okno</a>,
+<a class="link" href="skin-file.html#skin-file-subwindow" title="B.2.2. Ovládací panel">podokno</a>,
+<a class="link" href="skin-file.html#skin-file-main" title="B.2.1. Hlavní okno a ovládací panel">ovládací panel</a> a
+<a class="link" href="skin-file.html#skin-file-menu" title="B.2.3. Nabídka">nabidka</a> (tu lze aktivovat
+pravým myšítkem).
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="application">MPlayer</span> je ovládán v
+  <span class="bold"><strong>hlavním okně</strong></span> a/nebo v
+  <span class="bold"><strong>ovládacím panelu</strong></span>. Pozadím okna je obrázek.
+  Následující součásti mohou (a musí) být umístěny v okně:
+  <span class="emphasis"><em>tlačítka</em></span>, <span class="emphasis"><em>potenciometry</em></span> (šoupátka)
+  a <span class="emphasis"><em>popisky</em></span>.
+  Každé součásti musíte nastavit pozici a velikost.
+  </p><p>
+  A <span class="bold"><strong>tlačítko</strong></span> má tři stavy (stisknuto, puštěno a
+  zakázáno), proto musí být jeho obraz svisle rozdělen do tří částí.
+  Detaily viz součást <a class="link" href="skin-file.html#skin-button">tlačítko</a>.
+  </p><p>
+  A <span class="bold"><strong>potenciometr</strong></span> (hlavně používaný pro
+  lištu převíjení a ovládání hlasitosti/stereováhy) může mít libovolný počet
+  fází dělících jeho obraz na jednotlivé části pod sebou. Detaily viz
+  <a class="link" href="skin-file.html#skin-hpotmeter">hpotenciometr</a>.
+  </p><p>
+  <span class="bold"><strong>Popisky</strong></span> jsou poněkud zvláštní: Znaky potřebné
+  pro jejich vykreslení jsou brány z obrazového souboru a znaky v obrázku jsou
+  popsány <a class="link" href="skin-fonts.html" title="B.3. Fonty">souborem popisu fontu</a>.
+  Tento (druhý) soubor je prostý textový soubor, který popisuje pozici x,y a
+  velikost každého znaku v obrázku (obrázkový soubor a soubor popisu fontu
+  <span class="emphasis"><em>spolu</em></span> tvoří font). Detaily viz
+  <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+  Všechny obrázky mohou mít plnou průhlednost, jak je popsána v sekci
+  o <a class="link" href="skin-overview.html#skin-overview-formats" title="B.1.2. Formáty obrázků">formátech obrázků</a>. Pokud X
+  server nepodporuje rozšíření XShape, budou průhledné části černé. Pokud byste
+  chtěli využít tuto vlastnost, musí být šířka pozadí hlavního okna celočíselně
+  dělitelná 8.
+  </p></div></li><li class="listitem"><p>
+  <span class="bold"><strong>Podokno</strong></span> je to okno, kde se zobrazuje film.
+  Může v něm být zobrazen určený obrázek, pokud není načten žádný film (je
+  docela únavné, pokud zde není nic :-)).
+  <span class="bold"><strong>Poznámka:</strong></span> průhlednost zde
+  <span class="bold"><strong>není povolena</strong></span>.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Nabídka</strong></span> je jen způsob, jak ovládat
+  <span class="application">MPlayer</span> položkami menu. Vyžadovány jsou dva
+  obrázky: jeden z nich jako menu v normálním stavu a druhý se zvýrazněnými
+  položkami. Když pak vyvoláte menu, je zobrazen první obrázek. Při pohybu myší
+  přes položky, je zkopírována aktuálně vybraná položka z druhého obrázku přes
+  ten první pod kursorem (druhý obrázek není nikdy zobrazen celý).
+  </p><p>
+  Položka menu je definována svou pozicí a velikostí v obrázku (detaily viz
+  sekce <a class="link" href="skin-file.html#skin-file-menu" title="B.2.3. Nabídka">nabídka</a>).
+  </p></li></ul></div><p>
+</p><p>
+Jednu důležitou věc jsme ještě nezmínili: Mají-li tlačítka,
+potenciometry a položky menu pracovat, musí <span class="application">MPlayer</span>
+vědět, co má udělat, pokud je na ně kliknuto. To je zajištěno pomocí
+<a class="link" href="skin-gui.html" title="B.4. GUI zprávy">zpráv</a> (událostí). Pro tyto členy tedy musíte
+definovat zprávy, které budou při kliku generovány.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-files"></a>B.1.4. Soubory</h3></div></div></div><p>
+Pro výrobu skinu budete potřebovat následující:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Konfigurační soubor jménem <a class="link" href="skin-file.html" title="B.2. Soubor skin">skin</a> řekne
+  <span class="application">MPlayer</span>u, jak má dát jednotlivé části skinu
+  dohromady a co udělat, kliknete-li někde v okně.
+</p></li><li class="listitem"><p>
+  Obrázek pozadí hlavního okna.
+</p></li><li class="listitem"><p>
+  Obrázky položek hlavního okna (včetně jednoho nebo více souborů s popisem
+  fontu pro vykreslování popisek).
+</p></li><li class="listitem"><p>
+  Obrázek pro zobrazení v podokně (volitelný).
+</p></li><li class="listitem"><p>
+  Dva obrázky pro nabídku (ty jsou potřeba pouze pokud chcete vytvořit menu).
+</p></li></ul></div><p>
+  S výjimkou konfiguračního souboru skinu si můžete pojmenovat ostatní soubory
+  jak chcete (s tím, že vaše soubory s popisem fontu budou mít příponu
+  <tt class="filename">.fnt</tt>).
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-file.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">Příloha B. Formát skinů <span class="application">MPlayer</span>u </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> B.2. Soubor skin</td></tr></table></div></body></html>

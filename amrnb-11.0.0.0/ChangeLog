@@ -1,0 +1,115 @@
+2013-04-05  Stanislav Brabec  <utx@penguin.cz>
+
+	* prepare_sources.sh.in, Makefile.am, configure.ac, README,
+	AUTHORS, amrnb.spec.in: Use upstream version 11.0.0 (library
+	version increment not needed).
+
+2012-01-08  Stanislav Brabec  <utx@penguin.cz>
+
+	* prepare_sources.sh.in, Makefile.am, configure.ac, README,
+	AUTHORS: Use upstream version 10.0.0 (library version increment
+	not needed).
+
+	* configure.ac, NEWS: Version 10.0.0.0.
+
+	* COPYING: License change to BSD-3.
+
+	* amrnb-any-cflags.patch, amrnb-strict-aliasing.patch: Correct
+	strict aliasing fix.
+
+	* Makefile.am: Make build compatible with the latest make distcheck.
+
+2008-05-22  Stanislav Brabec  <utx@penguin.cz>
+
+	* Makefile.am: Dependencies fix.
+	* configure.ac, NEWS: Version 7.0.0.2.
+	* README: Documented build without network.
+	* prepare_sources.sh.in: Strip null characters.
+	
+2008-03-25  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, NEWS: Version 7.0.0.1.
+
+	* prepare_sources.sh.in: Set locale to C to prevent tr failures
+	on platforms which use character-wise conversion.
+
+2007-08-23  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, NEWS: Version 7.0.0.0.
+
+	* Makefile.am, prepare_sources.sh.in: Fixed rules for separate
+	directory build and already unpacked sources.
+
+2007-08-22  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, amrnb.spec.in, COPYING, README, NEWS: Upgraded
+	to version 7.0.0
+
+	* Makefile.am: Increased library version.
+
+	* m4/advanced_shell.m4, m4/downloader_prog.m4: New files and new
+	checks: AC_PARAMETER_EXPANSION_STRING_REPLACE_CAPABLE_SHELL,
+	AC_CHECK_DOWNLOADER_PROG.
+
+	* Makefile.am, prepare_sources.sh.in: Use values from configure.
+
+	* prepare_sources.sh.in: Don't depend on Bash specific features.
+
+2007-06-06  Stanislav Brabec  <utx@penguin.cz>
+
+	* prepare_sources.sh: Use trailing EOL for sed "c" command to get
+	byte equal sources on all platforms.
+
+2007-05-25  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, NEWS: Version 6.1.0.4.
+
+	* prepare_sources.sh: Do not use "\|" in sed regexp.
+
+2007-04-30  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, NEWS: Version 6.1.0.3.
+
+	* configure.ac: Fail on critical checks.
+
+	* amrnb.spec.in: New file.
+
+	* configure.ac, Makefile.am: Use AC_SEARCH_LIBS instead of
+	explicit -lm.
+
+2007-04-29  Stanislav Brabec  <utx@penguin.cz>
+
+	* Makefile.am: Removed "order only" make targets. Use
+	-no-undefined required for Windows.
+
+	* Makefile.am, amrnb.spec, TODO: Fixed parallel build using
+	readme.txt as reference time stamp.
+
+	* prepare_sources.sh: Use recommended sed syntax. Change
+	readme.txt first in order. Delete corrupted files in case of
+	error.
+
+	* configure.ac: More build checks based on autoscan. Support
+	Windows dll.
+
+2007-04-13  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac, amrnb.spec: Version 6.1.0.2.
+
+	* amrnb-any-cflags.patch: Ported memory allocation commented out
+	by mistake.
+
+2007-04-13  Stanislav Brabec  <utx@penguin.cz>
+
+	* configure.ac: Version 6.1.0.1.
+
+	* amrnb-intsizes.patch, prepare_sources.sh, Makefile.am: Apply new
+	patch.
+
+	* Makefile.am, amrnb.spec: Do not package 26104-610.doc.
+
+	* configure.ac: Fail if needed binaries are missing.
+
+2007-03-21  Stanislav Brabec  <utx@penguin.cz>
+
+	* New package.

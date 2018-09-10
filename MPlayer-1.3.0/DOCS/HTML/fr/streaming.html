@@ -1,0 +1,32 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.4. Streaming depuis le réseau ou les pipes</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="usage.html" title="Chapitre 3. Utilisation"><link rel="prev" href="control.html" title="3.3. Contrôles"><link rel="next" href="mpst.html" title="3.5. Flux distants"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="streaming.html#streaming-save" title="3.4.1. Sauvegarder du contenu flux"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.4. Streaming depuis le réseau ou les pipes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="control.html">Précédent</a> </td><th width="60%" align="center">Chapitre 3. Utilisation</th><td width="20%" align="right"> <a accesskey="n" href="mpst.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="streaming"></a>3.4. Streaming depuis le réseau ou les pipes</h2></div></div></div><p>
+<span class="application">MPlayer</span> peut lire des fichiers depuis le réseau, en
+utilisant les protocoles HTTP, FTP, MMS ou RTSP/RTP.
+</p><p>
+La lecture se fait juste en ajoutant l'URL à la ligne de commande.
+<span class="application">MPlayer</span> utilise également la variable d'environnement
+<code class="envar">http_proxy</code>, et utilise le proxy si disponible. L'utilisation du proxy
+peut aussi être forcé:
+</p><pre class="screen">mplayer <em class="replaceable"><code>http_proxy://proxy.micorsops.com:3128/http://micorsops.com:80/stream.asf</code></em></pre><p>
+</p><p>
+<span class="application">MPlayer</span> peut lire depuis stdin
+(<span class="emphasis"><em>pas</em></span> depuis les pipes nommés). Cela peut être utilisé par
+exemple pour lire depuis le FTP:
+</p><pre class="screen">wget <em class="replaceable"><code>ftp://micorsops.com/quelquechose.avi</code></em> -O - | mplayer -</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+Il est également recommandé d'activer <tt class="option">-cache</tt> pour une lecture
+depuis le réseau:
+</p><pre class="screen">wget <em class="replaceable"><code>ftp://micorsops.com/quelquechose.avi</code></em> -O - | mplayer -cache 8192 -</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="streaming-save"></a>3.4.1. Sauvegarder du contenu flux</h3></div></div></div><p>
+Une fois que vous avez réussi à faire lire
+votre flux internet favorit par <span class="application">MPlayer</span>, vous pouvez utiliser l'option
+<tt class="option">-dumpstream</tt> pour sauvegarder le flux dans un fichier.
+Par exemple:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>http://217.71.208.37:8006</code></em> -dumpstream -dumpfile <em class="replaceable"><code>stream.asf</code></em>
+</pre><p>
+sauvegardera le contenu en flux depuis
+<em class="replaceable"><code>http://217.71.208.37:8006</code></em> vers
+<em class="replaceable"><code>stream.asf</code></em>.
+Cela marche avec tous les protocoles supportés par
+<span class="application">MPlayer</span>, comme MMS, RSTP, et bien d'autre encore.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="control.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="mpst.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">3.3. Contrôles </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 3.5. Flux distants</td></tr></table></div></body></html>

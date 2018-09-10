@@ -1,0 +1,21 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.4. SDL</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="dga.html" title="4.3. DGA"><link rel="next" href="svgalib.html" title="4.5. SVGAlib"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.4. SDL</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dga.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="svgalib.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sdl"></a>4.4. SDL</h2></div></div></div><p>
+<acronym class="acronym">SDL</acronym> (Simple Directmedia Layer) - это, в основном, унифицированный
+видео/аудио интерфейс. Программы, его использующие, знают только про SDL, а не про
+то, какой видео или аудио драйвер реально используется. Например, порт игры Doom,
+используя SDL, может запуститься на svgalib, aalib, X, fbdev и других, вам
+придется только указать (для примера) используемый видеодрайвер при помощи
+переменной окружения <code class="envar">SDL_VIDEODRIVER</code>. Ну, в теории.
+</p><p>
+
+Для карт/драйверов, не поддерживающих XVideo, мы использовали в
+<span class="application">MPlayer</span> собственные возможности программного масштабирования
+SDL'вских X11 драйверов, пока не написали наш собственный (более быстрый и изящный)
+программный модуль масштабирования. Также мы использовали его aalib вывод, но
+теперь у нас есть свой, более удобный. До некоторых пор его DGA режим был
+лучше нашего. Хотите получить его прямо сейчас ? :)
+</p><p>
+Он также помогает с некоторыми сбоящими  драйверами/картами, если видео
+прерывается (если это не проблема недостаточного быстродействия), или заикается звук.
+</p><p>
+SDL видео вывод поддерживает отображения субтитров внизу, на черной полосе (если она есть).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dga.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="svgalib.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.3. DGA </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.5. SVGAlib</td></tr></table></div></body></html>

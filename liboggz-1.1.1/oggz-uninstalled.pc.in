@@ -1,0 +1,11 @@
+prefix=
+exec_prefix=
+libdir=${pcfiledir}/src
+includedir=${pcfiledir}/include
+
+Name: oggz uninstalled
+Description: A library for reading and writing Ogg encapsulated data.
+Requires:
+Version: @VERSION@
+Libs: -L${libdir} -loggz -logg
+Cflags: -I${includedir}

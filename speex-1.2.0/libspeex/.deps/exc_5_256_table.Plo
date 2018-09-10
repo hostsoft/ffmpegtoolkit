@@ -1,0 +1,3 @@
+exc_5_256_table.lo: exc_5_256_table.c /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:

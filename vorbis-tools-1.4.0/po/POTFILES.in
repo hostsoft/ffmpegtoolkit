@@ -1,0 +1,60 @@
+# files to translate
+
+
+# ogg123
+
+ogg123/audio.c
+ogg123/buffer.c
+ogg123/callbacks.c
+ogg123/cfgfile_options.c
+ogg123/cmdline_options.c
+ogg123/file_transport.c
+ogg123/format.c
+ogg123/http_transport.c
+ogg123/ogg123.c
+ogg123/oggvorbis_format.c
+ogg123/playlist.c
+ogg123/speex_format.c
+ogg123/status.c
+ogg123/transport.c
+ogg123/vorbis_comments.c
+
+# oggdec
+
+oggdec/oggdec.c
+
+
+# oggenc
+
+oggenc/audio.c
+oggenc/encode.c
+oggenc/lyrics.c
+oggenc/oggenc.c
+oggenc/platform.c
+oggenc/resample.c
+
+# ogginfo
+
+ogginfo/ogginfo2.c
+
+
+# shared
+
+share/charset.c
+share/charset_test.c
+share/getopt.c
+share/getopt1.c
+share/iconvert.c
+share/makemap.c
+share/utf8.c
+
+
+#vcut
+
+vcut/vcut.c
+
+
+# vorbiscomment
+
+vorbiscomment/vcedit.c
+vorbiscomment/vcomment.c

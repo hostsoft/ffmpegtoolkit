@@ -1,0 +1,20 @@
+\section{About}
+\label{group__about}\index{About@{About}}
+\subsection{Design}\label{group__about_design}
+libfishsound provides a simple programming interface for decoding and encoding audio data using codecs from {\tt Xiph.\-Org}.
+
+libfishsound by itself is designed to handle raw codec streams from a lower level layer such as U\-D\-P datagrams. When these codecs are used in files, they are commonly encapsulated in {\tt Ogg} to produce {\itshape Ogg F\-L\-A\-C}, {\itshape Speex} and {\itshape Ogg Vorbis} files. Example C programs using {\tt liboggz} to read and write these files are provided in the libfishsound sources.
+
+libfishsound is implemented as a wrapper around the existing codec libraries and provides a consistent, higher-\/level programming interface. The motivation for this is twofold\-: to simplify the task of developing application software that supports these codecs, and to ensure that valid codec streams are generated.\subsection{History}\label{group__about_history}
+libfishsound was designed and developed by Conrad Parker on the weekend of October 18-\/19 2003. Previously the author had implemented Vorbis and Speex support in the following software\-:
+\begin{DoxyItemize}
+\item {\tt Sweep}, a digital audio editor with decoding and G\-U\-I control of all encoding options of Vorbis and Speex
+\item Speex support in the {\tt xine} multimedia player
+\item Vorbis and Speex importers for {\tt libannodex}, the basic library for reading and writing {\tt Annodex.\-net} media files.
+\end{DoxyItemize}
+
+The implementation of libfishsound draws heavily on these sources, and in turn the original example sources of libvorbis and libvorbisenc by Monty, and libspeex by Jean-\/\-Marc Valin.
+
+The naming of libfishsound reflects both the Xiph.\-Org logo and the author's reputation as a dirty, smelly old fish.\subsection{Limitations}\label{group__about_limitations}
+libfishsound has been designed to accomodate the various decoding and encoding styles required by a wide variety of software. However, as it is an abstraction of the underlying libvorbis, libvorbisenc and libspeex libraries, it may not be possible to implement some low-\/level techniques that these libraries enable, such as parallelization of Vorbis sub-\/block decoding. Nevertheless it is expected that libfishsound is a useful A\-P\-I for most software requiring Vorbis or Speex support, including most applications the author has encountered.\subsection{Acknowledgements}\label{group__about_acknowledgements}
+Much of the A\-P\-I design follows the style of {\tt libsndfile}. The author would like to thank Erik de Castro Lopo for feedback on the design of libfishsound. 

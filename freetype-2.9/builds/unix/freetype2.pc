@@ -1,0 +1,14 @@
+prefix=/usr/local/ffmpegtoolkit
+exec_prefix=/usr/local/ffmpegtoolkit
+libdir=/usr/local/ffmpegtoolkit/lib
+includedir=/usr/local/ffmpegtoolkit/include
+
+Name: FreeType 2
+URL: https://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 22.0.16
+Requires:
+Requires.private: zlib, libpng
+Libs: -L${libdir} -lfreetype
+Libs.private: -lbz2
+Cflags: -I${includedir}/freetype2

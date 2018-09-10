@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.2. Výběr vstupního souboru nebo zařízení</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="prev" href="menc-feat-selecting-codec.html" title="6.1. Výběr kodeků a nosných formátů"><link rel="next" href="menc-feat-mpeg4.html" title='6.3. Dvouprůchodové enkódování MPEG-4 ("DivX")'><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. Výběr vstupního souboru nebo zařízení</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 6. Základní použití <span class="application">MEncoder</span>u</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-input"></a>6.2. Výběr vstupního souboru nebo zařízení</h2></div></div></div><p>
+<span class="application">MEncoder</span> umí enkódovat ze souborů nebo přímo z
+DVD či VCD disku.
+Vložte na příkazovém řádku jméno souboru pro enkódování souboru,
+nebo <tt class="option">dvd://</tt><em class="replaceable"><code>číslo_titulu</code></em> nebo
+<tt class="option">vcd://</tt><em class="replaceable"><code>číslo_stopy</code></em> pro enkódování
+DVD titulu či VCD stopy.
+Máte-li již zkopírováno DVD na hard disk (k tomu můžete použít nástroj jako
+<span class="application">dvdbackup</span>, dostupný na mnoha systémech),
+a chcete enkódovat z kopie, měli byste i zde použít syntaxi
+<tt class="option">dvd://</tt> ve spojení s volbou <tt class="option">-dvd-device</tt>
+následovanou cestou do kořenového adresáře skopírovaného DVD.
+
+Volby <tt class="option">-dvd-device</tt> a <tt class="option">-cdrom-device</tt>
+lze rovněž použít k přenastavení cest k souborům zařízení pro přímé
+čtení disků, pokud výchozí
+<tt class="filename">/dev/dvd</tt> a <tt class="filename">/dev/cdrom</tt> na vašem
+systému nepracují.
+</p><p>
+Enkódujete-li z DVD, je často vhodné vybrat kapitolu nebo rozsah
+kapitol k enkódování.
+Pro tento účel můžete použít volbu <tt class="option">-chapter</tt>.
+Například s volbou <tt class="option">-chapter</tt> <em class="replaceable"><code>1-4</code></em>
+se budou z DVD enkódovat pouze kapitoly 1 až 4.
+To se zvlášť hodí, pokud budete enkódovat film na velikost 1400 MB
+určený pro dvě CD, jelikož budete mít jistotu, že zlom nastane přesně
+na hranici kapitol místo uprostřed scény.
+</p><p>
+Pokud máte podporovanou TV zachytávací kartu, můžete rovněž enkódovat ze
+zařízení TV vstupu.
+Použijte <tt class="option">tv://</tt><em class="replaceable"><code>číslo_kanálu</code></em> jako
+jméno souboru a volbu <tt class="option">-tv</tt> pro konfiguraci různých nastavení
+zachytávání.
+Vstup z DVB pracuje obdobně.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. Výběr kodeků a nosných formátů </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 6.3. Dvouprůchodové enkódování MPEG-4 ("DivX")</td></tr></table></div></body></html>

@@ -1,0 +1,378 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.2. Jak naložit s telecine a prokladem v NTSC DVD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="prev" href="menc-feat-dvd-mpeg4.html" title='7.1. Vytvoření MPEG-4 ("DivX") ripu DVD filmu ve vysoké kvalitě'><link rel="next" href="menc-feat-enc-libavcodec.html" title="7.3. Enkódování s rodinou kodeků libavcodec"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-intro" title="7.2.1. Představení"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-ident" title="7.2.2. Jak zjistit o jaký typ videa se jedná"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-encode" title="7.2.3. Jak enkódovat jednotlivé kategorie"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Poznámky pod čarou"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.2. Jak naložit s telecine a prokladem v NTSC DVD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-dvd-mpeg4.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 7. Enkódování s <span class="application">MEncoder</span>em</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-enc-libavcodec.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-telecine"></a>7.2. Jak naložit s telecine a prokladem v NTSC DVD</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-intro"></a>7.2.1. Představení</h3></div></div></div><p><b>Co je to telecine? </b>
+Pokud moc nerozumíte tomu, co je napsáno v tomto dokumentu,
+přečtěte si
+<a class="ulink" href="http://en.wikipedia.org/wiki/Telecine" target="_top">článek na Wikipedii</a>.
+Je to srozumitelný a rozumně vyčerpávající popis co je to
+telecine.
+</p><p><b>Poznámka k číslům. </b>
+Mnoho dokumentů, včetně výše odkazované příručky, udává hodnotu půlsnímků za
+sekundu NTSC videa jako 59.94 a odpovídající snímky za sekundu jako 29.97
+(pro telecinované a prokládané video) a 23.976 (pro neprokládané).
+Pro jednoduchost některé dokumenty zaokrouhlují tyto hodnoty na 60, 30 a 24.
+</p><p>
+Přesně řečeno jsou všechna tato čísla přibližná. Černobílé NTSC video mělo
+přesně 60 půlsnímků za sekundu, ale později byla zvolena hodnota 60000/1001,
+aby bylo možné přidat barevná data a zůstat kompatibilní se starými
+černobílými televizemi. Digitální NTSC (např. na DVD) má rovněž rychlost
+60000/1001 půlsnímků za sekundu. Z toho vyplývá, že prokládané a telecinované
+video má 30000/1001 snímků za sekundu; neprokládané video má 24000/1001 snímků
+za sekundu.
+</p><p>
+Starší verze dokumentace <span class="application">MEncoder</span>u a mnoho zpráv
+v archivu konference hovoří o 59.94, 29.97 a 23.976.
+Všechna dokumentace <span class="application">MEncoder</span>u byla aktualizována
+a používá zlomkových hodnot. Vy byste je měli používat také.
+</p><p>
+<tt class="option">-ofps 23.976</tt> je nesprávně.
+Místo toho byste měli použít <tt class="option">-ofps 24000/1001</tt>.
+</p><p><b>Jak je používáno telecine. </b>
+Veškeré video určené k zobrazení na NTSC televizi musí mít 60000/1001
+půlsnímků za sekundu. Filmy vyráběné pro televizi jsou často natáčeny přímo
+ve 60000/1001 půlsnímcích za sekundu, ale většina filmů do kin je natáčena při
+24 nebo 24000/1001 snímcích za sekundu. Když je film přepisován na DVD, je
+video upraveno pro televizi v procesu zvaném telecine.
+</p><p>
+Na DVD není video ve skutečnosti nikdy uloženo v 60000/1001 půlsnímcích za
+sekundu. Video jež bylo původně 60000/1001, bude mít každý pár půlsnímků
+zkombinován do podoby snímku s rychlostí 30000/1001 snímků za sekundu.
+Hardwarové DVD přehrávače pak čtou příznak, zabudovaný ve video proudu, který
+udává jestli první půlsnímek tvoří liché nebo sudé řádky.
+</p><p>
+Obsah ve 24000/1001 snímcích za sekundu obvykle zůstává tak jak byl v době
+přepisu na DVD a DVD přehrávač musí provést telecine za letu. Někdy je však
+video telecinováno <span class="emphasis"><em>před</em></span> uložením na DVD; dokonce i když
+mělo původně 24000/1001 snímků za sekundu, bude mít 60000/1001 půlsnímků za
+sekundu. Pokud je uložen na DVD, páry půlsnímků jsou zkombinovány do formy
+30000/1001 snímků za sekundu.
+</p><p>
+Když se podíváme na jednotlivé snímky vzniklé z videa o 60000/1001 půlsnímcích
+za sekundu, telecinovaného nebo ne, je zřetelně vidět toto prokládání jakmile
+je zde nějaký pohyb, jelikož jeden půlsnímek (řekněme liché řádky)
+reprezentuje časový okamžik o 1/(60000/1001) sekundy pozdější než ten druhý.
+Přehrávání prokládaného videa na počítači vypadá škaredě jak proto, že monitor
+má vyšší rozlišení, ale i proto, že video je zobrazováno snímek po snímku místo
+půlsnímek po půlsnímku.
+</p><div class="itemizedlist"><p class="title"><b>Poznámky:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Tento odstavec platí pouze pro NTSC DVD, nikoli PAL.
+</p></li><li class="listitem"><p>
+  Řádky s příklady spuštění <span class="application">MEncoder</span>u v dokumentu
+  <span class="bold"><strong>nejsou</strong></span> určeny pro opravdové použití.
+  Obsahují pouze nutné minimum vyžadované pro enkódování příslušné ke kategorii
+  videa. Jak dělat dobré DVD ripy nebo doladit
+  <code class="systemitem">libavcodec</code> pro maximální kvalitu
+  není v záběru tohoto dokumentu.
+</p></li><li class="listitem"><p>
+  Poznámky pod čarou příslušné pro tuto příručku jsou linkovány takto:
+  <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Poznámky pod čarou">[1]</a>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-ident"></a>7.2.2. Jak zjistit o jaký typ videa se jedná</h3></div></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-progressive"></a>7.2.2.1. Progresivní (neprokládané)</h4></div></div></div><p>
+Progresivní video je původně natočeno při 24000/1001 snímcích za sekundu a
+uloženo na DVD beze změn.
+</p><p>
+Když přehrajete progresivní DVD v <span class="application">MPlayer</span>u,
+<span class="application">MPlayer</span> vypíše následující řádek jakmile začne
+přehrávat:
+</p><pre class="screen">
+demux_mpg: 24000/1001 fps progressive NTSC content detected, switching framerate.
+</pre><p>
+Od tohoto okamžiku by demux_mpg neměl nikdy říct že našel
+"30000/1001 fps NTSC obsah"
+</p><p>
+Když sledujete progresivní video, neměli byste nikdy vidět žádný proklad.
+Dejte si ale pozor, jelikož je občas trošku telecine namixováno tam, kde byste
+to vůbec nečekali. Setkal jsem se s TV show na DVD, které měly sekundu
+telecine při každé změně scény nebo na zcela náhodných místech. Jednou jsem se
+díval na DVD, které bylo do půlky progresivní a od půlky telecinováno. Pokud
+chcete být <span class="emphasis"><em>opravdu</em></span> důkladní, můžete oskenovat celý film:
+</p><pre class="screen">mplayer dvd://1 -nosound -vo null -benchmark</pre><p>
+Použití volby <tt class="option">-benchmark</tt> nechá
+<span class="application">MPlayer</span> přehrát film tak rychle, jak je to jen
+možné; stejně to ale, podle výkonu hardware, chvíli potrvá.
+Vždy, když demux_mpg ohlásí změnu snímkové rychlosti, řádek těsně nad hlášením
+ukáže čas ve kterém ke změně došlo.
+</p><p>
+Občas je progresivní video na DVD označeno jako
+"soft-telecine" protože je zamýšleno, aby telecine provedl DVD
+přehrávač.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-telecined"></a>7.2.2.2. Telecinováno (přepsáno pro NTSC televizi)</h4></div></div></div><p>
+Telecinované video bylo původně natočeno při 24000/1001, ale bylo telecinováno
+<span class="emphasis"><em>před</em></span> zápisem na DVD.
+</p><p>
+<span class="application">MPlayer</span> (nikdy) nehlásí žádnou změnu snímkové
+rychlosti, když přehrává telecinované video.
+</p><p>
+Při sledování telecinovaného videa uvidíte prokladové artefakty, které jako by
+"blikaly": opakovaně mizí a objevují se.
+Blíže se na to můžete podívat:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="screen">mplayer dvd://1</pre></li><li class="listitem"><p>
+  Převiňte na část s pohybem.
+</p></li><li class="listitem"><p>
+  Použijte klávesu <span class="keycap"><b>.</b></span> pro krokování po jednom snímku.
+</p></li><li class="listitem"><p>
+  Sledujte vzor prokládaně vypadajících a progresivně vypadajících snímků.
+  Pokud je vzor, který sledujete PPPII,PPPII,PPPII,..., pak je video
+  telecinováno. Pokud vidíte jiný vzor, pak mohlo být video telecinováno
+  použitím nějaké nestandardní metody; <span class="application">MEncoder</span>
+  neumí bezztrátově převést nestandardní telecine do progresivního. Pokud
+  nevidíte žádný vzor, pak je video nejspíš prokládané.
+</p></li></ol></div><p>
+</p><p>
+Někdy je telecinované video na DVD označeno jako "hard-telecine".
+Jelikož hard-telecine již je ve 60000/1001 půlsnímcích za sekundu, DVD
+přehrávač přehraje video bez jakýchkoli manipulací.
+</p><p>
+Dalším způsobem jak zjistíte, že je váš zdroj telecinován, je přehrát
+jej s volbami <tt class="option">-vf pullup</tt> a <tt class="option">-v</tt> a
+uvidíte, jak <tt class="option">pullup</tt> nachází vzor.
+Pokud je zdroj telecinován, mělibyste vidět na konzoli vzor 3:2 s opakujícím
+se <code class="systemitem">0+.1.+2</code> a <code class="systemitem">0++1</code>.
+Tato technika má tu výhodu, že nemusíte sledovat zdroj, abyste jej
+identifikovali, což se může hodit, pokud chcete automatizovat enkódovací
+proceduru, nebo ji provést vzdáleně přes pomalou linku.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-interlaced"></a>7.2.2.3. Prokládané</h4></div></div></div><p>
+Prokládané video bylo od samého začátku filmováno při 60000/1001 půlsnímcích
+za sekundu a uloženo na DVD ve 30000/1001 snímcích za sekundu. Efekt
+prokládání (často označovaný jako "roztřepení") je výsledkem
+skládání půlsnímků do snímků. Vzdálenost mezi půlsnímky má být 1/(60000/1001)
+sekundy a proto když jsou zobrazeny současně, je rozdíl jasně patrný.
+</p><p>
+Stejně jako u telecinovaného videa by <span class="application">MPlayer</span> neměl
+hlásit jakékoli změny snímkové rychlosti při přehrávání prokládaného obsahu.
+</p><p>
+Když si prohlédnete video blíže pomocí krokování snímků pomocí klávesy
+<span class="keycap"><b>.</b></span>, uvidíte, že každý jednotlivý snímek je prokládaný.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-mixedpt"></a>7.2.2.4. Smíšené progresivní a telecinované</h4></div></div></div><p>
+Veškerý obsah "smíšeného progresivního a telecinovaného" videa měl
+původně 24000/1001 snímků za sekundu, ale některé části prošly telecine.
+</p><p>
+Když <span class="application">MPlayer</span> přehrává tuto kategorii, bude
+(častoi opakovaně) přepínat mezi "30000/1001 snímky/s NTSC"
+a "24000/1001 snímky/s progresivním NTSC". Sledujte spodek
+<span class="application">MPlayer</span>ova výstupu, abyste zachytili tyto zprávy.
+</p><p>
+Měli byste prověřit části se "30000/1001 snímky/s NTSC", abyste měli
+jistotu, že jsou skutečně telecinovány a ne jen prokládané.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-mixedpi"></a>7.2.2.5. Smíšené progresivní a prokládané</h4></div></div></div><p>
+Ve "smíšeném progresivním a prokládaném" obsahu bylo progresivní a
+prokládané video splácáno dohromady.
+</p><p>
+Tato kategorie vypadá jako "smíšené progresivní a telecine",
+dokud si neprohlédnete části se 30000/1001 snímky/s a neuvidíte, že nemají
+telecine vzor.
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-encode"></a>7.2.3. Jak enkódovat jednotlivé kategorie</h3></div></div></div><p>
+Jak jsem se zmínil na začátku, příklady příkazových řádků
+<span class="application">MEncoder</span>u níže <span class="bold"><strong>nejsou</strong></span>
+určeny pro praktické použití; pouze demonstrují, minimum voleb nutných k tomu,
+abyste správně enkódovali každou kategorii.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-progressive"></a>7.2.3.1. Progresivní</h4></div></div></div><p>
+Progresivní video nevyžaduje žádné speciální filtrování pro enkódování.
+Jediná volba, která by určitě neměla chybět je
+<tt class="option">-ofps 24000/1001</tt>. Jinak se <span class="application">MEncoder</span>
+pokusí enkódovat při 30000/1001 snímcích/s a bude opakovat snímky.
+</p><p>
+</p><pre class="screen">mencoder dvd://1 -oac copy -ovc lavc -ofps 24000/1001</pre><p>
+</p><p>
+Často se stává, že video, které vypadá progresivně, má v sobě zamíchány
+kratičké telecinované části. Pokud si nejste jisti, je nejbezpečnější
+považovat video za
+<a class="link" href="menc-feat-telecine.html#menc-feat-telecine-encode-mixedpt" title="7.2.3.4. Smíšené progresivní a telecinované">smíšené progresivní a
+telecinované</a>. Ztráta výkonu je jen malá
+<a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Poznámky pod čarou">[3]</a>.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-telecined"></a>7.2.3.2. Telecinované</h4></div></div></div><p>
+Telecine lze obrátit a dostat tak původní 24000/1001 obsah, za použití metody
+zvané inverzní telecine.
+<span class="application">MPlayer</span> má několik filtrů právě pro tuto činnost;
+nejlepší z těchto filtrů, <tt class="option">pullup</tt>, je popsán v části
+<a class="link" href="menc-feat-telecine.html#menc-feat-telecine-encode-mixedpt" title="7.2.3.4. Smíšené progresivní a telecinované">smíšené progresivní a
+telecinované</a>.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-interlaced"></a>7.2.3.3. Prokládané</h4></div></div></div><p>
+V praxi není většinou možné dostat kompletní progresivní video z prokládaného
+obsahu. Jediný způsob jak to udělat bez ztráty poloviny svislého rozlišení je
+zdvojením snímkové rychlosti a zkusit "odhadnout" co mám provést
+s odpovídajícími linkami každého z půlsnímků (má to ovšem i nevýhody –
+viz metoda 3).
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  Enkódujte video v prokládané formě. Obvykle prokládání způsobí těžkou újmu
+  schopnosti enkodéru dobře komprimovat, ale
+  <code class="systemitem">libavcodec</code> má dvě volby určené právě
+  pro lepší ukládání prokládaného videa: <tt class="option"> ildct</tt> a
+  <tt class="option">ilme</tt>. Rovněž velmi doporučujeme použití volby
+  <tt class="option">mbd=2</tt> <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Poznámky pod čarou">[2] </a>
+  protože bude enkódovat makrobloky jako neprokládané tam, kde není žádný pohyb.
+  Volba <tt class="option">-ofps</tt> zde <span class="bold"><strong>není</strong></span> nutná.
+  </p><pre class="screen">mencoder dvd://1 -oac copy -ovc lavc -lavcopts ildct:ilme:mbd=2</pre><p>
+</p></li><li class="listitem"><p>
+  Použijte filtr odstraňující proklad před enkódováním. Je jich zde několik,
+  můžete si vybrat. Každý z nich má svá pro i proti. Prohlédněte si výstup
+  <tt class="option">mplayer -pphelp</tt> a <tt class="option">mplayer -vf help</tt>
+  abyste zjistili, které jsou k dispozici
+  (grep pro "deint"), přečtěte si
+  <a class="ulink" href="http://guru.multimedia.cx/deinterlacing-filters/" target="_top">Deinterlacing filters comparison</a> od Michaela Niedermayera
+  a vyhledejte
+  <a class="ulink" href="http://www.mplayerhq.hu/design7/mailing_lists.html" target="_top">
+  e-mailové konference MPlayeru</a>, kde naleznete mnoho diskusí o různých
+  filtrech.
+  Snímková rychlost se ani zde nemění, takže žádné
+  <tt class="option">-ofps</tt>. Odstranění proklady by rovněž mělo být provedeno po
+  ořezání <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Poznámky pod čarou">[1]</a>, ale před
+  škálováním.
+  </p><pre class="screen">mencoder dvd://1 -oac copy -vf yadif -ovc lavc</pre><p>
+  </p></li><li class="listitem"><p>
+  Naneštěstí je tato volba vadná v <span class="application">MEncoder</span>u;
+  měla by dobře pracovat v <span class="application">MEncoder G2</span>, ale ten tu
+  zatím není. Stejně je určením <tt class="option"> -vf tfields</tt> vytvoření
+  kompletního snímku z každého půlsnímku, což zvýší snímkovou rychlost na
+  60000/1001. Výhoda tohoto přístupu je v tom, že nepřijdete o žádná data;
+  Protože však každý snímek pochází jen z jediného půlsnímku, musí být chybějící
+  linky nějak dopočítány. Neexistuje mnoho dobrých metod, generujících chybějící
+  data, takže výsledek bude trochu podobný tomu, když se použije některý filtr
+  odstraňující proklad.
+  Generováním chybějících linek vznikají další problémy tím, že se zdvojnásobí
+  množství dat. Takže jsou potřeba vyšší datové toky pro enkódování, aby byla
+  zachována kvalita a spotřebuje se více výkonu CPU jak pro enkódování, tak pro
+  dekódování. tfields má několik různých voleb pro volbu způsobu generování
+  chybějících linek. Pokud použijete tuto možnost, prostudujte si manuál a
+  zvolte si volbu, která s vaším materiálem vypadá nejlépe.
+  Poznamenejme, že při použití <tt class="option">tfields</tt>
+  <span class="bold"><strong>musíte</strong></span> nastavit <tt class="option">-fps</tt> a
+  <tt class="option">-ofps</tt> na dvojnásobek snímkové rychlosti originálu.
+  </p><pre class="screen">
+mencoder dvd://1 -oac copy -vf tfields=2 -ovc lavc \
+    -fps 60000/1001 -ofps 60000/1001</pre><p>
+</p></li><li class="listitem"><p>
+  Pokud plánujete výrazné zmenšování, můžete extrahovat a enkódovat jen jeden
+  z půlsnímků. Samozřejmě přijdete o polovinu svislého rozlišení, ale pokud
+  plánujete zmenšení ideálně na 1/2 originální velikosti, nebude na této ztrátě
+  vůbec záležet. Výsledek bude progresivní soubor s 30000/1001 snímky za sekundu.
+  Celý postup spočívá v použití <tt class="option">-vf field</tt> a následném ořezu
+  <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Poznámky pod čarou">[1]</a> a příslušném
+  škálování. Pamatujte, že musíte nastavit scale tak, aby kompenzoval
+  zmenšení svislého rozměru na polovinu.
+  </p><pre class="screen">mencoder dvd://1 -oac copy -vf field=0 -ovc lavc</pre><p>
+</p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-mixedpt"></a>7.2.3.4. Smíšené progresivní a telecinované</h4></div></div></div><p>
+Abychom převedli smíšené progresivní a telecinované video zcela na progresivní
+video, musí být telecinované části inverzně telecinovány. K tomu lze dospět
+třemi postupy popsanými níže. Poznamenejme, že byste měli
+<span class="bold"><strong>vždy</strong></span> provést inverzní telecine před
+jakýmkoliv škálováním; a v případě, že přesně nevíte co děláte, také před
+ořezáním <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Poznámky pod čarou">[1]</a>.
+Volba <tt class="option">-ofps 24000/1001</tt> je vyžadována, protože výstupní video
+bude mít 24000/1001 snímků za sekundu.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <tt class="option">-vf pullup</tt> je navržen tak, aby inverzně telecinoval, ale
+  progresivní data nechával jak jsou. Pro správnou funkci
+  <span class="bold"><strong>musí</strong></span> být <tt class="option">pullup</tt> následován
+  filtrem <tt class="option">softskip</tt>, jinak <span class="application">MEncoder</span>
+  zhavaruje. <tt class="option">pullup</tt> je však nejčistší a nejpřesnější dostupnou
+  metodou pro enkódování jak telecinovaného, tak "smíšeného progresivního a
+  telecinovaného".
+  </p><pre class="screen">
+mencoder dvd://1 -oac copy -vf pullup,softskip
+    -ovc lavc -ofps 24000/1001</pre><p>
+</p></li><li class="listitem"><p>
+  Starší metodou je, spíše než inverzně telecinovat telecinované části,
+  telecinovat progresivní části a poté inverzně telecinovat celé video.
+  Zní to zmateně? softpulldown je filtr, který projde celé video a převede celý
+  soubor na telecinovaný. Pokud budeme následovat softpulldown buď
+  <tt class="option">detc</tt> nebo <tt class="option">ivtc</tt>, bude konečný výsledek zcela
+  progresivní. Nutná je volba <tt class="option">-ofps 24000/1001</tt>.
+  </p><pre class="screen">
+mencoder dvd://1 -oac copy -vf softpulldown,ivtc=1 -ovc lavc -ofps 24000/1001
+  </pre><p>
+</p></li><li class="listitem"><p>
+  Osobně jsem nepoužil <tt class="option">-vf filmdint</tt>, ale toto o něm (přibližně)
+  řekl D Richard Felker III:
+
+  </p><div class="blockquote"><blockquote class="blockquote"><p>Je to OK, ale IMO to zkouší až příliš často odstraňovat
+      proklad místo provádění inverzního telecine (stejně jako settop DVD
+      přehrávače &amp; progresivní televize) což vede ke škaredému třepotání a
+      dalším artefaktům. Pokud jej chcete používat, měli byste předtím alespoň
+      trochu času věnovat ladění voleb a sledováním výstupu, abyste měli jistotu,
+      že vám to něco nekazí.
+    </p></blockquote></div><p>
+  </p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-mixedpi"></a>7.2.3.5. Smíšené progresivní a prokládané</h4></div></div></div><p>
+Máme dvě volby pro práci s touto kategorií, obě jsou však
+kompromisem. Měli byste se rozhodnout podle
+trvání/umístění každého typu.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Považujte to za progresivní. Prokládané části budou vypadat prokládaně a
+  některé z prokládaných políček bude muset být zahozeno, což povede
+  k nestejnoměrnému poskakování. Můžete proti tomu nasadit postprocesní filtr,
+  pokud chcete, ale tím mírně degradujete progresivní části.
+  </p><p>
+  Této volbě byste se měli rozhodně vyhnout, pokud chcete nakonec zobrazovat
+  video na zobrazovači s prokládaným obrazem (přes TV kartu například).
+  Pokud máte prokládané snímky ve videu s rychlostí 24000/1001 snímků za
+  sekundu, budou telecinovány spolu s progresivními snímky. Polovina
+  prokládaných "snímků" bude zobrazena po dobu trvání třech snímků
+  (3/(60000/1001) sekund), což povede k poskakování. Efekt
+  "cukání zpět" vypadá skutečně zle. Pokud se o to přece pokusíte,
+  <span class="bold"><strong>musíte</strong></span> použít filtr odstraňující proklad,
+  jako je <tt class="option">lb</tt> nebo <tt class="option">l5</tt>.
+  </p><p>
+  Špatnou volbou je to i pro progresivní zobrazovač. Ten zahodí páry po sobě
+  jdoucích snímků, což povede k přerušování, které může být více viditelné, než
+  při druhé metodě, která zobrazuje některé progresivní snímky dvakrát.
+  Prokládané video se 30000/1001 snímky za sekundu je totiž poněkud trhané,
+  protože by ve skutečnosti mělo být promítáno při 60000/1001 půlsnímcích za
+  sekundu, takže zdvojení některých snímků není tak moc vidět.
+  </p><p>
+  V každém případě je nejlepší posoudit obsah a způsob, jakým bude zobrazován.
+  Pokud je vaše video z 90% progresivní a nikdy jej nebudete pouštět na
+  televizi, měli byste volit progresivní přístup.
+  Pokud je progresívní jen z poloviny, pravděpodobně jej bude lepší enkódovat
+  jako by bylo celé prokládané.
+  </p></li><li class="listitem"><p>
+  Pokládat jej za prokládané. Některé snímky v progresivních částech budou muset
+  být duplikovány, což povede k nepravidelnému poskakování. Opět platí, že
+  filtry pro odstranění prokladu mohou poněkud degradovat progresivní části.
+</p></li></ul></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-footnotes"></a>7.2.4. Poznámky pod čarou</h3></div></div></div><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p><b>K ořezu: </b>
+  Video data na DVD jsou ukládána ve formátu zvaném YUV 4:2:0. V YUV videu jsou,
+  jasová ("černobílá"; angl. luma) a barvonosná (angl. chroma) složka
+  ukládány odděleně. Protože je lidské oko méně citlivé na změnu barvy, než na
+  jas, připadá v YUV 4:2:0 obrázku pouze jeden barvonosný pixel na každé čtyři
+  jasové pixely. V progresivním obrázku má každý čtverec 2x2 jasových pixelů
+  právě jeden barvonosný pixel. Proto musíte ořezávat progresivní YUV 4:2:0
+  na sudé rozměry a používat sudé odsazení (offsety). Například
+  <tt class="option">crop=716:380:2:26</tt> je OK, ale
+  <tt class="option">crop=716:380:3:26 </tt> není.
+  </p><p>
+  Když máte co do činění s prokládaným YUV 4:2:0, je situace mnohem
+  komplikovanější. Místo každých čtyřech pixelů ve <span class="emphasis"><em>snímku</em></span>
+  sdílejících barvonosný pixel, každé čtyři jasové pixely v každém
+  <span class="emphasis"><em>půlsnímku</em></span> sdílejí barvonosný pixel. Když jsou půlsnímky
+  proloženy do snímku, každá linka má výšku jeden pixel. A nyní místo aby dané
+  čtyři pixely tvořily čtverec, jsou první dva vedle sebe a druhé dva jsou vedle
+  sebe o dvě linky níž. Dva pixely těsně pod nimi patří do jiného půlsnímku a
+  proto sdílí jiný barvonosný pixel se dvěma jasovými pixely o dva řádky níž.
+  Všechno tohle nás nutí mít svislé rozměry ořezání a odsazení bezezbytku
+  dělitelné čtyřmi. Vodorovné stačí když budou sudé.
+  </p><p>
+  Pro telecinované video doporučuji, abyste ořezání prováděli až po inverzi
+  telecine. Jakmile je video progresivní, stačí řezat jen na sudé rozměry.
+  Pokud si však přece jen chcete dopřát mírné zrychlení, které může poskytnout
+  časný ořez, musíte svisle dodržet násobky čtyřech, jinak nebude mít filtr
+  pro inverzi telecine správná data.
+  </p><p>
+  Prokládané (nikoli telecinované) video musíte vždy ořezávat svisle násobky
+  čtyř, pokud před ořezáním nepoužijete <tt class="option">-vf field</tt>.
+  </p></li><li class="listitem"><p><b>K volbám pro enkódování a kvalitě: </b>
+  Jen proto, že doporučuji <tt class="option">mbd=2</tt> zde neznamená, že by tato
+  volba nemohla být použita jinde. V kombinaci s <tt class="option">trell</tt>, je
+  <tt class="option">mbd=2</tt> jednou ze dvou voleb
+  <code class="systemitem">libavcodec</code>u, které nejvíce zvyšují
+  kvalitu a vy byste měli vždy použít alespoň tyto dvě, pokud není na škodu
+  zpomalení rychlosti enkódování (např. při enkódování v reálném čase).
+  Mnoho dalších voleb <code class="systemitem">libavcodec</code>u
+  zvyšuje kvalitu enkódování (a snižuje jeho rychlost), ale to je mimo zaměření
+  tohoto textu.
+  </p></li><li class="listitem"><p><b>K výkonu filtru pullup: </b>
+  Použití <tt class="option">pullup</tt> je bezpečné (spolu se <tt class="option">softskip
+  </tt>) na progresivní video a je to obvykle dobrá volba, pokud nebyl zdroj
+  prověřen, že je celý progresivní. Ve většině případů je ztráta výkonu malá.
+  V ojedinělých případech enkódování způsobí <tt class="option">pullup</tt>, že je
+  <span class="application">MEncoder</span> o 50% pomalejší. Přidání zpracování zvuku
+  a pokročilých <tt class="option">lavcopts</tt> zastíní tento rozdíl tak, že rozdíl
+  v rychlosti působený použitím <tt class="option">pullup</tt> se sníží na 2%.
+  </p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-dvd-mpeg4.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-enc-libavcodec.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">7.1. Vytvoření MPEG-4 ("DivX")
+ripu DVD filmu ve vysoké kvalitě </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 7.3. Enkódování s rodinou kodeků <code class="systemitem">libavcodec</code>
+</td></tr></table></div></body></html>

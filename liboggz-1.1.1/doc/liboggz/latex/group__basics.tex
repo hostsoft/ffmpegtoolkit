@@ -1,0 +1,190 @@
+\section{Ogg basics}
+\label{group__basics}\index{Ogg basics@{Ogg basics}}
+\subsection{Scope}\label{group__basics_Scope}
+This section provides a minimal introduction to Ogg concepts, covering only that which is required to use liboggz.
+
+For more detailed information, see the {\tt Ogg} homepage or I\-E\-T\-F {\tt R\-F\-C 3533} {\itshape The Ogg File Format version 0}.\subsection{Terminology}\label{group__basics_Terminology}
+The monospace text below is quoted directly from R\-F\-C 3533. For each concept introduced, tips related to liboggz are provided in bullet points.\subsubsection{Physical and Logical Bitstreams}\label{group__basics_bitstreams}
+The raw data of an Ogg stream, as read directly from a file or network socket, is called a {\itshape physical bitstream}.
+
+
+\begin{DoxyPre}
+   The result of an Ogg encapsulation is called the "Physical (Ogg)
+   Bitstream".  It encapsulates one or several encoder-created
+   bitstreams, which are called "Logical Bitstreams".  A logical
+   bitstream, provided to the Ogg encapsulation process, has a
+   structure, i.e., it is split up into a sequence of so-called
+   "Packets".  The packets are created by the encoder of that logical
+   bitstream and represent meaningful entities for that encoder only
+   (e.g., an uncompressed stream may use video frames as packets).
+\end{DoxyPre}
+\subsubsection{Packets and Pages}\label{group__basics_pages}
+Within the Ogg format, packets are written into {\itshape pages}. You can think of pages like pages in a book, and packets as items of the actual text. Consider, for example, individual poems or short stories as the packets. Pages are of course all the same size, and a few very short packets could be written into a single page. On the other hand, a very long packet will use many pages.
+
+
+\begin{DoxyItemize}
+\item liboggz handles the details of writing packets into pages, and of reading packets from pages; your application deals only with {\ttfamily ogg\-\_\-packet} structures.
+\item Each {\ttfamily ogg\-\_\-packet} structure contains a block of data and its length in bytes, plus other information related to the stream structure as explained below.
+\end{DoxyItemize}\subsubsection{serialno}\label{group__basics_serialno}
+Each logical bitstream is uniquely identified by a serial number or {\itshape serialno}.
+
+
+\begin{DoxyItemize}
+\item Packets are always associated with a {\itshape serialno}. This is not actually part of the {\ttfamily ogg\-\_\-packet} structure, so wherever you see an {\ttfamily ogg\-\_\-packet} in the liboggz A\-P\-I, you will see an accompanying {\itshape serialno}.
+\end{DoxyItemize}
+
+
+\begin{DoxyPre}
+   This unique serial number is created randomly and does not have any
+   connection to the content or encoder of the logical bitstream it
+   represents.
+\end{DoxyPre}
+
+
+
+\begin{DoxyItemize}
+\item Use \doxyref{oggz\-\_\-serialno\-\_\-new()}{p.}{oggz_8h_aaf89877e3e89408387d422f487bcf094} to generate a new serial number for each logical bitstream you write.
+\item Use an \doxyref{Oggz\-Table }{p.}{oggz__table_8h}, keyed by {\itshape serialno}, to store and retrieve data related to each logical bitstream.
+\end{DoxyItemize}\subsubsection{b\-\_\-o\-\_\-s and e\-\_\-o\-\_\-s}\label{group__basics_boseos}
+
+\begin{DoxyPre}
+   bos page: The initial page (beginning of stream) of a logical
+      bitstream which contains information to identify the codec type
+      and other decoding-relevant information.\end{DoxyPre}
+
+
+
+\begin{DoxyPre}   eos page: The final page (end of stream) of a logical bitstream.
+\end{DoxyPre}
+
+
+
+\begin{DoxyItemize}
+\item Every {\ttfamily ogg\-\_\-packet} contains {\itshape b\-\_\-o\-\_\-s} and {\itshape e\-\_\-o\-\_\-s} flags. Of course each of these will be set only once per logical bitstream. See the Structuring section below for rules on setting {\itshape b\-\_\-o\-\_\-s} and {\itshape e\-\_\-o\-\_\-s} when interleaving logical bitstreams.
+\item This documentation will refer to {\itshape bos} and {\itshape eos} {\itshape packets} (not {\itshape pages}) as that is more closely represented by the A\-P\-I. The {\itshape bos} packet is the only packet on the {\itshape bos} page, and the {\itshape eos} packet is the last packet on the {\itshape eos} page.
+\end{DoxyItemize}\subsubsection{granulepos}\label{group__basics_granulepos}
+
+\begin{DoxyPre}
+   granule position: An increasing position number for a specific
+      logical bitstream stored in the page header.  Its meaning is
+      dependent on the codec for that logical bitstream
+\end{DoxyPre}
+
+
+
+\begin{DoxyItemize}
+\item Every {\ttfamily ogg\-\_\-packet} contains a {\itshape granulepos}. The {\itshape granulepos} of each packet is used mostly for \doxyref{seeking. }{p.}{group__seek__api}
+\end{DoxyItemize}\subsection{Structuring}\label{group__basics_Structuring}
+The general structure of an Ogg stream is governed by various rules.\subsubsection{Secondary header packets}\label{group__basics_secondaries}
+Some data sources require initial setup information such as comments and codebooks to be present near the beginning of the stream (directly following the b\-\_\-o\-\_\-s packets.
+
+
+\begin{DoxyPre}
+   Ogg also allows but does not require secondary header packets after
+   the bos page for logical bitstreams and these must also precede any
+   data packets in any logical bitstream.  These subsequent header
+   packets are framed into an integral number of pages, which will not
+   contain any data packets.  So, a physical bitstream begins with the
+   bos pages of all logical bitstreams containing one initial header
+   packet per page, followed by the subsidiary header packets of all
+   streams, followed by pages containing data packets.
+\end{DoxyPre}
+
+
+
+\begin{DoxyItemize}
+\item liboggz handles the framing of {\itshape packets} into low-\/level {\itshape pages}. To ensure that the pages used by secondary headers contain no data packets, set the {\itshape flush} parameter of \doxyref{oggz\-\_\-write\-\_\-feed()}{p.}{group__write__api_ga6ccaceb107db1fd2eae047dbdbaa5889} to {\itshape O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-A\-F\-T\-E\-R} when queueing the last of the secondary headers.
+\item or, equivalently, set {\itshape flush} to {\itshape O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-B\-E\-F\-O\-R\-E} when queueing the first of the data packets.
+\end{DoxyItemize}\subsubsection{Sequencing b\-\_\-o\-\_\-s and e\-\_\-o\-\_\-s packets}\label{group__basics_boseosseq}
+The following rules apply for sequencing {\itshape bos} and {\itshape eos} packets in a physical bitstream\-: 
+\begin{DoxyPre}
+   ... All bos pages of all logical bitstreams MUST appear together at
+   the beginning of the Ogg bitstream.\end{DoxyPre}
+
+
+
+\begin{DoxyPre}   ... eos pages for the logical bitstreams need not all occur
+   contiguously.  Eos pages may be 'nil' pages, that is, pages
+   containing no content but simply a page header with position
+   information and the eos flag set in the page header.
+\end{DoxyPre}
+
+
+
+\begin{DoxyItemize}
+\item \doxyref{oggz\-\_\-write\-\_\-feed()}{p.}{group__write__api_ga6ccaceb107db1fd2eae047dbdbaa5889} will fail with a return value of {\itshape O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-O\-S} if an attempt is made to queue a late {\itshape bos} packet
+\end{DoxyItemize}\subsubsection{Interleaving logical bitstreams}\label{group__basics_interleaving}
+
+\begin{DoxyPre}
+   It is possible to consecutively chain groups of concurrently
+   multiplexed bitstreams.  The groups, when unchained, MUST stand on
+   their own as a valid concurrently multiplexed bitstream.  The
+   following diagram shows a schematic example of such a physical
+   bitstream that obeys all the rules of both grouped and chained
+   multiplexed bitstreams.\end{DoxyPre}
+
+
+
+\begin{DoxyPre}               physical bitstream with pages of
+          different logical bitstreams grouped and chained
+      -------------------------------------------------------------
+      |*A*|*B*|*C*|A|A|C|B|A|B|#A\#|C|...|B|C|#B\#|#C\#|*D*|D|...|#D\#|
+      -------------------------------------------------------------
+       bos bos bos             eos           eos eos bos       eos\end{DoxyPre}
+
+
+
+\begin{DoxyPre}   In this example, there are two chained physical bitstreams, the first
+   of which is a grouped stream of three logical bitstreams A, B, and C.
+   The second physical bitstream is chained after the end of the grouped
+   bitstream, which ends after the last eos page of all its grouped
+   logical bitstreams.  As can be seen, grouped bitstreams begin
+   together - all of the bos pages MUST appear before any data pages.
+   It can also be seen that pages of concurrently multiplexed bitstreams
+   need not conform to a regular order.  And it can be seen that a
+   grouped bitstream can end long before the other bitstreams in the
+   group end.
+\end{DoxyPre}
+
+
+
+\begin{DoxyItemize}
+\item \doxyref{oggz\-\_\-write\-\_\-feed()}{p.}{group__write__api_ga6ccaceb107db1fd2eae047dbdbaa5889} will fail, returning an explicit error value, if an attempt is made to queue a packet in violation of these rules.
+\end{DoxyItemize}\subsection{References}\label{group__basics_References}
+This introduction to the Ogg format is derived from I\-E\-T\-F {\tt R\-F\-C 3533} {\itshape The Ogg File Format version 0} in accordance with the following copyright statement pertaining to the text of R\-F\-C 3533\-:
+
+
+\begin{DoxyPre}
+   Copyright (C) The Internet Society (2003).  All Rights Reserved.\end{DoxyPre}
+
+
+
+\begin{DoxyPre}   This document and translations of it may be copied and furnished to
+   others, and derivative works that comment on or otherwise explain it
+   or assist in its implementation may be prepared, copied, published
+   and distributed, in whole or in part, without restriction of any
+   kind, provided that the above copyright notice and this paragraph are
+   included on all such copies and derivative works.  However, this
+   document itself may not be modified in any way, such as by removing
+   the copyright notice or references to the Internet Society or other
+   Internet organizations, except as needed for the purpose of
+   developing Internet standards in which case the procedures for
+   copyrights defined in the Internet Standards process must be
+   followed, or as required to translate it into languages other than
+   English.\end{DoxyPre}
+
+
+
+\begin{DoxyPre}   The limited permissions granted above are perpetual and will not be
+   revoked by the Internet Society or its successors or assigns.\end{DoxyPre}
+
+
+
+\begin{DoxyPre}   This document and the information contained herein is provided on an
+   "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+   TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+   BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+   HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+\end{DoxyPre}
+ 

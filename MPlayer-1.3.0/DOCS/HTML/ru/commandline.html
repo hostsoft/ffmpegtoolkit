@@ -1,0 +1,60 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.1. Командная строка</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="usage.html" title="Глава 3. Использование"><link rel="next" href="subosd.html" title="3.2. Субтитры и OSD"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.1. Командная строка</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="usage.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="subosd.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="commandline"></a>3.1. Командная строка</h2></div></div></div><p>
+<span class="application">MPlayer</span> использует составное дерево воспроизведения.
+Опции, указанные в командной строке, могут применяться ко всем файлам/URL или
+только к некоторым, в зависимости от местоположения. Например
+</p><pre class="screen">mplayer -vfm ffmpeg movie1.avi movie2.avi</pre><p>,
+будет использовать FFmpeg декодеры для каждого из двух файлов, а
+</p><pre class="screen">
+mplayer -vfm ffmpeg <em class="replaceable"><code>movie1.avi</code></em> <em class="replaceable"><code>movie2.avi</code></em> -vfm dmo
+</pre><p>
+будет воспроизводить второй файл, используя DMO декодер.
+</p><p>
+Вы можете группировать файлы/URL'ы вместе, используя <code class="literal">{</code> и
+<code class="literal">}</code>. Это полезно, например, с опцией <tt class="option">-loop</tt>:
+</p><pre class="screen">mplayer { 1.avi -loop 2 2.avi } -loop 3</pre><p>
+Эта команда проиграет файлы в таком порядке: 1, 1, 2, 1, 1, 2, 1, 1, 2.
+</p><p>
+Воспроизведение файла:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>опции</code></em>] [<em class="replaceable"><code>путь</code></em>/]<em class="replaceable"><code>имя_файла</code></em>
+</pre><p>
+</p><p>
+Другой способ:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>опции</code></em>] <em class="replaceable"><code>file:///uri-escaped-path</code></em>
+</pre><p>
+</p><p>
+Воспроизведение множества файлов:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>общие опции</code></em>] [<em class="replaceable"><code>путь</code></em>/]<em class="replaceable"><code>имя_файла1</code></em> [<em class="replaceable"><code>опции для имя_файла1</code></em>] <em class="replaceable"><code>имя_файла2</code></em> [<em class="replaceable"><code>опции для имя_файла2</code></em>] ...
+</pre><p>
+</p><p>
+Воспроизведение VCD:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>опции</code></em>] vcd://<em class="replaceable"><code>номер_дорожки</code></em> [-cdrom-device <em class="replaceable"><code>/dev/cdrom</code></em>]
+</pre><p>
+</p><p>
+Воспроизведение DVD:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>опции</code></em>] dvd://<em class="replaceable"><code>номер_ролика</code></em> [-dvd-device <em class="replaceable"><code>/dev/dvd</code></em>]
+</pre><p>
+</p><p>
+Воспроизведение из WWW:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>опции</code></em>] http://<em class="replaceable"><code>site.com/file.asf</code></em>
+</pre><p>
+(так же можно использовать и списки проигрывания (плейлист[playlist]) )
+</p><p>
+Воспроизведение по RTSP:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>опции</code></em>] rtsp://<em class="replaceable"><code>server.example.com/streamName</code></em>
+</pre><p>
+</p><p>
+Примеры:
+</p><pre class="screen">
+mplayer -vo x11 <em class="replaceable"><code>/mnt/Films/Contact/contact2.mpg</code></em>
+mplayer vcd://<em class="replaceable"><code>2</code></em> -cdrom-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -afm 3 <em class="replaceable"><code>/mnt/DVDtrailers/alien4.vob</code></em>
+mplayer dvd://<em class="replaceable"><code>1</code></em> -dvd-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -abs 65536 -delay -0.4 -nobps <em class="replaceable"><code>~/movies/test.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="usage.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="subosd.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">Глава 3. Использование </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 3.2. Субтитры и OSD</td></tr></table></div></body></html>

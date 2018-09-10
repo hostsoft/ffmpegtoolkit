@@ -1,0 +1,184 @@
+\section{decode.\-h File Reference}
+\label{decode_8h}\index{decode.\-h@{decode.\-h}}
+
+
+Decode functions and callback prototypes.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int($\ast$ {\bf Fish\-Sound\-Decoded\-\_\-\-Float} )({\bf Fish\-Sound} $\ast$fsound, float $\ast$pcm[$\,$], long frames, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Signature of a callback for libfishsound to call when it has decoded P\-C\-M audio data, and you want this provided as non-\/interleaved floats. \end{DoxyCompactList}\item 
+typedef int($\ast$ {\bf Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv} )({\bf Fish\-Sound} $\ast$fsound, float $\ast$$\ast$pcm, long frames, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Signature of a callback for libfishsound to call when it has decoded P\-C\-M audio data, and you want this provided as interleaved floats. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float} ({\bf Fish\-Sound} $\ast$fsound, {\bf Fish\-Sound\-Decoded\-\_\-\-Float} decoded, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Set the callback for libfishsound to call when it has a block of decoded P\-C\-M audio ready, and you want this provided as non-\/interleaved floats. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv} ({\bf Fish\-Sound} $\ast$fsound, {\bf Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv} decoded, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Set the callback for libfishsound to call when it has a block of decoded P\-C\-M audio ready, and you want this provided as interleaved floats. \end{DoxyCompactList}\item 
+long {\bf fish\-\_\-sound\-\_\-decode} ({\bf Fish\-Sound} $\ast$fsound, unsigned char $\ast$buf, long bytes)
+\begin{DoxyCompactList}\small\item\em Decode a block of compressed data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Decode functions and callback prototypes. 
+
+\subsection{Typedef Documentation}
+\index{decode.\-h@{decode.\-h}!Fish\-Sound\-Decoded\-\_\-\-Float@{Fish\-Sound\-Decoded\-\_\-\-Float}}
+\index{Fish\-Sound\-Decoded\-\_\-\-Float@{Fish\-Sound\-Decoded\-\_\-\-Float}!decode.h@{decode.\-h}}
+\subsubsection[{Fish\-Sound\-Decoded\-\_\-\-Float}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ Fish\-Sound\-Decoded\-\_\-\-Float)({\bf Fish\-Sound} $\ast$fsound, float $\ast$pcm[$\,$], long frames, void $\ast$user\-\_\-data)}\label{decode_8h_abc40e3343ebff3d1418835569079b2c8}
+
+
+Signature of a callback for libfishsound to call when it has decoded P\-C\-M audio data, and you want this provided as non-\/interleaved floats. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & The Fish\-Sound$\ast$ handle \\
+\hline
+{\em pcm} & The decoded audio \\
+\hline
+{\em frames} & The count of frames decoded \\
+\hline
+{\em user\-\_\-data} & Arbitrary user data \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E} & Continue decoding \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K} & Stop decoding immediately and return control to the \doxyref{fish\-\_\-sound\-\_\-decode()}{p.}{decode_8h_a070a1843d6990a00e2471945d40645c7} caller \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R} & Stop decoding immediately, purge buffered data, and return control to the \doxyref{fish\-\_\-sound\-\_\-decode()}{p.}{decode_8h_a070a1843d6990a00e2471945d40645c7} caller \\
+\hline
+\end{DoxyRetVals}
+\index{decode.\-h@{decode.\-h}!Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv@{Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv}}
+\index{Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv@{Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv}!decode.h@{decode.\-h}}
+\subsubsection[{Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv)({\bf Fish\-Sound} $\ast$fsound, float $\ast$$\ast$pcm, long frames, void $\ast$user\-\_\-data)}\label{decode_8h_a8ba661947284a888e24f7e5d0b076828}
+
+
+Signature of a callback for libfishsound to call when it has decoded P\-C\-M audio data, and you want this provided as interleaved floats. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & The Fish\-Sound$\ast$ handle \\
+\hline
+{\em pcm} & The decoded audio \\
+\hline
+{\em frames} & The count of frames decoded \\
+\hline
+{\em user\-\_\-data} & Arbitrary user data \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E} & Continue decoding \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K} & Stop decoding immediately and return control to the \doxyref{fish\-\_\-sound\-\_\-decode()}{p.}{decode_8h_a070a1843d6990a00e2471945d40645c7} caller \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R} & Stop decoding immediately, purge buffered data, and return control to the \doxyref{fish\-\_\-sound\-\_\-decode()}{p.}{decode_8h_a070a1843d6990a00e2471945d40645c7} caller \\
+\hline
+\end{DoxyRetVals}
+
+
+\subsection{Function Documentation}
+\index{decode.\-h@{decode.\-h}!fish\-\_\-sound\-\_\-decode@{fish\-\_\-sound\-\_\-decode}}
+\index{fish\-\_\-sound\-\_\-decode@{fish\-\_\-sound\-\_\-decode}!decode.h@{decode.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-decode}]{\setlength{\rightskip}{0pt plus 5cm}long fish\-\_\-sound\-\_\-decode (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{unsigned char $\ast$}]{buf, }
+\item[{long}]{bytes}
+\end{DoxyParamCaption}
+)}\label{decode_8h_a070a1843d6990a00e2471945d40645c7}
+
+
+Decode a block of compressed data. 
+
+No internal buffering is done, so a complete compressed audio packet must be passed each time. 
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E) \\
+\hline
+{\em buf} & A buffer containing a compressed audio packet \\
+\hline
+{\em bytes} & A count of bytes to decode (i.\-e. the length of buf) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes consumed 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K} & Decoding was stopped by a Fish\-Sound\-Decode$\ast$ callback returning F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K before any input bytes were consumed. This will occur when P\-C\-M is decoded from previously buffered input, and stopping is immediately requested. \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R} & Decoding was stopped by a Fish\-Sound\-Decode$\ast$ callback returning F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R before any input bytes were consumed. This will occur when P\-C\-M is decoded from previously buffered input, and stopping is immediately requested. \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & Not a valid Fish\-Sound$\ast$ handle \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}
+\index{decode.\-h@{decode.\-h}!fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float@{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float}}
+\index{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float@{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float}!decode.h@{decode.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{{\bf Fish\-Sound\-Decoded\-\_\-\-Float}}]{decoded, }
+\item[{void $\ast$}]{user\-\_\-data}
+\end{DoxyParamCaption}
+)}\label{decode_8h_ae821800e11efe106676d7ce4c743328a}
+
+
+Set the callback for libfishsound to call when it has a block of decoded P\-C\-M audio ready, and you want this provided as non-\/interleaved floats. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E) \\
+\hline
+{\em decoded} & The callback to call \\
+\hline
+{\em user\-\_\-data} & Arbitrary user data to pass to the callback \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & Not a valid Fish\-Sound$\ast$ handle \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}
+\index{decode.\-h@{decode.\-h}!fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv@{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv}}
+\index{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv@{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv}!decode.h@{decode.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{{\bf Fish\-Sound\-Decoded\-\_\-\-Float\-Ilv}}]{decoded, }
+\item[{void $\ast$}]{user\-\_\-data}
+\end{DoxyParamCaption}
+)}\label{decode_8h_a3a4055f579b841a5c05d2a2865f5e939}
+
+
+Set the callback for libfishsound to call when it has a block of decoded P\-C\-M audio ready, and you want this provided as interleaved floats. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E) \\
+\hline
+{\em decoded} & The callback to call \\
+\hline
+{\em user\-\_\-data} & Arbitrary user data to pass to the callback \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & Not a valid Fish\-Sound$\ast$ handle \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}

@@ -1,0 +1,179 @@
+\section{Decoding audio data}
+\label{group__decode}\index{Decoding audio data@{Decoding audio data}}
+
+
+To decode audio data using libfishsound\-:  
+
+
+To decode audio data using libfishsound\-: 
+\begin{DoxyItemize}
+\item create a Fish\-Sound$\ast$ object with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E. \doxyref{fish\-\_\-sound\-\_\-new()}{p.}{fishsound_8h_adecddfef35cbbddcc8a76b28c365c527} will return a new Fish\-Sound$\ast$ object, initialised for decoding, and the \doxyref{Fish\-Sound\-Info}{p.}{structFishSoundInfo} structure will be cleared.
+\item provide a Fish\-Sound\-Decoded\-\_\-$\ast$ callback for libfishsound to call when it has decoded audio.
+\item (optionally) specify whether you want to receive interleaved or per-\/channel P\-C\-M data, using a \doxyref{fish\-\_\-sound\-\_\-set\-\_\-interleave()}{p.}{deprecated_8h_a8e6b76134675d948015fe4afa3fe4104}. The default is for per-\/channel (non-\/interleaved) P\-C\-M.
+\item feed encoded audio data to libfishsound via \doxyref{fish\-\_\-sound\-\_\-decode()}{p.}{decode_8h_a070a1843d6990a00e2471945d40645c7}. libfishsound will decode the audio for you, calling the Fish\-Sound\-Decoded\-\_\-$\ast$ callback you provided earlier each time it has a block of audio ready.
+\item when finished, call \doxyref{fish\-\_\-sound\-\_\-delete()}{p.}{fishsound_8h_a002e2dee1a7f736699dba5bec0a81426}.
+\end{DoxyItemize}
+
+This procedure is illustrated in src/examples/fishsound-\/decode.\-c. Note that this example additionally\-:
+\begin{DoxyItemize}
+\item uses {\tt liboggz} to demultiplex audio data from an Ogg encapsulated F\-L\-A\-C, Speex or Vorbis stream. The step of feeding encoded data to libfishsound is done within the Oggz\-Read\-Packet callback.
+\item uses {\tt libsndfile} to write the decoded audio to a W\-A\-V file.
+\end{DoxyItemize}
+
+Hence this example code demonstrates all that is needed to decode Ogg F\-L\-A\-C, Speex or Ogg Vorbis files\-:
+
+
+\begin{DoxyCodeInclude}
+\textcolor{comment}{/*}
+\textcolor{comment}{   Copyright (C) 2003 Commonwealth Scientific and Industrial Research}
+\textcolor{comment}{   Organisation (CSIRO) Australia}
+\textcolor{comment}{}
+\textcolor{comment}{   Redistribution and use in source and binary forms, with or without}
+\textcolor{comment}{   modification, are permitted provided that the following conditions}
+\textcolor{comment}{   are met:}
+\textcolor{comment}{}
+\textcolor{comment}{   - Redistributions of source code must retain the above copyright}
+\textcolor{comment}{   notice, this list of conditions and the following disclaimer.}
+\textcolor{comment}{}
+\textcolor{comment}{   - Redistributions in binary form must reproduce the above copyright}
+\textcolor{comment}{   notice, this list of conditions and the following disclaimer in the}
+\textcolor{comment}{   documentation and/or other materials provided with the distribution.}
+\textcolor{comment}{}
+\textcolor{comment}{   - Neither the name of CSIRO Australia nor the names of its}
+\textcolor{comment}{   contributors may be used to endorse or promote products derived from}
+\textcolor{comment}{   this software without specific prior written permission.}
+\textcolor{comment}{}
+\textcolor{comment}{   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+\textcolor{comment}{   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+\textcolor{comment}{   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}
+\textcolor{comment}{   PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE ORGANISATION OR}
+\textcolor{comment}{   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,}
+\textcolor{comment}{   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,}
+\textcolor{comment}{   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR}
+\textcolor{comment}{   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF}
+\textcolor{comment}{   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING}
+\textcolor{comment}{   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS}
+\textcolor{comment}{   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}
+\textcolor{comment}{*/}
+
+\textcolor{preprocessor}{#include "config.h"}
+
+\textcolor{preprocessor}{#include <stdio.h>}
+\textcolor{preprocessor}{#include <stdlib.h>}
+\textcolor{preprocessor}{#include <string.h>}
+
+\textcolor{preprocessor}{#include <oggz/oggz.h>}
+\textcolor{preprocessor}{#include <fishsound/fishsound.h>}
+\textcolor{preprocessor}{#include <sndfile.h>}
+
+\textcolor{keyword}{static} \textcolor{keywordtype}{char} * infilename, * outfilename;
+\textcolor{keyword}{static} \textcolor{keywordtype}{int} begun = 0;
+\textcolor{keyword}{static} FishSoundInfo fsinfo;
+\textcolor{keyword}{static} SNDFILE * sndfile;
+
+\textcolor{comment}{/* In general, an Ogg file may contain multiple audio tracks in parallel.}
+\textcolor{comment}{ * To keep this example simple, we only decode the first track that we find.}
+\textcolor{comment}{ * Tracks ("logical bitstreams" in the Ogg documentations) are identified by}
+\textcolor{comment}{ * a serialno.}
+\textcolor{comment}{ */}
+\textcolor{keyword}{static} \textcolor{keywordtype}{long} decode\_serialno = -1;
+
+\textcolor{keyword}{static} \textcolor{keywordtype}{int}
+open\_output (\textcolor{keywordtype}{int} samplerate, \textcolor{keywordtype}{int} channels)
+\{
+  SF\_INFO sfinfo;
+
+  sfinfo.samplerate = samplerate;
+  sfinfo.channels = channels;
+  sfinfo.format = SF\_FORMAT\_WAV | SF\_FORMAT\_PCM\_16;
+
+  sndfile = sf\_open (outfilename, SFM\_WRITE, &sfinfo);
+
+  \textcolor{keywordflow}{return} 0;
+\}
+
+\textcolor{keyword}{static} \textcolor{keywordtype}{int}
+decoded\_float (FishSound * fsound, \textcolor{keywordtype}{float} ** pcm, \textcolor{keywordtype}{long} frames, \textcolor{keywordtype}{void} * user\_data)
+\{
+  \textcolor{keywordflow}{if} (!begun) \{
+    fish_sound_command (fsound, FISH_SOUND_GET_INFO, &fsinfo,
+                        \textcolor{keyword}{sizeof} (FishSoundInfo));
+    open\_output (fsinfo.samplerate, fsinfo.channels);
+    begun = 1;
+  \}
+
+  sf\_writef\_float (sndfile, (\textcolor{keywordtype}{float} *)pcm, frames);
+
+  \textcolor{keywordflow}{return} 0;
+\}
+
+\textcolor{keyword}{static} \textcolor{keywordtype}{int}
+read\_packet (OGGZ * oggz, ogg\_packet * op, \textcolor{keywordtype}{long} serialno, \textcolor{keywordtype}{void} * user\_data)
+\{
+  FishSound * fsound = (FishSound *)user\_data;
+
+  \textcolor{comment}{/* If we have not yet selected an audio track to decode, then try}
+\textcolor{comment}{   * to identify this one. If it is a known audio codec, then remember its}
+\textcolor{comment}{   * serialno.}
+\textcolor{comment}{   * NB. We only try this if we are processing a BOS (beginning of stream)}
+\textcolor{comment}{   * packet, and it contains at least 8 bytes of data. If it contained less}
+\textcolor{comment}{   * than 8 bytes of data, fish\_sound\_identify would simply return}
+\textcolor{comment}{   * FISH\_SOUND\_ERR\_SHORT\_IDENTIFY.}
+\textcolor{comment}{   */}
+  \textcolor{keywordflow}{if} (decode\_serialno == -1 && op->b\_o\_s && op->bytes >= 8) \{
+    \textcolor{keywordflow}{if} (fish_sound_identify (op->packet, op->bytes) != FISH_SOUND_UNKNOWN)
+      decode\_serialno = serialno;
+  \}
+
+  \textcolor{comment}{/* If this is the track we are decoding, go ahead and decode it */}
+  \textcolor{keywordflow}{if} (serialno == decode\_serialno) \{
+    fish_sound_prepare_truncation (fsound, op->granulepos, op->e\_o\_s);
+    fish_sound_decode (fsound, op->packet, op->bytes);
+  \}
+
+  \textcolor{keywordflow}{return} 0;
+\}
+
+\textcolor{keywordtype}{int}
+main (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} ** argv)
+\{
+  OGGZ * oggz;
+  FishSound * fsound;
+  \textcolor{keywordtype}{long} n;
+
+  \textcolor{keywordflow}{if} (argc < 3) \{
+    printf (\textcolor{stringliteral}{"usage: %s infilename outfilename\(\backslash\)n"}, argv[0]);
+    printf (\textcolor{stringliteral}{"*** FishSound example program. ***\(\backslash\)n"});
+    printf (\textcolor{stringliteral}{"Decodes an Ogg FLAC, Speex or Ogg Vorbis file producing a PCM wav file.\(\backslash\)n"});
+    exit (1);
+  \}
+
+  infilename = argv[1];
+  outfilename = argv[2];
+
+  fsound = fish_sound_new (FISH_SOUND_DECODE, NULL);
+
+  fish_sound_set_interleave (fsound, 1);
+
+  fish_sound_set_decoded_float_ilv (fsound, decoded\_float, NULL);
+
+  \textcolor{keywordflow}{if} ((oggz = oggz\_open ((\textcolor{keywordtype}{char} *) infilename, OGGZ\_READ)) == NULL) \{
+    printf (\textcolor{stringliteral}{"unable to open file %s\(\backslash\)n"}, infilename);
+    exit (1);
+  \}
+
+  oggz\_set\_read\_callback (oggz, -1, read\_packet, fsound);
+
+  \textcolor{keywordflow}{while} ((n = oggz\_read (oggz, 1024)) > 0);
+
+  oggz\_close (oggz);
+
+  fish_sound_delete (fsound);
+  
+  sf\_close (sndfile);
+
+  exit (0);
+\}
+
+\end{DoxyCodeInclude}
+ 

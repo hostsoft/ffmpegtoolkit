@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.11. Szoftveres hangerő állítás</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="3. fejezet - Használat"><link rel="prev" href="advaudio-channels.html" title="3.10. Csatorna többszörözés"><link rel="next" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.11. Szoftveres hangerő állítás</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="advaudio-channels.html">Vissza</a> </td><th width="60%" align="center">3. fejezet - Használat</th><td width="20%" align="right"> <a accesskey="n" href="tv-input.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="advaudio-volume"></a>3.11. Szoftveres hangerő állítás</h2></div></div></div><p>
+Néhány audió sáv túl halk, hogy kényelmesen hallható legyen kiegészítés nélkül.
+Ez akkor jelent problémát, ha az audió berendezésed nem tud erősíteni a jelen.
+A <tt class="option">-softvol</tt> opció utasítja az
+<span class="application">MPlayer</span>t egy belső keverő használatára. Használhatod
+a hangerő állító gombokat (alapértelmezettként <span class="keycap"><b>9</b></span> és
+<span class="keycap"><b>0</b></span>) a nagyobb hangerő eléréséhez. Figyelj rá, hogy ez nem hagyja
+figyelmen kívül a hangkártyád keverőjét; az <span class="application">MPlayer</span>
+csak erősít az eredeti jelen mielőtt kiküldené a hangkártyára.
+A következő példa jó kezdésként:
+</p><pre class="screen">mplayer <em class="replaceable"><code>halk-fájl</code></em> -softvol -softvol-max 300</pre><p>
+A <tt class="option">-softvol-max</tt> opció megadja a maximálisan megengedhető kimeneti
+hangerőt az eredeti hangerő százalékában. Például a <tt class="option">-softvol-max 200</tt>
+az eredeti szint dupláját engedélyezi.
+Nyugodtan megadhatsz egy nagy értéket a
+<tt class="option">-softvol-max</tt> kapcsolóval; a nagyobb hangerő addig nem lesz
+használva, amíg te nem használod a hangerő állító gombokat. Az egyetlen hátránya
+a nagy értéknek az, hogy mivel az <span class="application">MPlayer</span> a maximum
+százalékával állítja be a hangerőt, nem lesz olyan precíz vezérlésed a
+hangerő állító gombok használatakor. Használj kisebb értéket a
+<tt class="option">-softvol-max</tt>-szal és/vagy add meg a <tt class="option">-volstep 1</tt>-et,
+ha nagyobb pontosságot akarsz.
+</p><p>
+A <tt class="option">-softvol</tt> opció a <tt class="option">volume</tt> audió szűrő
+vezérlésével működik. Ha egy fájlt egy bizonyos hangerővel akarsz lejátszani az
+elejétől kezdve, megadhatod a <tt class="option">volume</tt>-val kézzel:
+</p><pre class="screen">mplayer <em class="replaceable"><code>halk-fájl</code></em> -af volume=10</pre><p>
+Ez 10 decibel-es növeléssel játsszal le a fájlt. Légy óvatos, ha a
+<tt class="option">volume</tt> szűrőt használod - könnyen károsíthatod a füleidet, ha
+túl nagy értéket használsz. Kezd alacsonyan és fokozatosan menj felfelé, amíg
+meg nem érzed, hogy meddig kell állítani. Valamint ha nagyon nagy értékeket adsz
+meg, a <tt class="option">volume</tt>-nek lehet, hogy le kell csípnie a jelet, hogy
+megakadályozza a hangkártyád elfogadható tartományán kívül eső adatok küldését;
+ez zavart audiót eredményez.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="advaudio-channels.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="tv-input.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">3.10. Csatorna többszörözés </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 4. fejezet - TV bemenet</td></tr></table></div></body></html>

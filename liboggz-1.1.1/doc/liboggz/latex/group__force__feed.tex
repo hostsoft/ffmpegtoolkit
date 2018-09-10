@@ -1,0 +1,94 @@
+\section{Writing by force feeding Oggz}
+\label{group__force__feed}\index{Writing by force feeding Oggz@{Writing by force feeding Oggz}}
+
+
+Force feeding involves synchronously\-:  
+
+
+Force feeding involves synchronously\-: 
+\begin{DoxyItemize}
+\item Creating an {\itshape ogg\-\_\-packet} structure
+\item Adding it to the packet queue with \doxyref{oggz\-\_\-write\-\_\-feed()}{p.}{group__write__api_ga6ccaceb107db1fd2eae047dbdbaa5889}
+\item Calling \doxyref{oggz\-\_\-write()}{p.}{group__write__api_ga3c97d94ea425d64546adf9c368b71904} or \doxyref{oggz\-\_\-write\-\_\-output()}{p.}{group__write__api_ga5606dff01964caec4582eb172fde0c1c}, repeatedly as necessary, to generate the Ogg bitstream.
+\end{DoxyItemize}
+
+This process is illustrated in the following diagram\-:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=10cm]{forcefeed}
+\caption{Force Feeding Oggz}
+\end{DoxyImage}
+
+
+The following example code generates a stream of ten packets, each containing a single byte ('A', 'B', ... , 'J')\-:
+
+
+\begin{DoxyCodeInclude}
+
+\textcolor{preprocessor}{#include <stdlib.h>} \textcolor{comment}{/* exit */}
+\textcolor{preprocessor}{#include "oggz/oggz.h"}
+
+\textcolor{keyword}{static} \textcolor{keywordtype}{long} serialno;
+\textcolor{keyword}{static} ogg\_int64\_t granulepos = 0;
+\textcolor{keyword}{static} ogg\_int64\_t packetno = 0;
+
+\textcolor{keywordtype}{int}
+main (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} * argv[])
+\{
+  \textcolor{keywordtype}{char} * progname, * filename = NULL;
+  OGGZ * oggz;
+  ogg\_packet op;
+  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} buf[1];
+  \textcolor{keywordtype}{long} n;
+
+  progname = argv[0];
+  \textcolor{keywordflow}{if} (argc > 1) filename = argv[1];
+
+  \textcolor{keywordflow}{if} (filename) \{
+    oggz = oggz_open (filename, OGGZ_WRITE);
+  \} \textcolor{keywordflow}{else} \{
+    oggz = oggz_open_stdio (stdout, OGGZ_WRITE);
+  \}
+
+  \textcolor{keywordflow}{if} (oggz == NULL) \{
+    fprintf (stderr, \textcolor{stringliteral}{"%s: Error creating oggz\(\backslash\)n"}, progname);
+    exit (1);
+  \}
+
+  serialno = oggz_serialno_new (oggz);
+
+  \textcolor{keywordflow}{for} (packetno = 0; packetno < 10; packetno++) \{
+
+    \textcolor{comment}{/* Create a packet */}
+
+    buf[0] = \textcolor{charliteral}{'A'} + (int)packetno;
+
+    op.packet = buf;
+    op.bytes = 1;
+    op.granulepos = granulepos;
+    op.packetno = packetno;
+    
+    \textcolor{keywordflow}{if} (packetno == 0) op.b\_o\_s = 1;
+    \textcolor{keywordflow}{else} op.b\_o\_s = 0;
+    
+    \textcolor{keywordflow}{if} (packetno == 9) op.e\_o\_s = 1;
+    \textcolor{keywordflow}{else} op.e\_o\_s = 0;
+    
+    \textcolor{comment}{/* Feed it to the Oggz packet queue */}
+
+    oggz_write_feed (oggz, &op, serialno, OGGZ_FLUSH_AFTER, NULL);
+    
+    granulepos += 100;
+
+    \textcolor{comment}{/* Write bytes from packetized bitstream to the output file */}
+
+    \textcolor{keywordflow}{while} ((n = oggz_write (oggz, 32)) > 0);
+  \}
+
+  oggz_close (oggz);
+
+  exit (0);
+\}
+\end{DoxyCodeInclude}
+ 

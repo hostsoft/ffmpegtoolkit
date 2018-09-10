@@ -1,0 +1,24 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.3. A co z GUI?</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="install.html" title="Rozdział 2. Instalacja"><link rel="prev" href="features.html" title="2.2. Możliwości"><link rel="next" href="fonts-osd.html" title="2.4. Czcionki i OSD"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.3. A co z GUI?</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="features.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 2. Instalacja</th><td width="20%" align="right"> <a accesskey="n" href="fonts-osd.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gui"></a>2.3. A co z GUI?</h2></div></div></div><p>
+GUI wymaga biblioteki GTK 1.2.x lub GTK 2.0 (nie jest w pełni w GTK, ale jego
+panele są). Skórki przechowywane są w formacie PNG, tak więc musi być
+zainstalowane GTK, <code class="systemitem">libpng</code>
+(i ich pakiety rozwojowe, zazwyczaj nazwane
+<code class="systemitem">gtk-dev</code> i
+<code class="systemitem">libpng-dev</code>).
+Możesz go zbudować podając opcję <tt class="option">--enable-gui</tt> skryptowi
+<tt class="filename">./configure</tt>. Aby skorzystać z trybu GUI, musisz wywołać
+polecenie <span class="command"><strong>gmplayer</strong></span>.
+</p><p>
+Jako że <span class="application">MPlayer</span> nie zawiera żadnej skórki, musisz
+je ściągnąć, jeżeli chcesz używać GUI. Sprawdź
+<a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">stronę z zasobami do pobrania</a>.
+Skórki powinny być rozpakowane do katalogu dostępnego dla wszystkich
+(<tt class="filename">$PREFIX/share/mplayer/skins</tt>) lub do
+<tt class="filename">$HOME/.mplayer/skins</tt>.
+<span class="application">MPlayer</span> sprawdza je w poszukiwaniu
+folderu nazwanego <tt class="filename">default</tt>, ale
+możesz użyć opcji <tt class="option">-skin <em class="replaceable"><code>nowaskórka</code></em></tt>
+lub wpisać do pliku konfiguracyjnego <code class="literal">skin=nowaskórka</code>, aby
+program korzystał ze skórki w katalogu
+<tt class="filename">*/skins/nowaskórka</tt>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="features.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="fonts-osd.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">2.2. Możliwości </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 2.4. Czcionki i OSD</td></tr></table></div></body></html>

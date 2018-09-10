@@ -1,0 +1,94 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.13. VESA - uscita attraverso il VESA BIOS</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="prev" href="caca.html" title="4.12.  libcaca – Libreria Color ASCII Art"><link rel="next" href="x11.html" title="4.14. X11"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.13. VESA - uscita attraverso il VESA BIOS</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="caca.html">Indietro</a> </td><th width="60%" align="center">Capitolo 4. Dispositivi di uscita video</th><td width="20%" align="right"> <a accesskey="n" href="x11.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vesa"></a>4.13. VESA - uscita attraverso il VESA BIOS</h2></div></div></div><p>
+Questo driver è stato progettato ed introdotto come un
+<span class="bold"><strong>driver generico</strong></span> per qualsiasi scheda video che
+abbia un BIOS compatibile con VESA VBE 2.0. Un altro vantaggio di questo driver
+è che cerca di attivare l'uscita TV.
+La <em class="citetitle">VESA BIOS EXTENSION (VBE) Versione 3.0 Data: 16 settembre
+1998</em> (pagina 70) dice:
+</p><div class="blockquote"><blockquote class="blockquote"><p><b>Dual-Controller Designs. </b>
+VBE 3.0 supports the dual-controller design by assuming that since both
+controllers are typically provided by the same OEM, under control of a
+single BIOS ROM on the same graphics card, it is possible to hide the fact
+that two controllers are indeed present from the application. This has the
+limitation of preventing simultaneous use of the independent controllers,
+but allows applications released before VBE 3.0 to operate normally. The
+VBE Function 00h (Return Controller Information) returns the combined
+information of both controllers, including the combined list of available
+modes. When the application selects a mode, the appropriate controller is
+activated. Each of the remaining VBE functions then operates on the active
+controller.
+</p></blockquote></div><p>
+Perciò usando questo driver hai qualche possibilità di far funzionare
+l'uscita TV (si presume che spesso l'uscita TV sia almeno un'uscita a sè
+stante).
+</p><div class="itemizedlist"><p class="title"><b>VANTAGGI</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Puoi riuscire a guardare film <span class="bold"><strong>anche se Linux non
+  riconosce</strong></span> il tuo hardware grafico.
+</p></li><li class="listitem"><p>
+  Non ti serve avere alcuna cosa relativa alla grafica (come X11 (AKA XFree86),
+  fbdev e così via) sul tuo Linux. Questo driver può venir utilizzato dalla
+  <span class="bold"><strong>modalità testo</strong></span>.
+</p></li><li class="listitem"><p>
+  Hai qualche possibilità di avere l'<span class="bold"><strong>uscita TV
+  funzionante</strong></span> (per le schede ATI perlomeno è così).
+</p></li><li class="listitem"><p>
+  Questo driver chiama la funzione <code class="function">int 10h</code> percui non è
+  un emulatore - fa riferimento a cose <span class="bold"><strong>reali</strong></span>
+  del BIOS <span class="bold"><strong>reale</strong></span> in
+  <span class="emphasis"><em>modalità reale</em></span> (attualmente in modalità vm86).
+</p></li><li class="listitem"><p>
+  Con esso puoi usare VIDIX, potendo ottenere contemporaneamente un'uscita
+  video accelerata <span class="bold"><strong>e</strong></span> e l'uscita TV!
+  (consigliato per schede ATI)
+  </p></li><li class="listitem"><p>
+  Se hai VESA VBE 3.0+ e hai specificato in qualche dove
+  <tt class="option">monitor-hfreq, monitor-vfreq, monitor-dotclock</tt> (nel file di
+  configurazione o dalla riga comando) otterrai la massima frequenza di
+  aggiornamento possibile (usando formule generiche di temporizzazione).
+  Per abilitare questa funzionalità devi specificare
+  <span class="bold"><strong>tutte</strong></span> le opzioni per il tuo monitor.
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>SVANTAGGI</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+   Funziona solo su <span class="bold"><strong>sistemi x86</strong></span>.
+</p></li><li class="listitem"><p>
+  Può essere usato solo da <code class="systemitem">root</code>.
+</p></li><li class="listitem"><p>
+  Attualmente è disponibile solo per <span class="bold"><strong>Linux</strong></span>.
+</p></li></ul></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Importante</h3><p>
+Non usare questo driver con <span class="bold"><strong>GCC 2.96</strong></span>!
+Non funzionerà!
+</p></div><div class="variablelist"><p class="title"><b>OPZIONI DELLA RIGA COMANDO DISPONIBILI PER VESA</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo vesa:<em class="replaceable"><code>opzioni</code></em></tt></span></dt><dd><p>
+    attualmente riconosciute: <code class="literal">dga</code> per forzare la modalità
+    dga e <code class="literal">nodga</code> per disabilitarla. In modalità dga puoi
+    abilitare il doppio buffering con l'opzione <tt class="option">-double</tt>.
+    Nota: puoi omettere questi parametri per abilitare
+    l'<span class="bold"><strong>auto-rilevazione</strong></span> della modalità dga.
+  </p></dd></dl></div><div class="itemizedlist"><p class="title"><b>PROBLEMI CONOSCIUTI E SOLUZIONI</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Se hai dei font <span class="bold"><strong>NLS</strong></span> installati sulla tua
+  macchina Linux ed utilizzi il driver VESA in modalità testo, allora dopo
+  essere uscito da<span class="application">MPlayer</span> avrai i
+  <span class="bold"><strong>font ROM</strong></span> caricati al posto di quelli locali.
+  Puoi ricaricare i font locali usando lo strumento
+  <span class="command"><strong>setsysfont</strong></span> per Mandrake/Mandriva, ad esempio
+  (<span class="bold"><strong>consiglio</strong></span>: lo stesso strumento viene
+  usato per la localizzazione di fbdev).
+</p></li><li class="listitem"><p>
+  Alcuni <span class="bold"><strong>driver grafici per Linux</strong></span> non
+  modificano nella memoria DOS la
+  <span class="bold"><strong>modalità BIOS</strong></span> attiva.
+  Per cui se hai questo problema - usa sempre il driver VESA dalla
+  <span class="bold"><strong>modalità testo</strong></span>. Altrimenti verrà
+  comunque attivata la modalità testo (#03) e dovrai riavviare il tuo
+  computer.
+</p></li><li class="listitem"><p>
+  Spesso dopo aver dismesso il driver VESA ottieni uno schermo
+  <span class="bold"><strong>nero</strong></span>. Per riportare il tuo schermo allo
+  stato originario - salta semplicemente ad unìaltra console (premendo
+  <span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F&lt;x&gt;</b></span>) poi
+  ritorna alla console precedente allo stesso modo.
+</p></li><li class="listitem"><p>
+  Per avere <span class="bold"><strong>l'uscita TV funzionante</strong></span> devi avere
+  il connettore TV collegato prima di avviare il tuo PC, visto che il BIOS
+  video si inizializza solo una volta durante il passaggio POST.
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="caca.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="x11.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">4.12. 
+<code class="systemitem">libcaca</code> – Libreria Color ASCII Art
+ </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 4.14. X11</td></tr></table></div></body></html>

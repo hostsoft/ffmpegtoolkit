@@ -1,0 +1,111 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.9. Térhatású/többcsatornás lejátszás</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="3. fejezet - Használat"><link rel="prev" href="networksync.html" title="3.8. Szinkronizált lejátszás hálózaton"><link rel="next" href="advaudio-channels.html" title="3.10. Csatorna többszörözés"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-DVD" title="3.9.1. DVD-k"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-stereoinfour" title="3.9.2. Sztereó fájlok lejátszása négy hangszórón"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-passthrough" title="3.9.3. AC-3/DTS áteresztés"><link rel="subsection" href="advaudio-surround.html#hwmpa-surround-passthrough" title="3.9.4. MPEG audió áteresztés"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-matrix" title="3.9.5. Mátrix-kódolású audió"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-hrtf" title="3.9.6. Térhatás emulálása fülhallgatóval"><link rel="subsection" href="advaudio-surround.html#advaudio-surround-troubleshooting" title="3.9.7. Hibajavítás"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.9. Térhatású/többcsatornás lejátszás</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="networksync.html">Vissza</a> </td><th width="60%" align="center">3. fejezet - Használat</th><td width="20%" align="right"> <a accesskey="n" href="advaudio-channels.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="advaudio-surround"></a>3.9. Térhatású/többcsatornás lejátszás</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-DVD"></a>3.9.1. DVD-k</h3></div></div></div><p>
+A legtöbb DVD és sok más fájl térhatású hangot tartalmaz.
+Az <span class="application">MPlayer</span> támogatja a térhatású lejátszást, de
+alapértelmezésként nem engedélyezi, mivel a sztereó berendezések a gyakoribbak.
+A több, mint két csatornás audiót tartalmazó fájlok lejátszásához használd a
+<tt class="option">-channels</tt> kapcsolót.
+Például egy 5.1-es audióval rendelkező DVD lejátszása:
+</p><pre class="screen">mplayer dvd://1 -channels 6</pre><p>
+Figyelj rá, hogy az "5.1" név ellenére valójában hat különálló csatorna van.
+Ha van térhatású hangfalszetted, nyugodtan beleírhatod a
+<tt class="option">channels</tt> opciót az <span class="application">MPlayer</span>
+konfigurációs fájljába, a <tt class="filename">~/.mplayer/config</tt>-ba. Például a
+kvadrafónikus lejátszás alapértelmezetté tételéhez írd be ezt a sort:
+</p><pre class="programlisting">channels=4</pre><p>
+Az <span class="application">MPlayer</span> ekkor az audiót négy csatornán fogja
+lejátszani, ha mind a négy csatorna elérhető.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-stereoinfour"></a>3.9.2. Sztereó fájlok lejátszása négy hangszórón</h3></div></div></div><p>
+Az <span class="application">MPlayer</span> nem duplázza meg a csatornákat alapból,
+ahogy a legtöbb audió vezérlő sem. Ha ilyet akarsz, kézzel kell megadnod:
+</p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af channels=2:2:0:1:0:0</pre><p>
+Lásd a <a class="link" href="advaudio-channels.html#advaudio-channels-copying" title="3.10.3. Csatorna másolás/mozgatás">csatorna másolásról</a>
+szóló rész a magyarázatért.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-passthrough"></a>3.9.3. AC-3/DTS áteresztés</h3></div></div></div><p>
+A DVD-k általában AC-3 (Dolby Digital) vagy DTS (Digital Theater System) formátumban
+kódolt térhatású hanggal rendelkeznek. Néhány modern audió berendezés képes ezen
+formátumok belső dekódolására. Az <span class="application">MPlayer</span> beállítható
+úgy, hogy dekódolás nélkül adja át az audió adatot. Ez csak akkor fog működni, ha
+van egy S/PDIF (Sony/Philips Digital Interface) jack dugó a hangkártyádon, vagy
+HDMI-n keresztül küldöd át a hangot.
+</p><p>
+Ha az audió berendezésed tudja dekódolni mind az AC-3-at, mind a DTS-t, nyugodtan
+engedélyezheted az áteresztést mindkét formátumnál. Különben csak arra a formátumra
+engedélyezd, amelyiket a berendezésed támogatja.
+</p><div class="itemizedlist"><p class="title"><b>Áteresztés engedélyezése a parancssorban:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Csak AC-3-hoz használd a <tt class="option">-ac hwac3</tt> kapcsolót.
+</p></li><li class="listitem"><p>
+  CSak DTS-hez használd a <tt class="option">-ac hwdts</tt> kapcsolót
+</p></li><li class="listitem"><p>
+  AC-3 és DTS esetén használd a <tt class="option">-afm hwac3</tt> kapcsolót.
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>Áteresztés engedélyezése az <span class="application">MPlayer</span>
+  konfigurációs fájljában: </b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Csak AC-3-hoz használd az <tt class="option">ac=hwac3,</tt> sort.
+</p></li><li class="listitem"><p>
+  Csak DTS-hez használd az <tt class="option">ac=hwdts,</tt> sort.
+</p></li><li class="listitem"><p>
+  AC-3 és DTS esetén használd az <tt class="option">afm=hwac3</tt> sort.
+</p></li></ul></div><p>
+Figyelj rá, hogy az <tt class="option">ac=hwac3,</tt> és <tt class="option">ac=hwdts,</tt>
+sorok végén van egy vessző (","). Ez arra utasítja az <span class="application">MPlayer</span>t,
+hogy váltson vissza a normálisan használt codec-re, ha olyan fájlt játszasz le,
+amiben nincs AC-3-as vagy DTS audió. Az <tt class="option">afm=hwac3</tt>
+sorba nem kell vessző; az <span class="application">MPlayer</span> mindenképpen vált
+ha egy audió család van megadva.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="hwmpa-surround-passthrough"></a>3.9.4. MPEG audió áteresztés</h3></div></div></div><p>
+A digitális TV továbbítás (mint pl. a DVB és ATSC) és néhány DVD általában
+MPEG audió stream-ekkel rendelkezik (általában MP2).
+Pár MPEG hardver dekóder, mint például a jól felszerelt DVB kártyák és a
+DXR2 adapterek natívan dekódolják ezt a formátumot.)
+Az <span class="application">MPlayer</span> beállítható úgy, hogy ne foglalkozzon
+az audió adatok dekódolásával.
+</p><p>
+To use this codec:
+</p><pre class="screen"> mplayer -ac hwmpa </pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-matrix"></a>3.9.5. Mátrix-kódolású audió</h3></div></div></div><p>
+<span class="emphasis"><em>***TENNIVALÓ***</em></span>
+</p><p>
+Ezt a részt még el kell készíteni, de addig nem lehet befejezni, amíg valaki
+nem ad nekünk hozzá példafájlokat teszteléshez. Ha van mátrix-kódolású audió
+fájlod, tudod, hogy hol lehet találni ilyet vagy van bármilyen információd,
+hálásak lennénk ha üzennél nekünk az
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-docs" target="_top">MPlayer-DOCS</a>
+levelezési listára. Írj egy "[matrix-encoded audio]"-t a tárgy sorba.
+</p><p>
+Ha nem érkezik fájl vagy további információ, ez a fejezet törölve lesz.
+</p><p>
+Jó link-ek:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <a class="ulink" href="http://electronics.howstuffworks.com/surround-sound5.htm" target="_top">http://electronics.howstuffworks.com/surround-sound5.htm</a>
+</p></li><li class="listitem"><p>
+  <a class="ulink" href="http://www.extremetech.com/article2/0,1697,1016875,00.asp" target="_top">http://www.extremetech.com/article2/0,1697,1016875,00.asp</a>
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-hrtf"></a>3.9.6. Térhatás emulálása fülhallgatóval</h3></div></div></div><p>
+Az <span class="application">MPlayer</span> tartalmaz HRTF (Head Related Transfer
+Function) szűrőt, mely egy
+<a class="ulink" href="http://sound.media.mit.edu/KEMAR.html" target="_top">MIT projekten</a> alapszik,
+melyben méréseket végeztek emberi műfejre szerelt mikrofonokkal.
+</p><p>
+Bár nem lehet tökéletesen imitálni egy térhatású rendszert,
+az <span class="application">MPlayer</span> HRTF szűrője biztosít térben némileg
+mélyített hangot két csatornás fülhallgatón. A hagyományos lekeverés
+egyszerűen kombinálja az összes csatornát kettőbe; a csatornák kombinálásán
+túl a <tt class="option">hrtf</tt> finom visszhangot generál, kissé növeli a sztereó
+elválasztást és megváltoztatja néhány frekvencia hangerejét. A HRTF
+hangzásának minősége függ a forrás audiótól és az emberi érzékléstől, de
+mindenképpen megér egy próbát.
+</p><p>
+DVD lejátszása DVD HRTF-fel:
+</p><pre class="screen">mplayer dvd://1 -channels 6 -af hrtf</pre><p>
+</p><p>
+A <tt class="option">hrtf</tt> csak 5 vagy 6 csatornával működik jól, valamint
+48 kHz-es audió kell hozzá. A DVD audió már 48 kHz-es, de ha van egy fájlod
+ettől különböző mintavételezési rátával, akkor a <tt class="option">hrtf</tt>-fel
+történő lejátszáshoz újra kell mintáznod:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>fájlnév</code></em> -channels 6 -af resample=48000,hrtf
+</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-surround-troubleshooting"></a>3.9.7. Hibajavítás</h3></div></div></div><p>
+Ha nem hallasz semmilyen hangot a térhatású csatornáidból, ellenőrizd a mixer
+beállításait egy mixer programmal, mint pl. az <span class="application">alsamixer</span>;
+az audió kimenetek gyakran le vannak némítva és nulla hangerőre vannak állítva alapértelmezésben.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="networksync.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio-channels.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">3.8. Szinkronizált lejátszás hálózaton </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 3.10. Csatorna többszörözés</td></tr></table></div></body></html>

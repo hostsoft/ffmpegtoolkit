@@ -1,0 +1,33 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>8.7. Stream másolás</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="prev" href="menc-feat-rescale.html" title="8.6. Filmek átméretezése"><link rel="next" href="menc-feat-enc-images.html" title="8.8. Kódolás több bemeneti képfájlból (JPEG, PNG, TGA, stb.)"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">8.7. Stream másolás</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-rescale.html">Vissza</a> </td><th width="60%" align="center">8. fejezet - A <span class="application">MEncoder</span> használatának alapjai</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-streamcopy"></a>8.7. Stream másolás</h2></div></div></div><p>
+<span class="application">MEncoder</span> kétféleképpen tudja kezelni a folyamokat:
+<span class="bold"><strong>kódolni</strong></span> vagy <span class="bold"><strong>másolni</strong></span>
+tudja őket. Ez a rész a <span class="bold"><strong>másolásról</strong></span> szól.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Videó stream</strong></span> (<tt class="option">-ovc copy</tt> kapcsoló):
+  szép dolgokat lehet vele csinálni :) Például FLI vagy VIVO vagy
+  MPEG-1 videót tenni (nem konvertálni!) AVI fájlba! Természetesen csak az
+  <span class="application">MPlayer</span> tudja lejátszani az ilyen fájlokat :) Ennek
+  valószínűleg gyakorlati haszna nincs. Ésszerűbben: a videó stream másolása
+  hasznos lehet például ha csak az audió stream-et kell kódolni (például
+  tömörítetlen PCM-et MP3-ba).
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Audió stream</strong></span> (<tt class="option">-oac copy</tt> kapcsoló):
+  őszintén szólva... Bele lehet mixelni egy külső audió fájlt (MP3, WAV) a
+  kimeneti stream-be. Használd a
+  <tt class="option">-audiofile <em class="replaceable"><code>fájlnév</code></em></tt> kapcsolót
+  ehhez.
+</p></li></ul></div><p>
+A <tt class="option">-oac copy</tt> használatával végrehajtott egyik konténer
+formátumból másikba történő másoláshoz szükséges lehet a
+<tt class="option">-fafmttag</tt> kapcsoló, hogy megmaradjon az eredeti fájl
+audió formátum tag-je.
+Például ha egy NSV fájl AAC audióval AVI konténerbe alakítasz át, az
+audió formátum tag hibás lesz és meg kell változtatni. Az audió formátum
+tag-ek listáját megtalálod a <tt class="filename">codecs.conf</tt> fájlban.
+</p><p>
+Példa:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>bemenet.nsv</code></em> -oac copy -fafmttag 0x706D \
+  -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -o <em class="replaceable"><code>kimenet.avi</code></em>
+</pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-rescale.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">8.6. Filmek átméretezése </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 8.8. Kódolás több bemeneti képfájlból (JPEG, PNG, TGA, stb.)</td></tr></table></div></body></html>

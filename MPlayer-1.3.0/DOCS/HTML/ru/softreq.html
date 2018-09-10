@@ -1,0 +1,48 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.1. Требуемые программы:</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="install.html" title="Глава 2. Установка"><link rel="prev" href="install.html" title="Глава 2. Установка"><link rel="next" href="features.html" title="2.2. Возможности:"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.1. Требуемые программы:</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="install.html">Пред.</a> </td><th width="60%" align="center">Глава 2. Установка</th><td width="20%" align="right"> <a accesskey="n" href="features.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="softreq"></a>2.1. Требуемые программы:</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>binutils</strong></span> - рекомендуемая версия - это
+  <span class="bold"><strong>2.11.x</strong></span>.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>gcc</strong></span> - рекомендуемые версии:
+  2.95 и 3.4+.  Известно, что 2.96 и 3.0.x генерируют испорченный код.
+  С 3.1 и 3.2 были проблемы, с 3.3. тоже были небольшие проблемы. На PowerPC используйте 4.x+.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>XOrg/XFree86</strong></span> - рекомендуемая версия -
+  4.3 или более поздняя.  Убедитесь, что также установлен
+  <span class="bold"><strong>пакет разработки</strong></span>, иначе это не будет работать.
+  Вам необязательно иметь X, некоторые драйверы вывода видео работают и без него.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>make</strong></span> - рекомендуемая версия - 3.79.x или
+  более поздняя. Для сборки XML документации требуется 3.80.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>FreeType</strong></span> - версия 2.0.9 или более поздняя
+  требуется для OSD и субтитров.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>ALSA</strong></span> - необязательно, для поддержки вывода звука через ALSA
+  Требуется минимум  0.9.0rc4.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libjpeg</strong></span> - необходима для опционального
+  драйвера вывода видео JPEG.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libpng</strong></span> - необходима для опционального
+  драйвера вывода видео PNG.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>directfb</strong></span> - необязательно, версия 0.9.13 или
+  более поздняя требуется для драйвера вывода видео directfb.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>lame</strong></span> - рекомендуется 3.90 или новее,
+  необходимо для кодирования MP3 аудио c <span class="application">MEncoder</span>,
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>zlib</strong></span> - рекомендуется, необходима для сжатых
+  MOV заголовков и поддержки PNG.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong><a class="ulink" href="http://www.live555.com/mplayer/" target="_top">LIVE555 Streaming Media</a></strong></span>
+- необязательно, необходимо для некоторых RTSP/RTP потоков.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>cdparanoia</strong></span> - необязательно, для поддержки CDDA
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libxmms</strong></span> - необязательно, для поддержки входных плагинов XMMS.
+Требуется минимум 1.2.7.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libsmb</strong></span> - необязательно, для поддержки
+  сетевого протокола SMB.
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="install.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="features.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">Глава 2. Установка </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 2.2. Возможности:</td></tr></table></div></body></html>

@@ -1,0 +1,65 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. Comment faire des tests de regression en utilisant Subversion</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="prev" href="bugreports_fix.html" title="A.2. Comment réparer les bogues"><link rel="next" href="bugreports_report.html" title="A.4. Comment rapporter les bogues"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. Comment faire des tests de regression en utilisant Subversion</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">Précédent</a> </td><th width="60%" align="center">Annexe A. Comment rapporter les bogues</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. Comment faire des tests de regression en utilisant Subversion</h2></div></div></div><p>
+  Un problème qui peut survenir quelque fois est «cela marchait avant,
+et plus maintenant...».
+Voici une procédure étape-par-étape pour tenter d'indiquer quand exactement
+le problème s'est produit. Ceci n'est <span class="bold"><strong>pas</strong></span> pour les utilisateurs
+occasionnels.
+</p><p>
+Premièrement, vous aurez besoin de récuperer l'arbre des sources de MPlayer depuis le dépot
+Subversion.
+Les instructions peuvent être trouvé au bas de
+<a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">cette page</a>.
+</p><p>
+Vous aurez donc dans le repertoire mplayer/ une image de l'arbre Subversion, du coté
+client.
+Maintenant mettez à jour cette image à la date voulue :
+</p><pre class="screen">
+cd mplayer/
+svn update -r {"2004-08-23"}
+</pre><p>
+Le format de date est AAAA-MM-JJ HH:MM:SS.
+Utiliser ce format de date vous assure que vous pourrez extraire les patches
+selon la date à laquelle elles ont été fusionnés au dépot, comme dans l'
+<a class="ulink" href="http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">archive MPlayer-cvslog</a>.
+</p><p>
+Maintenant procéder comme pour une mise-à-jour normale :
+</p><pre class="screen">
+./configure
+make
+</pre><p>
+</p><p>
+Pour un non-informaticien qui lit ceci, la méthode la plus rapide d'arriver au point
+où le problème se produit est d'utiliser une recherche dichotomique — qui est,
+chercher la date où est survenu le problème en divisant à plusieurs reprises l'intervalle
+de recherche par moitié.
+Par exemple, si le problème se produit en 2003, commencez en milieu d'année, puis demandez-vous
+"Le problème est-il déjà présent à ce moment?".
+Si oui, revenez au premier Avril; si non, allez au premier Octobre,
+et ainsi de suite.
+</p><p>
+Si vous avez beaucoup d'espace libre sur le disque dur (une compilation complète des sources prend actuellement
+100 MO, et environ 300-350 MO si les symboles de déboguage sont activés), copiez la
+plus vieille version fonctionnelle connue avant de la mettre à jour; cela sauvera du temps si
+vous devez y revenir.
+(Il est habituellement nécessaire de lancer 'make distclean' avant de recompiller une
+version plus récente, donc si vous ne faites pas une copie de sauvegarde de votre arbre
+source original, vous devrez tout recompiler dedans quand vous reviendrez
+à la version présente.)
+</p><p>
+Quand vous avez trouvé le jour où le problème survient, continuez la recherche
+en utilisant l'archive mplayer-cvslog (triée par date) et en affinant par des
+mises-à-jour depuis Subversion en précisant heure, minute et seconde :
+</p><pre class="screen">
+svn update -r {"2004-08-23 15:17:25"}
+</pre><p>
+Cela vous permettra de trouver facilement le patch exact à l'origine du problème.
+</p><p>
+Si vous trouvez le patch qui est la cause du problème, vous avez quasiement gagné;
+signalez le à
+<a class="ulink" href="http://bugzilla.mplayerhq.hu/" target="_top">MPlayer Bugzilla</a> ou
+souscrivez à
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-users</a>
+et postez-le là.
+Il y a une chance pour que l'auteur s'empresse de suggérer un correctif.
+Vous pouvez également décortiquer le patch jusqu'à ce que le bug vous saute aux yeux :-).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. Comment réparer les bogues </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> A.4. Comment rapporter les bogues</td></tr></table></div></body></html>

@@ -1,0 +1,45 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.12. Radio</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="prev" href="tv-teletext.html" title="3.11. Videotext"><link rel="next" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="radio.html#radio-input" title="3.12.1. Radio Input"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.12. Radio</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-teletext.html">Zurück</a> </td><th width="60%" align="center">Kapitel 3. Gebrauch</th><td width="20%" align="right"> <a accesskey="n" href="video.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="radio"></a>3.12. Radio</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-input"></a>3.12.1. Radio Input</h3></div></div></div><p>
+  Dieser Abschnitt behandelt das Hören von Radio mittels eines V4L-kompatiblen Radioempfängers. Siehe Manpage für eine Beschreibung der Radio-Optionen und Tastensteuerungen.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-compilation"></a>3.12.1.1. Kompilierung</h4></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Zuerst muss <span class="application">MPlayer</span> neu kompiliert werden mittels <tt class="filename">./configure</tt> mit
+  <tt class="option">--enable-radio</tt> und (falls Aufzeichnen untersttzt werden soll)
+  <tt class="option">--enable-radio-capture</tt>.
+</p></li><li class="step"><p>
+  Stelle sicher, dass dein Empfänger mit anderer Radio Software für Linux läuft, wie z.B. <span class="application">XawTV</span>.
+</p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-tips"></a>3.12.1.2. Tips zum Gebrauch</h4></div></div></div><p>
+  Eine vollständige Liste aller Optionen ist in der Manpage.
+  Hier sind nur ein paar Tips:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Benutze die Option <tt class="option">channels</tt>. Ein Beispiel:
+  </p><pre class="screen">-radio channels=104.4-Sibir,103.9-Maximum</pre><p>
+  Erklärung: Mit dieser Option sind nur die Frequenzen 104.4 und 103.9 in Gebrauch. Ein netter OSD-Text wird beim Kanalwechsel den Namen des Kanals angeben.
+  Leerzeichen im Kanalnamen müssen ersetzt werden durch das Zeichen "_".
+</p></li><li class="listitem"><p>
+  Es gibt mehrere Möglichkeiten, Radio aufzuzeichnen. Das Sound-Signal kann entweder mit der Soundkarte und einer externen Kabelverbindung
+  zwischen dem Line-In der Soundkarte und der TV-Karte erfasst werden,
+  oder mittels des eingebauten ADC im saa7134-Chip. In letzterem Falle ist es nötig, den Treiber
+  <code class="systemitem">saa7134-alsa</code> oder <code class="systemitem">saa7134-oss</code> zu laden.
+</p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span> ist zum Aufzeichnen von Radio ungeeignet, da es einen Video Stream benötigt. Daher kannst du entweder
+  <span class="application">arecord</span> vom ALSA Projekt benutzen, oder die
+  Option <tt class="option">-ao pcm:file=file.wav</tt>. In letzterem Falle wirst du keinen Sound hören können
+  (es sei denn, du hast ein Line-In Kabel und hast den Line-In Kanal nicht stumm geschaltet).
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-examples"></a>3.12.1.3. Beispiele</h4></div></div></div><div class="informalexample"><p>
+  Input von Standard-V4L (mittels Line-In Kabel, keine Aufzeichnung):
+  </p><pre class="screen">mplayer radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+  Input von Standard-V4L (mittels Line-In Kabel, keine Aufzeichnung,
+  V4Lv1 Interface):
+  </p><pre class="screen">mplayer -radio driver=v4l radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+  Abspielen des zweiten Kanals aus der Kanalliste:
+  </p><pre class="screen">mplayer -radio channels=104.4=Sibir,103.9=Maximm  radio://2</pre><p>
+</p></div><div class="informalexample"><p>
+Leiten des Sounds über den PCI-Bus vom internen ADC des Radio-Empfängers.
+In diesem Beispiel wird der Empfänger als zweite Soundkarte genutzt (ALSA device hw:1,0).
+Für saa7134-basierte Karten muss entweder das Modul
+<code class="systemitem">saa7134-alsa</code> oder <code class="systemitem">saa7134-oss</code> geladen werden.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Anmerkung</h3><p>Werden ALSA-Gerätenamen benutzt, so müssen Doppelpunkte durch Gleichheitszeichen und Kommata durch Punkte ersetzt werden.
+    </p><pre class="screen">mplayer -rawaudio rate=32000 -radio adevice=hw=1.0:arate=32000:channels=104.4=Sibir,103.9=Maximm  radio://2/capture</pre><p>
+  </p></div><p>
+</p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-teletext.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="video.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">3.11. Videotext </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> Kapitel 4. Videoausgabegeräte</td></tr></table></div></body></html>

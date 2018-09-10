@@ -1,0 +1,76 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.7. Přehrávání VCD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="usage.html" title="Kapitola 3. Použití"><link rel="prev" href="dvd.html" title="3.6. Přehrávání DVD"><link rel="next" href="edl.html" title="3.8. Seznamy editačních zásahů (EDL)"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.7. Přehrávání VCD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dvd.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 3. Použití</th><td width="20%" align="right"> <a accesskey="n" href="edl.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vcd"></a>3.7. Přehrávání VCD</h2></div></div></div><p>
+Úplný seznam dostupných voleb naleznete v man stránce. Syntaxe pro standardní
+Video CD (VCD) je následující:
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>&lt;stopa&gt;</code></em> [-cdrom-device <em class="replaceable"><code>&lt;zařízení&gt;</code></em>]</pre><p>
+Příklad:
+</p><pre class="screen">mplayer vcd://2 -cdrom-device /dev/hdc</pre><p>
+Výchozím VCD zařízením je <tt class="filename">/dev/cdrom</tt>. Pokud se vaše nastavení
+liší, vytvořte symlink nebo uveďte správné zařízení na příkazovém řádku pomocí volby
+<tt class="option">-cdrom-device</tt>.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+Minimálně SCSI CD-ROM mechaniky Plextor a Toshiba vykazují mizerný výkon
+při čtení VCD. To proto, že CDROMREADRAW <code class="systemitem">ioctl</code>
+není pro tyto mechaniky plně implementováno. Pokud máte zkušenosti se
+SCSI programováním, prosíme
+<a class="ulink" href="../../tech/patches.txt" target="_top">pomozte nám</a>
+implementovat obecnou SCSI podporu pro VCD.
+</p></div><p>
+Mezitím můžete extrahovat data z VCD pomocí
+<a class="ulink" href="http://ftp.ntut.edu.tw/ftp/OS/Linux/packages/X/viewers/readvcd/" target="_top">readvcd</a>
+a výsledný soubor přehrát v <span class="application">MPlayer</span>u.
+</p><p><b>Struktura VCD. </b>
+Video CD (VCD) je tvořeno CD-ROM XA sektory, čili stopy CD-ROM mode 2
+třída 1 a 2:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  První stopa je ve formátu mode 2 třída 2 což znamená, že používá L2
+  korekci chyb. Stopa obsahuje souborový systém ISO-9660 s 2048
+  bajty/sektor. Tento souborový systém obsahuje VCD metadata informace,
+  spolu se statickými snímky často používanými v menu. MPEG segmenty menu
+  mohou být rovněž uloženy v této první stopě, ale tyto MPEGy musí být
+  rozsekány na série 150 sektorových chunků. Souborový systém ISO-9660
+  může obsahovat další soubory, které nejsou potřeba pro operace
+  s VCD.
+</p></li><li class="listitem"><p>
+  Druhá a ostatní stopy jsou všeobecně surovými MPEG (film) stopami
+  s 2324 bajty/sektor, obsahující jeden MPEG PS datový paket na
+  sektor. Ty jsou v mode 2 třída 1 formátu, takže obsahují více dat
+  v každém sektoru za cenu omezení korekce chyb. Je rovněž možné mít
+  CD-DA stopy na VCD za první stopou.
+  V některých operačních systémech jsou triky, které umožňují zpřístupnit
+  tyto ne-ISO-9660 stopy v systému souborů. V dalších operačních
+  systémech jako GNU/Linux to není možné (zatím). Zde MPEG data
+  <span class="bold"><strong>nemohou být připojena</strong></span>. Protože většina
+  filmů je uložena uvnitř tohoto druhu stopy, měli byste nejprve zkusit
+  <tt class="option">vcd://2</tt>.
+</p></li><li class="listitem"><p>
+  Existují také VCD disky bez první stopy (jediná stopa bez systému souborů).
+  Můžete je přehrát, ale nemohou být namountovány.
+</p></li><li class="listitem"><p>
+  Definice standardu Video CD se nazývá
+  Philips „White Book“ a není obecně přístupná online, ale musí být zakoupena
+  od Philipsu. Podrobnější informace o Video CD můžete nalézt
+  <a class="ulink" href="http://www.vcdimager.org/pub/vcdimager/manuals/0.7/vcdimager.html#SEC4" target="_top">v dokumentaci programu vcdimager</a>.
+</p></li></ul></div><p>
+</p><p><b>Pár slov o .DAT souborech. </b>
+Soubor veliký ~600 MB viditelný v první stopě připojeného VCD není
+skutečným souborem! Je to takzvaná ISO gateway, vytvořená proto,
+aby mohl Windows přistupovat k těmto stopám (Windows vůbec neumožňuje
+aplikacím surový přístup k zařízení).
+Pod Linuxem nemůžete kopírovat nebo přehrávat tyto soubory
+(obsahují jen nesmysly). Pod Windows je to možné, protože jeho iso9660
+ovladač emuluje surový přístup ke stopě v tomto souboru. Abyste mohli
+přehrát .DAT soubor, potřebujete ovladač kernelu který můžete nalézt
+v Linuxové verzi PowerDVD. Obsahuje upravený ovladač systému souborů
+iso9660 (<tt class="filename">vcdfs/isofs-2.4.X.o</tt>), který umí emulovat
+surové stopy přes tento stínový .DAT soubor. Pokud připojíte disk
+s pomocí jejich ovladače, můžete kopírovat či dokonce přehrávat .DAT
+soubory <span class="application">MPlayer</span>em. Ale nebude to fungovat
+se standardním iso9660 ovladačem z Linuxového kernelu! Místo toho
+použijte <tt class="option">vcd://</tt>. Alternativou kopírování VCD je
+nový jaderný ovladač jménem
+<a class="ulink" href="http://www.elis.rug.ac.be/~ronsse/cdfs/" target="_top">cdfs</a>
+(není součástí oficiálního jádra), který zobrazuje CD sekce jako
+obrazové soubory a program
+<a class="ulink" href="http://cdrdao.sf.net/" target="_top">cdrdao</a>, který bit-po-bitu
+grabuje/kopíruje CD.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dvd.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="edl.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">3.6. Přehrávání DVD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 3.8. Seznamy editačních zásahů (EDL)</td></tr></table></div></body></html>

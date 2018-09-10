@@ -1,0 +1,38 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.2. Auswahl von Eingabedatei oder -gerät</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="prev" href="menc-feat-selecting-codec.html" title="6.1. Auswahl der Codecs und Containerformate"><link rel="next" href="menc-feat-handheld-psp.html" title="6.3. Encodieren ins Sony PSP Video Format"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. Auswahl von Eingabedatei oder -gerät</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Zurück</a> </td><th width="60%" align="center">Kapitel 6. Allgemeiner Gebrauch von <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-handheld-psp.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-input"></a>6.2. Auswahl von Eingabedatei oder -gerät</h2></div></div></div><p>
+      <span class="application">MEncoder</span> kann aus Dateien oder direkt von
+      einer DVD- oder VCD-Disk encodieren.
+      Schließe einfach den Dateinamen in der Befehlszeile mit ein, um
+      von einer Datei zu ecodieren, oder
+      <tt class="option">dvd://</tt><em class="replaceable"><code>Titelnummer</code></em>
+      bzw. <tt class="option">vcd://</tt><em class="replaceable"><code>Tracknummer</code></em> zum
+      Ecodieren von einem DVD-Titel oder VCD-Track.
+      Wenn du bereits einmal eine DVD auf deine Festplatte kopiert hast
+      (du kannst ein Tool wie etwa <span class="application">dvdbackup</span>
+      verwenden, auf den meisten Systemen verfügbar)
+      und von der Kopie encodieren willst, solltest du nach wie vor die Syntax
+      <tt class="option">dvd://</tt> benutzen, zusammen mit <tt class="option">-dvd-device</tt>
+      gefolgt vom Pfad zur kopierten DVD-Root.
+
+      Die Optionen <tt class="option">-dvd-device</tt> und <tt class="option">-cdrom-device</tt>
+      können auch dazu genutzt werden, die Pfade zu den Geräte-Nodes zu überschreiben,
+      um direkt von der Disk zu lesen, falls die Standardoptionen
+      <tt class="filename">/dev/dvd</tt> und <tt class="filename">/dev/cdrom</tt> auf
+      deinem System nicht funktionieren.
+    </p><p>
+      Wenn du von einer DVD encodierst, ist es oft wünschenswert, ein zu
+      encodierendes Kapitel oder einen Bereich von Kapiteln auszuwählen.
+      Du kannst zu diesem Zweck die Option <tt class="option">-chapter</tt> nutzen.
+      Zum Beispiel wird <tt class="option">-chapter</tt> <em class="replaceable"><code>1-4</code></em>
+      nur die Kapitel 1 bis 4 der DVD encodieren.
+      Dies ist besonders nützlich, wenn du eine für zwei CDs bestimmte
+      Encodierung mit 1400 MB durchführen willst, da du sicherstellen kannst,
+      dass die Unterbrechung exakt an den Kapitelgrenzen stattfindet, anstatt mitten
+      in einer Szene.
+    </p><p>
+      Besitzt du eine unterstützte TV-Capture-Karte, kannst du auch von einem
+      TV-In-Gerät encodieren.
+      Verwende <tt class="option">tv://</tt><em class="replaceable"><code>Kanalnummer</code></em> als
+      Dateinamen und <tt class="option">-tv</tt> zur Konfiguration der zahlreichen
+      Aufnahmeeinstellungen.
+      Der DVB-Input funktioniert ähnlich.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-handheld-psp.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. Auswahl der Codecs und Containerformate </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 6.3. Encodieren ins Sony PSP Video Format</td></tr></table></div></body></html>

@@ -1,0 +1,28 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.9. tdfx_vid</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="tdfxfb.html" title="4.8. Поддержка 3Dfx YUV"><link rel="next" href="opengl.html" title="4.10. OpenGL вывод"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.9. tdfx_vid</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tdfxfb.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="opengl.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tdfx_vid"></a>4.9. tdfx_vid</h2></div></div></div><p>
+Это комбинация модуля Linux ядра и драйвера вывода видео, аналогичный
+<a class="link" href="mga_vid.html" title="4.7. Matrox фреймбуфер (mga_vid)">mga_vid</a>.
+Вам потребуется 2.4.x ядро с драйвером <code class="systemitem">agpgart</code>,
+поскольку <code class="systemitem">tdfx_vid</code> использует AGP.
+Укажите <span class="command"><strong>configure</strong></span> опцию <tt class="option">--enable-tdfxfb</tt>
+для сборки драйвера вывода видео и соберите модуль ядра, как указано далее.
+</p><div class="procedure"><a name="idp41764368"></a><p class="title"><b>Установка tdfx_vid.o модуля ядра:</b></p><ol class="procedure" type="1"><li class="step"><p>
+  Скомпилируйте <tt class="filename">tdfx_vid.o</tt>
+  </p><pre class="screen">
+cd drivers
+make</pre><p>
+</p></li><li class="step"><p>
+  Запустите (от <code class="systemitem">root</code>):
+  </p><pre class="screen">make install</pre><p>
+  что должно установить модуль и создать для Вас файл устройства.
+  Загрузите драйвер:
+  </p><pre class="screen">insmod tdfx_vid.o</pre><p>
+</p></li><li class="step"><p>
+  Чтобы сделать его загружающимся/выгружающимся автоматически, сначала вставьте
+  следующую строку в конец <tt class="filename">/etc/modules.conf</tt>:
+
+  </p><pre class="programlisting">alias char-major-178 tdfx_vid</pre><p>
+</p></li></ol></div><p>
+В том же каталоге есть тестовая программа, называющаяся
+<span class="command"><strong>tdfx_vid_test</strong></span>. Она должна вывести некоторую полезную
+информацию, если все работает нормально.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tdfxfb.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="opengl.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.8. Поддержка 3Dfx YUV </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.10. OpenGL вывод</td></tr></table></div></body></html>

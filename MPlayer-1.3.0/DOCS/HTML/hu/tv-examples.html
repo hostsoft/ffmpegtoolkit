@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.2. Példák</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="prev" href="tv-tips.html" title="4.1. Használati tippek"><link rel="next" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.2. Példák</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-tips.html">Vissza</a> </td><th width="60%" align="center">4. fejezet - TV bemenet</th><td width="20%" align="right"> <a accesskey="n" href="tv-teletext.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-examples"></a>4.2. Példák</h2></div></div></div><div class="informalexample"><p>
+Dummy kimenet AAlib-re :)
+</p><pre class="screen">mplayer -tv driver=dummy:width=640:height=480 -vo aa tv://</pre><p>
+</p></div><div class="informalexample"><p>
+Bemenet standard V4L-ről:
+</p><pre class="screen">
+mplayer -tv driver=v4l:width=640:height=480:outfmt=i420 -vc rawi420 -vo xv tv://
+</pre><p>
+</p></div><div class="informalexample"><p>
+Egy sokkal mesterkéltebb példa. Ezzel a <span class="application">MEncoder</span>
+elmenti a teljes PAL képet, levágja a széleket és deinterlace-eli a képet
+a linear blend algoritmus segítségével. Az audió 65 kbps-es állandó bitrátával
+kerül tömörítésre, a LAME codec felhasználásával. Ez a beállítás megfelelő a
+filmek elmentéséhez.
+</p><pre class="screen">
+mencoder -tv driver=v4l:width=768:height=576 -oac mp3lame -lameopts cbr:br=64\
+    -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=900 \
+    -vf crop=720:544:24:16,pp=lb -o <em class="replaceable"><code>output.avi</code></em> tv://
+</pre><p>
+</p></div><div class="informalexample"><p>
+Ez ráadásul átméretezi a képet 384x288-ra és 350 kbps-sel, nagyon jó
+minőségben összetömöríti a videót. A vqmax opció felszabadítja a
+kvantálót és így lehetővé teszi a videó tömörítőnek az ilyen alacsony
+bitráta elérését akár a minőség kárára is. Ez használható TV-s sorozatok
+elmentésekor, amikor a minőség nem olyan fontos.
+</p><pre class="screen">
+mencoder -tv driver=v4l:width=768:height=576 \
+    -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=350:vhq:vqmax=31:keyint=300 \
+    -oac mp3lame -lameopts cbr:br=48 -sws 1 -o <em class="replaceable"><code>output.avi</code></em>\
+    -vf crop=720:540:24:18,pp=lb,scale=384:288 tv://
+</pre><p>
+Meg lehet adni kisebb képméretet is a <tt class="option">-tv</tt> kapcsolónál
+és ki lehet hagyni a szoftveres méretezést, de ez a megközelítés a
+lehető legtöbb információt használja fel és egy kicsit ellenállóbb a
+zajokkal szemben. A bt8x8 chip-ek a pixel átlagolást csak vízszintesen
+tudják hardveres korlátok miatt.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-tips.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="tv-input.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="tv-teletext.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">4.1. Használati tippek </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 5. fejezet - Teletext</td></tr></table></div></body></html>

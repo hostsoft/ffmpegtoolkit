@@ -1,0 +1,69 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.8. 从多个输入图像文件进行编码(JPEG, PNG, TGA等)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="prev" href="menc-feat-streamcopy.html" title="6.7. 媒体流复制"><link rel="next" href="menc-feat-extractsub.html" title="6.9. 将DVD子标题提取到VOBsub文件"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.8. 从多个输入图像文件进行编码(JPEG, PNG, TGA等)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-streamcopy.html">上一页</a> </td><th width="60%" align="center">第 6 章 <span class="application">MEncoder</span>的基础用法</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-extractsub.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-enc-images"></a>6.8. 从多个输入图像文件进行编码(JPEG, PNG, TGA等)</h2></div></div></div><p>
+<span class="application">MEncoder</span>可以通过一个或多个JPEG, PNG, TGA, 或其
+他图片文件制作电影。使用简单的桢复制，它能生成MJPEG (移动JPEG), MPNG
+(移动PNG)或MTGA (移动TGA) 文件。
+</p><div class="orderedlist"><p class="title"><b>进程描述：</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  <span class="application">MEncoder</span>使用<code class="systemitem">libjpeg</code>
+  （当解码PNG时，它将使用<code class="systemitem">libpng</code>）将输入图片进行
+  <span class="emphasis"><em>解码</em></span>。
+</p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span>然后将解码好的图片送到被选定的视频压缩器中
+  (DivX4, Xvid, FFmpeg msmpeg4等)。
+</p></li></ol></div><p><b>例子. </b>
+关于<tt class="option">-mf</tt>选项的解释在man页中。
+
+</p><div class="informalexample"><p>
+使用当前目录下所有JPEG文件生成MPEG-4文件。
+</p><pre class="screen">
+mencoder mf://*.jpg -mf w=800:h=600:fps=25:type=jpg -ovc lavc \
+    -lavcopts vcodec=mpeg4:mbd=2:trell -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+使用当前目录中的一些JPEG文件生成MPEG-4文件。
+</p><pre class="screen">
+mencoder mf://<em class="replaceable"><code>frame001.jpg,frame002.jpg</code></em> -mf w=800:h=600:fps=25:type=jpg \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+使用显示指示的一系列JPEG文件生成MPEG-4文件（当前目录下的list.txt包含被用做源的文件列表，
+一个一行）：
+</p><pre class="screen">
+mencoder mf://<em class="replaceable"><code>@list.txt</code></em> -mf w=800:h=600:fps=25:type=jpg \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+使用当前目录下所有JPEG文件生成移动JPEG（MJPEG）文件：
+</p><pre class="screen">
+mencoder mf://*.jpg -mf w=800:h=600:fps=25:type=jpg -ovc copy -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+使用当前目录下所有PNG文件生成未压缩的文件：
+</p><pre class="screen">
+mencoder mf://*.png -mf w=800:h=600:fps=25:type=png -ovc raw -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">注意</h3><p>
+宽度必须是4的倍数，这是原始RGB AVI文件格式的限制。
+</p></div><p>
+
+</p><div class="informalexample"><p>
+使用当前目录下所有PNG文件生成移动PNG (MPNG)文件：
+</p><pre class="screen">
+mencoder mf://*.png -mf w=800:h=600:fps=25:type=png -ovc copy -oac copy -o <em class="replaceable"><code>output.avi</code></em></pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+使用当前目录下的所有TGA文件生成移动TGA (MTGA)文件：
+</p><pre class="screen">
+mencoder mf://*.tga -mf w=800:h=600:fps=25:type=tga -ovc copy -oac copy -o <em class="replaceable"><code>output.avi</code></em></pre><p>
+</p></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-streamcopy.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-extractsub.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">6.7. 媒体流复制 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 6.9. 将DVD子标题提取到VOBsub文件</td></tr></table></div></body></html>

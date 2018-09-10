@@ -1,0 +1,118 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.6. 报告什么</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="prev" href="bugreports_where.html" title="A.5. 到哪里报告错误"><link rel="next" href="bugreports_advusers.html" title="A.7. 我知道我在做什么..."><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"><link rel="subsection" href="bugreports_what.html#bugreports_system" title="A.6.1. 系统信息"><link rel="subsection" href="bugreports_what.html#bugreports_hardware" title="A.6.2. 硬件及驱动"><link rel="subsection" href="bugreports_what.html#bugreports_configure" title="A.6.3. Configure问题"><link rel="subsection" href="bugreports_what.html#bugreports_compilation" title="A.6.4. 编译问题"><link rel="subsection" href="bugreports_what.html#bugreports_playback" title="A.6.5. 回放错误"><link rel="subsection" href="bugreports_what.html#bugreports_crash" title="A.6.6. 崩溃"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.6. 报告什么</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_where.html">上一页</a> </td><th width="60%" align="center">附录 A. 如何报告错误</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_advusers.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_what"></a>A.6. 报告什么</h2></div></div></div><p>
+你可能要在你的错误报告中包含日志，配置或例子文件。如果他们中一些非常大，
+最好把它压缩（请尽量使用gzip或bzip2）并提交到我们的
+<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">FTP服务器</a>
+上并且在你的错误报告中只包含路径及文件名称。我们的邮件列表有80k的信息限制，
+如果你有更大的附件，你不得不压缩后提交。
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_system"></a>A.6.1. 系统信息</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+你的Linux发行版本或操作系统及版本，如：
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Red Hat 7.1</p></li><li class="listitem"><p>Slackware 7.0 + devel packs from 7.1 ...</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+内核版本：
+  </p><pre class="screen">uname -a</pre><p>
+</p></li><li class="listitem"><p>
+libc版本：
+  </p><pre class="screen">ls -l /lib/libc[.-]*</pre><p>
+</p></li><li class="listitem"><p>
+gcc及ld版本：
+  </p><pre class="screen">
+gcc -v
+ld -v</pre><p>
+</p></li><li class="listitem"><p>
+binutils版本：
+  </p><pre class="screen">as --version</pre><p>
+</p></li><li class="listitem"><p>
+如果你在全屏模式下出现问题：
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>视窗管理器类型及版本</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+如果你有关于XVIDIX的问题：
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>
+  X颜色深度：
+    </p><pre class="screen">xdpyinfo | grep "depth of root"</pre><p>
+  </p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+如果只是GUI有错误：
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>GTK版本</p></li><li class="listitem"><p>GLIB版本</p></li><li class="listitem"><p>libpng版本</p></li><li class="listitem"><p>错误产生时的GUI情况</p></li></ul></div><p>
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_hardware"></a>A.6.2. 硬件及驱动</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+CPU信息（这只在Linux上工作）：
+  </p><pre class="screen">cat /proc/cpuinfo</pre><p>
+</p></li><li class="listitem"><p>
+显卡厂家及型号，例如：
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>ASUS V3800U chip: nVidia TNT2 Ultra pro 32MB SDRAM</p></li><li class="listitem"><p>Matrox G400 DH 32MB SGRAM</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+显卡驱动 &amp; 版本，例如:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>X built-in driver</p></li><li class="listitem"><p>nVidia 0.9.623</p></li><li class="listitem"><p>Utah-GLX CVS 2001-02-17</p></li><li class="listitem"><p>DRI from X 4.0.3</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+声卡型号 &amp; 驱动，例如：
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Creative SBLive! Gold with OSS driver from oss.creative.com</p></li><li class="listitem"><p>Creative SB16 with kernel OSS drivers</p></li><li class="listitem"><p>GUS PnP with ALSA OSS emulation</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+如果还存在疑问，包含LInux系统上的<span class="command"><strong>lspci -vv</strong></span>输出信息。
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_configure"></a>A.6.3. Configure问题</h3></div></div></div><p>
+当你在执行<span class="command"><strong>./configure</strong></span>,或一些自动检测发生错误，阅读
+<tt class="filename">config.log</tt>。你可能会在那里发现答案。例如同一链接库的不同
+版本共存于你的系统上，或者你忘记安装开发包（包含有-dev后缀）。如果你认为有错误，
+在你的错误报告中包含<tt class="filename">config.log</tt>。
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_compilation"></a>A.6.4. 编译问题</h3></div></div></div><p>
+请包含这些文件：
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>config.h</p></li><li class="listitem"><p>config.mak</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_playback"></a>A.6.5. 回放错误</h3></div></div></div><p>
+请包含<span class="application">MPlayer</span>在一级verbose模式下的输出，另外谨记
+当你把它粘贴入邮件时<span class="bold"><strong>不要截断输出</strong></span>
+开发者需要所有信息以便正确诊断一个问题。你可以如下把输出定向到一个文件：
+</p><pre class="screen">
+mplayer -v <em class="replaceable"><code>options</code></em> <em class="replaceable"><code>filename</code></em> &gt; mplayer.log 2&gt;&amp;1
+</pre><p>
+</p><p>
+如果你的问题只针对一个或更多文件，请把他们上传到：
+<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">ftp://upload.mplayerhq.hu/incoming/</a>
+</p><p>
+另外上传一个和你的原始文件有相同本名并用.txt为后缀的小文本文件。描述你在此文件
+上遇到的问题，并且包含你的email以及<span class="application">MPlayer</span>在verbose
+一级模式下的输出。通常，文件的前1-5 MB足够用于重现问题，可是确定我们请你做：
+</p><pre class="screen">
+dd if=<em class="replaceable"><code>yourfile</code></em> of=<em class="replaceable"><code>smallfile</code></em> bs=1024k count=5
+</pre><p>
+它将提取'<span class="bold"><strong>你的文件</strong></span>'的前5MB，并将它写入
+'<span class="bold"><strong>小文件</strong></span>'。然后在此小文件上重试，如果
+错误重现，你的例子对我们已经足够了。
+请<span class="bold"><strong>千万不要</strong></span>通过邮件传送此文件！
+上传并且只发送文件在FTP服务器上的路径/文件名。如果文件在网络上获得，那么发送
+<span class="bold"><strong>精确的</strong></span>URL就足够了。
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_crash"></a>A.6.6. 崩溃</h3></div></div></div><p>
+你需要在<span class="command"><strong>gdb</strong></span>里运行<span class="application">MPlayer</span>并且把
+完全输出发给我们，或者如果你有此崩溃的<tt class="filename">core</tt>输出，你能从
+Core文件中提取有用的信息。如下：
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_debug"></a>A.6.6.1. 如何保存一个可重复崩溃的信息</h4></div></div></div><p>
+重新编译<span class="application">MPlayer</span>并打开debug选项:
+</p><pre class="screen">
+./configure --enable-debug=3
+make
+</pre><p>
+然后在gdb中运行<span class="application">MPlayer</span>:
+</p><pre class="screen">gdb ./mplayer</pre><p>
+你先在在gdb里面。输入：
+</p><pre class="screen">
+run -v <em class="replaceable"><code>options-to-mplayer</code></em> <em class="replaceable"><code>filename</code></em>
+</pre><p>
+重复你的崩溃。你一重现此现象，gdb将使你返回命令行，在此你输入
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_core"></a>A.6.6.2. 如何从core输出文件中提取有用信息</h4></div></div></div><p>
+创建如下命令文件：
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+然后只执行这个命令
+</p><pre class="screen">
+gdb mplayer --core=core -batch --command=command_file &gt; mplayer.bug
+</pre><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_where.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_advusers.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">A.5. 到哪里报告错误 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> A.7. 我知道我在做什么...</td></tr></table></div></body></html>

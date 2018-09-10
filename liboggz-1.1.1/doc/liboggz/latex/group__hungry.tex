@@ -1,0 +1,99 @@
+\section{Writing with Oggz\-Hungry callbacks}
+\label{group__hungry}\index{Writing with Oggz\-Hungry callbacks@{Writing with Oggz\-Hungry callbacks}}
+
+
+You can add packets to the Oggz packet queue only when it is \char`\"{}hungry\char`\"{} by providing an Oggz\-Hungry callback.  
+
+
+You can add packets to the Oggz packet queue only when it is \char`\"{}hungry\char`\"{} by providing an Oggz\-Hungry callback. An Oggz\-Hungry callback will\-:
+\begin{DoxyItemize}
+\item Create an {\itshape ogg\-\_\-packet} structure
+\item Add it to the packet queue with \doxyref{oggz\-\_\-write\-\_\-feed()}{p.}{group__write__api_ga6ccaceb107db1fd2eae047dbdbaa5889}
+\end{DoxyItemize}
+
+Once you have set such a callback with \doxyref{oggz\-\_\-write\-\_\-set\-\_\-hungry\-\_\-callback()}{p.}{group__write__api_gaf362c030bc7a7f57cb23f2b863a59389}, simply call \doxyref{oggz\-\_\-write()}{p.}{group__write__api_ga3c97d94ea425d64546adf9c368b71904} or \doxyref{oggz\-\_\-write\-\_\-output()}{p.}{group__write__api_ga5606dff01964caec4582eb172fde0c1c} repeatedly, and Oggz will call your callback to provide packets when it is hungry.
+
+This process is illustrated in the following diagram\-:
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=10cm]{hungry}
+\caption{Using Oggz\-Hungry}
+\end{DoxyImage}
+
+
+The following example code generates a stream of ten packets, each containing a single byte ('A', 'B', ... , 'J')\-:
+
+
+\begin{DoxyCodeInclude}
+
+\textcolor{preprocessor}{#include <stdlib.h>} \textcolor{comment}{/* exit */}
+\textcolor{preprocessor}{#include "oggz/oggz.h"}
+
+\textcolor{keyword}{static} \textcolor{keywordtype}{long} serialno;
+\textcolor{keyword}{static} ogg\_int64\_t granulepos = 0;
+\textcolor{keyword}{static} ogg\_int64\_t packetno = 0;
+
+\textcolor{keyword}{static} \textcolor{keywordtype}{int}
+hungry (OGGZ * oggz, \textcolor{keywordtype}{int} empty, \textcolor{keywordtype}{void} * user\_data)
+\{
+  ogg\_packet op;
+  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} buf[1];
+
+  buf[0] = \textcolor{charliteral}{'A'} + (int)packetno;
+
+  op.packet = buf;
+  op.bytes = 1;
+  op.granulepos = granulepos;
+  op.packetno = packetno;
+
+  \textcolor{keywordflow}{if} (packetno == 0) op.b\_o\_s = 1;
+  \textcolor{keywordflow}{else} op.b\_o\_s = 0;
+
+  \textcolor{keywordflow}{if} (packetno == 9) op.e\_o\_s = 1;
+  \textcolor{keywordflow}{else} op.e\_o\_s = 0;
+
+  oggz_write_feed (oggz, &op, serialno, OGGZ_FLUSH_AFTER, NULL);
+
+  granulepos += 100;
+  packetno++;
+
+  \textcolor{keywordflow}{return} 0;
+\}
+
+\textcolor{keywordtype}{int}
+main (\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} * argv[])
+\{
+  \textcolor{keywordtype}{char} * progname, * filename = NULL;
+  OGGZ * oggz;
+  \textcolor{keywordtype}{long} n;
+
+  progname = argv[0];
+  \textcolor{keywordflow}{if} (argc > 1) filename = argv[1];
+
+  \textcolor{keywordflow}{if} (filename) \{
+    oggz = oggz_open (filename, OGGZ_WRITE);
+  \} \textcolor{keywordflow}{else} \{
+    oggz = oggz_open_stdio (stdout, OGGZ_WRITE);
+  \}
+
+  \textcolor{keywordflow}{if} (oggz == NULL) \{
+    fprintf (stderr, \textcolor{stringliteral}{"%s: Error creating oggz\(\backslash\)n"}, progname);
+    exit (1);
+  \}
+
+  serialno = oggz_serialno_new (oggz);
+
+  \textcolor{keywordflow}{if} (oggz_write_set_hungry_callback (oggz, hungry, 1, NULL) == -1) \{
+    fprintf (stderr, \textcolor{stringliteral}{"%s: Error setting OggzHungry callback\(\backslash\)n"}, progname);
+    exit (1);
+  \}
+
+  \textcolor{keywordflow}{while} ((n = oggz_write (oggz, 32)) > 0);
+
+  oggz_close (oggz);
+
+  exit (0);
+\}
+\end{DoxyCodeInclude}
+ 

@@ -1,0 +1,128 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.6. Que rapporter</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="prev" href="bugreports_where.html" title="A.5. Où rapporter les bogues"><link rel="next" href="bugreports_advusers.html" title="A.7. Je sais ce que je fait..."><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="bugreports_what.html#bugreports_system" title="A.6.1. Information Système"><link rel="subsection" href="bugreports_what.html#bugreports_hardware" title="A.6.2. Matériel et pilotes"><link rel="subsection" href="bugreports_what.html#bugreports_configure" title="A.6.3. Problèmes de configuration"><link rel="subsection" href="bugreports_what.html#bugreports_compilation" title="A.6.4. Problèmes de compilation"><link rel="subsection" href="bugreports_what.html#bugreports_playback" title="A.6.5. Problèmes de lecture"><link rel="subsection" href="bugreports_what.html#bugreports_crash" title="A.6.6. Plantages"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.6. Que rapporter</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_where.html">Précédent</a> </td><th width="60%" align="center">Annexe A. Comment rapporter les bogues</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_what"></a>A.6. Que rapporter</h2></div></div></div><p>
+Vous pouvez avoir besoin d'inclure des fichiers de log, de configuration
+ou d'échantillon. Si certains sont très gros alors il vaut mieux les uploader
+sur notre <a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">serveur FTP</a>
+en format compressé (gzip et bzip2 préférés) et indiquer uniquement leur
+chemin et nom dans le rapport de bogue.
+Nos listes de diffusion ont une taille de message limite de 80k, si vous
+avez quelque chose de plus gros vous devrez le compresser ou l'uploader.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_system"></a>A.6.1. Information Système</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+Votre distribution Linux ou système d'exploitation et version, ex. :
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Red Hat 7.1</p></li><li class="listitem"><p>Slackware 7.0 + paquets de développement de la 7.1 ...</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Version du noyau :
+</p><pre class="screen">uname -a</pre><p>
+</p></li><li class="listitem"><p>
+Version de la libc :
+</p><pre class="screen">ls -l /lib/libc[.-]*</pre><p>
+</p></li><li class="listitem"><p>
+Versions de gcc et ld :
+</p><pre class="screen">
+gcc -v
+ld -v
+</pre><p>
+</p></li><li class="listitem"><p>
+Version des binutils :
+</p><pre class="screen">as --version</pre><p>
+</p></li><li class="listitem"><p>
+Si vous avez des problèmes avec le mode plein-écran :
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Type de gestionnaire de fenêtre et version</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Si vous avez des problèmes avec XVIDIX :
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Profondeur de couleur de X :
+</p><pre class="screen">xdpyinfo | grep "depth of root"</pre><p>
+    </p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Si seul le GUI (ou IHM - Interface Homme Machine) est boguée :
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Version de GTK</p></li><li class="listitem"><p>Version de GLIB</p></li><li class="listitem"><p>Position dans le GUI au moment où le bogue se produit</p></li></ul></div><p>
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_hardware"></a>A.6.2. Matériel et pilotes</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+Info CPU (cela ne fonctionne que sous Linux) :
+</p><pre class="screen">cat /proc/cpuinfo</pre><p>
+</p></li><li class="listitem"><p>
+Fabricant et modèle de votre carte vidéo, ex. :
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Puce ASUS V3800U: nVidia TNT2 Ultra pro 32Mo SDRAM</p></li><li class="listitem"><p>Matrox G400 DH 32Mo SGRAM</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Type et version des drivers vidéo, ex. :
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Pilote X intégré</p></li><li class="listitem"><p>nVidia 0.9.623</p></li><li class="listitem"><p>Utah-GLX CVS 2001-02-17</p></li><li class="listitem"><p>DRI avec X 4.0.3</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Type de carte son et pilote, ex. :
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Creative SBLive! Gold avec pilote OSS de oss.creative.com</p></li><li class="listitem"><p>Creative SB16 avec pilotes noyau OSS</p></li><li class="listitem"><p>GUS PnP avec émulation OSS ALSA</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+En cas de doute, joignez-y le résultat de <span class="command"><strong>lspci -vv</strong></span> sur les systèmes Linux.
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_configure"></a>A.6.3. Problèmes de configuration</h3></div></div></div><p>
+Si vous rencontrez des erreurs pendant l'éxecution de <span class="command"><strong>./configure</strong></span>,
+ou si l'auto-détection ou autre chose échoue, lisez <tt class="filename">config.log</tt>.
+Vous pourriez y trouver la réponse, par exemple des versions multiples
+mélangées de la même librairie dans votre système, ou vous avez oublié
+d'installer les paquets de développement (ceux avec le suffixe -dev).
+Si vous pensez que c'est un bogue, incluez
+<tt class="filename">config.log</tt> dans votre rapport de bogue.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_compilation"></a>A.6.4. Problèmes de compilation</h3></div></div></div><p>
+Veuillez inclure ces fichiers :
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>config.h</p></li><li class="listitem"><p>config.mak</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_playback"></a>A.6.5. Problèmes de lecture</h3></div></div></div><p>
+Merci d'inclure la sortie de <span class="application">MPlayer</span> en verbosité niveau 1,
+mais rappelez-vous de <span class="bold"><strong>ne pas tronquer la sortie</strong></span> en le
+copiant dans votre mail. Les développeurs ont besoin de tous les messages
+pour diagnostiquer correctement un problème. Vous pouvez rediriger la sortie
+dans un fichier comme ceci :
+</p><pre class="screen">mplayer -v <em class="replaceable"><code>options</code></em> <em class="replaceable"><code>nomfichier</code></em> &gt; mplayer.log 2&gt;&amp;1</pre><p>
+</p><p>
+Si votre problème est spécifique à un ou plusieurs fichiers, alors merci d'uploader
+le(s) fautif(s) sur :
+<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">ftp://upload.mplayerhq.hu/incoming/</a>
+</p><p>
+Uploadez aussi un petit fichier texte ayant le même nom que votre fichier
+mais avec une extension .txt.
+Décrivez le problème que vous avez avec ce fichier et incluez votre adresse
+e-mail ainsi que la sortie de MPlayer en verbosité niveau 1.
+Généralement les premiers 1-5 Mo sont suffisants pour reproduire le problème,
+mais pour être sûrs nous vous demandons de faire :
+</p><pre class="screen">dd if=<em class="replaceable"><code>votre_fichier</code></em> of=<em class="replaceable"><code>petit_fichier</code></em> bs=1024k count=5</pre><p>
+Cela coupera les 5 premiers Mo de '<span class="bold"><strong>votre_fichier</strong></span>'
+et les sauvera dans '<span class="bold"><strong>petit_fichier</strong></span>'.
+Essayez alors de lire le petit fichier, et si le bogue persiste vous pouvez
+envoyer le petit fichier par ftp. <span class="bold"><strong>N'envoyez jamais</strong></span>
+ces fichiers par e-mail SVP !
+Envoyez-les par FTP, et postez seulement le chemin/nom des fichiers sur le serveur
+FTP. Si le fichier est accessible en téléchargement à partir d'Internet, alors
+envoyez seulement son adresse URL <span class="bold"><strong>exacte</strong></span>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_crash"></a>A.6.6. Plantages</h3></div></div></div><p>
+Vous devez lancer <span class="application">MPlayer</span> à l'intérieur de
+<span class="command"><strong>gdb</strong></span> et nous envoyer le résultat complet ou si vous
+avez un <tt class="filename">core</tt> dump du plantage vous pouvez extraire
+des informations utiles du fichier Core. Voici comment :
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_debug"></a>A.6.6.1. Comment conserver les informations sur un plantage reproductible</h4></div></div></div><p>
+Recompilez <span class="application">MPlayer</span> avec les instructions de
+déboguage activées :
+</p><pre class="screen">
+./configure --enable-debug=3
+make
+</pre><p>
+et ensuite lancez MPlayer à l'intérieur de gdb en utilisant :
+</p><pre class="screen">gdb ./mplayer</pre><p>
+Vous êtes maintenant à l'intérieur de gdb. Tapez :
+</p><pre class="screen">run -v <em class="replaceable"><code>options-pour-mplayer</code></em> <em class="replaceable"><code>nomfichier</code></em></pre><p>
+et reproduisez votre plantage.
+Aussitôt que vous l'avez fait, gdb va vous renvoyer à la ligne de commande
+où vous devrez entrer
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+Utilise disass $pc-32 $pc+32 avec les anciennes versions de gdb.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_core"></a>A.6.6.2. Comment extraire les informations significatives d'un core dump</h4></div></div></div><p>
+Créer le fichier de commande suivant :
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+Ensuite exécutez simplement la commande :
+</p><pre class="screen">gdb mplayer --core=core -batch --command=<em class="replaceable"><code>fichier_de_commande</code></em> &gt; mplayer.bug</pre><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_where.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">A.5. Où rapporter les bogues </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> A.7. Je sais ce que je fait...</td></tr></table></div></body></html>

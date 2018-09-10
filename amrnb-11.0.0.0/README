@@ -1,0 +1,57 @@
+3GPP Adaptive Multi-Rate Floating-point (AMR) Speech Codec Shared Library
+
+3GPP released reference implementation of 3GPP Adaptive Multi-Rate
+Floating-point (AMR) Speech Codec (3GPP TS 26.104 V 11.0.0).
+
+http://www.3gpp.org/ftp/Specs/html-info/26104.htm
+
+Reference implementation is available as a source code, but the code uses
+#define to choose code options type. In world of GNU-Linux, there is a common
+practice to compile such code as a shared library.
+
+Due to restrictive license, the reference implementation is not part of
+this package and it is dowloaded from 3GPP during build. If you want to
+build this package without network access, you either have to put the
+original source code ZIP file to the unpacked wrapper code directory or
+you have to use full source core (see below).
+
+This package converts 3GPP TS 26.104 V 11.0.0 reference implementation of AMR-NB
+to a shared library. It has exactly the same API, but some calls are wrapped by
+macros to call proper variant of the function.
+
+It supports following three defines:
+-DIF2 -DETSI -DVAD2
+
+For more see readme.txt and 26104-b00.doc, which comes with the original code.
+
+Note that VAD=VAD1 from readme.txt is valid only for original Makefiles, not C
+sources.
+
+Please note, that this wrapper does not fix any bugs of original code,
+especially it does not fix known crashes on input files with different format
+than expected. I will accept patches for it, if 3GPP will not release fixed
+implementation.
+
+To use package compiled by this code, you may need a license from 3GPP.
+
+It is possible to distribute these packages in three source forms:
+1. As a wrapper-only source (as you can build by "make extradist").
+2. As a full source code including 3GPP code (as you can build by "make dist").
+3. As a wrapper-only source accompanied by the original zip file.
+
+Package home page: http://www.penguin.cz/~utx/amr
+
+For problems with the shared library wrapper or building code please contact
+Stanislav Brabec <utx@penguin.cz>
+
+For problems with the implementation, contact 3GPP.
+
+Technical notes:
+
+The code has three branches depending on ETSI and IF2 defines. It's not
+much useful while creating library. So it contains three variants of
+code using different defines and modifies the header to select proper
+version during compilation of the application using this library.
+
+In addition to "make dist", you can also call "make extradist", which
+builds distribution package containing BSD-3 licensed wrapper only.

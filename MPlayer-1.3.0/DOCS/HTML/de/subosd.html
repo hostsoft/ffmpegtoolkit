@@ -1,0 +1,58 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.2. Untertitel und OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="prev" href="commandline.html" title="3.1. Kommandozeile"><link rel="next" href="control.html" title="3.3. Steuerung/Kontrolle"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. Untertitel und OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="commandline.html">Zurück</a> </td><th width="60%" align="center">Kapitel 3. Gebrauch</th><td width="20%" align="right"> <a accesskey="n" href="control.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="subosd"></a>3.2. Untertitel und OSD</h2></div></div></div><p>
+    <span class="application">MPlayer</span> kann Untertitel bei Filmen darstellen.
+    Momentan werden die folgenden Formate unterstützt:
+    </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>VOBsub</p></li><li class="listitem"><p>OGM</p></li><li class="listitem"><p>CC (closed caption)</p></li><li class="listitem"><p>MicroDVD</p></li><li class="listitem"><p>SubRip</p></li><li class="listitem"><p>SubViewer</p></li><li class="listitem"><p>Sami</p></li><li class="listitem"><p>VPlayer</p></li><li class="listitem"><p>RT</p></li><li class="listitem"><p>SSA</p></li><li class="listitem"><p>PJS (Phoenix Japanimation Society)</p></li><li class="listitem"><p>MPsub</p></li><li class="listitem"><p>AQTitle</p></li><li class="listitem"><p><a class="ulink" href="http://unicorn.us.com/jacosub/" target="_top">JACOsub</a></p></li></ul></div><p>
+  </p><p>
+    <span class="application">MPlayer</span> kann (<span class="bold"><strong>außer den ersten drei</strong></span>)
+    die oben gelisteten Zielformate ausgeben (speichern), und zwar mit folgenden Optionen:
+    </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>MPsub: <tt class="option">-dumpmpsub</tt></p></li><li class="listitem"><p>SubRip: <tt class="option">-dumpsrtsub</tt></p></li><li class="listitem"><p>MicroDVD: <tt class="option">-dumpmicrodvdsub</tt></p></li><li class="listitem"><p>JACOsub: <tt class="option">-dumpjacosub</tt></p></li><li class="listitem"><p>Sami: <tt class="option">-dumpsami</tt></p></li></ul></div><p>
+  </p><p>
+    <span class="application">MEncoder</span> kann DVD-Untertitel im
+    <a class="link" href="menc-feat-extractsub.html" title="6.9. Extrahieren von DVD-Untertiteln in eine VOBsub-Datei">VOBsub</a>-Format ausgeben.
+  </p><p>
+    Die Kommandozeilenoptionen unterscheiden sich leicht von den anderen Formaten:
+  </p><p><b>VOBsub-Untertitel. </b>
+      VOBsub-Untertitel bestehen aus einer (ein paar Megabyte) großen
+      <tt class="filename">.SUB</tt> Datei, und optional <tt class="filename">.IDX-</tt> und/oder
+      <tt class="filename">.IFO</tt>-Dateien. Wenn du Dateien hast wie
+      <tt class="filename"><em class="replaceable"><code>beispiel.sub</code></em></tt>,
+      <tt class="filename"><em class="replaceable"><code>beispiel.ifo</code></em></tt> (optional),
+      oder <tt class="filename"><em class="replaceable"><code>beispiel.idx</code></em></tt>, musst du
+      <span class="application">MPlayer</span> die Optionen
+      <tt class="option">-vobsub beispiel [-vobsubid <em class="replaceable"><code>id</code></em>]</tt>
+      übergeben (vollständige Pfadangabe optional).
+      Die Option <tt class="option">-vobsubid</tt> verhält sich wie
+      die Option <tt class="option">-sid</tt> für DVDs, du kannst damit Tracks (Sprachen) wählen.
+      Im Falle, dass <tt class="option">-vobsubid</tt> nicht angegeben wird, wird
+      <span class="application">MPlayer</span> versuchen, auf die Sprachen zurückzugreifen,
+      die mit der Option <tt class="option">-slang</tt> angegeben werden, und sonst auf
+      <code class="systemitem">langidx</code> zurückzugreifen, um die Untertitelsprache zu wählen.
+      Schlägt dies fehl, wird es keine Untertitel geben.
+    </p><p><b>Andere Untertitel. </b>
+      Die anderen Formate bestehen aus einer Textdatei, die Zeit-, Platzierungs- und
+      Textinformationen enthält. Gebrauch:
+      Wenn du eine Datei wie
+      <tt class="filename"><em class="replaceable"><code>beispiel.txt</code></em></tt> hast,
+      musst du die Option <tt class="option">-sub <em class="replaceable"><code>beispiel.txt</code></em></tt>
+      (vollständiger Pfad optional) angeben.
+    </p><div class="variablelist"><p class="title"><b>Untertitel-Timing und Platzierung angeben:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-subdelay <em class="replaceable"><code>sek</code></em></tt></span></dt><dd><p>
+          Verzögert Untertitel um <tt class="option"><em class="replaceable"><code>sek</code></em></tt>
+          Sekunden. Kann negativ sein. Dieser Wert wird zum Zeitpositionszähler
+          hinzuaddiert.
+        </p></dd><dt><span class="term"><tt class="option">-subfps <em class="replaceable"><code>RATE</code></em></tt></span></dt><dd><p>
+          Gibt die Frame/sek-Rate der Untertiteldatei (Fließkommazahl) an.
+        </p></dd><dt><span class="term"><tt class="option">-subpos <em class="replaceable"><code>0-100</code></em></tt></span></dt><dd><p>
+          Gibt die Position der Untertitel an.
+        </p></dd></dl></div><p>
+    Wenn du bei Benutzung einer MicroDVD-Untertiteldatei eine zunehmende Verzögerung
+    zwischen Film und Untertiteln feststellst, ist vermutlich die Framerate des
+    Films und die der Untertiteldatei unterschiedlich. Beachte bitte, dass das MicroDVD-Untertitelformat
+    absolute Framenummern nutzt. Daher sollte die Option <tt class="option">-subfps</tt>
+    bei diesem Format verwendet werden. Wenn du dieses Problem auf Dauer beheben willst,
+    musst du die Framerate manuell konvertieren.
+    <span class="application">MPlayer</span> kann diese Konvertierung für dich übernehmen:
+
+    </p><pre class="screen">mplayer -dumpmicrodvdsub -fps <em class="replaceable"><code>untertitel_fps</code></em> -subfps <em class="replaceable"><code>avi_fps</code></em> -sub <em class="replaceable"><code>untertitel_dateiname</code></em> <em class="replaceable"><code>dummy.avi</code></em></pre><p>
+  </p><p>
+    Ausführungen über DVD-Untertitel findest du im Abschnitt <a class="link" href="dvd.html" title="3.6. DVD-Wiedergabe">DVD</a>.
+  </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="commandline.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="control.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. Kommandozeile </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 3.3. Steuerung/Kontrolle</td></tr></table></div></body></html>

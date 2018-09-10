@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. Как провести проверку на деградацию, используя Subversion</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="prev" href="bugreports_fix.html" title="A.2. Как исправить ошибку"><link rel="next" href="bugreports_report.html" title="A.4. Как сообщить об ошибке"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. Как провести проверку на деградацию, используя Subversion</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">Пред.</a> </td><th width="60%" align="center">Приложение A. Как сообщать об ошибках</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. Как провести проверку на деградацию, используя Subversion</h2></div></div></div><p>
+Иногда возникает проблема 'раньше это работало, а теперь - нет'. Здесь представлена
+пошаговая процедура определения момента возникновения ошибки.
+Но она <span class="bold"><strong>не для</strong></span> рядовых пользователей.
+</p><p>
+Во-первых, Вам нужно получить исходный код MPlayer из Subversion.
+Инструкции могут быть найдены в
+<a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html#svn" target="_top">разделе Subversion
+страницы закачки</a>.
+</p><p>
+После этого в каталоге mplayer/ Вы будете иметь образ дерева Subversion.
+Теперь обновите этот образ на желаемую дату:
+</p><pre class="screen">
+cd mplayer/
+svn update -r {"2004-08-23"}
+</pre><p>
+Формат даты: YYYY-MM-DD HH:MM:SS.
+Использование этого формата, гарантирует, что Вы сможете извлечь патчи по дате их
+внесения, которые указаны в
+<a class="ulink" href="http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">архиве MPlayer-cvslog</a>.
+</p><p>
+Далее выполняйте как при обычном обновлении:
+</p><pre class="screen">
+./configure
+make
+</pre><p>
+</p><p>
+Для непрограммистов, читающих эту страницу, сообщим, то самый быстрый способ найти место
+возникновения ошибки — использование бинарного поиска, т.е. поиск даты,
+деля интервал поиска пополам раз за разом.
+Например, если проблема возникла в 2003 году, начните с середины года и
+выясните присутствует ли проблема. Если да, то переходите к проверке
+начала Апреля, иначе — к началу Октября. Повторяйте этот процесс, уменьшая интервал
+поиска вдвое, пока не выясните искомую дату.
+</p><p>
+Если у Вас имеется достаточно свободного места на жестком диске (полная
+компиляция требует около 100Мб, или 300-350 если включена отладочная
+информация), скопируйте последнюю работающую версию перед обновлением,
+это сэкономит время при необходимости вернуться назад.
+(Как правило необходимо выполнять 'make distclean' до перекомпиляции
+более ранней версии, поэтому при отсутствии сохраненной копии
+Вам придется перекомпилировать весь проект.)
+Также Вы можете использовать <a class="ulink" href="http://ccache.samba.org/" target="_top">ccache</a>
+для ускорения компиляции.
+</p><p>
+Как только Вы нашли дату, продолжайте поиск, используя архив mplayer-cvslog
+(отсортированный по дате) до получения более точного времени, включая
+час, минуту, секунду:
+</p><pre class="screen">
+svn update -r {"2004-08-23 15:17:25"}
+</pre><p>
+Это позволит легко выделить патч, явившийся источником проблемы.
+</p><p>
+Если Вы нашли нужный патч, то Вы практически победили; сообщите о нем в
+<a class="ulink" href="http://bugzilla.mplayerhq.hu/" target="_top">MPlayer Bugzilla</a> или
+подпишитесь на
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-users</a>
+и отправте сообщение туда.
+Есть шанс, что автор исправит ошибку.
+Вы также можете долго и пристально вглядываться в патч, пока сами не увидите ошибку :).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. Как исправить ошибку </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> A.4. Как сообщить об ошибке</td></tr></table></div></body></html>

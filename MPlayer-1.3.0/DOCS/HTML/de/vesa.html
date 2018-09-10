@@ -1,0 +1,95 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.13. VESA-Ausgabe über das VESA-BIOS</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="prev" href="caca.html" title="4.12. libcaca - Color ASCII Art-Bibliothek"><link rel="next" href="x11.html" title="4.14. X11"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.13. VESA-Ausgabe über das VESA-BIOS</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="caca.html">Zurück</a> </td><th width="60%" align="center">Kapitel 4. Videoausgabegeräte</th><td width="20%" align="right"> <a accesskey="n" href="x11.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vesa"></a>4.13. VESA-Ausgabe über das VESA-BIOS</h2></div></div></div><p>
+  Dieser Treiber ist vom Design her ein <span class="bold"><strong>generischer Treiber</strong></span>
+  für alle Grafikkarten, deren Bios VESA VBE 2.0 unterstützt. Ein weiterer
+  Vorteil dieses Treibers liegt darin, dass er versucht, den TV-Ausgang anzuschalten.
+  <em class="citetitle">VESA BIOS EXTENSION (VBE) Version 3.0 Date: September 16, 1998</em>
+  (Seite 70) hat folgendes zu sagen:
+</p><div class="blockquote"><blockquote class="blockquote"><p><b>Designs für zwei Controller. </b>
+  VBE 3.0 unterstützt zwei Controller dadurch, dass angenommen wird,
+  dass beide Controller vom gleichen OEM (Hardwarehersteller) stammen und
+  unter Kontrolle desselben BIOS auf derselben Grafikkarte sitzen. Somit ist
+  es möglich, die Tatsache, dass zwei Controller vorhanden sind, vor der
+  Anwendung zu verbergen. Dies verhindert zwar, dass beide Controller
+  unabhängig voneinander gesteuert werden, erlaubt andererseits aber,
+  dass Anwendungen weiterhin problemlos funktionieren, die vor Erscheinen der
+  VBE-3.0-Spezifikation geschrieben wurden. Die VBE-Funktion 00h (Auskunft
+  über die Controller, Return Controller Information) gibt
+  dementsprechend die kombinierten Informationen über beide Controller
+  zurück, was auch eine kombinierte Liste der vorhandenen Grafikmodi
+  einschließt. Sobald eine Anwendung einen Grafikmodus wählt, wird
+  der entsprechende Controller aktiviert. Alle weiteren VBE-Funtkionen werden
+  dann auf diesem Controller ausgeführt.
+</p></blockquote></div><p>
+  Somit hast du also eine Chance, den TV-Ausgang mit diesem Treiber zum
+  Laufen zu bringen.
+  (Ich vermute, dass der TV-Ausgang normalerweise auf einer separaten
+  Grafikkarte oder zumindest ein separater Ausgang ist.)
+</p><div class="itemizedlist"><p class="title"><b>VORTEILE</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Du hast die Möglichkeit, selbst dann Filme anzusehen, wenn
+  <span class="bold"><strong>Linux nichts von deiner Grafikhardware weiß</strong></span>.
+</p></li><li class="listitem"><p>
+  Du musst keine einzige Grafikanwendung installiert haben (wie
+  X11/XFree86, fbdev usw.). Dieser Treiber wird im
+  <span class="bold"><strong>Textmodus</strong></span>
+  benutzt.
+</p></li><li class="listitem"><p>
+  Die Chancen stehen gut, dass der <span class="bold"><strong>TV-Ausgang funktioniert</strong></span>.
+  (Es läuft nachweislich zumindest auf ATI-Karten.)
+</p></li><li class="listitem"><p>
+  Dieser Treiber ruft die <code class="function">int 10h</code>-Routine wirklich auf und ist
+  dementsprechend kein Emulator - er ruft <span class="bold"><strong>echte</strong></span>
+  Funktionen des <span class="emphasis"><em>echten</em></span> BIOS im <span class="emphasis"><em>Real</em></span>-Modus
+  auf (bzw. im vm68-Modus).
+</p></li><li class="listitem"><p>
+  Du kannst den Treiber zusammen mit VIDIX verwenden und erhältst
+  dadurch gleichzeitig eine hardwarebeschleunigte Grafikanzeige
+  <span class="bold"><strong>und</strong></span> den TV-Ausgang! (für ATI-Karten empfohlen)
+</p></li><li class="listitem"><p>
+  Wenn du ein VESA-VBE-3.0+-BIOS hast und irgendwo die Optionen
+  <tt class="option">monitor-hfreq</tt>, <tt class="option">monitor-vfreq</tt>,
+  <tt class="option">monitor-dotclock</tt> angegeben werden (Kommandozeile,
+  Konfigurationsdatei), dann bekommst du die höchstmögliche
+  Bildwiederholrate (mit den generischen Timingformeln). Um dieses Feature
+  zu aktivieren, müssen <span class="bold"><strong>alle</strong></span>
+  Monitoroptionen angegeben werden.
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>NACHTEILE</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Der Treiber funtkioniert nur auf <span class="bold"><strong>x86-Systemen</strong></span>.
+</p></li><li class="listitem"><p>
+  Er kann nur von <code class="systemitem">root</code> benutzt werden.
+</p></li><li class="listitem"><p>
+  Momentan ist er nur für <span class="bold"><strong>Linux</strong></span> verfügbar.
+</p></li></ul></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Wichtig</h3><p>
+  Benutze diesen Treiber nicht mit <span class="bold"><strong>GCC 2.96</strong></span>!
+  Das wird nicht funktionieren!
+</p></div><div class="variablelist"><p class="title"><b>BEI VESA VERFÜGBARE KOMMANDOZEILENOPTIONEN</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo vesa:<em class="replaceable"><code>opts</code></em></tt></span></dt><dd><p>
+  Momentan erkannt: <code class="literal">dga</code>, um den DGA-Modus zu erzwingen
+  und <code class="literal">nodga</code>, um ihn zu deaktivieren. Im DGA-Modus kannst du den
+  Doppelpuffermodus mit <tt class="option">-double</tt> aktivieren. Anmerkung: Du
+  kannst diese Parameter auch weglassen, um die <span class="bold"><strong>automatische
+  Erkennung</strong></span> des DGA-Modus zu ermöglichen.
+  </p></dd></dl></div><div class="itemizedlist"><p class="title"><b>BEKANNTE PROBLEME UND WIE MAN SIE UMGEHT</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Wenn du unter Linux eine <span class="bold"><strong>NLS</strong></span>-Schrift
+  verwendest und du den VESA-Treiber aus dem Textmodus heraus aufrufst,
+  dann wird nach dem Beenden von <span class="application">MPlayer</span> die
+  <span class="bold"><strong>ROM-Schrift</strong></span> anstelle der nationalen
+  geladen sein. Du kannst die nationale Schriftart erneut mit
+  <span class="command"><strong>setsysfont</strong></span> laden, das z.B. bei Mandrake zur
+  Distribution gehört. (<span class="bold"><strong>Tip:</strong></span> Das
+  gleiche Tool wird für die Lokalisation von fbdev verwendet.)
+</p></li><li class="listitem"><p>
+  Manche <span class="bold"><strong>Linux-Grafiktreiber</strong></span> aktualisieren
+  nicht den aktiven <span class="bold"><strong>BIOS-Modus</strong></span> im DOS-Speicher.
+  Wenn du also so ein Problem hast, dann verwende den VESA-Treiber nur aus dem
+  <span class="bold"><strong>Textmodus</strong></span> heraus. Andernfalls
+  wird immer der Textmodus (#03) aktiviert werden, und du wirst den
+  Computer neustarten müssen.
+</p></li><li class="listitem"><p>
+  Oftmals siehst du nur einen <span class="bold"><strong>schwarzen Bildschirm</strong></span>,
+  wenn der VESA-Treiber beendet wird. Um die Anzeige wieder in den richtigen Zustand
+  zu versetzen, wechsele einfach zu einer anderen Console (mit
+  <span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F&lt;x&gt;</b></span>) und wieder zurück.
+</p></li><li class="listitem"><p>
+  Um eine <span class="bold"><strong>funktionierende TV-Ausgabe</strong></span> zu erhalten,
+  musst du das TV-Kabel eingesteckt haben, bevor du deinen PC bootest, da das BIOS
+  nur einmal während der POST-Phase initialisiert wird.
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="caca.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="x11.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">4.12. <code class="systemitem">libcaca</code> - Color ASCII Art-Bibliothek </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 4.14. X11</td></tr></table></div></body></html>

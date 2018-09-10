@@ -1,0 +1,38 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.4. Hálózati és pipe-os stream-elés</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="3. fejezet - Használat"><link rel="prev" href="control.html" title="3.3. Vezérlés"><link rel="next" href="dvd.html" title="3.5. DVD lejátszás"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="streaming.html#streaming-save" title="3.4.1. Stream-elt tartalom lementése"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.4. Hálózati és pipe-os stream-elés</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="control.html">Vissza</a> </td><th width="60%" align="center">3. fejezet - Használat</th><td width="20%" align="right"> <a accesskey="n" href="dvd.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="streaming"></a>3.4. Hálózati és pipe-os stream-elés</h2></div></div></div><p>
+Az <span class="application">MPlayer</span> HTTP, FTP, MMS vagy RTSP/RTP protokoll
+segítségével le tud játszani fájlokat hálózatról is.
+</p><p>
+A lejátszáshoz egyszerűen csak be kell írni az URL-t a parancssorba.
+Az <span class="application">MPlayer</span> figyeli a
+<code class="envar">http_proxy</code> környezeti változót is, és használja a
+proxy-t, ha van. Azonban így is megadhatod a proxy-t:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>http_proxy://proxy.micorsops.com:3128/http://micorsops.com:80/stream.asf</code></em>
+</pre><p>
+</p><p>
+Az <span class="application">MPlayer</span> tud olvasni a standard bemenetről (stdin)
+is (<span class="emphasis"><em>nem</em></span> nevesített pipe). Ezt például FTP-ről történő lejátszásnál
+tudod használni:
+</p><pre class="screen">
+wget <em class="replaceable"><code>ftp://micorsops.com/something.avi</code></em> -O - | mplayer -
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+Tanácsos megadni a <tt class="option">-cache</tt> kapcsolót, ha hálózatról
+játszol le:
+</p><pre class="screen">
+wget <em class="replaceable"><code>ftp://micorsops.com/something.avi</code></em> -O - | mplayer -cache 8192 -
+</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="streaming-save"></a>3.4.1. Stream-elt tartalom lementése</h3></div></div></div><p>
+Ha már sikerült az <span class="application">MPlayer</span>rel lejátszani
+a kedvenc internetes stream-edet, a <tt class="option">-dumpstream</tt>
+kapcsoló segítségével el is tudod menteni a folyamot egy fájlba.
+Például:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>http://217.71.208.37:8006</code></em> -dumpstream -dumpfile <em class="replaceable"><code>stream.asf</code></em>
+</pre><p>
+Ez el fogja menteni a
+<em class="replaceable"><code>http://217.71.208.37:8006</code></em> szerveren stream-elt
+tartalmat a <em class="replaceable"><code>stream.asf</code></em> fájlba.
+Ez működik az <span class="application">MPlayer</span> által támogatott
+összes protokollal, mint MMS, RTSP és így tovább.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="control.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="dvd.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">3.3. Vezérlés </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 3.5. DVD lejátszás</td></tr></table></div></body></html>

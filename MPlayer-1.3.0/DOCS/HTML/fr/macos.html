@@ -1,0 +1,122 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.5. Mac OS</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="ports.html" title="Chapitre 5. Ports"><link rel="prev" href="windows.html" title="5.4. Windows"><link rel="next" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="macos.html#osx_gui" title="5.5.1. MPlayer OS X GUI"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.5. Mac OS</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="windows.html">Précédent</a> </td><th width="60%" align="center">Chapitre 5. Ports</th><td width="20%" align="right"> <a accesskey="n" href="mencoder.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="macos"></a>5.5. Mac OS</h2></div></div></div><p>
+<span class="application">MPlayer</span> ne fonctionne pas sur des versions ultérieures
+à Mac OS 10, mais devrait compiler sans changement sur Mac OS X 10.2 et supérieur.
+Le compilateur préféré étant la version Apple de GCC 3.x ou supérieure.
+Vous pouvez obtenir l'environement de compilation de base en
+installant <a class="ulink" href="http://developer.apple.com/tools/download/" target="_top">Xcode</a> de Apple.
+Si vous avez Mac OS X 10.3.9 ou supérieur et QuickTime 7
+vous pouvez utiliser le pilote corevideo de sortie vidéo.
+</p><p>
+Malheureusement, cet environement de base ne vous autorise pas à
+profiter de toute les fonctionalités de
+<span class="application">MPlayer</span>.
+Par exemple, pour compiler le support OSD, vous devez avoir les
+librairies fontconfig
+et freetype installées sur votre machine.
+Contrairement à d'autres Unix comme la plupart des Linux et des BSDs,
+OSX n'a pas un seul système de package installé par défault.
+</p><p>
+Il y en a au moins deux au choix :
+<a class="ulink" href="http://fink.sourceforge.net/" target="_top">Fink</a> et
+<a class="ulink" href="http://www.macports.org/" target="_top">MacPorts</a>.
+Les deux fournissent approximativement les même services
+(i.e. beaucoup de packages au choix, la résolution des dépendances, la
+possibilité d'ajouter/mêtre à jour/supprimer simplement des packages,
+etc...).
+Fink offre à la fois des packages binaires précompilés ou la
+possibilité de compiler tout à partir des sources, alors que
+MacPorts offre seulement la possibilité de compilé les sources.
+L'auteur de ce guide a choisi MacPorts pour la simple raison que
+son installation minimale occupe moins d'espace disque.
+Les exemples à suivre sont basés sur MacPorts.
+</p><p>
+Par exemple, pour compiler <span class="application">MPlayer</span> avec le
+support OSD :
+</p><pre class="screen">sudo port install pkgconfig</pre><p>
+Ceci va installer <span class="application">pkg-config</span>, le système de
+gestion des flags de compilation/linking des librairies.
+Le script <code class="systemitem">configure</code> de
+<span class="application">MPlayer</span> l'utilise pour détecter les
+librairies proprement.
+Vous pouvez ensuite installer <span class="application">fontconfig</span> de
+la même manière :
+</p><pre class="screen">sudo port install fontconfig</pre><p>
+Vous pouvez ensuite lancer le script
+<code class="systemitem">configure</code> de
+<span class="application">MPlayer</span> (notez les variables d'environement
+<code class="systemitem">PKG_CONFIG_PATH</code> et
+<code class="systemitem">PATH</code> pour que
+<code class="systemitem">configure</code> trouve les librairies installées
+avec MacPorts) :
+</p><pre class="screen">PKG_CONFIG_PATH=/opt/local/lib/pkgconfig/ PATH=$PATH:/opt/local/bin/ ./configure</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osx_gui"></a>5.5.1. MPlayer OS X GUI</h3></div></div></div><p>
+Vous pouvez obtenir un GUI natif et un binaire pré-compilé de
+<span class="application">MPlayer</span> pour Mac OS X depuis le projet
+<a class="ulink" href="http://mplayerosx.sf.net/" target="_top">MPlayerOSX</a>, mais soyez averti :
+ce projet n'est plus du tout actif.
+</p><p>
+Heureusement, <span class="application">MPlayerOSX</span> a été repris en main
+par un membre de l'équipe de <span class="application">MPlayer</span>.
+Des versions preview sont disponibles sur notre
+<a class="ulink" href="http://mplayerhq.hu/dload.html" target="_top">page de téléchargement</a>
+et une version officielle ne devrait pas tarder.
+</p><p>
+Afin de compiler <span class="application">MPlayerOSX</span> depuis le source
+vous-même, vous avez besoin du module <code class="systemitem">mplayerosx</code>,
+du module <code class="systemitem">main</code> et d'une copie du module SVN
+<code class="systemitem">main</code> renommé en <code class="systemitem">main_noaltivec</code>.
+<code class="systemitem">mplayerosx</code> est le frontend GUI,
+<code class="systemitem">main</code> est un MPlayer et
+<code class="systemitem">main_noaltivec</code> est le MPlayer compilé sans le support
+AltiVec.
+</p><p>
+Pour récupérer les modules SVN utilisez :
+</p><pre class="screen">
+svn checkout svn://svn.mplayerhq.hu/mplayerosx/trunk/ mplayerosx
+svn checkout svn://svn.mplayerhq.hu/mplayer/trunk/ main
+</pre><p>
+</p><p>
+Pour compiler <span class="application">MPlayerOSX</span> vous aurez besoin de
+mettre en place quelque chose comme ceci :
+
+</p><pre class="screen">
+MPlayer_repertoire_source
+   |
+   |---&gt;main           (source SVN de MPlayer)
+   |
+   |---&gt;main_noaltivec (source SVN de MPlayer configuré avec --disable-altivec)
+   |
+   \---&gt;mplayerosx     (source SVN MPlayerOSX)
+</pre><p>
+Premièrement vous avez besoin de compiler main et main_noaltivec.
+</p><p>
+  Pour assurer une rétro compatibilité maximum, commencez par créer la variable d'environnement suivante :
+</p><pre class="screen">export MACOSX_DEPLOYMENT_TARGET=10.3</pre><p>
+</p><p>
+Et, configurez :
+</p><p>
+Si vous configurez pour un CPU G4 (ou plus récent) avec le support AltiVec,
+faites comme suit :
+</p><pre class="screen">
+./configure --disable-gl --disable-x11
+</pre><p>
+Si vous configurez pour un G3 sans le support AltiVec, faites comme suit :
+</p><pre class="screen">
+./configure --disable-gl --disable-x11 --disable-altivec
+</pre><p>
+Vous pourriez avoir besoin d'éditer <tt class="filename">config.mak</tt> et
+changer le
+<code class="systemitem">-mcpu</code> et <code class="systemitem">-mtune</code> de
+<code class="systemitem">74XX</code> à <code class="systemitem">G3</code>.
+</p><p>
+Continuez avec
+</p><pre class="screen">make</pre><p>
+ensuite placez vous dans le répertoire mplayerosx et tapez
+</p><pre class="screen">make dist</pre><p>
+Cela créera une archive compressée <code class="systemitem">.dmg</code> avec le binaire
+prêt à l'emploi.
+</p><p>
+Vous pouvez aussi utiliser le projet <span class="application">Xcode</span> 2.1;
+le vieux projet pour <span class="application">Xcode</span> 1.x n'étant plus
+du tout en fonction.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="windows.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="mencoder.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">5.4. Windows </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> Chapitre 6. Utilisation basique de <span class="application">MEncoder</span></td></tr></table></div></body></html>

@@ -1,0 +1,251 @@
+\section{theoradec.\-h File Reference}
+\label{theoradec_8h}\index{theoradec.\-h@{theoradec.\-h}}
+
+
+The {\ttfamily libtheoradec} C decoding A\-P\-I.  
+
+
+{\ttfamily \#include $<$stddef.\-h$>$}\\*
+{\ttfamily \#include $<$ogg/ogg.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}codec.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf th\-\_\-stripe\-\_\-callback}
+\begin{DoxyCompactList}\small\item\em The striped decode callback data to pass to \doxyref{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-S\-T\-R\-I\-P\-E\-\_\-\-C\-B}{p.}{theoradec_8h_ac95cc9e109474b0fa4bb920ab2cfdf1e}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf \-\_\-\-O\-\_\-\-T\-H\-E\-O\-R\-A\-\_\-\-T\-H\-E\-O\-R\-A\-D\-E\-C\-\_\-\-H\-\_\-}~(1)
+\end{DoxyCompactItemize}
+\begin{Indent}{\bf th\-\_\-decode\-\_\-ctl() codes}\par
+{\em \label{theoradec_8h_decctlcodes}%
+These are the available request codes for \doxyref{th\-\_\-decode\-\_\-ctl()}{p.}{group__decfuncs_ga1a8051958d75b1012573b6e3c8f670e1}. By convention, these are odd, to distinguish them from the \doxyref{encoder control codes}{p.}{theoraenc_8h_encctlcodes}. Keep any experimental or vendor-\/specific values above {\ttfamily 0x8000}. }\begin{DoxyCompactItemize}
+\item 
+\#define {\bf T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X}~(1)
+\begin{DoxyCompactList}\small\item\em Gets the maximum post-\/processing level. \end{DoxyCompactList}\item 
+\#define {\bf T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L}~(3)
+\begin{DoxyCompactList}\small\item\em Sets the post-\/processing level. \end{DoxyCompactList}\item 
+\#define {\bf T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-G\-R\-A\-N\-P\-O\-S}~(5)
+\begin{DoxyCompactList}\small\item\em Sets the granule position. \end{DoxyCompactList}\item 
+\#define {\bf T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-S\-T\-R\-I\-P\-E\-\_\-\-C\-B}~(7)
+\begin{DoxyCompactList}\small\item\em Sets the striped decode callback function. \end{DoxyCompactList}\item 
+\#define {\bf T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-B\-M\-O\-D\-E}~(9)
+\begin{DoxyCompactList}\small\item\em Enables telemetry and sets the macroblock display mode. \end{DoxyCompactList}\item 
+\#define {\bf T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-V}~(11)
+\begin{DoxyCompactList}\small\item\em Enables telemetry and sets the motion vector display mode. \end{DoxyCompactList}\item 
+\#define {\bf T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-Q\-I}~(13)
+\begin{DoxyCompactList}\small\item\em Enables telemetry and sets the adaptive quantization display mode. \end{DoxyCompactList}\item 
+\#define {\bf T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-B\-I\-T\-S}~(15)
+\begin{DoxyCompactList}\small\item\em Enables telemetry and sets the bitstream breakdown visualization mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ {\bf th\-\_\-stripe\-\_\-decoded\-\_\-func} )(void $\ast$\-\_\-ctx, {\bf th\-\_\-ycbcr\-\_\-buffer} \-\_\-buf, int \-\_\-yfrag0, int \-\_\-yfrag\-\_\-end)
+\begin{DoxyCompactList}\small\item\em A callback function for striped decode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}{\bf Decoder state}\par
+{\em The following data structures are opaque, and their contents are not publicly defined by this A\-P\-I.
+
+Referring to their internals directly is unsupported, and may break without warning. }\begin{DoxyCompactItemize}
+\item 
+typedef struct {\bf th\-\_\-dec\-\_\-ctx} {\bf th\-\_\-dec\-\_\-ctx}
+\begin{DoxyCompactList}\small\item\em The decoder context. \end{DoxyCompactList}\item 
+typedef struct {\bf th\-\_\-setup\-\_\-info} {\bf th\-\_\-setup\-\_\-info}
+\begin{DoxyCompactList}\small\item\em Setup information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Functions}
+\begin{Indent}{\bf Functions for decoding}\par
+{\em You must link to {\ttfamily libtheoradec} if you use any of the functions in this section.
+
+The functions are listed in the order they are used in a typical decode. The basic steps are\-:
+\begin{DoxyItemize}
+\item Parse the header packets by repeatedly calling \doxyref{th\-\_\-decode\-\_\-headerin()}{p.}{group__decfuncs_ga006d01d36fbe64768c571e6a12b7fc50}.
+\item Allocate a \doxyref{th\-\_\-dec\-\_\-ctx}{p.}{theoradec_8h_a843d70bb02563885a8d54b9c1a781729} handle with \doxyref{th\-\_\-decode\-\_\-alloc()}{p.}{group__decfuncs_ga0ef07a9a97849054aa606c595a2d807e}.
+\item Call \doxyref{th\-\_\-setup\-\_\-free()}{p.}{group__decfuncs_gadef55431b68aaa59d0d7b32b2f118f27} to free any memory used for codec setup information.
+\item Perform any additional decoder configuration with \doxyref{th\-\_\-decode\-\_\-ctl()}{p.}{group__decfuncs_ga1a8051958d75b1012573b6e3c8f670e1}.
+\item For each video data packet\-:
+\begin{DoxyItemize}
+\item Submit the packet to the decoder via \doxyref{th\-\_\-decode\-\_\-packetin()}{p.}{group__decfuncs_ga31c814bf09b2232aff69c57ae20f04eb}.
+\item Retrieve the uncompressed video data via \doxyref{th\-\_\-decode\-\_\-ycbcr\-\_\-out()}{p.}{group__decfuncs_gaa9cc8af63fa8540e0fc95572f259cdcb}.
+\end{DoxyItemize}
+\item Call \doxyref{th\-\_\-decode\-\_\-free()}{p.}{group__decfuncs_gafb6684ad8ba507b71112bc9de148e7d0} to release all decoder memory. 
+\end{DoxyItemize}}\begin{DoxyCompactItemize}
+\item 
+int {\bf th\-\_\-decode\-\_\-headerin} ({\bf th\-\_\-info} $\ast$\-\_\-info, {\bf th\-\_\-comment} $\ast$\-\_\-tc, {\bf th\-\_\-setup\-\_\-info} $\ast$$\ast$\-\_\-setup, ogg\-\_\-packet $\ast$\-\_\-op)
+\begin{DoxyCompactList}\small\item\em Decodes the header packets of a Theora stream. \end{DoxyCompactList}\item 
+{\bf th\-\_\-dec\-\_\-ctx} $\ast$ {\bf th\-\_\-decode\-\_\-alloc} (const {\bf th\-\_\-info} $\ast$\-\_\-info, const {\bf th\-\_\-setup\-\_\-info} $\ast$\-\_\-setup)
+\begin{DoxyCompactList}\small\item\em Allocates a decoder instance. \end{DoxyCompactList}\item 
+void {\bf th\-\_\-setup\-\_\-free} ({\bf th\-\_\-setup\-\_\-info} $\ast$\-\_\-setup)
+\begin{DoxyCompactList}\small\item\em Releases all storage used for the decoder setup information. \end{DoxyCompactList}\item 
+int {\bf th\-\_\-decode\-\_\-ctl} ({\bf th\-\_\-dec\-\_\-ctx} $\ast$\-\_\-dec, int \-\_\-req, void $\ast$\-\_\-buf, size\-\_\-t \-\_\-buf\-\_\-sz)
+\begin{DoxyCompactList}\small\item\em Decoder control function. \end{DoxyCompactList}\item 
+int {\bf th\-\_\-decode\-\_\-packetin} ({\bf th\-\_\-dec\-\_\-ctx} $\ast$\-\_\-dec, const ogg\-\_\-packet $\ast$\-\_\-op, ogg\-\_\-int64\-\_\-t $\ast$\-\_\-granpos)
+\begin{DoxyCompactList}\small\item\em Submits a packet containing encoded video data to the decoder. \end{DoxyCompactList}\item 
+int {\bf th\-\_\-decode\-\_\-ycbcr\-\_\-out} ({\bf th\-\_\-dec\-\_\-ctx} $\ast$\-\_\-dec, {\bf th\-\_\-ycbcr\-\_\-buffer} \-\_\-ycbcr)
+\begin{DoxyCompactList}\small\item\em Outputs the next available frame of decoded Y'Cb\-Cr data. \end{DoxyCompactList}\item 
+void {\bf th\-\_\-decode\-\_\-free} ({\bf th\-\_\-dec\-\_\-ctx} $\ast$\-\_\-dec)
+\begin{DoxyCompactList}\small\item\em Frees an allocated decoder instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+The {\ttfamily libtheoradec} C decoding A\-P\-I. 
+
+\subsection{Macro Definition Documentation}
+\index{theoradec.\-h@{theoradec.\-h}!\-\_\-\-O\-\_\-\-T\-H\-E\-O\-R\-A\-\_\-\-T\-H\-E\-O\-R\-A\-D\-E\-C\-\_\-\-H\-\_\-@{\-\_\-\-O\-\_\-\-T\-H\-E\-O\-R\-A\-\_\-\-T\-H\-E\-O\-R\-A\-D\-E\-C\-\_\-\-H\-\_\-}}
+\index{\-\_\-\-O\-\_\-\-T\-H\-E\-O\-R\-A\-\_\-\-T\-H\-E\-O\-R\-A\-D\-E\-C\-\_\-\-H\-\_\-@{\-\_\-\-O\-\_\-\-T\-H\-E\-O\-R\-A\-\_\-\-T\-H\-E\-O\-R\-A\-D\-E\-C\-\_\-\-H\-\_\-}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{\-\_\-\-O\-\_\-\-T\-H\-E\-O\-R\-A\-\_\-\-T\-H\-E\-O\-R\-A\-D\-E\-C\-\_\-\-H\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \-\_\-\-O\-\_\-\-T\-H\-E\-O\-R\-A\-\_\-\-T\-H\-E\-O\-R\-A\-D\-E\-C\-\_\-\-H\-\_\-~(1)}\label{theoradec_8h_a0d78767a326c34dbf84d5b845cba7b4a}
+\index{theoradec.\-h@{theoradec.\-h}!T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X}}
+\index{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X~(1)}\label{theoradec_8h_ab31f251c9319f2140d247585d30b3d07}
+
+
+Gets the maximum post-\/processing level. 
+
+The decoder supports a post-\/processing filter that can improve the appearance of the decoded images. This returns the highest level setting for this post-\/processor, corresponding to maximum improvement and computational expense.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em \-\_\-buf} & int\-: The maximum post-\/processing level. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em T\-H\-\_\-\-E\-F\-A\-U\-L\-T} & {\itshape \-\_\-dec\-\_\-ctx} or {\itshape \-\_\-buf} is {\ttfamily N\-U\-L\-L}. \\
+\hline
+{\em T\-H\-\_\-\-E\-I\-N\-V\-A\-L} & {\itshape \-\_\-buf\-\_\-sz} is not {\ttfamily sizeof(int)}. \\
+\hline
+{\em T\-H\-\_\-\-E\-I\-M\-P\-L} & Not supported by this implementation. \\
+\hline
+\end{DoxyRetVals}
+\index{theoradec.\-h@{theoradec.\-h}!T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-G\-R\-A\-N\-P\-O\-S@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-G\-R\-A\-N\-P\-O\-S}}
+\index{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-G\-R\-A\-N\-P\-O\-S@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-G\-R\-A\-N\-P\-O\-S}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-G\-R\-A\-N\-P\-O\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-G\-R\-A\-N\-P\-O\-S~(5)}\label{theoradec_8h_a1e870c654d35394f0d490045df04e0f5}
+
+
+Sets the granule position. 
+
+Call this after a seek, before decoding the first frame, to ensure that the proper granule position is returned for all subsequent frames. If you track timestamps yourself and do not use the granule position returned by the decoder, then you need not call this function.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em \-\_\-buf} & {\ttfamily ogg\-\_\-int64\-\_\-t}\-: The granule position of the next frame. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em T\-H\-\_\-\-E\-F\-A\-U\-L\-T} & {\itshape \-\_\-dec\-\_\-ctx} or {\itshape \-\_\-buf} is {\ttfamily N\-U\-L\-L}. \\
+\hline
+{\em T\-H\-\_\-\-E\-I\-N\-V\-A\-L} & {\itshape \-\_\-buf\-\_\-sz} is not {\ttfamily sizeof(ogg\-\_\-int64\-\_\-t)}, or the granule position is negative. \\
+\hline
+\end{DoxyRetVals}
+\index{theoradec.\-h@{theoradec.\-h}!T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L}}
+\index{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L~(3)}\label{theoradec_8h_a87774c35e1a755a84e2d705b38ebef0d}
+
+
+Sets the post-\/processing level. 
+
+By default, post-\/processing is disabled.
+
+Sets the level of post-\/processing to use when decoding the compressed stream. This must be a value between zero (off) and the maximum returned by T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em \-\_\-buf} & int\-: The new post-\/processing level. 0 to disable; larger values use more C\-P\-U. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em T\-H\-\_\-\-E\-F\-A\-U\-L\-T} & {\itshape \-\_\-dec\-\_\-ctx} or {\itshape \-\_\-buf} is {\ttfamily N\-U\-L\-L}. \\
+\hline
+{\em T\-H\-\_\-\-E\-I\-N\-V\-A\-L} & {\itshape \-\_\-buf\-\_\-sz} is not {\ttfamily sizeof(int)}, or the post-\/processing level is out of bounds. The maximum post-\/processing level may be implementation-\/specific, and can be obtained via \doxyref{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-G\-E\-T\-\_\-\-P\-P\-L\-E\-V\-E\-L\-\_\-\-M\-A\-X}{p.}{theoradec_8h_ab31f251c9319f2140d247585d30b3d07}. \\
+\hline
+{\em T\-H\-\_\-\-E\-I\-M\-P\-L} & Not supported by this implementation. \\
+\hline
+\end{DoxyRetVals}
+\index{theoradec.\-h@{theoradec.\-h}!T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-S\-T\-R\-I\-P\-E\-\_\-\-C\-B@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-S\-T\-R\-I\-P\-E\-\_\-\-C\-B}}
+\index{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-S\-T\-R\-I\-P\-E\-\_\-\-C\-B@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-S\-T\-R\-I\-P\-E\-\_\-\-C\-B}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-S\-T\-R\-I\-P\-E\-\_\-\-C\-B}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-S\-T\-R\-I\-P\-E\-\_\-\-C\-B~(7)}\label{theoradec_8h_ac95cc9e109474b0fa4bb920ab2cfdf1e}
+
+
+Sets the striped decode callback function. 
+
+If set, this function will be called as each piece of a frame is fully decoded in \doxyref{th\-\_\-decode\-\_\-packetin()}{p.}{group__decfuncs_ga31c814bf09b2232aff69c57ae20f04eb}. You can pass in a \doxyref{th\-\_\-stripe\-\_\-callback}{p.}{structth__stripe__callback} with \doxyref{th\-\_\-stripe\-\_\-callback\-::stripe\-\_\-decoded}{p.}{structth__stripe__callback_a977c725680a37e3446e459f063b1f4a5} set to {\ttfamily N\-U\-L\-L} to disable the callbacks at any point. Enabling striped decode does not prevent you from calling \doxyref{th\-\_\-decode\-\_\-ycbcr\-\_\-out()}{p.}{group__decfuncs_gaa9cc8af63fa8540e0fc95572f259cdcb} after the frame is fully decoded.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em \-\_\-buf} & \doxyref{th\-\_\-stripe\-\_\-callback}{p.}{structth__stripe__callback}\-: The callback parameters. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em T\-H\-\_\-\-E\-F\-A\-U\-L\-T} & {\itshape \-\_\-dec\-\_\-ctx} or {\itshape \-\_\-buf} is {\ttfamily N\-U\-L\-L}. \\
+\hline
+{\em T\-H\-\_\-\-E\-I\-N\-V\-A\-L} & {\itshape \-\_\-buf\-\_\-sz} is not {\ttfamily sizeof(th\-\_\-stripe\-\_\-callback)}. \\
+\hline
+\end{DoxyRetVals}
+\index{theoradec.\-h@{theoradec.\-h}!T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-B\-I\-T\-S@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-B\-I\-T\-S}}
+\index{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-B\-I\-T\-S@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-B\-I\-T\-S}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-B\-I\-T\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-B\-I\-T\-S~(15)}\label{theoradec_8h_a7f43fec07486f8a5f00e92aab7d44a25}
+
+
+Enables telemetry and sets the bitstream breakdown visualization mode. 
+
+\index{theoradec.\-h@{theoradec.\-h}!T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-B\-M\-O\-D\-E@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-B\-M\-O\-D\-E}}
+\index{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-B\-M\-O\-D\-E@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-B\-M\-O\-D\-E}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-B\-M\-O\-D\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-B\-M\-O\-D\-E~(9)}\label{theoradec_8h_a8d5e0b9b4c8898f93f241acbeb7e7ffb}
+
+
+Enables telemetry and sets the macroblock display mode. 
+
+\index{theoradec.\-h@{theoradec.\-h}!T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-V@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-V}}
+\index{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-V@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-V}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-V}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-M\-V~(11)}\label{theoradec_8h_a829285a03d24832c583f33c6357df8aa}
+
+
+Enables telemetry and sets the motion vector display mode. 
+
+\index{theoradec.\-h@{theoradec.\-h}!T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-Q\-I@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-Q\-I}}
+\index{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-Q\-I@{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-Q\-I}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-Q\-I}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-H\-\_\-\-D\-E\-C\-C\-T\-L\-\_\-\-S\-E\-T\-\_\-\-T\-E\-L\-E\-M\-E\-T\-R\-Y\-\_\-\-Q\-I~(13)}\label{theoradec_8h_ae3e2f7674ad92fe67b63915d48c9df5b}
+
+
+Enables telemetry and sets the adaptive quantization display mode. 
+
+
+
+\subsection{Typedef Documentation}
+\index{theoradec.\-h@{theoradec.\-h}!th\-\_\-dec\-\_\-ctx@{th\-\_\-dec\-\_\-ctx}}
+\index{th\-\_\-dec\-\_\-ctx@{th\-\_\-dec\-\_\-ctx}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{th\-\_\-dec\-\_\-ctx}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf th\-\_\-dec\-\_\-ctx} {\bf th\-\_\-dec\-\_\-ctx}}\label{theoradec_8h_a843d70bb02563885a8d54b9c1a781729}
+
+
+The decoder context. 
+
+\index{theoradec.\-h@{theoradec.\-h}!th\-\_\-setup\-\_\-info@{th\-\_\-setup\-\_\-info}}
+\index{th\-\_\-setup\-\_\-info@{th\-\_\-setup\-\_\-info}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{th\-\_\-setup\-\_\-info}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf th\-\_\-setup\-\_\-info} {\bf th\-\_\-setup\-\_\-info}}\label{theoradec_8h_ab71cd2657455cc27d6c0127c66a89f28}
+
+
+Setup information. 
+
+This contains auxiliary information (Huffman tables and quantization parameters) decoded from the setup header by \doxyref{th\-\_\-decode\-\_\-headerin()}{p.}{group__decfuncs_ga006d01d36fbe64768c571e6a12b7fc50} to be passed to \doxyref{th\-\_\-decode\-\_\-alloc()}{p.}{group__decfuncs_ga0ef07a9a97849054aa606c595a2d807e}. It can be re-\/used to initialize any number of decoders, and can be freed via \doxyref{th\-\_\-setup\-\_\-free()}{p.}{group__decfuncs_gadef55431b68aaa59d0d7b32b2f118f27} at any time. \index{theoradec.\-h@{theoradec.\-h}!th\-\_\-stripe\-\_\-decoded\-\_\-func@{th\-\_\-stripe\-\_\-decoded\-\_\-func}}
+\index{th\-\_\-stripe\-\_\-decoded\-\_\-func@{th\-\_\-stripe\-\_\-decoded\-\_\-func}!theoradec.h@{theoradec.\-h}}
+\subsubsection[{th\-\_\-stripe\-\_\-decoded\-\_\-func}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ th\-\_\-stripe\-\_\-decoded\-\_\-func)(void $\ast$\-\_\-ctx, {\bf th\-\_\-ycbcr\-\_\-buffer} \-\_\-buf, int \-\_\-yfrag0, int \-\_\-yfrag\-\_\-end)}\label{theoradec_8h_a25dfc8713157545abd81eda476ca4b54}
+
+
+A callback function for striped decode. 
+
+This is a function pointer to an application-\/provided function that will be called each time a section of the image is fully decoded in \doxyref{th\-\_\-decode\-\_\-packetin()}{p.}{group__decfuncs_ga31c814bf09b2232aff69c57ae20f04eb}. This allows the application to process the section immediately, while it is still in cache. Note that the frame is decoded bottom to top, so {\itshape \-\_\-yfrag0} will steadily decrease with each call until it reaches 0, at which point the full frame is decoded. The number of fragment rows made available in each call depends on the pixel format and the number of post-\/processing filters enabled, and may not even be constant for the entire frame. If a non-\/{\ttfamily N\-U\-L\-L} {\itshape \-\_\-granpos} pointer is passed to \doxyref{th\-\_\-decode\-\_\-packetin()}{p.}{group__decfuncs_ga31c814bf09b2232aff69c57ae20f04eb}, the granule position for the frame will be stored in it before the first callback is made. If an entire frame is dropped (a 0-\/byte packet), then no callbacks will be made at all for that frame. 
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-ctx} & An application-\/provided context pointer. \\
+\hline
+{\em \-\_\-buf} & The image buffer for the decoded frame. \\
+\hline
+{\em \-\_\-yfrag0} & The Y coordinate of the first row of 8x8 fragments decoded. Multiply this by 8 to obtain the pixel row number in the luma plane. If the chroma planes are subsampled in the Y direction, this will always be divisible by two. \\
+\hline
+{\em \-\_\-yfrag\-\_\-end} & The Y coordinate of the first row of 8x8 fragments past the newly decoded section. If the chroma planes are subsampled in the Y direction, this will always be divisible by two. I.\-e., this section contains fragment rows {\ttfamily {\itshape \-\_\-yfrag0} ...{\itshape \-\_\-yfrag\-\_\-end} -\/1}. \\
+\hline
+\end{DoxyParams}

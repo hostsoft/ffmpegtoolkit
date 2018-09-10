@@ -1,0 +1,53 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.6. Вывод во фреймбуфер (FBdev)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="svgalib.html" title="4.5. SVGAlib"><link rel="next" href="mga_vid.html" title="4.7. Matrox фреймбуфер (mga_vid)"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.6. Вывод во фреймбуфер (FBdev)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="svgalib.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="mga_vid.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fbdev"></a>4.6. Вывод во фреймбуфер (FBdev)</h2></div></div></div><p>
+Надо ли собирать FBdev автоматически определяется скриптом
+<tt class="filename">./configure</tt>. Прочтите документацию на фреймбуйер в
+исходниках ядра (<tt class="filename">Documentation/fb/*</tt>) для более подробной
+информации.
+</p><p>
+Если ваша карта не поддерживает стандарт VBE 2.0 (старые ISA/PCI карты, такие
+как S3 Trio64), а только VBE 1.2 (или еще старее?): ну, VESAfb все же будет доступна,
+но вам потребуется загрузить SciTech Display Doctor (она же UniVBE) до загрузки Linux.
+Используйте загрузочный диск DOS или что либо другое. И не забудьте зарегистрировать
+ваш UniVBE ;))
+</p><p>
+Драйвер FBdev вместе с прочими принимает несколько дополнительных параметров:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><tt class="option">-fb</tt></span></dt><dd><p>
+    указывает какой устройство фреймбуфера использовать
+    (по-умолчанию: <tt class="filename">/dev/fb0</tt>)
+  </p></dd><dt><span class="term"><tt class="option">-fbmode</tt></span></dt><dd><p>
+    название используемого режима (в соответствии с <tt class="filename">/etc/fb.modes</tt>)
+  </p></dd><dt><span class="term"><tt class="option">-fbmodeconfig</tt></span></dt><dd><p>
+    конфигурационный файл с режимами (по-умолчанию: <tt class="filename">/etc/fb.modes</tt>)
+  </p></dd><dt><span class="term"><tt class="option">-monitor-hfreq</tt>, </span><span class="term"><tt class="option">-monitor-vfreq</tt>, </span><span class="term"><tt class="option">-monitor-dotclock</tt></span></dt><dd><p>
+    <span class="bold"><strong>важные</strong></span> знаячения, смотрите
+    <tt class="filename">example.conf</tt>
+  </p></dd></dl></div><p>
+При желании переключиться в особый режим используйте:
+</p><pre class="screen">
+mplayer -vm -fbmode <em class="replaceable"><code>название_режима</code></em> <em class="replaceable"><code>имя_файла</code></em>
+</pre><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <tt class="option">-vm</tt> в одиночку выберет наиболее подходящий режим из
+  <tt class="filename">/etc/fb.modes</tt>. Также может использоваться совместно с
+  <tt class="option">-x</tt> и <tt class="option">-y</tt>. Опция
+  <tt class="option">-flip</tt> поддерживается, только если формат точки фильма совпадает с
+  форматом точки видеорежима. Обратите внимание на значение bpp, fbdev пытается
+  использовать текущий или указанный вами опцией <tt class="option">-bpp</tt>.
+</p></li><li class="listitem"><p>
+  Опция <tt class="option">-zoom</tt> не поддерживается (используйте <tt class="option">-vf scale</tt>).
+  Вы не можете использовать режимы с 8bpp (или меньше).
+</p></li><li class="listitem"><p>
+  Вы, возможно, захотите отключить курсор:
+  </p><pre class="screen">echo -e '\033[?25l'</pre><p>
+  или
+  </p><pre class="screen">setterm -cursor off</pre><p>
+  и хранитель экрана:
+  </p><pre class="screen">setterm -blank 0</pre><p>
+  Чтобы снова включить курсор:
+  </p><pre class="screen">echo -e '\033[?25h'</pre><p>
+  или
+  </p><pre class="screen">setterm -cursor on</pre><p>
+</p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+Смена режимов FBdev <span class="emphasis"><em>не работает</em></span> с VESA фреймбуфером.
+Не просите об этом, т.к. это не ограничения <span class="application">MPlayer</span>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="svgalib.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="mga_vid.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.5. SVGAlib </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.7. Matrox фреймбуфер (mga_vid)</td></tr></table></div></body></html>

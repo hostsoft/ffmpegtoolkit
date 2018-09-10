@@ -1,0 +1,80 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.4. Шрифты и OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="install.html" title="Глава 2. Установка"><link rel="prev" href="gui.html" title="2.3. Как насчёт GUI?"><link rel="next" href="codec-installation.html" title="2.5. Codec installation"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="fonts-osd.html#truetype-fonts" title="2.4.1. TrueType шрифты"><link rel="subsection" href="fonts-osd.html#bitmap-fonts" title="2.4.2. Растровые шрифты"><link rel="subsection" href="fonts-osd.html#osdmenu" title="2.4.3. OSD меню"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.4. Шрифты и OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="gui.html">Пред.</a> </td><th width="60%" align="center">Глава 2. Установка</th><td width="20%" align="right"> <a accesskey="n" href="codec-installation.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fonts-osd"></a>2.4. Шрифты и OSD</h2></div></div></div><p>
+Чтобы насладиться OSD и субтитрами, надо указать <span class="application">MPlayer</span> какой
+шрифт использовать. Подойдет любой TrueType или специальный растровый шрифт. Тем не менее,
+рекомендуется использовать TrueType шрифты, поскольку они лучше выглядят, корректно
+масштабируются до размера фильма, у лучше справляются с различными кодировками.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="truetype-fonts"></a>2.4.1. TrueType шрифты</h3></div></div></div><p>
+Есть два способа заставить работать TrueType шрифты. Первый - указать опцию <tt class="option">-font</tt>,
+чтобы указать путь к TrueType шрифту из команднов строки. Эта опция будет хорошим кандидатом на
+помещение в файл конфигурации (для подробностей смотрите страницу man руководства).
+Второй - создание символической ссылки с именем <tt class="filename">subfont.ttf</tt> на выбранный
+файл шрифта. Либо
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>/path/to/sample_font.ttf</code></em> ~/.mplayer/subfont.ttf
+</pre><p>
+индивидуально для каждого пользователя, либо одну общесистемную
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>/path/to/sample_font.ttf</code></em> $PREFIX/share/mplayer/subfont.ttf
+</pre><p>
+</p><p>
+Если <span class="application">MPlayer</span> был скомпилирован с поддержкой
+<code class="systemitem">fontconfig</code>, эти методы не будут работать,
+вместо этого, опция <tt class="option">-font</tt> ожидает
+<code class="systemitem">fontconfig</code> название шрифта,
+ и по умолчанию это шрифт sans-serif. Пример:
+</p><pre class="screen">
+mplayer -font <em class="replaceable"><code>'Bitstream Vera Sans'</code></em> <em class="replaceable"><code>anime.mkv</code></em>
+</pre><p>
+</p><p>
+Чтобы получить список шрифтов, известных
+<code class="systemitem">fontconfig</code>,
+используйте <span class="command"><strong>fc-list</strong></span>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bitmap-fonts"></a>2.4.2. Растровые шрифты</h3></div></div></div><p>
+Если по каким-то причинам вам необходимо использовать растровый шрифт, скачайте набор таковых с
+нашего сайта. Вы можете выбирать между различными
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/fonts/" target="_top">ISO шрифтами</a> и
+набором шрифтов
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/fonts/" target="_top">созданных пользователями</a>
+в различных кодировках.
+</p><p>
+Распакуйте скачанный файл в <tt class="filename">~/.mplayer</tt> или
+<tt class="filename">$PREFIX/share/mplayer</tt>.
+После этого переименуйте каталог или создайте символическую ссылку на него с именем
+<tt class="filename">font</tt>, например:
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>~/.mplayer/arial-24</code></em> ~/.mplayer/font
+</pre><p>
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>$PREFIX/mplayer/arial-24</code></em> $PREFIX/mplayer/font
+</pre><p>
+</p><p>
+Шрифты должны иметь соответствующий им <tt class="filename">font.desc</tt> файл, отображающий
+позиции юникод шрифта в кодовую страницу текста субтитров. Другое решение - иметь субтитры,
+кодированные в UTF-8 и использовать опцию <tt class="option">-utf8</tt> или просто дать файлу
+с субтитрами такое же, как у видео файла, имя с расширением <tt class="filename">.utf</tt>,
+положив его в один каталог с фильмом.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osdmenu"></a>2.4.3. OSD меню</h3></div></div></div><p>
+У <span class="application">MPlayer</span>'а существует целиком определяемый пользователем интерфейс OSD меню.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+меню Preferences[Настройки] в настоящий момент НЕ НАПИСАНО!
+</p></div><div class="orderedlist"><p class="title"><b>Установка</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  скомпилируйте <span class="application">MPlayer</span>, указав
+  <tt class="filename">./configure</tt> параметр <tt class="option">--enable-menu</tt>
+</p></li><li class="listitem"><p>
+  убедитесь, что у Вас установлен OSD шрифт
+</p></li><li class="listitem"><p>
+  скопируйте <tt class="filename">etc/menu.conf</tt> в Ваш каталог <tt class="filename">.mplayer</tt>
+</p></li><li class="listitem"><p>
+  скопируйте <tt class="filename">etc/input.conf</tt> в Ваш каталог
+  <tt class="filename">.mplayer</tt>, или в системный конфигурационный
+  каталог <span class="application">MPlayer</span>'а (по умолчанию:
+  <tt class="filename">/usr/local/etc/mplayer</tt>)
+</p></li><li class="listitem"><p>
+  проверьте и отредактируйте <tt class="filename">input.conf</tt>, чтобы включить
+  кнопки перемещения по меню (это здесь описано).
+</p></li><li class="listitem"><p>
+  запустите <span class="application">MPlayer</span> как в следующем примере:
+  </p><pre class="screen">mplayer -menu <em class="replaceable"><code>file.avi</code></em></pre><p>
+</p></li><li class="listitem"><p>
+  нажмите любую меню-кнопку, которую Вы определили
+</p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="gui.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="codec-installation.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">2.3. Как насчёт GUI? </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 2.5. Codec installation</td></tr></table></div></body></html>

@@ -1,0 +1,66 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.6.  Encoding with the Video For Windows codec family</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="prev" href="menc-feat-x264.html" title="7.5. Encoding with the x264 codec"><link rel="next" href="menc-feat-quicktime-7.html" title="7.7. Using MEncoder to create QuickTime-compatible files"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="menc-feat-video-for-windows.html#menc-feat-enc-vfw-video-codecs" title="7.6.1. Video for Windows supported codecs"><link rel="subsection" href="menc-feat-video-for-windows.html#menc-feat-video-for-windows-bitrate-settings" title="7.6.2. Using vfw2menc to create a codec settings file."></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.6. 
+  Encoding with the <code class="systemitem">Video For Windows</code>
+  codec family
+</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-x264.html">Prev</a> </td><th width="60%" align="center">Chapter 7. Encoding with <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-quicktime-7.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-video-for-windows"></a>7.6. 
+  Encoding with the <code class="systemitem">Video For Windows</code>
+  codec family
+</h2></div></div></div><p>
+Video for Windows provides simple encoding by means of binary video codecs.
+You can encode with the following codecs (if you have more, please tell us!)
+</p><p>
+Note that support for this is very experimental and some codecs may not work
+correctly. Some codecs will only work in certain colorspaces, try
+<tt class="option">-vf format=bgr24</tt> and <tt class="option">-vf format=yuy2</tt>
+if a codec fails or gives wrong output.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-enc-vfw-video-codecs"></a>7.6.1. Video for Windows supported codecs</h3></div></div></div><p>
+</p><div class="informaltable"><table border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Video codec file name</th><th>Description (FourCC)</th><th>md5sum</th><th>Comment</th></tr></thead><tbody><tr><td>aslcodec_vfw.dll</td><td>Alparysoft lossless codec vfw (ASLC)</td><td>608af234a6ea4d90cdc7246af5f3f29a</td><td> </td></tr><tr><td>avimszh.dll</td><td>AVImszh (MSZH)</td><td>253118fe1eedea04a95ed6e5f4c28878</td><td>needs <tt class="option">-vf format</tt></td></tr><tr><td>avizlib.dll</td><td>AVIzlib (ZLIB)</td><td>2f1cc76bbcf6d77d40d0e23392fa8eda</td><td> </td></tr><tr><td>divx.dll</td><td>DivX4Windows-VFW</td><td>acf35b2fc004a89c829531555d73f1e6</td><td> </td></tr><tr><td>huffyuv.dll</td><td>HuffYUV (lossless) (HFYU)</td><td>b74695b50230be4a6ef2c4293a58ac3b</td><td> </td></tr><tr><td>iccvid.dll</td><td>Cinepak Video (cvid)</td><td>cb3b7ee47ba7dbb3d23d34e274895133</td><td> </td></tr><tr><td>icmw_32.dll</td><td>Motion Wavelets (MWV1)</td><td>c9618a8fc73ce219ba918e3e09e227f2</td><td> </td></tr><tr><td>jp2avi.dll</td><td>ImagePower MJPEG2000 (IPJ2)</td><td>d860a11766da0d0ea064672c6833768b</td><td><tt class="option">-vf flip</tt></td></tr><tr><td>m3jp2k32.dll</td><td>Morgan MJPEG2000 (MJ2C)</td><td>f3c174edcbaef7cb947d6357cdfde7ff</td><td> </td></tr><tr><td>m3jpeg32.dll</td><td>Morgan Motion JPEG Codec (MJPEG)</td><td>1cd13fff5960aa2aae43790242c323b1</td><td> </td></tr><tr><td>mpg4c32.dll</td><td>Microsoft MPEG-4 v1/v2</td><td>b5791ea23f33010d37ab8314681f1256</td><td> </td></tr><tr><td>tsccvid.dll</td><td>TechSmith Camtasia Screen Codec (TSCC)</td><td>8230d8560c41d444f249802a2700d1d5</td><td>shareware error on windows</td></tr><tr><td>vp31vfw.dll</td><td>On2 Open Source VP3 Codec (VP31)</td><td>845f3590ea489e2e45e876ab107ee7d2</td><td> </td></tr><tr><td>vp4vfw.dll</td><td>On2 VP4 Personal Codec (VP40)</td><td>fc5480a482ccc594c2898dcc4188b58f</td><td> </td></tr><tr><td>vp6vfw.dll</td><td>On2 VP6 Personal Codec (VP60)</td><td>04d635a364243013898fd09484f913fb</td><td> </td></tr><tr><td>vp7vfw.dll</td><td>On2 VP7 Personal Codec (VP70)</td><td>cb4cc3d4ea7c94a35f1d81c3d750bc8d</td><td><tt class="option">-ffourcc VP70</tt></td></tr><tr><td>ViVD2.dll</td><td>SoftMedia ViVD V2 codec VfW (GXVE)</td><td>a7b4bf5cac630bb9262c3f80d8a773a1</td><td> </td></tr><tr><td>msulvc06.DLL</td><td>MSU Lossless codec (MSUD)</td><td>294bf9288f2f127bb86f00bfcc9ccdda</td><td>
+  Decodable by <span class="application">Window Media Player</span>,
+  not <span class="application">MPlayer</span> (yet).
+  </td></tr><tr><td>camcodec.dll</td><td>CamStudio lossless video codec (CSCD)</td><td>0efe97ce08bb0e40162ab15ef3b45615</td><td>sf.net/projects/camstudio</td></tr></tbody></table></div><p>
+
+The first column contains the codec names that should be passed after the
+<code class="literal">codec</code> parameter,
+like: <tt class="option">-xvfwopts codec=divx.dll</tt>
+The FourCC code used by each codec is given in the parentheses.
+</p><div class="informalexample"><p>
+An example to convert an ISO DVD trailer to a VP6 flash video file
+using compdata bitrate settings:
+</p><pre class="screen">
+mencoder -dvd-device <em class="replaceable"><code>zeiram.iso</code></em> dvd://7 -o <em class="replaceable"><code>trailer.flv</code></em> \
+-ovc vfw -xvfwopts codec=vp6vfw.dll:compdata=onepass.mcf -oac mp3lame \
+-lameopts cbr:br=64 -af lavcresample=22050 -vf yadif,scale=320:240,flip \
+-of lavf
+</pre><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-video-for-windows-bitrate-settings"></a>7.6.2. Using vfw2menc to create a codec settings file.</h3></div></div></div><p>
+To encode with the Video for Windows codecs, you will need to set bitrate
+and other options. This is known to work on x86 on both *NIX and Windows.
+</p><p>
+First you must build the <span class="application">vfw2menc</span> program.
+It is located in the <tt class="filename">TOOLS</tt> subdirectory
+of the MPlayer source tree.
+To build on Linux, this can be done using <span class="application">Wine</span>:
+</p><pre class="screen">winegcc vfw2menc.c -o vfw2menc -lwinmm -lole32</pre><p>
+
+To build on Windows in <span class="application">MinGW</span> or
+<span class="application">Cygwin</span> use:
+</p><pre class="screen">gcc vfw2menc.c -o vfw2menc.exe -lwinmm -lole32</pre><p>
+
+To build on <span class="application">MSVC</span> you will need getopt.
+Getopt can be found in the original <span class="application">vfw2menc</span>
+archive available at:
+The <a class="ulink" href="http://oss.netfarm.it/mplayer-win32.php" target="_top">MPlayer on win32</a> project.
+</p><div class="informalexample"><p>
+Below is an example with the VP6 codec.
+</p><pre class="screen">
+vfw2menc -f VP62 -d vp6vfw.dll -s firstpass.mcf
+</pre><p>
+This will open the VP6 codec dialog window.
+Repeat this step for the second pass
+and use <tt class="option">-s <em class="replaceable"><code>secondpass.mcf</code></em></tt>.
+</p></div><p>
+Windows users can use
+<tt class="option">-xvfwopts codec=vp6vfw.dll:compdata=dialog</tt> to have
+the codec dialog display before encoding starts.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-x264.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-quicktime-7.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">7.5. Encoding with the
+  <code class="systemitem">x264</code> codec </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 7.7. Using <span class="application">MEncoder</span> to create
+<span class="application">QuickTime</span>-compatible files</td></tr></table></div></body></html>

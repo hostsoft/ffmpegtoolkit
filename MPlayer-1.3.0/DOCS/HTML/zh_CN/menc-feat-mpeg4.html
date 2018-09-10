@@ -1,0 +1,24 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.3. 编码为双通道MPEG-4 ("DivX")</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="prev" href="menc-feat-selecting-input.html" title="6.2. 选择输入文件或设备"><link rel="next" href="menc-feat-handheld-psp.html" title="6.4. 编码为Sony PSP视频格式"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.3. 编码为双通道MPEG-4 ("DivX")</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-input.html">上一页</a> </td><th width="60%" align="center">第 6 章 <span class="application">MEncoder</span>的基础用法</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-handheld-psp.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-mpeg4"></a>6.3. 编码为双通道MPEG-4 ("DivX")</h2></div></div></div><p>
+之所以这样命名，是因为这种编码<span class="emphasis"><em>两次</em></span>对文件进行编码。
+第一次编码（配音通道）生成一些几兆大的临时文件(<tt class="filename">*.log</tt>)，
+先不要删除它们（你可以删除AVI或者通过重定向到<tt class="filename">/dev/null</tt>
+而不生成视频）。第二次编码时，生成了双通道输出文件，使用的即是从临时文件提供
+的比特律数据。生成文件会有更好的图像质量。如果这是你第一次听说，你可以在互联
+网上找到相关参考。
+</p><div class="example"><a name="copy_audio_track"></a><p class="title"><b>例 6.2. 复制音轨</b></p><div class="example-contents"><p>
+双通道编码在复制音轨时将DVD的第二个轨道转换成MPEG-4 ("DivX") AVI。
+</p><pre class="screen">
+mencoder dvd://2 -ovc lavc -lavcopts vcodec=mpeg4:vpass=1 -oac copy -o /dev/null
+mencoder dvd://2 -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell:vpass=2 \
+    -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div></div><br class="example-break"><div class="example"><a name="encode_audio_track"></a><p class="title"><b>例 6.3. 对音轨编码</b></p><div class="example-contents"><p>
+将一个DVD编码成MPEG-4 ("DivX") AVI，音轨采用MP3格式
+使用这个方法的时候要当心，因为有时它可能造成音/视频不同步。
+</p><pre class="screen">
+mencoder dvd://2 -ovc lavc -lavcopts vcodec=mpeg4:vpass=1 \
+    -oac mp3lame -lameopts vbr=3 -o /dev/null
+mencoder dvd://2 -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell:vpass=2 \
+    -oac mp3lame -lameopts vbr=3 -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-input.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-handheld-psp.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">6.2. 选择输入文件或设备 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 6.4. 编码为Sony PSP视频格式</td></tr></table></div></body></html>

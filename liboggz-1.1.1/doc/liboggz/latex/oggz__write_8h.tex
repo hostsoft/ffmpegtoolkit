@@ -1,0 +1,29 @@
+\section{oggz\-\_\-write.\-h File Reference}
+\label{oggz__write_8h}\index{oggz\-\_\-write.\-h@{oggz\-\_\-write.\-h}}
+
+
+Interfaces for writing Ogg files and streams.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int($\ast$ {\bf Oggz\-Write\-Hungry} )({\bf O\-G\-G\-Z} $\ast$oggz, int empty, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em This is the signature of a callback which Oggz will call when {\itshape oggz} is \doxyref{hungry }{p.}{group__hungry}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf oggz\-\_\-write\-\_\-set\-\_\-hungry\-\_\-callback} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf Oggz\-Write\-Hungry} hungry, int only\-\_\-when\-\_\-empty, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Set a callback for Oggz to call when {\itshape oggz} is \doxyref{hungry }{p.}{group__hungry}. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-write\-\_\-feed} ({\bf O\-G\-G\-Z} $\ast$oggz, ogg\-\_\-packet $\ast$op, long serialno, int flush, int $\ast$guard)
+\begin{DoxyCompactList}\small\item\em Add a packet to {\itshape oggz's} packet queue. \end{DoxyCompactList}\item 
+long {\bf oggz\-\_\-write\-\_\-output} ({\bf O\-G\-G\-Z} $\ast$oggz, unsigned char $\ast$buf, long n)
+\begin{DoxyCompactList}\small\item\em Output data from an O\-G\-G\-Z handle. \end{DoxyCompactList}\item 
+long {\bf oggz\-\_\-write} ({\bf O\-G\-G\-Z} $\ast$oggz, long n)
+\begin{DoxyCompactList}\small\item\em Write n bytes from an O\-G\-G\-Z handle. \end{DoxyCompactList}\item 
+long {\bf oggz\-\_\-write\-\_\-get\-\_\-next\-\_\-page\-\_\-size} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Query the number of bytes in the next page to be written. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interfaces for writing Ogg files and streams. 

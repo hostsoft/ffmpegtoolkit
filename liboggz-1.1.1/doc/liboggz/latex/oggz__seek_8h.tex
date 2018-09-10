@@ -1,0 +1,82 @@
+\section{oggz\-\_\-seek.\-h File Reference}
+\label{oggz__seek_8h}\index{oggz\-\_\-seek.\-h@{oggz\-\_\-seek.\-h}}
+
+
+Seeking within files.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef ogg\-\_\-int64\-\_\-t($\ast$ {\bf Oggz\-Metric} )({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, ogg\-\_\-int64\-\_\-t granulepos, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em This is the signature of a function to correlate Ogg streams. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ogg\-\_\-int64\-\_\-t {\bf oggz\-\_\-tell\-\_\-units} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Query the current offset in milliseconds, or custom units as specified by a Metric function you have provided. \end{DoxyCompactList}\item 
+ogg\-\_\-int64\-\_\-t {\bf oggz\-\_\-seek\-\_\-units} ({\bf O\-G\-G\-Z} $\ast$oggz, ogg\-\_\-int64\-\_\-t units, int whence)
+\begin{DoxyCompactList}\small\item\em Seek to an offset in milliseconds, or custom units as specified by a Metric function you have provided. \end{DoxyCompactList}\item 
+ogg\-\_\-int64\-\_\-t {\bf oggz\-\_\-tell\-\_\-granulepos} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Provide the exact stored granulepos (from the page header) if relevant to the current packet, or a constructed granulepos if the stored granulepos does not belong to this packet, or -\/1 if this codec does not have support for granulepos interpolation. \end{DoxyCompactList}\item 
+{\bf oggz\-\_\-off\-\_\-t} {\bf oggz\-\_\-tell} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Query the file offset in bytes corresponding to the data read. \end{DoxyCompactList}\item 
+{\bf oggz\-\_\-off\-\_\-t} {\bf oggz\-\_\-seek} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf oggz\-\_\-off\-\_\-t} offset, int whence)
+\begin{DoxyCompactList}\small\item\em Seek to a specific byte offset. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-get\-\_\-preroll} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Retrieve the preroll of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-preroll} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, int preroll)
+\begin{DoxyCompactList}\small\item\em Specify the preroll of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-get\-\_\-granuleshift} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Retrieve the granuleshift of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-granuleshift} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, int granuleshift)
+\begin{DoxyCompactList}\small\item\em Specify the granuleshift of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-get\-\_\-granulerate} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, ogg\-\_\-int64\-\_\-t $\ast$granulerate\-\_\-n, ogg\-\_\-int64\-\_\-t $\ast$granulerate\-\_\-d)
+\begin{DoxyCompactList}\small\item\em Retrieve the granulerate of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-granulerate} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, ogg\-\_\-int64\-\_\-t granule\-\_\-rate\-\_\-numerator, ogg\-\_\-int64\-\_\-t granule\-\_\-rate\-\_\-denominator)
+\begin{DoxyCompactList}\small\item\em Specify the granulerate of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-metric} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, {\bf Oggz\-Metric} metric, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Set the Oggz\-Metric to use for an O\-G\-G\-Z handle. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-data\-\_\-start} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf oggz\-\_\-off\-\_\-t} offset)
+\begin{DoxyCompactList}\small\item\em Tell Oggz to remember the given offset as the start of data. \end{DoxyCompactList}\item 
+ogg\-\_\-int64\-\_\-t {\bf oggz\-\_\-bounded\-\_\-seek\-\_\-set} ({\bf O\-G\-G\-Z} $\ast$oggz, ogg\-\_\-int64\-\_\-t unit\-\_\-target, ogg\-\_\-int64\-\_\-t offset\-\_\-begin, ogg\-\_\-int64\-\_\-t offset\-\_\-end)
+\begin{DoxyCompactList}\small\item\em Seeks Oggz to time unit\-\_\-target, but with the bounds of the offset range [offset\-\_\-begin, offset\-\_\-end]. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Seeking within files. 
+
+\subsection{Function Documentation}
+\index{oggz\-\_\-seek.\-h@{oggz\-\_\-seek.\-h}!oggz\-\_\-bounded\-\_\-seek\-\_\-set@{oggz\-\_\-bounded\-\_\-seek\-\_\-set}}
+\index{oggz\-\_\-bounded\-\_\-seek\-\_\-set@{oggz\-\_\-bounded\-\_\-seek\-\_\-set}!oggz_seek.h@{oggz\-\_\-seek.\-h}}
+\subsubsection[{oggz\-\_\-bounded\-\_\-seek\-\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}ogg\-\_\-int64\-\_\-t oggz\-\_\-bounded\-\_\-seek\-\_\-set (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{ogg\-\_\-int64\-\_\-t}]{unit\-\_\-target, }
+\item[{ogg\-\_\-int64\-\_\-t}]{offset\-\_\-begin, }
+\item[{ogg\-\_\-int64\-\_\-t}]{offset\-\_\-end}
+\end{DoxyParamCaption}
+)}\label{oggz__seek_8h_a116cf4ae056573ab69b1161671ff6c59}
+
+
+Seeks Oggz to time unit\-\_\-target, but with the bounds of the offset range [offset\-\_\-begin, offset\-\_\-end]. 
+
+This is useful when seeking in network streams where only parts of a media are buffered, and retrieving unbuffered parts is expensive. 
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle previously opened for reading \\
+\hline
+{\em unit\-\_\-target} & The seek target, in milliseconds, or custom units \\
+\hline
+{\em offset\-\_\-begin} & Start of offset range to seek inside, in bytes \\
+\hline
+{\em offset\-\_\-end} & End of offset range to seek inside, in bytes, pass -\/1 for end of media \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new position, in milliseconds or custom units 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em -\/1} & on failure (unit\-\_\-target is not within range) \\
+\hline
+\end{DoxyRetVals}

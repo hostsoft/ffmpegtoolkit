@@ -1,0 +1,79 @@
+.TH "oggz-sort" "1" 
+.SH "NAME" 
+oggz-sort \(em Sort the pages of an Ogg file in order of presentation time. 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-sort\fR [\-o \fBfilename\fR  | \-\-output \fBfilename\fR ] filename  
+.PP 
+\fBoggz-sort\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-sort\fR sorts an Ogg file, interleaving 
+pages in order of presentation time.
+It correctly interprets the granulepos timestamps of
+Ogg CELT, CMML, Dirac, FLAC, Kate, PCM, Speex, Theora and Vorbis
+bitstreams.
+Run \fBoggz-known-codecs\fP\fB(1)\fP for a full list
+of codecs known by the installed version of oggz.
+ 
+.PP 
+Some encoders produce files with incorrect page ordering; for example, 
+some audio and video pages may occur out of order. Although these files 
+are usually playable, it can be difficult to accurately seek or scrub  
+on them, increasing the likelihood of glitches during playback. 
+Players may also need to use more memory in order to buffer the audio 
+and video data for synchronized playback, which can be a problem when 
+the files are viewed on low-memory devices. 
+ 
+.PP 
+Some older Ogg encoders also produce pages which incorrectly have 
+granulepos timestamps recorded that shouldn't be: pages which have no 
+completed packets must have a granulepos of \-1. 
+\fBoggz-sort\fR will correct such granulepos during the 
+process of sorting. 
+ 
+.PP 
+The tool \fBoggz-validate\fR can be used to check the 
+relative ordering of packets in a file, and also to detect incorrect 
+granulepos on pages with no completed packets. If either of these errors 
+are reported, or use \fBoggz-sort\fR to fix the problem. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-sort\fR accepts the following options: 
+ 
+.SS "Miscellaneous options" 
+.IP "\-o \fBfilename\fR, \-\-output \fBfilename\fR" 10 
+Write output to the specified 
+\fBfilename\fR instead of printing it to 
+standard output. 
+ 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+
+.SH EXAMPLES
+.PP
+Correct the page ordering in broken.ogv:
+.PP
+.RS
+\f(CWoggz sort \-o fixed.ogv broken.ogv\fP
+.RE
+
+.SH "AUTHOR" 
+.PP 
+Conrad Parker        January 25, 2008;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2008 Annodex Association 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-validate\fP\fB(1)\fP, 
+\fBoggz-merge\fP\fB(1)\fP, 
+\fBoggz-dump\fP\fB(1)\fP, 
+\fBoggz-diff\fP\fB(1)\fP, 
+\fBhogg\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

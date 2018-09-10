@@ -1,0 +1,28 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.8. Preservando relación de aspecto</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="prev" href="menc-feat-extractsub.html" title="6.7. Extrayendo subtítulos DVD a archivo Vobsub"><link rel="next" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.8. Preservando relación de aspecto</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Anterior</a> </td><th width="60%" align="center">Capítulo 6. Codificación básica con <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="encoding-guide.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aspect"></a>6.8. Preservando relación de aspecto</h2></div></div></div><p>
+Los archivos de DVDs y SVCDs (p.e. MPEG1/2) contienen un valor sobre la
+relación de aspecto, que describe cómo debe el reproductor escalar el flujo
+de video, los humanos tienen un huevo por cabeza (ej.:480x480 + 4:3 = 640x480).
+Sin embargo cuando se codifica a archivo AVI (DivX), debe estar advertido
+de que los encabezados AVI no almacenan este valor. Reescalar la película
+es repugnante y consume tiempo, ¡siempre debe haber un camino mejor!
+</p><p>Esto es</p><p>
+MPEG4 tiene una característica única: el flujo de video puede contener
+la razón de aspecto necesaria. Sí, igual que MPEG1/2 (DVD, SVCD) y los archivos H263.
+Por lástima, <span class="bold"><strong>no</strong></span> hay reproductores de video
+ahí fuera que soporten esta característica de MPEG4, excepto <span class="application">MPlayer</span>.
+</p><p>
+Esta característica puede ser usada solo con el codec
+<code class="systemitem">mpeg4</code> de
+<code class="systemitem">libavcodec</code>.
+Tenga en mente: aunque <span class="application">MPlayer</span> puede reproducir
+correctamente el archivo creado, otros reproductores pueden usar una razón
+de aspecto incorrecta.
+</p><p>
+Seriamente debe recortar las bandas negras que hay por encima y por debajo
+de la imagen.
+Vea la página de manual para usar los filtros <code class="systemitem">cropdetect</code>
+y <code class="systemitem">crop</code>.
+</p><p>
+Uso
+</p><pre class="screen">mencoder <em class="replaceable"><code>sample-svcd.mpg</code></em> -ovc lavc -lavcopts vcodec=mpeg4:autoaspect -vf crop=714:548:0:14 -oac copy -o <em class="replaceable"><code>salida.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="encoding-guide.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">6.7. Extrayendo subtítulos DVD a archivo Vobsub </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> Capítulo 7. Codificando con <span class="application">MEncoder</span></td></tr></table></div></body></html>

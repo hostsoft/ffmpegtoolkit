@@ -1,0 +1,1003 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.2. Salidas de video para tarjetas de video tradicionales</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="prev" href="mtrr.html" title="4.1. Configurando MTRR"><link rel="next" href="mpeg_decoders.html" title="4.3. Decodificadores MPEG"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="output-trad.html#xv" title="4.2.1. Xv"><link rel="subsection" href="output-trad.html#dga" title="4.2.2. DGA"><link rel="subsection" href="output-trad.html#sdl" title="4.2.3. SDL"><link rel="subsection" href="output-trad.html#svgalib" title="4.2.4. SVGAlib"><link rel="subsection" href="output-trad.html#fbdev" title="4.2.5. Salida en framebuffer (FBdev)"><link rel="subsection" href="output-trad.html#mga_vid" title="4.2.6. Framebuffer de Matrox (mga_vid)"><link rel="subsection" href="output-trad.html#tdfxfb" title="4.2.7. Soporte 3Dfx YUV"><link rel="subsection" href="output-trad.html#opengl" title="4.2.8. Salida OpenGL"><link rel="subsection" href="output-trad.html#aalib" title="4.2.9. AAlib - reproduciendo en modo texto"><link rel="subsection" href="output-trad.html#caca" title="4.2.10. libcaca - Biblioteca de Arte AsCii en color"><link rel="subsection" href="output-trad.html#vesa" title="4.2.11. VESA - salida en VESA BIOS"><link rel="subsection" href="output-trad.html#x11" title="4.2.12. X11"><link rel="subsection" href="output-trad.html#vidix" title="4.2.13. VIDIX"><link rel="subsection" href="output-trad.html#directfb" title="4.2.14. DirectFB"><link rel="subsection" href="output-trad.html#dfbmga" title="4.2.15. DirectFB/Matrox (dfbmga)"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.2. Salidas de video para tarjetas de video tradicionales</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mtrr.html">Anterior</a> </td><th width="60%" align="center">Capítulo 4. Dispositivos de salida de video</th><td width="20%" align="right"> <a accesskey="n" href="mpeg_decoders.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="output-trad"></a>4.2. Salidas de video para tarjetas de video tradicionales</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="xv"></a>4.2.1. Xv</h3></div></div></div><p>
+Bajo XFree86 4.0.2 o posterior, puede usar las rutinas de hardware YUV de su
+tarjeta gráfica usando la extensión XVideo. Esto es lo que usa la opción
+<tt class="option">-vo xv</tt>. Además, este controlador soporta ajustes de
+brillo/contraste/saturación/etc (a menos que use el antiguo, lento codec
+DirectShow DivX, que tiene soporte siempre), vea la página de manual.
+</p><p>
+Para que esto funcione, asegúrese de comprobar lo siguiente:
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  Tiene que usar XFree86 4.0.2 o posterior (otras versiones no tienen XVideo)
+  </p></li><li class="listitem"><p>
+  Su tarjeta actualmente soporta aceleración hardware (las modernas lo hacen)
+  </p></li><li class="listitem"><p>
+  X carga la extensión XVideo, esto es algo como:
+  </p><pre class="programlisting">(II) Loading extension XVideo</pre><p>
+  en <tt class="filename">/var/log/XFree86.0.log</tt>
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+   Esto carga solo la extensión de XFree86. En una instalación buena, siempre
+   es cargado, y no importa si el soporte XVideo para la
+   <span class="bold"><strong>tarjeta</strong></span> ha sido cargado!
+  </p></div><p>
+  </p></li><li class="listitem"><p>
+  Su tarjeta tiene soporte Xv bajo Linux. Para comprobarlo, pruebe
+  <span class="command"><strong>xvinfo</strong></span>, es parte de la distribucióno XFree86. Debe mostrar
+  un texto largo, similar a éste:
+  </p><pre class="screen">
+X-Video Extension version 2.2
+screen #0
+  Adaptor #0: "Savage Streams Engine"
+    number of ports: 1
+    port base: 43
+    operations supported: PutImage
+    supported visuals:
+      depth 16, visualID 0x22
+      depth 16, visualID 0x23
+    number of attributes: 5
+(...)
+    Number of image formats: 7
+      id: 0x32595559 (YUY2)
+        guid: 59555932-0000-0010-8000-00aa00389b71
+        bits per pixel: 16
+        number of planes: 1
+        type: YUV (packed)
+      id: 0x32315659 (YV12)
+        guid: 59563132-0000-0010-8000-00aa00389b71
+        bits per pixel: 12
+        number of planes: 3
+        type: YUV (planar)
+(...etc...)</pre><p>
+  Debe soportar formatos de pixel YUY2 packed, y YV12 planar para ser
+  usables con <span class="application">MPlayer</span>.
+  </p></li><li class="listitem"><p>
+  Y finalmente, compruebe si <span class="application">MPlayer</span> fue
+  compilado con soporte 'xv'.
+  Haga <span class="command"><strong>mplayer -vo help | grep xv</strong></span>. Si fue compilado
+  con soporte 'xv', aparecerá una línea similar a:
+  </p><pre class="screen">
+  xv    X11/Xv</pre><p>
+  </p></li></ol></div><p>
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="tdfx"></a>4.2.1.1. Tarjetas 3dfx</h4></div></div></div><p>
+Controladores antiguos 3dfx se sabe que tienen problemas con la aceleración
+XVideo, no soportan ni YUY2 ni YV12, ni nada. Verifique que tiene XFree86
+versión 4.2.0 o posterior, este funciona bien con YV12 y YUY2. Versiones
+previas, incluyendo 4.1.0, <span class="bold"><strong>falla con YV12</strong></span>.
+Si experiencia efectos extraños usando <tt class="option">-vo xv</tt>, pruebe SDL
+(tiene XVideo también) y vea si eso puede ayudarle. Compruebe la
+sección <a class="link" href="output-trad.html#sdl" title="4.2.3. SDL">SDL</a> para más detalles.
+</p><p>
+¡<span class="bold"><strong>O</strong></span>, pruebe el NUEVO controlador
+<tt class="option">-vo tdfxfb</tt>! Vea la sección <a class="link" href="output-trad.html#tdfxfb" title="4.2.7. Soporte 3Dfx YUV">tdfxfb</a>.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="s3"></a>4.2.1.2. Tarjetas S3</h4></div></div></div><p>
+Las S3 Savage3D deben funcionar bien, pero para Savage4, use XFree86 version 4.0.3
+o posterior (en caso de problemas con la imagen, pruebe 16bpp). Como para
+S3 Virge: hay soporte xv, pero la tarjeta es lenta por sí misma, será mejor que
+la venda.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Actualmente no está claro qué modelos de Savage carecen de soporte YV12, y
+convierten por controlador (lento). Si sospecha de su tarjeta, obtenga un
+controlador nuevo, o pregunte de forma correcta en la lista de correo
+mplayer-users por un controlador con soporte para MMX/3DNow.
+</p></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="nvidia"></a>4.2.1.3. Tarjetas nVidia</h4></div></div></div><p>
+nVidia no es siempre una buena elección bajo Linux ... El controlador de
+código abierto de XFree86 tiene soporte en la mayoría de los casos, pero para
+algunas tarjetas, tiene que usar un controlador de código-cerrado de nVidia,
+disponible en
+<a class="ulink" href="http://www.nvidia.com/object/linux.html" target="_top">el sitio web de nVidia</a>.
+Siempre necesitará ese controlador de todos modos si quiere también aceleración 3D.
+</p><p>
+Las tarjetas Riva128 no tienen soporte XVideo con el controlador nVidia de
+XFree86 :( Las quejas a nVidia.
+</p><p>
+Sin embargo, <span class="application">MPlayer</span> contiene un controlador
+<a class="link" href="output-trad.html#vidix" title="4.2.13. VIDIX">VIDIX</a> para la mayoría de las tarjetas nVidia.
+Actualmente está en estado beta, y tiene algunos problemas. Para más
+información, vea la sección <a class="link" href="output-trad.html#vidix-nvidia" title="4.2.13.5. Tarjetas nVidia">nVidia VIDIX</a>.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ati"></a>4.2.1.4. Tarjetas ATI</h4></div></div></div><p>
+El <a class="ulink" href="http://www.linuxvideo.org/gatos" target="_top">controlador GATOS</a>
+(que es el que debería de usar, a menos que tenga una Rage128 o Radeon) tiene
+VSYNC activado por defecto. Esto significa que tiene velocidad de decodificación (!)
+sincronizado con la tasa de refresco del monitor. Si la reproducción es lenta, pruebe
+a desactivar VSYNC, o establezca una tasa de refresco a n*(fps de la película) Hz.
+</p><p>
+Radeon VE - si necesita X, use XFree86 4.2.0 o posterior para esta tarjeta.
+No tiene soporte de salida de TV. Por supuesto con <span class="application">MPlayer</span>
+puede felizmente obtener gráficos <span class="bold"><strong>acelerados</strong></span>, con o
+sin <span class="bold"><strong>salida TV</strong></span>, y no se necesitan bibliotecas o X.
+Lea la sección <a class="link" href="output-trad.html#vidix" title="4.2.13. VIDIX">VIDIX</a>.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="neomagic"></a>4.2.1.5. Tarjetas NeoMagic</h4></div></div></div><p>
+Estas tarjetas se pueden encontrar en algunos portátiles. Debe usar XFree86 4.3.0 o
+posterior, o incluso los controladores de Stefan Seyfried
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/NeoMagic-driver/" target="_top">Xv-capable</a>.
+Elija el que corresponda a su versión de XFree86.
+</p><p>
+XFree86 4.3.0 incluye soporte  Xv, a pesar de eso Bohdan Horst envió un pequeño
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/NeoMagic-driver/neo_driver.patch" target="_top">parche</a>
+contra los fuentes de XFree86 que aceleran las operaciones de framebuffer (y XVideo por tanto)
+hasta cuatro veces. El parche ha sido incluido en XFree86 CVS y deberá estar en la
+siguiente liberación después de la 4.3.0.
+</p><p>
+Para permitir reproducción de contenido de tamaño de DVD cambie su XF86Config como este:
+</p><pre class="programlisting">
+Section "Device"
+    [...]
+    Driver "neomagic"
+    <span class="emphasis"><em>Option "OverlayMem" "829440"</em></span>
+    [...]
+EndSection</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="trident"></a>4.2.1.6. Tarjetas Trident</h4></div></div></div><p>
+Si quiere usar xv con una tarjeta trident, sepa que no funciona con
+4.1.0, instale XFree 4.2.0. 4.2.0 añade soporte para Xv en pantalla completa
+con la tarjeta Cyberblade XP.
+</p><p>
+Alternativamente, <span class="application">MPlayer</span> contiene un controlador
+<a class="link" href="output-trad.html#vidix" title="4.2.13. VIDIX">VIDIX</a> para la tarjeta Cyberblade/i1.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="kyro"></a>4.2.1.7. Tarjetas Kyro/PowerVR</h4></div></div></div><p>
+Si quiere usar Xv con una tarjeta basada en Kyro (por ejemplo Hercules
+Prophet 4000XT), debe descargar los controladores desde
+<a class="ulink" href="http://www.powervr.com/" target="_top">el sitio de PowerVR</a>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dga"></a>4.2.2. DGA</h3></div></div></div><p><b>PREÁMBULO. </b>
+Este documento intenta explicar en pocas palabras que es DGA en general
+y que puede hacer el controlador de video DGA de <span class="application">MPlayer</span>
+(y qué no puede hacer).
+</p><p><b>QUÉ ES DGA. </b>
+<acronym class="acronym">DGA</acronym> es una abreviatura para <span class="emphasis"><em>Direct Graphics
+Access</em></span> y eso significa que es un programa que pasa por alto
+el servidor X y modifica directamente la memoria de framebuffer. Técnicamente
+hablando esto se hace mapeando la memoria del framebuffer en el rango de
+memoria de su proceso. Esto es permitido por el kernel solo si tiene privilegios
+de superusuario. Puede obtenerlos identificandose como
+<code class="systemitem">root</code> o estableciendo el bit SUID en
+el ejecutable de <span class="application">MPlayer</span> (<span class="bold"><strong>no
+recomendado</strong></span>).
+</p><p>
+Hay dos versiones de DGA: DGA1 es usado por XFree 3.x.x y DGA2 fue
+introducido con Xfree 4.0.1.
+</p><p>
+DGA1 provee solo acceso directo al framebuffer como se describe más arriba.
+Para cambiar la resolución de la señal de video debe apoyarse en la extensión
+XVidMode.
+</p><p>
+DGA2 incorpora las características de la extensión XVidMode y también
+permite cambiar la profundidad de color de la pantalla. Con eso puede,
+básicamente ejecutar un servidor X con profundidad de color de 32 bit,
+cambiando a una profundidad de 15 bits y viceversa.
+</p><p>
+Sin embargo DGA tiene algunos problemas. Parece ser muy dependiente del
+chip gráfico que usa en la implementación del controlador de video en
+el servidor X que controla a este chip. Por eso no funciona en todos los
+sistemas...
+</p><p><b>INSTALANDO SOPORTE DGA PARA <span class="application">MPlayer</span>. </b>Primero asegura que X carga la extensión DGA, mira en
+<tt class="filename">/var/log/XFree86.0.log</tt>:
+
+</p><pre class="programlisting">(II) Loading extension XFree86-DGA</pre><p>
+
+Vea, ¡XFree86 4.0.x o posterior es <span class="bold"><strong>altamente recomendado</strong></span>!
+El controlador DGA de <span class="application">MPlayer</span> es autodetectado
+por <tt class="filename">./configure</tt>, o puede forzarlo con <tt class="option">--enable-dga</tt>.
+</p><p>
+Si el controlador no puede cambiar a una resolución menor, experimente
+con opciones <tt class="option">-vm</tt> (solo con X 3.3.x), <tt class="option">-fs</tt>,
+<tt class="option">-bpp</tt>, <tt class="option">-zoom</tt> para encontrar un modo de
+video donde quepa la película. No hay un conversor bueno por ahora :(
+</p><p>
+Hágase <code class="systemitem">root</code>. DGA necesita acceso
+root para permitir escribir directamente en la memoria de video. Si quiere
+ejecutarlo como usuario, entonces instale <span class="application">MPlayer</span>
+SUID root:
+
+</p><pre class="screen">
+chown root <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod 750 <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod +s <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+</pre><p>
+
+Ahora funciona como usuario simple, también.
+</p><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Riesgos de seguridad</h3><p>
+¡Esto es un <span class="bold"><strong>gran</strong></span> riesgo de seguridad!
+<span class="bold"><strong>Nunca</strong></span> haga esto en un servidor o en un ordenador
+que pueda ser accedido por otra gente porque pueden ganar privilegios de root
+a través del <span class="application">MPlayer</span> SUID root.
+</p></div><p>
+Ahora use la opción <tt class="option">-vo dga</tt>, y ya debe ir! (espero :) También
+debe probar si la opción <tt class="option">-vo sdl:dga</tt> funciona para usted!
+¡Esto es mucho más rápido!
+</p><p><a name="dga-modelines"></a><b>CAMBIOS DE RESOLUCIÓN. </b>
+El controlador DGA le permite cambiar la resolución de la señal de salida.
+Esto evita tener que hacer escalado por software (lento) y al mismo tiempo
+provee imagen a pantalla completa. Idealmente debe cambiarse a la resolución
+exacta (excepto para respetar relación de aspecto) de los datos de video, pero
+el servidor X solo permite cambiar resoluciones predefinidas en
+<tt class="filename">/etc/X11/XF86Config</tt>
+<tt class="filename">/etc/X11/XF86Config</tt>
+(<tt class="filename">/etc/X11/XF86Config-4</tt> para XFree 4.X.X respectivamente).
+Estas son definidas por las llamadas modelines y dependen de las capacidades
+de su hardware de video. El servidor X escanea este archivo de configuración
+durante el inicio y desactiva los modelines que no sirvan para su hardware.
+Puede encontrar que modos sobreviven en el archivo de historial de X11. Puede
+encontrarse en: <tt class="filename">/var/log/XFree86.0.log</tt>.
+</p><p>
+Se sabe que estas entradas funcionan bien con un chip Riva128, usando el
+modulo de controlador nv.o del servidor X.
+</p><pre class="programlisting">
+Section "Modes"
+  Identifier "Modes[0]"
+  Modeline "800x600"  40     800 840 968 1056  600 601 605 628
+  Modeline "712x600"  35.0   712 740 850 900   400 410 412 425
+  Modeline "640x480"  25.175 640 664 760 800   480 491 493 525
+  Modeline "400x300"  20     400 416 480 528   300 301 303 314 Doublescan
+  Modeline "352x288"  25.10  352 368 416 432   288 296 290 310
+  Modeline "352x240"  15.750 352 368 416 432   240 244 246 262 Doublescan
+  Modeline "320x240"  12.588 320 336 384 400   240 245 246 262 Doublescan
+EndSection
+</pre><p><b>DGA &amp; <span class="application">MPlayer</span>. </b>
+DGA es usado en dos lugares con <span class="application">MPlayer</span>: El
+controlador SDL puede prepararse para que lo use (<tt class="option">-vo sdl:dga</tt>)
+y el controlador DGA (<tt class="option">-vo dga</tt>. Lo mencionado más arriba es
+correcto para ambos; en las siguientes secciones explicaré cómo funciona
+el controlador DGA para <span class="application">MPlayer</span>.
+</p><p><b>CARACTERISTICAS. </b>
+El controlador DGA es invocado especificando <tt class="option">-vo dga</tt> en la
+línea de órdenes. El comportamiento por defecto es cambiar a una resolución
+que coincida con la resolución original del video o tan cercana como sea
+posible. De forma deliberada ignora las opciones <tt class="option">-vm</tt> y
+<tt class="option">-fs</tt> (activando el cambio de modo de video y pantalla
+completa) - siempre intenta cubrir tanta área de su pantalla como sea
+posible cambiando el modo de video, lo que lo hace usar un ciclo adicional
+de su CPU para escalar la imagen. Si no le gusta este modo que elije puede
+forzar que se elija el modo que se ajuste más a la resolución especificada
+por <tt class="option">-x</tt> y <tt class="option">-y</tt>. Proporcionando la opción
+<tt class="option">-v</tt>, el controlador DGA imprimirá, junto con otro montón
+de cosas, una lista de todas las resoluciones soportadas por su archivo
+<tt class="filename">XF86Config</tt> actual. Teniendo DGA2 también puede forzar
+que se use cierta profundidad de color usando la opción <tt class="option">-bpp</tt>.
+Profundidades de color válidas son 15, 16, 24 y 32. Depende de su hardware
+que estén soportadas de manera nativa o que se hagan mediante una conversión
+por software (posiblemente lento).
+</p><p>
+Si tiene la suerte suficiente para tener memoria fuera de pantalla restante
+donde colocar una imagen entera, el controlador DGA usará doblebuffering,
+lo que puede resultar en una reproducción de la película mucho más suave.
+Le informará de cuándo está activado o no el doble-buffer.
+</p><p>
+Doblebuffering significa que el siguiente marco de su video está siendo
+dibujado en alguna zona de memoria fuera de la pantalla mientras se muestra
+el marco actual. Cuando el siguiente marco está listo, el chip de gráficos
+solo dice la posición en memoria donde se encuentra y muestra los datos
+que hay allí. Mientras tanto el otro buffer en memoria es rellenado de nuevo
+con nuevos datos de video.
+</p><p>
+Doblebuffering puede ser activado usando la opción <tt class="option">-double</tt>
+y desactivado con <tt class="option">-nodouble</tt>. Actualmente la opción por
+defecto es doblebuffering desactivado. Cuando use el controlador DGA,
+la información en pantalla (OSD) solo funciona si está el doblebuffering activado.
+Sin embargo, activar doblebufferint puede resultar en una falta grande
+de velocidad (en mi K6-II+ 525 usa un 20% adicional de tiempo de CPU!) dependiendo
+de la implementación de DGA para su hardware.
+</p><p><b>ASUNTOS SOBRE VELOCIDAD. </b>
+Generalmente hablando, el acceso DGA al framebuffer debe ser al menos tan
+rápido como usar el controlador X11 con el beneficio adicional de obtener
+una imagen a pantalla completa. Los porcentajes de velocidad son impresos por
+<span class="application">MPlayer</span> y se tienen que interpretar con cuidado,
+por ejemplo, con el controlador X11 no se incluye el tiempo usado por
+el servidor X necesario para realizar el dibujo en pantalla. Conecte un
+terminal serie a su equipo e inicie <span class="command"><strong>top</strong></span> para ver qué
+es realmente lo que está ocurriendo en su equipo.
+</p><p>
+Generalmente hablando, el aumento de velocidad por usar DGA frente al uso
+'normal' usando X11 depende en gran medida de su tarjeta gráfica y de cómo
+de optimizado esté el módulo del servidor X.
+</p><p>
+Si tiene un sistema lento, mejor use 15 o 16 bit de profundidad de color porque
+requieren solo la mitad de ancho de banda de memoria que una pantalla de 32 bit.
+</p><p>
+Usar una profundidad de color de 24 bit sigue siendo incluso buena idea aunque
+su tarjeta soporte 32 bit de forma nativa porque transfiere 25% menos datos que
+el modo 32/32.
+</p><p>
+He visto algunos archivos AVI reproducidos en un Pentium MMX 266. Las CPUs
+AMD K6-2 deben funcionar a 400 MHz o superior.
+</p><p><b>FALLOS CONOCIDOS. </b>
+Bien, de acuerdo con algunos desarrolladores de XFree, DGA es bastante
+bestia. Ellos aconsejan que es mejor no usarlo. Su implementación no
+funciona bien con todos los controladores de chipsets para XFree existentes.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Con XFree 4.0.3 y <tt class="filename">nv.o</tt> hay un fallo que resulta en
+  extraños colores.
+  </p></li><li class="listitem"><p>
+  El controlador ATI requiere cambiar el modo original más de una vez una
+  vez finaliza el uso de DGA.
+  </p></li><li class="listitem"><p>
+  Algunos controladores símplemente fallan al volver a la resolución
+  normal (use
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad +</b></span> y
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad -</b></span>
+  para volver al modo normal de manera manual).
+  </p></li><li class="listitem"><p>
+  Algunos controladores símplemente muestran colores extraños.
+  </p></li><li class="listitem"><p>
+  Algunos controladores se quejan de la cantidad de memoria que intenta
+  mapear el espacio de direcciones del proceso, incluso cuando vo_dga no
+  quiere usar doblebuffering (¿SIS?).
+  </p></li><li class="listitem"><p>
+  Algunos controladores parecen fallar informando de un único modo
+  válido. En este caso el controlador DGA falla diciendole que no tiene
+  sentido el modo 100000x100000 o algo así.
+  </p></li><li class="listitem"><p>
+  OSD solo funciona con doblebuffering activado (si no parpadea).
+  </p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="sdl"></a>4.2.3. SDL</h3></div></div></div><p>
+<acronym class="acronym">SDL</acronym> (Simple Directmedia Layer) es básicamente una
+interfaz unificada de video/audio. Los programas que la usan solo tienen
+que preocuparse de SDL, y no del controlador de video o audio que SDL esté
+usando. Por ejemplo una versión de Doom que use SDL puede usarse en
+svgalib, aalib, X, fbdev, y otros, solo tiene que especificar el (por
+ejemplo) controlador de video a usar con la variable de entorno
+<code class="envar">SDL_VIDEODRIVER</code>. Bueno, teóricamente.
+</p><p>
+Con <span class="application">MPlayer</span>, se usa la característica del escalador
+software del controlador X11 para tarjetas/controladores que no soportan
+XVideo, hasta que hagamos nuestro propio (más rápido, más bonito) escalador
+por software. También usamos su salida aalib, pero ahora tenemos el nuestro propio
+que es más confortable. Su modo DGA fue mejor que el nuestro, hasta hace poco.
+¿Lo quiere probar ahora? :)
+</p><p>
+También ayuda con algunos controladores/tarjetas con fallos si el video va
+a saltos (sin ser un problema de sistema lento), o el audio va con retardo.
+</p><p>
+La salida de video SDL permite mostrar los subtítulos debajo de la película,
+en la (si está presente) banda negra.
+</p><div class="variablelist"><p class="title"><b>Hay varias opciones en la línea de órdenes para SDL:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo sdl:<em class="replaceable"><code>nombre</code></em></tt></span></dt><dd><p>
+    especifica el controlador de SDL de video a usar (i.e. <code class="literal">aalib</code>,
+    <code class="literal">dga</code>, <code class="literal">x11</code>)
+  </p></dd><dt><span class="term"><tt class="option">-ao sdl:<em class="replaceable"><code>nombre</code></em></tt></span></dt><dd><p>
+    especifica el controlador de SDL de audio a usar (i.e. <code class="literal">dsp</code>,
+    <code class="literal">esd</code>, <code class="literal">arts</code>)
+  </p></dd><dt><span class="term"><tt class="option">-noxv</tt></span></dt><dd><p>
+    desactiva la aceleración hardware XVideo
+  </p></dd><dt><span class="term"><tt class="option">-forcexv</tt></span></dt><dd><p>
+    intenta forzar la aceleración XVideo
+  </p></dd></dl></div><div class="table"><a name="teclas_sdl"></a><p class="title"><b>Tabla 4.1. Teclas solo para SDL</b></p><div class="table-contents"><table summary="Teclas solo para SDL" border="1"><colgroup><col><col></colgroup><thead><tr><th>Tecla</th><th>Acción</th></tr></thead><tbody><tr><td><span class="keycap"><b>c</b></span></td><td>
+    cambia entre los modos de pantalla completa disponibles
+    </td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>
+    regresa al modo normal
+    </td></tr></tbody></table></div></div><br class="table-break"><div class="itemizedlist"><p class="title"><b>Fallos conocidos:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Al pulsar teclas bajo una consola sdl:aalib el controlador la repite
+  indefinidamente. (¡Mejor use la opción <tt class="option">-vo aa</tt>!) Es un
+  fallo de SDL, yo no puedo cambiarlo (probado con SDL 1.2.1).
+  </p></li><li class="listitem"><p>
+  ¡NO USE SDL con GUI! El comportamiento no será el esperado.
+  </p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="svgalib"></a>4.2.4. SVGAlib</h3></div></div></div><p><b>INSTALACIÓN. </b>
+Debe instalar svgalib y su paquete de desarrollo para construir
+<span class="application">MPlayer</span> con el controlador SVGAlib (es autodetectado,
+aunque también puede forzarse), y no se olvide de editar
+<tt class="filename">/etc/vga/libvga.config</tt> para configurar su tarjeta y su
+monitor.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Asegúrese de no usar la opción <tt class="option">-fs</tt>, porque cambia el estado
+del uso del escalador software, y es lento. Si realmente lo necesita, use
+la opción <tt class="option">-sws 4</tt> lo que le producirá peor calidad, pero
+es algo más rápido.
+</p></div><p><b>SOPORTE EGA (4BPP). </b>
+SVGAlib incorpora EGAlib, y <span class="application">MPlayer</span> tiene la
+posibilidad de mostrar cualquier película en 16 colores, de manera que se
+puede usar con las siguientes configuraciones de equipos:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Tarjeta EGA con monitor EGA: 320x200x4bpp, 640x200x4bpp, 640x350x4bpp
+  </p></li><li class="listitem"><p>
+  Tarjeta EGA con monitor CGA: 320x200x4bpp, 640x200x4bpp
+  </p></li></ul></div><p>
+El valor bpp (bits por pixel) debe establecerse a 4 manualmente:
+<tt class="option">-bpp 4</tt>
+</p><p>
+La película probablemente deberá ser escalada para ajustarse al modo EGA:
+</p><pre class="screen">-vf scale=640:350</pre><p>
+o
+</p><pre class="screen">-vf scale=320:200</pre><p>
+</p><p>
+Para eso se necesita una rutina de escalado de mala calidad pero rápida:
+</p><pre class="screen">-sws 4</pre><p>
+</p><p>
+Quizá la corrección automática de relación de aspecto deberá desactivarse:
+</p><pre class="screen">-noaspect</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+De acuerdo con mi experiencia la mejor calidad de imagen
+en pantallas EGA puede obtenerse decrementando el brillo un poco:
+<tt class="option">-vf eq=-20:0</tt>. También necesité bajar la tasa de
+muestreo en mi equipo, porque el sonido no funcionaba a 44kHz:
+<tt class="option">-srate 22050</tt>.
+</p></div><p>
+Puede activar OSD y subtítulos solo con el filtro <tt class="option">expand</tt>,
+vea la página de manual para los parámetros concretos.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="fbdev"></a>4.2.5. Salida en framebuffer (FBdev)</h3></div></div></div><p>
+Si se construye o no el objetivo FBdev es autodetectado durante el
+<tt class="filename">./configure</tt>. Lea la documentación del framebuffer en
+los fuentes del núcleo (<tt class="filename">Documentation/fb/*</tt>) para más
+información.
+</p><p>
+Si su tarjeta no soporta el estándar VBE 2.0 (tarjetas ISA/PCI antiguas, tales
+como S3 Trio64), solo VBE 1.2 (¿o anterior?): Bueno, VESAfb sigue funcionando,
+pero necesitará cargar SciTech Display Doctor (formalmente UniVBE) antes de
+iniciar Linux. Use un disco de inicio DOS o similar. Y no olvide registrar
+UniVBE ;))
+</p><p>
+La salida FBdev toma parámetros adicionales sobre los otros:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><tt class="option">-fb</tt></span></dt><dd><p>
+    especifica el dispositivo framebuffer a usar (<tt class="filename">/dev/fb0</tt>)
+    </p></dd><dt><span class="term"><tt class="option">-fbmode</tt></span></dt><dd><p>
+    nombre del modo a usar (de acuerdo con <tt class="filename">/etc/fb.modes</tt>)
+    </p></dd><dt><span class="term"><tt class="option">-fbmodeconfig</tt></span></dt><dd><p>
+    archivo de configuración de modos (por defecto <tt class="filename">/etc/fb.modes</tt>)
+    </p></dd><dt><span class="term"><tt class="option">-monitor-hfreq</tt>, </span><span class="term"><tt class="option">-monitor-vfreq</tt>, </span><span class="term"><tt class="option">-monitor-dotclock</tt></span></dt><dd><p>
+    valores importantes <span class="bold"><strong>important</strong></span>, vea
+    <tt class="filename">example.conf</tt>
+    </p></dd></dl></div><p>
+Si desea cambiar a un modo específico, use
+</p><pre class="screen">
+mplayer -vm -fbmode <em class="replaceable"><code>nombre_del_modo</code></em> <em class="replaceable"><code>nombrearchivo</code></em>
+</pre><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <tt class="option">-vm</tt> sin más opciones elije el mejor modo desde
+  <tt class="filename">/etc/fb.modes</tt>. Puede usarse junto con
+  las opciones <tt class="option">-x</tt> y <tt class="option">-y</tt> también. La opción
+  <tt class="option">-flip</tt> está soportada solo si el formato de pixel de la
+  película coincide con el formato de pixel del modo de video. Preste atención
+  al valor bpp, el controlador fbdev intentará usar el actual, o si especifica
+  uno con la opción <tt class="option">-bpp</tt>, pues ese.
+  </p></li><li class="listitem"><p>
+  La opción <tt class="option">-zoom</tt> no está soportada (use <tt class="option">-vf scale</tt>).
+  No puede usar modos de 8bpp (o menos).
+  </p></li><li class="listitem"><p>
+  Posiblemente quiera desactivar el cursor:
+  </p><pre class="screen">echo -e '\033[?25l'</pre><p>
+  o
+  </p><pre class="screen">setterm -cursor off</pre><p>
+  y el protector de pantalla:
+  </p><pre class="screen">setterm -blank 0</pre><p>
+  Para volver a activar el cursor:
+  </p><pre class="screen">echo -e '\033[?25h'</pre><p>
+  o
+  </p><pre class="screen">setterm -cursor on</pre><p>
+  </p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Los cambios de modo de video para FBdev <span class="emphasis"><em>no funcionan</em></span> con
+el framebuffer VESA, y no nos pida que funcione, porque no es una limitación
+de <span class="application">MPlayer</span>.
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mga_vid"></a>4.2.6. Framebuffer de Matrox (mga_vid)</h3></div></div></div><p>
+Esta sección se encarga de describir el soporte de Matrox
+G200/G400/G450/G550 BES (Back-End Scaler), el controlador del núcleo mga_vid.
+Está en activo desarrollo poro A'rpi, y tiene soporte de VSYNC por hardware
+con triple buffering. Funciona tanto en consola con frambuffer como bajo X.
+</p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Aviso</h3><p>
+¡Esto es solo en Linux! En sistemas no-Linux (probado en FreeBSD), puede
+usar en su lugar <a class="link" href="output-trad.html#vidix" title="4.2.13. VIDIX">VIDIX</a>!
+</p></div><div class="procedure"><a name="idp72143104"></a><p class="title"><b>Instalación:</b></p><ol class="procedure" type="1"><li class="step"><p>
+  Para usarlo, primero tendrá que compilar <tt class="filename">mga_vid.o</tt>:
+  </p><pre class="screen">
+cd drivers
+make</pre><p>
+  </p></li><li class="step"><p>
+  Cree ahora el dispositivo <tt class="filename">/dev/mga_vid</tt>:
+  </p><pre class="screen">mknod /dev/mga_vid c 178 0</pre><p>
+  y cargue el controlador con
+  </p><pre class="screen">insmod mga_vid.o</pre><p>
+  </p></li><li class="step"><p>
+  Deberá verificar la autodetección del tamaño de memoria
+  usando la órden <span class="command"><strong>dmesg</strong></span>. Si es incorrecta,
+  use la opción <tt class="option">mga_ram_size</tt> (antes haga
+  <span class="command"><strong>rmmod mga_vid</strong></span>), especifique el tamaño
+  de la memoria de la tarjeta gráfica en MB:
+  </p><pre class="screen">insmod mga_vid.o mga_ram_size=16</pre><p>
+  </p></li><li class="step"><p>
+  Para que se cargue/descargue automáticamente cuando sea necesario,
+  primero inserte la siguiente línea al final de
+  <tt class="filename">/etc/modules.conf</tt>:
+
+  </p><pre class="programlisting">alias char-major-178 mga_vid</pre><p>
+
+  Después copie el módulo <tt class="filename">mga_vid.o</tt> al lugar
+  apropiado bajo <tt class="filename">/lib/modules<em class="replaceable"><code>versión de
+  kernel</code></em>/<em class="replaceable"><code>dondesea</code></em></tt>.
+  </p><p>
+  Y después ejecute
+  </p><pre class="screen">depmod -a</pre><p>
+  </p></li><li class="step"><p>
+  Ahora deberá (re)compilar <span class="application">MPlayer</span>,
+  <tt class="filename">./configure</tt> detectará
+  <tt class="filename">/dev/mga_vid</tt> y construirá el controlador 'mga'.
+  Luego lo podrá usar con <span class="application">MPlayer</span> mediante
+  <tt class="option">-vo mga</tt> si tiene una consola matroxfb, o
+  <tt class="option">-vo xmga</tt> bajo XFree86 3.x.x ó 4.x.x.
+  </p></li></ol></div><p>
+El controlador mga_vid coopera con Xv.
+</p><p>
+El archivo de dispositivo <tt class="filename">/dev/mga_vid</tt> puede ser leído
+para obtener informaión, por ejemplo mediante </p><pre class="screen">cat /dev/mga_vid</pre><p>
+y puede se escrito para realizar cambios en el brillo:
+</p><pre class="screen">echo "brightness=120" &gt; /dev/mga_vid</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tdfxfb"></a>4.2.7. Soporte 3Dfx YUV</h3></div></div></div><p>
+Este controlador usa el controlador framebuffer del kernel tdfx para
+reproducir las películas con aceleración YUV. Necesita un kernel con
+soporte tdfxfb, y recompilar con
+</p><pre class="screen">./configure --enable-tdfxfb</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="opengl"></a>4.2.8. Salida OpenGL</h3></div></div></div><p>
+<span class="application">MPlayer</span> permite mostrar películas usando OpenGL,
+pero si su plataforma/controlador soporta xv como es el caso en un PC con
+Linux, usa xv en su lugar, el rendimiento en OpenGL es considerablemente
+peor. Si tiene una implementación de X11 sin soporte para xv, OpenGL es una
+alternativa viable.
+</p><p>
+Desafortunadamente no todos los controladores soportan esta característica.
+Los controladores Utah-GLX (para XFree86 3.3.6) lo soportan para todas las
+tarjetas.
+Vea <a class="ulink" href="http://utah-glx.sourceforge.net" target="_top">http://utah-glx.sourceforge.net</a> para detalles sobre su
+instalación.
+</p><p>
+XFree86(DRI) 4.0.3 o posterior soportan OpenGL con tarjetas Matrox y Radeon,
+4.2.0 o posterior soportan Rage128.
+Vea <a class="ulink" href="http://dri.sourceforge.net" target="_top">http://dri.sourceforge.net</a> para instrucciones de descarga
+e instalación.
+</p><p>
+Un consejo de uno de nuestros usuarios: la salida de video GL puede usarse
+para obtener salida de TV con sincronización vertical. Puede establecer
+una variable de entorno (por lo menos con nVidia):
+</p><p>
+<span class="command"><strong>export $__GL_SYNC_TO_VBLANK=1</strong></span>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="aalib"></a>4.2.9. AAlib - reproduciendo en modo texto</h3></div></div></div><p>
+AAlib es una biblioteca para mostrar gráficos en modo texto, usando un
+render ASCII potente. Hay <span class="emphasis"><em>montones</em></span> de programas que
+tienen soporte para AAlib, como Doom, Quake, etc.
+<span class="application">MPlayer</span> contiene un controlador que funciona
+bastante bien para ello. Si <tt class="filename">./configure</tt> detecta
+que aalib está instalado, el controlador aalib libvo será compilado.
+</p><p>
+Puede usar algunas teclas en la ventana AA para cambiar las opciones
+de renderizado:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Tecla</th><th>Acción</th></tr></thead><tbody><tr><td><span class="keycap"><b>1</b></span></td><td>
+  reducir contraste
+  </td></tr><tr><td><span class="keycap"><b>2</b></span></td><td>
+  aumentar contraste
+  </td></tr><tr><td><span class="keycap"><b>3</b></span></td><td>
+  reducir brillo
+  </td></tr><tr><td><span class="keycap"><b>4</b></span></td><td>
+  aumentar brillo
+  </td></tr><tr><td><span class="keycap"><b>5</b></span></td><td>
+  cambiar renderizado rápido activado/desactivado
+  </td></tr><tr><td><span class="keycap"><b>6</b></span></td><td>
+  establece el modo de difuminado (ninguno, distribución de error,
+  Floyd Steinberg)
+  </td></tr><tr><td><span class="keycap"><b>7</b></span></td><td>
+  invierte la imagen
+  </td></tr><tr><td><span class="keycap"><b>8</b></span></td><td>
+  cambia entre control de aa y <span class="application">MPlayer</span>
+  </td></tr></tbody></table></div><div class="variablelist"><p class="title"><b>Pueden usarse las siguientes opciones en la línea de órdenes:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aaosdcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    cambia el color OSD
+    </p></dd><dt><span class="term"><tt class="option">-aasubcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    cambia el color de los subtítulos
+    </p><p>
+    donde <em class="replaceable"><code>V</code></em> puede ser:
+    <code class="literal">0</code> (normal),
+    <code class="literal">1</code> (oscuro),
+    <code class="literal">2</code> (negrita),
+    <code class="literal">3</code> (tipografía negrita),
+    <code class="literal">4</code> (invertido),
+    <code class="literal">5</code> (especial).
+    </p></dd></dl></div><div class="variablelist"><p class="title"><b>AAlib provee por sí mismo una gran cantidad de opciones. Aquí están
+algunas de las más importantes:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aadriver</tt></span></dt><dd><p>
+    establecer el controlador aa recomendado (X11, curses, Linux)
+    </p></dd><dt><span class="term"><tt class="option">-aaextended</tt></span></dt><dd><p>
+    usar los 256 caracteres
+    </p></dd><dt><span class="term"><tt class="option">-aaeight</tt></span></dt><dd><p>
+    usar ASCII de ocho bit
+    </p></dd><dt><span class="term"><tt class="option">-aahelp</tt></span></dt><dd><p>
+    muestra todas las opciones de aalib
+    </p></dd></dl></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+El renderizado hace un uso intensivo de la CPU, especialmente usando
+AA-en-X (usando aalib bajo X), y hace un uso menos intenso de CPU en
+una consola estándar, sin framebuffer. Use SVGATextMode para establecer
+un modo texto grande, ¡y disfrútelo! (en las tarjetas Hercules con
+pantalla secundaria queda muy bien :)) (pero en mi humilde opinión
+puede usar la opción <tt class="option">-vf 1bpp</tt> para obtener gráficos
+en hgafb :)
+</p></div><p>
+Use la opción <tt class="option">-framedrop</tt> si su ordenador no es lo
+suficientemente rápido para renderizar todos los marcos!
+</p><p>
+Al reproducir en un terminal puede obtener mejor velocidad y calidad
+usando el controlador Linux, en lugar del curses (<tt class="option">-aadriver linux</tt>).
+Pero lo malo es que necesita permisos de escritura en
+<tt class="filename">/dev/vcsa<em class="replaceable"><code>&lt;terminal&gt;</code></em></tt>!
+Esto no es automáticamente detectado por aalib, pero vo_aa intenta encontrar
+el mejor modo.
+Vea <a class="ulink" href="http://aa-project.sourceforge.net/tune" target="_top">http://aa-project.sourceforge.net/tune</a> para más detalles
+y ajustes.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="caca"></a>4.2.10. <code class="systemitem">libcaca</code> - Biblioteca de Arte AsCii
+en color</h3></div></div></div><p>
+La biblioteca <a class="ulink" href="http://sam.zoy.org/projects/libcaca/" target="_top"><code class="systemitem">libcaca</code></a>
+es una biblioteca gráfica que tiene como salida texto en lugar de pixels, de modo
+que funicona en cualquier tarjeta gráfica antigua o en terminales de texto.
+No es como la famosa biblioteca <code class="systemitem">AAlib</code>.
+<code class="systemitem">libcaca</code> necesita un terminal para funcionar,
+esto es funciona en todo sistema Unix (incluyendo Mac OS X) usando bien la biblioteca
+<code class="systemitem">slang</code> o bien la biblioteca
+<code class="systemitem">ncurses</code>, en DOS usando la biblioteca
+<code class="systemitem">conio.h</code>, y en sistemas Windows usando bien
+<code class="systemitem">slang</code> o
+<code class="systemitem">ncurses</code> (a través de emulación Cygwin) o
+<code class="systemitem">conio.h</code>. Si <tt class="filename">./configure</tt>
+detecta <code class="systemitem">libcaca</code>, el controlador de salida
+caca libvo será construido.
+</p><div class="itemizedlist"><p class="title"><b>Las diferencias con <code class="systemitem">AAlib</code> son las
+siguientes:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  16 colores disponibles para la salida de caracteres (256 pares de colores)
+  </p></li><li class="listitem"><p>
+  difuminado del color de la imagen
+  </p></li></ul></div><div class="itemizedlist"><p class="title"><b>Pero <code class="systemitem">libcaca</code> también tiene las siguientes
+limitaciones:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  no soporta brillo, contraste, gamma
+  </p></li></ul></div><p>
+Puede usar algunas teclas en la ventana caca para cambiar opciones de renderizado:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Tecla</th><th>Acción</th></tr></thead><tbody><tr><td><span class="keycap"><b>d</b></span></td><td>
+  Cambia los métodos de difuminado de <code class="systemitem">libcaca</code>.
+  </td></tr><tr><td><span class="keycap"><b>a</b></span></td><td>
+  Cambia el antialiasing en <code class="systemitem">libcaca</code>.
+  </td></tr><tr><td><span class="keycap"><b>b</b></span></td><td>
+  Cambia el fondo en <code class="systemitem">libcaca</code>.
+  </td></tr></tbody></table></div><div class="variablelist"><p class="title"><b><code class="systemitem">libcaca</code> también mira algunas
+variables de entorno:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">CACA_DRIVER</tt></span></dt><dd><p>
+    Establece el controlador caca recomendado, e.g. ncurses, slang, x11.
+    </p></dd><dt><span class="term"><tt class="option">CACA_GEOMETRY (solo X11)</tt></span></dt><dd><p>
+    Especifica el número de filas y columnas. e.g. 128x50.
+    </p></dd><dt><span class="term"><tt class="option">CACA_FONT (solo X11)</tt></span></dt><dd><p>
+    Especifica la tipografía a usar. e.g. fixed, nexus.
+    </p></dd></dl></div><p>
+Use la opción <tt class="option">-framedrop</tt> si su ordenador no es suficientemente
+rápido para renderizar todos los marcos de imagen.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vesa"></a>4.2.11. VESA - salida en VESA BIOS</h3></div></div></div><p>
+Este controlador fue diseñado e introducido como un
+<span class="bold"><strong>controlador genérico</strong></span> para cualquier tarjeta
+gráfica que tenga una BIOS compatible con VESA VBE 2.0. Otra ventaja
+de este controlador es que intenta forzar la activación de la salida
+de TV.
+<em class="citetitle">VESA BIOS EXTENSION (VBE) Version 3.0 Fecha: 16 de Septiembre,
+1998</em> (Página 70) dice:
+</p><div class="blockquote"><blockquote class="blockquote"><p><b>Diseños de controlador-dual. </b>
+VBE 3.0 soporta el diseño de controlador-dual asumiendo que ambos controladores
+norlmanmente son proporcionados por el mismo OEM, bajo el control de una ROM
+BIOS única en la misma tarjeta gráfica, es posible esconder el hecho
+de que hay dos controladores presentes para la aplicación. Esto tiene la
+limitación de prevenir el uso simultáneo de controladores independientes,
+pero permite a las aplicaciones que se hayan desarrollado antes de la liberación
+de VBE 3.0 operar normalmente. La función VBE 00h (Devuelve Información sobre
+el Controlador) devuelve información combinada de ambos controladores, incluyendo
+una lista combinada de los modos disponibles. Cada una de las funciones VBE
+restantes operan en el controlador activo.
+</p></blockquote></div><p>
+Por ello puede hacer que la salida-TV funcione usando este controlador.
+(Yo creo que la salida-TV normalmente tiene una cabeza individual o
+al menos una salida individual.)
+</p><div class="itemizedlist"><p class="title"><b>VENTAJAS</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Le permite ver sus películas <span class="bold"><strong>incluso si Linux no
+  conoce</strong></span> su hardware de video.
+  </p></li><li class="listitem"><p>
+  No necesita tener instalado nada relacionado con gráficos en su Linux
+  (como X11 (también conocido como XFree86), fbdev ni nada por el estilo).
+  Este controlador puede funcionar en <span class="bold"><strong>modo-texto</strong></span>.
+  </p></li><li class="listitem"><p>
+  Puede hacer <span class="bold"><strong>funcionar la salida-TV</strong></span>.
+  (Esto es conocido al menos para las tarjetas ATI).
+  </p></li><li class="listitem"><p>
+  Este controlador llama al manejador <code class="function">int 10h</code> y no
+  realiza una emulación - hace llamas <span class="bold"><strong>reales</strong></span>
+  de BIOS <span class="emphasis"><em>real</em></span> en <span class="emphasis"><em>modo-real</em></span>.
+  (actualmente en modo vm86).
+  </p></li><li class="listitem"><p>
+  Puede usar VIDIX con él, obteniendo pantalla de gráficos acelerados
+  <span class="bold"><strong>y</strong></span> salida TV al mismo tiempo!
+  (Recomendado para tarjetas ATI.)
+  </p></li><li class="listitem"><p>
+  Si tiene VESA VBE 3.0+, y especifica
+  <code class="systemitem">monitor-hfreq, monitor-vfreq, monitor-dotclock</code> en
+  algún sitio (archivo de configuración, o línea de órdenes) podrá obtener
+  la tasa de refresco mayor posible. (Usando la Fórmula de Temporización General).
+  Para activar ésta característica debe especificar <span class="bold"><strong>todas</strong></span>
+  las opciones de su monitor.
+  </p></li></ul></div><div class="itemizedlist"><p class="title"><b>DESVENTAJAS</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Solo funciona en <span class="bold"><strong>sistemas x86</strong></span>.
+  </p></li><li class="listitem"><p>
+  Solo puede ser usado por <code class="systemitem">root</code>.
+  </p></li><li class="listitem"><p>
+  En la actualidad solo está disponible para  <span class="bold"><strong>Linux</strong></span>.
+  </p></li></ul></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Importante</h3><p>
+No use este controlador con <span class="bold"><strong>GCC 2.96</strong></span>!
+¡No funcionará!
+</p></div><div class="variablelist"><p class="title"><b>OPCIONES EN LA LÍNEA DE ÓRDENES PARA VESA</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo vesa:<em class="replaceable"><code>opts</code></em></tt></span></dt><dd><p>
+    reconocidas actualmente: <code class="literal">dga</code> para forzar el modo dga
+    y <code class="literal">nodga</code> para desactivar el modo dga. En modo dga puede
+    activar doble buffering mediante la opción <tt class="option">-double</tt>. Nota:
+    puede omitir estos parámetros activando
+    <span class="bold"><strong>autodetección</strong></span> del modo dga.
+    </p></dd></dl></div><div class="itemizedlist"><p class="title"><b>PROBLEMAS CONOCIDOS Y SUS SOLUCIONES</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Si tiene instalada una tipografía <span class="bold"><strong>NLS</strong></span> en
+  su equipo Linux y ejecuta el controlador VESA en modo-texto entonces después
+  de terminar <span class="application">MPlayer</span> tendrá cargada una
+  <span class="bold"><strong>tipografía ROM</strong></span> en lugar de la nacional.
+  Puede cargar de nuevo la tipografía nacional usando la utilidad
+  <span class="command"><strong>setsysfont</strong></span> de la distribución Mandrake por ejemplo.
+  (<span class="bold"><strong>Consejo</strong></span>: La misma utilidad se usa para
+  la localización de fbdev).
+  </p></li><li class="listitem"><p>
+  Algunos <span class="bold"><strong>controladores gráficos para Linux</strong></span>
+  no actualizan el <span class="bold"><strong>modo BIOS</strong></span> activo en la
+  memoria DOS. Si tiene ese problema - use siempre el controlador VESA solo
+  en <span class="bold"><strong>modo-texto</strong></span>. De otro modo
+  el modo texto (#03) será activado de todas maneras y tendrá que reiniciar
+  la computadora.
+  </p></li><li class="listitem"><p>
+  Además puede obtener una pantalla <span class="bold"><strong>negra</strong></span> cuando
+  el controlador VESA termine. Para volver al estado original de la pantalla -
+  símplemente cambie a otra consola (pulsando <span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F&lt;x&gt;</b></span>)
+  y vuelva a la consola original del mismo modo.
+  </p></li><li class="listitem"><p>
+  Para  hacer que <span class="bold"><strong>funcione la salida-TV</strong></span> deberá
+  tener conectado el conector de TV antes de iniciar el PC porque la BIOS de video
+  lo inicia automáticamente durante el proceso POST.
+  </p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="x11"></a>4.2.12. X11</h3></div></div></div><p>
+Evite usarlo si es posible. La salida a X11 (usa la extensión de memoria
+compartida), sin ninguna aceleración hardware. Soporta (acelerado por
+MMX/3DNow/SSE, pero sigue siendo lento) escalado por software, use las
+opciones <tt class="option">-fs -zoom</tt>. La mayoría de las tarjetas tienen
+soporte de escalado por hardware, use la salida <tt class="option">-vo xv</tt>
+para obtenerlo, o <tt class="option">-vo xmga</tt> para las Matrox.
+</p><p>
+El problema es que la mayoría de los controladores de las tarjetas no
+soportan aceleración hardware en un monitor/TV secundario. En esos casos,
+puede ver una ventana de color verde/azul en lugar de la película. Aquí es
+donde entra en escena este controlador, pero necesitará una CPU potente
+para escalar por software. No use el escalador+salida por software de SDL,
+¡obtendrá una peor calidad de imagen!
+</p><p>
+El escalado por software es muy lento, mejor pruebe a cambiar el modo de video.
+Es muy simple. Vea los <a class="link" href="output-trad.html#dga-modelines" title="CAMBIOS DE RESOLUCIÓN">la sección de modos de
+DGA</a>, e insertela en su <tt class="filename">XF86Config</tt>.
+
+</p><div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Si tiene XFree86 4.x.x: use la opcioón <tt class="option">-vm</tt>. Esto cambiará
+  a una resolución donde la película se ajuste. Si no lo hace:
+  </p></li><li class="listitem"><p>
+  Con XFree86 3.x.x: tiene que cambiar entre las resoluciones disponibles
+  con las teclas
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>plus</b></span>
+  y
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>minus</b></span>.
+  </p></li></ul></div><p>
+</p><p>
+Si no puede encontrar los modos que ha insertado, consule la salida de
+XFree86. Algunos controladores no pueden usar pixelclocks bajos que son
+necesarios para modos de video de baja resolución.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix"></a>4.2.13. VIDIX</h3></div></div></div><p><b>PREÁMBULO. </b>
+<acronym class="acronym">VIDIX</acronym> es la abreviatura para
+<span class="bold"><strong>VID</strong></span>eo<span class="bold"><strong>I</strong></span>nterface
+para *ni<span class="bold"><strong>X</strong></span>.
+VIDIX ha sido diseñado e introducido como una interfaz para los controladores de
+espacio de usuario que proveen tanto rendimiento de video como mga_vid lo hace para
+las tarjetas Matrox. También es muy portable.
+</p><p>
+Esta interfaz ha sido diseñada como un intento por ajustar las interfaces
+de aceleración de video existentes (conocidas como mga_vid, rage128_vid, radeon_vid,
+pm3_vid) en un esquema fijo. Provee una interfaz de alto nivel a los chips
+que es conocida como BES (BackEnd scalers) u OV (Video Overlays). No provee
+interfaz a bajo nivel de cosas conocidas por los servidores gráficos.
+(No quiero competir con el equipo X11 en el cambio de modos de gráfidcos).
+Es decir, el principal objetivo de esta interfaz es maximizar la velocidad
+de la reproducción de video.
+</p><div class="itemizedlist"><p class="title"><b>USO</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Puede usar un controlador de salida de video individual:
+  <tt class="option">-vo xvidix</tt>. Este controlador ha sido desarrollado como u
+  front end de X11 a la tecnología VIDIX. Requiere un servidor X y puede funcionar
+  solo bajo un servidor X. Note que, como accede directamente al hardware y
+  no usa el controlador X, los mapas de pixels en caché en la memoria de la
+  tarjeta gráfica pueden estar corruptos. Puede prevenir esto limitando la
+  cantidad de memoria de video usada por X con la opción "VideoRam" de
+  XF86Config en la sección device. Debe establecer el valor a la cantidad de
+  memoria instalada en su tarjeta menos 4MB. Si tiene menos de 8MB de ram de
+  video, puede usar la opción "XaaNoPixmapCache" en la sección screen en su lugar.
+  </p></li><li class="listitem"><p>
+  Hay un controlador de consola VIDIX: <tt class="option">-vo cvidix</tt>.
+  Requiere un framebuffer inicializado y funcionando para muchas tarjetas (o
+  fastidiará su pantalla), y obtendrá un efecto similar al que se obtiene con
+  <tt class="option">-vo mga</tt> o <tt class="option">-vo fbdev</tt>. Las tarjetas nVidia, sin
+  embargo, son capaces de mostrar gráficos reales de video sobre una consola
+  de texto real. Vea la sección <a class="link" href="output-trad.html#vidix-nvidia" title="4.2.13.5. Tarjetas nVidia">nvidia_vid</a>
+  para más información.
+  </p></li><li class="listitem"><p>
+  Puede usar el subdispositivo VIDIX aplicado a varios controladores de salida
+  de video, tales como: <tt class="option">-vo vesa:vidix</tt>
+  (<span class="bold"><strong>solo en Linux</strong></span>) y <tt class="option">-vo fbdev:vidix</tt>.
+  </p></li></ul></div><p>
+Como ve no impora qué controlador de salida de video se usa con
+<span class="bold"><strong>VIDIX</strong></span>.
+</p><div class="itemizedlist"><p class="title"><b>REQUISITOS</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  La tarjeta gráfica debe estar en modo gráfico (excepto las tarjetas nVidia
+  con el controlador de salida <tt class="option">-vo cvidix</tt>.
+  </p></li><li class="listitem"><p>
+  El controlador de salida de video de <span class="application">MPlayer</span> debe
+  conocer el modo de video activo y ser capaz de decir al subdispositivo
+  VIDIX algunas características de video del servidor.
+  </p></li></ul></div><p><b>MODOS DE USO. </b>
+Cuando VIDIX se usa como <span class="bold"><strong>subdispositivo</strong></span>
+(<tt class="option">-vo vesa:vidix</tt>) entonces la configuración del modo de video
+es hecha por el dispositivo de salida de video (<span class="bold"><strong>vo_server</strong></span>
+en pocas palabras). Por ese motivo puede pasar en la línea de órdenes de
+<span class="application">MPlayer</span> las mismas teclas que para vo_server.
+Además entiende <tt class="option">-double</tt> como un parámetro visible globalmente.
+(Recomiendo usar esto con VIDIX por lo menos en tarjetas ATI). Como para
+<tt class="option">-vo xvidix</tt>, actualmente reconoce las siguientes opciones:
+<tt class="option">-fs -zoom -x -y -double</tt>.
+</p><p>
+También puede especificar el controlador VIDIX directamente con un  tercer
+argumento en la línea de órdenes:
+
+</p><pre class="screen">mplayer -vo xvidix:mga_vid.so -fs -zoom -double <em class="replaceable"><code>archivo.avi</code></em></pre><p>
+o
+</p><pre class="screen">mplayer -vo vesa:vidix:radeon_vid.so -fs -zoom -double -bpp 32 <em class="replaceable"><code>archivo.avi</code></em></pre><p>
+
+Pero esto es peligroso, y no debería hacerlo. En ese caso el controlador
+se ve forzado y el resultado puede ser impredicible (puede incluso
+<span class="bold"><strong>dejar colgado</strong></span> su ordenador). Debe hacerlo
+SOLO si está absolutamente seguro de que funciona, y
+<span class="application">MPlayer</span> no lo hace automáticamente. Por favor
+en ese caso dígaselo a los desarrolladores. La manera correcta de usar VIDIX es
+sin argumentos para activar la autodetección del controlador.
+</p><p>
+VIDIX es una tecnología nueva y es extremadamente posible que en su
+sistema no funcione. En ese caso la única solución para usted es
+portarlo (principalmente con libdha). Pero se supone que debe de funcionar
+en los sistemas en los que funciona X11.
+</p><p>
+Debido a que VIDIX requiere acceso directo al hardware puede ejecutarlo
+como root o establecer el bit SUID en el binario de
+<span class="application">MPlayer</span> (<span class="bold"><strong>Advertencia:
+¡eso es un riesgo de seguridad!</strong></span>). De manera alternativa,
+puede usar un módulo especial del kernel, como esto:
+</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Descargue la <a class="ulink" href="http://www.arava.co.il/matan/svgalib/" target="_top">versión de desarrollo</a>
+  de svgalib (por ejemplo 1.9.17), <span class="bold"><strong>O</strong></span>
+  descargue una versión hecha por Alex especialmente para usar con
+  <span class="application">MPlayer</span> (no necesita el código fuente de svgalib para
+  compilar) desde
+  <a class="ulink" href="http://www.mplayerhq.hu/~alex/svgalib_helper-1.9.17-mplayer.tar.bz2" target="_top">aquí</a>.
+  </p></li><li class="step"><p>
+  Compile el módulo en el directorio <tt class="filename">svgalib_helper</tt>
+  (puede encontrarse dentro del directorio
+  <tt class="filename">svgalib-1.9.17/kernel/</tt> si ha descargado el
+  código fuente del sitio de svgalib) e insmodéelo.
+  </p></li><li class="step"><p>
+  Para crear los dispositivos necesarios en el directorio
+  <tt class="filename">/dev</tt>, haga un </p><pre class="screen">make device</pre><p>
+  en el directorio <tt class="filename">svgalib_helper</tt> como root.
+  </p></li><li class="step"><p>
+  Mueva el directorio <tt class="filename">svgalib_helper</tt> a
+  <tt class="filename">mplayer/main/libdha/svgalib_helper</tt>.
+  </p></li><li class="step"><p>
+  Requerido si descarga el código fuente desde el sitio de svgalib: Borre el comentario
+  antes de la línea CFLAGS que contiene la cadena "svgalib_helper" en
+  <tt class="filename">libdha/Makefile</tt>.
+  </p></li><li class="step"><p>
+  Recompile e instale libdha.
+  </p></li></ol></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="vidix-ati"></a>4.2.13.1. Tarjetas ATI</h4></div></div></div><p>
+Actualmente la mayoría de las tarjetas ATI están soportadas de manera nativa,
+desde la Mach64 hasta las más nuevas Radeons.
+</p><p>
+Hay dos binarios compilados: <tt class="filename">radeon_vid</tt> para Radeon y
+<tt class="filename">rage128_vid</tt> para tarjetas Rage 128. Puede forzar uno
+o dejar que el sistema VIDIX pruebe automáticamente todos los controladores
+disponibles.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="vidix-mga"></a>4.2.13.2. Tarjetas Matrox</h4></div></div></div><p>
+Hemos sido informados de que funcionan Matrox G200, G400, G450 y G550.
+</p><p>
+El controlador soporta ecualizadores de video y debe ser casi tan rápido como el
+<a class="link" href="output-trad.html#mga_vid" title="4.2.6. Framebuffer de Matrox (mga_vid)">Matrox framebuffer</a>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="vidix-trident"></a>4.2.13.3. Tarjetas Trident</h4></div></div></div><p>
+Hay un controlador disponible para los chipset Trident Ciberblade/i1, que
+puede ser encontrado en las placas base VIA Epia.
+</p><p>
+El controlador ha sido escrito y es mantenido por,
+<a class="ulink" href="http://www.blackfiveservices.co.uk/EPIAVidix.shtml" target="_top">Alastair M.
+Robinson</a>.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="vidix-3dlabs"></a>4.2.13.4. Tarjetas 3DLabs</h4></div></div></div><p>
+Aunque hay un controlador para los chips 3DLabs GLINT R3 y Permedia3, ninguno
+ha sido probado, así que cualquier comentario o informe será bienvenido.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="vidix-nvidia"></a>4.2.13.5. Tarjetas nVidia</h4></div></div></div><p>
+Hay controladores para nVidia relativamente recientes, se sabe que funcionan bien
+con los chipset Riva 128, TNT y GeForce2, también se nos ha informado de que funciona
+con otros.
+</p><div class="itemizedlist"><p class="title"><b>LIMITACIONES</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Es recomendable usar los controladores binarios de nVidia para X antes de usar el
+  controlador VIDIX, porque algunos de los registros que es necesario inicializar
+  aún no han sido descubiertos, por lo que probablemente falle con el controlador
+  de Código Abierto de XFree86 <tt class="filename">nv.o</tt>.
+  </p></li><li class="listitem"><p>
+  Actualmente solo los codecs que tienen salida en el espacio de color UYVY son los
+  que funcionan junto con este controlador. Desafortunadamente, esto excluye
+  todo decodificador simple de la familia <code class="systemitem">libavcodec</code>.
+  Esto nos deja con los siguientes codecs populares usables:
+  <code class="systemitem">cvid, divxds, xvid, divx4, wmv7, wmv8</code> y algunos otros.
+  Por favor tenga en cuenta que esto es solo algo temporal.
+  La sintaxis de uso es la siguiente:
+  </p><pre class="screen">
+    mplayer -vf format=uyvy -vc divxds <em class="replaceable"><code>archivodivx3.avi</code></em>
+  </pre><p>
+  </p></li></ul></div><p>
+  Una característica única del controlador nvidia_vid es la habilidad de mostrar
+  video en <span class="bold"><strong>una consola de texto solo, plano y puro</strong></span>
+  - sin framebuffer o X magic ni nada. Para conseguir esto, se ha de usar la
+  salida de video <tt class="option">cvidix</tt>, como muestra el siguiente ejemplo:
+  </p><pre class="screen">
+    mplayer -vf format=uyvy -vc divxds -vo cvidix ejemplo.avi
+  </pre><p>
+</p><p>
+¡Esperamos que nos informe!
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="vidix-sis"></a>4.2.13.6. Tarjetas SiS</h4></div></div></div><p>
+Se trata de un código muy experimental, al igual que el nvidia_vid.
+</p><p>
+Ha sido probado en SiS 650/651/740 (los chipset más comunes usados en las versiones
+SiS de las placas base "Shuttle XPC")
+</p><p>
+¡Esperamos que nos informe!
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="directfb"></a>4.2.14. DirectFB</h3></div></div></div><div class="blockquote"><blockquote class="blockquote"><p>
+"DirectFB es una biblioteca de gráficos que ha sido diseñada
+con los sistemas embebidos en mente. Ofrece el máximo rendimientdo en
+aceleración hardware con el mínimo uso de recursos y sobrecarga." -
+cita de <a class="ulink" href="http://www.directfb.org" target="_top">http://www.directfb.org</a>
+</p></blockquote></div><p>No incluiré las características de DirectFB en esta sección.</p><p>
+Aunque <span class="application">MPlayer</span> no está reconocido como un "proveedor
+de video" en DirectFB, este controlador de salida debe activar la reproducción
+de video a través del DirectFB. Tiene - por supuesto - aceleración, en mi Matrox
+G400 la velocidad para DirectFB es la misma que con XVideo.
+</p><p>
+Intente usar siempre la versión más reciente de DirectFB. Puede usar las opciones
+de DirectFB en la línea de órdenes, usando la opción <tt class="option">-dfbopts</tt>.
+La capa de selección puede hacerse con el método de subdispositivo, p.e.:
+<tt class="option">-vo directfb:2</tt> (la capa -1 se usa por defecto: autodetectado)
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dfbmga"></a>4.2.15. DirectFB/Matrox (dfbmga)</h3></div></div></div><p>
+Lea por favor la sección <a class="link" href="output-trad.html#directfb" title="4.2.14. DirectFB">principal de DirectFB</a> para
+información general.
+</p><p>
+Este controlador de salida de video activa CRTC2 (en un segundo monitor) en la
+tarjeta G400/G450/G550, mostrando video <span class="bold"><strong>independiente</strong></span>
+en el monitor principal.
+</p><p>
+Ville Syrjala tiene un
+<a class="ulink" href="http://www.sci.fi/~syrjala/directfb/Matrox_TV-out_README.txt" target="_top">LEAME</a>
+y un
+<a class="ulink" href="http://www.sci.fi/~syrjala/directfb/matrox_tv-out_howto" target="_top">COMO</a>
+en su página web que explica cómo sacar salida de TV con DirectFB en tarjetas
+Matrox.
+</p><div class="variablelist"><p class="title"><b>USO</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">(no)bes</tt></span></dt><dd><p>activa el uso de Matrox BES (backend scaler).
+Da resultados muy buenos en cuanto a velocidad y calidad de salida como procesado
+de imágenes interpoladas por hardware. Funciona solo en la salida primaria.
+Por defecto: desactivado</p></dd><dt><span class="term"><tt class="option">(no)spic</tt></span></dt><dd><p>hace uso de la capa de sub imagen para mostrar el OSD de
+<span class="application">MPlayer</span>.
+Por defecto: activado</p></dd><dt><span class="term"><tt class="option">(no)crtc2</tt></span></dt><dd><p>activa la salida TV en la segunda salida. La calidad de la salida
+es sorprendente ya que da una imagen completamente entrelazada con sincronización
+correcta en cada campo par/impar. Por defecto: activada</p></dd><dt><span class="term"><tt class="option">(no)input</tt></span></dt><dd><p>usa el código de teclado de DirectFB en lugar del código de
+teclado normal de <span class="application">MPlayer</span>. Por defecto:
+desactivado</p></dd><dt><span class="term"><tt class="option">buffermode=single|double|triple</tt></span></dt><dd><p>Doble y triple buffer da mejores resultados si quiere evitar problemas
+de desgarramientos de imagen. Triple buffer es más eficiente que el doble buffer ya que no
+bloquea <span class="application">MPlayer</span> mientras que espera al refresco vertical.
+El buffer simple debe evitarse. Por defecto: triple</p></dd><dt><span class="term"><tt class="option">fieldparity=top|bottom</tt></span></dt><dd><p>controla el orden de salida de los marcos de imagen entrelazados.
+Valores válidos son top = campos superiores primero, bottom = campos inferiores primero.
+Esta opción no tiene efecto en material de película progresivo como lo son las
+películas MPEG. Necesitará activar esta opción si tiene problema de desgarros de imagen
+o movimiento no suave mientras ve material entrelazado. (Buenos ejemplos de material
+filmográfico entrelazado en DVD son Star Trek Enterprise y Star Trek DS9)
+Por defecto: desactivado (no establecido)</p></dd><dt><span class="term"><tt class="option">tvnorm=pal|ntsc|auto</tt></span></dt><dd><p>establece la norma de TV en las tarjetas Matrox sin la necesidad
+de modificar /etc/directfbrc. Normas válidas son pal = PAL, ntsc = NTSC.
+Una norma especial es auto (auto-ajuste usando PAL/NTSC) porque decide
+qué norma usar mirando la tasa de imágenes por segundo de la película.
+Por defecto: desactivado (no establecido)</p></dd></dl></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+La primera versión de DirectFB que hace que esto funcione fue 0.9.17 (tiene fallos,
+necesita el parche <code class="systemitem">surfacemanager</code> de la URL de más arriba).
+De todos modos se está trabajando para portar el código de CRTC2 a
+<span class="bold"><strong>mga_vid</strong></span>.
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mtrr.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="video-dev.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="mpeg_decoders.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">4.1. Configurando MTRR </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 4.3. Decodificadores MPEG</td></tr></table></div></body></html>

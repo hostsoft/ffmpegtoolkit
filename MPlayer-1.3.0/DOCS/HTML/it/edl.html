@@ -1,0 +1,41 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.8. Edit Decision Lists (EDL) (liste di decisione di modifica)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="prev" href="vcd.html" title="3.7. Riproduzione VCD"><link rel="next" href="advaudio.html" title="3.9. Audio avanzato"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="subsection" href="edl.html#edl_using" title="3.8.1. Usare un file EDL"><link rel="subsection" href="edl.html#edl_making" title="3.8.2. Creare un file EDL"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.8. Edit Decision Lists (EDL) (liste di decisione di modifica)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vcd.html">Indietro</a> </td><th width="60%" align="center">Capitolo 3. Utilizzo</th><td width="20%" align="right"> <a accesskey="n" href="advaudio.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="edl"></a>3.8. Edit Decision Lists (EDL) (liste di decisione di modifica)</h2></div></div></div><p>
+Il sistema della lista di decisione di modifica (EDL) ti permette di saltare
+o di silenziare automaticamente alcune parti dei video durante la riproduzione,
+basandosi su un file di configurazione EDL specifico per il filmato.
+</p><p>
+Questo torna utile per colore che vogliono guardare un film in modalità
+"amichevole per la famiglia". Puoi eliminare violenze, profanità,
+Jar-Jar Binks... da un filmato, secondo i tuoi gusti personali. Oltre a
+ciò, ci sono altri utilizzi, come saltare automaticamente le pubblicità nei
+file video che guardi.
+</p><p>
+Il formato del file EDL è piuttosto scarno. C'è un comando per ogni riga che
+indica cosa fare (saltare/silenziare) e quando farlo (usando la posizione in
+secondi).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_using"></a>3.8.1. Usare un file EDL</h3></div></div></div><p>
+Includi l'opzione <tt class="option">-edl &lt;nomefile&gt;</tt> quando esegui
+<span class="application">MPlayer</span>, con il nome del file EDL che vuoi sia
+applicato al video.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_making"></a>3.8.2. Creare un file EDL</h3></div></div></div><p>
+Il formato corrente dei file EDL è:
+</p><pre class="programlisting">[secondi inizio] [secondi fine] [azione]</pre><p>
+Dove i secondi sono numeri decimali e l'azione è <code class="literal">0</code> per
+saltare o <code class="literal">1</code> per silenziare. Esempio:
+</p><pre class="programlisting">
+5.3   7.1    0
+15    16.7   1
+420   422    0
+</pre><p>
+Questo farà saltare il video dal secondo 5.3 al secondo 7.1, poi lo
+silenzierà a 15 secondi, toglierà il muto a 16.7 e salterà dal secondo 420
+al 422. Queste azioni saranno eseguite quando il tempo della riproduzione
+raggiunge i tempi indicati nel file.
+</p><p>
+Per creare un file EDL da cui partire, usa l'opzione <tt class="option">-edlout
+&lt;nomefile&gt;</tt>.
+Durante la riproduzione, premi semplicemente <span class="keycap"><b>i</b></span> per segnare
+l'inizio e la fine di un blocco di salto. Una voce corrispondente sarà
+scritta nel file per quella posizione. Puoi poi tornare indietro e rifinire
+il file EDL generato così come cambiare l'operazione di default, che è
+saltare il blocco indicato da ogni riga.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vcd.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">3.7. Riproduzione VCD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 3.9. Audio avanzato</td></tr></table></div></body></html>

@@ -1,0 +1,83 @@
+.TH "oggz-merge" "1" 
+.SH "NAME" 
+oggz-merge \(em Merge Ogg files together, interleaving pages in order of 
+presentation time. 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-merge\fR [\-o \fBfilename\fR  | \-\-output \fBfilename\fR ] filename \&...  
+.PP 
+\fBoggz-merge\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-merge\fR merges Ogg files together, interleaving 
+pages in order of presentation time.
+It correctly interprets the granulepos timestamps of
+Ogg CELT, CMML, Dirac, FLAC, Kate, PCM, Speex, Theora and Vorbis
+bitstreams.
+Run \fBoggz-known-codecs\fP\fB(1)\fP for a full list
+of codecs known by the installed version of oggz.
+ 
+.PP 
+For example, if you have an Ogg Theora video file, and its soundtrack 
+stored separately as an Ogg Speex audio file, and you can use 
+\fBoggz-merge\fR to create a single Ogg file containing 
+the video and audio, interleaved together in parallel. 
+ 
+.PP 
+Similarly, using \fBoggz-merge\fR on a collection of Ogg 
+Vorbis audio files will create a big Ogg file with all the songs in 
+parallel, ie. interleaved for simultaneous playback. Such a file is 
+proper Ogg, but not "Ogg Vorbis I" \-\- the Ogg Vorbis I specification 
+defines an Ogg Vorbis file as an Ogg file containing only one Vorbis 
+track at a time (ie. no parallel multiplexing). Many music players 
+(which use libvorbisfile) aren't designed to play multitrack Ogg files. 
+In general however, video players, and anything built on a multimedia 
+framework (like GStreamer, DirectShow etc.) will probably be able to 
+handle such files. 
+ 
+.PP 
+If you want to create a file containing some Ogg files sequenced one 
+after another, then you should simply concatenate them together using 
+\fBcat\fR. In Ogg this is called "chaining". If you cat 
+Ogg Vorbis I audio files together, then the result will also be a 
+compliant Ogg Vorbis file. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-merge\fR accepts the following options: 
+ 
+.SS "Miscellaneous options" 
+.IP "\-o \fBfilename\fR, \-\-output \fBfilename\fR" 10 
+Write output to the specified 
+\fBfilename\fR instead of printing it to 
+standard output. 
+ 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+
+.SH EXAMPLES
+.PP
+Merge pages of audio.oga and video.ogv:
+.PP
+.RS
+\f(CWoggz merge \-o output.ogv audio.oga video.ogv\fP
+.RE
+
+.SH "AUTHOR" 
+.PP 
+Conrad Parker        September 21, 2004;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2004 CSIRO Australia 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBcat\fP\fB(1)\fP, 
+\fBoggz-rip\fP\fB(1)\fP, 
+\fBoggz-dump\fP\fB(1)\fP, 
+\fBoggz-diff\fP\fB(1)\fP, 
+\fBhogg\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

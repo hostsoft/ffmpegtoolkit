@@ -1,0 +1,87 @@
+.TH "oggz-info" "1" 
+.SH "NAME" 
+oggz-info \(em Display information about one or more Ogg files and their bitstreams. 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-info\fR [\-l  | \-\-length ]  [\-b  | \-\-bitrate ]  [\-g  | \-\-page-stats ]  [\-p  | \-\-packet-stats ]  [\-k  | \-\-skeleton ]  [\-a  | \-\-all ] filename \&...  
+.PP 
+\fBoggz-info\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-info\fR displays information about one or more 
+Ogg files and their bitstreams. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-info\fR accepts the following options: 
+ 
+.SS "Display options" 
+.IP "\-l, \-\-length" 10 
+Display content lengths. 
+.IP "\-b, \-\-bitrate" 10 
+Display bitrate information. 
+.IP "\-g, \-\-page-stats" 10 
+Display Ogg page statistics. 
+.IP "\-p, \-\-packet-stats" 10 
+Display Ogg packet statistics. 
+.IP "\-k, \-\-skeleton" 10 
+Display Extra data from OggSkeleton bitstream. 
+.IP "\-a, \-\-all" 10 
+Display all information. 
+.SS "Miscellaneous options" 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+.SH "Units of measurement" 
+.PP 
+\fBoggz-info\fR displays information using the 
+following units: 
+ 
+.SS "Byte lengths" 
+.IP "bytes" 10 
+(8 bits) 
+.IP "kB" 10 
+kilobytes (1024 bytes) 
+.IP "MB" 10 
+megabytes (1024*1024 bytes) 
+.IP "GB" 10 
+gigabytes (1024*1024*1024 bytes) 
+.SS "Bitrates" 
+.IP "bps" 10 
+bits per second (bit/s) 
+.IP "kbps" 10 
+kilobits per second (1000 bit/s) 
+.IP "Mbps" 10 
+megabits per second (1000000 bit/s) 
+.IP "Gbps" 10 
+gigabits per second (1000000000 bit/s) 
+
+.SH EXAMPLES
+.PP
+Describe all bitstreams in file.ogg:
+.PP
+.RS
+\f(CWoggz info file.ogg\fP
+.RE
+.PP
+Describe only the Theora bitstream in file.ogv:
+.PP
+.RS
+\f(CWoggz info \-c theora file.ogv\fP
+.RE
+
+.SH "AUTHOR" 
+.PP 
+Conrad Parker        March 10, 2005;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2005 CSIRO Australia 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-dump\fP\fB(1)\fP, 
+\fBoggz-rip\fP\fB(1)\fP, 
+\fBoggz-diff\fP\fB(1)\fP       \fBhogg\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

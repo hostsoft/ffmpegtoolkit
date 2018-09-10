@@ -1,0 +1,176 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>9.4. Kódolás az Xvid codec-kal</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="prev" href="menc-feat-enc-libavcodec.html" title="9.3. Kódolás a libavcodec codec családdal"><link rel="next" href="menc-feat-x264.html" title="9.5. Kódolás az x264 codec-kel"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="menc-feat-xvid.html#menc-feat-xvid-intro" title="9.4.1. Milyen opciókat kell használnom, ha a legjobb eredményt akarom?"><link rel="subsection" href="menc-feat-xvid.html#menc-feat-xvid-encoding-options" title="9.4.2. Az Xvid kódolási opciói"><link rel="subsection" href="menc-feat-xvid.html#menc-feat-xvid-encoding-profiles" title="9.4.3. Kódolási profilok"><link rel="subsection" href="menc-feat-xvid.html#menc-feat-xvid-example-settings" title="9.4.4. Kódolás beállítási példák"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">9.4. Kódolás az <code class="systemitem">Xvid</code>
+  codec-kal</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-enc-libavcodec.html">Vissza</a> </td><th width="60%" align="center">9. fejezet - Kódolás a <span class="application">MEncoder</span>rel</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-x264.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-xvid"></a>9.4. Kódolás az <code class="systemitem">Xvid</code>
+  codec-kal</h2></div></div></div><p>
+Az <code class="systemitem">Xvid</code> egy szabad függvénykönyvtár
+MPEG-4 ASP videó stream-ek elkódolásához.
+A kódolás megkezdése előtt <a class="link" href="codec-installation.html#xvid" title="2.5.1. Xvid">be kell állítanod
+a <span class="application">MEncoder</span>ben a támogatását</a>.
+</p><p>
+Ez a leírás főként hasonló információkat szeretne nyújtani, mint az
+x264 kódolási leírás.
+Ezért, kérlek kezdd azzal, hogy elolvasod azon leírásnak az
+<a class="link" href="menc-feat-x264.html#menc-feat-x264-encoding-options-intro" title="9.5.1.1. Bevezetés">első részét</a>.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-xvid-intro"></a>9.4.1. Milyen opciókat kell használnom, ha a legjobb eredményt akarom?</h3></div></div></div><p>
+Kezdésként nézd át az
+<span class="application">MPlayer</span> man oldalának
+<code class="systemitem">Xvid</code> részét!
+Ez a rész csak a man oldal kiegészítéseként használható.
+</p><p>
+Az Xvid alapértelmezett beállításai egyensúlyt teremtenek a
+sebesség és a minőség között, így nyugodtan használhatod azokat,
+ha a következő rész túl zavarosnak tűnik.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-xvid-encoding-options"></a>9.4.2. Az <code class="systemitem">Xvid</code> kódolási opciói</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>vhq</strong></span>
+  Ez a beállítás a makroblokk döntési algoritmust érinti, minél
+  nagyobb a beállítás, annál okosabb a döntés.
+  Az alapértelmezett érték bátran használható minden kódoláshoz,
+  míg a nagyobb értékek segítik a PSNR-t de jelentősen lassabbak.
+  Kérlek vedd figyelembe, hogy a jobb PSNR nem feltétlenül jelenti
+  azt, hogy a kép jobban fog kinézni, de közelebb lesz az eredetihez.
+  A kikapcsolása észrevehetően felgyorsítja a kódolást; ha a sebesség
+  kritikus számodra, megéri a cserét.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>bvhq</strong></span>
+  Ez ugyan azt csinálja, mint a vhq, de a B-kockákon.
+  Elhanyagolható a hatása a sebességre és kismértékben javít a minőségen
+  (+0.1dB PSNR körül).
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>max_bframes</strong></span>
+  Az egymás után engedélyezett több B-kocka általában javítja a
+  tömöríthetőséget, de több blokkosodási mellékhatást okoz.
+  Az alapértelmezett beállítás jó kompromisszum a tömöríthetőség és a
+  minőség között, de növelheted 3-ig ha ki vagy éhezve a bitrátára.
+  Csökkentheted 1-re vagy 0-ra ha a tökéletes minőséget céloztad meg,
+  de ekkor biztosan tudnod kell, hogy a forrásod bitrátája elég nagy
+  ahhoz, hogy a kódolónak nem kell növelni a kvantálást, hogy elére ezt.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>bf_threshold</strong></span>
+  Ez a kódoló B-kocka érzékenységét szabályozza, a nagyobb érték hatására
+  több B-kockát használ (és fordítva).
+  Ez a beállítás a <tt class="option">max_bframes</tt>-szel együtt használható;
+  ha bitráta éhségben szenvedsz, növelned kell mind a
+  <tt class="option">max_bframes</tt>, mind a <tt class="option">bf_threshold</tt>
+  értékét, míg ha növeled a <tt class="option">max_bframes</tt>-t és csökkented
+  a <tt class="option">bf_threshold</tt>-ot, akkor a kódoló több B-kockát fog
+  használni, de csak azokon a helyeken, ahol
+  <span class="bold"><strong>tényleg</strong></span> szükséges.
+  A <tt class="option">max_bframes</tt> alacsony értéke és a
+  <tt class="option">bf_threshold</tt> magas értéke nem túl bölcs döntés,
+  mert ez arra kényszeríti a kódolót, hogy olyan helyekre is tegyen
+  B-kockát, ahol nincs rájuk szükség, így csökkenti a vizuális
+  minőséget. De ha kompatibilis akarsz maradni az egyedi lejátszókkal,
+  amik csak a régi DivX profilokat támogatják (amik csak legfeljebb
+  1 B-kockát támogatnak sorban), ez az egyetlen lehetőséged a
+  tömöríthetőség növelésére a B-kockák használatával.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>trellis</strong></span>
+  Optimalizálja a kvantálási eljárást, hogy optimális arányt találjon
+  a PSNR és a bitráta között, ami jelentős bitmegtakarítást engedélyez.
+  Cserébe ezek a bitek a videóban máshol kerülnek felhasználásra,
+  növelve az össz minőséget.
+  Mindig ajánlott bekapcsolva hagyni, mert jelentősen befolyásolja a
+  minőséget. Még ha neked a sebesség számít, akkor is ne kapcsold ki,
+  amíg nem kapcsoltad ki a <tt class="option">vhq</tt>-t és a többi CPU-éhes
+  opciót nem állítottad a minimumra.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>hq_ac</strong></span>
+  Bekapcsol egy jobb együttható kölcségbecslő módszert, ami kissé
+  csökkenti a fájl méretet, kb. 0,15-0,19% között (ami kevesebb, mint
+  0,01dB-es PSNR növekedésnek felel meg), miközben jelentéktelen
+  hatása van a sebességre. Ezért ajánlott mindig bekapcsolva hagyni.
+</p></li><li class="listitem"><p>
+ <span class="bold"><strong>cartoon</strong></span>
+  A rajzfilm tartalom jobb kódolására lett kitalálva és nincs
+  hatása a sebességre, mivel csak a döntési heurisztikát tuningolja
+  az ilyen típusú tartalomnál.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>me_quality</strong></span>
+  Ez a beállítás a mozgás előrejelzés pontosságát vezérli.
+  Minél nagyobb a <tt class="option">me_quality</tt> érték, annál
+  pontosabb lesz az eredeti mozgás előrejelzése és minél pontosabb
+  ez, annál jobban közelíti majd az eredmény az eredeti mozgást.
+  </p><p>
+  Az alapértelmezett érték jó a legtöbb esetben; így nem javasolt
+  a változtatása, csak ha tényleg a sebesség számít, mivel minden
+  a mozgás becslésével megmentett bit másra lesz felhasználva,
+  növelve az össz minőséget. Ezért ne menj 5 alá és ezt is csak
+  végszükség esetén állítsd be.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>chroma_me</strong></span>
+  Javítja a mozgás előrejelzést úgy, hogy a számításba beleveszi
+  a chroma (szín) információkat is, míg a <tt class="option">me_quality</tt>
+  csak a luma-t (grayscale) használja.
+  Ez 5-10%-kal lassítja a kódolást, de eléggé javítja a vizuális
+  minőséget a blokkosodási effektusok csökkentésével és csökkenti
+  a fájl méretet kb. 1,3%-kal.
+  Ha a sebesség érdekel, kapcsold ki ezt az opciót, mielőtt
+  elkezdenél töprengeni a <tt class="option">me_quality</tt> csökkentésén.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>chroma_opt</strong></span>
+  A chroma képek minőségének javítása a célja az egyszerű
+  fehér/fekete sarkoknál a tömörítés javítása helyett.
+  Ezzel csökkentheted a "red stairs" effektust.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>lumi_mask</strong></span>
+  Megpróbál kevesebb bitrátát adni a kép azon részeinek, amiket az
+  emberi szem nem lát olyan jól, így a kódolónak lehetősége van a
+  megspórolt biteket a kép sokkal fontosabb részeinél felhasználni.
+  Ezen opció nyeresége a kódolás minőségének szempontjából erősen
+  függ az egyéni beállításoktól és a megtekintéshez használt monitor
+  típusától és beállításaitól (tipikusan egy világosabb vagy TFT
+  monitoron nem fog olyan jól kinézni).
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>qpel</strong></span>
+  Növeli a várható mozgásvektorok számát a mozgás előrejelzés
+  pontosságának növelésével halfpel-ről quarterpel-re.
+  Az ötlet annyi, hogy a jobb mozgásvektorokért cserébe csökken a
+  bitráta (ezért nő a minőség).
+  Habár a quarterpel pontosságú mozgásvektorok kódolásához egy kicsivel
+  több bit kell, a várható vektorok nem mindig adnak (sokkal) jobb
+  minőséget.
+  Elég gyakran a codec még mindig biteket biztosít az extra
+  pontossághoz, de csak kicsi vagy semmilyen minőségi nyereség nincs
+  cserében.
+  Sajnos, nem lehet előre megmondani a <tt class="option">qpel</tt> lehetséges
+  nyereségeit, így kódolnod kell vele is és nélküle is, hogy biztosan
+  tudd.
+  </p><p>
+  A <tt class="option">qpel</tt> majdnem dupla kódolási időt jelent és 25%-kal
+  több feldolgozási erőforrást igényel a dekódolása. Nem minden
+  asztali lejátszó támogatja.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>gmc</strong></span>
+  Biteket próbál megspórolni bizonyos jeleneteknél úgy, hogy
+  egy mozgásvektort használ az egész kockához.
+  Ez majdnem mindig növeli a PSNR-t, de jelentősen lelassítja
+  a kódolást (és a dekódolást is).
+  Ezért csak akkor ajánlott használnod, ha a <tt class="option">vhq</tt>
+  a maximumra állítottad.
+  Az <code class="systemitem">Xvid</code> GMC-je sokkal
+  kifinomultabb, mint a DivX-é, de csak kevés lejátszó támogatja.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-xvid-encoding-profiles"></a>9.4.3. Kódolási profilok</h3></div></div></div><p>
+Az Xvid támogatja a kódolási profilokat a <tt class="option">profile</tt> opción
+keresztül, amivel az XVid videó folyam tulajdonságaiban olyan
+megszorításokat lehet előírni, amikkel az lejátszható marad az összes
+eszközön, ami támogatja a választott profilt.
+A megkötések a felbontásra, a bitrátára és bizonyos MPEG-4-es funkciókra
+vonatkoznak.
+A következő táblázat megmutatja, hogy melyik profil mit támogat.
+</p><div class="informaltable"><table border="1"><colgroup><col align="center" class="col1"><col align="center" class="col2"><col align="center" class="col3"><col align="center" class="col4"><col align="center" class="col5"><col align="center" class="col6"><col align="center" class="col7"><col align="center" class="col8"><col align="center" class="col9"><col align="center" class="col10"><col align="center" class="col11"><col align="center" class="col12"><col align="center" class="col13"><col align="center" class="col14"><col align="center" class="col15"><col align="center" class="col16"></colgroup><tbody><tr><td align="center"> </td><td colspan="4" align="center">Szimpla</td><td colspan="6" align="center">Fejlett szimpla</td><td colspan="6" align="center">DivX</td></tr><tr><td align="center">Profil neve</td><td align="center">0</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">0</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">Handheld</td><td align="center">Hordozható NTSC</td><td align="center">Hordozható PAL</td><td align="center">NTSC házimozi</td><td align="center">PAL házimozi</td><td align="center">HDTV</td></tr><tr><td align="center">Szélesség [pixelben]</td><td align="center">176</td><td align="center">176</td><td align="center">352</td><td align="center">352</td><td align="center">176</td><td align="center">176</td><td align="center">352</td><td align="center">352</td><td align="center">352</td><td align="center">720</td><td align="center">176</td><td align="center">352</td><td align="center">352</td><td align="center">720</td><td align="center">720</td><td align="center">1280</td></tr><tr><td align="center">Magasság [pixelben]</td><td align="center">144</td><td align="center">144</td><td align="center">288</td><td align="center">288</td><td align="center">144</td><td align="center">144</td><td align="center">288</td><td align="center">288</td><td align="center">576</td><td align="center">576</td><td align="center">144</td><td align="center">240</td><td align="center">288</td><td align="center">480</td><td align="center">576</td><td align="center">720</td></tr><tr><td align="center">Frame ráta [fps]</td><td align="center">15</td><td align="center">15</td><td align="center">15</td><td align="center">15</td><td align="center">30</td><td align="center">30</td><td align="center">15</td><td align="center">30</td><td align="center">30</td><td align="center">30</td><td align="center">15</td><td align="center">30</td><td align="center">25</td><td align="center">30</td><td align="center">25</td><td align="center">30</td></tr><tr><td align="center">Max átlagos bitráta [kbps]</td><td align="center">64</td><td align="center">64</td><td align="center">128</td><td align="center">384</td><td align="center">128</td><td align="center">128</td><td align="center">384</td><td align="center">768</td><td align="center">3000</td><td align="center">8000</td><td align="center">537.6</td><td align="center">4854</td><td align="center">4854</td><td align="center">4854</td><td align="center">4854</td><td align="center">9708.4</td></tr><tr><td align="center">Átlagos csúcs bitráta 3 mp-n keresztül [kbps]</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">800</td><td align="center">8000</td><td align="center">8000</td><td align="center">8000</td><td align="center">8000</td><td align="center">16000</td></tr><tr><td align="center">Max. B-frame</td><td align="center">0</td><td align="center">0</td><td align="center">0</td><td align="center">0</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">0</td><td align="center">1</td><td align="center">1</td><td align="center">1</td><td align="center">1</td><td align="center">2</td></tr><tr><td align="center">MPEG kvantálás</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td></tr><tr><td align="center">Adaptív kvantálás</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td></tr><tr><td align="center">Átlapolt kódolás</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td></tr><tr><td align="center">Quarterpixel</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td></tr><tr><td align="center">Globális mozgás-kompenzáció</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td><td align="center"> </td></tr></tbody></table></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-xvid-example-settings"></a>9.4.4. Kódolás beállítási példák</h3></div></div></div><p>
+A következő beállítások példák különböző kódolási opciók
+kombinációjára, amik a sebesség vs minőség kérdést döntően
+befolyásolják ugyanazon cél bitráta mellett.
+</p><p>
+Az összes kódolási beállítást egy 720x448 @30000/1001 fps-es példa
+videón teszteltük, a cél bitráta 900kbps volt, a gép pedig egy
+AMD-64 3400+ 2400 MHz-en 64 bites módban.
+Mindegyik kódolási beállítás tartalmazza a kódolási sebességet
+(képkocka per másodpercben) és a PSNR veszteséget (dB-ben) a
+"nagyon jó minőséghez" viszonyítva.
+Kérlek vedd figyelembe, hogy a forrásanyagodtól, a géped típusától
+és a fejlesztésektől függően különböző eredményeket kaphatsz.
+</p><p>
+</p><div class="informaltable"><table border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Leírás</th><th>Kódolási opciók</th><th>sebesség (fps-ben)</th><th>Relatív PSNR veszteség (dB-ben)</th></tr></thead><tbody><tr><td>Nagyon jó minőség</td><td><tt class="option">chroma_opt:vhq=4:bvhq=1:quant_type=mpeg</tt></td><td>16fps</td><td>0dB</td></tr><tr><td>Jó minőség</td><td><tt class="option">vhq=2:bvhq=1:chroma_opt:quant_type=mpeg</tt></td><td>18fps</td><td>-0.1dB</td></tr><tr><td>Gyors</td><td><tt class="option">turbo:vhq=0</tt></td><td>28fps</td><td>-0.69dB</td></tr><tr><td>Valós idejű</td><td><tt class="option">turbo:nochroma_me:notrellis:max_bframes=0:vhq=0</tt></td><td>38fps</td><td>-1.48dB</td></tr></tbody></table></div><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-enc-libavcodec.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-x264.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">9.3. Kódolás a <code class="systemitem">libavcodec</code>
+  codec családdal </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 9.5. Kódolás az
+  <code class="systemitem">x264</code> codec-kel</td></tr></table></div></body></html>

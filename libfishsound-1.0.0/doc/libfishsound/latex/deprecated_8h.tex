@@ -1,0 +1,120 @@
+\section{deprecated.\-h File Reference}
+\label{deprecated_8h}\index{deprecated.\-h@{deprecated.\-h}}
+
+
+Deprecated interfaces.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef {\bf Fish\-Sound\-Decoded\-\_\-\-Float} {\bf Fish\-Sound\-Decoded}
+\begin{DoxyCompactList}\small\item\em D\-E\-P\-R\-E\-C\-A\-T\-E\-D T\-Y\-P\-E. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-callback} ({\bf Fish\-Sound} $\ast$fsound, {\bf Fish\-Sound\-Decoded} decoded, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em D\-E\-P\-R\-E\-C\-A\-T\-E\-D F\-U\-N\-C\-T\-I\-O\-N. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-set\-\_\-interleave} ({\bf Fish\-Sound} $\ast$fsound, int interleave)
+\begin{DoxyCompactList}\small\item\em D\-E\-P\-R\-E\-C\-A\-T\-E\-D F\-U\-N\-C\-T\-I\-O\-N. \end{DoxyCompactList}\item 
+long {\bf fish\-\_\-sound\-\_\-encode} ({\bf Fish\-Sound} $\ast$fsound, float $\ast$$\ast$pcm, long frames)
+\begin{DoxyCompactList}\small\item\em D\-E\-P\-R\-E\-C\-A\-T\-E\-D F\-U\-N\-C\-T\-I\-O\-N. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Deprecated interfaces. 
+
+\subsection{Typedef Documentation}
+\index{deprecated.\-h@{deprecated.\-h}!Fish\-Sound\-Decoded@{Fish\-Sound\-Decoded}}
+\index{Fish\-Sound\-Decoded@{Fish\-Sound\-Decoded}!deprecated.h@{deprecated.\-h}}
+\subsubsection[{Fish\-Sound\-Decoded}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Fish\-Sound\-Decoded\-\_\-\-Float} {\bf Fish\-Sound\-Decoded}}\label{deprecated_8h_a30f4221d1810083d5907749dcacf8df3}
+
+
+D\-E\-P\-R\-E\-C\-A\-T\-E\-D T\-Y\-P\-E. 
+
+Signature of a callback for libfishsound to call when it has decoded P\-C\-M audio data, and you want this provided as floats using the current interleave method as set by \doxyref{fish\-\_\-sound\-\_\-set\-\_\-interleave()}{p.}{deprecated_8h_a8e6b76134675d948015fe4afa3fe4104}. 
+
+\subsection{Function Documentation}
+\index{deprecated.\-h@{deprecated.\-h}!fish\-\_\-sound\-\_\-encode@{fish\-\_\-sound\-\_\-encode}}
+\index{fish\-\_\-sound\-\_\-encode@{fish\-\_\-sound\-\_\-encode}!deprecated.h@{deprecated.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-encode}]{\setlength{\rightskip}{0pt plus 5cm}long fish\-\_\-sound\-\_\-encode (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{float $\ast$$\ast$}]{pcm, }
+\item[{long}]{frames}
+\end{DoxyParamCaption}
+)}\label{deprecated_8h_a6cd1117b2d09f0f9589c8b10cccae75c}
+
+
+D\-E\-P\-R\-E\-C\-A\-T\-E\-D F\-U\-N\-C\-T\-I\-O\-N. 
+
+Encode a block of audio 
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E) \\
+\hline
+{\em pcm} & The audio data to encode \\
+\hline
+{\em frames} & A count of frames to encode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of frames encoded 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+For multichannel audio, the audio data is interpreted according to the current P\-C\-M style 
+\end{DoxyNote}
+\index{deprecated.\-h@{deprecated.\-h}!fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-callback@{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-callback}}
+\index{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-callback@{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-callback}!deprecated.h@{deprecated.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{{\bf Fish\-Sound\-Decoded}}]{decoded, }
+\item[{void $\ast$}]{user\-\_\-data}
+\end{DoxyParamCaption}
+)}\label{deprecated_8h_add6f678e9e38d3b27bd8e5b95c2547f1}
+
+
+D\-E\-P\-R\-E\-C\-A\-T\-E\-D F\-U\-N\-C\-T\-I\-O\-N. 
+
+Set the callback for libfishsound to call when it has a block of decoded P\-C\-M audio ready, and you want this provided as floats using the current interleave method as set by \doxyref{fish\-\_\-sound\-\_\-set\-\_\-interleave()}{p.}{deprecated_8h_a8e6b76134675d948015fe4afa3fe4104}. This function, and \doxyref{fish\-\_\-sound\-\_\-set\-\_\-interleave()}{p.}{deprecated_8h_a8e6b76134675d948015fe4afa3fe4104}, have been superceded by the typesafe fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-\-T\-Y\-P\-E() callbacks, such as \doxyref{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float()}{p.}{decode_8h_ae821800e11efe106676d7ce4c743328a} or \doxyref{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv()}{p.}{decode_8h_a3a4055f579b841a5c05d2a2865f5e939}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E) \\
+\hline
+{\em decoded} & The callback to call \\
+\hline
+{\em user\-\_\-data} & Arbitrary user data to pass to the callback \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{deprecated.\-h@{deprecated.\-h}!fish\-\_\-sound\-\_\-set\-\_\-interleave@{fish\-\_\-sound\-\_\-set\-\_\-interleave}}
+\index{fish\-\_\-sound\-\_\-set\-\_\-interleave@{fish\-\_\-sound\-\_\-set\-\_\-interleave}!deprecated.h@{deprecated.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-set\-\_\-interleave}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-set\-\_\-interleave (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{int}]{interleave}
+\end{DoxyParamCaption}
+)}\label{deprecated_8h_a8e6b76134675d948015fe4afa3fe4104}
+
+
+D\-E\-P\-R\-E\-C\-A\-T\-E\-D F\-U\-N\-C\-T\-I\-O\-N. 
+
+Set the P\-C\-M format used by a Fish\-Sound object. The default value is non-\/interleaved. Prior to libfishsound 0.\-7.\-0, you would (optionally) specify whether you wanted to receive interleaved or per-\/channel P\-C\-M data using \doxyref{fish\-\_\-sound\-\_\-set\-\_\-interleave()}{p.}{deprecated_8h_a8e6b76134675d948015fe4afa3fe4104}, the default being per-\/channel (non-\/interleaved) P\-C\-M. Whether or not your decoded callback expects interleaved or non-\/interleaved data is now implied by the particular fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-\-T\-Y\-P\-E() method you use to set it, such as \doxyref{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float()}{p.}{decode_8h_ae821800e11efe106676d7ce4c743328a} or \doxyref{fish\-\_\-sound\-\_\-set\-\_\-decoded\-\_\-float\-\_\-ilv()}{p.}{decode_8h_a3a4055f579b841a5c05d2a2865f5e939}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+{\em interleave} & Whether to use interleaved P\-C\-M or not. Valid values are 0 for non-\/interleaved, and 1 for interleaved. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em -\/1} & Invalid {\itshape fsound} \\
+\hline
+\end{DoxyRetVals}

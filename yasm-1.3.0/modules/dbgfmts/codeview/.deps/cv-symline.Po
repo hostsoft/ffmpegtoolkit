@@ -1,0 +1,179 @@
+modules/dbgfmts/codeview/cv-symline.o: \
+ modules/dbgfmts/codeview/cv-symline.c /usr/include/stdc-predef.h util.h \
+ config.h /usr/include/stdio.h /usr/include/features.h \
+ /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
+ /usr/include/bits/stdio.h /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/byteswap-16.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h /usr/include/string.h \
+ /usr/include/xlocale.h /usr/include/bits/string.h \
+ /usr/include/bits/string2.h /usr/include/assert.h /usr/include/strings.h \
+ libyasm-stdint.h /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h libyasm/coretype.h \
+ /usr/include/libintl.h /usr/include/locale.h /usr/include/bits/locale.h \
+ libyasm/compat-queue.h libyasm.h libyasm/valparam.h libyasm/linemap.h \
+ libyasm/errwarn.h libyasm/intnum.h libyasm/floatnum.h libyasm/expr.h \
+ libyasm/value.h libyasm/symrec.h libyasm/bytecode.h libyasm/section.h \
+ libyasm/insn.h libyasm/arch.h libyasm/dbgfmt.h libyasm/objfmt.h \
+ libyasm/listfmt.h libyasm/parser.h libyasm/preproc.h libyasm/file.h \
+ libyasm/module.h libyasm/hamt.h libyasm/md5.h \
+ modules/dbgfmts/codeview/cv-dbgfmt.h
+
+/usr/include/stdc-predef.h:
+
+util.h:
+
+config.h:
+
+/usr/include/stdio.h:
+
+/usr/include/features.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h:
+
+/usr/include/bits/stdio_lim.h:
+
+/usr/include/bits/sys_errlist.h:
+
+/usr/include/bits/stdio.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/bits/byteswap-16.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/time.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/bits/sigset.h:
+
+/usr/include/bits/time.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/alloca.h:
+
+/usr/include/bits/stdlib-float.h:
+
+/usr/include/string.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+/usr/include/assert.h:
+
+/usr/include/strings.h:
+
+libyasm-stdint.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/bits/wchar.h:
+
+libyasm/coretype.h:
+
+/usr/include/libintl.h:
+
+/usr/include/locale.h:
+
+/usr/include/bits/locale.h:
+
+libyasm/compat-queue.h:
+
+libyasm.h:
+
+libyasm/valparam.h:
+
+libyasm/linemap.h:
+
+libyasm/errwarn.h:
+
+libyasm/intnum.h:
+
+libyasm/floatnum.h:
+
+libyasm/expr.h:
+
+libyasm/value.h:
+
+libyasm/symrec.h:
+
+libyasm/bytecode.h:
+
+libyasm/section.h:
+
+libyasm/insn.h:
+
+libyasm/arch.h:
+
+libyasm/dbgfmt.h:
+
+libyasm/objfmt.h:
+
+libyasm/listfmt.h:
+
+libyasm/parser.h:
+
+libyasm/preproc.h:
+
+libyasm/file.h:
+
+libyasm/module.h:
+
+libyasm/hamt.h:
+
+libyasm/md5.h:
+
+modules/dbgfmts/codeview/cv-dbgfmt.h:

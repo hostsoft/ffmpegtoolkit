@@ -1,0 +1,48 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "decode", "decode.vcproj", "{396EAD20-08E6-45EF-8025-8128AA8216FE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98C525E8-8F4F-4A6E-A860-0ABFAE03B02F} = {98C525E8-8F4F-4A6E-A860-0ABFAE03B02F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "encode", "encode.vcproj", "{9EDDE147-2DC5-4D04-A763-65A6907C3864}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98C525E8-8F4F-4A6E-A860-0ABFAE03B02F} = {98C525E8-8F4F-4A6E-A860-0ABFAE03B02F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "identify", "identify.vcproj", "{6D420024-09BB-43CE-AF32-60F590B9A6B2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{98C525E8-8F4F-4A6E-A860-0ABFAE03B02F} = {98C525E8-8F4F-4A6E-A860-0ABFAE03B02F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfishsound", "libfishsound.vcproj", "{98C525E8-8F4F-4A6E-A860-0ABFAE03B02F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{396EAD20-08E6-45EF-8025-8128AA8216FE}.Debug.ActiveCfg = Debug|Win32
+		{396EAD20-08E6-45EF-8025-8128AA8216FE}.Debug.Build.0 = Debug|Win32
+		{396EAD20-08E6-45EF-8025-8128AA8216FE}.Release.ActiveCfg = Release|Win32
+		{396EAD20-08E6-45EF-8025-8128AA8216FE}.Release.Build.0 = Release|Win32
+		{9EDDE147-2DC5-4D04-A763-65A6907C3864}.Debug.ActiveCfg = Debug|Win32
+		{9EDDE147-2DC5-4D04-A763-65A6907C3864}.Debug.Build.0 = Debug|Win32
+		{9EDDE147-2DC5-4D04-A763-65A6907C3864}.Release.ActiveCfg = Release|Win32
+		{9EDDE147-2DC5-4D04-A763-65A6907C3864}.Release.Build.0 = Release|Win32
+		{6D420024-09BB-43CE-AF32-60F590B9A6B2}.Debug.ActiveCfg = Debug|Win32
+		{6D420024-09BB-43CE-AF32-60F590B9A6B2}.Debug.Build.0 = Debug|Win32
+		{6D420024-09BB-43CE-AF32-60F590B9A6B2}.Release.ActiveCfg = Release|Win32
+		{6D420024-09BB-43CE-AF32-60F590B9A6B2}.Release.Build.0 = Release|Win32
+		{98C525E8-8F4F-4A6E-A860-0ABFAE03B02F}.Debug.ActiveCfg = Debug|Win32
+		{98C525E8-8F4F-4A6E-A860-0ABFAE03B02F}.Debug.Build.0 = Debug|Win32
+		{98C525E8-8F4F-4A6E-A860-0ABFAE03B02F}.Release.ActiveCfg = Release|Win32
+		{98C525E8-8F4F-4A6E-A860-0ABFAE03B02F}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,40 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.5. Кодирование в MPEG формат</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="prev" href="menc-feat-handheld-psp.html" title="6.4. Кодирование в Sony PSP видео формат"><link rel="next" href="menc-feat-rescale.html" title="6.6. Масштабирование фильмов"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.5. Кодирование в MPEG формат</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-handheld-psp.html">Пред.</a> </td><th width="60%" align="center">Глава 6. Основы использования <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-rescale.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-mpeg"></a>6.5. Кодирование в MPEG формат</h2></div></div></div><p>
+<span class="application">MEncoder</span> может создавать файлы формата MPEG (MPEG-PS).
+MPEG-1 или MPEG-2 обычно используют по причине кодирования в более
+ограниченные форматы, такие как SVCD, VCD или DVD.
+Особые требования для этих форматов описаны в
+<a class="link" href="menc-feat-vcd-dvd.html" title="7.8. Использование MEncoder для создания VCD/SVCD/DVD-совместимых файлов."> руководстве по созданию VCD и DVD</a>
+section.
+</p><p>
+Чтобы сменить формат выходного файла <span class="application">MEncoder</span>, используйте
+опцию <tt class="option">-of mpeg</tt>.
+</p><div class="informalexample"><p>
+Пример:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.avi</code></em> -of mpeg -ovc lavc -lavcopts
+vcodec=mpeg1video \
+    -oac copy <em class="replaceable"><code>other_options</code></em> -o <em class="replaceable"><code>output.mpg</code></em>
+</pre><p>
+Создается файл MPEG-1 пригодный для воспроизведения на системах с минимальной поддержкой
+мультимедиа, таких как только что установленные Windows:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.avi</code></em> -of mpeg -mpegopts format=mpeg1:tsaf:muxrate=2000 \
+    -o <em class="replaceable"><code>output.mpg</code></em> -oac lavc -lavcopts acodec=mp2:abitrate=224 -ovc lavc \
+    -lavcopts vcodec=mpeg1video:vbitrate=1152:keyint=15:mbd=2:aspect=4/3
+</pre><p>
+То же, но используя <code class="systemitem">libavformat</code> MPEG
+мультиплексор:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.avi</code></em> -o <em class="replaceable"><code>VCD.mpg</code></em> -ofps 25 -vf scale=352:288,harddup -of lavf \
+    -lavfopts format=mpg -oac lavc -lavcopts acodec=mp2:abitrate=224 -ovc lavc \
+    -lavcopts vcodec=mpeg1video:vrc_buf_size=327:keyint=15:vrc_maxrate=1152:vbitrate=1152:vmax_b_frames=0
+</pre><p>
+</p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Подсказка:</h3><p>
+Если по каким-то причинам видео после второго прохода вас не устраивает,
+можно снова запустить кодирование с другими значениями битпотока, при
+условии, что вы сохранили статистику предыдущего прохода.
+Это возможно, потому что основная задача файла со статистикой - записывать
+сложность каждого кадра, которая жестко с битпотоком не связана.
+Следует иметь в виду, что, несмотря на это, лучшее качество получается если
+значения результирующего битпотока всех проходов не сильно отличаются.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-handheld-psp.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-rescale.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">6.4. Кодирование в Sony PSP видео формат </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 6.6. Масштабирование фильмов</td></tr></table></div></body></html>

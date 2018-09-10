@@ -1,0 +1,244 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.10. Channel manipulation</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="usage.html" title="第 3 章 Usage"><link rel="prev" href="advaudio-surround.html" title="3.9. Surround/Multichannel playback"><link rel="next" href="advaudio-volume.html" title="3.11. Software Volume adjustment"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"><link rel="subsection" href="advaudio-channels.html#advaudio-channels-general" title="3.10.1. General information"><link rel="subsection" href="advaudio-channels.html#advaudio-channels-mono" title="3.10.2. Playing mono with two speakers"><link rel="subsection" href="advaudio-channels.html#advaudio-channels-copying" title="3.10.3. Channel copying/moving"><link rel="subsection" href="advaudio-channels.html#advaudio-channels-mixing" title="3.10.4. Channel mixing"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.10. Channel manipulation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="advaudio-surround.html">上一页</a> </td><th width="60%" align="center">第 3 章 Usage</th><td width="20%" align="right"> <a accesskey="n" href="advaudio-volume.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="advaudio-channels"></a>3.10. Channel manipulation</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-channels-general"></a>3.10.1. General information</h3></div></div></div><p>
+Unfortunately, there is no standard for how channels are ordered. The orders
+listed below are those of AC-3 and are fairly typical; try them and see if your
+source matches. Channels are numbered starting with 0.
+
+</p><div class="orderedlist"><p class="title"><b>mono</b></p><ol class="orderedlist compact" type="1"><li class="listitem" value="0"><p>center</p></li></ol></div><p>
+
+</p><div class="orderedlist"><p class="title"><b>stereo</b></p><ol class="orderedlist compact" type="1"><li class="listitem" value="0"><p>left</p></li><li class="listitem"><p>right</p></li></ol></div><p>
+
+</p><div class="orderedlist"><p class="title"><b>quadraphonic</b></p><ol class="orderedlist compact" type="1"><li class="listitem" value="0"><p>left front</p></li><li class="listitem"><p>right front</p></li><li class="listitem"><p>left rear</p></li><li class="listitem"><p>right rear</p></li></ol></div><p>
+
+</p><div class="orderedlist"><p class="title"><b>surround 4.0</b></p><ol class="orderedlist compact" type="1"><li class="listitem" value="0"><p>left front</p></li><li class="listitem"><p>right front</p></li><li class="listitem"><p>center rear</p></li><li class="listitem"><p>center front</p></li></ol></div><p>
+
+</p><div class="orderedlist"><p class="title"><b>surround 5.0</b></p><ol class="orderedlist compact" type="1"><li class="listitem" value="0"><p>left front</p></li><li class="listitem"><p>right front</p></li><li class="listitem"><p>left rear</p></li><li class="listitem"><p>right rear</p></li><li class="listitem"><p>center front</p></li></ol></div><p>
+
+</p><div class="orderedlist"><p class="title"><b>surround 5.1</b></p><ol class="orderedlist compact" type="1"><li class="listitem" value="0"><p>left front</p></li><li class="listitem"><p>right front</p></li><li class="listitem"><p>left rear</p></li><li class="listitem"><p>right rear</p></li><li class="listitem"><p>center front</p></li><li class="listitem"><p>subwoofer</p></li></ol></div><p>
+</p><p>
+The <tt class="option">-channels</tt> option is used to request the number of
+channels from the audio decoder. Some audio codecs use the number of specified
+channels to decide if downmixing the source is necessary. Note that this does
+not always affect the number of output channels. For example, using
+<tt class="option">-channels 4</tt> to play a stereo MP3 file will still result in
+2-channel output since the MP3 codec will not produce the extra channels.
+</p><p>
+The <tt class="option">channels</tt> audio filter can be used to create or remove
+channels and is useful for controlling the number of channels sent to the sound
+card. See the following sections for more information on channel manipulation.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-channels-mono"></a>3.10.2. Playing mono with two speakers</h3></div></div></div><p>
+Mono sounds a lot better when played through two speakers - especially when
+using headphones. Audio files that truly have one channel are automatically
+played through two speakers; unfortunately, most files with mono sound are
+actually encoded as stereo with one channel silent. The easiest and most
+foolproof way to make both speakers output the same audio is the
+<tt class="option">extrastereo</tt> filter:
+</p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af extrastereo=0</pre><p>
+</p><p>
+This averages both channels, resulting in both channels being half as loud as
+the original. The next sections have examples of other ways to do this without a
+volume decrease, but they are more complex and require different options
+depending on which channel to keep. If you really need to maintain the volume,
+it may be easier to experiment with the <tt class="option">volume</tt> filter and find
+the right value. For example:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>filename</code></em> -af extrastereo=0,volume=5
+</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-channels-copying"></a>3.10.3. Channel copying/moving</h3></div></div></div><p>
+The <tt class="option">channels</tt> filter can move any or all channels.
+Setting up all the suboptions for the <tt class="option">channels</tt>
+filter can be complicated and takes a little care.
+
+</p><div class="orderedlist"><ol class="orderedlist compact" type="1"><li class="listitem"><p>
+  Decide how many output channels you need. This is the first suboption.
+</p></li><li class="listitem"><p>
+  Count how many channel moves you will do. This is the second suboption. Each
+  channel can be moved to several different channels at the same time, but keep
+  in mind that when a channel is moved (even if to only one destination) the
+  source channel will be empty unless another channel is moved into it. To copy
+  a channel, keeping the source the same, simply move the channel into both the
+  destination and the source. For example:
+  </p><pre class="programlisting">
+channel 2 --&gt; channel 3
+channel 2 --&gt; channel 2</pre><p>
+</p></li><li class="listitem"><p>
+  Write out the channel copies as pairs of suboptions. Note that the first
+  channel is 0, the second is 1, etc. The order of these suboptions does not
+  matter as long as they are properly grouped into
+  <em class="replaceable"><code>source:destination</code></em> pairs.
+</p></li></ol></div><p>
+</p><h4><a name="idp69889456"></a>Example: one channel in two speakers</h4><p>
+Here is an example of another way to play one channel in both speakers. Suppose
+for this example that the left channel should be played and the right channel
+discarded. Following the steps above:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  In order to provide an output channel for each of the two speakers, the first
+  suboption must be "2".
+</p></li><li class="listitem"><p>
+  The left channel needs to be moved to the right channel, and also must be
+  moved to itself so it won't be empty. This is a total of two moves, making
+  the second suboption "2" as well.
+</p></li><li class="listitem"><p>
+  To move the left channel (channel 0) into the right channel (channel 1), the
+  suboption pair is "0:1", "0:0" moves the left channel onto itself.
+</p></li></ol></div><p>
+Putting that all together gives:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>filename</code></em> -af channels=2:2:0:1:0:0
+</pre><p>
+</p><p>
+The advantage this example has over <tt class="option">extrastereo</tt> is that the
+volume of each output channel is the same as the input channel. The disadvantage
+is that the suboptions must be changed to "2:2:1:0:1:1" when the desired audio
+is in the right channel. Also, it is more difficult to remember and type.
+</p><h4><a name="idp69895360"></a>Example: left channel in two speakers shortcut</h4><p>
+There is actually a much easier way to use the <tt class="option">channels</tt> filter
+for playing the left channel in both speakers:
+</p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af channels=1</pre><p>
+The second channel is discarded and, with no further suboptions, the single
+remaining channel is left alone. Sound card drivers automatically play
+single-channel audio in both speakers. This only works when the desired channel
+is on the left.
+</p><h4><a name="idp69897776"></a>Example: duplicate front channels to the rear</h4><p>
+Another common operation is to duplicate the front channels and play them back
+on the rear speakers of a quadraphonic setup.
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  There should be four output channels. The first suboption is "4".
+</p></li><li class="listitem"><p>
+  Each of the two front channels needs to be moved to the corresponding rear
+  channel and also to itself. This is four moves, so the second suboption is "4".
+</p></li><li class="listitem"><p>
+  The left front (channel 0) needs to moved to the left rear (channel 2):
+  "0:2".  The left front also needs to be moved to itself: "0:0". The right
+  front (channel 1) is moved to the right rear (channel 3): "1:3", and also to
+  itself: "1:1".
+</p></li></ol></div><p>
+Combine all the suboptions to get:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>filename</code></em> -af channels=4:4:0:2:0:0:1:3:1:1
+</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="advaudio-channels-mixing"></a>3.10.4. Channel mixing</h3></div></div></div><p>
+The <tt class="option">pan</tt> filter can mix channels in user-specified proportions.
+This allows for everything the <tt class="option">channels</tt> filter can do and
+more. Unfortunately, the suboptions are much more complicated.
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  Decide how many channels to work with. You may need to specify this with
+  <tt class="option">-channels</tt> and/or <tt class="option">-af channels</tt>.
+  Later examples will show when to use which.
+</p></li><li class="listitem"><p>
+  Decide how many channels to feed into <tt class="option">pan</tt> (further decoded
+  channels are discarded). This is the first suboption, and it also controls how
+  many channels to employ for output.
+</p></li><li class="listitem"><p>
+  The remaining suboptions specify how much of each channel gets mixed into each
+  other channel. This is the complicated part. To break the task down, split the
+  suboptions into several sets, one set for each input channel. Each suboption
+  within a set corresponds to an output channel. The number you specify will be
+  the percentage of the input channel that gets mixed into the output channel.
+  </p><p>
+  <tt class="option">pan</tt> accepts values from 0 to 512, yielding 0% to 51200% of
+  the original volume. Be careful when using values greater than 1. Not only
+  can this give you very high volume, but if you exceed the sample range of
+  your sound card you may hear painful pops and clicks. If you want you can
+  follow <tt class="option">pan</tt> with <tt class="option">,volume</tt> to enable clipping,
+  but it is best to keep the values of <tt class="option">pan</tt> low enough that
+  clipping is not necessary.
+  </p></li></ol></div><p>
+</p><h4><a name="idp69911744"></a>Example: one channel in two speakers</h4><p>
+Here is yet another example for playing the left channel in two speakers. Follow
+the steps above:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  <tt class="option">pan</tt> should output two channels, so the first
+  suboption is "2".
+</p></li><li class="listitem"><p>
+  Since we have two input channels, there will be two sets of suboptions.
+  Since there are also two output channels,
+  there will be two suboptions per set.
+  The left channel from the file should go with full volume to
+  the new left and the right channels.
+  Thus the first set of suboptions is "1:1".
+  The right channel should be discarded, so the second would be "0:0".
+  Any 0 values at the end can be left out, but for ease of
+  understanding we will keep them.
+</p></li></ol></div><p>
+Putting those options together gives:
+</p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af pan=2:1:1:0:0</pre><p>
+If the right channel is desired instead of the left, the suboptions to
+<tt class="option">pan</tt> will be "2:0:0:1:1".
+</p><h4><a name="idp69916944"></a>Example: left channel in two speakers shortcut</h4><p>
+As with <tt class="option">channels</tt>, there is a shortcut that only works with the
+left channel:
+</p><pre class="screen">mplayer <em class="replaceable"><code>filename</code></em> -af pan=1:1</pre><p>
+Since <tt class="option">pan</tt> has only one channel of input (the other channel is
+discarded), there is only one set with one suboption, which specifies that the
+only channel gets 100% of itself.
+</p><h4><a name="idp69919744"></a>Example: downmixing 6-channel PCM</h4><p>
+<span class="application">MPlayer</span>'s decoder for 6-channel PCM is not capable of
+downmixing. Here is a way to downmix PCM using <tt class="option">pan</tt>:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  The number of output channels is 2, so the first suboption is "2".
+</p></li><li class="listitem"><p>
+  With six input channels there will be six sets of options. Fortunately,
+  since we only care about the output of the first two channels, we only need to
+  make two sets; the remaining four sets can be omitted. Beware that not all
+  multichannel audio files have the same channel order! This example
+  demonstrates downmixing a file with the same channels as AC-3 5.1:
+  </p><pre class="programlisting">
+0 - front left
+1 - front right
+2 - rear left
+3 - rear right
+4 - center front
+5 - subwoofer</pre><p>
+  The first set of suboptions lists the percentages of the original volume, in
+  order, which each output channel should receive from the
+  front left channel: "1:0".
+  The front right channel should go into the right output: "0:1".
+  The same for the rear channels: "1:0" and "0:1".
+  The center channel goes into both output channels with half volume:
+  "0.5:0.5", and the subwoofer goes into both with full volume: "1:1".
+</p></li></ol></div><p>
+Put all that together, for:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>6-channel.wav</code></em> -af pan=2:1:0:0:1:1:0:0:1:0.5:0.5:1:1
+</pre><p>
+The percentages listed above are only a rough example. Feel free to tweak them.
+</p><h4><a name="idp69926400"></a>Example: Playing 5.1 audio on big speakers without a subwoofer</h4><p>
+If you have a huge pair of front speakers you may not want to waste any money on
+buying a subwoofer for a complete 5.1 sound system. If you use
+<tt class="option">-channels 5</tt> to request that liba52 decode 5.1 audio in 5.0,
+the subwoofer channel is simply discarded. If you want to distribute the
+subwoofer channel yourself you need to downmix manually with
+<tt class="option">pan</tt>:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  Since <tt class="option">pan</tt> needs to examine all six channels, specify
+  <tt class="option">-channels 6</tt> so liba52 decodes them all.
+</p></li><li class="listitem"><p>
+  <tt class="option">pan</tt> outputs to only five channels, the first suboption is 5.
+</p></li><li class="listitem"><p>
+  Six input channels and five output channels means six sets of five suboptions.
+  </p><div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+    The left front channel only replicates onto itself:
+    "1:0:0:0:0"
+  </p></li><li class="listitem"><p>
+    Same for the right front channel:
+    "0:1:0:0:0"
+  </p></li><li class="listitem"><p>
+    Same for the left rear channel:
+    "0:0:1:0:0"
+  </p></li><li class="listitem"><p>
+    And also the same for the right rear channel:
+    "0:0:0:1:0"
+  </p></li><li class="listitem"><p>
+    Center front, too:
+    "0:0:0:0:1"
+  </p></li><li class="listitem"><p>
+    And now we have to decide what to do with the subwoofer,
+    e.g. half into front right and front left:
+    "0.5:0.5:0:0:0"
+  </p></li></ul></div><p>
+</p></li></ol></div><p>
+Combine all those options to get:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>dvd://1</code></em> -channels 6 -af pan=5:1:0:0:0:0:0:1:0:0:0:0:0:1:0:0:0:0:0:1:0:0:0:0:0:1:0.5:0.5:0:0:0
+</pre><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="advaudio-surround.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio-volume.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">3.9. Surround/Multichannel playback </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 3.11. Software Volume adjustment</td></tr></table></div></body></html>

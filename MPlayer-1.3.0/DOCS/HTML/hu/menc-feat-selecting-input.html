@@ -1,0 +1,34 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>8.2. Bemeneti fájl vagy eszköz kiválasztása</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="prev" href="menc-feat-selecting-codec.html" title="8.1. Codec és konténer formátum kiválasztása"><link rel="next" href="menc-feat-mpeg4.html" title='8.3. Két menetes MPEG-4 ("DivX") kódolás'><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">8.2. Bemeneti fájl vagy eszköz kiválasztása</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Vissza</a> </td><th width="60%" align="center">8. fejezet - A <span class="application">MEncoder</span> használatának alapjai</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-input"></a>8.2. Bemeneti fájl vagy eszköz kiválasztása</h2></div></div></div><p>
+A <span class="application">MEncoder</span> tud kódolni fájlokból vagy akár
+direkt DVD vagy VCD lemezekről is.
+A fájlból való kódoláshoz egyszerűen csak add meg a fájl nevét a parancssorban,
+vagy a <tt class="option">dvd://</tt><em class="replaceable"><code>részszám</code></em> vagy
+<tt class="option">vcd://</tt><em class="replaceable"><code>sávszám</code></em> eszközt a
+DVD részről vagy VCD sávról történő kódoláshoz.
+Ha egy DVD-t már átmásoltál a merevlemezedre (használhatod pl. a
+<span class="application">dvdbackup</span> ezsközt, mely a legtöbb rendszeren megvan),
+és a másolatot akarod elkódolni, akkor is használnod kell a
+<tt class="option">dvd://</tt> szintaxist, a <tt class="option">-dvd-device</tt>-szal együtt,
+amit a lemásolt DVD gyökérkönyvtárának elérési útja követ.
+
+A <tt class="option">-dvd-device</tt> és <tt class="option">-cdrom-device</tt>
+kapcsolókkal felülbírálhatóak a direkt lemezolvasásnál használt eszközök
+elérési útjái is, ha az alapértelmezett
+<tt class="filename">/dev/dvd</tt> és <tt class="filename">/dev/cdrom</tt> nem
+működnek a rendszereden.
+</p><p>
+Ha DVD-ről kódolsz, gyakran kívánatos, hogy a kódolni kívánt fejezetet vagy
+fejezetek tartományát is megadd.
+Ehhez használhatod a <tt class="option">-chapter</tt> kapcsolót.
+Például a <tt class="option">-chapter</tt> <em class="replaceable"><code>1-4</code></em>
+csak az 1-4 fejezeteket fogja elkódolni a DVD-ről.
+Ez különösen hasznos, ha egy 1400 MB-os kódolást csinálsz két CD-re, mivel
+meggyőződhetsz róla, hogy a vágás pontosan fejezet határnál lesz és nem
+egy jelenet közepén.
+</p><p>
+Ha van támogatott TV felvevő kártyád, tudsz kódolni a TV-in eszközről is.
+Használd a <tt class="option">tv://</tt><em class="replaceable"><code>csatornaszám</code></em> eszközt
+fájlnévként és a <tt class="option">-tv</tt> kapcoslót a mentési beállítások
+megadásához.
+A DVB hasonlóképpen működik.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">8.1. Codec és konténer formátum kiválasztása </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 8.3. Két menetes MPEG-4 ("DivX") kódolás</td></tr></table></div></body></html>

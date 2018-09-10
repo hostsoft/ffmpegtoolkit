@@ -1,0 +1,286 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.16. MPEG decoders</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="Chapter 4. Video output devices"><link rel="prev" href="dfbmga.html" title="4.15. DirectFB/Matrox (dfbmga)"><link rel="next" href="zr.html" title="4.17. Zr"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="mpeg_decoders.html#dvb" title="4.16.1. DVB output and input"><link rel="subsection" href="mpeg_decoders.html#dxr2" title="4.16.2. DXR2"><link rel="subsection" href="mpeg_decoders.html#dxr3" title="4.16.3. DXR3/Hollywood+"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.16. MPEG decoders</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dfbmga.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="zr.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mpeg_decoders"></a>4.16. MPEG decoders</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dvb"></a>4.16.1. DVB output and input</h3></div></div></div><p>
+<span class="application">MPlayer</span> supports cards with the Siemens DVB chipset
+from vendors like Siemens, Technotrend, Galaxis or Hauppauge. The latest DVB
+drivers are available from the
+<a class="ulink" href="http://www.linuxtv.org" target="_top">Linux TV site</a>.
+If you want to do software transcoding you should have at least a 1GHz CPU.
+</p><p>
+Configure should detect your DVB card. If it did not, force detection with
+</p><pre class="screen">./configure --enable-dvb</pre><p>
+Then compile and install as usual.</p><p><b>USAGE. </b>
+Hardware decoding of streams containing MPEG-1/2 video and/or MPEG audio can be done with this
+command:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes <em class="replaceable"><code>file.mpg|vob</code></em>
+</pre><p>
+</p><p>
+Decoding of any other type of video stream requires transcoding to MPEG-1, thus it's slow
+and may not be worth the trouble, especially if your computer is slow.
+It can be achieved using a command like this:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes <em class="replaceable"><code>yourfile.ext</code></em>
+mplayer -ao mpegpes -vo mpegpes -vf expand <em class="replaceable"><code>yourfile.ext</code></em>
+</pre><p>
+Note that DVB cards only support heights 288 and 576 for PAL or 240 and 480 for
+NTSC. You <span class="bold"><strong>must</strong></span> rescale for other heights by
+adding <tt class="option">scale=width:height</tt> with the width and height you want
+to the <tt class="option">-vf</tt> option. DVB cards accept various widths, like 720,
+704, 640, 512, 480, 352 etc. and do hardware scaling in horizontal direction,
+so you do not need to scale horizontally in most cases.
+For a 512x384 (aspect 4:3) MPEG-4 (DivX) try:
+</p><pre class="screen">mplayer -ao mpegpes -vo mpegpes -vf scale=512:576</pre><p>
+</p><p>
+If you have a widescreen movie and you do not want to scale it to full height,
+you can use the <tt class="option">expand=w:h</tt> filter to add black bands. To view a
+640x384 MPEG-4 (DivX), try:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes -vf expand=640:576 <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+</p><p>
+If your CPU is too slow for a full size 720x576 MPEG-4 (DivX), try downscaling:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes -vf scale=352:576 <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+</p><p>If speed does not improve, try vertical downscaling, too:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes -vf scale=352:288 <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+</p><p>
+For OSD and subtitles use the OSD feature of the expand filter. So, instead of
+<tt class="option">expand=w:h</tt> or <tt class="option">expand=w:h:x:y</tt>, use
+<tt class="option">expand=w:h:x:y:1</tt> (the 5th parameter <tt class="option">:1</tt>
+at the end will enable OSD rendering). You may want to move the image up a bit
+to get a bigger black zone for subtitles. You may also want to move subtitles
+up, if they are outside your TV screen, use the
+<tt class="option">-subpos &lt;0-100&gt;</tt>
+option to adjust this (<tt class="option">-subpos 80</tt> is a good choice).
+</p><p>
+In order to play non-25fps movies on a PAL TV or with a slow CPU, add the
+<tt class="option">-framedrop</tt> option.
+</p><p>
+To keep the aspect ratio of MPEG-4 (DivX) files and get the optimal scaling
+parameters (hardware horizontal scaling and software vertical scaling
+while keeping the right aspect ratio), use the new dvbscale filter:
+</p><pre class="screen">
+for a  4:3 TV: -vf dvbscale,scale=-1:0,expand=-1:576:-1:-1:1
+for a 16:9 TV: -vf dvbscale=1024,scale=-1:0,expand=-1:576:-1:-1:1
+</pre><p>
+</p><p><b>Digital TV (DVB input module). </b>You can use your DVB card for watching Digital TV.</p><p>
+You should have the programs <span class="command"><strong>scan</strong></span> and
+<span class="command"><strong>szap/tzap/czap/azap</strong></span> installed; they are all included in
+the drivers package.
+</p><p>
+Verify that your drivers are working properly with a program such as
+<a class="ulink" href="http://sf.net/projects/dvbtools/" target="_top"><span class="command"><strong>dvbstream</strong></span></a>
+(that is the base of the DVB input module).
+</p><p>
+Now you should compile a <tt class="filename">~/.mplayer/channels.conf</tt>
+file, with the syntax accepted by <span class="command"><strong>szap/tzap/czap/azap</strong></span>, or
+have <span class="command"><strong>scan</strong></span> compile it for you.
+</p><p>
+If you have more than one card type (e.g. Satellite, Terrestrial, Cable and ATSC)
+you can save your channels files as
+<tt class="filename">~/.mplayer/channels.conf.sat</tt>,
+<tt class="filename">~/.mplayer/channels.conf.ter</tt>,
+<tt class="filename">~/.mplayer/channels.conf.cbl</tt>,
+and <tt class="filename">~/.mplayer/channels.conf.atsc</tt>,
+respectively, so as to implicitly hint <span class="application">MPlayer</span>
+to use these files rather than <tt class="filename">~/.mplayer/channels.conf</tt>,
+and you only need to specify which card to use.
+</p><p>
+Make sure that you have <span class="emphasis"><em>only</em></span> Free to Air
+channels in your <tt class="filename">channels.conf</tt> file, or
+<span class="application">MPlayer</span> will wait for an unencrypted transmission.
+</p><p>
+In your audio and video fields you can use an extended syntax:
+<tt class="option">...:pid[+pid]:...</tt> (for a maximum of 6 pids each);
+in this case <span class="application">MPlayer</span> will include in the
+stream all the indicated pids, plus pid 0 (that contains the PAT).
+You should always include in each row the PMT and PCR pids for the
+corresponding channel (if you know them).
+You can also specify 8192, this will select all pids on this frequency
+and you can then switch between the programs with TAB.
+This might need more bandwidth, though cheap cards always transfer all
+channels at least to the kernel so it does not make much of a difference
+for these.
+Other possible uses are: televideo pid, second audio track, etc.
+</p><p>
+If <span class="application">MPlayer</span> complains frequently about
+</p><pre class="screen">Too many video/audio packets in the buffer</pre><p> or
+if you notice a growing desynchronization between audio and
+video verify the presence of the PCR pid in your stream
+(needed to comply with the buffering model of the transmitter)
+and/or try to use the libavformat MPEG-TS demuxer by adding
+<tt class="option">-demuxer lavf -lavfdopts probesize=128</tt>
+to your command line.
+</p><p>
+To show the first of the channels present in your list, run
+</p><pre class="screen">mplayer dvb://</pre><p>
+</p><p>
+If you want to watch a specific channel, such as R1, run
+</p><pre class="screen">mplayer dvb://<em class="replaceable"><code>R1</code></em></pre><p>
+</p><p>
+If you have more than one card you also need to specify the number of the card
+where the channel is visible (e.g. 2) with the syntax:
+</p><pre class="screen">mplayer dvb://<em class="replaceable"><code>2@R1</code></em></pre><p>
+</p><p>
+To change channels press the <span class="keycap"><b>h</b></span> (next) and
+<span class="keycap"><b>k</b></span> (previous) keys, or use the
+<a class="link" href="fonts-osd.html#osdmenu" title="2.4.3. OSD menu">OSD menu</a>.
+</p><p>
+To temporarily disable the audio or the video stream copy the
+following to <tt class="filename">~/.mplayer/input.conf</tt>:
+</p><pre class="screen">
+% set_property  switch_video -2
+&amp; step_property switch_video
+? set_property  switch_audio -2
+^ step_property switch_audio
+</pre><p>
+(Overriding the action keys as preferred.) When pressing the key
+corresponding to switch_x -2 the associated stream will be closed;
+when pressing the key corresponding to step_x the stream will be reopened.
+Notice that this switching mechanism will not work as expected when there
+are multiple audio and video streams in the multiplex.
+</p><p>
+During playback (not during recording), in order to prevent stuttering
+and error messages such as 'Your system is too slow' it is advisable to add
+</p><pre class="screen">
+-mc 10 -speed 0.97 -af scaletempo
+</pre><p>
+to your command line, adjusting the scaletempo parameters as preferred.
+</p><p>
+If your <tt class="filename">~/.mplayer/menu.conf</tt> contains a
+<code class="literal">&lt;dvbsel&gt;</code> entry, such as the one in the example
+file <tt class="filename">etc/dvb-menu.conf</tt> (that you can use to overwrite
+<tt class="filename">~/.mplayer/menu.conf</tt>), the main menu will show a
+sub-menu entry that will permit you to choose one of the channels present
+in your <tt class="filename">channels.conf</tt>, possibly preceded by a menu
+with the list of cards available if more than one is usable by
+<span class="application">MPlayer</span>.
+</p><p>
+If you want to save a program to disk you can use
+</p><pre class="screen">
+mplayer -dumpfile <em class="replaceable"><code>r1.ts</code></em> -dumpstream dvb://<em class="replaceable"><code>R1</code></em>
+</pre><p>
+</p><p>
+If you want to record it in a different format (re-encoding it) instead
+you can run a command such as
+</p><pre class="screen">
+mencoder -o <em class="replaceable"><code>r1.avi</code></em> -ovc xvid -xvidencopts bitrate=800 \
+    -oac mp3lame -lameopts cbr:br=128 -pp=ci dvb://<em class="replaceable"><code>R1</code></em>
+</pre><p>
+</p><p>
+Read the man page for a list of options that you can pass to the
+DVB input module.
+</p><p><b>FUTURE. </b>
+If you have questions or want to hear feature announcements and take part in
+discussions on this subject, join our
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-dvb" target="_top">MPlayer-DVB</a>
+mailing list. Please remember that the list language is English.
+</p><p>
+In the future you may expect the ability to display OSD and subtitles using
+the native OSD feature of DVB cards.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dxr2"></a>4.16.2. DXR2</h3></div></div></div><p>
+<span class="application">MPlayer</span> supports hardware accelerated playback
+with the Creative DXR2 card.
+</p><p>
+First of all you will need properly installed DXR2 drivers. You can find
+the drivers and installation instructions at the
+<a class="ulink" href="http://dxr2.sf.net/" target="_top">DXR2 Resource Center</a> site.
+</p><div class="variablelist"><p class="title"><b>USAGE</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo dxr2</tt></span></dt><dd><p>Enable TV output.</p></dd><dt><span class="term"><tt class="option">-vo dxr2:x11</tt> or <tt class="option">-vo dxr2:xv</tt></span></dt><dd><p>Enable Overlay output in X11.</p></dd><dt><span class="term"><tt class="option">-dxr2 &lt;option1:option2:...&gt;</tt></span></dt><dd><p>
+  This option is used to control the DXR2 driver.
+  </p></dd></dl></div><p>
+The overlay chipset used on the DXR2 is of pretty bad quality but the
+default settings should work for everybody. The OSD may be usable with the
+overlay (not on TV) by drawing it in the colorkey. With the default colorkey
+settings you may get variable results, usually you will see the colorkey
+around the characters or some other funny effect. But if you properly adjust
+the colorkey settings you should be able to get acceptable results.
+</p><p>Please see the man page for available options.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dxr3"></a>4.16.3. DXR3/Hollywood+</h3></div></div></div><p>
+<span class="application">MPlayer</span> supports hardware accelerated playback
+with the Creative DXR3 and Sigma Designs Hollywood Plus cards. These cards
+both use the em8300 MPEG decoder chip from Sigma Designs.
+</p><p>
+First of all you will need properly installed DXR3/H+ drivers, version 0.12.0
+or later. You can find the drivers and installation instructions at the
+<a class="ulink" href="http://dxr3.sf.net/" target="_top">DXR3 &amp; Hollywood Plus for Linux</a>
+site. <tt class="filename">configure</tt> should detect your card automatically,
+compilation should go without problems.
+</p><div class="variablelist"><p class="title"><b>USAGE</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo dxr3:prebuf:sync:norm=x:<em class="replaceable"><code>device</code></em></tt></span></dt><dd><p>
+<tt class="option">overlay</tt> activates the overlay instead of TV-out. It requires
+that you have a properly configured overlay setup to work right. The easiest
+way to configure the overlay is to first run autocal. Then run mplayer with
+dxr3 output and without overlay turned on, run dxr3view. In dxr3view you can
+tweak the overlay settings and see the effects in realtime, perhaps this feature
+will be supported by the <span class="application">MPlayer</span> GUI in the future.
+When overlay is properly set up you will no longer need to use dxr3view.
+<tt class="option">prebuf</tt> turns on prebuffering. Prebuffering is a feature of the
+em8300 chip that enables it to hold more than one frame of video at a time.
+This means that when you are running with prebuffering
+<span class="application">MPlayer</span> will try to keep the video buffer filled
+with data at all times.
+If you are on a slow machine <span class="application">MPlayer</span> will probably
+use close to, or precisely 100% of CPU.
+This is especially common if you play pure MPEG streams
+(like DVDs, SVCDs a.s.o.) since <span class="application">MPlayer</span> will not have
+to reencode it to MPEG it will fill the buffer very fast.
+With prebuffering video playback is <span class="bold"><strong>much</strong></span>
+less sensitive to other programs hogging the CPU, it will not drop frames unless
+applications hog the CPU for a long time.
+When running without prebuffering the em8300 is much more sensitive to CPU load,
+so it is highly suggested that you turn on <span class="application">MPlayer</span>'s
+<tt class="option">-framedrop</tt> option to avoid further loss of sync.
+<tt class="option">sync</tt> will turn on the new sync-engine. This is currently an
+experimental feature. With the sync feature turned on the em8300's internal
+clock will be monitored at all times, if it starts to deviate from
+<span class="application">MPlayer</span>'s clock it will be reset causing the em8300
+to drop any frames that are lagging behind.
+<tt class="option">norm=x</tt> will set the TV norm of the DXR3 card without the need
+for external tools like em8300setup. Valid norms are 5 = NTSC, 4 = PAL-60,
+3 = PAL. Special norms are 2 (auto-adjust using PAL/PAL-60) and 1 (auto-adjust
+using PAL/NTSC) because they decide which norm to use by looking at the frame
+rate of the movie. norm = 0 (default) does not change the current norm.
+<tt class="option"><em class="replaceable"><code>device</code></em></tt> = device number to use if
+you have more than one em8300 card. Any of these options may be left out.
+<tt class="option">:prebuf:sync</tt> seems to work great when playing MPEG-4 (DivX)
+movies. People have reported problems using the prebuf option when playing
+MPEG-1/2 files.
+You might want to try running without any options first, if you have sync
+problems, or DVD subtitle problems, give <tt class="option">:sync</tt> a try.
+</p></dd><dt><span class="term"><tt class="option">-ao oss:/dev/em8300_ma-<em class="replaceable"><code>X</code></em></tt></span></dt><dd><p>
+  For audio output, where <em class="replaceable"><code>X</code></em> is the device number
+  (0 if one card).
+  </p></dd><dt><span class="term"><tt class="option">-af resample=<em class="replaceable"><code>xxxxx</code></em></tt></span></dt><dd><p>
+  The em8300 cannot play back samplerates lower than 44100Hz. If the sample
+  rate is below 44100Hz select either 44100Hz or 48000Hz depending on which
+  one matches closest. I.e. if the movie uses 22050Hz use 44100Hz as
+  44100 / 2 = 22050, if it is 24000Hz use 48000Hz as 48000 / 2 = 24000
+  and so on.
+  This does not work with digital audio output (<tt class="option">-ac hwac3</tt>).
+  </p></dd><dt><span class="term"><tt class="option">-vf lavc</tt></span></dt><dd><p>
+  To watch non-MPEG content on the em8300 (i.e. MPEG-4 (DivX) or RealVideo)
+  you have to specify an MPEG-1 video filter such as
+  <code class="systemitem">libavcodec</code> (lavc).
+  See the man page for further info about <tt class="option">-vf lavc</tt>.
+  Currently there is no way of setting the fps of the em8300 which means that
+  it is fixed to 30000/1001 fps.
+  Because of this it is highly recommended that you use
+  <tt class="option">-vf lavc=<em class="replaceable"><code>quality</code></em>:25</tt>
+  especially if you are using prebuffering. Then why 25 and not 30000/1001?
+  Well, the thing is that when you use 30000/1001 the picture becomes a bit
+  jumpy.
+  The reason for this is unknown to us.
+  If you set it to somewhere between 25 and 27 the picture becomes stable.
+  For now all we can do is accept this for a fact.
+  </p></dd><dt><span class="term"><tt class="option">-vf expand=-1:-1:-1:-1:1</tt></span></dt><dd><p>
+  Although the DXR3 driver can put some OSD onto the MPEG-1/2/4 video, it has
+  much lower quality than <span class="application">MPlayer</span>'s traditional OSD,
+  and has several refresh problems as well. The command line above will firstly
+  convert the input video to MPEG-4 (this is mandatory, sorry), then apply an
+  expand filter which won't expand anything (-1: default), but apply the normal
+  OSD onto the picture (that's what the "1" at the end does).
+  </p></dd><dt><span class="term"><tt class="option">-ac hwac3</tt></span></dt><dd><p>
+  The em8300 supports playing back AC-3 audio (surround sound) through the
+  digital audio output of the card. See the <tt class="option">-ao oss</tt> option
+  above, it must be used to specify the DXR3's output instead of a sound card.
+  </p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dfbmga.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="zr.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4.15. DirectFB/Matrox (dfbmga) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4.17. Zr</td></tr></table></div></body></html>

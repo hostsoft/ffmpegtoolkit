@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.7. Edit Decision Lists (EDL)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="3. fejezet - Használat"><link rel="prev" href="vcd.html" title="3.6. VCD lejátszás"><link rel="next" href="networksync.html" title="3.8. Szinkronizált lejátszás hálózaton"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="edl.html#edl_using" title="3.7.1. EDL fájl használata"><link rel="subsection" href="edl.html#edl_making" title="3.7.2. EDL fájl készítése"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.7. Edit Decision Lists (EDL)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vcd.html">Vissza</a> </td><th width="60%" align="center">3. fejezet - Használat</th><td width="20%" align="right"> <a accesskey="n" href="networksync.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="edl"></a>3.7. Edit Decision Lists (EDL)</h2></div></div></div><p>
+Az edit decision list (EDL) rendszer segítségével automatikusan kihagyhatsz
+vagy elnémíthatsz részeket videókban a lejátszás alatt, egy film specifikus
+EDL konfigurációs fájl segítségével.
+</p><p>
+Ez azoknak hasznos, akik "család-barát" módban szeretnének filmet nézni. Ki
+tudsz vágni bármilyen erőszakos, káromkodós, Jar-Jar Binks-es jelenetet egy
+filmből, a saját igényeidnek megfelelően. Mindemellett más felhasználási módok
+is vannak, például automatikusan átlépni a videó fájlokban lévő reklámokat.
+</p><p>
+Az EDL fájl formátuma eléggé egyszerű. Egy sorban egy parancs van, ami megadja,
+hogy mit kell csinálni (skip/mute) és mikor (másodperc alapú mutatóval).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_using"></a>3.7.1. EDL fájl használata</h3></div></div></div><p>
+Add meg a <tt class="option">-edl &lt;fájlnév&gt;</tt> kapcsolót, amikor
+indítod az <span class="application">MPlayer</span>t, a videóhoz használni
+kívánt EDL fájl nevével.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_making"></a>3.7.2. EDL fájl készítése</h3></div></div></div><p>
+A jelenlegi EDL fájl formátum:
+</p><pre class="programlisting">[kezdő másodperc] [befejező másodperc] [akció]</pre><p>
+Ahol a másodpercek lebegőpontos számok, az akció pedig vagy
+<code class="literal">0</code> a kihagyáshoz vagy <code class="literal">1</code> az elnémításhoz. Például:
+</p><pre class="programlisting">
+5.3   7.1    0
+15    16.7   1
+420   422    0
+</pre><p>
+Ez az 5.3 másodperctől a 7.1 másodpercig kihagyja a videót, majd 15 másodpercnél
+leveszi a hangot, 16.7 másodpercnél visszateszi és a 420. és 422. másodperc között
+ismét kihagy a videóból. Ezek az akciók akkor hajtódnak végre, amikor a lejátszás
+időzítője eléri a fájlban megadott időket.
+</p><p>
+Ha készíteni akarsz egy EDL fájl, amit utána szerkeszthetsz, használd a
+<tt class="option">-edlout &lt;fájlnév&gt;</tt> kapcsolót. Lejátszás közben csak
+nyomd meg az <span class="keycap"><b>i</b></span> billentyűt a kihagyandó rész elejének és
+végének a megjelöléséhez. A megfelelő bejegyzés bekerül a fájlba erre az
+időszakra. Ezután kézzel tetszőlegesen beigazíthatod az EDL fájlt és
+megváltoztathatod az alapértelmezett műveletet, ami az egyes sorok által
+leírt blokkok kihagyása.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vcd.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="networksync.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">3.6. VCD lejátszás </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 3.8. Szinkronizált lejátszás hálózaton</td></tr></table></div></body></html>

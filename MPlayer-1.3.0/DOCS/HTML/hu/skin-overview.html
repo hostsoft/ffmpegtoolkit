@@ -1,0 +1,97 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.1. Áttekintés</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="prev" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="next" href="skin-file.html" title="B.2. A skin fájl"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="skin-overview.html#skin-overview-components" title="B.1.1. Skin komponensek"><link rel="subsection" href="skin-overview.html#skin-overview-formats" title="B.1.2. Képformátumok"><link rel="subsection" href="skin-overview.html#skin-files" title="B.1.3. Fájlok"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.1. Áttekintés</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin.html">Vissza</a> </td><th width="60%" align="center">B. függelék - <span class="application">MPlayer</span> skin formátum</th><td width="20%" align="right"> <a accesskey="n" href="skin-file.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-overview"></a>B.1. Áttekintés</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-components"></a>B.1.1. Skin komponensek</h3></div></div></div><p>
+A Skin-ek eléggé szabad formátumúak (nem mint például a
+<span class="application">Winamp</span>/<span class="application">XMMS</span>,
+fix formátumú skin-jei), tehát csak rajtad múlik, hogy valami
+igazán nagyot alkoss.
+</p><p>
+Jelenleg négy ablak van, amit dekorálni kell: a
+<a class="link" href="skin-file.html#skin-file-main" title="B.2.1. Fő ablak és a playbar">fő ablak</a>, az
+<a class="link" href="skin-file.html#skin-file-subwindow" title="B.2.2. Alablak">alablak</a>, a
+<a class="link" href="skin-file.html#skin-file-main" title="B.2.1. Fő ablak és a playbar">playbar</a> és a
+<a class="link" href="skin-file.html#skin-file-menu" title="B.2.3. Skin menü">skin menü</a> (ami jobb kattintással
+aktiválható).
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  A <span class="bold"><strong>fő ablak</strong></span> és/vagy a
+  <span class="bold"><strong>playbar</strong></span> az, ahol vezérelheted az
+  <span class="application">MPlayer</span>t. Az ablak háttere egy kép.
+  Ebbe az ablakba különböző elemeket lehet (és kell) tenni:
+  <span class="emphasis"><em>gombok</em></span>, <span class="emphasis"><em>potméterek</em></span> (csúszkák)
+  és <span class="emphasis"><em>címkék</em></span>.
+  Minden egyes elemnek meg kell adnod a pozícióját és a méretét.
+  </p><p>
+  Egy <span class="bold"><strong>gomb</strong></span>nak három állása van (lenyomott,
+  felengedett, letiltott), így a képe függőlegesen három részre van osztva.
+  Lásd a <a class="link" href="skin-file.html#skin-button">gomb</a> elemet a részletekért.
+  </p><p>
+  Egy <span class="bold"><strong>potmeter</strong></span>nek (főként a kereső sáv és a
+  hangerő/balansz állító) bármennyi fázisa lehet a képének egymás alatti
+  tetszőleges feldarabolásával. Lásd a
+  <a class="link" href="skin-file.html#skin-hpotmeter">hpotmeter</a>t a részletekért.
+  </p><p>
+  A <span class="bold"><strong>címkék</strong></span> egy kicsit különlegesek: A
+  megrajzolásukhoz szükséges karaktereket egy kép fájlból nyerjük és
+  a képen lévő karaktereket egy
+  <a class="link" href="skin-fonts.html" title="B.3. Betűk">betű leíró fájl</a> írja le.
+  Ez utóbbi egy sima szöveges fájl, ami megadja minden egyes betű
+  x, y pozícióját és méretét a képen (a kép fájl és a hozzátartozó
+  betű leíró fájl <span class="emphasis"><em>együtt</em></span> alkot egy betűtípust).
+  Lásd a <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>t
+  és az <a class="link" href="skin-file.html#skin-slabel">slabel</a>t a részletekért.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+  Az összes kép lehet teljes transzparens is, amint az a
+  <a class="link" href="skin-overview.html#skin-overview-formats" title="B.1.2. Képformátumok">kép formátumokról</a> szóló
+  részben le van írva. Ha az X szerver nem támogatja az XShape kiterjesztést,
+  a transzparensként megjelölt részek feketék lesznek. Ha használni
+  akarod ezt a tulajdonságot, a fő ablak háttérképének 8-cal oszthatónak
+  kell lennie.
+  </p></div></li><li class="listitem"><p>
+  Az <span class="bold"><strong>alablak</strong></span> az, ahol a film megjelenik. Egy
+  megadott képet tud megjeleníteni, ha nincs film betöltve (elég unalmas egy
+  üres ablak :-)) <span class="bold"><strong>Megjegyzés:</strong></span> a transzparens
+  kép <span class="bold"><strong>nem megengedett</strong></span> itt.
+</p></li><li class="listitem"><p>
+  A <span class="bold"><strong>skin menü</strong></span> csak az
+  <span class="application">MPlayer</span> vezérlésének egy módja menüpontok
+  segítségével. Két kép kell a menühöz: az egyik a legjobb kép, ami a
+  menüt mutatja normál állapotában, a másik a kiválasztott pont
+  megjelenítésére lesz felhasználva. Ha kinyitod a menüt, az első kép
+  látszódik. Ha az egeret az egyik menüpont fölé viszed, az aktuálisan
+  kiválasztott pont bemásolódik a második képről az egér mutató alatti
+  területre (a második képet soha sem lehet látni egészében).
+  </p><p>
+  Egy menüpontot a képen lévő poziciója és a mérete határoz meg (lásd a
+  <a class="link" href="skin-file.html#skin-file-menu" title="B.2.3. Skin menü">skin menü</a> részt).
+  </p></li></ul></div><p>
+</p><p>
+Van egy fontos dolog, amiről eddig nem beszéltünk: a gombokhoz, potméterekhez
+és menüpontokhoz tartozóan az <span class="application">MPlayer</span> tudnia kell,
+hogy mit csináljon, ha rákattintanak. Ez <a class="link" href="skin-gui.html" title="B.4. GUI üzenetek">üzenetekkel</a>
+(eseményekkel) van megvalósítva. Minden elemhez meg kell adnod, hogy milyen
+üzenetet generál, amikor kattintanak rá.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-overview-formats"></a>B.1.2. Képformátumok</h3></div></div></div><p>A képeknek truecolor-os (24 vagy 32 bpp) PNG-knek kell lenniük.</p><p>
+A fő ablakban és a playbar-on (lásd lejjebb) használhatsz transzparens képeket:
+Az #FF00FF (bíborvörös) színnel feltöltött területek teljesen
+transzparensek lesznek, ha az <span class="application">MPlayer</span>-rel
+nézed. Ez azt jelenti, hogy formázott ablakjaid is lehetnek, ha az X
+szerverednek van XShape kiterjesztése.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-files"></a>B.1.3. Fájlok</h3></div></div></div><p>
+A következő fájlokra lesz szükséges, hogy el tudj készíteni egy skin-t:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  A konfigurációs fájl, aminek <a class="link" href="skin-file.html" title="B.2. A skin fájl">skin</a> a neve,
+  megmondja az <span class="application">MPlayer</span>nek, hogyan rakja össze a
+  skin különböző részeit és hogy mit tegyen ha valahol kattintanak az ablakban.
+</p></li><li class="listitem"><p>
+  A fő ablak háttérképe.
+</p></li><li class="listitem"><p>
+  A fő ablakban lévő elemek képe (beleértve egy vagy több betű leíró fájlt,
+  ami a címkék megrajzolásához kell).
+</p></li><li class="listitem"><p>
+  Az alablakban megjelenítendő kép (opcionális).
+</p></li><li class="listitem"><p>
+  Két kép a skin menünek (csak akkor szükséges, ha menüt akarsz csinálni).
+</p></li></ul></div><p>
+  A skin konfigurációs fájl kivételével a többi fájlt úgy nevezed el, ahogy
+  csak akarod (de jegyezd meg, hogy a betű leíró fájlnak
+  <tt class="filename">.fnt</tt> kiterjesztéssel kell rendelkeznie).
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-file.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">B. függelék - <span class="application">MPlayer</span> skin formátum </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> B.2. A skin fájl</td></tr></table></div></body></html>

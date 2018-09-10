@@ -1,0 +1,132 @@
+--- dec_if.c
++++ dec_if.c
+@@ -109,7 +109,6 @@
+    return (Word16)!memcmp(input_frame, dhf[mode], nb_of_param_first[mode] * sizeof(Word16));
+ }
+ 
+-#ifdef IF2
+ /*
+  * D_IF_conversion
+  *
+@@ -432,7 +431,6 @@
+    return (Word16)mode;
+ }
+ 
+-#else
+ 
+ /*
+  * D_IF_mms_conversion
+@@ -758,7 +756,6 @@
+    return (Word16)mode;
+ }
+ 
+-#endif
+ 
+ /*
+  * D_IF_decode
+--- dec_if.h
++++ dec_if.h
+@@ -16,6 +16,11 @@
+ #define _lost_frame  2
+ #define _no_frame    3
+ 
++#ifdef IF2
++#define D_IF_decode IF2D_IF_decode
++#else
++#define D_IF_decode GP3D_IF_decode
++#endif
+ void D_IF_decode(void *st, UWord8 *bits, Word16 *synth, Word32 bfi);
+ void * D_IF_init(void);
+ void D_IF_exit(void *state);
+--- decoder.c
++++ decoder.c
+@@ -8,6 +8,7 @@
+ #include <stdlib.h>
+ #include "typedef.h"
+ #include "dec_if.h"
++#include "if_rom.h"
+ 
+ #ifndef IF2
+ #include <string.h>
+@@ -29,8 +30,6 @@
+  *
+  */
+ 
+-extern const UWord8 block_size[];
+-
+ int main(int argc, char *argv[])
+ {
+     FILE *f_serial;                        /* File of serial bits for transmission  */
+--- enc_if.c
++++ enc_if.c
+@@ -127,7 +127,6 @@
+ }
+ 
+ 
+-#ifdef IF2
+ /*
+  * E_IF_if2_conversion
+  *
+@@ -485,7 +484,6 @@
+    return j/8;
+ }
+ 
+-#else
+ 
+ /*
+  * E_IF_mms_conversion
+@@ -852,7 +850,6 @@
+    return j/8 + 1;
+ }
+ 
+-#endif
+ 
+ /*
+  * E_IF_sid_sync_reset
+--- enc_if.h
++++ enc_if.h
+@@ -11,6 +11,11 @@
+ #define L_FRAME16k   320   /* Frame size at 16kHz  */
+ #define NB_SERIAL_MAX 61   /* max serial size      */
+ 
++#ifdef IF2
++#define E_IF_encode IF2E_IF_encode
++#else
++#define E_IF_encode GP3E_IF_encode
++#endif
+ int E_IF_encode(void *st, Word16 mode, Word16 *speech,
+                 UWord8 *serial, Word16 dtx);
+ void *E_IF_init(void);
+--- if_rom.c
++++ if_rom.c
+@@ -72,11 +72,8 @@
+  * 6 bytes are used both for mode 9 and 10.
+  * Mode 9 is used in encoder and mode 10 in IF2
+  */
+-#ifdef IF2
+-const UWord8 block_size[16]= {18, 23, 33, 37, 41, 47, 51, 59, 61, 6, 6, 0, 0, 0, 1, 1};
+-#else
+-const UWord8 block_size[16]= {18, 24, 33, 37, 41, 47, 51, 59, 61, 6, 6, 0, 0, 0, 1, 1};
+-#endif
++const UWord8 IF2block_size[16]= {18, 23, 33, 37, 41, 47, 51, 59, 61, 6, 6, 0, 0, 0, 1, 1};
++const UWord8 GP3block_size[16]= {18, 24, 33, 37, 41, 47, 51, 59, 61, 6, 6, 0, 0, 0, 1, 1};
+ /*
+  * tables
+  */
+--- if_rom.h
++++ if_rom.h
+@@ -7,6 +7,14 @@
+ #define IF_ROM_H
+ 
+ #include "typedef.h"
++
++extern const UWord8 IF2block_size[];
++extern const UWord8 GP3block_size[];
++#ifndef IF2
++#define block_size IF2block_size
++#else
++#define block_size GP3block_size
++#endif
+ 
+ /*
+  * definition of constants

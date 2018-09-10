@@ -1,0 +1,41 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.3. Fonts</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="prev" href="skin-file.html" title="B.2. The skin file"><link rel="next" href="skin-gui.html" title="B.4. GUI messages"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="subsection" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Symbols"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.3. Fonts</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-file.html">Indietro</a> </td><th width="60%" align="center">Appendice B. <span class="application">MPlayer</span> skin format</th><td width="20%" align="right"> <a accesskey="n" href="skin-gui.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-fonts"></a>B.3. Fonts</h2></div></div></div><p>
+As mentioned in the section about the parts of a skin, a font is defined by an
+image and a description file. You can place the characters anywhere in the
+image, but make sure that their position and size is given in the description
+file exactly.
+</p><p>
+The font description file (with <tt class="filename">.fnt</tt> extension) can have
+comments like the skin configuration file starting with '<code class="literal">;</code>'
+(or '<code class="literal">#</code>', but only at the beginning of the line). The file must have a line
+in the form
+<a name="skin-font-image"></a>
+</p><pre class="programlisting">image = <em class="replaceable"><code>image</code></em></pre><p>
+Where <code class="literal"><em class="replaceable"><code>image</code></em></code> is the name of the
+image file to be used for the font (you do not have to specify the extension).
+<a name="skin-font-char"></a>
+</p><pre class="programlisting">"char" = X, Y, width, height</pre><p>
+Here <code class="literal">X</code> and <code class="literal">Y</code> specify the position of the
+<code class="literal">char</code> character in the image (<code class="literal">0,0</code> is the
+upper left corner). <code class="literal">width</code> and <code class="literal">height</code> are
+the dimensions of the character in pixels. The character <code class="literal">char</code>
+shall be in UTF-8 encoding.
+</p><p>
+This example defines the A, B, C characters using <tt class="filename">font.png</tt>.
+</p><pre class="programlisting">
+; Can be "font" instead of "font.png".
+image = font.png
+
+; Three characters are enough for demonstration purposes :-)
+"A" =  0,0, 7,13
+"B" =  7,0, 7,13
+"C" = 14,0, 7,13
+</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-fonts-symbols"></a>B.3.1. Symbols</h3></div></div></div><p>
+Some characters have special meanings when returned by some of the variables
+used in <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>. These characters are meant
+to be shown as symbols so that things like a nice DVD logo can be displayed
+instead of the character '<code class="literal">d</code>' for a DVD stream.
+</p><p>
+The following table lists all the characters that can be used to display
+symbols (and thus require a different font).
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Character</th><th>Symbol</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>play</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>stop</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>pause</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>no sound</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>mono sound</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>stereo sound</td></tr><tr><td><span class="keycap"><b>r</b></span></td><td>surround sound</td></tr><tr><td><span class="keycap"><b>space</b></span></td><td>no (known)stream</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>stream is a file</td></tr><tr><td><span class="keycap"><b>a</b></span></td><td>stream is a CD</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>stream is a Video CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>stream is a DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>stream is a URL</td></tr><tr><td><span class="keycap"><b>b</b></span></td><td>stream is a TV/DVB broadcast</td></tr><tr><td><span class="keycap"><b>c</b></span></td><td>stream is a cue sheet</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-file.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-gui.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">B.2. The skin file </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> B.4. GUI messages</td></tr></table></div></body></html>

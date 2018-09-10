@@ -1,0 +1,89 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.3. Sun Solaris</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="prev" href="bsd.html" title="5.2. *BSD"><link rel="next" href="hpux.html" title="5.4. HP UX"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.3. Sun Solaris</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bsd.html">Anterior</a> </td><th width="60%" align="center">Capítulo 5. Adaptaciones</th><td width="20%" align="right"> <a accesskey="n" href="hpux.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="solaris"></a>5.3. Sun Solaris</h2></div></div></div><p>
+<span class="application">MPlayer</span> debería funcionar en Solaris 2.6 o posterior.
+</p><p>
+En <span class="bold"><strong>UltraSPARCs</strong></span>,
+<span class="application">MPlayer</span> tiene la ventaja de las extensiones
+<span class="bold"><strong>VIS</strong></span> (equivalentes a MMX), actualmente
+solo en
+<code class="systemitem">libmpeg2</code>,
+<code class="systemitem">libvo</code> y
+<code class="systemitem">libavcodec</code>, pero no en
+<code class="systemitem">mp3lib</code>. Puede ver un archivo
+VOB en una CPU a 400MHz. Necesita tener
+<a class="ulink" href="http://www.sun.com/sparc/vis/mediaLib.html" target="_top"><code class="systemitem">mLib</code></a>
+instalado.
+</p><p>
+Para contruir el paquete necesita GNU <span class="application">make</span>
+(<tt class="filename">gmake</tt>, <tt class="filename">/opt/sfw/gmake</tt>), el make
+nativo de Solaris no funciona. Errores típicos que puede obtener construyendo
+con el make de Solaris en lugar de con el make de GNU:
+</p><pre class="screen">
+   % /usr/ccs/bin/make
+   make: Error fatal en lector: Makefile, línea 25: Fin de línea visto inesperado
+</pre><p>
+</p><p>
+En Solaris SPARC, necesita el Compilador GNU C/C++; no importa si el compilador
+GNU C/C++ está configurado con o sin el ensamblador GNU.
+</p><p>
+En Solaris x86, necesita el ensamblador GNU y el compilador GNU C/C++,
+¡configurado para usar el ensamblador GNU! El código de
+<span class="application">MPlayer</span> en la plataforma
+x86 hace dificil el uso de las instrucciones de MMX, SSE y 3DNOW! que no puede
+ser compilado usando el ensamblador de Sun <tt class="filename">/usr/ccs/bin/as</tt>.
+</p><p>El script <tt class="filename">configure</tt> intenta encontrarlo, qué
+programa ensamblador es usado por tu órden "gcc" (en caso de que la
+autodetección falle, use la opción
+<tt class="option">--as=<em class="replaceable"><code>/donde/este/instalado/gnu-as</code></em></tt>
+para decirle al script <tt class="filename">configure</tt> donde puede encontrar el "as"
+de GNU en su sistema).
+</p><p>
+Mensaje de error de <tt class="filename">configure</tt> en un sistema Solaris x86
+usando GCC sin el ensamblador GNU:
+</p><pre class="screen">
+   % configure
+   ...
+   Comprobando ensamblador (/usr/ccs/bin/as) ... , fallo
+   Por favor, actualice(baje versión) de binutils a 2.10.1...
+</pre><p>
+(Solución: Instalar y usar un gcc configurado con <tt class="option">--with-as=gas</tt>)
+</p><p>
+Error típico que se obtiene cuando se construye con un compilador GNU C que no
+usa GNU as:
+</p><pre class="screen">
+   % gmake
+   ...
+   gcc -c -Iloader -Ilibvo -O4 -march=i686 -mcpu=i686 -pipe -ffast-math
+        -fomit-frame-pointer  -I/usr/local/include   -o mplayer.o mplayer.c
+   Assembler: mplayer.c
+   "(stdin)", line 3567 : Illegal mnemonic
+   "(stdin)", line 3567 : Error de sintaxis
+   ... más errores "Illegal mnemonic" y "Error de sintaxis" ...
+</pre><p>
+</p><p>
+Debido a fallos en Solaris 8, puede que no se puedan reproducir discos DVD mayores
+de 4 GB:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+El controlador sd(7D) en Solaris 8 x86 tiene un error cuando accede a un bloque
+de disco &gt;4GB en un dispositivo usando un tamaño de bloque lógico != DEV_BSIZE
+(p.e. CD-ROM y medios DVD). Debido a un error de desbordamiento de entero de
+32Bit, un módulo de 4GB de dirección de disco es accedido.
+(<a class="ulink" href="http://groups.yahoo.com/group/solarisonintel/message/22516" target="_top">http://groups.yahoo.com/group/solarisonintel/message/22516</a>).
+Este problema no existe en la versión SPARC de Solaris 8.
+</p></li><li class="listitem"><p>
+Un error similar está presente en el código de sistema de archivos hsfs(7FS)
+(aka ISO9660), hsfs no puede soportar particiones/discos mayores de 4GB, todos
+los datos se acceden módulo 4GB
+(<a class="ulink" href="http://groups.yahoo.com/group/solarisonintel/message/22592" target="_top">http://groups.yahoo.com/group/solarisonintel/message/22592</a>).
+El problema hsfs puede ser corregido instalando el parche 109764-04 (sparc) /
+109765-04 (x86).
+</p></li></ul></div><p>
+En Solaris con una CPU UltraSPARC, puede obtener alguna velocidad extra usando
+las instrucciones VIS de la CPU para algunas operaciones que consumen un tiempo.
+La acelación VIS puede ser usada en <span class="application">MPlayer</span>
+llamando a funciones en la
+<a class="ulink" href="http://www.sun.com/sparc/vis/mediaLib.html" target="_top">mediaLib</a> de Sun.
+</p><p>
+Las operaciones aceleradas de mediaLib son usadas por el decodificador mpeg2 de
+video y por la conversión en espacio de color en los controladoers de salida de
+video.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bsd.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="hpux.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">5.2. *BSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 5.4. HP UX</td></tr></table></div></body></html>

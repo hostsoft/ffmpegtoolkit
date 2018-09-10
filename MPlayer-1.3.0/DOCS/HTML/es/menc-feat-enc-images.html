@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.6. Codificando desde múltiples archivos de imágenes de entrada (JPEGs, PNGs o TGAs)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="prev" href="menc-feat-fix-avi.html" title="6.5. Arreglando AVIs con índice roto o interpolado"><link rel="next" href="menc-feat-extractsub.html" title="6.7. Extrayendo subtítulos DVD a archivo Vobsub"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.6. Codificando desde múltiples archivos de imágenes de entrada (JPEGs, PNGs o TGAs)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-fix-avi.html">Anterior</a> </td><th width="60%" align="center">Capítulo 6. Codificación básica con <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-extractsub.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-enc-images"></a>6.6. Codificando desde múltiples archivos de imágenes de entrada (JPEGs, PNGs o TGAs)</h2></div></div></div><p>
+<span class="application">MEncoder</span> es capaz de crear películas desde uno o más
+archivos JPEG, PNG o TGA. Con framecopy simple crea archivos MJPEG (Motion JPEG),
+MPNG (Motion PNG) o MTGA (Motion TGA).
+</p><div class="orderedlist"><p class="title"><b>Explicación del proceso:</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  <span class="application">MEncoder</span> <span class="emphasis"><em>decodifica</em></span> las imágenes
+  de entrada con
+  <code class="systemitem">libjpeg</code> (cuando decodifica PNGs, usa
+  <code class="systemitem">libpng</code>).
+  </p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span> alimenta entonces con la imagen decodificada
+  al compresor de video elegido (DivX4, Xvid, ffmpeg msmpeg4, etc.).
+  </p></li></ol></div><p><b>Ejemplos. </b>
+La explicación de la opción <tt class="option">-mf</tt> puede encontrarse más abajo en
+la página de manual.
+
+</p><div class="informalexample"><p>
+Creating a DivX4 file from all the JPEG files in the current dir:
+</p><pre class="screen">
+mencoder -mf on:w=800:h=600:fps=25 -ovc divx4 -o output.avi \*.jpg</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Creando un archivo DivX4 desde algunos archivos JPEG en el directorio actual:
+</p><pre class="screen">
+mencoder -mf on:w=800:h=600:fps=25 -ovc divx4 -o <em class="replaceable"><code>salida.avi</code></em> frame001.jpg,frame002.jpg </pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Creando un archivo Motion JPEG (MJPEG) desde todos los archivos JPEG en el
+directorio actual:
+</p><pre class="screen">
+mencoder -mf on:w=800:h=600:fps=25 -ovc copy -o <em class="replaceable"><code>salida.avi</code></em> \*.jpg</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Creando un archivo sin comprimir desde todos los archivos PNG en el directorio
+actual:
+</p><pre class="screen">
+mencoder -mf on:w=800:h=600:fps=25:type=png -ovc raw -o <em class="replaceable"><code>salida.avi</code></em> \*.png</pre><p>
+</p></div><p>
+
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+El ancho debe ser múltiplo entero de 4, esto es una estimación del formato AVI RAW RGB.
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Creando un archivo Motion PNG (MPNG) desde todos los archivos PNG en el
+directorio actual:
+</p><pre class="screen">
+mencoder -mf on:w=800:h=600:fps=25:type=png -ovc copy -o salida.avi \*.png</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Creando un archivo Motion TGA (MTGA) desde todos los archivos TGA en el
+directorio actual:
+</p><pre class="screen">
+mencoder -mf on:w=800:h=600:fps=25:type=tga -ovc copy -o salida.avi \*.tga</pre><p>
+</p></div><p>
+
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-fix-avi.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-extractsub.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">6.5. Arreglando AVIs con índice roto o interpolado </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 6.7. Extrayendo subtítulos DVD a archivo Vobsub</td></tr></table></div></body></html>

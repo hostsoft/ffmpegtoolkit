@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.1. Parancssor</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="3. fejezet - Használat"><link rel="prev" href="usage.html" title="3. fejezet - Használat"><link rel="next" href="subosd.html" title="3.2. Feliratok és OSD"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.1. Parancssor</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="usage.html">Vissza</a> </td><th width="60%" align="center">3. fejezet - Használat</th><td width="20%" align="right"> <a accesskey="n" href="subosd.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="commandline"></a>3.1. Parancssor</h2></div></div></div><p>
+Az <span class="application">MPlayer</span> egy komplex lejátszási sort használ.
+A parancssorban megadott opciók minden fájlra/URL-re vagy, a helyüktől
+függően csak bizonyosokra vonatkoznak. Például az
+</p><pre class="screen">mplayer -vfm ffmpeg movie1.avi movie2.avi</pre><p>
+FFmpeg dekódolót használ mindkét fájlhoz, azonban az
+</p><pre class="screen">
+mplayer -vfm ffmpeg <em class="replaceable"><code>movie1.avi</code></em> <em class="replaceable"><code>movie2.avi</code></em> -vfm dmo
+</pre><p>
+a második fájlt a DMO dekóderrel jeleníti meg.
+</p><p>
+A fájlneveket/URL-eket csoportosíthatod a <code class="literal">{</code> és
+<code class="literal">}</code> segítségével. Ez főleg a <tt class="option">-loop</tt>
+kapcsolóval együtt hasznos:
+</p><pre class="screen">mplayer { 1.avi -loop 2 2.avi } -loop 3</pre><p>
+A fenti parancs a fájlokat ebben a sorrendben játsza le: 1, 1, 2, 1, 1, 2, 1, 1, 2.
+</p><p>
+Egy fájl lejátszása:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>kapcsolók</code></em>] [<em class="replaceable"><code>elérési út</code></em>/]<em class="replaceable"><code>fájlnév</code></em>
+</pre><p>
+</p><p>
+Másik módszer egy fájl lejátszásához:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>kapcsolók</code></em>] <em class="replaceable"><code>file:///uri-escaped-path</code></em>
+</pre><p>
+</p><p>
+Több fájl lejátszása:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>alapértelmezett kapcsolók</code></em>] [<em class="replaceable"><code>elérési út</code></em>/]<em class="replaceable"><code>fájlnév1</code></em> [<em class="replaceable"><code>options for filename1</code></em>] <em class="replaceable"><code>fájlnév2</code></em> [<em class="replaceable"><code>kapcsolók a fájlnév2-höz</code></em>] ...
+</pre><p>
+</p><p>
+VCD lejátszása:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>kapcsolók</code></em>] vcd://<em class="replaceable"><code>sávszám</code></em> [-cdrom-device <em class="replaceable"><code>/dev/cdrom</code></em>]
+</pre><p>
+</p><p>
+DVD lejátszása:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>kapcsolók</code></em>] dvd://<em class="replaceable"><code>rész szám</code></em> [-dvd-device <em class="replaceable"><code>/dev/dvd</code></em>]
+</pre><p>
+</p><p>
+Lejátszás a WWW-ről:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>kapcsolók</code></em>] http://<em class="replaceable"><code>site.com/file.asf</code></em>
+</pre><p>
+(lejátszási listák is megadhatóak)
+</p><p>
+Lejátszás RTSP-ről:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>options</code></em>] rtsp://<em class="replaceable"><code>pelda.szerver.com/streamNev</code></em>
+</pre><p>
+</p><p>
+Példák:
+</p><pre class="screen">
+mplayer -vo x11 <em class="replaceable"><code>/mnt/Films/Contact/contact2.mpg</code></em>
+mplayer vcd://<em class="replaceable"><code>2</code></em> -cdrom-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -afm 3 <em class="replaceable"><code>/mnt/DVDtrailers/alien4.vob</code></em>
+mplayer dvd://<em class="replaceable"><code>1</code></em> -dvd-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -abs 65536 -delay -0.4 -nobps <em class="replaceable"><code>~/movies/test.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="usage.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="subosd.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">3. fejezet - Használat </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 3.2. Feliratok és OSD</td></tr></table></div></body></html>

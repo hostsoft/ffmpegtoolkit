@@ -1,0 +1,40 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.8. Seznamy editačních zásahů (EDL)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="usage.html" title="Kapitola 3. Použití"><link rel="prev" href="vcd.html" title="3.7. Přehrávání VCD"><link rel="next" href="advaudio.html" title="3.9. Pokročilé audio"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="edl.html#edl_using" title="3.8.1. Použití EDL souboru"><link rel="subsection" href="edl.html#edl_making" title="3.8.2. Vytvoření EDL souboru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.8. Seznamy editačních zásahů (EDL)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vcd.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 3. Použití</th><td width="20%" align="right"> <a accesskey="n" href="advaudio.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="edl"></a>3.8. Seznamy editačních zásahů (EDL)</h2></div></div></div><p>
+Systém seznamů editačních zásahů (EDL) umožňuje automaticky vynechat nebo vypnout
+zvuk v částech videa při přehrávání, což je zajišťováno pro každý film zvláštním
+EDL konfiguračním souborem.
+</p><p>
+Toho se dá využít pro ty, kdo chtějí sledovat film v "rodinném" režimu.
+Můžete vystříhat veškeré násilí, nechutnosti, Jar-Jar Binkse .. z filmu
+podle svých vlastních osobních preferencí. Mimoto jsou zde i jiná využití,
+jako je automatické vystřihávání reklam z videa které sleduješ.
+</p><p>
+Formát EDL souboru je poměrně kostrbatý. Každý příkaz je na samostatném
+řádku a označuje co dělat (vystřihnout/ztišit) a kdy to dělat
+(pomocí ukazatelů v sekundách).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_using"></a>3.8.1. Použití EDL souboru</h3></div></div></div><p>
+Vložte volbu <tt class="option">-edl &lt;soubor&gt;</tt> při spouštění
+<span class="application">MPlayer</span>, se jménem EDL souboru, který chcete použít
+na video.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_making"></a>3.8.2. Vytvoření EDL souboru</h3></div></div></div><p>
+Současný formát EDL souboru je:
+</p><pre class="programlisting">[počáteční sekunda] [koncová sekunda] [akce]</pre><p>
+Kde jsou sekundy desetinnými čísly a akce je buď
+<code class="literal">0</code> pro vynechání nebo <code class="literal">1</code> pro vypnutí zvuku.
+Příklad:
+</p><pre class="programlisting">
+5.3   7.1    0
+15    16.7   1
+420   422    0
+</pre><p>
+To vynechá část videa mezi sekundami 5.3 a 7.1, pak vypne zvuk na
+15 sekundě, zapne jej na 16.7 sekundy a vynechá část videa mezi sekundami 420 a 422.
+Tyto akce budou provedeny jakmile časovač přehrávání dosáhne hodnoty zadané
+v souboru.
+</p><p>
+Pro vytvoření EDL souboru se kterým budete moci začít, použijte volbu
+<tt class="option">-edlout &lt;soubor&gt;</tt>. Během přehrávání jen stiskněte
+<span class="keycap"><b>i</b></span> pro označení začátku a konce bloku. Pro vyznačený čas
+bude do souboru zapsán odpovídající záznam. Můžete se pak vrátit a doladit
+vygenerovaný EDL soubor, stejně jako změnit výchozí akci, což je vystřižení
+vyznačených bloků.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vcd.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">3.7. Přehrávání VCD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 3.9. Pokročilé audio</td></tr></table></div></body></html>

@@ -1,0 +1,101 @@
+Checking whether the ASM_NASM compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+NASM version 2.13.02 compiled on Apr  3 2018
+Checking whether the ASM_NASM compiler is HP using "-V" did not match "HP C":
+nasm: error: unrecognised option `-V'
+type `nasm -h' for help
+Checking whether the ASM_NASM compiler is Intel using "--version" did not match "(ICC)":
+NASM version 2.13.02 compiled on Apr  3 2018
+Checking whether the ASM_NASM compiler is SunPro using "-V" did not match "Sun C":
+nasm: error: unrecognised option `-V'
+type `nasm -h' for help
+Checking whether the ASM_NASM compiler is XL using "-qversion" did not match "XL C":
+nasm: error: unrecognised option `-q'
+type `nasm -h' for help
+Checking whether the ASM_NASM compiler is MSVC using "/?" did not match "Microsoft":
+nasm: warning: file name already has no extension: output will be in `nasm.out'
+nasm: fatal: unable to open input file `/?'
+Checking whether the ASM_NASM compiler is TI using "-h" did not match "Texas Instruments":
+usage: nasm [-@ response file] [-o outfile] [-f format] [-l listfile]
+            [options...] [--] filename
+    or nasm -v (or --v) for version info
+
+    -t          assemble in SciTech TASM compatible mode
+    -E (or -e)  preprocess only (writes output to stdout by default)
+    -a          don't preprocess (assemble only)
+    -M          generate Makefile dependencies on stdout
+    -MG         d:o, missing files assumed generated
+    -MF <file>  set Makefile dependency file
+    -MD <file>  assemble and generate dependencies
+    -MT <file>  dependency target name
+    -MQ <file>  dependency target name (quoted)
+    -MP         emit phony target
+
+    -Z<file>    redirect error messages to file
+    -s          redirect error messages to stdout
+
+    -g          generate debugging information
+
+    -F format   select a debugging format
+
+    -gformat    same as -g -F format
+
+    -o outfile  write output to an outfile
+
+    -f format   select an output format
+
+    -l listfile write listing to a listfile
+
+    -I<path>    adds a pathname to the include file path
+    -O<digit>   optimize branch offsets
+                -O0: No optimization
+                -O1: Minimal optimization
+                -Ox: Multipass optimization (default)
+
+    -P<file>    pre-includes a file
+    -D<macro>[=<value>] pre-defines a macro
+    -U<macro>   undefines a macro
+    -X<format>  specifies error reporting format (gnu or vc)
+    -w+foo      enables warning foo (equiv. -Wfoo)
+    -w-foo      disable warning foo (equiv. -Wno-foo)
+
+    -w[+-]error[=foo] can be used to promote warnings to errors
+    -h           show invocation summary and exit
+
+--prefix,--postfix
+                these options prepend or append the given string
+                to all extern and global variables
+
+Response files should contain command line parameters,
+one per line.
+
+Warnings for the -W/-w options:
+    other                   any warning not specifially mentioned below (default on)
+    macro-params            macro calls with wrong parameter count (default on)
+    macro-selfref           cyclic macro references (default off)
+    macro-defaults          macros with more default than optional parameters (default on)
+    orphan-labels           labels alone on lines without trailing `:' (default on)
+    number-overflow         numeric constant does not fit (default on)
+    gnu-elf-extensions      using 8- or 16-bit relocation in ELF32, a GNU extension (default off)
+    float-overflow          floating point overflow (default on)
+    float-denorm            floating point denormal (default off)
+    float-underflow         floating point underflow (default off)
+    float-toolong           too many digits in floating-point number (default on)
+    user                    %warning directives (default on)
+    lock                    lock prefix on unlockable instructions (default on)
+    hle                     invalid hle prefixes (default on)
+    bnd                     invalid bnd prefixes (default on)
+    zext-reloc              relocation zero-extended to match output format (default on)
+    ptr                     non-NASM keyword used in other assemblers (default on)
+    bad-pragma              empty or malformed %pragma (default off)
+    unknown-pragma          unknown %pragma facility or directive (default off)
+    not-my-pragma           %pragma not applicable to this compilation (default off)
+    unknown-warning         unknown warning in -W/-w or warning directive (default off)
+    all                     all possible warnings
+
+For a list of valid output formats, use -hf.
+For a list of debug formats, use -f <form> -y.
+Checking whether the ASM_NASM compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+NASM version 2.13.02 compiled on Apr  3 2018
+Checking whether the ASM_NASM compiler is IAR using "" did not match "IAR Assembler":
+nasm: error: no input file specified
+type `nasm -h' for help

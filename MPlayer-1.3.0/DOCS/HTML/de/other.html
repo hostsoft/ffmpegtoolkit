@@ -1,0 +1,96 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.19. Andere Visualisierungshardware</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="prev" href="mpeg_decoders.html" title="4.18. MPEG-Dekoderkarten"><link rel="next" href="tvout.html" title="4.20. Unterstützung für die TV-Ausgabe"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="other.html#zr" title="4.19.1. Zr"><link rel="subsection" href="other.html#blinkenlights" title="4.19.2. Blinkenlights"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.19. Andere Visualisierungshardware</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mpeg_decoders.html">Zurück</a> </td><th width="60%" align="center">Kapitel 4. Videoausgabegeräte</th><td width="20%" align="right"> <a accesskey="n" href="tvout.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="other"></a>4.19. Andere Visualisierungshardware</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="zr"></a>4.19.1. Zr</h3></div></div></div><p>
+  Dieser Treiber ist ein Anzeigetreiber (<tt class="option">-vo zr</tt>), der
+  verschiedeene MJPEG-Aufnahme-/-Wiedergabekarten unterstützt. Getestet
+  wurde er mit DC10+ und Buz, und er sollte auch mit der LML33 und der
+  Original-DC10 funktionieren. Dieser Treiber encodiert jedes Bild nach JPEG
+  und schickt es dann an die Karte. Für die Encodierung wird
+  <code class="systemitem">libavcodec</code> benutzt und
+  dementsprechend auch benötigt. Mit dem speziellen
+  <span class="emphasis"><em>cinemara</em></span>-Modus kannst du Filme auch tatsächlich im
+  Breitbildformat anschauen, wenn du zwei Beamer und zwei MJPEG-Karten hast.
+  Abhängig von der Qualität und Auflösung braucht dieser Treiber
+  eine Menge CPU-Power. Benutze also besser die Option <tt class="option">-framedrop</tt>,
+  wenn deine Maschine zu langsam ist. Anmerkung: Mein AMD K6-2 350MHz ist
+  durchaus in der Lage, Filme in VCD-Größe mit <tt class="option">-framedrop</tt>
+  wiederzugeben.
+</p><p>
+  Dieser Treiber benutzt den Kerneltreiber, den du auf
+  <a class="ulink" href="http://mjpeg.sf.net" target="_top">http://mjpeg.sf.net</a>
+  herunterladen kannst. Dieser muss also vorher schon funktionieren.
+  <tt class="filename">configure</tt> erkennt automatisch vorhandene MJPEG-Karten. Wenn
+  nicht, dann erzwinge zr mit
+  </p><pre class="screen">./configure --enable-zr</pre><p>
+</p><p>
+  Die Ausgabe kann mit diversen Optionen gesteuert werden. Eine
+  vollständige Liste findest du in der Manpage. Eine kurze Auflistung gibt
+  dir auch
+  </p><pre class="screen">mplayer -zrhelp</pre><p>
+</p><p>
+  Sachen wie das OSD und Skalierung werden nicht von diesem Treiber
+  erledigt, aber sie können natürlich durch Filter realisiert werden.
+  Beispiel: Angenommen, du hast einen Film mit einer Auflösung von
+  512x272, und du möchtest ihn im Vollbild auf deiner DC10+
+  anschauen. Du hast dann drei Möglichkeiten: den Film auf eine Breite von
+  768, 384 oder 192 zu skalieren. Aus
+  Geschwindigkeits- und Qualitätsgründen würde ich empfehlen,
+  den Film auf 384x204 mit dem bilinearen Algorithmus zu
+  skalieren. Die Kommandozeile sieht dazu wie folgt aus:
+</p><pre class="screen">
+mplayer -vo zr -sws 0 -vf scale=384:204 <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+  Das Beschneiden des Bildes kann mit dem <tt class="option">crop</tt>-Filter geschehen
+  oder vom Treiber selbst vorgenommen werden. Angenommen, der Film ist zu breit
+  für die Anzeige deiner Buz, und du möchtest <tt class="option">-zrcrop</tt>
+  benutzen, um den Film schmaler zu machen. Dann verwendest du folgendes
+  Kommando:
+</p><pre class="screen">
+mplayer -vo zr -zrcrop 720x320+80+0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+  Mit dem <tt class="option">crop</tt>-Filter sieht es so aus:
+</p><pre class="screen">
+mplayer -vo zr -vf crop=720:320:80:0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+  Mehrfache Anwendung von <tt class="option">-zrcrop</tt> aktiviert den
+  <span class="emphasis"><em>cinerama</em></span>-Modus. Das heißt, du kannst das Bild über
+  mehrere Fernseher oder Beamer verteilen, um eine größere
+  Anzeigefläche zu erreichen. Angenommen, du hast zwei Beamer. Der linke
+  hängt an deiner Buz an <tt class="filename">/dev/video1</tt>, und der rechte
+  hängt an deiner DC10+ an <tt class="filename">/dev/video0</tt>. Der Film hat eine
+  Auflösung von 704x288. Nehmen wir weiter an, dass du den
+  rechten Beamer schwarz/weiß betreiben möchtest, und dass du auf
+  dem linken Beamer Bilder mit der Qualitätsstufe 10 haben
+  möchtest. Dann benutzt du dafür das folgende Kommando:
+</p><pre class="screen">
+mplayer -vo zr -zrdev /dev/video0 -zrcrop 352x288+352+0 -zrxdoff 0 -zrbw \
+    -zrcrop 352x288+0+0 -zrdev /dev/video1 -zrquality 10 \
+        <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+  Wie du siehst, gelten die Optionen vor dem zweiten <tt class="option">-zrcrop</tt> nur
+  für die DC10+ und die Optionen nach dem zweiten <tt class="option">-zrcrop</tt> nur
+  für die Buz. Die maximale Anzahl an MJPEG-Karten, die am
+  <span class="emphasis"><em>cinerama</em></span>-Modus teilnehmen, liegt bei vier, sodass du dir
+  eine 2x2-Videowand basteln kannst.
+</p><p>
+  Zuletzt ein wirklich wichtiger Hinweis: Starte oder beende auf keinen Fall
+  XawTV während der Wiedergabe, da das deinen Computer zum Absturz bringen
+  wird. Du kannst aber problemlos <span class="bold"><strong>ZUERST</strong></span> XawTV,
+  <span class="bold"><strong>DANN</strong></span> <span class="application">MPlayer</span>
+  starten, warten, bis <span class="application">MPlayer</span> fertig ist
+  und <span class="bold"><strong>ZULETZT</strong></span> XawTV beenden.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="blinkenlights"></a>4.19.2. Blinkenlights</h3></div></div></div><p>
+  Dieser Treiber kann Video mit dem Blinkenlights UDP-Protokoll wiedergeben.
+  Wenn du nicht weißt, was
+  <a class="ulink" href="http://www.blinkenlights.de/" target="_top">Blinkenlights</a>
+  oder dessen Nachfolger <a class="ulink" href="http://www.blinkenlights.de/arcade/" target="_top">Arcade</a>
+  ist, finde es heraus.
+  Obwohl dies höchstwahrscheinlich der am wenigsten genutzte Videoausgabetreiber ist,
+  den <span class="application">MPlayer</span> zu bieten hat, so ist er ohne Zweifel der coolste.
+  Schau dir einfach ein paar von den
+  <a class="ulink" href="http://www.blinkenlights.de/video.en.html" target="_top">Blinkenlights-Dokumentationsvideos</a>
+  an.
+  Auf dem Arcade-Video siehst du Blinkenlights-Ausgabetreiber um 00:07:50 in Aktion.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mpeg_decoders.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="tvout.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">4.18. MPEG-Dekoderkarten </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 4.20. Unterstützung für die TV-Ausgabe</td></tr></table></div></body></html>

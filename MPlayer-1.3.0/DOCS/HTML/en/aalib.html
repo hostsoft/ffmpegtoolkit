@@ -1,0 +1,65 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.9. AAlib – text mode displaying</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="Chapter 4. Video output devices"><link rel="prev" href="opengl.html" title="4.8. OpenGL output"><link rel="next" href="caca.html" title="4.10.  libcaca – Color ASCII Art library"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.9. AAlib – text mode displaying</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="opengl.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="caca.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aalib"></a>4.9. AAlib – text mode displaying</h2></div></div></div><p>
+AAlib is a library for displaying graphics in text mode, using powerful
+ASCII renderer. There are <span class="emphasis"><em>lots</em></span> of programs already
+supporting it, like Doom, Quake, etc. <span class="application">MPlayer</span>
+contains a very usable driver for it. If <tt class="filename">./configure</tt>
+detects aalib installed, the aalib libvo driver will be built.
+</p><p>
+You can use some keys in the AA Window to change rendering options:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td><span class="keycap"><b>1</b></span></td><td>
+  decrease contrast
+</td></tr><tr><td><span class="keycap"><b>2</b></span></td><td>
+  increase contrast
+</td></tr><tr><td><span class="keycap"><b>3</b></span></td><td>
+  decrease brightness
+</td></tr><tr><td><span class="keycap"><b>4</b></span></td><td>
+  increase brightness
+</td></tr><tr><td><span class="keycap"><b>5</b></span></td><td>
+  switch fast rendering on/off
+</td></tr><tr><td><span class="keycap"><b>6</b></span></td><td>
+  set dithering mode (none, error distribution, Floyd Steinberg)
+</td></tr><tr><td><span class="keycap"><b>7</b></span></td><td>
+  invert image
+</td></tr><tr><td><span class="keycap"><b>8</b></span></td><td>
+  toggles between aa and <span class="application">MPlayer</span> control
+</td></tr></tbody></table></div><div class="variablelist"><p class="title"><b>The following command line options can be used:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aaosdcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    change OSD color
+  </p></dd><dt><span class="term"><tt class="option">-aasubcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    Change subtitle color
+    </p><p>
+    where <em class="replaceable"><code>V</code></em> can be:
+    <code class="literal">0</code> (normal),
+    <code class="literal">1</code> (dark),
+    <code class="literal">2</code> (bold),
+    <code class="literal">3</code> (bold font),
+    <code class="literal">4</code> (reverse),
+    <code class="literal">5</code> (special).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>AAlib itself provides a large sum of options. Here are some
+important:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aadriver</tt></span></dt><dd><p>
+    Set recommended aa driver (X11, curses, Linux).
+  </p></dd><dt><span class="term"><tt class="option">-aaextended</tt></span></dt><dd><p>
+    Use all 256 characters.
+  </p></dd><dt><span class="term"><tt class="option">-aaeight</tt></span></dt><dd><p>
+    Use eight bit ASCII.
+  </p></dd><dt><span class="term"><tt class="option">-aahelp</tt></span></dt><dd><p>
+    Prints out all aalib options.
+  </p></dd></dl></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+The rendering is very CPU intensive, especially when using AA-on-X
+(using aalib on X), and it's least CPU intensive on standard,
+non-framebuffer console. Use SVGATextMode to set up a big textmode,
+then enjoy! (secondary head Hercules cards rock :)) (but IMHO you
+can use <tt class="option">-vf 1bpp</tt> option to get graphics on hgafb:)
+</p></div><p>
+Use the <tt class="option">-framedrop</tt> option if your computer isn't fast
+enough to render all frames!
+</p><p>
+Playing on terminal you'll get better speed and quality using the Linux
+driver, not curses (<tt class="option">-aadriver linux</tt>). But therefore you
+need write access on
+<tt class="filename">/dev/vcsa<em class="replaceable"><code>&lt;terminal&gt;</code></em></tt>!
+That isn't autodetected by aalib, but vo_aa tries to find the best mode.
+See <a class="ulink" href="http://aa-project.sf.net/tune" target="_top">http://aa-project.sf.net/tune</a> for further
+tuning issues.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="opengl.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="caca.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4.8. OpenGL output </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4.10. 
+<code class="systemitem">libcaca</code> – Color ASCII Art library
+</td></tr></table></div></body></html>

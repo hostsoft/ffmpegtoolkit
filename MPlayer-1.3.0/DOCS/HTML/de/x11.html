@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.14. X11</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="prev" href="vesa.html" title="4.13. VESA-Ausgabe über das VESA-BIOS"><link rel="next" href="vidix.html" title="4.15. VIDIX"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.14. X11</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vesa.html">Zurück</a> </td><th width="60%" align="center">Kapitel 4. Videoausgabegeräte</th><td width="20%" align="right"> <a accesskey="n" href="vidix.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="x11"></a>4.14. X11</h2></div></div></div><p>
+  Vermeide diesen Treiber, wenn's geht. Er benutzt X11 (mit den Shared-
+  Memory-Erweiterungen) ohne jegliche Hardwarebeschleunigung. Unterstützt
+  MMX-/3DNow/SSE-beschleunigte Softwareskalierung mit den Optionen
+  <tt class="option">-fs -zoom</tt>, aber die ist trotzdem langsam. Die meisten
+  Karten bieten Unterstützung für Hardwareskalierung. Benutze also
+  <tt class="option">-vo xv</tt> in den meisten Fällen bzw. <tt class="option">-vo xmga</tt>
+  bei Matrox-Karten.
+</p><p>
+  Ein Problem liegt darin, dass die meisten Grafikkartentreiber
+  Hardwarebeschleunigung nicht beim zweiten Ausgang/beim TV-Ausgang
+  unterstützen. In diesen Fällen siehst du nur ein grünes/blaues
+  Fenster anstelle des Films. Hier ist der X11-Treiber ganz praktisch, aber du
+  brauchst trotzdem eine schnelle CPU für die Softwareskalierung. Benutze
+  nicht den SDL-Ausgabetreiber und SDLs Skalierer, da dieser eine schlechtere
+  Qualität bietet!
+</p><p>
+  Softwareskalierung ist sehr langsam. Versuch also besser, vorher in einen
+  anderen Videomodus zu schalten. Das ist sehr einfach. Such die
+  <a class="link" href="dga.html#dga-modelines" title="ÄNDERN DER AUFLÖSUNG">Modelines in der DGA-Sektion</a> und füge sie
+  in deine <tt class="filename">XF86Config</tt> ein.
+
+</p><div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Wenn du XFree86 4.x.x hast, dann benutze die Option <tt class="option">-vm</tt>.
+  MPlayer wird dann die Auflösung in diejenige ändern,
+  in die dein Film am besten hineinpasst. Wenn das nicht funktioniert:
+</p></li><li class="listitem"><p>
+  Unter XFree86 3.x.x musst du mit
+  <span class="keycap"><b>Strg</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad +</b></span>
+  und
+  <span class="keycap"><b>Strg</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad -</b></span>
+  die Auflösung ändern.
+</p></li></ul></div><p>
+</p><p>
+  Wenn du die soeben eingefügten Modi nicht wiederfindest, dann schau
+  dir die Ausgabe von XFree86 an. Einige Treiber können nicht die
+  niedrigen Pixelclock-Werte benutzen, die für niedrige Auflösungen
+  vonnöten sind.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vesa.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="vidix.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">4.13. VESA-Ausgabe über das VESA-BIOS </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 4.15. VIDIX</td></tr></table></div></body></html>

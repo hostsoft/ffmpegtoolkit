@@ -1,0 +1,53 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.5. DVD playback</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="Chapter 3. Usage"><link rel="prev" href="streaming.html" title="3.4. Streaming from network or pipes"><link rel="next" href="vcd.html" title="3.6. VCD playback"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="dvd.html#region_code" title="3.5.1. region code"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.5. DVD playback</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="streaming.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Usage</th><td width="20%" align="right"> <a accesskey="n" href="vcd.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dvd"></a>3.5. DVD playback</h2></div></div></div><p>
+For the complete list of available options, please read the man page.
+The syntax to play a standard DVD is as follows:
+</p><pre class="screen">
+mplayer dvd://<em class="replaceable"><code>&lt;track&gt;</code></em> [-dvd-device <em class="replaceable"><code>&lt;device&gt;</code></em>]
+</pre><p>
+</p><p>
+Example:
+</p><pre class="screen">mplayer dvd://1 -dvd-device /dev/hdc</pre><p>
+</p><p>
+If you have compiled <span class="application">MPlayer</span> with dvdnav support, the
+syntax is the same, except that you need to use dvdnav:// instead of dvd://.
+</p><p>
+The default DVD device is <tt class="filename">/dev/dvd</tt>. If your setup
+differs, make a symlink or specify the correct device on the command
+line with the <tt class="option">-dvd-device</tt> option.
+</p><p>
+<span class="application">MPlayer</span> uses <code class="systemitem">libdvdread</code> and
+<code class="systemitem">libdvdcss</code> for DVD playback and decryption. These two
+libraries are contained in the
+<span class="application">MPlayer</span> source tree, you do not have
+to install them separately. You can also use system-wide versions of the two
+libraries, but this solution is not recommended, as it can result in bugs,
+library incompatibilities and slower speed.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+In case of DVD decoding problems, try disabling supermount, or any other such
+facilities. Some RPC-2 drives may also require setting the region code.
+</p></div><p><b>DVD decryption. </b>
+DVD decryption is done by <code class="systemitem">libdvdcss</code>. The method
+can be specified through the <code class="envar">DVDCSS_METHOD</code> environment
+variable, see the manual page for details.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="region_code"></a>3.5.1. region code</h3></div></div></div><p>
+DVD drives nowadays come with a nonsensical restriction labeled
+<a class="ulink" href="http://en.wikipedia.org/wiki/DVD_region_code" target="_top">region code</a>.
+This is a scheme to force DVD drives to only accept DVDs produced for one of
+the six different regions into which the world was partitioned. How a group
+of people can sit around a table, come up with such an idea and expect the
+world of the 21st century to bow to their will is beyond anyone's guess.
+</p><p>
+Drives that enforce region settings through software only are also known as
+RPC-1 drives, those that do it in hardware as RPC-2. RPC-2 drives allow
+changing the region code five times before it remains fixed.
+Under Linux you can use the
+<a class="ulink" href="http://linvdr.org/projects/regionset/" target="_top">regionset</a> tool
+to set the region code of your DVD drive.
+</p><p>
+Thankfully, it is possible to convert RPC-2 drives into RPC-1 drives through
+a firmware upgrade. Feed the model number of your DVD drive into your favorite
+search engine or have a look at the forum and download sections of
+<a class="ulink" href="http://www.rpc1.org/" target="_top">"The firmware page"</a>.
+While the usual caveats for firmware upgrades apply, experience with
+getting rid of region code enforcement is generally positive.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="streaming.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="vcd.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.4. Streaming from network or pipes </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.6. VCD playback</td></tr></table></div></body></html>

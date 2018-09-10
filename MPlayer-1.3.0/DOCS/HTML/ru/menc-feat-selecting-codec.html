@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.1. Выбор кодеков и формата файлов</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="prev" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="next" href="menc-feat-selecting-input.html" title="6.2. Выбор входного файла или устройства"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.1. Выбор кодеков и формата файлов</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mencoder.html">Пред.</a> </td><th width="60%" align="center">Глава 6. Основы использования <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-selecting-input.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-codec"></a>6.1. Выбор кодеков и формата файлов</h2></div></div></div><p>
+Аудио и видео кодеки для кодирования выбираются опциями
+<tt class="option">-oac</tt> и <tt class="option">-ovc</tt>, соответственно.
+Наберите для примера:
+</p><pre class="screen">mencoder -ovc help</pre><p>
+чтобы получить список всех видео кодеков поддерживаемых
+версией <span class="application">MEncoder</span>, установленной на вашей машине.
+Доступны следующие варианты:
+</p><p>
+Аудио кодеки:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Название кодека</th><th>Описание</th></tr></thead><tbody><tr><td>mp3lame</td><td>Кодируйте в VBR, ABR или CBR MP3 с LAME</td></tr><tr><td>lavc</td><td>Используйте один из кодеков библиотеки <a class="link" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-audio-codecs" title="7.3.2. Аудио кодеки libavcodec"><code class="systemitem">libavcodec</code></a></td></tr><tr><td>faac</td><td>FAAC AAC аудио кодер</td></tr><tr><td>toolame</td><td>MPEG Audio Layer 2 кодер</td></tr><tr><td>twolame</td><td>MPEG Audio Layer 2 кодер, основанный на tooLAME</td></tr><tr><td>pcm</td><td>Несжатый PCM звук</td></tr><tr><td>copy</td><td>Не перекодировать, просто копировать сжатые кадры</td></tr></tbody></table></div><p>
+</p><p>
+Видео кодеки:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Название кодека</th><th>Описание</th></tr></thead><tbody><tr><td>lavc</td><td>Используйте один из кодеков библиотеки <a class="link" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-video-codecs" title="7.3.1. Видео кодеки libavcodec"><code class="systemitem">libavcodec</code></a></td></tr><tr><td>xvid</td><td>Xvid, MPEG-4 Advanced Simple Profile (ASP) кодек</td></tr><tr><td>x264</td><td>x264, MPEG-4 Advanced Video Coding (AVC), AKA[он же] H.264 кодек</td></tr><tr><td>nuv</td><td>nuppel видео, используемое некоторыми приложениями реального времени</td></tr><tr><td>raw</td><td>Несжатые видео кадры</td></tr><tr><td>copy</td><td>Не перекодировать, просто скопировать сжатые кадры</td></tr><tr><td>frameno</td><td>Использовался для 3-х проходного кодирования (не рекомендуется)</td></tr></tbody></table></div><p>
+</p><p>
+Формат выходных файлов выбирается опцией <tt class="option">-of</tt>.
+Наберите:
+</p><pre class="screen">mencoder -of help</pre><p>
+чтобы получить список всех форматов, поддерживаемых версией
+<span class="application">MEncoder</span>, установленного на вашей машине.
+Доступны следующие варианты:
+</p><p>
+Форматы файлов:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Название формата</th><th>Описание</th></tr></thead><tbody><tr><td>lavf</td><td>Один из форматов, поддерживаемых библиотекой
+  <code class="systemitem">libavformat</code></td></tr><tr><td>avi</td><td>'Слоеное' Аудио-Видео</td></tr><tr><td>mpeg</td><td>MPEG-1 и MPEG-2 PS</td></tr><tr><td>rawvideo</td><td>сырой видео поток (без мультиплексирования - только видео поток)</td></tr><tr><td>rawaudio</td><td>сырой аудио поток (без мультиплексирования - только аудио поток)</td></tr></tbody></table></div><p>
+AVI является родным форматом для  <span class="application">MEncoder</span>,
+что означает наилучшую его поддержку,
+<span class="application">MEncoder</span> изначально разрабатывался для этого формата.
+Как замечено выше, другие форматы тоже пригодны, но
+вы можете столкнуться с проблемами при их использовании.
+</p><p>
+форматы файлов библиотеки <code class="systemitem">libavformat</code>:
+</p><p>
+Если вы выбрали <code class="systemitem">libavformat</code> для
+мультиплексирования выходного файла (используя <tt class="option">-of lavf</tt>),
+подходящий формат файла будет определен по расширению выходного файла.
+Вы можете заставить использовать конкретный формат опцией
+<tt class="option">format</tt> библиотеки
+<code class="systemitem">libavformat</code>.
+
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>название формата <code class="systemitem">libavformat</code></th><th>Описание</th></tr></thead><tbody><tr><td>mpg</td><td>MPEG-1 и MPEG-2 PS</td></tr><tr><td>asf</td><td>Advanced Streaming Format</td></tr><tr><td>avi</td><td>'Слоеное' Аудио-Видео</td></tr><tr><td>wav</td><td>Waveform Аудио</td></tr><tr><td>swf</td><td>Macromedia Flash</td></tr><tr><td>flv</td><td>Macromedia Flash видео</td></tr><tr><td>rm</td><td>RealMedia</td></tr><tr><td>au</td><td>SUN AU</td></tr><tr><td>nut</td><td>
+  открытый формат NUT (экспериментальный и пока не полностью соответствующий спецификации)
+  </td></tr><tr><td>mov</td><td>QuickTime</td></tr><tr><td>mp4</td><td>MPEG-4 формат</td></tr><tr><td>dv</td><td>Sony Digital Видео формат</td></tr><tr><td>mkv</td><td>Открытый аудио/видео контейнер Matroska</td></tr></tbody></table></div><p>
+Как видите, <code class="systemitem">libavformat</code>
+позволяет <span class="application">MEncoder</span> мультиплексировать во
+множество форматов.
+К сожалению, поскольку <span class="application">MEncoder</span> изначально не разрабатывался
+для поддержки форматов, отличных от AVI, вам следует относиться к результирующему
+файлу с определенной долей паранойи. Убедитесь, что в порядке Аудио/видео синхронизация, и
+файл воспроизводится не только в <span class="application">MPlayer</span>.
+</p><div class="example"><a name="encode_to_macromedia_flash_format"></a><p class="title"><b>Пример 6.1. Кодирование в формат Macromedia Flash</b></p><div class="example-contents"><p>
+Создание видео Macromedia Flash, подходящего для воспроизведения в веб браузере плагином
+Macromedia Flash:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.avi</code></em> -o <em class="replaceable"><code>output.flv</code></em> -of lavf \
+    -oac mp3lame -lameopts abr:br=56 -srate 22050 -ovc lavc \
+    -lavcopts vcodec=flv:vbitrate=500:mbd=2:mv0:trell:v4mv:cbp:last_pred=3
+</pre><p>
+</p></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mencoder.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-selecting-input.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">Глава 6. Основы использования <span class="application">MEncoder</span> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 6.2. Выбор входного файла или устройства</td></tr></table></div></body></html>

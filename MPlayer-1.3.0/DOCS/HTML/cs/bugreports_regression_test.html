@@ -1,0 +1,60 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. Jak provádět regresní testování pomocí Subversion</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="prev" href="bugreports_fix.html" title="A.2. Jak napravovat chyby"><link rel="next" href="bugreports_report.html" title="A.4. Jak oznamovat chyby"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. Jak provádět regresní testování pomocí Subversion</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">Předcházející</a> </td><th width="60%" align="center">Příloha A. Jak hlásit chyby</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. Jak provádět regresní testování pomocí Subversion</h2></div></div></div><p>
+Občas nastane problém typu 'předtím to fungovalo, teď už ne...'.
+Zde přinášíme postup krok za krokem, jak vyhledat, kdy problém
+nastal. Toto <span class="bold"><strong>není</strong></span> určeno příležitostným
+uživatelům.
+</p><p>
+Nejprve si musíte opatřit zdrojové kódy MPlayeru ze Subversion.
+Instrukce lze nalést v
+<a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html#svn" target="_top">sekci Subversion stránky download</a>.
+</p><p>
+Tak dostanete v adresáři mplayer/ obraz Subversion stromu na straně klienta.
+Nyní aktualizujte tento obraz k datu, které chcete:
+</p><pre class="screen">
+cd mplayer/
+svn update -r {"2004-08-23"}
+</pre><p>
+Formát data je YYYY-MM-DD HH:MM:SS.
+Požití tohoto datového formátu zajišťuje, že budete schopni extrahovat
+patche podle data, kdy byly zapsány (commit) stejně, jak jsou v
+<a class="ulink" href="http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">MPlayer-cvslog archivu</a>.
+</p><p>
+A teď proveďte sestavení jako při normální aktualizaci:
+</p><pre class="screen">
+./configure
+make
+</pre><p>
+</p><p>
+Pokud to čte nějaký neprogramátor, nejrychlejší metodou, jak se dostat
+k bodu, kde problém nastal, je použití binárního vyhledávání – to je
+vyhledávání data poruchy opakovaným dělením vyhledávacího intervalu napůl.
+Například pokud problém nastal v 2003, začneme v polovině roku a ptáme se,
+„Už je tu problém?“.
+Pokud ano, vraťte se na prvního dubna; pokud ne, běžte na prvního října
+a tak dále.
+</p><p>
+Pokud máte spoustu místa na disku (plná kompilace obvykle zabírá 100 MB
+a kolem 300–350 MB, pokud jsou zapnuty debugovací symboly), zkopírujte
+nejstarší známou funkční verzi před jejím updatem; to vám ušetří čas,
+pokud se budete vracet.
+(Obvykla je nutné spustit 'make distclean' před rekompilací starší verze,
+takže pokud si neuděláte záložní kopii originálního zdrojového stromu,
+budete v něm muset rekompilovat vše, až se vrátíte do současnosti.)
+</p><p>
+Pokud jste našli den, kdy k problému došlo, pokračujte v hledání pomocí
+archivu mplayer-cvslog (řazeného podle data) a preciznějším cvs update
+s uvedením hodiny, minuty a sekundy:
+</p><pre class="screen">
+cvs update -PAd -D "2004-08-23 15:17:25"
+</pre><p>
+To vám umožní lehce najít patch, který problém způsobil.
+</p><p>
+Pokud jste našli patch, který je příčinou problému, máte téměř vyhráno;
+ohlaste to do
+<a class="ulink" href="http://bugzilla.mplayerhq.hu/" target="_top">MPlayer Bugzilly</a> nebo
+se přihlaste do
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-users</a>
+a pošlete to tam.
+Je šance, že autor navrhne opravu.
+Rovněž si můžete patch rozpitvat, dokud z něj nevytlučete, kde je chyba :-).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. Jak napravovat chyby </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> A.4. Jak oznamovat chyby</td></tr></table></div></body></html>

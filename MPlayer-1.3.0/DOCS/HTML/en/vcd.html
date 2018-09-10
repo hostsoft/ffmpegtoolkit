@@ -1,0 +1,72 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.6. VCD playback</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="Chapter 3. Usage"><link rel="prev" href="dvd.html" title="3.5. DVD playback"><link rel="next" href="edl.html" title="3.7. Edit Decision Lists (EDL)"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.6. VCD playback</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dvd.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Usage</th><td width="20%" align="right"> <a accesskey="n" href="edl.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vcd"></a>3.6. VCD playback</h2></div></div></div><p>
+For the complete list of available options, please read the man page. The
+Syntax for a standard Video CD (VCD) is as follows:
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>&lt;track&gt;</code></em> [-cdrom-device <em class="replaceable"><code>&lt;device&gt;</code></em>]</pre><p>
+Example:
+</p><pre class="screen">mplayer vcd://2 -cdrom-device /dev/hdc</pre><p>
+The default VCD device is <tt class="filename">/dev/cdrom</tt>. If your setup
+differs, make a symlink or specify the correct device on the command line
+with the <tt class="option">-cdrom-device</tt> option.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+At least Plextor and some Toshiba SCSI CD-ROM drives have horrible performance
+reading VCDs. This is because the CDROMREADRAW <code class="systemitem">ioctl</code>
+is not fully implemented for these drives. If you have some knowledge of SCSI
+programming, please <a class="ulink" href="../../tech/patches.txt" target="_top">help us</a>
+implement generic SCSI support for VCDs.
+</p></div><p>
+In the meantime you can extract data from VCDs with
+<a class="ulink" href="http://ftp.ntut.edu.tw/ftp/OS/Linux/packages/X/viewers/readvcd/" target="_top">readvcd</a>
+and play the resulting file with <span class="application">MPlayer</span>.
+</p><p><b>VCD structure. </b>
+A Video CD (VCD) is made up of CD-ROM XA sectors, i.e. CD-ROM mode 2
+form 1 and 2 tracks:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  The first track is in mode 2 form 2 format which means it uses L2
+  error correction. The track contains an ISO-9660 file system with 2048
+  bytes/sector. This file system contains VCD metadata information, as
+  well as still frames often used in menus. MPEG segments for menus can
+  also be stored in this first track, but the MPEGs have to be broken up
+  into a series of 150-sector chunks. The ISO-9660 file system may
+  contain other files or programs that are not essential for VCD
+  operation.
+</p></li><li class="listitem"><p>
+  The second and remaining tracks are generally raw 2324 bytes/sector
+  MPEG (movie) tracks, containing one MPEG PS data packet per
+  sector. These are in mode 2 form 1 format, so they store more data per
+  sector at the loss of some error correction. It is also legal to have
+  CD-DA tracks in a VCD after the first track as well.
+  On some operating systems there is some trickery that goes on to make
+  these non-ISO-9660 tracks appear in a file system. On other operating
+  systems like GNU/Linux this is not the case (yet). Here the MPEG data
+  <span class="bold"><strong>cannot be mounted</strong></span>. As most movies are
+  inside this kind of track, you should try <tt class="option">vcd://2</tt>
+  first.
+</p></li><li class="listitem"><p>
+  There exist VCD disks without the first track (single track and no file system
+  at all). They are still playable, but cannot be mounted.
+</p></li><li class="listitem"><p>
+  The definition of the Video CD standard is called the
+  Philips "White Book" and it is not generally available online as it
+  must be purchased from Philips. More detailed information about Video
+  CDs can be found in the
+  <a class="ulink" href="http://www.vcdimager.org/pub/vcdimager/manuals/0.7/vcdimager.html#SEC4" target="_top">vcdimager documentation</a>.
+</p></li></ul></div><p>
+</p><p><b>About .DAT files. </b>
+The ~600 MB file visible on the first track of the mounted VCD is not a real
+file! It is a so called ISO gateway, created to allow Windows to handle such
+tracks (Windows does not allow raw device access to applications at all).
+Under Linux you cannot copy or play such files (they contain garbage). Under
+Windows it is possible as its iso9660 driver emulates the raw reading of
+tracks in this file. To play a .DAT file you need the kernel driver which can
+be found in the Linux version of PowerDVD. It has a modified iso9660 file system
+(<tt class="filename">vcdfs/isofs-2.4.X.o</tt>) driver, which is able to emulate the
+raw tracks through this shadow .DAT file. If you mount the disc using their
+driver, you can copy and even play .DAT files with
+<span class="application">MPlayer</span>. But it will not
+work with the standard iso9660 driver of the Linux kernel! Use
+<tt class="option">vcd://</tt> instead. Alternatives for VCD copying are the
+new <a class="ulink" href="http://www.elis.rug.ac.be/~ronsse/cdfs/" target="_top">cdfs</a> kernel
+driver (not part of the official kernel) that shows CD sessions as image files
+and <a class="ulink" href="http://cdrdao.sf.net/" target="_top">cdrdao</a>, a bit-by-bit
+CD grabbing/copying application.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dvd.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="edl.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.5. DVD playback </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.7. Edit Decision Lists (EDL)</td></tr></table></div></body></html>

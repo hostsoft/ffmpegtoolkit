@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.7. копирование потока</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="prev" href="menc-feat-rescale.html" title="6.6. Масштабирование фильмов"><link rel="next" href="menc-feat-enc-images.html" title="6.8. Кодирование из нескольких входных файлов изображений (JPEG, PNG, TGA, SGI)"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.7. копирование потока</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-rescale.html">Пред.</a> </td><th width="60%" align="center">Глава 6. Основы использования <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-streamcopy"></a>6.7. копирование потока</h2></div></div></div><p>
+<span class="application">MEncoder</span> может обрабатывать входные потоки двумя способами:
+<span class="bold"><strong>кодировать</strong></span> или <span class="bold"><strong>копировать</strong></span>
+их. Этот раздел о <span class="bold"><strong>копировании</strong></span>.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Видео поток</strong></span> (опция <tt class="option">-ovc copy</tt>):
+  можно делать классные вещи :) Вроде помещения (не преобразования!) FLI или VIVO или
+  MPEG-1 видео в AVI файл! Конечно, проиграть такие файлы сможет только
+  <span class="application">MPlayer</span> :) И, возможно, никакого реальной пользы в
+  этом нет. Реально: копирование видеопотока может быть полезно, если надо кодировать только
+  аудио поток (например, несжатый PCM в MP3).
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Аудио поток</strong></span> (опция <tt class="option">-oac copy</tt>):
+  straightforward. Возможно взять внешний файл (MP3, WAV) и уплотнить[mux] его в выходной
+  поток. Воспользуйтесь опцией <tt class="option">-audiofile <em class="replaceable"><code>имя_файла</code></em></tt>,
+  чтобы сделать это.
+</p></li></ul></div><p>
+Использование <tt class="option">-oac copy</tt> для копирования из одного формата в другой
+может потребовать указания <tt class="option">-fafmttag</tt> для сохранения тэга аудио формата
+из оригинального файла. Например, если вы преобразовываете NSV файл со звуком AAC
+в формат AVI, аудио формат будет неверен и должен быть изменен. Чтобы получить список
+тэгов аудио формата проверьте <tt class="filename">codecs.conf</tt>.
+</p><p>
+Пример:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.nsv</code></em> -oac copy -fafmttag 0x706D \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-rescale.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">6.6. Масштабирование фильмов </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 6.8. Кодирование из нескольких входных файлов изображений (JPEG, PNG, TGA, SGI)</td></tr></table></div></body></html>

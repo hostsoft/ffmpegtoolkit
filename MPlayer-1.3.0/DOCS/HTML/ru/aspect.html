@@ -1,0 +1,25 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.10. Сохранение пропорций</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="prev" href="menc-feat-extractsub.html" title="6.9. Извлечение DVD субтитров в файл VOBsub"><link rel="next" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10. Сохранение пропорций</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Пред.</a> </td><th width="60%" align="center">Глава 6. Основы использования <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="encoding-guide.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aspect"></a>6.10. Сохранение пропорций</h2></div></div></div><p>
+DVD и SVCD (т.е. MPEG-1/2) файлы содержат информацию о пропорции, которая описывает
+как проигрыватель должен масштабировать видео поток, чтобы люди не становились яйцеголовыми.
+(напр.: 480x480 + 4:3 = 640x480). Хотя при кодировании в  AVI (DivX) файлы вы избавлены от этой
+проблемы, т.к. заголовки AVI не содержат это значение.
+Масштабирование изображения отвратительно и расточительно, есть лучший путь!
+</p><p>There is</p><p>
+MPEG-4 имеет уникальную возможность: видео поток может хранить требуемые ему пропорции.
+Да, в точности как MPEG-1/2 (DVD, SVCD) и H.263 файлы. К сожалению, немного проигрывателей
+кроме <span class="application">MPlayer</span> поддерживают этот MPEG-4 атрибут.
+</p><p>
+Эта возможность может использоваться только с
+<code class="systemitem">libavcodec</code>'овским
+<code class="systemitem">mpeg4</code> кодеком. Имейте в виду: хотя
+<span class="application">MPlayer</span> корректно воспроизведет файл, другие
+проигрыватели могут использовать неверные пропорции.
+</p><p>
+Вы серьезно должны обрезать черные полосы выше и ниже изображения.
+Смотрите страницу руководства man по использованию <code class="systemitem">cropdetect</code> и
+<code class="systemitem">crop</code> плагинов.
+</p><p>
+Использование:
+</p><pre class="screen">mencoder <em class="replaceable"><code>sample-svcd.mpg</code></em> -vf crop=714:548:0:14 -oac copy -ovc lavc \
+    -lavcopts vcodec=mpeg4:mbd=2:trell:autoaspect -o <em class="replaceable"><code>output.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="encoding-guide.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">6.9. Извлечение DVD субтитров в файл VOBsub </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> Глава 7. Кодирование с <span class="application">MEncoder</span></td></tr></table></div></body></html>

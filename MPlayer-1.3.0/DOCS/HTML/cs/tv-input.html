@@ -1,0 +1,129 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.10. TV vstup</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="usage.html" title="Kapitola 3. Použití"><link rel="prev" href="advaudio.html" title="3.9. Pokročilé audio"><link rel="next" href="radio.html" title="3.11. Rádio"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="tv-input.html#tv-compilation" title="3.10.1. Kompilace"><link rel="subsection" href="tv-input.html#tv-tips" title="3.10.2. Tipy pro používání"><link rel="subsection" href="tv-input.html#tv-examples" title="3.10.3. Příklady"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.10. TV vstup</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="advaudio.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 3. Použití</th><td width="20%" align="right"> <a accesskey="n" href="radio.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-input"></a>3.10. TV vstup</h2></div></div></div><p>
+Tato sekce je zaměřena na zpřístupnění
+<span class="bold"><strong>sledování/grabování z V4L kompatibilního TV tuneru
+</strong></span>. Popis voleb k TV a ovládání z klávesnice naleznete v man
+stránce.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-compilation"></a>3.10.1. Kompilace</h3></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Zaprvé musíte rekompilovat. <tt class="filename">./configure</tt> zdetekuje
+  v4l hlavičkové soubory kernelu a existenci zařízení
+  <tt class="filename">/dev/video*</tt>. Pokud existují, bude zabudována
+  podpora pro TV (viz výstup z <tt class="filename">./configure</tt>).
+</p></li><li class="step"><p>
+  Ujistěte se, že váš tuner pracuje s jiným Linuxovým TV softwarem,
+  například <span class="application">XawTV</span>.
+</p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-tips"></a>3.10.2. Tipy pro používání</h3></div></div></div><p>
+Úplný seznam voleb je dostupný v manuálové stránce.
+Zde je jen několik typů:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Použijte volbu <tt class="option">channels</tt>. Příklad:
+  </p><pre class="screen">-tv channels=26-MTV1,23-TV2</pre><p>
+  Vysvětlení: Při použití této volby budou použitelné pouze kanály 26 a 23 a
+  budete také mít krásný OSD text po přepnutí kanálů, zobrazující jméno
+  kanálu. Mezery ve jméně kanálu musí být nahrazeny znakem
+  "_".
+</p></li><li class="listitem"><p>
+  Zvolte rozumné rozměry obrazu. Rozměry výsledného obrazu by měly být
+  bezezbytku dělitelné 16.
+</p></li><li class="listitem"><p>
+  Pokud zachytáváte video se svislým rozlišením vyšším než polovina plného
+  rozlišení (čili 288 pro PAL nebo 240 pro NTSC), pak 'snímky', které dostanete,
+  budou ve skutečnosti prokládané páry půlsnímků.
+  V závislosti na tom, co chcete s videem dělat, je můžete nechat jak jsou,
+  destruktivně odstranit proklad, nebo rozdělit páry do individuálních políček.
+  </p><p>
+  Jinak bude získaný snímek roztřepený
+  během rychlých scén a regulátor datového toku nebude pravděpodobně schopen
+  ani udržet nastavený datový tok, vzhledem k tomu, že prokladové artefakty
+  produkují velké množství detailů, což spotřebovává velké přenosové pásmo.
+  Odstraňování prokladu můžete zapnout pomocí volby
+  <tt class="option">-vf pp=DEINT_TYPE</tt>. Dobrou práci obvykle odvede
+  <tt class="option">pp=lb</tt>, ale záleží na osobních preferencích. Prostudujte si
+  ostatní možnosti odstraňování prokladu v manuálu a vyzkoušejte je.
+  </p></li><li class="listitem"><p>
+  Odstřihněte mrtvý prostor. Když zachytáváte video, oblasti na okrajích jsou
+  obvykle černé, nebo obsahují nějaký šum. Což opět zbytečně spotřebovává
+  přenosové pásmo. Přesněji to nejsou samotné černé oblasti, ale ostrý přechod
+  mezi černou a světlejším videem, ale to teď není důležité.
+  Než začnete zachytávat, nastavte parametry volby <tt class="option">crop</tt> tak,
+  aby byl veškerý binec na okrajích odstřižen. Opět se snažte zachovat rozumné
+  rozměry výsledného obrazu.
+</p></li><li class="listitem"><p>
+  Sledujte zatížení CPU. Většinu času by nemělo překročit hranici 90%. Pokud
+  máte velkou vyrovnávací paměť pro zachytávání, dokáže
+  <span class="application">MEncoder</span> přežít několikasekundové přetížení, ale
+  nic víc. Raději vypněte 3D OpenGL spořiče obrazovky a podobné věci.
+</p></li><li class="listitem"><p>
+  Nehrajte si se systémovými hodinami. <span class="application">MEncoder</span>
+  používá systémové hodiny pro A/V synchronizaci. Pokud přestavíte systémové
+  hodiny (zvlášť nazpět), <span class="application">MEncoder</span> bude zmaten a
+  vy přijdete o snímky. To je velmi důležité pokud jste připojeni k síti a
+  používáte nějaký časový synchronizační software jako je NTP. Musíte vypnout
+  NTP během zachytávání, pokud chcete spolehlivě zachytávat.
+</p></li><li class="listitem"><p>
+  Neměňte <tt class="option">outfmt</tt> pokud nevíte co děláte, nebo vaše
+  karta/ovladač opravdu nepodporuje výchozí (YV12 barevný prostor).
+  Ve starší verzi <span class="application">MPlayer</span>u/
+  <span class="application">MEncoder</span>u bylo nutné nastavit výstupní formát.
+  Tento problém by měl být v současných verzích vyřešen,
+  <tt class="option">outfmt</tt> již není nadále potřeba a výchozí hodnoty vyhovují
+  pro většinu případů. Například pokud zachytáváte do DivX pomocí
+  <code class="systemitem">libavcodec</code>u a uvedete
+  <tt class="option">outfmt=RGB24</tt> pro zvýšení kvality zachytávaných snímků,
+  stejně budou tyto snímky později konvertovány zpět na YV12, takže jediné co
+  tím získáte je spousta vyplýtvaného výkonu CPU.
+</p></li><li class="listitem"><p>
+  Chcete-li nastavit barevný prostor I420 (<tt class="option">outfmt=i420</tt>),
+  musíte přidat i volbu <tt class="option">-vc rawi420</tt> kvůli konfliktu fourcc
+  Intel Indeo video kodekem.
+</p></li><li class="listitem"><p>
+  Existuje několik cest, jak zachytávat zvuk. Můžete nahrát zvuk buď pomocí
+  zvukové karty pomocí externího propojení mezi video kartou a linkovým
+  vstupem, nebo použitím vestavěného ADC v čipu bt878. Ve druhém případě
+  musíte načíst ovladač <span class="bold"><strong>btaudio</strong></span>. Přečtěte si
+  soubor <tt class="filename">linux/Documentation/sound/btaudio</tt> (ve zdrojácích
+  kernelu, nikoli <span class="application">MPlayer</span>u) pro několik instrukcí
+  jak použít tento ovladač.
+</p></li><li class="listitem"><p>
+  Pokud <span class="application">MEncoder</span> nedokáže otevřít audio zařízení,
+  ujistěte se, že je opravdu k dispozici. Můžete mít potíže se zvukovými
+  servery jako aRts (KDE) nebo ESD (GNOME). Pokud máte plně duplexní zvukovou
+  kartu (téměř každá slušná karta to již podporuje) a používáte KDE, zkuste
+  zaškrtnout volbu "full duplex" v menu nastavení zvukového serveru.
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-examples"></a>3.10.3. Příklady</h3></div></div></div><div class="informalexample"><p>
+Modelový výstup do AAlib :)
+</p><pre class="screen">mplayer -tv driver=dummy:width=640:height=480 -vo aa tv://</pre><p>
+</p></div><div class="informalexample"><p>
+Vstup ze standardního V4L:
+</p><pre class="screen">
+mplayer -tv driver=v4l:width=640:height=480:outfmt=i420 -vc rawi420 -vo xv tv://
+</pre><p>
+</p></div><div class="informalexample"><p>
+Mnohem sofistikovanější příklad. Zde <span class="application">MEncoder</span>
+zachytává obraz v plném PALu, ořízne okraje a odstraní proklad obrazu pomocí
+lineárního směšovacího algoritmu. Zvuk je komprimován konstantním datovým
+tokem 64kbps LAME kodekem. Toto nastavení je vhodné pro zachytávání filmů.
+</p><pre class="screen">
+mencoder -tv driver=v4l:width=768:height=576 -oac mp3lame -lameopts cbr:br=64\
+    -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=900 \
+    -vf crop=720:544:24:16,pp=lb -o <em class="replaceable"><code>výstup.avi</code></em> tv://
+</pre><p>
+</p></div><div class="informalexample"><p>
+Toto navíc přeškáluje video na 384x288 a zkomprimuje jej s datovým tokem
+350kbps v režimu vysoké kvality. Volba vqmax uvolňuje kvantizer a umožní
+video kompresoru podržet takto nízký datový tok i za cenu snížení kvality.
+To lze použít pro záznam dlouhých TV seriálů, kde kvalita obrazu není až
+tolik důležitá.
+</p><pre class="screen">
+mencoder -tv driver=v4l:width=768:height=576 \
+    -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=350:vhq:vqmax=31:keyint=300 \
+    -oac mp3lame -lameopts cbr:br=48 -sws 1 -o <em class="replaceable"><code>výstup.avi</code></em>\
+    -vf crop=720:540:24:18,pp=lb,scale=384:288 tv://
+</pre><p>
+Rovněž můžete nastavit menší rozměry obrazu ve volbě
+<tt class="option">-tv</tt> a vyhnout se tak softwarovému škálování, ale tento přístup
+vyžaduje maximální množství informací a je trochu odolnější proti šumu.
+Čipy bt8x8 umí průměrování pixelů pouze ve svislém směru díky
+hardwarovým omezením.
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="advaudio.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="radio.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">3.9. Pokročilé audio </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 3.11. Rádio</td></tr></table></div></body></html>

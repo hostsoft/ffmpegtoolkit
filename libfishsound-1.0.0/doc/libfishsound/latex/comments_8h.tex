@@ -1,0 +1,298 @@
+\section{comments.\-h File Reference}
+\label{comments_8h}\index{comments.\-h@{comments.\-h}}
+
+
+Encoding and decoding of comments.  
+
+
+{\ttfamily \#include $<$fishsound/fishsound.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Fish\-Sound\-Comment}
+\begin{DoxyCompactList}\small\item\em A comment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ {\bf fish\-\_\-sound\-\_\-comment\-\_\-get\-\_\-vendor} ({\bf Fish\-Sound} $\ast$fsound)
+\begin{DoxyCompactList}\small\item\em Retrieve the vendor string. \end{DoxyCompactList}\item 
+const {\bf Fish\-Sound\-Comment} $\ast$ {\bf fish\-\_\-sound\-\_\-comment\-\_\-first} ({\bf Fish\-Sound} $\ast$fsound)
+\begin{DoxyCompactList}\small\item\em Retrieve the first comment. \end{DoxyCompactList}\item 
+const {\bf Fish\-Sound\-Comment} $\ast$ {\bf fish\-\_\-sound\-\_\-comment\-\_\-next} ({\bf Fish\-Sound} $\ast$fsound, const {\bf Fish\-Sound\-Comment} $\ast$comment)
+\begin{DoxyCompactList}\small\item\em Retrieve the next comment. \end{DoxyCompactList}\item 
+const {\bf Fish\-Sound\-Comment} $\ast$ {\bf fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname} ({\bf Fish\-Sound} $\ast$fsound, char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Retrieve the first comment with a given name. \end{DoxyCompactList}\item 
+const {\bf Fish\-Sound\-Comment} $\ast$ {\bf fish\-\_\-sound\-\_\-comment\-\_\-next\-\_\-byname} ({\bf Fish\-Sound} $\ast$fsound, const {\bf Fish\-Sound\-Comment} $\ast$comment)
+\begin{DoxyCompactList}\small\item\em Retrieve the next comment following and with the same name as a given comment. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-comment\-\_\-add} ({\bf Fish\-Sound} $\ast$fsound, {\bf Fish\-Sound\-Comment} $\ast$comment)
+\begin{DoxyCompactList}\small\item\em Add a comment. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-comment\-\_\-add\-\_\-byname} ({\bf Fish\-Sound} $\ast$fsound, const char $\ast$name, const char $\ast$value)
+\begin{DoxyCompactList}\small\item\em Add a comment by name and value. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-comment\-\_\-remove} ({\bf Fish\-Sound} $\ast$fsound, {\bf Fish\-Sound\-Comment} $\ast$comment)
+\begin{DoxyCompactList}\small\item\em Remove a comment. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-comment\-\_\-remove\-\_\-byname} ({\bf Fish\-Sound} $\ast$fsound, char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Remove all comments with a given name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Encoding and decoding of comments. Vorbis and Speex bitstreams use a comment format called \char`\"{}\-Vorbiscomment\char`\"{}, defined {\tt here}. Many standard comment names (such as T\-I\-T\-L\-E, C\-O\-P\-Y\-R\-I\-G\-H\-T and G\-E\-N\-R\-E) are defined in that document.
+
+The following general features of Vorbiscomment are relevant to this A\-P\-I\-:
+\begin{DoxyItemize}
+\item Each stream has one comment packet, which occurs before any encoded audio data in the stream.
+\item When encoding, Fish\-Sound will generate the comment block and pass it to the encoded() callback in sequence, just like any other packet. Hence, all comments must be set before any call to fish\-\_\-sound\-\_\-encode\-\_\-$\ast$().
+\item When decoding, Fish\-Sound will decode the comment block before calling the first decoded() callback. Hence, retrieving comment data is possible from as soon as the decoded() callback is first called.
+\end{DoxyItemize}
+
+Each comment block contains one Vendor string, which can be retrieved with \doxyref{fish\-\_\-sound\-\_\-comment\-\_\-get\-\_\-vendor()}{p.}{comments_8h_aecaa4422dade26c02553ba48697503ad}. When encoding, this string is effectively fixed by the codec libraries; it cannot be set by the application.
+
+The rest of a comment block consists of {\itshape name} = {\itshape value} pairs, with the following restrictions\-:
+\begin{DoxyItemize}
+\item Both the {\itshape name} and {\itshape value} must be non-\/empty
+\item The {\itshape name} is case-\/insensitive and must consist of A\-S\-C\-I\-I within the range 0x20 to 0x7\-D inclusive, 0x3\-D ('=') excluded.
+\item The {\itshape name} is not unique; multiple entries may exist with equivalent {\itshape name} within a Vorbiscomment block.
+\item The {\itshape value} may be any U\-T\-F-\/8 string.
+\end{DoxyItemize}\subsection{Retrieving comments}\label{comments_8h_comments_get}
+Fish\-Sound contains A\-P\-I methods to iterate through all comments associated with a Fish\-Sound$\ast$ handle (\doxyref{fish\-\_\-sound\-\_\-comment\-\_\-first()}{p.}{comments_8h_a1f0118f390450b28b19bd61ebb6cb7a3} and \doxyref{fish\-\_\-sound\-\_\-comment\-\_\-next()}{p.}{comments_8h_ab68a529900d2546075193fa37cba76c8}, and to iterate through comments matching a particular name (\doxyref{fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname()}{p.}{comments_8h_a8d4404ac25bc87a08bdd64cccb27f934} and \doxyref{fish\-\_\-sound\-\_\-comment\-\_\-next\-\_\-byname()}{p.}{comments_8h_a7a57c6059a0c2c8b10cf655d78977940}). Given that multiple comments may exist with the same {\itshape name}, you should not use \doxyref{fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname()}{p.}{comments_8h_a8d4404ac25bc87a08bdd64cccb27f934} as a simple \char`\"{}get\char`\"{} function.\subsection{Encoding comments}\label{comments_8h_comments_set}
+For encoding, Fish\-Sound contains A\-P\-I methods for adding comments (\doxyref{fish\-\_\-sound\-\_\-comment\-\_\-add()}{p.}{comments_8h_a77493e66f0e4ce8870f6f5413b90317e} and \doxyref{fish\-\_\-sound\-\_\-comment\-\_\-add\-\_\-byname()}{p.}{comments_8h_aef6ec7d8894aac5da78cb0f5711e7d67} and for removing comments (\doxyref{fish\-\_\-sound\-\_\-comment\-\_\-remove()}{p.}{comments_8h_ad6c456b3c1f943966d1bac04452b2e84} and \doxyref{fish\-\_\-sound\-\_\-comment\-\_\-remove\-\_\-byname()}{p.}{comments_8h_a5a84f90f4f3d61acd7682675b874a359}). 
+
+\subsection{Function Documentation}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-add@{fish\-\_\-sound\-\_\-comment\-\_\-add}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-add@{fish\-\_\-sound\-\_\-comment\-\_\-add}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-comment\-\_\-add (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{{\bf Fish\-Sound\-Comment} $\ast$}]{comment}
+\end{DoxyParamCaption}
+)}\label{comments_8h_a77493e66f0e4ce8870f6f5413b90317e}
+
+
+Add a comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E) \\
+\hline
+{\em comment} & The comment to add \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape fsound} is not a valid Fish\-Sound$\ast$ handle \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this Fish\-Sound \\
+\hline
+\end{DoxyRetVals}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-add\-\_\-byname@{fish\-\_\-sound\-\_\-comment\-\_\-add\-\_\-byname}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-add\-\_\-byname@{fish\-\_\-sound\-\_\-comment\-\_\-add\-\_\-byname}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-add\-\_\-byname}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-comment\-\_\-add\-\_\-byname (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{const char $\ast$}]{name, }
+\item[{const char $\ast$}]{value}
+\end{DoxyParamCaption}
+)}\label{comments_8h_aef6ec7d8894aac5da78cb0f5711e7d67}
+
+
+Add a comment by name and value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E) \\
+\hline
+{\em name} & The name of the comment to add \\
+\hline
+{\em value} & The contents of the comment to add \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape fsound} is not a valid Fish\-Sound$\ast$ handle \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this Fish\-Sound \\
+\hline
+\end{DoxyRetVals}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-first@{fish\-\_\-sound\-\_\-comment\-\_\-first}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-first@{fish\-\_\-sound\-\_\-comment\-\_\-first}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-first}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Fish\-Sound\-Comment}$\ast$ fish\-\_\-sound\-\_\-comment\-\_\-first (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound}
+\end{DoxyParamCaption}
+)}\label{comments_8h_a1f0118f390450b28b19bd61ebb6cb7a3}
+
+
+Retrieve the first comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the first comment, or N\-U\-L\-L if no comments exist for this Fish\-Sound$\ast$ object. 
+\end{DoxyReturn}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname@{fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname@{fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Fish\-Sound\-Comment}$\ast$ fish\-\_\-sound\-\_\-comment\-\_\-first\-\_\-byname (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{comments_8h_a8d4404ac25bc87a08bdd64cccb27f934}
+
+
+Retrieve the first comment with a given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+{\em name} & the name of the comment to retrieve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the first comment matching the given {\itshape name}. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & no match was found. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+If {\itshape name} is N\-U\-L\-L, the behaviour is the same as for \doxyref{fish\-\_\-sound\-\_\-comment\-\_\-first()}{p.}{comments_8h_a1f0118f390450b28b19bd61ebb6cb7a3} 
+\end{DoxyNote}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-get\-\_\-vendor@{fish\-\_\-sound\-\_\-comment\-\_\-get\-\_\-vendor}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-get\-\_\-vendor@{fish\-\_\-sound\-\_\-comment\-\_\-get\-\_\-vendor}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-get\-\_\-vendor}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ fish\-\_\-sound\-\_\-comment\-\_\-get\-\_\-vendor (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound}
+\end{DoxyParamCaption}
+)}\label{comments_8h_aecaa4422dade26c02553ba48697503ad}
+
+
+Retrieve the vendor string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the vendor string 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & No vendor string is associated with {\itshape fsound}, or {\itshape fsound} is N\-U\-L\-L. \\
+\hline
+\end{DoxyRetVals}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-next@{fish\-\_\-sound\-\_\-comment\-\_\-next}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-next@{fish\-\_\-sound\-\_\-comment\-\_\-next}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-next}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Fish\-Sound\-Comment}$\ast$ fish\-\_\-sound\-\_\-comment\-\_\-next (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{const {\bf Fish\-Sound\-Comment} $\ast$}]{comment}
+\end{DoxyParamCaption}
+)}\label{comments_8h_ab68a529900d2546075193fa37cba76c8}
+
+
+Retrieve the next comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+{\em comment} & The previous comment. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the comment immediately following the given comment. 
+\end{DoxyReturn}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-next\-\_\-byname@{fish\-\_\-sound\-\_\-comment\-\_\-next\-\_\-byname}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-next\-\_\-byname@{fish\-\_\-sound\-\_\-comment\-\_\-next\-\_\-byname}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-next\-\_\-byname}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Fish\-Sound\-Comment}$\ast$ fish\-\_\-sound\-\_\-comment\-\_\-next\-\_\-byname (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{const {\bf Fish\-Sound\-Comment} $\ast$}]{comment}
+\end{DoxyParamCaption}
+)}\label{comments_8h_a7a57c6059a0c2c8b10cf655d78977940}
+
+
+Retrieve the next comment following and with the same name as a given comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+{\em comment} & A comment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A read-\/only copy of the next comment with the same name as {\itshape comment}. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & no further comments with the same name exist for this Fish\-Sound$\ast$ object. \\
+\hline
+\end{DoxyRetVals}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-remove@{fish\-\_\-sound\-\_\-comment\-\_\-remove}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-remove@{fish\-\_\-sound\-\_\-comment\-\_\-remove}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-remove}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-comment\-\_\-remove (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{{\bf Fish\-Sound\-Comment} $\ast$}]{comment}
+\end{DoxyParamCaption}
+)}\label{comments_8h_ad6c456b3c1f943966d1bac04452b2e84}
+
+
+Remove a comment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E) \\
+\hline
+{\em comment} & The comment to remove. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 1} & Success\-: comment removed \\
+\hline
+{\em 0} & No-\/op\-: comment not found, nothing to remove \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape fsound} is not a valid Fish\-Sound$\ast$ handle \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this Fish\-Sound \\
+\hline
+\end{DoxyRetVals}
+\index{comments.\-h@{comments.\-h}!fish\-\_\-sound\-\_\-comment\-\_\-remove\-\_\-byname@{fish\-\_\-sound\-\_\-comment\-\_\-remove\-\_\-byname}}
+\index{fish\-\_\-sound\-\_\-comment\-\_\-remove\-\_\-byname@{fish\-\_\-sound\-\_\-comment\-\_\-remove\-\_\-byname}!comments.h@{comments.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-comment\-\_\-remove\-\_\-byname}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-comment\-\_\-remove\-\_\-byname (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{comments_8h_a5a84f90f4f3d61acd7682675b874a359}
+
+
+Remove all comments with a given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E) \\
+\hline
+{\em name} & The name of the comments to remove \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em $>$= 0} & The number of comments removed \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D} & {\itshape fsound} is not a valid Fish\-Sound$\ast$ handle \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this Fish\-Sound \\
+\hline
+\end{DoxyRetVals}

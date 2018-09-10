@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.5. Kodowanie do formatu MPEG</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="prev" href="menc-feat-handheld-psp.html" title="6.4. Kodowanie do formatu video Sony PSP"><link rel="next" href="menc-feat-rescale.html" title="6.6. Przeskalowywanie filmów"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.5. Kodowanie do formatu MPEG</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-handheld-psp.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 6. Podstawy używania <span class="application">MEncodera</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-rescale.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-mpeg"></a>6.5. Kodowanie do formatu MPEG</h2></div></div></div><p>
+<span class="application">MEncoder</span> może tworzyć pliki formatu MPEG (MPEG-PS).
+Zazwyczaj, jeśli używasz filmu MPEG-1 albo MPEG-2, to jest tak ponieważ
+kodujesz na ograniczony format, taki jak SVCD, VCD albo DVD.
+Specyficzne ograniczenia tych formatów są wyjaśnione w
+<a class="link" href="menc-feat-vcd-dvd.html" title="7.8. Using MEncoder to create VCD/SVCD/DVD-compliant files">przewodniku tworzenia VCD i DVD</a>.
+</p><p>
+Aby zmienić wyjściowy format plików <span class="application">MEncodera</span>, użyj opcji <tt class="option">-of mpeg</tt>.
+</p><div class="informalexample"><p>
+Przykład:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>wejscie.avi</code></em> -of mpeg -ovc lavc -lavcopts vcodec=mpeg1video \
+    -oac copy <em class="replaceable"><code>inne_opcje</code></em> -o <em class="replaceable"><code>wyjście.mpg</code></em>
+</pre><p>
+Tworzenie pliku MPEG-1, który można odtworzyć na systemach z minimalną obsługą
+multimedialną, taką jak domyślne instalacje Windows:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>wejscie.avi</code></em> -of mpeg -mpegopts format=mpeg1:tsaf:muxrate=2000 \
+    -o <em class="replaceable"><code>wyjście.mpg</code></em> -oac lavc -lavcopts acodec=mp2:abitrate=224 -ovc lavc \
+    -lavcopts vcodec=mpeg1video:vbitrate=1152:keyint=15:mbd=2:aspect=4/3
+</pre><p>
+To samo, ale używając muxera MPEG z <code class="systemitem">libavformat</code>:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>wejście.avi</code></em> -o <em class="replaceable"><code>VCD.mpg</code></em> -ofps 25 -vf scale=352:288,harddup -of lavf \
+    -lavfopts format=mpg:i_certify_that_my_video_stream_does_not_use_b_frames \
+    -oac lavc -lavcopts acodec=mp2:abitrate=224 -ovc lavc \
+    -lavcopts vcodec=mpeg1video:vrc_buf_size=327:keyint=15:vrc_maxrate=1152:vbitrate=1152:vmax_b_frames=0
+</pre><p>
+</p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Wskazówka:</h3><p>
+Jeżeli z jakiegoś powodu nie satysfakcjonuje Cię jakość video
+z drugiego przebiegu, możesz ponownie uruchomić kodowanie
+swojego video z inną docelową szybkością transmisji (bitrate),
+zakładając, że zapisałeś statystyki pliku z poprzedniego przebiegu.
+Jest to możliwe, ponieważ głównym celem pliku ze statystykami jest
+zapamiętanie złożoności każdej z ramek, co nie zależy zbyt mocno
+od szybkości transmisji. Weź jednak pod uwagę, że uzyskasz najlepsze
+wyniki, jeżeli wszystkie przebiegi będą uruchomione z nieróżniącymi
+się za bardzo docelowymi szybkościami transmisji.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-handheld-psp.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-rescale.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">6.4. Kodowanie do formatu video Sony PSP </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 6.6. Przeskalowywanie filmów</td></tr></table></div></body></html>

@@ -1,0 +1,82 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.1. Használati tippek</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="prev" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="next" href="tv-examples.html" title="4.2. Példák"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.1. Használati tippek</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-input.html">Vissza</a> </td><th width="60%" align="center">4. fejezet - TV bemenet</th><td width="20%" align="right"> <a accesskey="n" href="tv-examples.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-tips"></a>4.1. Használati tippek</h2></div></div></div><p>
+A kapcsolók teljes listája a man oldalon található.
+Itt csak pár tippet említünk meg:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Győződj meg róla, hogy a tuner működik más rádiós programmal Linuxon,
+  például a <span class="application">XawTV</span>-vel.
+</p></li><li class="listitem"><p>
+  Használd a <tt class="option">channels</tt> kapcsolót. Például:
+  </p><pre class="screen">-tv channels=26-MTV1,23-TV2</pre><p>
+  Magyarázat: Ha ezt a kapcsolót használod, akkor csak a 26-os és a 23-as
+  csatorna lesz használható, és szép OSD szöveg lesz csatorna váltáskor,
+  mely a csatorna nevét jelzi ki. A csatorna nevében lévő szóközöket a
+  "_" karakterrel kell kicserélni.
+</p></li><li class="listitem"><p>
+  Válassz valamilyen értelmes képméretet. A kp méreteinek oszthatónak
+  kell lennie 16-tal.
+</p></li><li class="listitem"><p>
+  Ha videót mentesz el úgy, hogy a függőleges felbontás nagyobb, mint a
+  teljes felbontás fele (pl. 288 a PAL-nál és 240 az NTSC-nél), akkor a
+  kapott 'képkockák' tényleg átlapolt mezőpárok lesznek.
+  Attól függően, hogy mit akarsz csinálni a videóval, hagyhatod ebben a
+  formában, veszteséges deinterlacing-et hajthatsz végre vagy szétszedheted
+  a párokat egyedi mezőkre.
+  </p><p>
+  Különben a filmed torzul a gyors mozgású jelenetek alatt és a bitráta
+  vezérlő is valószínűleg képtelen lesz az előírt bitráta megtartására,
+  ahogy az interlacing változások nagy mennyiségű adatot eredményeznek és
+  így nagy sávszélességet vesznek el. A deinterlacing-et bekapcsolhatod a
+  <tt class="option">-vf pp=DEINT_TYPE</tt> kapcsolóval.
+  Általában a <tt class="option">pp=lb</tt> jó, de ez az egyéni beállításokon is
+  múlik.
+  A többi deinterlacing algoritmust lásd a manuálban és próbálgasd ki őket.
+  </p></li><li class="listitem"><p>
+  Vágd le a felesleges helyet. Ha videót mentesz, a sarki arénák teljesen
+  feketék és némi zajt tartalmaznak. Ezek szintén nagy sávszélességet
+  foglalnak el feleslegesen. Pontosabban nem maguk a fekete területek,
+  hanem az éles átmenetek a fekete és a világosabb videó kép között, de
+  ez most nem fontos igazából. Mielőtt elindítanád a mentést, állítsd be
+  a <tt class="option">crop</tt> kapcsoló argumentumait, így a széleknél lévő
+  vackok le lesznek vágva. És ne feledd a képméreteket ésszerű keretek
+  között tartani.
+</p></li><li class="listitem"><p>
+  Figyelj a CPU terhelésre. Legtöbbször átlépi a 90%-os határt. Ha nagy
+  mentési buffered van, a <span class="application">MEncoder</span> túlél egy
+  esetleges túlterhelést pár másodpercig, de semmi több. Jobb kikapcsolni
+  a 3D OpenGL képernyővédőket és a hasonló dolgokat.
+</p></li><li class="listitem"><p>
+  Ne szórakozz a rendszer órával. A <span class="application">MEncoder</span> a rendszer
+  órát használja az A/V szinkronhoz. Ha átállítod a rendszer órát (különösen
+  vissza az időben), a <span class="application">MEncoder</span> összezavarodik és
+  képkockákat veszítesz. Ez egy fontos dolog, ha hálózathoz kapcsolódsz és
+  futtatsz valamilyen idő szinkronizációs szoftvert, mint pl. NTP. Ki kell
+  kapcsolnod az NTP-t a mentési folyamat alatt, ha megbízható mentést akarsz.
+</p></li><li class="listitem"><p>
+  Ne változtasd meg az <tt class="option">outfmt</tt>-t, hacsak vagy biztos benne,
+  hogy mit csinálsz, vagy a kártyád/vezérlőd tényleg nem támogatja az
+  alapértelmezést (YV12 színtér). A <span class="application">MPlayer</span>/<span class="application">MEncoder</span>
+  régebbi verzióiban szükséges volt a kimeneti formátum megadása. Ez a
+  jelenlegi kiadásban már javítva lett és az <tt class="option">outfmt</tt> már
+  nem szükséges, az alapértelmezés megfelel a legtöbb esetben. Például ha
+  videót mentesz DivX-be a <code class="systemitem">libavcodec</code>
+  használatával és megadod az <tt class="option">outfmt=RGB24</tt>-t a mentett kép
+  minőségének növelése érdekében, a mentett kép igazából később lesz
+  visszakonvertálva YV12-be így az egyetlen, amit elérsz, az erőteljes CPU
+  használat.
+</p></li><li class="listitem"><p>
+  Rengeteg módon menthetsz el audiót. A hangot grabbelheted a hang kártyáddal is
+  egy a videó kártya és a line-in között lévő külső kábelen keresztül, vagy a
+  bt878-as chip-be beépített ADC segítségével. A második esetben be kell töltened
+  a <span class="bold"><strong>btaudio</strong></span> vezérlőt. Olvasd el a
+  <tt class="filename">linux/Documentation/sound/btaudio</tt> fájlt (a kernel fájában,
+  nem az <span class="application">MPlayer</span>ében) némi leírásért ezen vezérlő
+  használatával kapcsolatban.
+</p></li><li class="listitem"><p>
+  Ha a <span class="application">MEncoder</span> nem tudja megnyitni az audió eszközt,
+  győződj meg róla, hogy tényleg elérhető-e. Gond lehet a hang szerverekkel, mint
+  pl. aRts (KDE) vagy ESD (GNOME). ha full duplex hang kártyád van (majdnem
+  az összes hangkártya tudja már ezt manapság), és KDE-t használsz, próbáld
+  meg bekapcsolni a "full duplex" opciót a hangkártya tulajdonságok menüben.
+</p></li></ul></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-input.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="tv-input.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="tv-examples.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">4. fejezet - TV bemenet </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 4.2. Példák</td></tr></table></div></body></html>

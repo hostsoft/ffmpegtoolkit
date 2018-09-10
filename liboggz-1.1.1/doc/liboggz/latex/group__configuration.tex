@@ -1,0 +1,18 @@
+\section{Configuration}
+\label{group__configuration}\index{Configuration@{Configuration}}
+\subsection{./configure}\label{group__configuration_configure}
+It is possible to customize the functionality of liboggz by using various ./configure flags when building it from source. You can build a smaller version of liboggz to only read or write. By default, both reading and writing support is built.
+
+For general information about using ./configure, see the file \doxyref{I\-N\-S\-T\-A\-L\-L }{p.}{group__install_install}\subsubsection{Removing writing support}\label{group__configuration_no_encode}
+Configuring with {\itshape --disable-\/write} will remove all support for writing\-:
+\begin{DoxyItemize}
+\item All internal write related functions will not be built
+\item Any attempt to call \doxyref{oggz\-\_\-new()}{p.}{oggz_8h_a6eb34d123389ae38d993601f9e7bb9d6}, \doxyref{oggz\-\_\-open()}{p.}{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db} or \doxyref{oggz\-\_\-open\-\_\-stdio()}{p.}{oggz_8h_ac49e9de0bc4ef1d91b43b13605f98b19} with {\itshape flags} == O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E will fail, returning N\-U\-L\-L
+\item Any attempt to call \doxyref{oggz\-\_\-write()}{p.}{group__write__api_ga3c97d94ea425d64546adf9c368b71904}, \doxyref{oggz\-\_\-write\-\_\-output()}{p.}{group__write__api_ga5606dff01964caec4582eb172fde0c1c}, \doxyref{oggz\-\_\-write\-\_\-feed()}{p.}{group__write__api_ga6ccaceb107db1fd2eae047dbdbaa5889}, \doxyref{oggz\-\_\-write\-\_\-set\-\_\-hungry\-\_\-callback()}{p.}{group__write__api_gaf362c030bc7a7f57cb23f2b863a59389}, or \doxyref{oggz\-\_\-write\-\_\-get\-\_\-next\-\_\-page\-\_\-size()}{p.}{group__write__api_gab25da7d2cbf39585357f2a426d3dba2f} will return O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D
+\end{DoxyItemize}\subsubsection{Removing reading support}\label{group__configuration_no_decode}
+Configuring with {\itshape --disable-\/read} will remove all support for reading\-:
+\begin{DoxyItemize}
+\item All internal reading related functions will not be built
+\item Any attempt to call \doxyref{oggz\-\_\-new()}{p.}{oggz_8h_a6eb34d123389ae38d993601f9e7bb9d6}, \doxyref{oggz\-\_\-open()}{p.}{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db} or \doxyref{oggz\-\_\-open\-\_\-stdio()}{p.}{oggz_8h_ac49e9de0bc4ef1d91b43b13605f98b19} with {\itshape flags} == O\-G\-G\-Z\-\_\-\-R\-E\-A\-D will fail, returning N\-U\-L\-L
+\item Any attempt to call \doxyref{oggz\-\_\-read()}{p.}{group__read__api_ga3ce7a31de5da56375057436c6b5108f2}, \doxyref{oggz\-\_\-read\-\_\-input()}{p.}{group__read__api_ga77d4158dd119f496f73311ace7f630d6}, \doxyref{oggz\-\_\-set\-\_\-read\-\_\-callback()}{p.}{group__read__api_ga6d5aae4f7f186fffe19d4fd3cd63148d}, \doxyref{oggz\-\_\-seek()}{p.}{group__seek__api_gaeef4b261d443701207954e5a636d6817}, or \doxyref{oggz\-\_\-seek\-\_\-units()}{p.}{group__seek__api_ga60bac88ef3695629efacec43a21927e5} will return O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D 
+\end{DoxyItemize}

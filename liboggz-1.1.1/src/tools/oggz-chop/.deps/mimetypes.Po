@@ -1,0 +1,8 @@
+mimetypes.o: ../mimetypes.c /usr/include/stdc-predef.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h ../mimetypes.h
+
+/usr/include/stdc-predef.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h:
+
+../mimetypes.h:

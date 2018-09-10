@@ -1,0 +1,28 @@
+\section{Building against liboggz}
+\label{group__building}\index{Building against liboggz@{Building against liboggz}}
+\subsection{Using G\-N\-U autoconf}\label{group__building_autoconf}
+If you are using G\-N\-U autoconf, you do not need to call pkg-\/config directly. Use the following macro to determine if liboggz is available\-:
+
+
+\begin{DoxyPre}
+PKG\_CHECK\_MODULES(OGGZ, oggz >= 0.6.0,
+                  HAVE\_OGGZ="yes", HAVE\_OGGZ="no")
+if test "x$HAVE\_OGGZ" = "xyes" ; then
+  AC\_SUBST(OGGZ\_CFLAGS)
+  AC\_SUBST(OGGZ\_LIBS)
+fi
+\end{DoxyPre}
+
+
+If liboggz is found, H\-A\-V\-E\-\_\-\-O\-G\-G\-Z will be set to \char`\"{}yes\char`\"{}, and the autoconf variables O\-G\-G\-Z\-\_\-\-C\-F\-L\-A\-G\-S and O\-G\-G\-Z\-\_\-\-L\-I\-B\-S will be set appropriately.\subsection{Determining compiler options with pkg-\/config}\label{group__building_pkg-config}
+If you are not using G\-N\-U autoconf in your project, you can use the pkg-\/config tool directly to determine the correct compiler options.
+
+
+\begin{DoxyPre}
+OGGZ\_CFLAGS={\ttfamily pkg-config --cflags oggz}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}OGGZ\_LIBS={\ttfamily pkg-config --libs oggz}
+\end{DoxyPre}
+ 

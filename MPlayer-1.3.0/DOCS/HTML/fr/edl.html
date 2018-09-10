@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.9. Listes d'Edition de Décision (EDL)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="usage.html" title="Chapitre 3. Utilisation"><link rel="prev" href="vcd.html" title="3.8. Lecture de VCDs"><link rel="next" href="advaudio.html" title="3.10. Audio Avancé"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="edl.html#edl_using" title="3.9.1. Utiliser un fichier EDL"><link rel="subsection" href="edl.html#edl_making" title="3.9.2. Faire un fichier EDL"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.9. Listes d'Edition de Décision (EDL)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vcd.html">Précédent</a> </td><th width="60%" align="center">Chapitre 3. Utilisation</th><td width="20%" align="right"> <a accesskey="n" href="advaudio.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="edl"></a>3.9. Listes d'Edition de Décision (EDL)</h2></div></div></div><p>
+Le système de liste d'édition de décision (Edit Decision Lists - EDL) vous
+permet de sauter ou rendre muet des sections de vidéos pendant la lecture,
+basé sur un fichier de configuration EDL spécifique au film.
+</p><p>
+Ceci est utile pour ceux qui veulent voir un film en mode "tout public".
+Vous pouvez couper toute violence, profanation, Jar-Jar Binks .. d'un film
+suivant vos préférences personnelles. A part ça, il y a d'autres
+utilisations, comme sauter automatiquement les publicités dans les fichiers vidéos
+que vous regardez.
+</p><p>
+Le format de fichier EDL est plutôt rudimentaire. Il y a une commande par ligne
+qui défini ce qui doit être fait (couper ou rétablir le son) et quand il faut le faire.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_using"></a>3.9.1. Utiliser un fichier EDL</h3></div></div></div><p>
+Incluez l'option <tt class="option">-edl &lt;nomfichier&gt;</tt> quand vous lancez
+<span class="application">MPlayer</span>, avec le nom du fichier EDL que vous voulez
+appliquer à la vidéo.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_making"></a>3.9.2. Faire un fichier EDL</h3></div></div></div><p>
+Le format de fichier actuel EDL est:
+</p><pre class="programlisting">
+[seconde de départ] [seconde de fin] [action]
+</pre><p>
+Où les secondes sont des nombres à virgule et l'action est soit
+<code class="literal">0</code> pour sauter, soit <code class="literal">1</code> pour couper le son.
+Exemple:
+</p><pre class="programlisting">
+5.3   7.1    0
+15    16.7   1
+420   422    0
+</pre><p>
+Cela va sauter de la seconde 5.3 à la seconde 7.1 de la vidéo, puis va couper
+le son à 15 secondes, le remettre à 16.7 secondes et sauter de la seconde 420
+à la seconde 422 de la vidéo. Ces actions seront appliquées quand le temps de
+lecture aura atteint le temps indiqué dans le fichier.
+</p><p>
+Pour créer un fichier EDL à partir duquel travailler, utilisez l'option
+<tt class="option">-edlout &lt;nomfichier&gt;</tt>. Durant la lecture, pressez
+la touche <span class="keycap"><b>i</b></span> pour marquer le début et la fin du passage à sauter.
+Une entrée correspondante sera ajoutée au fichier pour cette fois-ci. Vous pouvez
+ensuite ajuster de manière plus précise le fichier EDL ainsi que changer l'opération
+par défaut qui est de sauter le passage décrit par chaque ligne.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vcd.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="advaudio.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">3.8. Lecture de VCDs </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 3.10. Audio Avancé</td></tr></table></div></body></html>

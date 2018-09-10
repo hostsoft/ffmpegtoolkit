@@ -1,0 +1,80 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>第 1 章 介绍</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="index.html" title="MPlayer - 电影播放器"><link rel="prev" href="howtoread.html" title="如何阅读此文档"><link rel="next" href="install.html" title="第 2 章 Installation"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">第 1 章 介绍</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="howtoread.html">上一页</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="install.html">下一页</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="intro"></a>第 1 章 介绍</h1></div></div></div><p>
+<span class="application">MPlayer</span>是一款为Linux编写的电影播放器(在其他Unix
+上也可运行，并且很多<span class="bold"><strong>非x86</strong></span>CPU。参见
+<a class="xref" href="ports.html" title="第 5 章 Ports">Ports</a>）。
+它能播放大部分由许多本地，XAnim，RealPlayer及Win32 DLL解码器支持的MPEG, VOB,
+AVI, OGG/OGM, VIVO, ASF/WMA/WMV, QT/MOV/MP4, FLI, RM, NuppelVideo, yuv4mpeg,
+FILM, RoQ, PVA, Matroska文件。你也可以观看
+<span class="bold"><strong>VideoCD, SVCD, DVD, 3ivx, RealMedia, Sorenson, Theora</strong></span>,
+及<span class="bold"><strong>MPEG-4 (DivX)</strong></span>影片。<span class="application">MPlayer</span>
+另外一个很大的特点是支持广泛的输出驱动。它能工作在X11, Xv, DGA, OpenGL, SVGAlib,
+fbdev, AAlib, libcaca, DirectFB下，但你可以使用GGI及SDL(此种方式下的所有驱动)
+以及一些低端的特定显卡驱动(针对Matrox, 3Dfx及Radeon, Mach64, Permedia3)！
+他们大多数支持软件或硬件视频伸缩，所以你能以全屏幕欣赏影片。
+<span class="application">MPlayer</span>支持一些硬件MPEG解码器的显示，例如
+<a class="link" href="mpeg_decoders.html#dvb" title="4.16.1. DVB output and input">DVB</a>及<a class="link" href="mpeg_decoders.html#dxr3" title="4.16.3. DXR3/Hollywood+">DXR3/Hollywood+</a>。
+并且你认为那些又大又漂亮的不重名的有阴影修饰的包括欧洲ISO 8859-1,2（匈牙利语，
+英语，捷克语等等），西里尔语，韩语字体的子标题
+(<span class="bold"><strong>支持14种类型</strong></span>)，以及屏幕显示(OSD)如何呢？
+</p><p>
+此播放器能稳定的播放损坏的MPEG文件（对于一些VCD很有用），并且它能播放著名的
+windows media player不能播放的损坏的AVI文件。甚至能播放没有索引部分的AVI文件，
+并且你还可以用<tt class="option">-idx</tt>选项暂时重建索引，或者用
+<span class="application">MEncoder</span>永久性的建立索引，以此支持定位查找！
+如你所见，稳定性及质量是最重要的，但速度也让人赞叹。还有一套强大的拥有视音频
+处理功能的滤镜系统。
+</p><p>
+<span class="application">MEncoder</span>(<span class="application">MPlayer</span>的电影
+编码器)是一个简单的影片编码器，它可用于将<span class="application">MPlayer</span>
+可播放的影片
+(<span class="bold"><strong>AVI/ASF/OGG/DVD/VCD/VOB/MPG/MOV/VIV/FLI/RM/NUV/NET/PVA</strong></span>)
+编码成其他<span class="application">MPlayer</span>可播放的形式(如后所述).
+It can encode with various codecs, like
+<span class="bold"><strong>MPEG-4 (DivX4)</strong></span>
+(单通道或双通道), <code class="systemitem">libavcodec</code>,
+<span class="bold"><strong>PCM/MP3/VBR MP3</strong></span>
+音频。
+</p><div class="itemizedlist"><p class="title"><b><span class="application">MEncoder</span>的特点</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  支持从大量文件格式中编码生成文件，并且是<span class="application">MPlayer</span>
+  的解码器。
+</p></li><li class="listitem"><p>
+  编码到所有FFmpeg的
+  <code class="systemitem">libavcodec</code>
+  所支持的编码
+</p></li><li class="listitem"><p>
+  对从与<span class="bold"><strong>V4L兼容的TV调节器</strong></span>中出来的视频进行编码
+</p></li><li class="listitem"><p>
+  编码/合成到相交织的AVI文件并有正确的索引
+</p></li><li class="listitem"><p>
+  由外部音频流创建文件
+</p></li><li class="listitem"><p>
+  1, 2 或 3通道编码
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>VBR</strong></span> MP3音频
+  </p><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">重要</h3><p>
+  在windows上的播放器中播放VBR MP3音频并不能总是得到很好的效果！
+  </p></div><p>
+</p></li><li class="listitem"><p>
+  PCM音频
+</p></li><li class="listitem"><p>
+  媒体流复制
+</p></li><li class="listitem"><p>
+  输入A/V同步(基于PTS，可以通过<tt class="option">-mc 0</tt>选型禁用)
+</p></li><li class="listitem"><p>
+  通过<tt class="option">-ofps</tt>选项对fps进行纠正（此功能在将
+  30000/1001 fps VOB 转换到 24000/1001 fps AVI的文件时有作用）
+</p></li><li class="listitem"><p>
+  使用我们非常强大的滤镜系统（剪切，展开，覆盖，后续处理，旋转，缩放，
+  rgb/yuv之间的转换）
+</p></li><li class="listitem"><p>
+  能编码为DVD/VOBsub<span class="bold"><strong>并且</strong></span>能将文字子标题
+  放入所生成文件
+</p></li><li class="listitem"><p>
+  能将DVD子标题变为VOBsub格式
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>计划中的特性</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  更广泛的编/解码已知的文件格式/编解码器（通过DivX4/Indeo5/VIVO流生成VOB
+  文件:) ）。
+</p></li></ul></div><p>
+<span class="application">MPlayer</span>及<span class="application">MEncoder</span>
+可以在遵循GNU通用公用协议第2版的前提下被发布。
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="howtoread.html">上一页</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="install.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">如何阅读此文档 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 第 2 章 Installation</td></tr></table></div></body></html>

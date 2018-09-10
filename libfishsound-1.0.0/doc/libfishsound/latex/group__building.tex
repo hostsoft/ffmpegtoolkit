@@ -1,0 +1,28 @@
+\section{Building against libfishsound}
+\label{group__building}\index{Building against libfishsound@{Building against libfishsound}}
+\subsection{Using G\-N\-U autoconf}\label{group__building_autoconf}
+If you are using G\-N\-U autoconf, you do not need to call pkg-\/config directly. Use the following macro to determine if libfishsound is available\-:
+
+
+\begin{DoxyPre}
+PKG\_CHECK\_MODULES(FISHSOUND, fishsound >= 0.6.0,
+                  HAVE\_FISHSOUND="yes", HAVE\_FISHSOUND="no")
+if test "x$HAVE\_FISHSOUND" = "xyes" ; then
+  AC\_SUBST(FISHSOUND\_CFLAGS)
+  AC\_SUBST(FISHSOUND\_LIBS)
+fi
+\end{DoxyPre}
+ (Note that if your application requires F\-L\-A\-C support, you should check for a version of fishsound $>$= 0.\-9.\-0).
+
+If libfishsound is found, H\-A\-V\-E\-\_\-\-F\-I\-S\-H\-S\-O\-U\-N\-D will be set to \char`\"{}yes\char`\"{}, and the autoconf variables F\-I\-S\-H\-S\-O\-U\-N\-D\-\_\-\-C\-F\-L\-A\-G\-S and F\-I\-S\-H\-S\-O\-U\-N\-D\-\_\-\-L\-I\-B\-S will be set appropriately.\subsection{Determining compiler options with pkg-\/config}\label{group__building_pkg-config}
+If you are not using G\-N\-U autoconf in your project, you can use the pkg-\/config tool directly to determine the correct compiler options.
+
+
+\begin{DoxyPre}
+FISHSOUND\_CFLAGS={\ttfamily pkg-config --cflags fishsound}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}FISHSOUND\_LIBS={\ttfamily pkg-config --libs fishsound}
+\end{DoxyPre}
+ 

@@ -1,0 +1,57 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.3. Rádió</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="prev" href="tv-teletext-usage.html" title="5.2. A teletext használata"><link rel="next" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="radio.html#radio-tips" title="5.3.1. Használati tippek"><link rel="subsection" href="radio.html#radio-examples" title="5.3.2. Példák"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.3. Rádió</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-teletext-usage.html">Vissza</a> </td><th width="60%" align="center">5. fejezet - Teletext</th><td width="20%" align="right"> <a accesskey="n" href="video.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="radio"></a>5.3. Rádió</h2></div></div></div><p>
+Ez a fejezet arról szól, hogyan engedélyezheted a V4L-kompatibilis
+rádió tuner-ről történő rádió hallgatást. Lásd a man oldalt a
+rádiós opciók és a billentyűzeten keresztüli vezérlés leírásához.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-tips"></a>5.3.1. Használati tippek</h3></div></div></div><p>
+Az összes használható opcióhoz nézd meg a man oldalt.
+Következzék pár tipp:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Győződj meg róla, hogy a tuner működik más rádiós programmal Linuxon,
+  például a <span class="application">XawTV</span>-vel.
+</p></li><li class="listitem"><p>
+  Használd a <tt class="option">channels</tt> opciót. Egy példa:
+  </p><pre class="screen">-radio channels=104.4-Sibir,103.9-Maximum</pre><p>
+  Magyarázat: Ezzel az opcióval csak a 104.4 és 103.9 rádió adók
+  használhatóak. Egy szép OSD szöveg fog megjelenni csatorna váltásnál,
+  kiírva a csatorna nevét. A csatorna nevében szereplő szóközöket
+  "_" karakterrel kell helyettesíteni.
+</p></li><li class="listitem"><p>
+  Több lehetőség is adott az audió elmentésére. Menthetsz a hangkártyád segítségével
+  is, egy videó kártyát és a line-in-t összekötő külső kábellel, vagy az saa7134
+  chip-be beépített ADC segítségével. Ez utóbbi esetben be kell töltened az
+  <code class="systemitem">saa7134-alsa</code> vagy az
+  <code class="systemitem">saa7134-oss</code> vezérlőt.
+</p></li><li class="listitem"><p>
+  A <span class="application">MEncoder</span> nem használható az audió
+  elmentésére, mert videó folyamra van szüksége. Így vagy az
+  <span class="application">arecord</span> használhatod az ALSA projektből
+  vagy a <tt class="option">-ao pcm:file=file.wav</tt> opciót. Ez utóbbi
+  esetben nem fogsz hallani semmilyen hangot (hacsak nem használsz egy
+  line-in kábelt és nem kapcsolod ki a line-in némítást).
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-examples"></a>5.3.2. Példák</h3></div></div></div><div class="informalexample"><p>
+Bemenet szabványos V4L-ről (line-in kábellel, mentés kikapcsolva):
+</p><pre class="screen">mplayer radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+Bemenet szabványos V4L-ről (line-in kábellel, mentés kikapcsolva,
+V4Lv1 interfész):
+</p><pre class="screen">mplayer -radio driver=v4l radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+A csatorna listán második csatorna lejátszása:
+</p><pre class="screen">mplayer -radio channels=104.4=Sibir,103.9=Maximm radio://2</pre><p>
+</p></div><div class="informalexample"><p>
+Hang átadása a PCI buszon a rádió kártya belső ADC-jéből.
+Ebben a példában a tuner második hangkártyaként szerepel
+(ALSA device hw:1,0). Az saa7134-alapú kártyákhoz vagy az
+<code class="systemitem">saa7134-alsa</code> vagy az <code class="systemitem">saa7134-oss</code>
+modult be kell tölteni.
+</p><pre class="screen">
+mplayer -rawaudio rate=32000 radio://2/capture \
+    -radio adevice=hw=1.0:arate=32000:channels=104.4=Sibir,103.9=Maximm
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+Ha ALSA eszköz neveket használsz, a kettőspontokat egyenlőség
+jelekkel kell helyettesíteni, a periódusokat vesszők választják el.
+</p></div><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-teletext-usage.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="tv-teletext.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="video.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">5.2. A teletext használata </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6. fejezet - Videó kimeneti eszközök</td></tr></table></div></body></html>

@@ -1,0 +1,103 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.8. Encodage à partir de nombreux fichiers Image (JPEG, PNG, TGA, SGI)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="prev" href="menc-feat-streamcopy.html" title="6.7. Copie de flux"><link rel="next" href="menc-feat-extractsub.html" title="6.9. Extraction des sous-titres DVD depuis fichier Vobsub"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.8. Encodage à partir de nombreux fichiers Image (JPEG,
+PNG, TGA,
+SGI)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-streamcopy.html">Précédent</a> </td><th width="60%" align="center">Chapitre 6. Utilisation basique de <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-extractsub.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-enc-images"></a>6.8. Encodage à partir de nombreux fichiers Image (JPEG,
+PNG, TGA,
+SGI)</h2></div></div></div><p>
+<span class="application">MEncoder</span> est capable de créer des
+fichiers
+à partir de un ou plusieurs fichiers JPEG, PNG ou TGA.
+Avec une simple copie de trame il peut créer
+des fichiers MJPEG (Motion JPEG), MPNG (Motion PNG) ou MTGA
+(Motion TGA).
+</p><div class="orderedlist"><p class="title"><b>Explication du fonctionnement :</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+<span class="application">MEncoder</span>
+<span class="emphasis"><em>décode</em></span> le(s) image(s)
+d'origine(s) avec <code class="systemitem">libjpeg</code>
+(pour décoder
+des PNGs, il utilisera <code class="systemitem">libpng</code>).
+</p></li><li class="listitem"><p>
+<span class="application">MEncoder</span> envoie alors l'image
+décodée au
+compresseur
+vidéo choisi (DivX4, Xvid, ffmpeg msmpeg4, etc.).
+</p></li></ol></div><p><b>Exemples. </b>
+Une explication de l'option <tt class="option">-mf</tt> peut être trouvée
+dans la page de man.
+
+</p><div class="informalexample"><p>
+Créer un fichier Mpeg-4 à partir de tous les fichiers JPEG du
+répertoire courant:
+</p><pre class="screen">
+mencoder -mf://*.jpg -mf w=800:h=600:fps=25:type=jpg -ovc lavc
+-lavcopts vcodec=mpeg4 -oac copy -o
+<em class="replaceable"><code>sortie.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Créer un fichier MPEG-4 à partir de quelques fichiers JPEG du
+répertoire courant:
+</p><pre class="screen">
+mencoder
+mf://<em class="replaceable"><code>trame001.jpg,trame002.jpg</code></em> -mf
+w=800:h=600:fps=25:type=jpg -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell
+-oac copy -o <em class="replaceable"><code>sortie.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Création d'un fichier MPEG4 depuis une liste de fichiers JPEG (le fichier list.txt contenu
+dans le répertoire courant, liste les fichiers utilisés comme source, un par ligne):
+</p><pre class="screen">
+mencoder mf://<em class="replaceable"><code>@list.txt</code></em> -mf w=800:h=600:fps=25:type=jpg \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -oac copy -o <em class="replaceable"><code>sortie.avi</code></em>
+</pre><p>
+</p></div><p>
+
+Il est possible de mélanger différents types d'images, quelque soit
+la méthode utilisée — fichiers individuels, joker( i.e * )
+ou fichier avec liste — à condition que, bien sûr, elles soient de même dimension.
+De fait, vous pouvez par exemple, prendre une image de type PNG
+comme titre, et ensuite faire un diaporama de vos photos JPEG.
+
+</p><div class="informalexample"><p>
+Créer un fichier Motion JPEG (MJPEG) à partir de tous les fichiers
+JPEG du répertoire courant:
+</p><pre class="screen">
+mencoder mf://*.jpg -mf w=800:h=600:fps=25:type=jpg -ovc copy -oac copy -o <em class="replaceable"><code>sortie.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Créer un fichier non-compressé à partir de tous les fichiers
+PNG du répertoire courant:
+</p><pre class="screen">
+mencoder mf://*.png -mf w=800:h=600:fps=25:type=png -ovc raw -oac copy -o <em class="replaceable"><code>sortie.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+La largeur doit être un entier multiple de 4, c'est une
+limitation du
+format AVI RGB brut.
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Créer un fichier Motion PNG (MPNG) à partir de tous les
+fichiers PNG du répertoire courant:
+</p><pre class="screen">
+mencoder mf://*.png -mf w=800:h=600:fps=25:type=png -ovc copy -oac copy -o <em class="replaceable"><code>sortie.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Créer un fichier Motion TGA (MTGA) à partir de tous les fichiers TGA
+du répertoire courant:
+</p><pre class="screen">
+mencoder mf://*.tga -mf w=800:h=600:fps=25:type=tga -ovc copy -oac
+copy -o <em class="replaceable"><code>sortie.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-streamcopy.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-extractsub.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">6.7. Copie de flux </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 6.9. Extraction des sous-titres DVD depuis fichier
+Vobsub</td></tr></table></div></body></html>

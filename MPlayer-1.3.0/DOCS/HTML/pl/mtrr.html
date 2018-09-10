@@ -1,0 +1,46 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.1. Ustawianie MTRR</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="prev" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="next" href="output-trad.html" title="4.2. Wyjścia video dla tradycyjnych kart graficznych"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.1. Ustawianie MTRR</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="video.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 4. Urządzenia wyjścia video</th><td width="20%" align="right"> <a accesskey="n" href="output-trad.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mtrr"></a>4.1. Ustawianie MTRR</h2></div></div></div><p>
+Jest WYSOCE wskazane sprawdzenie, czy rejestry MTRR są ustawione prawidłowo,
+ponieważ mogą dać duży wzrost wydajności.
+</p><p>
+Wykonaj <span class="command"><strong>cat /proc/mtrr</strong></span>:
+</p><pre class="screen">
+<code class="prompt">--($:~)--</code> cat /proc/mtrr
+reg00: base=0xe4000000 (3648MB), size=  16MB: write-combining, count=9
+reg01: base=0xd8000000 (3456MB), size= 128MB: write-combining, count=1</pre><p>
+</p><p>
+Widać mojego Matroksa G400 z 16MB pamięci. Wydałem tę komendę z XFree 4.x.x,
+które ustawiają MTRR automatycznie.
+</p><p>
+Jeżeli nie zadziałało, trzeba to ustawić ręcznie.
+Przede wszystkim musisz znaleźć adres bazowy. Możesz to zrobić na 3 sposoby:
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  z komunikatów startowych X11, na przykład:
+  </p><pre class="screen">
+(--) SVGA: PCI: Matrox MGA G400 AGP rev 4, Memory @ 0xd8000000, 0xd4000000
+(--) SVGA: Linear framebuffer at 0xD8000000</pre><p>
+</p></li><li class="listitem"><p>
+  z <tt class="filename">/proc/pci</tt> (użyj polecenia <span class="command"><strong>lspci -v</strong></span>):
+  </p><pre class="screen">
+01:00.0 VGA compatible controller: Matrox Graphics, Inc.: Unknown device 0525
+Memory at d8000000 (32-bit, prefetchable)</pre><p>
+</p></li><li class="listitem"><p>
+  z komunikatów sterownika mga_vid w jądrze (użyj <span class="command"><strong>dmesg</strong></span>):
+  </p><pre class="screen">mga_mem_base = d8000000</pre><p>
+</p></li></ol></div><p>
+</p><p>
+Znajdźmy teraz rozmiar pamięci. Jest to bardzo łatwe, po prostu zamień
+rozmiar RAMu na karcie graficznej na system szesnastkowy lub użyj
+tej tabelki:
+</p><div class="informaltable"><table border="0"><colgroup><col><col></colgroup><tbody><tr><td>1 MB</td><td>0x100000</td></tr><tr><td>2 MB</td><td>0x200000</td></tr><tr><td>4 MB</td><td>0x400000</td></tr><tr><td>8 MB</td><td>0x800000</td></tr><tr><td>16 MB</td><td>0x1000000</td></tr><tr><td>32 MB</td><td>0x2000000</td></tr></tbody></table></div><p>
+</p><p>
+Znasz już adres bazowy i rozmiar pamięci. Ustawmy więc rejestry MTRR!
+Na przykład dla powyższej karty Matrox (<code class="literal">base=0xd8000000</code>)
+z 32MB RAMu (<code class="literal">size=0x2000000</code>) po prostu wykonaj:
+</p><pre class="screen">
+echo "base=0xd8000000 size=0x2000000 type=write-combining" &gt; /proc/mtrr</pre><p>
+</p><p>
+Nie wszystkie procesory obsługują MTRR. Na przykład starsze K6-2
+(jakieś 266MHz, stepping 0) nie obsługują MTRR, ale stepping 12 już tak
+(wykonaj <span class="command"><strong>cat /proc/cpuinfo</strong></span> aby sprawdzić).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="video.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="output-trad.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">Rozdział 4. Urządzenia wyjścia video </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 4.2. Wyjścia video dla tradycyjnych kart graficznych</td></tr></table></div></body></html>

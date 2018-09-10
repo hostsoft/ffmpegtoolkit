@@ -1,0 +1,189 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.3. DGA</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="xv.html" title="4.2. Xv"><link rel="next" href="sdl.html" title="4.4. SDL"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.3. DGA</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="xv.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="sdl.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dga"></a>4.3. DGA</h2></div></div></div><p><b>PŘEDMLUVA. </b>
+Tento dokument se několika slovy snaží vysvětlit co je to DGA a co
+výstupní videorozhraní DGA pro <span class="application">MPlayer</span>
+udělat může (a co ne).
+</p><p><b>CO JE DGA. </b>
+<acronym class="acronym">DGA</acronym> je zkratka pro <span class="emphasis"><em>Direct Graphics
+Access</em></span>, což je program pro obejití X servru a
+přímou modifikaci paměti framebufferu. Technicky to znamená mapování paměti
+framebufferu do paměťového prostoru vašeho procesu.
+To kernel umožňuje pouze pokud máte práva superuživatele. Ty dostanete buď
+nalogováním se jako <code class="systemitem">root</code>, nebo
+nastavením SUID bitu spustitelnému souboru
+<span class="application">MPlayer</span>u (<span class="bold"><strong>nedoporučujeme
+</strong></span>).
+</p><p>
+Existují dvě verze DGA: DGA1 je používáno XFree 3.x.x a DGA2 bylo
+představeno v XFree 4.0.1.
+</p><p>
+DGA1 poskytuje pouze přímý přístup k framebufferu jak byl popsán výše.
+Chcete-li přepínat rozlišení videosignálu, musíte se spolehnout na
+rozšíření XVidMode.
+</p><p>
+DGA2 zahrnuje vlastnosti rozšíření XVidMode a rovněž umožňuje přepínat
+barevnou hloubku zobrazovače. Takže můžete jendoduše provozovat X server
+s hloubkou 32 bitů a přepnout na barevnou hloubku 15 bitů a naopak.
+</p><p>
+DGA má ovšem i jisté obtíže. Zdá se, že je nějak závislé na grafickém čipu,
+který používáte a na implementaci video ovladače X serveru, který tento čip
+obsluhuje. Takže nefunguje na všech systémech...
+</p><p><b>INSTALACE PODPORY DGA PRO MPLAYER. </b>
+Nejprve si ověřte, že X nahrávají rozšíření DGA, viz v
+<tt class="filename">/var/log/XFree86.0.log</tt>:
+
+</p><pre class="programlisting">(II) Loading extension XFree86-DGA</pre><p>
+
+XFree86 4.0.x nebo vyšší je
+<span class="bold"><strong>vřele doporučován</strong></span>!
+Video rozhraní DGA <span class="application">MPlayer</span>u je autodetekováno
+<tt class="filename">./configure</tt>, nebo jej můžete vynutit pomocí
+<tt class="option">--enable-dga</tt>.
+</p><p>
+Pokud rozhraní nemůže přepnout do menšího rozlišení, experimentujte s
+volbami <tt class="option">-vm</tt> (pouze s X 3.3.x), <tt class="option">-fs</tt>,
+<tt class="option">-bpp</tt>, <tt class="option">-zoom</tt>, abyste nalezli videorežim, do
+kterého se video napasuje. Momentálně není žádný převodník :(
+</p><p>
+Staňte se <code class="systemitem">root</code>em. DGA vyžaduje
+práva roota, aby mohl přímo zapisovat do video paměti. Pokud jej chcete
+provozovat jako uživatel, pak nainstalujte <span class="application">MPlayer</span>
+jako SUID root:
+
+</p><pre class="screen">
+chown root <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod 750 <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod +s <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+</pre><p>
+
+A nyní to bude pracovat také pod obyčejným uživatelem.
+</p><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Bezpečnostní riziko</h3><p>
+Toto je <span class="bold"><strong>velké</strong></span> bezpečnostní riziko!
+<span class="bold"><strong>Nikdy</strong></span> to nedělejte na serveru nebo počítači
+ke kterému mohou mít přístup ostatní lidé, jelikož ti mohou získat
+superuživatelská práva díky SUID root
+<span class="application">MPlayer</span>u.
+</p></div><p>
+Nyní použijte volbu <tt class="option">-vo dga</tt> a je to! (doufám:)
+Také byste měli vyzkoušet, jestli vám pracuje volba
+<tt class="option">-vo sdl:dga</tt>!
+Je mnohem rychlejší!
+</p><p><a name="dga-modelines"></a><b>PŘEPÍNÁNÍ ROZLIŠENÍ. </b>
+Rozhraní DGA umožňuje přepínání rozlišení výstupního signálu.
+To odstraňuje potřebu (pomalého) softwarového škálování a zároveň
+poskytuje obraz na celou obrazovku. Ideálně by se mělo přepnout na přesné
+rozlišení (s výjimkou dodržení poměru stran) video dat, ale X
+server umožňuje poze přepínání do rozlišení předdefinovaných v
+<tt class="filename">/etc/X11/XF86Config</tt>
+(nebo <tt class="filename">/etc/X11/XF86Config-4</tt> pro XFree 4.X.X).
+Ty jsou definovány takzvanými "modelines" a závisí na
+schopnostech vašeho video hardwaru. X server projíždí tento konfigurační
+soubor při startu a zakáže režimy (modelines) nevhodné pro váš hardware.
+Povolené videorežimy naleznete v X11 log souboru. Tel lze nalézt zde:
+<tt class="filename">/var/log/XFree86.0.log</tt>.
+</p><p>
+Tyto vstupy jsou známy dobrou funkcí na Riva128 čipu, s použitím modulu
+ovladače nv.o X serveru.
+</p><pre class="programlisting">
+Section "Modes"
+  Identifier "Modes[0]"
+  Modeline "800x600"  40     800 840 968 1056  600 601 605 628
+  Modeline "712x600"  35.0   712 740 850 900   400 410 412 425
+  Modeline "640x480"  25.175 640 664 760 800   480 491 493 525
+  Modeline "400x300"  20     400 416 480 528   300 301 303 314 Doublescan
+  Modeline "352x288"  25.10  352 368 416 432   288 296 290 310
+  Modeline "352x240"  15.750 352 368 416 432   240 244 246 262 Doublescan
+  Modeline "320x240"  12.588 320 336 384 400   240 245 246 262 Doublescan
+EndSection
+</pre><p><b>DGA &amp; MPLAYER. </b>
+DGA je v <span class="application">MPlayer</span>u použito na dvou místech: SDL
+rozhraní může být nastaveno pro jeho použití (<tt class="option">-vo sdl:dga</tt>) a
+přímé DGA rozhraní (<tt class="option">-vo dga</tt>). Výše uvedené je platné
+pro obě varianty; v následující sekci vysvětlíme jak pracuje DGA rozhraní
+<span class="application">MPlayer</span>u.
+</p><p><b>VLASTNOSTI. </b>
+DGA rozhraní je použito zadáním volby <tt class="option">-vo dga</tt> na příkazovém
+řádku. Výchozím chováním je přepnout na rozlišení co nejbižší originálním
+rozměrům videa. Zcela záměrně se ignorují volby <tt class="option">-vm</tt> a
+<tt class="option">-fs</tt> (umožňující přepínání videorežimů a zobrazení na celou
+obrazovku) - vždy zkouší pokrýt tak velkou plochu obrazovky, jak je to jen možné
+pomocí přepnutí videorežimu, což nás oprostí od využívání dalších CPU cyklů
+pro škálování obrazu. Pokud se vám nelíbí režim, který vybere automatika,
+můžete ji přinutit pro výběr režimu nejblíže odpovídajícímu rozlišení,
+které zadáte pomocí <tt class="option">-x</tt> a <tt class="option">-y</tt>.
+Při zadání volby <tt class="option">-v</tt>, vypíše DGA rozhraní, spolu s dalšími
+věcmi, seznam všech rozlišení podporovaných vašim aktuálním
+<tt class="filename">XF86Config</tt> souborem.
+Máte-li DGA2, můžete jej rovněž přinutit použít různé barevné hloubky pomocí
+volby <tt class="option">-bpp</tt>. Platné barevné hloubky jsou 15, 16, 24 a 32.
+To jestli jsou tyto barevné hloubky nativně podporovány, nebo musí být provedena
+(pravděpodobně pomalá) konverze závisí na vašem hardware.
+</p><p>
+Pokud jste natolik šťastlivci, že máte dostatek volné mimoobrazové paměti,
+aby se zde vměstnal celý obrázek, použije DGA rozhraní dvojitou vyrovnávací
+paměť, což vám zajistí mnohem plynulejší přehrávání filmů. Rozhraní vás bude
+informovat jestli je dvojitý buffer zapnutý nebo ne.
+</p><p>
+Dvojitou vyrovnávací pamětí se rozumí to, že je další snímek vykreslován do
+paměti mimo zobrazovanou plochu, zatímco je zobrazován aktuální snímek.
+Jakmile je další snímek připraven, grafický čip je informován o pozici v paměti,
+kde je nový snímek a jednoduše přesune data k zobrazení odtud.
+Mezitím je další buffer v paměti zaplňován novými videodaty.
+</p><p>
+Dvojitá vyrovnávací paměť může být zapnuta volbou
+<tt class="option">-double</tt> a vypnuta volbou
+<tt class="option">-nodouble</tt>. Současná výchozí hodnota je vypnutí dvojité
+vyrovnávací paměti. Při použití DGA rozhraní bude display na obrazovce (OSD)
+pracovat pouze při zapnuté dvojité vyrovnávací paměti.
+Zapnutí dvojité vyrovnávací paměti však může vyústit velkou ztrátou výkonu
+(na mé K6-II+ 525 to použije dalších 20% CPU výkonu!) v závislosti na
+implementaci DGA pro váš hardware.
+</p><p><b>OTÁZKA RYCHLOSTI. </b>
+Obecně by přístup přes DGA framebuffer měl být alespoň tak rychlý jako
+použití rozhraní X11 navíc s celoobrazovkovým režimem.
+Procentní hodnoty rychlosti vypisované
+<span class="application">MPlayer</span>em byste měli brát s rezervou, jelikož
+například při použití X11 nezahrnují čas spotřebovaný X serverem pro
+vlastní vykreslování. Zavěste terminál na sériovou linku počítače a
+spusťte <span class="command"><strong>top</strong></span>, abyste viděli co se opravdu děje ve vašem
+počítači.
+</p><p>
+Obecně zrychlení použitím DGA oproti 'běžnému' X11 velmi závisí na vaší
+grafické kertě a jak dobře je pro ni optimalizován modul X serveru.
+</p><p>
+Pokud máte pomalý stroj, raději použijte 15 nebo 16 bitovou hloubku, jelikož
+vyžaduje pouze poloviční průchodnost paměti oproti 32 bitovému zobrazení.
+</p><p>
+Použití hloubky 24 bitů je dobré i v případě, že vaše karta nativně podporuje
+pouze barevnou hloubku 32 bitů, jelikož se přenáší o 25% méně dat oproti
+režimu 32/32.
+</p><p>
+Viděl jsem pár AVI souborů přehrávat na Pentiu MMX 266. Procesory AMD K6-2
+pracují při 400 MHZ a výše.
+</p><p><b>ZNÁMÉ CHYBY. </b>
+Podle některých vývojářů XFree je DGA zvěrstvo. Říkají, abyste je raději
+nepoužívali. Jeho implementace není vždy bezproblémová v každém dostupném
+ovladači pro XFree.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  V XFree 4.0.3 je v <tt class="filename">nv.o</tt> chyba vedoucí
+  k podivným barvám.
+</p></li><li class="listitem"><p>
+  Ovladač pro ATI vyžaduje více než jedno zpětné přepnutí režimu po skončení
+  používání DGA.
+</p></li><li class="listitem"><p>
+  Některé ovladače selžou při přepnutí do normálního rozlišení (použijte
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Numerické +</b></span>
+  a
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Numerické -</b></span>
+  pro ruční přepnutí).
+</p></li><li class="listitem"><p>
+  Některé ovladače zobrazují divné barvy.
+</p></li><li class="listitem"><p>
+  Některé ovladače lžou o množství paměti kterou mapují do adresového prostoru
+  procesu, takže vo_dga nepoužije dvojitou vyrovnávací paměť (SIS?).
+</p></li><li class="listitem"><p>
+  Některé ovladače nezvládnou ohlásit dokonce ani jeden platný režim.
+  V tom případě rozhraní DGA spadne s hláškou o nesmaslném režimu
+  100000x100000 nebo tak.
+</p></li><li class="listitem"><p>
+  OSD pracuje pouze se zapnutou dvojitou vyrovnávací pamětí (jinak poblikává).
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="xv.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="sdl.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.2. Xv </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.4. SDL</td></tr></table></div></body></html>

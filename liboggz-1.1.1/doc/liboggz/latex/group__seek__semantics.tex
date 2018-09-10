@@ -1,0 +1,22 @@
+\section{Semantics of seeking in Ogg bitstreams}
+\label{group__seek__semantics}\index{Semantics of seeking in Ogg bitstreams@{Semantics of seeking in Ogg bitstreams}}
+\subsection{Introduction}\label{group__seek__semantics_seek_semantics_intro}
+\begin{DoxyVerb}    [*** This line works around a bug in doxygen ***]
+
+    [*** This line works around a bug in doxygen ***]
+\end{DoxyVerb}
+
+
+The seeking semantics of the Ogg file format were outlined by Monty in {\tt a post to theora-\/dev} in September 2002. Quoting from that post, we have the following assumptions\-:
+
+
+\begin{DoxyItemize}
+\item Ogg is not a non-\/linear format. ... It is a media transport format designed to do nothing more than deliver content, in a stream, and have all the pieces arrive on time and in sync.
+\item The Ogg layer does not know the specifics of the codec data it's multiplexing into a stream. It knows nothing beyond 'Oooo, packets!', that the packets belong to different buckets, that the packets go in order, and that packets have position markers. Ogg does not even have a concept of 'time'; it only knows about the sequentially increasing, unitless position markers. It is up to higher layers which have access to the codec A\-P\-Is to assign and convert units of framing or time.
+\end{DoxyItemize}
+
+(For more details on the structure of Ogg streams, see the \doxyref{Ogg Basics }{p.}{group__basics} section).
+
+For data such as media, for which it is possible to provide a mapping such as 'time', Oggz can efficiently navigate through an Ogg stream by use of an Oggz\-Metric callback, thus allowing automatic seeking to points in 'time'.
+
+For common codecs you can ask Oggz to set this for you automatically by instantiating the O\-G\-G\-Z handle with the O\-G\-G\-Z\-\_\-\-A\-U\-T\-O flag set. For others you can specify a multiplier with \doxyref{oggz\-\_\-set\-\_\-metric\-\_\-linear()}{p.}{oggz__deprecated_8h_a12f232bca448853e66a1226ddccff7e0}, or a generic non-\/linear metric with \doxyref{oggz\-\_\-set\-\_\-metric()}{p.}{group__metric_ga5a630e8dcd04e1dd6601d8f56f0af3f6}. 

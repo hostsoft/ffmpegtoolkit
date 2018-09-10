@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.4. Riproduzione (streaming) da rete o da pipe</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="prev" href="control.html" title="3.3. Controlli"><link rel="next" href="drives.html" title="3.5. Lettori CD/DVD"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="subsection" href="streaming.html#streaming-save" title="3.4.1. Salvare il contenuto in streaming"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.4. Riproduzione (streaming) da rete o da pipe</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="control.html">Indietro</a> </td><th width="60%" align="center">Capitolo 3. Utilizzo</th><td width="20%" align="right"> <a accesskey="n" href="drives.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="streaming"></a>3.4. Riproduzione (streaming) da rete o da pipe</h2></div></div></div><p>
+<span class="application">MPlayer</span> può riprodurre file dalla rete, usando
+i protocolli HTTP, FTP, MMS o RTSP/RTP.
+</p><p>
+La riproduzione funziona semplicemente passando l'URL sulla riga comando.
+<span class="application">MPlayer</span> onora la variabile d'ambiente
+<code class="envar">http_proxy</code>, usando un proxy quando disponibile.
+Si può anche forzare l'uso di un proxy:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>http_proxy://proxy.micorsops.com:3128/http://micorsops.com:80/stream.asf</code></em>
+</pre><p>
+</p><p>
+<span class="application">MPlayer</span> può leggere dallo standard input
+(<span class="emphasis"><em>non</em></span> named pipes). Ciò può essere usato per riprodurre
+via FTP:
+</p><pre class="screen">
+wget <em class="replaceable"><code>ftp://micorsops.com/qualcosa.avi</code></em> -O - | mplayer -
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Si raccomanda inoltre di abilitare <tt class="option">-cache</tt> riproducendo da rete:
+</p><pre class="screen">
+wget <em class="replaceable"><code>ftp://micorsops.com/qualcosa.avi</code></em> -O - | mplayer -cache 8192 -
+</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="streaming-save"></a>3.4.1. Salvare il contenuto in streaming</h3></div></div></div><p>
+Una volte che riesci nel far riprodurre a <span class="application">MPlayer</span>
+il tuo flusso internet preferito, puoi usare l'opzione
+<tt class="option">-dumpstream</tt> per salvare il flusso in un file.
+Per esempio:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>http://217.71.208.37:8006</code></em> -dumpstream -dumpfile <em class="replaceable"><code>stream.asf</code></em>
+</pre><p>
+salverà il contenuto riprodotto da
+<em class="replaceable"><code>http://217.71.208.37:8006</code></em> dentro a
+<em class="replaceable"><code>stream.asf</code></em>.
+Ciò funziona con tutti i protocolli supportati da
+<span class="application">MPlayer</span>, come MMS, RSTP, e così via.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="control.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="drives.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">3.3. Controlli </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 3.5. Lettori CD/DVD</td></tr></table></div></body></html>

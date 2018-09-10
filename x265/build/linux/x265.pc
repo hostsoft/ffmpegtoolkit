@@ -1,0 +1,11 @@
+prefix=/usr/local/ffmpegtoolkit
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: x265
+Description: H.265/HEVC video encoder
+Version: 2.7
+Libs: -L${libdir} -lx265
+Libs.private: -lstdc++ -lm -lrt -ldl -lnuma
+Cflags: -I${includedir}

@@ -1,0 +1,412 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>9.2. Mit kezdjünk a telecine-nel és az átlapolással NTSC DVD-ken</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="prev" href="menc-feat-dvd-mpeg4.html" title='9.1. Nagyon jó minőségű MPEG-4 ("DivX") rip készítése DVD filmből'><link rel="next" href="menc-feat-enc-libavcodec.html" title="9.3. Kódolás a libavcodec codec családdal"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-intro" title="9.2.1. Bevezetés"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-ident" title="9.2.2. Hogyan állapítható meg egy videó típusa"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-encode" title="9.2.3. Hogyan lehet elkódolni ezen kategóriákat"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="9.2.4. Lábjegyzet"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">9.2. Mit kezdjünk a telecine-nel és az átlapolással NTSC DVD-ken</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-dvd-mpeg4.html">Vissza</a> </td><th width="60%" align="center">9. fejezet - Kódolás a <span class="application">MEncoder</span>rel</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-enc-libavcodec.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-telecine"></a>9.2. Mit kezdjünk a telecine-nel és az átlapolással NTSC DVD-ken</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-intro"></a>9.2.1. Bevezetés</h3></div></div></div><p><b>Mi az a telecine? </b>
+Ha nem érted teljesen, ami ebben a dokumentumban le van írva, olvasd el a
+<a class="ulink" href="http://en.wikipedia.org/wiki/Telecine" target="_top">Wikipedia telecine szócikkét</a>.
+Ez egy érthető és meglehetősen átfogó leírás arról, hogy mi is az
+a telecine.
+</p><p><b>Megjegyzés a számokhoz. </b>
+Sok dokumentáció, beleértve a fent belinkelt cikket is, az NTSC videó mező
+per másodperc értékét 59.94-ként határozza meg, és a megfelelő képkocka
+per másodperc értéket 29.97-nek (telecine-s és átlapolt) és 23.976-nak
+írja (progresszív). Az egyszerűség kedvéért sok dokumentáció még ezeket
+a számokat is lekerekíti 60-ra, 30-ra és 24-re.
+</p><p>
+Pontosan fogalmazva az összes szám csak közelítés. A fekete-fehér
+NTSC videó pontosan 60 mező per másodperces volt, de később 60000/1001-et
+választottak, hogy a szín adatokat hozzáigazítsák, de kompatibilisek
+maradjanak a kortárs fekete-fehér televíziókkal. A digitális NTSC videó
+(mint ami a DVD-n van) is 60000/1001 mező per másodperces. Ebből származik,
+hogy az átlapolt és telecine-lt videó 30000/1001 képkocka per másodperces;
+a progresszív videó 24000/1001 képkocka per másodperces.
+</p><p>
+A <span class="application">MEncoder</span> dokumentációjának régebbi változatai
+és számos archivált levelezési listára küldött levél az 59.94-re, 29.97-re
+és a 23.976-ra hivatkozik. Az összes <span class="application">MEncoder</span>
+dokumentáció frissítve lett a tört számokra és neked is ajánlatos ezeket
+használni.
+</p><p>
+<tt class="option">-ofps 23.976</tt> helytelen.
+<tt class="option">-ofps 24000/1001</tt> használandó helyette.
+</p><p><b>A telecine használata. </b>
+Az összes videónak, amit NTSC televízión szándékoznak megjeleníteni,
+60000/1001 mező per másodperc sebességűnek kell lennie. A TV-nek készített
+filmeket és show-kat gyakran direkt 60000/1001 mező per másodperces sebességgel
+fényképezik, de a mozifilmek nagy része 24 vagy 24000/1001 képkocka per
+másodperccel készül. Amikor a mozis film DVD-jét készítik, a videót egy
+telecine-nek nevezett eljárás keretében televíziós formátumra konvertálják.
+</p><p>
+Egy DVD-n a videót tulajdonképpen soha sem 60000/1001 mező per
+másodperccel tárolják. Abban a videóban, ami eredetileg 60000/1001-es
+volt, egy pár mező alkot egy képkockát, 30000/1001 képkocka per
+másodperces sebességet eredményezve. A hardveres DVD lejátszók ezután
+beolvasnak egy, a videó folyamban benne lévő jelzőt, hogy megállapítsák,
+hogy a páros vagy páratlan sorszámú sorok alkotják-e az első mezőt.
+</p><p>
+Általában a 24000/1001 képkocka per másodperces tartalom változatlan
+marad, ha DVD-re kódolják és a DVD lejátszónak kell telecine-t
+végezni menet közben. De néha a videót a DVD-re mentés
+<span class="emphasis"><em>előtt</em></span> telecine-lik, akkor is, ha eredetileg
+24000/1001 képkocka per másodperces volt, így 60000/1001 mező per
+másodperces lesz, és a lemezen 30000/1001 képkocka per
+másodpercesként tárolódik.
+</p><p>
+Ha megnézed az egyes képkockákat a 60000/1001 mező per másodperces
+videóban, telecine-lt vagy sem, az átlapolás tisztán látható bármilyen
+mozgásnál, mert az egyik mező (mondjuk a páros sorszámú sorok) időben
+1/(60000/1001) másodperccel későbbi történést reprezentál, mint a másik.
+Átlapolt videó számítógépen történő lejátszáskor rondán néz ki, mert
+egyrészt a monitornak nagyobb a felbontása, másrészt mert a videót
+kockáról kockára mutatja meg, mezőről mezőre történő lejátszás helyett.
+</p><div class="itemizedlist"><p class="title"><b>Megjegyzések:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Ez a rész csak NTSC DVD-re vonatkozik, nem a PAL-ra.
+</p></li><li class="listitem"><p>
+  A <span class="application">MEncoder</span> példa sorok a dokumentumban
+  <span class="bold"><strong>nem</strong></span> hétköznapi felhasználásra lettek
+  írva. Csak a legalapvetőbb dolgokat mutatják, ami a megfelelő kategóriába
+  tartozó videók kódolásához szükséges. A jó DVD rip-ek készítése vagy a
+  <code class="systemitem">libavcodec</code> finomhangolása a
+  maximális minőség eléréséhez nem tartozik ezen fejezet célkitűzései közé,
+  nézd meg a <a class="link" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel">MEncoder kódolási útmutató</a>
+  többi részét.
+</p></li><li class="listitem"><p>
+  Sok megjegyzés vonatkozik erre a leírásra, melyek így vannak jelölve:
+  <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="9.2.4. Lábjegyzet">[1]</a>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-ident"></a>9.2.2. Hogyan állapítható meg egy videó típusa</h3></div></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-progressive"></a>9.2.2.1. Progresszív</h4></div></div></div><p>
+A progresszív videót eredetileg 24000/1001 fps-sel rögzítették és
+változtatás nélkül tárolják a DVD-n.
+</p><p>
+Ha egy progressive DVD-t az <span class="application">MPlayer</span>rel játszasz
+le, az <span class="application">MPlayer</span> a következő sort fogja kiírni,
+amint a film lejátszása megkezdődik:
+</p><pre class="screen">
+demux_mpg: 24000/1001 fps progressive NTSC content detected, switching framerate.
+</pre><p>
+magyarul:
+</p><pre class="screen">
+demux_mpg: 24000/1001 fps progresszív NTSC formátumot találtam, frameráta váltás.
+</pre><p>
+Ettől a ponttól kezdve a demux_mpg soha sem mondhatja azt, hogy
+"30000/1001 fps NTSC formátumot" talált.
+</p><p>
+Ha progresszív videót nézel, soha nem láthatod meg az átlapolást. De
+vigyázz, néha pár telecine-s bit belekeveredik oda, ahol nem számítasz
+rá. Én DVD-n lévő TV műsoroknál láttam egy másodpercnyi telecine-t
+minden jelenet váltáskor vagy véletlen helyeken történő belenézéskor.
+Egyszer láttam olyan DVD-t is, aminek az első fele progresszív volt,
+a második fele pedig telecine-s. Ha <span class="emphasis"><em>tényleg</em></span>
+biztosra akarsz menni, átvizsgálhatod az egész filmet:
+</p><pre class="screen">mplayer dvd://1 -nosound -vo null -benchmark</pre><p>
+A <tt class="option">-benchmark</tt> kapcsoló határása az
+<span class="application">MPlayer</span> olyan gyorsan játsza le a
+filmet, amennyire csak lehetséges; a hardveredtől függően sokáig
+is eltarthat. Minden esetben, ha a demux_mpg frameráta váltást
+észlel, a fenti sor azonnal megmutatja neked a váltás idejét.
+</p><p>
+Néha a progresszív videóra "soft-telecine"-ként
+hivatkoznak, mert a DVD lejátszónak kell ezt telecine-elnie.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-telecined"></a>9.2.2.2. Telecine-lt</h4></div></div></div><p>
+A telecine-lt videót eredetileg 24000/1001 fps-sel vették fel, de
+telecine-lve lett a DVD-re írás <span class="emphasis"><em>előtt</em></span>.
+</p><p>
+Az <span class="application">MPlayer</span> nem ír semmilyen
+frameráta változást, ha telecine-lt videót játszik le.
+</p><p>
+Egy telecine-lt videó nézésekor átlapolási hibákat láthatsz, amik
+miatt "villoghat" a kép: ismétlődően megjelennek majd eltűnnek.
+Ezt jobban megfigyelheted így:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="screen">mplayer dvd://1</pre></li><li class="listitem"><p>
+  Menj egy mozgást ábrázoló részhez.
+</p></li><li class="listitem"><p>
+  Használd a <span class="keycap"><b>.</b></span> gombot az egy képkockával történő előreléptetéshez.
+</p></li><li class="listitem"><p>
+  Nézd meg az átlapoltnak látszó és a progresszívnak látszó képkockák
+  mintáját. Ha a minta, amit látsz PPPII, PPPII, PPPII,... akkor a
+  videó telecine-lt. Ha valami más mintát látsz, akkor a videót lehet,
+  hogy egy másik, nem szabványos módszerrel telecine-lték;
+  a <span class="application">MEncoder</span> nem tudja veszteségmentesen
+  átkonvertálni a nem-sabványos telecine-t progresszívba. Ha egyáltalán
+  nem látsz semmilyen mintát, akkor valószínűleg átlapolt.
+</p></li></ol></div><p>
+</p><p>
+Néha a DVD-ken lévő telecine-lt videót "hard-telecine"-nek
+is hívják. Mivel a hard-telecine már 60000/1001 mező per másodperces,
+a DVD lejátszó mindenféle manipulálás nélkül játsza le a videót.
+</p><p>
+A másik módszer a telecine-lt forrás felismerésére a forrás megtekintése
+a <tt class="option">-vf pullup</tt> és <tt class="option">-v</tt> kapcsolók
+parancssorhoz történő hozzáadásával. Így megnézheted, hogy a
+<tt class="option">pullup</tt> hogyan illeszkedik a képkockákhoz. Ha a forrás
+telecine-s, a konzolon egy 3:2-es mintát kell látnod, melyben
+<code class="systemitem">0+.1.+2</code> és <code class="systemitem">0++1</code> váltakozik.
+Ennek a technikának megvan az az előnye, hogy nem kell a forrást
+nézned az azonosításhoz, ami akkor jó, ha automatizálni szeretnéd a
+kódolási folyamatot vagy távolról, lassú kapcsolaton keresztül
+szeretnéd megcsinálni.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-interlaced"></a>9.2.2.3. Átlapolt</h4></div></div></div><p>
+Az átlapolt videót eredetileg 60000/1001 mező per másodperc sebességgel
+filmezték és 30000/1001 képkocka per másodperccel került fel a DVD-re. Az
+átlapolási effektus (gyakran "combing"-nak hívják) a mező párok
+képkockává történő egyesítésének eredménye. Minden mezőnek 1/(60000/1001)
+másodpercnyire kellene lennie egymástól, megjelenítésnél a különbség
+szemmel látható.
+</p><p>
+Akár csak a telecine-s videóknál, az <span class="application">MPlayer</span>nek
+a nem kell semmiféle frameráta változásról értesítenie átlapolt videók
+lejátszásakor.
+</p><p>
+Ha egy átlapolt videót közelebbről megnézel képkocka-léptetéssel a
+<span class="keycap"><b>.</b></span> gombot nyomogatva, megláthatod, hogy minden egyes
+képkocka átlapolt.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-mixedpt"></a>9.2.2.4. Kevert progresszív és telecine</h4></div></div></div><p>
+Az összes "kevert progresszív és telecine" videót eredetileg 24000/1001
+képkocka per másodperccel rögzítették, de egyes részei utólag
+telecine-lve lettek.
+</p><p>
+Ha az <span class="application">MPlayer</span> ilyen videót játszik le,
+(sokszor ismétlődően) oda-vissza vált "30000/1001 fps NTSC" és
+"24000/1001 fps progresszív NTSC" között. Figyeld az
+<span class="application">MPlayer</span> kimenetének alját, ott megláthatod
+az üzeneteket.
+</p><p>
+Nézd meg a "30000/1001 fps NTSC" részeket, és meggyőződhetsz róla,
+hogy telecine-ltek, nem csak átlapoltak.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-mixedpi"></a>9.2.2.5. Kevert progresszív és átlapolt</h4></div></div></div><p>
+"Kevert progresszív és átlapolt" tartalomnál a progresszív
+és az átlapolt videót összeillesztették.
+</p><p>
+Ez a kategória ugyan úgy viselkedik, mint a "kevert progresszív és telecine",
+egészen addig, amíg meg nem vizsgálod a 30000/1001 fps-es részeket
+és észre nem veszed, hogy nincs bennük telecine minta.
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-encode"></a>9.2.3. Hogyan lehet elkódolni ezen kategóriákat</h3></div></div></div><p>
+Ahogy említettem az elején, például a <span class="application">MEncoder</span>
+alábbi parancssorai <span class="bold"><strong>nem</strong></span> igazán használhatóak;
+csak demonstrálják a minimum paramétereket az egyes kategóriák megfelelő kódolásához.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-progressive"></a>9.2.3.1. Progresszív</h4></div></div></div><p>
+A progresszív videóhoz nem kell semmilyen különleges szűrés. Az egyetlen
+paraméterm, amit biztosan használnod kell, az a
+<tt class="option">-ofps 24000/1001</tt>. Egyébként a <span class="application">MEncoder</span>
+30000/1001 fps-sel és duplikált képkockákkal próbál kódolni.
+</p><p>
+</p><pre class="screen">mencoder dvd://1 -oac copy -ovc lavc -ofps 24000/1001</pre><p>
+</p><p>
+Gyakran az az eset áll fenn, hogy a videó progresszívnek tűnik, de valójában
+nagyon rövid telecine-s részek vannak belekeverve. Ha nem vagy biztos
+a dolgodban, a legbiztonságosabb, ha
+<a class="link" href="menc-feat-telecine.html#menc-feat-telecine-encode-mixedpt" title="9.2.3.4. Kevert progresszív és telecine">kevert progresszív és telecine-lt</a>
+videóként kezeled. A teljesítményvesztés kicsi
+<a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="9.2.4. Lábjegyzet">[3]</a>.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-telecined"></a>9.2.3.2. Telecine-lt</h4></div></div></div><p>
+A telecine visszafordítható, hogy megkapd az eredeti 24000/1001-es
+tartalmat, egy inverz-telecine-nek nevezett eljárással.
+Az <span class="application">MPlayer</span> számos szűrővel rendelkezik ennek
+az elvégzéséhez; a legjobb szűrő a <tt class="option">pullup</tt> le van írva
+a <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-encode-mixedpt" title="9.2.3.4. Kevert progresszív és telecine">kevert progresszív és telecine</a>
+részben.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-interlaced"></a>9.2.3.3. Átlapolt</h4></div></div></div><p>
+A legtöbb gyakorlati esetben nem lehetséges a teljes progresszív videó
+visszanyerése az átlapolt tartalomból. Az egyetlen út ehhez a függőleges
+felbontás felének elvesztése nélkül a frameráta megduplázása és
+"megtippelni", hogy mi kellene minden egyes mező megfelelő sorainak
+felépítéséhez (ennek vannak hátrányai - lásd a 3. módszert).
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  Kódold el a videót átlapolt formában. Normális esetben az átlapolás
+  eléggé odavág a kódoló tömörítési képességeinek, de a
+  <code class="systemitem">libavcodec</code>nek van két
+  paramétere speciálisan az átlapolt videó tárolásának egy kicsit jobb
+  kezeléséhez: <tt class="option">ildct</tt> és <tt class="option">ilme</tt>. Az
+  <tt class="option">mbd=2</tt> használata is javasolt
+  <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="9.2.4. Lábjegyzet">[2] </a>, mert ez a
+  makroblokkokat nem-átlapoltként fogja elkódolni azokon a helyeken, ahol
+  nincs mozgás. Ügyelj rá, hogy itt a <tt class="option">-ofps</tt> NEM kell.
+  </p><pre class="screen">mencoder dvd://1 -oac copy -ovc lavc -lavcopts ildct:ilme:mbd=2</pre><p>
+</p></li><li class="listitem"><p>
+  Használj deinterlacing szűrőt a kódolás előtt. Számos közül
+  választhatsz, mindegyiknek megvan a maga előnye és hátránya.
+  Lásd az <tt class="option">mplayer -pphelp</tt> és az
+  <tt class="option">mplayer -vf help</tt> kimenetét, hogy megtudd, mit
+  használhatsz (grep-pelj a "deint"-re), olvasd el Michael Niedermayer
+  <a class="ulink" href="http://guru.multimedia.cx/deinterlacing-filters/" target="_top">Deinterlacing szűrő összehasonlítását</a>,
+  és keress az
+  <a class="ulink" href="http://www.mplayerhq.hu/design7/mailing_lists.html" target="_top">
+  MPlayer levelezési listáin</a> a sok beszélgetés között, ami a
+  különböző szűrőkről szól.
+  A frameráta itt sem változik, így nem kell a
+  <tt class="option">-ofps</tt>. A deinterlacing-et a vágás után
+  <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="9.2.4. Lábjegyzet">[1]</a> és a méretezés
+  előtt kell elvégezni.
+  </p><pre class="screen">mencoder dvd://1 -oac copy -vf yadif -ovc lavc</pre><p>
+</p></li><li class="listitem"><p>
+  Sajnos ez a kapcsoló hibás a <span class="application">MEncoder</span>ben;
+  talán a <span class="application">MEncoder G2</span>-vel működni fog,
+  de itt most még nem. Fagyásokat tapasztalhatsz. Egyébként a <tt class="option"> -vf
+  tfields</tt> célja az lenne, hogy teljes képkockát készít
+  mindegyik mezőből, ami miatt a frameráta 60000/1001 lesz. Ennek a
+  megközelítésnek az az előnye, hogy soha nincs adatvesztés; habár
+  mivel minden egyes kocka csak egy mezőből keletkezik, a hiányzó
+  sorokat valahogy interpolálni kell. Igazából nincs jó módszer a
+  hiányzó adat összegyűjtésére és így az eredmény kicsit úgy fog
+  kinézni, mint amikor valamilyen deinterlacing szűrőt használsz. A
+  hiányzó sorok generálása egyéb dolgokat idéz elő, egyszerűen mivel
+  az adat mennyisége megduplázódik. Így, nagyobb kódolási bitráták
+  szükségesek a minőség megtartásához, és nagyobb CPU teljesítmény
+  mind a kódoláshoz, mind a dekódoláshoz. A tfield-eknek számos különböző
+  opciójuk van az egyes képkockákban hiányzó sorok előállításához. Ha
+  ezt a módszert használod, akkor nézd meg a manual-t és válassz, hogy
+  melyik opcióval néz ki legjobban az anyagod. Figyelj rá, hogy ha
+  <tt class="option">tfield</tt>-eket használsz,
+  mind a <tt class="option">-fps</tt>-nek, mind a <tt class="option">-ofps</tt>-nek
+  az eredeti forrásod framerátájának kétszeresét
+  <span class="bold"><strong>kell megadnod</strong></span>.
+  </p><pre class="screen">
+mencoder dvd://1 -oac copy -vf tfields=2 -ovc lavc \
+  -fps 60000/1001 -ofps 60000/1001</pre><p>
+</p></li><li class="listitem"><p>
+  Ha drasztikus downscaling-et tervezel, kiszedhetsz és elkódolhatsz
+  egy mezőt is a kettő helyett. Természetesen így elveszíted a
+  függőleges felbontás felét, de ha downscaling-et tervezel legfeljebb
+  az eredeti 1/2-ével, a veszteség nem számottevő. Az eredmény egy
+  progresszív 30000/1001 képkocka per másodperces fájl lesz. A
+  helyes eljárás a <tt class="option">-vf field</tt> használata, majd vágás
+  <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="9.2.4. Lábjegyzet">[1]</a> és
+  megfelelő méretezés. Emlékezz, hogy be kell állítanod a méretarányt a
+  felezett függőleges felbontásnak megfelelően.
+  </p><pre class="screen">mencoder dvd://1 -oac copy -vf field=0 -ovc lavc</pre><p>
+</p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-mixedpt"></a>9.2.3.4. Kevert progresszív és telecine</h4></div></div></div><p>
+Ahhoz, hogy egy kevert, progresszív és telecine-s videót teljesen
+progresszív videóvá konvertálj, a telecine-lt részeket
+inverz-telecine-elni kell. Ez háromféle képpen végezhető el,
+mint ahogy az lejjebb látható. Figyelj rá, hogy
+<span class="bold"><strong>mindig</strong></span> az inverse-telecine legyen
+meg bármilyen átméretezés előtt; hacsak nem vagy teljesen biztos a
+dolgodban, és az inverse-telecine legyen a vágás előtt is
+<a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="9.2.4. Lábjegyzet">[1]</a>.
+A <tt class="option">-ofps 24000/1001</tt> kell ide, mert a kimeneti videó 24000/1001
+képkocka per másodperc sebességű lesz.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  A <tt class="option">-vf pullup</tt> a telecine-s részek inverz-telecine-léséhez
+  lett tervezve úgy, hogy a progresszív adatokat érintetlenül hagyja.
+  A helyes működéshez a <tt class="option">pullup</tt>-ot
+  a <tt class="option">softskip</tt> szűrőnek <span class="bold"><strong>kell</strong></span>
+  követnie, különben a <span class="application">MEncoder</span> összeomlik.
+  Ennek ellenére a <tt class="option">pullup</tt> a legtisztább és legjobb
+  módszer mind a telecine-s, mind a "kevert progresszív és telecine-s"
+  videók elkódolásához.
+  </p><pre class="screen">
+mencoder dvd://1 -oac copy -vf pullup,softskip
+  -ovc lavc -ofps 24000/1001</pre><p>
+</p></li><li class="listitem"><p>
+  A <tt class="option">-vf filmdint</tt> hasonló a
+  <tt class="option">-vf pullup</tt>-hoz: mindkét szűrő megpróbálja egyeztetni a
+  mezőpárokat, hogy azok egy komplett képkockát adjanak. A <tt class="option">filmdint</tt>
+  deinterlace-lni fogja az egyedi mezőket, amelyeket nem tud egyeztetni,
+  míg a <tt class="option">pullup</tt> egyszerűen csak eldobja őket. A két szűrő
+  különböző detektáló kódot alkalmaz és a <tt class="option">filmdint</tt> néha túl kevés mezőt
+  egyeztet. Az, hogy melyik szűrő a jobb, a bemeneti videótól és az egyéni
+  ízléstől függ; kísérletezz szabadon a szűrők opcióinak finomhangolásával,
+  ha valamelyikkel problémád van (lásd a man oldalt a részletekért).
+  A legtöbb jól elkészített bemeneti videónál mindkettő eléggé jól működik,
+  így bármelyik jó választás lehet a kezdéshez.
+  </p><pre class="screen">
+mencoder dvd://1 -oac copy -vf filmdint -ovc lavc -ofps 24000/1001</pre><p>
+</p></li><li class="listitem"><p>
+  A régebbi módszer, a telecine-s részek inverz-telecine-lése
+  helyett a nem-telecine-s részek telecine-lése majd a teljes
+  videó inverz-telecine-lése. Zavarosan hangzik? A softpulldown
+  egy olyan szűrő, ami végigmegy a videón és a teljes fájlt
+  telecine-li. Ha a softpulldown-t vagy <tt class="option">detc</tt>
+  vagy <tt class="option">ivtc</tt> követi, a végső eredmény teljesen
+  progresszív lesz. A <tt class="option">-ofps 24000/1001</tt>
+  kapcsolót meg kell adni.
+  </p><pre class="screen">
+mencoder dvd://1 -oac copy -vf softpulldown,ivtc=1 -ovc lavc -ofps 24000/1001
+  </pre><p>
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-mixedpi"></a>9.2.3.5. Kevert progresszív és átlapolt</h4></div></div></div><p>
+Két módon kezelheted ezt a kategóriát, mindkettő kompromisszum.
+Az időtartam/hely alapján kell döntened.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Kezeld úgy, mintha progresszív lenne. Az átlapolt részek átlapoltnak
+  látszanak és néhány átlapolt mezőt el kell dobni, ami egyenletlen
+  ugrásokat eredményez. Használhatsz utófeldolgozó szűrőt, ha akarsz,
+  de ez kissé rontja a progresszív részeket.
+  </p><p>
+  Ez az opció használhatatlan akkor, ha a videót egy átlapolt eszközön
+  akarod megjeleníteni (TV kártyával például). Ha átlapolt képkockáid
+  vannak 24000/1001 képkocka per másodperces videóban, telecine-lve
+  lesznek a progresszív képkockákkal együtt. Az átlapolt "képkockák"
+  fele három mező hosszon lesz látható (3/(60000/1001) másodperc), ami
+  ugráló "visszaugrás az időben" effektust hoz létre, ami
+  nagyon rosszul néz ki. Ha mégis kísérletezel ezzel, használnod
+  <span class="bold"><strong>kell</strong></span> egy deinterlacing szűrőt, mint
+  pl. az <tt class="option">lb</tt> vagy az <tt class="option">l5</tt>.
+  </p><p>
+  Rossz ötlet a progresszív megjelenítéshez is. Eldobja az egymást
+  követő átlapolt mezőpárokat, megszakítva ezzel a folyamatosságot,
+  ami sokkal szembetűnőbb, mint a második módszer, ami néhány
+  progresszív képkockát duplán mutat. A 30000/1001 képkocka per
+  másodperces átlapolt videó amúgy is egy kicsit fodrozódó mert
+  igazából 60000/1001 mező per másodperc sebességgel kellene
+  megjeleníteni, így a duplikált képkockák nem látszanak annyira.
+  </p><p>
+  Mindkét esetben érdemes megnézni a tartalmat és eldönteni, hogy
+  hogyan szeretnéd megjeleníteni. Ha a videó 90%-ban progresszív és
+  soha nem akarod TV-n lejátszani, akkor a progresszív megközelítést
+  fogod előnyben részesíteni. Ha csak félig progresszív, akkor
+  valószínűleg átlapoltként akarod elkódolni az egészet.
+  </p></li><li class="listitem"><p>
+  Kezeld teljesen átlapoltként. A progresszív részekben néhány
+  képkockát meg kell duplázni, ami egyenlőtlen ugrásokat eredményez.
+  De hangsúlyozom, a deinterlacing szűrők rontják a progresszív részeket.
+</p></li></ul></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-footnotes"></a>9.2.4. Lábjegyzet</h3></div></div></div><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p><b>A vágásról: </b>
+  A videó adatot a DVD-ken egy úgynevezett YUV 4:2:0 formátumban tárolják.
+  A YUV videóban a luma ("fényerő") és a chroma ("szín")
+  külön tárolódik. Mivel az emberi szem valamivel érzéketlenebb a színre,
+  mint a fényerőre, a YUV 4:2:0 képen csak egy chroma pixel jut minden
+  négy luma pixelre. Egy progresszív képen minden négy luma pixel által
+  alkotott négyzetben (kettő mindkét oldalon) egy közös chroma pixel van.
+  A progresszív YUV 4:2:0-t le kell vágnod páros felbontásúra és páros
+  offszetet kell használnod. Például a
+  <tt class="option">crop=716:380:2:26</tt> jó de a
+  <tt class="option">crop=716:380:3:26 </tt> nem.
+  </p><p>
+  Ha átlapolt YUV 4:2:0-lal van dolgod, a szituáció egy kicsit bonyolódik.
+  Ahelyett, hogy az egy <span class="emphasis"><em>képkockában</em></span> lévő mind a
+  négy luma pixel osztozna egy chroma pixelen, a <span class="emphasis"><em>mezőben</em></span>
+  lévő négy luma osztozik egy chroma pixelen. Ha a mezők át vannak
+  lapolva egy képkocka felépítéséhez, minden egyes scanline egy pixel
+  magas. Nos, ahelyett, hogy a négy luma pixel egy négyszögben lenne,
+  két pixel van egymás mellett, a másik kettő két scanline-nal lejjebb
+  van egymás mellett. A két luma pixel a közbeeső scanline-on a másik
+  mezőből van és így egy másik chroma pixel tartozik hozzájuk és két
+  darab, két scanline távolságra lévő luma pixel. Mindezen keverés teszi
+  szükségessé azt, hogy a függőleges vágási dimenzióknak és az offszeteknek
+  néggyel oszthatóaknak kell lenniük. A vízszintes maradhat páros.
+  </p><p>
+  A telecine-lt videóknál javaslom, hogy a vágást az inverz telecine
+  után ejtsd meg. Ha a videó már progresszív, csak páros számokkal el
+  kell vágnod. Ha ki akarod használni azt a sebességnövekedést, amit a
+  vágás rejteget magában, akkor függőlegesen négy többszörösével kell
+  vágnod, különben az inverz-telecine szűrő nem kap megfelelő adatokat.
+  </p><p>
+  Az átlapolt (nem telecine-lt) videónál függőlegesen mindig négy
+  többszörösével kell vágnod, hacsak nem használod a <tt class="option">-vf
+  field</tt>-et a vágás előtt.
+  </p></li><li class="listitem"><p><b>A kódolási paraméterekről és a minőségről: </b>
+  Csak mert itt javasoltam az <tt class="option">mbd=2</tt>-t, nem jelenti
+  azt, hogy máshol ne lehetne használni. A <tt class="option">trell</tt>-lel
+  együtt az <tt class="option">mbd=2</tt> egyike a két <code class="systemitem">libavcodec</code> kapcsolóknak, amik legjobban
+  növelik a minőséget és igazából mindig ajánlott ezt a kettőt
+  használni, kivéve ha tilos a kódolási sebesség rontása (pl. valós
+  idejű kódolás). Még számos egyéb opciója van a <code class="systemitem">libavcodec</code>-nek, ami növeli a kódolás
+  minőségét (és csökkenti a kódolás sebességét) de az már túlmutat ezen
+  dokumentum célkitűzésein.
+  </p></li><li class="listitem"><p><b>A pullup teljesítményéről: </b>
+  Bátran használhatod a <tt class="option">pullup</tt>-ot (a <tt class="option">softskip</tt>pel
+  együtt) a progresszív videókon és ez általában jó ötlet, hacsak a forrás
+  nem egyértelműen teljesen progresszív. A teljesítmény veszteség kicsi az
+  esetek többségében. Nagyon ritka kódolási esetekben a <tt class="option">pullup</tt>
+  a <span class="application">MEncoder</span> 50%-os lassulását okozhatja.
+  A zenefeldolgozás hozzáadása és a fejlett <tt class="option">lavcopts</tt>
+  háttérbe szorítja ezt a különbséget, a <tt class="option">pullup</tt> miatti
+  teljesítményromlást 2%-ra csökkentve.
+  </p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-dvd-mpeg4.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-enc-libavcodec.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">9.1. Nagyon jó minőségű MPEG-4 ("DivX")
+  rip készítése DVD filmből </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 9.3. Kódolás a <code class="systemitem">libavcodec</code>
+  codec családdal</td></tr></table></div></body></html>

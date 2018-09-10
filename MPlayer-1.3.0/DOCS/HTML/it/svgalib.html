@@ -1,0 +1,44 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.5. SVGAlib</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="prev" href="sdl.html" title="4.4. SDL"><link rel="next" href="fbdev.html" title="4.6. Uscita su framebuffer (FBdev)"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.5. SVGAlib</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sdl.html">Indietro</a> </td><th width="60%" align="center">Capitolo 4. Dispositivi di uscita video</th><td width="20%" align="right"> <a accesskey="n" href="fbdev.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="svgalib"></a>4.5. SVGAlib</h2></div></div></div><p><b>INSTALLAZIONE. </b>
+Affinché <span class="application">MPlayer</span> compili il suo driver per SVGAlib
+(autorilevato, ma può essere forzato), devi installare svgalib e il suo
+pacchetto di sviluppo e non dimenticare di modificare
+<tt class="filename">/etc/vga/libvga.config</tt> in modo che corrisponda alla tua
+scheda e al tuo monitor.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Assicurati di non usare l'opzione <tt class="option">-fs</tt>, dato che attiva
+l'utilizzo del ridimensionatore software, ed è lento. Se davvero ti serve, usa
+l'opzione <tt class="option">-sws 4</tt>, che porterà una bassa qualità, ma è in
+qualche modo più veloce.
+</p></div><p><b>SUPPORTO PER EGA (4BPP). </b>
+SVGAlib include EGAlib, e <span class="application">MPlayer</span> ha la possibilità
+di mostrare qualsiasi filmato in 16 colori, utilizzabile in queste situazioni:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Scheda EGA con monitor EGA: 320x200x4bpp, 640x200x4bpp, 640x350x4bpp
+</p></li><li class="listitem"><p>
+  Scheda EGA con monitor CGA: 320x200x4bpp, 640x200x4bpp
+</p></li></ul></div><p>
+Il valore dei bpp (bit per pixel) deve essere impostato a 4 manualmente:
+<tt class="option">-bpp 4</tt>
+</p><p>
+Il filmato probabilmente deve essere rimpicciolito per starci nella modalità
+EGA:
+</p><pre class="screen">-vf scale=640:350</pre><p>
+or
+</p><pre class="screen">-vf scale=320:200</pre><p>
+</p><p>
+Per questo ci serve una funzione di ridimensionamento veloce ma a bassa
+qualità:
+</p><pre class="screen">-sws 4</pre><p>
+</p><p>
+Forse la correzione automatica dell'aspetto va disattivata:
+</p><pre class="screen">-noaspect</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Secondo la mia esperienza la qualità migliore dell'immagine su schermi EGA
+può essere ottenuta diminuendo un pochino la luminosità:
+<tt class="option">-vf eq=-20:0</tt>. Sul mio sistema ho anche bisogno di abbassare
+la frequenza audio, dato che era rovinata a 44kHz:
+<tt class="option">-srate 22050</tt>.
+</p></div><p>
+Puoi abilitare l'OSD e i sottotitoli solo con il filtro <tt class="option">expand</tt>,
+vedi la pagina man per i parametri precisi.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sdl.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="fbdev.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">4.4. SDL </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 4.6. Uscita su framebuffer (FBdev)</td></tr></table></div></body></html>

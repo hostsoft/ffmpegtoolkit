@@ -1,0 +1,87 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.3. Contrôles</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="usage.html" title="Chapitre 3. Utilisation"><link rel="prev" href="subosd.html" title="3.2. Sous-titres et OSD"><link rel="next" href="streaming.html" title="3.4. Streaming depuis le réseau ou les pipes"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="control.html#ctrl-cfg" title="3.3.1. Configuration des contrôles"><link rel="subsection" href="control.html#lirc" title="3.3.2. Control from LIRC"><link rel="subsection" href="control.html#slave-mode" title="3.3.3. Mode esclave"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.3. Contrôles</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="subosd.html">Précédent</a> </td><th width="60%" align="center">Chapitre 3. Utilisation</th><td width="20%" align="right"> <a accesskey="n" href="streaming.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="control"></a>3.3. Contrôles</h2></div></div></div><p>
+<span class="application">MPlayer</span> dispose d'une couche de contrôle pleinement
+configurable, qui vous permet de contrôler <span class="application">MPlayer</span>
+avec le clavier, la souris, le joystick ou une télécommande (en utilisant LIRC).
+Voir la page de man pour une liste complète des contrôles clavier.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ctrl-cfg"></a>3.3.1. Configuration des contrôles</h3></div></div></div><p>
+<span class="application">MPlayer</span> vous permet d'associer n'importe quel
+touche/bouton à n'importe quelle commande <span class="application">MPlayer</span> en
+utilisant un simple fichier de configuration.
+La syntaxe consiste un nom de touche suivi d'une commande. Le fichier
+de config par défaut est <tt class="filename">$HOME/.mplayer/input.conf</tt> mais cela
+peut être outrepassé en utilisant l'option <tt class="option">-input <em class="replaceable"><code>conf</code></em></tt>
+(les chemins relatifs le sont par rapport à <tt class="filename">$HOME/.mplayer</tt>).
+</p><p>
+Vous pouvez obtenir une liste complète des touches supportées en tapant
+<span class="command"><strong>mplayer -input keylist</strong></span>
+et une liste complète des commandes disponibles en tapant
+<span class="command"><strong>mplayer -input cmdlist</strong></span>.
+</p><div class="example"><a name="input_control_file"></a><p class="title"><b>Exemple 3.1. Un simple fichier de contrôles</b></p><div class="example-contents"><pre class="programlisting">
+##
+## MPlayer input control file
+##
+
+RIGHT seek +10
+LEFT seek -10
+- audio_delay 0.100
++ audio_delay -0.100
+q quit
+&gt; pt_step 1
+&lt; pt_step -1
+ENTER pt_step 1 1</pre></div></div><br class="example-break"></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="lirc"></a>3.3.2. Control from LIRC</h3></div></div></div><p>
+Linux Infrared Remote Control - utilisez un récepteur infrarouge fait
+maison, une télécommande, et contrôlez votre linux à distance ! Plus d'infos
+sur <a class="ulink" href="http://www.lirc.org" target="_top">la page de LIRC</a>.
+</p><p>
+Si vous avez installé le paquet LIRC, <tt class="filename">configure</tt> le détectera
+automatiquement.
+Si tout s'est bien passé, <span class="application">MPlayer</span> affichera un
+message du genre "<code class="computeroutput">Setting up LIRC support...</code>"
+au démarrage. Si une erreur se produit il vous le dira. Si il ne vous dit
+rien à propos de LIRC c'est que son support n'est pas compilé. C'est tout :-)
+</p><p>
+Le nom de l'application à lancer avec <span class="application">MPlayer</span> est
+- oh surprise - <tt class="filename">mplayer</tt>. Vous pouvez utiliser n'importe
+quelle commande <span class="application">MPlayer</span> et même passer plus d'une commande
+en les séparant avec <code class="literal">\n</code>.
+N'oubliez pas d'activer le flag repeat dans <tt class="filename">.lircrc</tt> quand cela
+est approprié (déplacement, volume, etc).
+Voici un extrait d'un fichier d'exemple
+<tt class="filename">.lircrc</tt>:
+</p><pre class="programlisting">
+begin
+     button = VOLUME_PLUS
+     prog = mplayer
+     config = volume 1
+     repeat = 1
+end
+
+begin
+    button = VOLUME_MINUS
+    prog = mplayer
+    config = volume -1
+    repeat = 1
+end
+
+begin
+    button = CD_PLAY
+    prog = mplayer
+    config = pause
+end
+
+begin
+    button = CD_STOP
+    prog = mplayer
+    config = seek 0 1\npause
+end</pre><p>
+Si vous n'aimez pas l'emplacement standard du fichier de config de lirc
+(<tt class="filename">~/.lircrc</tt>) utilisez <tt class="option">-lircconf
+<em class="replaceable"><code>nomfichier</code></em></tt> pour spécifier un autre fichier.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="slave-mode"></a>3.3.3. Mode esclave</h3></div></div></div><p>
+Le mode esclave vous permet de construire un frontend à
+<span class="application">MPlayer</span>. Quand il est activé (avec
+<tt class="option">-slave</tt>) <span class="application">MPlayer</span> lit les commandes
+séparées par un saut de ligne (\n) depuis l'entrée par défaut (stdin).
+Les commandes sont documentées dans le fichier
+<a class="ulink" href="../../tech/slave.txt" target="_top">slave.txt</a>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="subosd.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="streaming.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">3.2. Sous-titres et OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 3.4. Streaming depuis le réseau ou les pipes</td></tr></table></div></body></html>

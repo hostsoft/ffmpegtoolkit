@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.5. Codec installation</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="install.html" title="Kapitola 2. Instalace"><link rel="prev" href="fonts-osd.html" title="2.4. Fonty a OSD"><link rel="next" href="rtc.html" title="2.6. RTC"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="codec-installation.html#xvid" title="2.5.1. Xvid"><link rel="subsection" href="codec-installation.html#x264" title="2.5.2. x264"><link rel="subsection" href="codec-installation.html#amr" title="2.5.3. AMR kodeky"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.5. Codec installation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="fonts-osd.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 2. Instalace</th><td width="20%" align="right"> <a accesskey="n" href="rtc.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="codec-installation"></a>2.5. Codec installation</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="xvid"></a>2.5.1. Xvid</h3></div></div></div><p>
+<a class="ulink" href="http://www.xvid.org" target="_top">Xvid</a> je free software MPEG-4 ASP
+kompatibilní video kodec, jenž má podporu pro dvouprůchodové enkódování a
+plně podporuje MPEG-4 ASP.
+Poznamenejme, že Xvid není nutný pro dekódování Xvidem enkódovaného videa.
+Jako výchozí je používán <code class="systemitem">libavcodec</code>,
+jelikož poskytuje vyšší rychlost.
+</p><div class="procedure"><a name="idp66187200"></a><p class="title"><b>Instalace <code class="systemitem">Xvid</code></b></p><p>
+  Stejně jako většina svobodného software je dostupný ve dvou verzích:
+  <a class="ulink" href="http://www.xvid.org/downloads.html" target="_top">oficiálně uvolněné verzi</a>
+  a verzi CVS.
+  V současnosti je CVS verze obvykle dostatečně stabilní pro použití, jelikož
+  většinou obsahuje opravy chyb, které zůstaly po vydání.
+  Zde uvádíme postup pro zprovoznění <code class="systemitem">Xvid</code>
+  CVS v <span class="application">MEncoder</span>:
+</p><ol class="procedure" type="1"><li class="step"><p>
+  </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid login</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid co xvidcore</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">cd xvidcore/build/generic</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">./bootstrap.sh</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">./configure</pre><p>
+  Zde můžete přidat nějaké volby (prostudujte si výstup příkazu
+  <span class="command"><strong>./configure --help</strong></span>).
+</p></li><li class="step"><p>
+  </p><pre class="screen">make &amp;&amp; make install</pre><p>
+</p></li><li class="step"><p>
+  Znovu zkompilujte <span class="application">MPlayer</span> s volbami.
+</p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="x264"></a>2.5.2. <code class="systemitem">x264</code></h3></div></div></div><p>
+<a class="ulink" href="http://developers.videolan.org/x264.html" target="_top"><code class="systemitem">x264</code></a>
+is a library for creating H.264 video.
+<span class="application">MPlayer</span> sources are updated whenever
+an <code class="systemitem">x264</code> API change
+occurs, so it is always suggested to use
+<span class="application">MPlayer</span> from Subversion.
+</p><p>
+If you have a GIT client installed, the latest x264
+sources can be gotten with this command:
+</p><pre class="screen">git clone git://git.videolan.org/x264.git</pre><p>
+
+Then build and install in the standard way:
+</p><pre class="screen">./configure &amp;&amp; make &amp;&amp; make install</pre><p>
+
+Now rerun <tt class="filename">./configure</tt> for
+<span class="application">MPlayer</span> to pick up
+<code class="systemitem">x264</code> support.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="amr"></a>2.5.3. AMR kodeky</h3></div></div></div><p>
+Adaptivní Multi-Rate kodek pro mluvené slovo je používán třetí generací (3G)
+mobilních telefonů.
+Referenční implementace je dostupná od
+<a class="ulink" href="http://www.3gpp.org" target="_top">The 3rd Generation Partnership Project</a>
+(zdarma pro osobní použití).
+Pro zapnutí podpory si stáhněte podpůrné knihovny pro
+<a class="ulink" href="http://www.penguin.cz/~utx/amr" target="_top">AMR-NB a AMR-WB</a>
+a následujte instrukce na stránce. Potom znovu zkompilujte MPlayer.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="fonts-osd.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="rtc.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">2.4. Fonty a OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 2.6. RTC</td></tr></table></div></body></html>

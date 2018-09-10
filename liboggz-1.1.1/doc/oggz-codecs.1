@@ -1,0 +1,42 @@
+.TH "oggz-codecs" "1" 
+.SH "NAME" 
+oggz-codecs \(em List codecs in one or more Ogg files and their bitstreams. 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-codecs\fR [\-a  | \-\-all ]  [\-m  | \-\-mime ]  [\-1 | \-\-one\-per\-line]  filename \&...  
+.PP 
+\fBoggz-codecs\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-codecs\fR displays a list of codecs found in one or more Ogg files
+and their bitstreams. The default comma-separated output is designed for use
+in an HTML5 <video> codecs attribute.
+ 
+.SH "Options" 
+.PP 
+\fBoggz-codecs\fR accepts the following options: 
+ 
+.SS "Display options" 
+.IP "\-a, \-\-all" 10 
+Display codec names multiple times if present in multiple tracks.
+.IP "\-m, \-\-mime" 10 
+Display MIME types rather than codec names.
+.IP "\-1, \-\-one\-per\-line" 10 
+Display one entry per line.
+.SS "Miscellaneous options" 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+.SH "AUTHOR" 
+.PP 
+Conrad Parker        May 15, 2008;
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2009 Annodex Association
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-info\fP\fB(1)\fP       \fBhogg\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

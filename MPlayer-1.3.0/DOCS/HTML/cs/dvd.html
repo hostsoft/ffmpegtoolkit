@@ -1,0 +1,53 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.6. Přehrávání DVD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="usage.html" title="Kapitola 3. Použití"><link rel="prev" href="drives.html" title="3.5. CD/DVD mechaniky"><link rel="next" href="vcd.html" title="3.7. Přehrávání VCD"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="dvd.html#region_code" title="3.6.1. Kód regionu"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.6. Přehrávání DVD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="drives.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 3. Použití</th><td width="20%" align="right"> <a accesskey="n" href="vcd.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dvd"></a>3.6. Přehrávání DVD</h2></div></div></div><p>
+Úplný seznam dostupných voleb naleznete v man stránce.
+Syntaxe pro přehrání standardního DVD je následující:
+</p><pre class="screen">
+mplayer dvd://<em class="replaceable"><code>&lt;track&gt;</code></em> [-dvd-device <em class="replaceable"><code>&lt;DVD_zařízení&gt;</code></em>]
+</pre><p>
+</p><p>
+Příklad:
+</p><pre class="screen">mplayer dvd://1 -dvd-device /dev/hdc</pre><p>
+</p><p>
+Pokud jste kompilovali <span class="application">MPlayer</span> s podporou dvdnav,
+je syntaxe stejná až na to, že musíte používat dvdnav:// místo dvd://.
+</p><p>
+Výchozím DVD zařízením je <tt class="filename">/dev/dvd</tt>. Pokud se vaše nastavení
+liší, vytvořte symlink, nebo uveďte správné zařízení na příkazovém řádku
+pomocí volby <tt class="option">-dvd-device</tt>.
+</p><p>
+<span class="application">MPlayer</span> používá <code class="systemitem">libdvdread</code> a
+<code class="systemitem">libdvdcss</code> pro přehrávání a dekódování DVD. Tyto dvě
+knihovny jsou obsaženy ve zdrojových kódech
+<span class="application">MPlayer</span>u, nemusíte je tedy instalovat zvlášť.
+Můžete rovněž použít systémové verze těchto knihoven, ale toto řešení
+nedoporučujeme, protože může vést k chybám,
+nekompatibilitě knihovny a nižší rychlosti.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+V případě problémů s dekódováním DVD, zkuste vypnout supermount a podobná udělátka.
+Některé RPC-2 mechaniky mohou rovněž vyžadovat nastavení region kódu.
+</p></div><p><b>Dekódování DVD. </b>
+Dekódování DVD provádí <code class="systemitem">libdvdcss</code>. Metodu
+můžete zvolit pomocí proměnné prostředí <code class="envar">DVDCSS_METHOD</code>,
+detaIly viz manuálová stránka.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="region_code"></a>3.6.1. Kód regionu</h3></div></div></div><p>
+DVD mechaniky v současnosti přicházejí s nesmyslným omezením nazvaným
+<a class="ulink" href="http://en.wikipedia.org/wiki/DVD_region_code" target="_top">kód regionu</a>.
+To je způsob jak přinutit DVD mechaniku akceptovat pouze DVD vyrobené pro
+jeden ze šesti různých regionů na které byl rozdělen svět. Jak si může skupina lidí
+zasednout ke kulatému stolu, přijít s takovým nápadem a čekat, že se svět
+21. století skloní před jejich vůlí je naprosto nepochopitelné
+</p><p>
+Mechaniky, které vynucují nastavení regionu poze softwarově jsou známy také jako
+RPC-1 a ty, které to dělají v hardware jako RPC-2. Mechaniky RPC-2 umožňují změnu
+kódu regionu pětkrát a pak zůstane pevný.
+V Linuxu můžete použít nástroj
+<a class="ulink" href="http://linvdr.org/projects/regionset/" target="_top">regionset</a>
+pro nastavení kódu regionu vaší DVD mechaniky.
+</p><p>
+Naštěstí je možné konvertovat RPC-2 mechaniky na RPC-1 pomocí
+upgrade firmware. Vyplňte modelové číslo vaší DVD mechaniky do svého oblíbeného
+vyhledávače, nebo se podívejte do fóra a sekce download
+<a class="ulink" href="http://www.rpc1.org/" target="_top">„Firmware stránek“</a>.
+Ačkoli platí obvyklé „kazy“ upgradů fimware, zkušenosti se zbavením se
+vynucování region kódů jsou obecně kladné.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="drives.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="vcd.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">3.5. CD/DVD mechaniky </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 3.7. Přehrávání VCD</td></tr></table></div></body></html>

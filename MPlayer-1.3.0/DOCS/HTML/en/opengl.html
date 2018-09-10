@@ -1,0 +1,23 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.8. OpenGL output</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="Chapter 4. Video output devices"><link rel="prev" href="tdfx_vid.html" title="4.7. tdfx_vid"><link rel="next" href="aalib.html" title="4.9. AAlib – text mode displaying"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.8. OpenGL output</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tdfx_vid.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="aalib.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="opengl"></a>4.8. OpenGL output</h2></div></div></div><p>
+<span class="application">MPlayer</span> supports displaying movies using OpenGL,
+but if your platform/driver supports xv as should be the case on a PC with
+Linux, use xv instead, OpenGL performance is considerably worse. If you
+have an X11 implementation without xv support, OpenGL is a viable
+alternative.
+</p><p>
+Unfortunately not all drivers support this feature. The Utah-GLX drivers
+(for XFree86 3.3.6) support it for all cards.
+See <a class="ulink" href="http://utah-glx.sf.net" target="_top">http://utah-glx.sf.net</a> for details about how to
+install it.
+</p><p>
+XFree86(DRI) 4.0.3 or later supports OpenGL with Matrox and Radeon cards,
+4.2.0 or later supports Rage128.
+See <a class="ulink" href="http://dri.sf.net" target="_top">http://dri.sf.net</a> for download and installation
+instructions.
+</p><p>
+A hint from one of our users: the GL video output can be used to get
+vsynced TV output. You'll have to set an environment variable (at
+least on nVidia):
+</p><p>
+<span class="command"><strong>export __GL_SYNC_TO_VBLANK=1</strong></span>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tdfx_vid.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="aalib.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4.7. tdfx_vid </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4.9. AAlib – text mode displaying</td></tr></table></div></body></html>

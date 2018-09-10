@@ -1,0 +1,361 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.2. Die skin-Datei</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="prev" href="skin-overview.html" title="B.1. Überblick"><link rel="next" href="skin-fonts.html" title="B.3. Schriften"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="skin-file.html#skin-file-main" title="B.2.1. Hauptfenster und Abspielleiste"><link rel="subsection" href="skin-file.html#skin-file-subwindow" title="B.2.2. Videofenster"><link rel="subsection" href="skin-file.html#skin-file-menu" title="B.2.3. Skin-Menü"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.2. Die skin-Datei</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-overview.html">Zurück</a> </td><th width="60%" align="center">Anhang B. <span class="application">MPlayer</span>s Skinformat</th><td width="20%" align="right"> <a accesskey="n" href="skin-fonts.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-file"></a>B.2. Die skin-Datei</h2></div></div></div><p>
+      Wie oben erwähnt, ist dies die skin-Konfigurationsdatei. Sie ist
+      zeilenorientiert;
+      Kommentare beginnen mit einem Semikolon ('<code class="literal">;</code>')
+      und reichen bis zum Zeilenende oder beginnen mit einem '<code class="literal">#</code>'
+      am Zeilenanfang (dann sind nur Leerzeichen und Tabulatoren vor dem
+      '<code class="literal">#</code>' erlaubt).
+    </p><p>
+      Die Datei ist in Abschnitte unterteilt. Jeder Abschnitt beschreibt den Skin
+      für eine Anwendung und besitzt folgende Form:
+</p><pre class="programlisting">section = <em class="replaceable"><code>Abschnittsname</code></em>
+.
+.
+.
+end
+</pre><p>
+    </p><p>
+      Zur Zeit gibt es nur eine Anwendung, somit brauchst du nur einen Abschnitt:
+      Sein Name ist <span class="bold"><strong>movieplayer</strong></span>.
+    </p><p>
+      Innerhalb dieses Abschnitts wird jedes Fenster durch einen Block folgender
+      Form beschrieben:
+</p><pre class="programlisting">window = <em class="replaceable"><code>Fenstername</code></em>
+.
+.
+.
+end
+</pre><p>
+    </p><p>
+      wobei <em class="replaceable"><code>Fenstername</code></em> einer dieser Zeichenketten sein kann:
+      </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p><span class="bold"><strong>main</strong></span> - für das Hauptfenster</p></li><li class="listitem"><p><span class="bold"><strong>video</strong></span> - für das Videofenster</p></li><li class="listitem"><p><span class="bold"><strong>playbar</strong></span> - für die Abspielleiste</p></li><li class="listitem"><p><span class="bold"><strong>menu</strong></span> - für das Skin-Menü</p></li></ul></div><p>
+    </p><p>
+      (Die video-, playbar- und menu-Blöcke sind optional - es ist nicht
+      nötig, das Videofenster zu dekorieren, eine Abspielleiste zu haben
+      oder ein Menü zu erzeugen. Ein Standard-Menü steht immer über die
+      rechte Maustaste zur Verfügung.)
+    </p><p>
+      Innerhalb des Fensterblocks kannst du jedes Element für das Fenster durch eine
+      Zeile dieser Form definieren:
+      </p><pre class="programlisting">Element = Parameter</pre><p>
+      Wobei <code class="literal">Element</code> eine Zeichenkette ist, die den Typ des GUI-Elements
+      identifiziert, <code class="literal">Parameter</code> ist ein numerischer oder textueller
+      Wert (oder eine Liste Komma-getrennter Werte).
+    </p><p>
+      Fügt man nun das oben genannte zusammen, sieht die komplette Datei etwa so aus:
+</p><pre class="programlisting">section = movieplayer
+window = main
+; ... Elemente für das Hauptfenster ...
+end
+
+window = video
+; ... Elemente für das Videofenster ...
+end
+
+window = menu
+; ... Elemente für das Menü ...
+end
+
+window = playbar
+; ... Elemente für die Abspielleiste ...
+end
+end
+</pre><p>
+    </p><p>
+      Der Name einer Grafikdatei muss ohne führende Pfadangaben angegeben werden -
+      Grafiken werden im Verzeichnis <tt class="filename">skins</tt>
+      gesucht.
+      Du kannst (musst aber nicht) die Erweiterung der Datei spezifizieren.
+      Existiert die Datei nicht, versucht <span class="application">MPlayer</span> die Datei
+      <tt class="filename">&lt;Dateiname&gt;.&lt;ext&gt;</tt> zu laden, wobei
+      <code class="literal">png</code> und <code class="literal">PNG</code> als
+      <tt class="filename">&lt;ext&gt;</tt> (Erweiterung) probiert werden
+      (in dieser Reihenfolge). Die erste zutreffende Datei wird verwendet.
+    </p><p>
+      Zum Schluss einige Worte zur Positionierung.
+      Hauptfenster und Videofenster können in verschiedenen Ecken des Bilschirms
+      über die <code class="literal">X</code>- und <code class="literal">Y</code>-Koordinaten
+      platziert werden. <code class="literal">0</code> ist oben oder links,
+      <code class="literal">-1</code> bedeutet zentriert und <code class="literal">-2</code> ist
+      rechts oder unten, wie in dieser Illustration gezeigt:
+    </p><div class="informalfigure"><pre class="screen">
+(0, 0)----(-1, 0)----(-2, 0)
+  |          |          |
+  |          |          |
+(0,-1)----(-1,-1)----(-2,-1)
+  |          |          |
+  |          |          |
+(0,-2)----(-1,-2)----(-2,-2)
+      </pre></div><p>
+      Hier ein Beispiel, um es zu verdeutlichen. Angenommen, du hast eine Grafik
+      mit Namen <tt class="filename">main.png</tt>, die du für das Hauptfenster nutzt:
+      </p><pre class="programlisting">base = main, -1, -1</pre><p>
+      <span class="application">MPlayer</span> versucht, die Dateien
+      <tt class="filename">main</tt>,
+      <tt class="filename">main.png</tt>,
+      <tt class="filename">main.PNG</tt>
+      zu laden, und zentriert sie.
+    </p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-main"></a>B.2.1. Hauptfenster und Abspielleiste</h3></div></div></div><p>
+        Unten steht eine Liste von Einträgen, die in den Blöcken
+        '<code class="literal">window = main</code>' ... '<code class="literal">end</code>',
+        und '<code class="literal">window = playbar</code>' ... '<code class="literal">end</code>'
+        genutzt werden können.
+      </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+            <code class="literal">
+              <a name="skin-decoration"></a>decoration = enable|disable
+            </code>
+          </span></dt><dd><p>
+              Aktiviere oder deaktiviere die Fenstermanager-Dekoration des Hauptfensters.
+              Standard ist <span class="bold"><strong>disable</strong></span>.
+            </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Anmerkung</h3><p>
+                Dies kann für die Abspielleiste nicht benutzt werden.
+              </p></div></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-main-base"></a>base = image, X, Y
+            </code>
+          </span></dt><dd><p>
+              Lässt dich die Hintergrundgrafik fürs Hauptfenster spezifizieren.
+              Das Fenster wird an der angegebenen Position <code class="literal">X,Y</code> auf
+              dem Bildschirm erscheinen. Es wird die Größe der Grafik besitzen.
+            </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warnung</h3><p>
+                Transparente Bereiche innerhalb der Grafik (mit der Farbe #FF00FF) erscheinen
+                auf X-Servern ohne die XShape-Extension schwarz. Die Breite der Grafik muss
+                durch 8 teilbar sein.
+              </p></div></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-button"></a>button = image, X, Y, width, height, message
+            </code>
+          </span></dt><dd><p>
+              Platziere einen Button mit der Größe <code class="literal">width</code> * <code class="literal">height</code>
+              an Position <code class="literal">X,Y</code>. Die angegebene <code class="literal">message</code> wird
+              erzeugt, wenn der Button angeklickt wird. Die mittels <code class="literal">image</code>
+              festgelegte Grafik muss drei untereinander liegende Teile aufweisen (entsprechend
+              der möglichen Zustände des Buttons), etwa so:
+            </p><div class="informalfigure"><pre class="screen">
++---------------+
+|    gedrückt   |
++---------------+
+|  losgelassen  |
++---------------+
+|  deaktiviert  |
++---------------+</pre></div><p>
+             Ein spezieller Wert von <code class="literal">NULL</code> kann für <code class="literal">image</code>
+             benutzt werden, wenn keine Grafik angezeigt werden soll.
+            </p></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-hpotmeter"></a>hpotmeter = button, bwidth, bheight, phases, numphases, default, X, Y, width, height, message
+            </code>
+          </span></dt><dd><p></p></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-vpotmeter"></a>vpotmeter = button, bwidth, bheight, phases, numphases, default, X, Y, width, height, message
+            </code>
+          </span></dt><dd><p></p></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-rpotmeter"></a>rpotmeter = button, bwidth, bheight, phases, numphases, x<sub>0</sub>, y<sub>0</sub>, x<sub>1</sub>, y<sub>1</sub>, default, X, Y, width, height, message
+            </code>
+          </span></dt><dd><p>
+              Platziere ein horizontales (<code class="literal">hpotmeter</code>), vertikales (<code class="literal">vpotmeter</code>) oder drehbares (<code class="literal">rpotmeter</code>) Potentiometer
+              der Größe <code class="literal">width</code> * <code class="literal">height</code> an Position
+              <code class="literal">X,Y</code>. Die Grafik kann in unterschiedliche Teile für die
+              verschiedenen Phasen des Potentiometers aufgeteilt werden (du kannst zum Beispiel
+              eines für die Lautstärkeregelung haben, das von rot nach grün wechselt, während sich
+              sein Wert vom Minimum zum Maximum ändert.).
+              Alle Potentiometer können einen Button besitzen, der bei einem
+              <code class="literal">hpotmeter</code> und <code class="literal">vpotmeter</code>
+              gezogen werden kann. Ein <code class="literal">rpotmeter</code> kann auch
+              ohne Button gedreht werden. Die Parameter sind:
+            </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+                  <code class="literal">button</code> - die für den Button zu verwendende
+                  Grafik (muss drei untereinander liegende Teile aufweisen, wie im Fall des
+                  <a class="link" href="skin-file.html#skin-button">Buttons</a>). Ein spezieller Wert von
+                  <code class="literal">NULL</code> kann benutzt werden, wenn keine Grafik angezeigt werden soll.
+                </p></li><li class="listitem"><p>
+                  <code class="literal">bwidth</code>, <code class="literal">bheight</code> - Größe des Buttons
+                </p></li><li class="listitem"><p>
+                  <code class="literal">phases</code> - die für die verschiedenen Phasen
+                  zu verwendende Grafik des Potentiometers. Ein spezieller Wert von <code class="literal">NULL</code>
+                  kann benutzt werden, wenn du keine solche Grafik anwenden willst. Die Grafik muss
+                  in <code class="literal">numphases</code> untereinander (bzw. für
+                  <code class="literal">vpotmeter</code> nebeneinander) liegende Teile
+                  wie folgt aufgeteilt werden:
+                </p><div class="informalfigure"><pre class="screen">
++------------+
+|  Phase #1  |                Nur für vpotmeter:
++------------+
+|  Phase #2  |                +------------+------------+     +------------+
++------------+                |  Phase #1  |  Phase #2  | ... |  Phase #n  |
+     ...                      +------------+------------+     +------------+
++------------+
+|  Phase #n  |
++------------+</pre></div></li><li class="listitem"><p>
+                  <code class="literal">numphases</code> - Anzahl der Phasen, die in der
+                  <code class="literal">phases</code>-Grafik untergebracht sind
+                </p></li><li class="listitem"><p>
+                  <code class="literal">x<sub>0</sub></code>,
+                  <code class="literal">y<sub>0</sub></code> und
+                  <code class="literal">x<sub>1</sub></code>,
+                  <code class="literal">y<sub>1</sub></code> - Position des
+                  0%-Start-Punkts und 100%-Stopp-Punkts des Potentiometers
+                  <span class="bold"><strong>(nur für <code class="literal">rpotmeter</code>)</strong></span>
+                </p><p>
+                  Die erste Koordinate <code class="literal">x<sub>0</sub>,y<sub>0</sub></code>
+                  definiert den 0%-Start-Punkt (auf dem Rand des
+                  Potentiometer) in der Grafik für Phase #1 und die zweite
+                  Koordinate <code class="literal">x<sub>1</sub>,y<sub>1</sub></code>
+                  den 100%-Stopp-Punkt in der Grafik für Phase #n - mit
+                  anderen Worten: die Koordinaten der Spitze der Markierung
+                  auf dem Potentiometer in den beiden einzelnen Grafiken.
+                </p></li><li class="listitem"><p>
+                  <code class="literal">default</code> - Voreinstellung des Potentiometers
+                  (im Bereich <code class="literal">0</code> bis <code class="literal">100</code>)
+                </p></li><li class="listitem"><p>
+                  <code class="literal">X</code>, <code class="literal">Y</code> - Position des Potentiometers
+                </p></li><li class="listitem"><p>
+                  <code class="literal">width</code>, <code class="literal">height</code> - Breite und Höhe
+                  des Potentiometers
+                </p></li><li class="listitem"><p>
+                  <code class="literal">message</code> - die Nachricht, die erzeugt werden soll,
+                  wenn der Wert des Potentiometers geändert wird
+                </p></li></ul></div></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-pimage"></a>pimage = phases, numphases, default, X, Y, width, height, message
+            </code>
+          </span></dt><dd><p>
+              Platziere verschiedene Phasen einer Grafik an Position <code class="literal">X,Y</code>.
+              Dieses Element kann sehr gut zusammen mit Potentiometern
+              verwendet werden, um deren Zustand zu visualisieren.
+              <code class="literal">phases</code> kann <code class="literal">NULL</code> sein,
+              was aber ziemlich sinnlos ist, weil dann nichts angezeigt wird.
+              Eine Beschreibung der Parameter findet sich unter
+              <a class="link" href="skin-file.html#skin-hpotmeter">hpotmeter</a>. Der einzige
+              Unterschied zu den Parametern dort betrifft die Nachricht:
+            </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+                  <code class="literal">message</code> - die Nachricht, auf die
+                  reagiert werden (d. h. eine Änderung von
+                  <code class="literal">pimage</code> bewirken) soll
+                </p></li></ul></div></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-font"></a>font = fontfile
+            </code>
+          </span></dt><dd><p>
+              Definiert eine Schrift. <code class="literal">fontfile</code> ist der Name der
+              Schrift-Beschreibungsdatei mit der Erweiterung <tt class="filename">.fnt</tt>
+              (gib hier keine Erweiterung an) und
+              wird verwendet, um auf die Schrift zu verweisen
+              (siehe <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>
+              und <a class="link" href="skin-file.html#skin-slabel">slabel</a>). Bis zu 25 Schriften können
+              definiert werden.
+            </p></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-slabel"></a>slabel = X, Y, fontfile, "text"
+            </code>
+          </span></dt><dd><p>
+              Platziere ein statisches Label an Position <code class="literal">X,Y</code>.
+              <code class="literal">text</code> wird mittels der identifizierten
+              <code class="literal">fontfile</code> angezeigt. Der Text ist einfach ein
+              eine Ausgangszeichenkette (<code class="literal">$x</code>-Variablen funktionieren nicht),
+              eingeschlossen von doppelten Anführungszeichen (das <code class="literal">"</code>-Zeichen kann jedoch
+              nicht Teil des Textes sein).
+              Das Label wird mittels der über die <code class="literal">fontfile</code> identifizierten
+              Schrift angezeigt.
+            </p></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-dlabel"></a>dlabel = X, Y, width, align, fontfile, "text"
+            </code>
+          </span></dt><dd><p>
+              Platziere ein dynamisches Label an Position <code class="literal">X,Y</code>.
+              Das Label wird als dynamisch bezeichnet, weil sein Text periodisch
+              aktualisiert wird. Die maximale Breite des Labels wird mit dem
+              Wert <code class="literal">width</code> vorgegeben (seine Höhe ist die der
+              vorkommenden Zeichen).
+              Wird der anzuzeigende Text breiter als dieser Wert, wird er gescrollt,
+              andernfalls wird er innerhalb des angegebenen Bereichs gemäß des
+              <code class="literal">align</code>-Parameters ausgerichtet:
+              <code class="literal">0</code> steht für links,
+              <code class="literal">1</code> steht für zentriert,
+              <code class="literal">2</code> steht für rechts.
+            </p><p>
+              Der anzuzeigende Text wird mit <code class="literal">text</code> festgelegt:
+              Er muss zwischen doppelten Anführungszeichen stehen (das <code class="literal">"</code>-Zeichen kann jedoch
+              nicht Teil des Textes sein).
+              Das Label wird mittels der über die <code class="literal">fontfile</code> identifizierten
+              Schrift angezeigt.
+              Du kannst folgende Variablen im Text verwenden:
+            </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Variable</th><th>Bedeutung</th></tr></thead><tbody><tr><td>$1</td><td>bisherige Laufzeit im Format <span class="emphasis"><em>hh:mm:ss</em></span></td></tr><tr><td>$2</td><td>bisherige Laufzeit im Format <span class="emphasis"><em>mmmm:ss</em></span></td></tr><tr><td>$3</td><td>bisherige Laufzeit im Format <span class="emphasis"><em>hh</em></span> (Stunden)</td></tr><tr><td>$4</td><td>bisherige Laufzeit im Format <span class="emphasis"><em>mm</em></span> (Minuten)</td></tr><tr><td>$5</td><td>bisherige Laufzeit im Format <span class="emphasis"><em>ss</em></span> (Sekunden)</td></tr><tr><td>$6</td><td>Gesamtlaufzeit im Format <span class="emphasis"><em>hh:mm:ss</em></span></td></tr><tr><td>$7</td><td>Gesamtlaufzeit im Format <span class="emphasis"><em>mmmm:ss</em></span></td></tr><tr><td>$8</td><td>bisherige Laufzeit im Format <span class="emphasis"><em>h:mm:ss</em></span></td></tr><tr><td>$v</td><td>Lautstärke im Format <span class="emphasis"><em>xxx.xx</em></span>%</td></tr><tr><td>$V</td><td>Lautstärke im Format <span class="emphasis"><em>xxx.x</em></span></td></tr><tr><td>$U</td><td>Lautstärke im Format <span class="emphasis"><em>xxx</em></span></td></tr><tr><td>$b</td><td>Balance im Format <span class="emphasis"><em>xxx.xx</em></span>%</td></tr><tr><td>$B</td><td>Balance im Format <span class="emphasis"><em>xxx.x</em></span></td></tr><tr><td>$D</td><td>Balance im Format <span class="emphasis"><em>xxx</em></span></td></tr><tr><td>$$</td><td><code class="literal">$</code>-Zeichen</td></tr><tr><td>$a</td><td>
+                      Buchstabe entsprechend dem Audio-Typ (Kein: <span class="keycap"><b>n</b></span>,
+                      Mono: <span class="keycap"><b>m</b></span>, Stereo: <span class="keycap"><b>t</b></span>, Surround: <span class="keycap"><b>r</b></span>)
+                    </td></tr><tr><td>$t</td><td>Track-Nummer (DVD, VCD, CD oder Wiedergabeliste)</td></tr><tr><td>$o</td><td>Dateiname</td></tr><tr><td>$O</td><td>
+                      Dateiname (falls kein Titelname verfügbar), ansonsten
+                      der Titel
+                    </td></tr><tr><td>$f</td><td>Dateiname in Kleinbuchstaben</td></tr><tr><td>$F</td><td>Dateiname in Grossbuchstaben</td></tr><tr><td>$T</td><td>
+                      Buchstabe entsprechend dem Streamtyp (Datei: <span class="keycap"><b>f</b></span>,
+                      CD: <span class="keycap"><b>a</b></span>, Video-CD: <span class="keycap"><b>v</b></span>, DVD: <span class="keycap"><b>d</b></span>,
+                      URL: <span class="keycap"><b>u</b></span>, TV/DVB: <span class="keycap"><b>b</b></span>,
+                      CUE: <span class="keycap"><b>c</b></span>)
+                    </td></tr><tr><td>$P</td><td>
+                      Buchstabe entsprechend der Wiedergabe (Keine: <span class="keycap"><b>s</b></span>, Wiedergabe: <span class="keycap"><b>p</b></span>, Pause: <span class="keycap"><b>e</b></span>)
+                    </td></tr><tr><td>$p</td><td>
+                      Buchstabe <span class="keycap"><b>p</b></span> (wenn ein Film abgespielt wird)
+                    </td></tr><tr><td>$s</td><td>
+                      Buchstabe <span class="keycap"><b>s</b></span> (wenn ein Film angehalten wird)
+                    </td></tr><tr><td>$e</td><td>
+                      Buchstabe <span class="keycap"><b>e</b></span> (wenn ein Film pausiert wird)
+                    </td></tr><tr><td>$x</td><td>Videobreite</td></tr><tr><td>$y</td><td>Videohöhe</td></tr><tr><td>$C</td><td>Name des verwendeten Codecs</td></tr></tbody></table></div></dd></dl></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Anmerkung</h3><p>
+          Die Variablen <code class="literal">$a, $T, $P, $p, $s</code> und <code class="literal">$e</code>
+          geben Buchstaben zurück, die als spezielle Symbole angezeigt werden sollen
+          (zum Beispiel steht <span class="keycap"><b>e</b></span> für das Pause-Symbol, welches gewöhnlich
+          etwa so || aussieht).
+          Du solltest eine Schrift für normale Buchstaben und eine weitere Schrift für
+          Symbole haben. Schau in den Abschnitt über
+          <a class="link" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Symbole">Symbole</a>
+          für mehr Informationen.
+        </p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-subwindow"></a>B.2.2. Videofenster</h3></div></div></div><p>
+        Die folgenden Einträge können in diesem Block verwendet werden
+        '<code class="literal">window = video</code>' . . . '<code class="literal">end</code>'.
+      </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+            <code class="literal"><a name="skin-sub-base"></a>base = image, X, Y, width, height</code>
+          </span></dt><dd><p>
+              Die im Fenster anzuzeigende Grafik. Das Fenster wird so groß sein wie die Grafik.
+              <code class="literal">width</code> und <code class="literal">height</code>
+              kennzeichnen Breite und Höhe des Fensters; sie sind optional (wenn sie fehlen, hat
+              das Fenster dieselbe Größe wie die Grafik).
+              Ein spezieller Wert von <code class="literal">NULL</code> kann benutzt werden, wenn keine Grafik
+              angezeigt werden soll (dann dürfen <code class="literal">width</code> und <code class="literal">height</code>
+              allerdings nicht fehlen).
+            </p></dd><dt><span class="term">
+            <code class="literal"><a name="skin-background"></a>background = R, G, B</code>
+          </span></dt><dd><p>
+              Lässt dich die Hintergrundfarbe setzen. Dies ist von Nutzen, wenn die Grafik
+              kleiner ist als das Fenster.
+              <code class="literal">R</code>, <code class="literal">G</code> und <code class="literal">B</code>
+              spezifizieren die Rot-, Grün- und Blau-Komponenten der Farbe (jede davon ist
+              eine Dezimalzahl von 0 bis 255).
+            </p></dd></dl></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-menu"></a>B.2.3. Skin-Menü</h3></div></div></div><p>
+        Wie bereits zuvor erwähnt, wird das Menü mittels zweier Grafiken dargestellt.
+        Normale Menüeinträge werden aus der Grafik entnommen, die durch das Element
+        <code class="literal">base</code> festgelegt sind, während der aktuell gewählte Eintrag
+        aus der Grafik entnommen wird, die durch das Element <code class="literal">selected</code>
+        spezifiziert wurde. Du musst Position und Größe jedes Menüeintrags mittels des
+        Elements <code class="literal">menu</code> definieren.
+      </p><p>
+        Die folgenden Einträge können im Block
+        '<code class="literal">window = menu</code>'. . .'<code class="literal">end</code>' genutzt werden.
+      </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+            <code class="literal"><a name="skin-menu-base"></a>base = image</code>
+          </span></dt><dd><p>
+              Die Grafik für normale Menüeinträge.
+            </p></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-selected"></a>selected = image
+            </code>
+          </span></dt><dd><p>
+              Die Grafik, die das Menü mit allen gewählten Einträgen anzeigt.
+            </p></dd><dt><span class="term">
+            <code class="literal">
+              <a name="skin-menu"></a>menu = X, Y, width, height, message
+            </code>
+          </span></dt><dd><p>
+              Definiert die Position <code class="literal">X,Y</code> und die Größe eines Menüeintrags
+              innerhalb der Grafik. <code class="literal">message</code> ist die Nachricht, die erzeugt
+              werden soll, wenn die Maustaste über dem Eintrag losgelassen wird.
+            </p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-overview.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-fonts.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">B.1. Überblick </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> B.3. Schriften</td></tr></table></div></body></html>

@@ -1,0 +1,47 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.5. SVGAlib</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="prev" href="sdl.html" title="4.4. SDL"><link rel="next" href="fbdev.html" title="4.6. Framebuffer-Ausgabe (FBdev)"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.5. SVGAlib</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sdl.html">Zurück</a> </td><th width="60%" align="center">Kapitel 4. Videoausgabegeräte</th><td width="20%" align="right"> <a accesskey="n" href="fbdev.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="svgalib"></a>4.5. SVGAlib</h2></div></div></div><p><b>INSTALLATION. </b>
+  Du musst zuerst die svgalib und die dazugehörigen Entwicklerpakete
+  installieren, bevor du <span class="application">MPlayer</span> compilierst,
+  da er sonst die Svgalib nicht automatisch findet und den Treiber dazu
+  nicht compiliert (das kann aber trotzdem erzwungen werden). Vergiss auch
+  nicht, in <tt class="filename">/etc/vga/libvga.config</tt> richtige Werte
+  für deine Grafikkarte und deinen Monitor anzugeben.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Anmerkung</h3><p>
+  Verwende nicht die Option <tt class="option">-fs</tt>, da sie die Benutzung des
+  Softwareskalierers erzwingt und das ganze dann langsam wird. Wenn du diese
+  Option wirklich brauchst, dann verwende auch <tt class="option">-sws 4</tt>,
+  welche zwar schlechte Qualität produziert, dafür aber auch ein wenig
+  schneller ist.
+</p></div><p><b>EGA(4bpp)-UNTERSTÜTZUNG. </b>
+  SVGAlib beinhaltet die EGAlib, und MPlayer kann damit jeden Film in
+  16 Farben bei folgenden Modi anzeigen:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  EGA-Karte mit EGA-Monitor: 320x200x4bpp, 640x200x4bpp, 640x350x4bpp
+</p></li><li class="listitem"><p>
+  EGA-Karte mit CGA-Monitor: 320x200x4bpp, 640x200x4bpp
+</p></li></ul></div><p>
+  Der bpp-Wert (Bits pro Pixel) muss von Hand auf vier gesetzt werden:
+  <tt class="option">-bpp 4</tt>
+</p><p>
+  Die Auflösung des Films muss wahrscheinlich verkleinert werden, damit
+  er in den EGA-Modus reinpasst:
+  </p><pre class="screen">-vf scale=640:350</pre><p>
+  oder
+  </p><pre class="screen">-vf scale=320:200</pre><p>
+</p><p>
+  Dafür brauchen wir eine schnelle, aber schlechte Qualität
+  produzierende Skalierroutine:
+  </p><pre class="screen">-sws 4</pre><p>
+</p><p>
+  Eventuell muss die automatische Anpassung des
+  Höhen-/Breitenverhältnisses ausgeschaltet werden:
+  </p><pre class="screen">-noaspect</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Anmerkung</h3><p>
+  Die besten Ergebnisse bei EGA-Bildschirmen erhält man meiner Erfahrung nach,
+  wenn man die Helligkeit ein wenig verringert:
+  <tt class="option">-vf eq=-20:0</tt>. Ich musste auch die Audiosamplerate reduzieren,
+  weil bei 44KHz der Sound nicht richtig funktionierte:
+  <tt class="option">-srate 22050</tt>.
+</p></div><p>
+  Du kannst das OSD und Untertitel mit dem <tt class="option">expand</tt>-Filter
+  aktivieren. Die Manpage enthält die exakten Parameter.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sdl.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="fbdev.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">4.4. SDL </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 4.6. Framebuffer-Ausgabe (FBdev)</td></tr></table></div></body></html>

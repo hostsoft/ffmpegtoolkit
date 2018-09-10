@@ -1,0 +1,34 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.7. Kopieren von Streams</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="prev" href="menc-feat-rescale.html" title="6.6. Reskalierung von Filmen"><link rel="next" href="menc-feat-enc-images.html" title="6.8. Encodieren von mehreren Input-Bilddateien (JPEG, PNG, TGA, etc.)"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.7. Kopieren von Streams</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-rescale.html">Zurück</a> </td><th width="60%" align="center">Kapitel 6. Allgemeiner Gebrauch von <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-streamcopy"></a>6.7. Kopieren von Streams</h2></div></div></div><p>
+      <span class="application">MEncoder</span> kann Input-Streams auf zwei Arten verarbeiten:
+      <span class="bold"><strong>Encodiere</strong></span> oder <span class="bold"><strong>kopiere</strong></span>
+      sie. Dieser Abschnitt behandelt das <span class="bold"><strong>Kopieren</strong></span>.
+    </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+          <span class="bold"><strong>Videostream</strong></span> (Option <tt class="option">-ovc copy</tt>):
+          Damit kann man nette Sachen machen :) Wie etwa FLI oder VIVO oder
+          MPEG1-Video in eine AVI-Datei legen (nicht konvertieren!)! Sicherlich kann
+          nur <span class="application">MPlayer</span> solche Dateien abspielen :)
+          Und es hat tatsächlich keine wirkliche Daseinsberechtigung.
+          Rational: Das Kopieren eines Video-Stream kann zum Beispiel dann
+          nützlich sein, wenn nur der Audio-Stream encodiert werden muß (wie
+          unkomprimiertes PCM nach MP3).
+        </p></li><li class="listitem"><p>
+          <span class="bold"><strong>Audiostream</strong></span> (Option <tt class="option">-oac copy</tt>):
+          unkompliziert. Es ist möglich, eine externe Audio-Datei (MP3,
+          WAV) herzunehmen und sie in einen Ausgabestream zu muxen. Nimm dazu die
+          Option <tt class="option">-audiofile <em class="replaceable"><code>Dateinamename</code></em></tt>.
+        </p></li></ul></div><p>
+      Das Anwenden von <tt class="option">-oac copy</tt>, um von einem
+      Containerformat zum anderen zu kopieren, kann
+      <tt class="option">-fafmttag</tt> erfordern, um das Audio-Format-Tag der Originaldatei
+      beizubehalten.
+      Wenn du zum Beispiel eine NSV-Datei mit AAC-Audio in einen AVI-Container
+      konvertierst, wird der Audio-Format-Tag fehlerhaft sein und muss geändert
+      werden. <tt class="filename">codecs.conf</tt> enthält eine Liste von
+      Audio-Format-Tags.
+    </p><p>
+      Beispiel:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.nsv</code></em> -oac copy -fafmttag 0x706D \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-rescale.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">6.6. Reskalierung von Filmen </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 6.8. Encodieren von mehreren Input-Bilddateien (JPEG, PNG, TGA, etc.)</td></tr></table></div></body></html>

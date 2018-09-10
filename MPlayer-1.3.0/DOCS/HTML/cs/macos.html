@@ -1,0 +1,118 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.5. Mac OS</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="ports.html" title="Kapitola 5. Porty"><link rel="prev" href="windows.html" title="5.4. Windows"><link rel="next" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="macos.html#osx_gui" title="5.5.1. MPlayer OS X GUI"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.5. Mac OS</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="windows.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 5. Porty</th><td width="20%" align="right"> <a accesskey="n" href="mencoder.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="macos"></a>5.5. Mac OS</h2></div></div></div><p>
+<span class="application">MPlayer</span> nepracuje na Mac OS verzích pod
+10, ale měl by být bez úprav kompilovatelný na Mac OS X 10.2 a vyšších.
+Preferovaná verze kompileru je Apple verze
+GCC 3.x a vyšších.
+Základní prostředí pro kompilaci můžete získat instalací
+<a class="ulink" href="http://developer.apple.com/tools/download/" target="_top">Xcode</a>
+od Apple. Máte-li Mac OS X 10.3.9 nebo pozdější a QuickTime 7
+můžete použít výstupní video rozhraní <tt class="option">corevideo</tt>.
+</p><p>
+Naneštěstí toto základní prostředí neumožňuje využít všechny
+pěkné vlastnosti <span class="application">MPlayer</span>u.
+Například, budete-li chtít mít zakompilovánu podporu OSD, budete
+muset mít na svém stroji nainstalovány knihovny
+<code class="systemitem">fontconfig</code>
+a <code class="systemitem">freetype</code>.
+ Narozdíl od jiných Unixů, jako je většina variant Linuxu a BSD, OS X
+ nemá balíčkovací systém distribuovaný se systémem.
+</p><p>
+Můžete vybírat minimálně ze dvou:
+<a class="ulink" href="http://fink.sourceforge.net/" target="_top">Fink</a>u a
+<a class="ulink" href="http://www.macports.org/" target="_top">MacPorts</a>.
+Oba poskytují zhruba stejné služby (např. mnoho dostupných balíčků,
+řešení závislostí, schopnost jednoduše přidávat/aktualizovat/odebírat
+balíčky, atp...).
+Fink nabízí jak předkompilované binární balíčky, tak možnost kompilovat
+všechno ze zdrojového kódu, zatímco MacPorts nabízí pouze možnost
+kompilace ze zdrojového kódu.
+Autor této příručky zvolil MacPorts z jednoduchého důvodu, že jeho
+základní nastavení je mnohem lehčí.
+Pozdější příklady budou založeny na MacPorts.
+</p><p>
+Například pro kompilaci <span class="application">MPlayer</span> s podporou OSD:
+</p><pre class="screen">sudo port install pkgconfig</pre><p>
+Takto nainstalujete <span class="application">pkg-config</span>, což je systém pro správu
+knihovních příznaků compile/link.
+<span class="application">MPlayer</span>ův skript <code class="systemitem">configure</code> jej
+používá pro správnou detekci knihoven.
+Pak můžete nainstalovat <span class="application">fontconfig</span>
+podobným způsobem:
+</p><pre class="screen">sudo port install fontconfig</pre><p>
+Následně můžete pokračovat spuštěním <span class="application">MPlayer</span>ova
+<code class="systemitem">configure</code> skriptu (ověřte proměnné prostředí
+<code class="systemitem">PKG_CONFIG_PATH</code> a <code class="systemitem">PATH</code>,
+aby <code class="systemitem">configure</code> našel knihovny instalované pomocí
+MacPorts):
+</p><pre class="screen">
+PKG_CONFIG_PATH=/opt/local/lib/pkgconfig/ PATH=$PATH:/opt/local/bin/ ./configure
+</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osx_gui"></a>5.5.1. MPlayer OS X GUI</h3></div></div></div><p>
+Můžete si stáhnout nativní GUI pro <span class="application">MPlayer</span> spolu
+s předkompilovanými binárkami <span class="application">MPlayer</span>u pro Mac OS X
+z <a class="ulink" href="http://mplayerosx.sf.net/" target="_top">MPlayerOSX</a> projektu, ale upozorňujeme:
+tento projekt již není aktivní.
+</p><p>
+Naštěstí byl <span class="application">MPlayerOSX</span> převzat členem
+<span class="application">MPlayer</span> týmu.
+Předváděcí verze lze stáhnout z naší
+<a class="ulink" href="http://mplayerhq.hu/dload.html" target="_top">download stránky</a>
+a oficiální verze by měla přijít již brzy.
+</p><p>
+Abyste mohli skompilovat <span class="application">MPlayerOSX</span> ze zdrojového
+kódu sami, budete potřebovat <code class="systemitem">mplayerosx</code>,
+<code class="systemitem">main</code> a kopii
+<code class="systemitem">main</code> SVN modulu jménem
+<code class="systemitem">main_noaltivec</code>.
+<code class="systemitem">mplayerosx</code> je GUI nadstavba,
+<code class="systemitem">main</code> je MPlayer a
+<code class="systemitem">main_noaltivec</code> je MPlayer přeložený bez podpory AltiVec.
+</p><p>
+Pro stažení SVN modulů použijte:
+</p><pre class="screen">
+svn checkout svn://svn.mplayerhq.hu/mplayerosx/trunk/ mplayerosx
+svn checkout svn://svn.mplayerhq.hu/mplayer/trunk/ main
+</pre><p>
+</p><p>
+Abyste skompilovali <span class="application">MPlayerOSX</span> budete muset setavit
+asi toto:
+</p><pre class="screen">
+Adresář_se_zdrojáky_MPlayeru
+   |
+   |---&gt;main           (Zdrojový kód MPlayeru ze Subversion)
+   |
+   |---&gt;main_noaltivec (Zdrojový kód MPlayeru ze Subversion konfigurován s --disable-altivec)
+   |
+   \---&gt;mplayerosx     (Zdrojový kód MPlayer OS X ze Subversion)
+</pre><p>
+Nejdřív musíte skompilovat main a main_noaltivec.
+</p><p>
+Pro začátek, pro dosažení maximální zpětné kompatibility,  nastavte
+globální proměnnou:
+</p><pre class="screen">export MACOSX_DEPLOYMENT_TARGET=10.3</pre><p>
+</p><p>
+Pak konfigurujte:
+</p><p>
+Pokud konfigurujete pro G4 nebo pozdější CPU s podporou AltiVec, proveďte následující:
+</p><pre class="screen">
+./configure --disable-gl --disable-x11
+</pre><p>
+Pokud konfigurujete pro stroj s G3 bez AltiVec, použijte:
+</p><pre class="screen">
+./configure --disable-gl --disable-x11 --disable-altivec
+</pre><p>
+Možná budete muset editovat <tt class="filename">config.mak</tt> a změnit
+<code class="systemitem">-mcpu</code> a <code class="systemitem">-mtune</code>
+z <code class="systemitem">74XX</code> na <code class="systemitem">G3</code>.
+</p><p>
+Pokračujte s
+</p><pre class="screen">make</pre><p>
+pak jděte do adresáře mplayerosx a napište
+</p><pre class="screen">make dist</pre><p>
+To vytvoří komprimovaný <code class="systemitem">.dmg</code> archiv
+s binárkou připravenou k použití.
+</p><p>
+Také lze použít projekt <span class="application">Xcode</span> 2.1;
+starý projekt pro <span class="application">Xcode</span> 1.x
+již nepracuje.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="windows.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="mencoder.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">5.4. Windows </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> Kapitola 6. Základní použití <span class="application">MEncoder</span>u</td></tr></table></div></body></html>

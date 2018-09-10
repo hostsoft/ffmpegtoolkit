@@ -48,17 +48,10 @@ echo "Installer EPEL Release ........"
 yum install -y epel-release
 echo "Ensuring required RPM ........"
 yum install -y \
-gcc gcc-c++ git libgcc glib glib2 bzip2 xz unzip make cmake cmake3 automake autoconf patch ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib \
+gcc gcc-c++ git libgcc glib glib2 bzip2 xz unzip make cmake automake autoconf patch ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib \
 zlib zlib-devel libjpeg libjpeg-devel libpng libpng-devel gd gd-devel gettext freetype freetype-devel ImageMagick ImageMagick-devel \
 libstdc++ libstdc++-devel numactl numactl-devel mediainfo re2c giflib-devel giflib libtiff libtiff-devel libtool libxml2 libxml2-devel \
 subversion doxygen SDL-devel freeglut-devel openssl-devel openjpeg-devel  fribidi-devel fribidi
-
-echo "Update GCC to GCC7"
-#yum install centos-release-scl -y
-#yum install devtoolset-7-gcc* -y
-#scl enable devtoolset-7 bash
-#which gcc
-#gcc --version
 export ARCH=$(arch)
 fi
 
@@ -112,7 +105,6 @@ sh vc_libtheora.sh
 sh vc_xvid.sh
 sh vc_x264.sh
 sh vc_x265.sh
-#sh vc_aom.sh
 sh vc_mplayer_codecs.sh
 sh vc_mplayer.sh
 sh vc_ffmpeg.sh

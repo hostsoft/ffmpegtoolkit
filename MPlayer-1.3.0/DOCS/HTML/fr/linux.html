@@ -1,0 +1,63 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.1. Linux</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="ports.html" title="Chapitre 5. Ports"><link rel="prev" href="ports.html" title="Chapitre 5. Ports"><link rel="next" href="bsd.html" title="5.2. *BSD"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="linux.html#debian" title="5.1.1. Paquets Debian"><link rel="subsection" href="linux.html#rpm" title="5.1.2. Paquets RPM"><link rel="subsection" href="linux.html#arm" title="5.1.3. ARM"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.1. Linux</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ports.html">Précédent</a> </td><th width="60%" align="center">Chapitre 5. Ports</th><td width="20%" align="right"> <a accesskey="n" href="bsd.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="linux"></a>5.1. Linux</h2></div></div></div><p>
+La plateforme principale de développement est Linux sur x86, bien que
+<span class="application">MPlayer</span> fonctionne sur de nombreux autres ports
+Linux.
+Des binaires de <span class="application">MPlayer</span> sont disponibles depuis
+de nombreuses sources.  Par contre, <span class="bold"><strong>aucun de ces paquets n'est supporté</strong></span>.
+Rapportez les problèmes à leurs auteurs, pas à nous.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="debian"></a>5.1.1. Paquets Debian</h3></div></div></div><p>
+Pour construire le paquet Debian, lancez la commande suivante dans le
+répertoire source de <span class="application">MPlayer</span> :
+
+</p><pre class="screen">fakeroot debian/rules binary</pre><p>
+
+Si vous voulez passer des options particulières à configure, vous pouvez
+définir la variable d'environnement <code class="envar">DEB_BUILD_OPTIONS</code>.
+Par exemple, si vous voulez le support de la GUI et de l'OSD, faites :
+
+</p><pre class="screen">DEB_BUILD_OPTIONS="--enable-gui --enable-menu" fakeroot debian/rules binary</pre><p>
+
+Vous pouvez aussi passer quelques variables au Makefile. Par exemple, si
+vous voulez compiler avec gcc 3.4 même si ce n'est pas celui par défaut :
+
+</p><pre class="screen">CC=gcc-3.4 DEB_BUILD_OPTIONS="--enable-gui" fakeroot debian/rules binary</pre><p>
+
+Pour nettoyer l'arborescence des sources, exécutez la commande suivante :
+
+</p><pre class="screen">fakeroot debian/rules clean</pre><p>
+
+En tant que root installez le paquet <tt class="filename">.deb</tt> comme d'habitude :
+
+</p><pre class="screen">dpkg -i ../mplayer_<em class="replaceable"><code>version</code></em>.deb</pre><p>
+</p><p>
+Christian Marillat a construit des paquets Debian non-officiels pour
+<span class="application">MPlayer</span>, <span class="application">MEncoder</span>
+et les polices depuis un certain temps, vous pouvez les obtenir (apt-get)
+depuis sa <a class="ulink" href="http://www.debian-multimedia.org/" target="_top">page web</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="rpm"></a>5.1.2. Paquets RPM</h3></div></div></div><p>
+Dominik Mierzejewski maintient les paquets RPM officiels de
+<span class="application">MPlayer</span> pour Fedora Core.
+Ils sont disponibles sur le <a class="ulink" href="http://rpm.greysector.net/mplayer/" target="_top">dépôt Livna</a>.
+</p><p>
+Les paquets RPM pour Mandrake/Mandriva sont disponibles sur le
+<a class="ulink" href="http://plf.zarb.org/" target="_top">P.L.F.</a>,
+SuSE incluait une version limitée de <span class="application">MPlayer</span>
+dans sa distribution.
+Ils l'ont retiré dans leurs dernières versions.
+Vous pouvez obtenir des RPMs fonctionnels sur
+<a class="ulink" href="http://packman.links2linux.de/?action=128" target="_top">links2linux.de</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="arm"></a>5.1.3. ARM</h3></div></div></div><p>
+<span class="application">MPlayer</span> fonctionne sur les PDAs Linux avec un
+CPU ARM c-a-d Sharp Zaurus, Compaq Ipaq. La manière
+la plus facile d'obtenir <span class="application">MPlayer</span> est de récupérer
+un des paquets
+<a class="ulink" href="http://www.openzaurus.org" target="_top">OpenZaurus</a>.
+Si vous voulez le compiler vous-même, vous devriez regarder les répertoires
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/mplayer?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">mplayer</a>
+et
+<a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/libavcodec?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">libavcodec</a>
+du répertoire raçine de la distribution OpenZaurus.
+Ils ont toujours les derniers Makefile et patchs utilisés pour contruire
+la version SVN de <span class="application">MPlayer</span>.
+Si vous avez besoin d'une GUI, vous pouvez utiliser xmms-embedded.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ports.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="bsd.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">Chapitre 5. Ports </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 5.2. *BSD</td></tr></table></div></body></html>

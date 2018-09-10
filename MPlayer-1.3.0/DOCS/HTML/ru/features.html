@@ -1,0 +1,58 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.2. Возможности:</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="install.html" title="Глава 2. Установка"><link rel="prev" href="softreq.html" title="2.1. Требуемые программы:"><link rel="next" href="gui.html" title="2.3. Как насчёт GUI?"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.2. Возможности:</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="softreq.html">Пред.</a> </td><th width="60%" align="center">Глава 2. Установка</th><td width="20%" align="right"> <a accesskey="n" href="gui.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="features"></a>2.2. Возможности:</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Решите, нужен ли Вам GUI. Если да, прочитайте до компиляции
+  секцию <a class="link" href="gui.html" title="2.3. Как насчёт GUI?">GUI</a>.
+</p></li><li class="listitem"><p>
+  Если Вы хотите установить <span class="application">MEncoder</span> (наш великолепный многоцелевой кодировщик),
+читайте <a class="link" href="mencoder.html" title="Глава 6. Основы использования MEncoder">секцию <span class="application">MEncoder</span></a>.
+</p></li><li class="listitem"><p>
+  Если у Вас есть V4L совместимый <span class="bold"><strong>TV тюнер</strong></span>, и Вы хотите
+  смотреть/захватывать и кодировать MPlayer'ом фильмы, читайте секцию
+  <a class="link" href="tv-input.html" title="3.10. TV вход">TV вход</a>.
+</p></li><li class="listitem"><p>
+  Если у вас есть V4L совместимый <span class="bold"><strong>Radio тюнер</strong></span>,
+  и вы хотите слушать/записывать MPlayer'ом радиопередачи, читайте секцию
+  <a class="link" href="radio.html" title="3.12. Радио">Радио</a>.
+</p></li><li class="listitem"><p>
+  Существует изящное <span class="bold"><strong>OSD Меню</strong></span> готовое для использования.
+  Проверьте секцию <a class="link" href="subosd.html" title="3.2. Субтитры и OSD">OSD Меню</a>.
+</p></li></ul></div><p>
+Теперь соберите <span class="application">MPlayer</span>:
+</p><pre class="screen">
+./configure
+make
+make install
+</pre><p>
+</p><p>
+В этот момент, <span class="application">MPlayer</span> готов к использованию.
+Проверьте, не содержится ли файл <tt class="filename">codecs.conf</tt> в Вашем домашнем каталоге
+(<tt class="filename">~/.mplayer/codecs.conf</tt>) оставленный от предыдущих версий MPlayer'а,
+и удалите его.
+</p><p>
+Обратите внимание на то, что если у Вас в <tt class="filename">~/.mplayer/</tt> есть
+файл <tt class="filename">codecs.conf</tt>, то встроенный и системный файлы
+<tt class="filename">codecs.conf</tt> будут полностью игнорированы. Не делайте
+этого, если только Вы не собираетесь развлекаться со внутренностями <span class="application">MPlayer</span>'а,
+поскольку это может вызвать множество проблем. Если Вы хотите поменять порядок
+подбора кодеков, используйте опции <tt class="option">-vc</tt>, <tt class="option">-ac</tt>,
+<tt class="option">-vfm</tt>, и <tt class="option">-afm</tt> либо в командной строке, либо
+в Вашем конфигурационном файле (см. страницу руководства).
+</p><p>
+Пользователи Debian могут сами создать .deb пакеты, это очень
+просто. Просто запустите </p><pre class="screen">fakeroot debian/rules binary</pre><p> в корневом
+каталоге <span class="application">MPlayer'а</span>. Более подробные инструкции см.
+в разделе <a class="link" href="linux.html#debian" title="5.1.1. Debian пакеты">Создание Debian пакетов</a>.
+</p><p>
+<span class="bold"><strong>Всегда просматривайте вывод</strong></span> <tt class="filename">./configure</tt>, и файл
+<tt class="filename">config.log</tt>, они содержат информацию о том, что будет собрано,
+а что нет. Возможно Вы захотите просмотреть файлы <tt class="filename">config.h</tt> и
+<tt class="filename">config.mak</tt>.
+Если у Вас стоят какие-то библиотеки, которые не определяются
+<tt class="filename">./configure</tt>, проверьте, что у Вас установлены соответствующие
+заголовки[header files] (обычно это -dev пакеты) и их версии совпадают. Файл
+<tt class="filename">config.log</tt> Обычно сообщит Вам, чего не хватает для сборки.
+</p><p>
+Хотя это не обязательно, но чтобы получить функционирующие OSD и субтитры,
+должны быть установлены шрифты. Рекомендуемый метод - установка TTF шрифта и
+указание <span class="application">MPlyer</span>'у использовать его. Подробности, см. в  секции
+<a class="link" href="subosd.html" title="3.2. Субтитры и OSD">Субтитры и OSD</a>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="softreq.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="gui.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">2.1. Требуемые программы: </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 2.3. Как насчёт GUI?</td></tr></table></div></body></html>

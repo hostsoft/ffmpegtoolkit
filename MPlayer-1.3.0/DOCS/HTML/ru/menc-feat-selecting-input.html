@@ -1,0 +1,34 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.2. Выбор входного файла или устройства</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="prev" href="menc-feat-selecting-codec.html" title="6.1. Выбор кодеков и формата файлов"><link rel="next" href="menc-feat-mpeg4.html" title='6.3. Двухпроходное кодирование MPEG-4 ("DivX")'><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. Выбор входного файла или устройства</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Пред.</a> </td><th width="60%" align="center">Глава 6. Основы использования <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-input"></a>6.2. Выбор входного файла или устройства</h2></div></div></div><p>
+<span class="application">MEncoder</span> может кодировать из файлов или непосредственно
+с DVD или VCD диска.
+Просто укажите имя файла в командной строке для кодирования из файла,
+или <tt class="option">dvd://</tt><em class="replaceable"><code>номер_ролика</code></em> или
+<tt class="option">vcd://</tt><em class="replaceable"><code>номер_дорожки</code></em> для кодирования
+DVD ролика или VCD дорожки.
+Если вы уже скопировали DVD на жесткий диск (може воспользоваться утилитой вроде
+<span class="application">dvdbackup</span>, доступной на многих системах),
+и желаете кодировать из копии, вледует по-прежнему использовать
+<tt class="option">dvd://</tt> синтаксис, вместе с <tt class="option">-dvd-device</tt>
+с последующим путек к корню копии DVD.
+
+Опции <tt class="option">-dvd-device</tt> и <tt class="option">-cdrom-device</tt> также могут
+быть использованы для переопределения путей к файлам устройств для
+чтения прямо с диска, если значения по-умолчанию
+<tt class="filename">/dev/dvd</tt> и <tt class="filename">/dev/cdrom</tt> не подходят для
+вашей системы.
+</p><p>
+При кодировании с DVD, часто бывает желательно выбрать раздел или диапазон
+разделов для кодирования. для этой цели можно использовать опцию
+<tt class="option">-chapter</tt>.
+Например, <tt class="option">-chapter</tt> <em class="replaceable"><code>1-4</code></em>
+будет кодировать только разделы DVD с 1-го по 4-й.
+Это особенно полезно при кодировании 1400Мб с целью уместить их на 2 CD,
+так как вы можете разбить фильм точно на границе раздела, вместо
+середины некоторой сцены.
+</p><p>
+  Если у вас есть поддерживаемая карта TV захвата, вы также можете
+  кодировать с TV входа.
+  Используйте <tt class="option">tv://</tt><em class="replaceable"><code>номер_канала</code></em> в качестве
+  имени файла, и опцию <tt class="option">-tv</tt> для настройки различный параметров захвата.
+  DVB вход работает аналогично.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. Выбор кодеков и формата файлов </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 6.3. Двухпроходное кодирование MPEG-4 ("DivX")</td></tr></table></div></body></html>

@@ -1,0 +1,205 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.20. Podpora TV výstupu</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="other.html" title="4.19. Ostatní vizualizační hardware"><link rel="next" href="ports.html" title="Kapitola 5. Porty"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="tvout.html#tvout-mga-g400" title="4.20.1. Karty Matrox G400"><link rel="subsection" href="tvout.html#tv-out_matrox_g450" title="4.20.2. Karty Matrox G450/G550"><link rel="subsection" href="tvout.html#tvout-ati" title="4.20.3. Karty ATI"><link rel="subsection" href="tvout.html#tvout-nvidia" title="4.20.4. nVidia"><link rel="subsection" href="tvout.html#tvout-neomagic" title="4.20.5. NeoMagic"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.20. Podpora TV výstupu</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="other.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="ports.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tvout"></a>4.20. Podpora TV výstupu</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-mga-g400"></a>4.20.1. Karty Matrox G400</h3></div></div></div><p>
+Pod Linuxem máte dva způsoby jak zprovoznit TV výstup na G400:
+</p><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Důležité</h3><p>
+pro instrukce k TV výstupu na Matrox G450/G550 si prostudujte textovou část!
+</p></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">XFree86</span></dt><dd><p>
+    Pomocí ovladače a HAL modulu dostupného na stránkách <a class="ulink" href="http://www.matrox.com" target="_top">Matrox</a>. Takto dostanete X na TV.
+    </p><p>
+    <span class="bold"><strong>Tato metoda vám neposkytne akcelerované přehrávání</strong></span>
+    jako pod Windows! Sekundární jednotka má pouze YUV framebuffer, <span class="emphasis"><em>BES</em></span>
+    (Back End Scaler, YUV škálovač na kartách G200/G400/G450/G550) na něm
+    nepracuje! Ovladač pro Windows to nějak obchází, pravděpodobně použitím
+    3D jednotky pro zoom a YUV framebufferu pro zobrazení zoomovaného
+    obrazu. Pokud opravdu chcete použít X, použijte volby <tt class="option">-vo x11 -fs
+    -zoom</tt>, ale bude to <span class="bold"><strong>POMALÉ</strong></span> a
+    bude zapnuta ochrana proti kopírování
+    <span class="bold"><strong>Macrovision</strong></span>
+    (Macrovision můžete obejít pomocí tohoto
+    <a class="ulink" href="http://avifile.sf.net/mgamacro.pl" target="_top">perlového skriptu</a>).
+    </p></dd><dt><span class="term">Framebuffer</span></dt><dd><p>
+    Pomocí <span class="bold"><strong>matroxfb modulů</strong></span> v jádrech řady 2.4.
+    Jádra 2.2 v nich neobsahují podporu pro TV, takže jsou pro tento účel
+    nepoužitelná. Měli byste povolit VŠECHNY matroxfb-specifické vlastnosti
+    během kompilace (vyjma MultiHead) a zakompilovat je do
+    <span class="bold"><strong>modulů</strong></span>!
+    Rovněž potřebujete zapnuté I2C.
+    </p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+      Vstupte do <tt class="filename">TVout</tt> a zadejte
+      <span class="command"><strong>./compile.sh</strong></span>. Nainstalujte
+      <tt class="filename">TVout/matroxset/matroxset</tt>
+      někde do cesty <code class="envar">PATH</code>.
+    </p></li><li class="step"><p>
+      Nemáte-li nainstalován <span class="command"><strong>fbset</strong></span>, vložte
+      <tt class="filename">TVout/fbset/fbset</tt>
+      někde do cesty <code class="envar">PATH</code>.
+    </p></li><li class="step"><p>
+      Nemáte-li nainstalován <span class="command"><strong>con2fb</strong></span>, vložte
+      <tt class="filename">TVout/con2fb/con2fb</tt>
+      někde do cesty <code class="envar">PATH</code>.
+    </p></li><li class="step"><p>
+      Pak vstupte do adresáře <tt class="filename">TVout/</tt>
+      ve zdrojovém adresáři <span class="application">MPlayer</span>u a spusťte
+      <tt class="filename">./modules</tt> jako root. Vaše textová konzole přejde
+      do režimu framebuffer (není cesta zpět!).
+    </p></li><li class="step"><p>
+      Dále EDITUJTE a spusťte skript <tt class="filename">./matroxtv</tt>. Objeví se
+      vám velmi jednoduché menu. Stiskněte <span class="keycap"><b>2</b></span> a
+      <span class="keycap"><b>Enter</b></span>. Nyní byste měli mít stejný obraz na svém monitoru
+      i TV. Pokud má obraz na TV (výchozí je PAL) nějaké podivné šrámy, nebyl
+      skript schopen nastavit správně rozlišení (na výchozích 640x512).
+      Zkuste jiná rozlišení z menu a/nebo experimentujte s fbset.
+    </p></li><li class="step"><p>
+      Jo. Dalším úkolem je nechat zmizet kurzor z tty1 (nebo odjinud) a
+      vypnout mazání obrazovky. Spusťe následující příkazy:
+
+      </p><pre class="screen">
+echo -e '\033[?25l'
+setterm -blank 0</pre><p>
+      nebo
+      </p><pre class="screen">
+setterm -cursor off
+setterm -blank 0</pre><p>
+
+      Předchozí nejspíš bude lepší umístit do skriptu a také vyčistit obrazovku.
+      Pro zpětné zapnutí kurzoru:
+      </p><pre class="screen">echo -e '\033[?25h'</pre><p> nebo
+      </p><pre class="screen">setterm -cursor on</pre><p>
+    </p></li><li class="step"><p>
+      A jasně. Spusťte přehrávání filmu:
+      </p><pre class="screen">
+mplayer -vo mga -fs -screenw 640 -screenh 512 <em class="replaceable"><code>soubor</code></em></pre><p>
+
+      (Pokud používáte X, přepněte se nyní do matroxfb pomocí například
+
+<span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F1</b></span>.)
+      Změňte <code class="literal">640</code> a <code class="literal">512</code> pokud máte
+      nastaveno jiné rozlišení...
+    </p></li><li class="step"><p>
+      <span class="bold"><strong>Užijte si ultra-rychlý ultra-vybavený Matrox TV
+      výstup (lepší než Xv)!</strong></span>
+    </p></li></ol></div></dd></dl></div><p><b>Výroba kabelu pro Matrox TV–out. </b>
+Zříkáme se jakékoli odpovědnosti nebo záruky za jakékoli poškození způsobené
+touto dokumentací.
+</p><p><b>Kabel pro G400. </b>
+Na čtvrtém pinu CRTC2 konektoru je kompozitní video signál. Zem je
+na šestém, sedmém a osmém pinu. (informaci poskytl
+Balázs Rácz)
+</p><p><b>Kabel pro G450. </b>
+Kompozitní video signál je na pinu jedna. Zem je na pátém,
+šestém, sedmém a patnáctém (5, 6, 7, 15) pinu.
+(informaci poskytl Balázs Kerekes)
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-out_matrox_g450"></a>4.20.2. Karty Matrox G450/G550</h3></div></div></div><p>
+Podpora TV výstupu pro tyto karty byla přidána teprve nedávno a dosud není
+v ostré verzi jádra.
+V současnosti nelze (aspoň pokud vím) použít modul
+<span class="bold"><strong>mga_vid</strong></span>, protože ovladač G450/G550 pracuje
+pouze v jedné konfiguraci: první CRTC čip (s mnohem více schopnostmi) na první
+displej a druhá CRTC (žádné <span class="bold"><strong>BES</strong></span> – pro
+popis BES viz sekci G400 výše) na TV. Takže v současnosti můžete použít pouze
+<span class="application">MPlayer</span>ovo <span class="emphasis"><em>fbdev</em></span> výstupní
+rozhraní.
+</p><p>
+První CRTC nemůže být v současnosti přesměrována na sekundární výstup. Autor
+jaderného ovladače matroxfb – Petr Vandrovec – pro to snad
+vyrobí podporu pomocí zobrazení výstupu prvního CRTC na oba výstupy najednou,
+což se pro tuto chvíli doporučuje pro G400, viz předchozí sekce.
+</p><p>
+Potřebnou záplatu jádra a podrobné HOWTO lze stáhnout z
+<a class="ulink" href="http://www.bglug.ca/matrox_tvout/" target="_top">http://www.bglug.ca/matrox_tvout/</a>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-ati"></a>4.20.3. Karty ATI</h3></div></div></div><p><b>ÚVOD. </b>
+V současnosti nechce ATI podporovat žádný ze svých TV-out čipů pod Linuxem
+z důvodu jejich licencované technologii Macrovision.
+</p><div class="itemizedlist"><p class="title"><b>STATUS TV VÝSTUPU NA KARTÁCH ATI POD LINUXEM</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>ATI Mach64</strong></span>:
+  podporovaný <a class="ulink" href="http://gatos.sf.net" target="_top">GATOS</a>em.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>ASIC Radeon VIVO</strong></span>:
+  podporovaný <a class="ulink" href="http://gatos.sf.net" target="_top">GATOS</a>em.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Radeon</strong></span> a <span class="bold"><strong>Rage128</strong></span>:
+  podporovaný <span class="application">MPlayer</span>em!
+  Podívejte se na sekce <a class="link" href="vesa.html" title="4.13. VESA - výstup do VESA BIOSu">VESA</a> a
+  <a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a>.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Rage Mobility P/M, Radeon, Rage 128, Mobility M3/M4</strong></span>:
+  podporovaný <a class="ulink" href="http://www.stud.uni-hamburg.de/users/lennart/projects/atitvout/" target="_top">atitvout</a>em.
+</p></li></ul></div><p>
+Ne ostatních kartách prostě použijte rozhraní <a class="link" href="vesa.html" title="4.13. VESA - výstup do VESA BIOSu">VESA</a>
+bez VIDIX. Vyžaduje to výkoný CPU.
+</p><p>
+Jediné co musíte, je <span class="bold"><strong>mít TV konektor zapojený
+před zapnutím PC</strong></span> jelikož video BIOS se inicializuje pouze
+jednou během POST procedury.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-nvidia"></a>4.20.4. nVidia</h3></div></div></div><p>
+Nejprve si MUSÍTE stáhnout closed–source ovladače z
+<a class="ulink" href="http://nvidia.com" target="_top">http://nvidia.com</a>.
+Nebudu zde popisovat instalaci a konfiguraci, jelikož je to mimo rámec této
+dokumentace.
+</p><p>
+Jakmile je funkční XFree86, XVideo a 3D akcelerace, editujte sekci
+Device v souboru <tt class="filename">XF86Config</tt>, podle
+následujícího příkladu (upravte si to pro svou kartu/TV):
+
+</p><pre class="programlisting">
+Section "Device"
+        Identifier      "GeForce"
+        VendorName      "ASUS"
+        BoardName       "nVidia GeForce2/MX 400"
+        Driver          "nvidia"
+        #Option         "NvAGP" "1"
+        Option          "NoLogo"
+        Option          "CursorShadow"  "on"
+
+        Option          "TwinView"
+        Option          "TwinViewOrientation" "Clone"
+        Option          "MetaModes" "1024x768,640x480"
+        Option          "ConnectedMonitor" "CRT, TV"
+        Option          "TVStandard" "PAL-B"
+        Option          "TVOutFormat" "Composite"
+EndSection
+</pre><p>
+</p><p>
+Samozřejmě je nejdůležitější část TwinView.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-neomagic"></a>4.20.5. NeoMagic</h3></div></div></div><p>
+Čip NeoMagic lze nalézt v různých laptopech. Některé z nich jsou vybaveny
+jednoduchým analogovým TV enkodérem, některé jej mají mnohem pokročilejší.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Analogový enkodér</strong></span>:
+  Bylo nám hlášeno, že použitelný TV lze dosáhnout použitím
+  <tt class="option">-vo fbdev</tt> nebo <tt class="option">-vo fbdev2</tt>.
+  Musíte mít v jádře podporu vesafb a dopsat do příkazového řádku jádra
+  následující parametry:
+  <tt class="option">append="video=vesafb:ywrap,mtrr" vga=791</tt>.
+  Měli byste nastartovat <span class="application">X</span>, pak se přepnout do
+  terminálového režimu např. pomocí
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F1</b></span>.
+  Pokud se vám nepodaří nastartovat <span class="application">X</span> před spuštěním
+  <span class="application">MPlayer</span>u z konzole, bude video pomalé a trhané
+  (vysvětlení uvítáme).
+  Nalogujte se do konzole a zadejte následující příkaz:
+
+  </p><pre class="screen">clear; mplayer -vo fbdev -zoom -cache 8192 dvd://</pre><p>
+
+  Video by nyní mělo běžet v konzoli a vyplňovat asi polovinu LCD obrazovky
+  laptopu. Pro přepnutí na TV stiskněte
+  <span class="keycap"><b>Fn</b></span>+<span class="keycap"><b>F5</b></span> třikrát.
+  Testováno na Tecra 8000, 2.6.15 jádro s vesafb, ALSA v1.0.10.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Chrontel 70xx enkodér</strong></span>:
+  Nalezen v  IBM Thinkpad 390E a bude pravděpodobně i ostatních Thinkpadech nebo
+  noteboocích.
+  </p><p>
+  Musíte použít <tt class="option">-vo vesa:neotv_pal</tt> pro PAL nebo
+  <tt class="option">-vo vesa:neotv_ntsc</tt> pro NTSC.
+  To vám zpřístupní funkci TV výstupu v následujících 16 bpp a 8 bpp režimech:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>NTSC 320x240, 640x480 a možná také 800x600.</p></li><li class="listitem"><p>PAL  320x240, 400x300, 640x480, 800x600.</p></li></ul></div><p>Režim 512x384 není podporován BIOSem. Musíte obraz škálovat do
+  jiného rozlišení pro aktivaci TV výstupu. Pokud vidíte obraz na obrazovce
+  v 640x480 nebo v 800x600, ale ne v 320x240 nebo jiném menším rozlišení,
+  musíte nahradit dvě tabulky ve <tt class="filename">vbelib.c</tt>.
+  Viz funkci vbeSetTV pro více informací. V tomto případě prosím kontaktujte
+  autora.
+  </p><p>
+  Známá omezení: pouze VESA, žádné další ovládací prvky jako jas, kontrast,
+  úroveň černé, filtrace blikání nejsou implementovány.
+  </p></li></ul></div><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="other.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="ports.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.19. Ostatní vizualizační hardware </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> Kapitola 5. Porty</td></tr></table></div></body></html>

@@ -1,0 +1,269 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.18. MPEG dekodéry</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="dfbmga.html" title="4.17. DirectFB/Matrox (dfbmga)"><link rel="next" href="other.html" title="4.19. Ostatní vizualizační hardware"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="mpeg_decoders.html#dvb" title="4.18.1. DVB výstup a vstup"><link rel="subsection" href="mpeg_decoders.html#dxr2" title="4.18.2. DXR2"><link rel="subsection" href="mpeg_decoders.html#dxr3" title="4.18.3. DXR3/Hollywood+"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.18. MPEG dekodéry</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dfbmga.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="other.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mpeg_decoders"></a>4.18. MPEG dekodéry</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dvb"></a>4.18.1. DVB výstup a vstup</h3></div></div></div><p>
+<span class="application">MPlayer</span> podporuje karty s čipsetem Siemens DVB od
+výrobců jako Siemens, Technotrend, Galaxis nebo Hauppauge. Poslední DVB
+ovladače jsou dostupné na
+<a class="ulink" href="http://www.linuxtv.org" target="_top">Linux TV serveru</a>.
+Pokud chcete provádět softwarové transkódování, měli byste mít aspoň 1GHz CPU.
+</p><p>
+Configure by měl detekovat vaši DVB kartu. Pokud ne, vynuťte detekci pomocí
+</p><pre class="screen">./configure --enable-dvb</pre><p>
+Pokud máte ost hlavičky na nestandardním místě, nastavte cestu pomocí
+</p><pre class="screen">
+./configure --extra-cflags=<em class="replaceable"><code>zdrojový adresář DVB</code></em>/ost/include
+</pre><p>
+Pak kompilujte a instalujte obvyklým způsobem.</p><p><b>POUŽITÍ. </b>
+Hardwarové dekódování proudů obsahujících MPEG–1/2 video a/nebo audio lze
+provést tímto příkazem:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes <em class="replaceable"><code>soubor.mpg|vob</code></em>
+</pre><p>
+</p><p>
+Dekódování jakéhokoli jiného typu video proudu vyžaduje transkódování MPEG–1,
+což je pomalé a nemusí stát za to, zvlášť s pomalým počítačem.
+Můžete jej dosáhnout příkazem podobným tomuto:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes <em class="replaceable"><code>váš_soubor.ext</code></em>
+mplayer -ao mpegpes -vo mpegpes -vf expand <em class="replaceable"><code>váš_soubor.ext</code></em>
+</pre><p>
+Pamatujte, že DVB karty podporují pouze výšky 288 a 576 pro PAL nebo 240 a 480
+pro NTSC. Jiné výšky <span class="bold"><strong>musíte</strong></span> přeškálovat
+přidáním <tt class="option">scale=šířka:výška</tt> s šířkou a výškou, které chcete
+do volby <tt class="option">-vf</tt>. DVB karty akceptují různé šířky jako 720, 704,
+640, 512, 480, 352 atd, a provádí hardwarově vodorovné škálování,
+takže ve většině případů nemusíte vodorovně škálovat.
+Pro 512x384 (poměr stran 4:3) MPEG–4 (DivX) zkuste:
+</p><pre class="screen">mplayer -ao mpegpes -vo mpegpes -vf scale=512:576</pre><p>
+</p><p>
+Pokud máte širokoúhlý film a nechcete jej škálovat na plnou výšku, můžete
+použít filtr <tt class="option">expand=š:v</tt> pro přidání černých okrajů. Pro
+promítání 640x384 MPEG–4 (DivX), zkuste:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes -vf expand=640:576 <em class="replaceable"><code>soubor.avi</code></em>
+</pre><p>
+</p><p>
+Pokud je váš procesor příliš slabý pro 720x576 MPEG–4 (DivX), zkuste podškálovat:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes -vf scale=352:576 <em class="replaceable"><code>soubor.avi</code></em>
+</pre><p>
+</p><p>Pokud se rychlost nezlepší, zkuste podškálovat i výšku:
+</p><pre class="screen">
+mplayer -ao mpegpes -vo mpegpes -vf scale=352:288 <em class="replaceable"><code>soubor.avi</code></em>
+</pre><p>
+</p><p>
+Pro OSD a titulky použijte OSD vlastnost expand filtru. Takže místo
+<tt class="option">expand=š:v</tt> nebo <tt class="option">expand=š:v:x:y</tt>, použijte
+<tt class="option">expand=š:v:x:y:1</tt> (pátý parametr <tt class="option">:1</tt>
+na konci zapne renderování OSD). Možná byste měli trochu posunout obraz nahoru,
+abyste měli větší černý okraj pro titulky. Rovněž byste měli posunout nahoru
+titulky, pokud jsou mimo TV obrazovku. Použijte volbu
+<tt class="option">-subpos &lt;0-100&gt;</tt>
+pro toto nastavení (<tt class="option">-subpos 80</tt> je dobrá volba).
+</p><p>
+Chcete-li přehrávat filmy s jinou snímkovou rychlostí než 25 fps na PAL TV, nebo
+na pomalém CPU, přidejte volbu <tt class="option">-framedrop</tt>.
+</p><p>
+Chcete-li zachovat poměr stran MPEG–4 (DivX) souborů a dosáhnout optimálních
+škálovacích parametrů (hardwarové horizontální škálování a softwarové vertikální
+škálování zatímco zachováte správný poměr stran), použijte filtr dvbscale:
+</p><pre class="screen">
+pro 4:3 TV: -vf dvbscale,scale=-1:0,expand=-1:576:-1:-1:1
+pro 16:9 TV: -vf dvbscale=1024,scale=-1:0,expand=-1:576:-1:-1:1
+</pre><p>
+</p><p><b>Digitální TV (vstupní DVB modul). </b>Můžete použít svou DVB kartu pro sledování Digitální TV.</p><p>
+Měli byste mít nainstalovány programy <span class="command"><strong>scan</strong></span> a
+<span class="command"><strong>szap/tzap/czap/azap</strong></span>; všechny jsou zařazeny v balíčku
+ovladačů.
+</p><p>
+Ověřte si, zda vaše ovladače pracují správně s progamy jako je
+<a class="ulink" href="http://sf.net/projects/dvbtools/" target="_top"><span class="command"><strong>dvbstream</strong></span></a>
+(to je základ vstupního DVB modulu).
+</p><p>
+Nyní byste měli skompilovat soubor <tt class="filename">~/.mplayer/channels.conf</tt>,
+se syntaxí akceptovanou <span class="command"><strong>szap/tzap/czap/azap</strong></span>, nebo nechat
+<span class="command"><strong>scan</strong></span>, aby jej skompiloval.
+</p><p>
+Pokud máte více než jeden typ karty (Např. Satellitar, Terrestrial, Cable a ATSC)
+můžete si uložit své channels soubory podle typu jako
+<tt class="filename">~/.mplayer/channels.conf.sat</tt>,
+<tt class="filename">~/.mplayer/channels.conf.ter</tt>,
+<tt class="filename">~/.mplayer/channels.conf.cbl</tt>,
+a <tt class="filename">~/.mplayer/channels.conf.atsc</tt>,
+kdy <span class="application">MPlayer</span> použije tyto soubory spíše než
+<tt class="filename">~/.mplayer/channels.conf</tt>,
+a vy musíte pouze nastavit, kterou kartu použít.
+</p><p>
+Ujistěte se, že máte <span class="emphasis"><em>pouze</em></span> nekódované
+kanály ve svém <tt class="filename">channels.conf</tt> souboru, jinak se
+<span class="application">MPlayer</span> pokusí přeladit na nejbližší zobrazitelný,
+ale to může trvat dlouho, pokud je zde mnoho po sobě jdoucích šifrovaných
+kanálů.
+</p><p>
+V polích audio a video můžete použít rozšířenou syntaxi:
+<tt class="option">...:pid[+pid]:...</tt> (maximálně 6 pidů každé);
+v tom případě zahrne <span class="application">MPlayer</span> do datového proudu
+všechny zadané pidy plus pid 0 (který obsahuje PAT).
+Doporučujeme zahrnout do každého řádku PMT pid pro odpovídající kanál
+(pokud jej znáte)
+Můžete rovněž zadat 8192, to vybere všechny pidy na této frekvenci
+a vy pak můžete přepínat programy pomocí TAB.
+To může vyžadovat větší šířku pásma, ale laciné karty vždy přenášejí všechny
+kanály minimálně do jádra, takže u nich v tom nebude velký rozdíl.
+Další možná použití jsou: televideo pid, druhá audio stopa, atd.
+</p><p>
+Pokud <span class="application">MPlayer</span> často protestuje o
+</p><pre class="screen">Příliš mnoha video/audio paketech ve vyrovnávací paměti</pre><p> nebo
+pokud si povšimnete rostoucí desynchronizace mezi zvukem a
+videem, zkuste použít MPEG–TS demuxer z libavformat přidáním
+<tt class="option">-demuxer lavf -lavfdopts probesize=128</tt>
+na příkazovém řádku.
+</p><p>
+Pro zobrazení prvního z kanálů uvedeného v seznamu, spusťte
+</p><pre class="screen">mplayer dvb://</pre><p>
+</p><p>
+Pokud chcete sledovat určitý kanál, například R1, spusťte
+</p><pre class="screen">mplayer dvb://<em class="replaceable"><code>R1</code></em></pre><p>
+</p><p>
+Pokud máte více než jednu kartu, musíte rovněž uvést číslo karty, na které lze
+kanál sledovat (např. 2). Syntyxe je:
+</p><pre class="screen">mplayer dvb://<em class="replaceable"><code>2@R1</code></em></pre><p>
+</p><p>
+Pro změnu kanálu stiskněte klávesu <span class="keycap"><b>h</b></span> (další) nebo
+<span class="keycap"><b>k</b></span> (předchozí), nebo použijte
+<a class="link" href="fonts-osd.html#osdmenu" title="2.4.3. OSD menu">OSD menu</a>.
+</p><p>
+Pokud váš <tt class="filename">~/.mplayer/menu.conf</tt> obsahuje řádek
+<code class="literal">&lt;dvbsel&gt;</code> podobný tomu v ukázkovém souboru
+<tt class="filename">etc/dvb-menu.conf</tt> (který můžete použít k přepsání
+<tt class="filename">~/.mplayer/menu.conf</tt>), bude v hlavním menu podseznam,
+kde si budete moci zvolit kanál ze svého <tt class="filename">channels.conf</tt>.
+Může mu případně předcházet menu se seznamem dostupných karet, pokud máte
+více než jednu použitelnou <span class="application">MPlayer</span>em.
+</p><p>
+Pokud si chcete uložit program na disk, můžete použít
+</p><pre class="screen">
+mplayer -dumpfile <em class="replaceable"><code>r1.ts</code></em> -dumpstream dvb://<em class="replaceable"><code>R1</code></em>
+</pre><p>
+</p><p>
+Pokud jej chcete zaznamenat v odlišném formátu (reenkódovat jej), spusťte
+místo toho příkaz podobný následujícímu:
+</p><pre class="screen">
+mencoder -o <em class="replaceable"><code>r1.avi</code></em> -ovc xvid -xvidencopts bitrate=800\
+    -oac mp3lame -lameopts cbr:br=128 -pp=ci dvb://<em class="replaceable"><code>R1</code></em>
+</pre><p>
+</p><p>
+Přečtěte si man stránku pro seznam voleb, které můžete předat vstupnímu
+DVB modulu.
+</p><p><b>BUDOUCNOST. </b>
+Máte-li otázky, nebo chcete dostávat oznámení o nových vlastnostech a zapojit
+se do diskuse o těchto věcech, připojte se k naší
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-dvb" target="_top">MPlayer-DVB</a>
+e-mailové konferenci. Pamatujte prosím, že jazykem konference je angličtina.
+</p><p>
+V budoucnu můžete očekávat schopnost zobrazovat OSD a titulky pomocí nativní
+podpory OSD v DVB kartách, stejně jako plynulejší přehrávání filmů s jinou
+snímkovou rychlostí, než 25 fps a transkódování MPEG–2 na MPEG–4 v reálném čase
+(částečná dekomprese).
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dxr2"></a>4.18.2. DXR2</h3></div></div></div><p>
+<span class="application">MPlayer</span> podporuje hardwarově akcelerované
+přehrávání pomocí karty Creative DXR2.
+</p><p>
+Nejdříve musíte mít správně nainstalované DXR2 ovladače. Ovladače a návod
+k jejich instalaci naleznete na stránkách
+<a class="ulink" href="http://dxr2.sf.net/" target="_top">DXR2 Resource Center</a>.
+</p><div class="variablelist"><p class="title"><b>POUŽITÍ</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo dxr2</tt></span></dt><dd><p>Zapíná TV výstup.</p></dd><dt><span class="term"><tt class="option">-vo dxr2:x11</tt> nebo <tt class="option">-vo dxr2:xv</tt></span></dt><dd><p>Zapíná Overlay výstup v X11.</p></dd><dt><span class="term"><tt class="option">-dxr2 &lt;volba1:volba2:...&gt;</tt></span></dt><dd><p>
+  Tato volba je použita k ovládání DXR2 ovladače.
+  </p></dd></dl></div><p>
+Overlay čipset použitý v DXR2 má mizernou kvalitu, ale výchozí nastavení pracuje
+vždy. OSD lze použít spolu s overlay (ne na TV) při jeho vykreslení v klíčovací
+barvě. S výchozím nastavením klíčovací barvy můžete dosáhnout různých výsledků,
+obvykle uvidíte klíčovací barvu kolem znaků nebo jiné srandovní věci. Pokud ale
+vhodně upravíte klíčování, můžete dosáhnout použitelných výsledků.
+</p><p>Prostudujte si prosím man stránku pro dostupné volby.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="dxr3"></a>4.18.3. DXR3/Hollywood+</h3></div></div></div><p>
+<span class="application">MPlayer</span> podporuje hardwarově akcelerované
+přehrávání videa pomocí karet Creative DXR3 a Sigma Designs Hollywood Plus.
+Obě tyto karty používají MPEG dekodér em8300 od Sigma Designs.
+</p><p>
+Nejprve budete potřebovat správně nainstalované DXR3/H+ ovladače verze 0.12.0
+nebo pozdější. Ovladače a návod na jejich instalaci naleznete na stránkách
+<a class="ulink" href="http://dxr3.sf.net/" target="_top">DXR3 &amp; Hollywood Plus for Linux</a>.
+<tt class="filename">configure</tt> by mělo automaticky detekovat vaši kartu a
+kompilace by se měla obejít bez potíží.
+</p><div class="variablelist"><p class="title"><b>POUŽITÍ</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo dxr3:prebuf:sync:norm=x:<em class="replaceable"><code>zařízení</code></em></tt></span></dt><dd><p>
+<tt class="option">overlay</tt> aktivuje overlay místo TVOut. Pro správnou funkci
+vyžaduje, abyste měli správně nakonfigurované nastavení overlay. Nejjednodužší
+způsob nastavení overlay, je spuštění autocal. Pak spusťte MPlayer s video
+výstupem nastaveným na dxr3 s vypnutým overlay, spusťte dxr3view. V dxr3view
+si můžete hrát s nastavením overlay a pozorovat změny v reálném čase. Snad bude
+tato funkce časem dostupná z GUI <span class="application">MPlayer</span>u. Jakmile
+máte správně nastaveno overlay, není již nutné používat dxr3view.
+<tt class="option">prebuf</tt> zapíná prebuffering. Prebuffering je vlastnost čipu
+em8300, která mu umožňuje podržet si více než jeden videosnímek současně.
+To znamená, že pokud jej máte zapnutý, snaží se
+<span class="application">MPlayer</span> udržet vyrovnávací paměť videa (buffer)
+naplněný daty.
+Pokud jej provozujete na pomalém stroji, použije
+<span class="application">MPlayer</span> téměř nebo přesně 100% výkonu CPU.
+To je zvlášť časté, pokud přehráváte čisté MPEG datové proudy
+(jako DVD, SVCD atp.) jelikož je <span class="application">MPlayer</span> nemusí
+převádět do MPEG, naplní buffer velmi rychle.
+S prebufferingem je přehrávání videa <span class="bold"><strong>mnohem</strong></span>
+méně citlivé na zaměstnávání CPU jinými programy. Nebudou zahozeny snímky, pokud
+si aplikace neuzme CPU na dlouhou dobu.
+Pokud přehráváte bez prebufferingu, je em8300 mnohem citlivější na vytížení CPU,
+takže doporučujeme zapnout <span class="application">MPlayer</span>ovu volbu
+<tt class="option">-framedrop</tt> pro zachování synchronizace.
+<tt class="option">sync</tt> zapíná nový sync–engine. To je zatím experimentální
+vlastnost. Se zapnutým sync budou vnitřní hodiny em8300 neustále sledovány a
+pokud se začnou rozcházet s časovačem <span class="application">MPlayer</span>u,
+budou resetovány, což způsobí, že em8300 zahodí veškeré snímky, které čekají ve
+frontě.
+<tt class="option">norm=x</tt> nastaví TV normu DXR3 karty bez nutnosti externího
+nástroje jako em8300setup. Platné normy jsou 5 = NTSC, 4 = PAL-60,
+3 = PAL. Zvláštní normy jsou 2 (automaticné nastavení s použitím PAL/PAL-60) a
+1 (automatické nastavení s použitím PAL/NTSC), jelikož ty určí použitou normu
+podle snímkové rychlosti filmu. norm = 0 (výchozí) nezmění aktuální normu.
+<tt class="option"><em class="replaceable"><code>device</code></em></tt> = číslo zařízení, které se
+má použít, pokud máte více než jednu em8300 kartu.
+Jakoukoli z těchto voleb můžete vynechat.
+Volba <tt class="option">:prebuf:sync</tt>, zdá se, pracuje skvěle při přehrávání filmů
+v MPEG–4 (DivX). Lidé však hlásili potíže s volbou prebuf při přehrávání souborů
+v MPEG–1/2.
+Měli byste je nejprve zkusit přehrát bez dodatečných voleb a pokud
+narazíte na potíže se synchronizací nebo DVD titulky, zkuste to s volbou
+<tt class="option">:sync</tt>.
+</p></dd><dt><span class="term"><tt class="option">-ao oss:/dev/em8300_ma-<em class="replaceable"><code>X</code></em></tt></span></dt><dd><p>
+  Pro zvukový výstup, kde <em class="replaceable"><code>X</code></em> je číslo zařízení
+  (0 máte-li jen jednu kartu).
+  </p></dd><dt><span class="term"><tt class="option">-af resample=<em class="replaceable"><code>xxxxx</code></em></tt></span></dt><dd><p>
+  Čip em8300 neumí přehrávat signál vzorkovaný méně než 44100Hz. Pokud je
+  vzorkovací kmitočet pod 44100Hz, zvolte buď 44100Hz nebo 48000Hz podle toho,
+  násobek kterého je blíž. Čili pokud má film zvuk 22050Hz použijte 44100Hz,
+  jelikož 44100 / 2 = 22050, pokud jej má 24000Hz použijte 48000Hz jelikož
+  48000 / 2 = 24000 a tak dále.
+  S výstupem digitálního audia to nefunguje (<tt class="option">-ac hwac3</tt>).
+  </p></dd><dt><span class="term"><tt class="option">-vf lavc/fame</tt></span></dt><dd><p>
+  Pro přehrávání ne–MPEG obsahu na em8300 (např. MPEG–4 (DivX) nebo RealVideo)
+  musíte nastavit MPEG–1 video filtr jako
+  <code class="systemitem">libavcodec</code> (lavc).
+  Viz manuál pro další informace o <tt class="option">-vf lavc</tt>.
+  V tuto chvíli není možné nastavit snímkovou rychlost em8300, což znamená,
+  že je pevně nastavena na 30000/1001 snímků/s (fps).
+  Z toho důvodu doporučujeme,
+  abyste použili <tt class="option">-vf lavc=<em class="replaceable"><code>quality</code></em>:25</tt>
+  zvlášť pokud používáte prebuffering. Proč tedy 25 a ne 30000/1001? Nu, důvodem
+  je, že pokud zadáte 30000/1001, začne obraz trochu poskakovat.
+  Důvod tohoto jevu nám není znám.
+  Pokud to nastavíte někde mezi 25 a 27, obraz se ustálí.
+  Pro tuto chvíli se to dá pouze uznat jako fakt.
+  </p></dd><dt><span class="term"><tt class="option">-vf expand=-1:-1:-1:-1:1</tt></span></dt><dd><p>
+  Ačkoli DXR3 ovladač umí dodat OSD do MPEG–1/2/4 videa, má to mnohem nižší
+  kvalitu než tradiční OSD <span class="application">MPlayer</span>u a má i různé
+  problémy s obnovováním. Výše uvedený příkazový řádek nejprve převede vstupní
+  video do MPEG–4 (je to nutné, sorry), pak aplikuje filtr expand, který však
+  nic neexpanduje (-1: výchozí), ale doplní normální OSD do obrazu
+  (na to je ta „1“ na konci).
+  </p></dd><dt><span class="term"><tt class="option">-ac hwac3</tt></span></dt><dd><p>
+  Čip em8300 podporuje přehrávání zvuku v AC–3 (prostorový zvuk) přes digitální
+  audio výstup na kartě. Viz výš volbu <tt class="option">-ao oss</tt>. Ta musí být
+  použita pro nastavení výstupu do DXR3 místo zvukové karty.
+  </p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dfbmga.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="other.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.17. DirectFB/Matrox (dfbmga) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.19. Ostatní vizualizační hardware</td></tr></table></div></body></html>

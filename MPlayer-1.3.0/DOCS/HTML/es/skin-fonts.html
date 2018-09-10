@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.3. Tipografías</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="prev" href="skin-file.html" title="B.2. El archivo de skin"><link rel="next" href="skin-gui.html" title="B.4. Mensajes GUI"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Símbolos"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.3. Tipografías</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-file.html">Anterior</a> </td><th width="60%" align="center">Apéndice B. Formato del skin de <span class="application">MPlayer</span></th><td width="20%" align="right"> <a accesskey="n" href="skin-gui.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-fonts"></a>B.3. Tipografías</h2></div></div></div><p>
+Como se mencionó en la sección acerca de las partes de un skin, una tipografía
+viene definida por una imagen y un archivo de descripción. Puede colocar caracteres
+en cualquier parte de la imagen, pero ha de asegurarse de que su posición y tamaño
+vienen dados en el archivo de descripción de manera exacta.
+</p><p>
+El archivo de descripción de la tipografía (con extensión <tt class="filename">.fnt</tt>)
+puede tener líneas de comentarios que empiecen por '<code class="literal">;</code>'. El archivo
+debe tener una línea en la forma
+<a name="skin-font-image"></a>
+</p><pre class="programlisting">image = <em class="replaceable"><code>image</code></em></pre><p>
+Donde <code class="literal"><em class="replaceable"><code>image</code></em></code> es el nombre del
+archivo de imagen que se usará para la tipografía (puede no especificar la extensión).
+<a name="skin-font-char"></a>
+</p><pre class="programlisting">"char" = X, Y, width, height</pre><p>
+Aquí <code class="literal">X</code> e <code class="literal">Y</code> especifican la posición del
+caracter <code class="literal">char</code> en la imagen (<code class="literal">0,0</code> es la
+esquina superior izquierda). <code class="literal">width</code> y <code class="literal">height</code>
+son las dimensiones del caracter en pixels.
+</p><p>
+Este ejemplo define los caracteres A, B, C usando <tt class="filename">font.png</tt>.
+</p><pre class="programlisting">
+; Puede ser "font" en lugar de "font.png".
+image = font.png
+
+; Tres caracteres son suficientes para el propósito de esta demostración :-)
+"A" =  0,0, 7,13
+"B" =  7,0, 7,13
+"C" = 14,0, 7,13
+</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-fonts-symbols"></a>B.3.1. Símbolos</h3></div></div></div><p>
+Algunos caracteres tienen significado especial cuando son devueltos por algunas
+de las variables usadas en <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>. Estos
+caracteres se deben mostrar como símbolos para que parezca un bonito logotipo
+de DVD en lugar del caracter '<code class="literal">d</code>' para un flujo de DVD por ejemplo.
+</p><p>
+La siguiente tabla lista todos los caracters que pueden ser usados para
+mostrar símbolos (y que por lo tanto requieren una tipografía diferente).
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Caracter</th><th>Símbolo</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>play</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>stop</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>pausa</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>no sound</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>mono sound</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>stereo sound</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>stream es un archivo</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>stream es un Video CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>stream es un DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>stream es una URL</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-file.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-gui.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">B.2. El archivo de skin </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> B.4. Mensajes GUI</td></tr></table></div></body></html>

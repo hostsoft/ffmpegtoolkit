@@ -1,0 +1,161 @@
+\section{Oggz Seek A\-P\-I}
+\label{group__seek__api}\index{Oggz Seek A\-P\-I@{Oggz Seek A\-P\-I}}
+
+
+Oggz can seek on multitrack, multicodec bitstreams.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ogg\-\_\-int64\-\_\-t {\bf oggz\-\_\-tell\-\_\-units} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Query the current offset in milliseconds, or custom units as specified by a Metric function you have provided. \end{DoxyCompactList}\item 
+ogg\-\_\-int64\-\_\-t {\bf oggz\-\_\-seek\-\_\-units} ({\bf O\-G\-G\-Z} $\ast$oggz, ogg\-\_\-int64\-\_\-t units, int whence)
+\begin{DoxyCompactList}\small\item\em Seek to an offset in milliseconds, or custom units as specified by a Metric function you have provided. \end{DoxyCompactList}\item 
+ogg\-\_\-int64\-\_\-t {\bf oggz\-\_\-tell\-\_\-granulepos} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Provide the exact stored granulepos (from the page header) if relevant to the current packet, or a constructed granulepos if the stored granulepos does not belong to this packet, or -\/1 if this codec does not have support for granulepos interpolation. \end{DoxyCompactList}\item 
+{\bf oggz\-\_\-off\-\_\-t} {\bf oggz\-\_\-tell} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Query the file offset in bytes corresponding to the data read. \end{DoxyCompactList}\item 
+{\bf oggz\-\_\-off\-\_\-t} {\bf oggz\-\_\-seek} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf oggz\-\_\-off\-\_\-t} offset, int whence)
+\begin{DoxyCompactList}\small\item\em Seek to a specific byte offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Oggz can seek on multitrack, multicodec bitstreams. \subsection{Time seeking}\label{group__seek__api_seek_time}
+Support is built-\/in for seeking to time positions in {\tt C\-E\-L\-T}, {\tt C\-M\-M\-L}. {\tt F\-L\-A\-C}, {\tt Ogg\-P\-C\-M}, {\tt Speex}, {\tt Theora} and {\tt Vorbis}. Oggz is also compatible with {\tt Annodex} streams, and supports seeking on all tracks described in an {\tt Ogg Skeleton} track.
+
+You need to open the file with the O\-G\-G\-Z\-\_\-\-A\-U\-T\-O flag set\-:
+
+
+\begin{DoxyItemize}
+\item Create an O\-G\-G\-Z handle for reading with {\itshape flags} = O\-G\-G\-Z\-\_\-\-R\-E\-A\-D $|$ O\-G\-G\-Z\-\_\-\-A\-U\-T\-O
+\item Read data, ensuring that you have received all b\-\_\-o\-\_\-s pages before attempting to seek.
+\end{DoxyItemize}
+
+Oggz will silently parse known codec headers and associate metrics appropriately; if you attempt to seek before you have received all b\-\_\-o\-\_\-s pages, Oggz will not have had a chance to parse the codec headers and associate metrics. It is safe to seek once you have received a packet with {\itshape b\-\_\-o\-\_\-s} == 0; see the \doxyref{Ogg basics }{p.}{group__basics} section for more details.
+
+\begin{DoxyNote}{Note}
+Oggz parses these codec headers internally, and so liboggz is {\bfseries not} linked to libspeex, libvorbis, libflac, libtheora, libcmml or libannodex.
+\end{DoxyNote}
+For other data streams, you will need to provide a metric function; see the section on \doxyref{Using Oggz\-Metrics }{p.}{group__metric} for details of setting up and seeking with metrics.\subsection{Byte seeking}\label{group__seek__api_seek_bytes}
+\doxyref{oggz\-\_\-seek()}{p.}{group__seek__api_gaeef4b261d443701207954e5a636d6817} provides low-\/level seeking to byte positions.\subsection{More detail}\label{group__seek__api_seek_info}
+For a full description of the seeking methods possible in Ogg, see \doxyref{Semantics of seeking in Ogg bitstreams }{p.}{group__seek__semantics}. 
+
+\subsection{Function Documentation}
+\index{Oggz Seek A\-P\-I@{Oggz Seek A\-P\-I}!oggz\-\_\-seek@{oggz\-\_\-seek}}
+\index{oggz\-\_\-seek@{oggz\-\_\-seek}!Oggz Seek API@{Oggz Seek A\-P\-I}}
+\subsubsection[{oggz\-\_\-seek}]{\setlength{\rightskip}{0pt plus 5cm}{\bf oggz\-\_\-off\-\_\-t} oggz\-\_\-seek (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{{\bf oggz\-\_\-off\-\_\-t}}]{offset, }
+\item[{int}]{whence}
+\end{DoxyParamCaption}
+)}\label{group__seek__api_gaeef4b261d443701207954e5a636d6817}
+
+
+Seek to a specific byte offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em offset} & a byte offset \\
+\hline
+{\em whence} & As defined in $<$stdio.\-h$>$\-: S\-E\-E\-K\-\_\-\-S\-E\-T, S\-E\-E\-K\-\_\-\-C\-U\-R or S\-E\-E\-K\-\_\-\-E\-N\-D \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the new file offset, or -\/1 on failure. 
+\end{DoxyReturn}
+\index{Oggz Seek A\-P\-I@{Oggz Seek A\-P\-I}!oggz\-\_\-seek\-\_\-units@{oggz\-\_\-seek\-\_\-units}}
+\index{oggz\-\_\-seek\-\_\-units@{oggz\-\_\-seek\-\_\-units}!Oggz Seek API@{Oggz Seek A\-P\-I}}
+\subsubsection[{oggz\-\_\-seek\-\_\-units}]{\setlength{\rightskip}{0pt plus 5cm}ogg\-\_\-int64\-\_\-t oggz\-\_\-seek\-\_\-units (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{ogg\-\_\-int64\-\_\-t}]{units, }
+\item[{int}]{whence}
+\end{DoxyParamCaption}
+)}\label{group__seek__api_ga60bac88ef3695629efacec43a21927e5}
+
+
+Seek to an offset in milliseconds, or custom units as specified by a Metric function you have provided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em units} & A number of milliseconds, or custom units \\
+\hline
+{\em whence} & As defined in $<$stdio.\-h$>$\-: S\-E\-E\-K\-\_\-\-S\-E\-T, S\-E\-E\-K\-\_\-\-C\-U\-R or S\-E\-E\-K\-\_\-\-E\-N\-D \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the new file offset, or -\/1 on failure. 
+\end{DoxyReturn}
+\index{Oggz Seek A\-P\-I@{Oggz Seek A\-P\-I}!oggz\-\_\-tell@{oggz\-\_\-tell}}
+\index{oggz\-\_\-tell@{oggz\-\_\-tell}!Oggz Seek API@{Oggz Seek A\-P\-I}}
+\subsubsection[{oggz\-\_\-tell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf oggz\-\_\-off\-\_\-t} oggz\-\_\-tell (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{group__seek__api_ga553fabfa03553669f79e37b28eb07ec6}
+
+
+Query the file offset in bytes corresponding to the data read. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current offset of oggz.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+When reading, the value returned by \doxyref{oggz\-\_\-tell()}{p.}{group__seek__api_ga553fabfa03553669f79e37b28eb07ec6} reflects the data offset of the start of the most recent packet processed, so that when called from an Oggz\-Read\-Packet callback it reflects the byte offset of the start of the packet. As Oggz may have internally read ahead, this may differ from the current offset of the associated file descriptor. 
+\end{DoxyNote}
+\index{Oggz Seek A\-P\-I@{Oggz Seek A\-P\-I}!oggz\-\_\-tell\-\_\-granulepos@{oggz\-\_\-tell\-\_\-granulepos}}
+\index{oggz\-\_\-tell\-\_\-granulepos@{oggz\-\_\-tell\-\_\-granulepos}!Oggz Seek API@{Oggz Seek A\-P\-I}}
+\subsubsection[{oggz\-\_\-tell\-\_\-granulepos}]{\setlength{\rightskip}{0pt plus 5cm}ogg\-\_\-int64\-\_\-t oggz\-\_\-tell\-\_\-granulepos (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{group__seek__api_ga29181fb4e8f4e3629cb84810614acd30}
+
+
+Provide the exact stored granulepos (from the page header) if relevant to the current packet, or a constructed granulepos if the stored granulepos does not belong to this packet, or -\/1 if this codec does not have support for granulepos interpolation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the granulepos of the {\itshape current} packet (if available) 
+\end{DoxyReturn}
+\index{Oggz Seek A\-P\-I@{Oggz Seek A\-P\-I}!oggz\-\_\-tell\-\_\-units@{oggz\-\_\-tell\-\_\-units}}
+\index{oggz\-\_\-tell\-\_\-units@{oggz\-\_\-tell\-\_\-units}!Oggz Seek API@{Oggz Seek A\-P\-I}}
+\subsubsection[{oggz\-\_\-tell\-\_\-units}]{\setlength{\rightskip}{0pt plus 5cm}ogg\-\_\-int64\-\_\-t oggz\-\_\-tell\-\_\-units (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{group__seek__api_ga2ec088fc5541ce9749ce63ccc162761f}
+
+
+Query the current offset in milliseconds, or custom units as specified by a Metric function you have provided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the offset in milliseconds, or custom units 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+\end{DoxyRetVals}

@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.7. Reproducción de VCD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="usage.html" title="Capítulo 3. Uso"><link rel="prev" href="dvd.html" title="3.6. Reproducción de DVD"><link rel="next" href="edl.html" title="3.8. Listas de Decisión de Edición (EDL)"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.7. Reproducción de VCD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dvd.html">Anterior</a> </td><th width="60%" align="center">Capítulo 3. Uso</th><td width="20%" align="right"> <a accesskey="n" href="edl.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vcd"></a>3.7. Reproducción de VCD</h2></div></div></div><p>
+Para una lista completa de las opciones disponibles, lea por favor la página de manual. La
+sintaxis para un Video CD (VCD) estándar es la siguiente:
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>&lt;track&gt;</code></em> [-cdrom-device <em class="replaceable"><code>&lt;device&gt;</code></em>]</pre><p>
+Ejemplo:
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>2</code></em> -cdrom-device <em class="replaceable"><code>/dev/hdc</code></em></pre><p>
+El dispositivo para VCD Por defecto es <tt class="filename">/dev/cdrom</tt>.
+Si su configuracio no coincide con esto, haga un enlace simbólico o
+especifique el dispositivo correcto en la línea de órdenes con la
+opción <tt class="option">-cdrom-device</tt>.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Al menos las unidades de CD-ROM SCSI Plextor y algunas Toshiba tienen un
+rendimiento horrible leyendo VCDs. Esto es porque el <code class="systemitem">ioctl</code>
+CDROMREADRAW no está completamente implementado en estas unidades. Si tiene
+conocimientos sobre la programación SCSI, por favor
+<a class="ulink" href="../../tech/patches.txt" target="_top">ayúdenos</a> a implementar soporte SCSI
+genérico para VCDs.
+</p></div><p>
+En la actualidad puede extraer datos desde VCDs con
+<a class="ulink" href="http://140.132.1.204/OS/Linux/packages/X/viewers/readvcd/" target="_top">readvcd</a>
+y reproducir el archivo resultante con <span class="application">MPlayer</span>.
+</p><p><b>Estructura de un VCD. </b>Los discos de VCD consisten en una o más pistas:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+La primera piesta es una pista pequeña de datos 2048 bytes/sector con
+un sistema de archivos iso9660, normalmente conteniendo programas reproductores
+de VCD para Windows o quizá alguna otra información (imágenes, texto, etc).
+</p></li><li class="listitem"><p>
+La segunda y otras pistas son 2324 bytes/sector crudas de MPEG (película),
+conteniendo un paquete de datos MPEG PS por sector en lugar de un sistema
+de archivos. De manera similar a las pistas de CD de audio, estas pistas
+<span class="bold"><strong>no pueden ser montadas</strong></span> (¿Alguna vez ha
+montado un CD de audio para reproducirlo?).
+Como las películas están dentro de esta pista, debería probar <tt class="option">vcd://2</tt>
+primero.
+</p></li><li class="listitem"><p>
+Existen discos de VCD sin la primera pista (pista simple y sin ningún sistema
+de archivos). Siguen siendo reproducibles, pero no pueden ser montadas.
+</p></li></ul></div><p><b>Acerca de los archivos .DAT. </b>
+Los archivos visibles de ~600 MB en la primera pista de un VCD montado ¡no son
+archivos reales! Son llamadas puertas de acceso ISO, creadas para permitir a
+Windows administrar estas pistas (Windows no permite acceso crudo al dispositivo
+en ninguna de sus aplicaciones). Bajo Linux no puede copiar o reproducir estos
+archivos (solo contienen basura). Bajo Windows es posible que el controlador
+iso9660 emule lectura cruda de las pistas en estos archivos. Para reproducir
+un archivo .DAT necesita el controlador del kernel que se encuentra en la
+versión para Linux de PowerDVD. Contiene un controlador de sistema de archivos iso9660
+modificado (<tt class="filename">vcdfs/isofs-2.4.X.o</tt>), que permite emular las
+pistas crudas a través de este archivo de sombra .DAT. Si monta el disco usando
+ese controlador, puede copiar e incluso reproducir los archivos .DAT con
+<span class="application">MPlayer</span>. ¡Pero no funciona con el controlador estandar
+iso9660 del kernel de Linux! Use <tt class="option">vcd://</tt> en su lugar. Alternativas
+para copiar un VCD son los nuevos controladores del kernel
+<a class="ulink" href="http://www.elis.rug.ac.be/~ronsse/cdfs/" target="_top">cdfs</a> (que no forman
+parte del kernel oficialmente) que muestran sesiones de CD como archivos de imagen y
+<a class="ulink" href="http://cdrdao.sourceforge.net/" target="_top">cdrdao</a>, un programa para
+grabar/copiar CD bit-por-bit.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dvd.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="edl.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">3.6. Reproducción de DVD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 3.8. Listas de Decisión de Edición (EDL)</td></tr></table></div></body></html>

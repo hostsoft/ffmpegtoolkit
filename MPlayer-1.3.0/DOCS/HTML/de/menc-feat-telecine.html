@@ -1,0 +1,433 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.2. Wie mit telecine und interlacing in NTSC-DVDs umgehen</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="prev" href="menc-feat-dvd-mpeg4.html" title='7.1. Erzeugen eines hochwertigen MPEG-4-Rips ("DivX") eines DVD-Films'><link rel="next" href="menc-feat-enc-libavcodec.html" title="7.3. Encodieren mit der libavcodec Codecfamilie"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-intro" title="7.2.1. Einführung"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-ident" title="7.2.2. Wie kann man sagen, welchen Typ Video man hat"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-encode" title="7.2.3. Wie jede Kategorie encodieren"><link rel="subsection" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Fußnoten"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.2. Wie mit telecine und interlacing in NTSC-DVDs umgehen</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-dvd-mpeg4.html">Zurück</a> </td><th width="60%" align="center">Kapitel 7. Encodieren mit <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-enc-libavcodec.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-telecine"></a>7.2. Wie mit telecine und interlacing in NTSC-DVDs umgehen</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-intro"></a>7.2.1. Einführung</h3></div></div></div><p><b>Was ist telecine? </b>
+          Wenn du nicht viel von dem verstehst, was in diesem Dokument beschrieben wird, lies den
+          <a class="ulink" href="http://en.wikipedia.org/wiki/Telecine" target="_top">Wikipedia-Artikel über Telecine</a>.
+          Dies ist eine verständliche und einigermaßen umfassende
+          Beschreibung dessen, was telecine ist.
+        </p><p><b>Eine Anmerkung zu Zahlen. </b>
+          Viele Dokumente, einschließlich des oben verlinkten Handbuchs, beziehen
+          sich auf den Wert Felder pro Sekunde von NTSC-Video als 59.94 und den
+          korrespondierenden Frames pro Sekunde als 29.97 (für telecined und
+          interlaced) und 23.976 (für progressiv). Zur Vereinfachung runden
+          manche dieser Dokumente sogar auf 60, 30 und 24 auf.
+        </p><p>
+        Streng genommen sind alle diese Zahlen Näherungswerte. Das schwarz/weiße
+        NTSC-Video war exakt 60 Felder pro Sekunde, später wurde jedoch 60000/1001
+        gewählt, um die Farbdaten anzupassen, solange man gleichzeitig
+        zu Schwarz/weiß-Fernsehen kompatibel blieb. Digitales NTSC-Video
+        (so wie auf einer DVD) hat ebenfalls 60000/1001 Felder pro Sekunde. Hieraus
+        wird interlaced und telecined Video als 30000/1001 Frames pro Sekunde
+        enthaltend abgeleitet; progressive Video hat 24000/1001 Frames pro Sekunde.
+      </p><p>
+        Ältere Versionen der <span class="application">MEncoder</span>-Dokumentation
+        und viele archivierten Posts in Mailing-Listen beziehen sich auf 59.94,
+        29.97 und 23.976.
+        Alle <span class="application">MEncoder</span>-Dokumentationen wurden insofern
+        aktualisiert, dass sie fraktionale Werte verwenden, und du solltest dies
+        auch tun.
+      </p><p>
+        <tt class="option">-ofps 23.976</tt> ist inkorrekt.
+        <tt class="option">-ofps 24000/1001</tt> sollte statt dessen benutzt werden.
+      </p><p><b>Wie telecine angewandt wird. </b>
+          Jedes Video, das zur Anzeige auf einem NTSC-Fernseh-Set vorgesehen ist,
+          muss 60000/1001 Felder pro Sekunde haben. Für TV-Filme und Shows
+          hergestellt sind sie häufig direkt mit 60000/1001 Feldern pro Sekunde
+          aufgenommen, die Mehrheit der Kinofilme jedoch mit 24 oder 24000/1001
+          Frames pro Sekunde. Wenn cinematische Movie-DVDs gemastert werden,
+          wird das Video danach fürs Fernsehen mittels eines telecine genannten
+          Prozesses konvertiert.
+        </p><p>
+        Auf einer DVD wird das Video eigentlich nie als 60000/1001 Felder
+        pro Sekunde abgelegt. Für ein Video, das ursprünglich 60000/1001 war,
+        wird jedes Feldpaar zu einem Frame kombiniert, was dann 30000/1001
+        Frames pro Sekunde ergibt. Hardware-DVD-Player lesen dann ein im
+        Videostream eingebettetes Kennzeichen aus, um zu bestimmen, ob die gerade
+        oder ungerade nummerierten Zeilen das erste Feld formen sollen.
+      </p><p>
+        Üblicherweise bleibt ein Inhalt mit 24000/1001 Frames pro Sekunde
+        so wie er ist, wenn er für eine DVD encodiert wird, und der DVD-Player
+        muss das Telecining on-the-fly bewerkstelligen. Manchmal jedoch wird das
+        Video telecined <span class="emphasis"><em>bevor</em></span> es auf der DVD gespeichert wird;
+        selbst wenn es ursprünglich 24000/1001 Frames pro Sekunde war, wird es
+        60000/1001 Felder pro Sekunde. Wenn es auf der DVD gespeichert wird,
+        werden Feldpaare zu 30000/1001 Frames pro Sekunde kombiniert.
+      </p><p>
+        Wenn man das aus 60000/1001 Feldern pro Sekunde geformten Einzelframes
+        erzeugte Video betrachtet, ist telecined oder anderenfalls Interlacing
+        klar sichtbar woimmer Bewegung auftritt, da ein Feld (sagen wir, die
+        geradzahlig nummerierten Zeilen) einen Moment zur Zeit 1/(60000/1001) Sekunden
+        später als das andere repräsentiert. Spielt man ein interlaced Video auf
+        einem Computer ab, sehen beide hässlich aus, weil der Monitor eine höhere
+        Auflösung besitzt und weil das Video Frame für Frame anstatt Feld für Feld
+        angezeigt wird.
+      </p><div class="itemizedlist"><p class="title"><b>Anmerkungen</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+            Dieser Abschnitt gilt nur für NTSC-DVDs und nicht für PAL.
+          </p></li><li class="listitem"><p>
+            Die <span class="application">MEncoder</span>-Beispielzeilen überall im
+            Dokument sind <span class="bold"><strong>nicht</strong></span> zum
+            eigentlichen Gebrauch vorgesehen. Sie sind schlicht das bloße Minimum,
+            das zum Encodieren der betreffenden Videokategorie benötigt wird.
+            Wie mache ich gute DVD-Rips oder wie feintune ich
+            <code class="systemitem">libavcodec</code> auf maximale
+            Qualität gehören nicht zum Umfang dieses Dokuments.
+          </p></li><li class="listitem"><p>
+            Es gibt ein paar Fußnoten speziell für dieses Handbuch, die so ähnlich
+            verlinkt sind:
+            <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Fußnoten">[1]</a>
+          </p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-ident"></a>7.2.2. Wie kann man sagen, welchen Typ Video man hat</h3></div></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-progressive"></a>7.2.2.1. Progressiv</h4></div></div></div><p>
+          Progressive Video wurde ursprünglich mit 24000/1001 fps gefilmt und
+          ohne Änderung auf der DVD abgespeichert.
+        </p><p>
+          Wenn du eine progressive DVD in <span class="application">MPlayer</span> abspielst,
+          wird <span class="application">MPlayer</span> folgende Zeile ausgeben, sobald
+          das Abspielen des Films beginnt:
+
+          </p><pre class="screen"> demux_mpg: 24000/1001 fps progressive NTSC content detected, switching framerate.</pre><p>
+
+          Von diesem Punkt an vorwärts sollte demux_mpg nie erzählen, es finde
+          "30000/1001 fps NTSC content."
+        </p><p>
+          Wenn du progressives Video ankuckst, solltest du nie irgendein
+          Interlacing sehen. Sei trotzdem vorsichtig, weil manchmal ein winziges
+          bisschen telecine dort hineingemischt wurde, wo du es nicht erwartest.
+          Ich bin TV-Serien-DVDs begegnet, die eine Sekunde telecine bei jedem
+          Szenenwechsel haben oder an extrem zufälligen Stellen. Ich hatte mir einmal
+          eine DVD angesehen, die eine progressive erste Hälfte besaß, und die
+          zweite Hälfte war telecined. Willst du<span class="emphasis"><em>wirklich</em></span>
+          gründlich sein, kannst du den kompletten Film scannen:
+
+          </p><pre class="screen">mplayer dvd://1 -nosound -vo null -benchmark</pre><p>
+
+          Das Verwenden von <tt class="option">-benchmark</tt> veranlasst
+          <span class="application">MPlayer</span>, den Film so schnell er es nur kann
+          abzuspielen; dies dauert je nach Hardware trotzdem noch eine
+          Weile. Jedesmal wenn demux_mpg einen Frameratenwechsel meldet, wird dir
+          die Zeile unmittelbar darüber die Zeit zeigen, bei welcher der Wechsel
+          auftrat.
+        </p><p>
+          Manchmal wird progressive Video auf DVDs
+          "soft telecine" zugeordnet, weil es dazu vorgesehen ist,
+          vom DVD-Player telecined zu werden.
+        </p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-telecined"></a>7.2.2.2. Telecined</h4></div></div></div><p>
+          Telecined Video war ursprünglich mit 24000/1001 aufgenommen, wurde aber
+          telecined, <span class="emphasis"><em>bevor</em></span> es auf die DVD geschrieben wurde.
+        </p><p>
+          <span class="application">MPlayer</span> meldet keine (nie)
+          Frameratenwechsel, wenn er telecined Video abspielt.
+        </p><p>
+          Beim Betrachten eines telecined Videos wirst du Interlacing-Artefakte
+          sehen, die zu "blinken" scheinen: sie erscheinen wiederholt
+          und verschwinden wieder.
+          Du kannst dir das so genauer hinschauen
+          </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><pre class="screen">mplayer dvd://1</pre></li><li class="listitem"><p>
+                Suche einen Teil mit Bewegung.
+              </p></li><li class="listitem"><p>
+                Benutze die Taste <span class="keycap"><b>.</b></span>, um jeweils einen Frame vorwärts zu rücken.
+              </p></li><li class="listitem"><p>
+                Schau auf das Muster der interlaced und progressive aussehenden
+                Frames. Ist das Muster, das du siehst PPPII,PPPII,PPPII,... dann ist das
+                Video telecined. Siehst du andere Muster, dann wurde das Video womöglich
+                mittels einiger Nicht-Standard-Methoden telecined;
+                <span class="application">MEncoder</span> kann ein Nicht-Standard-telecine
+                nicht verlustfrei nach progressive konvertieren. Siehst du überhaupt
+                keine Muster, ist es höchstwahrscheinlich interlaced.
+              </p></li></ol></div><p>
+        </p><p>
+          Manchmal wird telecined Video auf DVDs "hard telecine"
+          zugeordnet. Da hard telecine bereits 60000/1001 Felder pro Sekunde hat,
+          spielt der DVD-Player das Video ohne irgendeine Manipulation ab.
+        </p><p>
+          Ein anderer Weg, zu sagen, ob deine Quelle telecined ist oder nicht,
+          ist die Quelle mit den Befehlszeilenoptionen <tt class="option">-vf pullup</tt>
+          und <tt class="option">-v</tt> abzuspielen, um nachzusehen, wie
+          <tt class="option">pullup</tt> zu den Frames passt.
+          Ist die Quelle telecined, solltest du in der Befehlszeile ein 3:2 Muster
+          mit abwechselnd <code class="systemitem">0+.1.+2</code> und <code class="systemitem">0++1</code>
+          anzeigen.
+          Diese Technik hat den Vorteil, dass du die Quelle nicht zu beobachten
+          brauchst, um sie zu identifizieren, was von Nutzen sein könnte, falls du
+          den Encodiervorgang automatisieren willst oder besagte Prozedur ferngesteuert
+          mittels einer langsamen Verbindung vornehmen willst.
+        </p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-interlaced"></a>7.2.2.3. Interlaced</h4></div></div></div><p>
+          Interlaced Video wurde ursprünglich als 60000/1001 Felder pro Sekunde
+          aufgenommen und auf der DVD als 30000/1001 Frames pro Sekunde abgespeichert.
+          Der interlacing-Effekt (oft "combing" genannt) ist ein Ergebnis
+          von Kammpaaren von Feldern in Frames. Jedes Feld wird einzeln als
+          1/(60000/1001) Sekunden angenommen, und wenn sie simultan angezeigt werden,
+          wird der Unterschied offensichtlich.
+        </p><p>
+          Wie bei telecined Video sollte <span class="application">MPlayer</span> niemals
+          einen Frameratewechsel beim Abspielen des interlaced Inhalts melden.
+        </p><p>
+          Wenn du ein interlaced Video genau ansiehst, in dem du dich mit der Taste
+          <span class="keycap"><b>.</b></span> durch die Frames bewegst, wirst du sehen, dass
+          jeder einzelne Frame interlaced ist.
+        </p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-mixedpt"></a>7.2.2.4. Gemischtes progressive und telecine</h4></div></div></div><p>
+          Alle "gemischten progressive und telecine" Videos wurden ursprünglich
+          als 24000/1001 Frames pro Sekunde aufgenommen, jedoch werden einige Teile
+          telecined beendet.
+        </p><p>
+          Spielt <span class="application">MPlayer</span> diese Kategorie ab, wird er
+          (oft wiederholt) zwischen "30000/1001 fps NTSC"
+          und "24000/1001 fps progressive NTSC" zurück und vor wechseln.
+          Beobachte die untere Hälfte von <span class="application">MPlayer</span>s Ausgabe,
+          um diese Meldungen anzusehen.
+        </p><p>
+          Du solltest die Sektion "30000/1001 fps NTSC" überprüfen, um
+          sicher zu gehen, dass sie auch wirklich telecine sind und nicht einfach
+          interlaced.
+        </p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-ident-mixedpi"></a>7.2.2.5. Gemischtes progressive und interlaced</h4></div></div></div><p>
+          In "gemischtem progressive und interlaced" Inhalt wurde progressive
+          und interlaced Video zusammengeklebt.
+        </p><p>
+          Diese Kategorie sieht aus wie "gemischtes progressive und telecine",
+          bis du die Sektion 30000/1001 fps untersuchst und feststellst, dass
+          sie das telecine-Muster nicht haben.
+        </p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-encode"></a>7.2.3. Wie jede Kategorie encodieren</h3></div></div></div><p>
+        Wie ich anfangs angemerkt hatte, sind die
+        <span class="application">MEncoder</span>-Beispielzeilen unten eigentlich
+        <span class="bold"><strong>nicht</strong></span> zur Anwendung bestimmt;
+        sie demonstrieren nur die Minimalparameter zur korrekten Encodierung
+        jeder Kategorie.
+      </p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-progressive"></a>7.2.3.1. Progressive</h4></div></div></div><p>
+          Progressive Video erfordert kein spezielles Filtern, um es zu encodieren.
+          Der einzige Parameter, den du gewiss anwenden solltest ist
+          <tt class="option">-ofps 24000/1001</tt>. Andernfalls wird
+          <span class="application">MEncoder</span> versuchen, bei 30000/1001 fps
+          zu encodieren und Frames duplizieren.
+        </p><p>
+          </p><pre class="screen">mencoder dvd://1 -oac copy -ovc lavc -ofps 24000/1001</pre><p>
+        </p><p>
+          Dennoch ist es öfters der Fall, dass ein Video, das progressive aussieht,
+          eigentlich kurze Teile telecine eingemischt hat. Solange du dir nicht
+          sicher bist, ist es am sichersten, das Video als
+          <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-encode-mixedpt" title="7.2.3.4. Gemischtes progressive und telecine">gemischtes progressive und telecine</a>.
+          zu behandeln. Der Performance-Verlust ist gering
+          <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Fußnoten">[3]</a>.
+        </p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-telecined"></a>7.2.3.2. Telecined</h4></div></div></div><p>
+          Telecine kann umgekehrt werden, um den originalen 24000/1001-Inhalt zu erhalten,
+          indem man einen Prozess verwendet, der inverse-telecine genannt wird.
+          <span class="application">MPlayer</span> enthält verschiedene Filter, um dies
+          zu erreichen; der beste Filter, <tt class="option">pullup</tt> wird in der Sektion
+          <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-encode-mixedpt" title="7.2.3.4. Gemischtes progressive und telecine">Gemischtes progressive und telecine</a>
+          beschrieben.
+        </p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-interlaced"></a>7.2.3.3. Interlaced</h4></div></div></div><p>
+
+          In den meisten praktischen Fällen ist es nicht möglich, ein komplett
+          progressives Video aus interlaced Inhalt zu erhalten. Der einzige Weg,
+          dies ohne den Verlust der Hälfte der vertikalen Auflösung zu erreichen,
+          ist das Verdoppeln der Framerate, und man kann versuchen zu
+          "schätzen", wie die korrespondierenden Zeilen für jedes Feld
+          vervollständigt werden sollten (dies hat Nachteile - siehe Methode 3).
+        </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+              Das Video in interlaced Form encodieren. Normalerweise richtet Interlacing
+              verheerenden Schaden für die Fähigkeit des Encoders an, gut zu komprimieren,
+              <code class="systemitem">libavcodec</code> hat jedoch zwei
+              eigens für das ein wenig bessere Abspeichern von interlaced Video gedachte
+              Parameter: <tt class="option">ildct</tt> und <tt class="option">ilme</tt>. Auch wenn
+              die Verwendung von <tt class="option">mbd=2</tt> dringend zu empfehlen ist
+              <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Fußnoten">[2]</a>, weil es
+              Macroblöcke wie nicht-interlaced an Stellen encodiert, an denen keine Bewegung
+              stattfindet. Beachte, dass <tt class="option">-ofps</tt> hier NICHT notwendig ist.
+
+              </p><pre class="screen">mencoder dvd://1 -oac copy -ovc lavc -lavcopts ildct:ilme:mbd=2</pre><p>
+            </p></li><li class="listitem"><p>
+              Nutze einen Deinterlacing-Filter vor dem Encodieren. Es stehen verschiedene
+              dieser Filter zur Auswahl, jeder mit seinen eigenen Vor-
+              und Nachteilen. Ziehe <tt class="option">mplayer -pphelp</tt> und <tt class="option">mplayer -vf help</tt>
+              zu Rate, um zu sehen, welche
+              verfügbar sind (suche nach "deint"), lies Michael Niedermayers
+              <a class="ulink" href="http://guru.multimedia.cx/deinterlacing-filters/" target="_top">Deinterlacing-Filter-Vergleich</a>
+              und durchsuche die
+              <a class="ulink" href="http://www.mplayerhq.hu/design7/mailing_lists.html" target="_top">MPlayer-Mailinglisten</a>,
+              um Diskussionen über die zahlreichen Filter zu finden.
+              Nochmals, die Framerate ändert sich nicht, also kein
+              <tt class="option">-ofps</tt>. Deinterlacing sollte außerdem nach dem Zuschneiden
+              (cropping) <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Fußnoten">[1]</a>
+              und vor dem Skalieren angewandt werden.
+
+              </p><pre class="screen">mencoder dvd://1 -oac copy -vf yadif -ovc lavc</pre><p>
+            </p></li><li class="listitem"><p>
+              Unglücklicherweise arbeitet diese Option im Zusammenhang mit
+              <span class="application">MEncoder</span> fehlerhaft; sie sollte mit
+              <span class="application">MEncoder G2</span> gut funktionieren, den gibts aber
+              noch nicht. Du könntest Abstürze erleben. Seis drum, der Zweck von
+              <tt class="option"> -vf tfields</tt> ist es, einen vollen Frame aus jedem Feld
+              zu erzeugen, was eine Framerate von 60000/1001 ergibt. Der Vorteil dieses
+              Lösungsansatzes ist, dass nie irgendwelche Daten verloren gehen;
+              dennoch, da jeder Frame aus nur einem Feld kommt, müssen die fehlenden Zeilen
+              irgendwie interpoliert werden. Es gibt keine sehr guten Methoden, die
+              fehlenden Daten zu generieren, und so wird das Resultat ein bisschen aussehen,
+              als hätte man irgendeinen Deinterlacing-Filter verwendet. Die fehlenden Zeilen
+              zu generieren erzeugt auch weitere Probleme, einfach weil sich die Menge
+              an Daten verdoppelt. Somit sind höhere Encodier-Bitraten nötig, um
+              die Qualität beizubehalten und mehr CPU-Power wird für beides,
+              Encodieren und Decodieren, aufgewendet. Das Attribut tfields hat mehrere
+              verschiedene Optionen dafür, wie die fehlenden Zeilen jedes Frames erzeugt
+              werden.
+              Wenn du diese Methode nutzt, dann nimm Bezug auf das Handbuch und wähle,
+              welche Option auch immer am besten für dein Material aussieht.
+              Beachte, dass du wenn <tt class="option">tfields</tt> verwendet wird,
+              sowohl <tt class="option">-fps</tt> als auch <tt class="option">-ofps</tt>spezifizieren <span class="bold"><strong>musst</strong></span>,
+              um die doppelte Framerate der originalen Quelle zu erhalten.
+
+              </p><pre class="screen">mencoder dvd://1 -oac copy -vf tfields=2 -ovc lavc -fps 60000/1001 -ofps 60000/1001</pre><p>
+            </p></li><li class="listitem"><p>
+              Wenn du vorhast, dramatisch herunterzuskalieren, kannst du nur eins
+              der beiden Felder extrahieren und encodieren. Sicherlich, du wirst die
+              Hälfte der vertikalen Auflösung verlieren, aber wenn du planst, bis auf
+              1/2 des Originals herunter zu skalieren, macht der Verlust so gut wie
+              gar nichts aus. Das Resultat wird eine progressive Datei mit 30000/1001
+              Frames pro Sekunde sein. Die Prozedur ist, <tt class="option">-vf field</tt>
+              zu verwenden, dann die Ränder abzuschneiden
+              <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Fußnoten">[1]</a> und angemessen
+              zu skalieren. Vergiss nicht, dass du die Skalierung anpassen musst, um
+              das Halbieren der vertikalen Auflösung zu kompensieren.
+              </p><pre class="screen">mencoder dvd://1 -oac copy -vf field=0 -ovc lavc</pre><p>
+            </p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-mixedpt"></a>7.2.3.4. Gemischtes progressive und telecine</h4></div></div></div><p>
+          Um progressive und telecine Video komplett in progressive Video
+          umzuwandeln, müssen die telecined Teile inverse-telecined werden.
+          Die drei Wege, dies zu erreichen, werden unten beschrieben.
+          Beachte, dass du inverse-telecine <span class="bold"><strong>immer</strong></span>
+          vor der Reskalierung durchführen solltest; es sei denn, du weißt wirklich,
+          was du tust; mache inverse-telecine auch vor dem Entfernen der Ränder
+          <a class="link" href="menc-feat-telecine.html#menc-feat-telecine-footnotes" title="7.2.4. Fußnoten">[1]</a>.
+          <tt class="option">-ofps 24000/1001</tt> wird hier benötigt, weil das Output-Video
+          24000/1001 Frames pro Sekunde werden soll.
+        </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+              <tt class="option">-vf pullup</tt> wurde entworfen, um auf telecined Material
+              inverse-telecine anzuwenden, während die progressiven Daten unangetastet
+              bleiben. Damit dies richtig funktioniert, <span class="bold"><strong>muss</strong></span>
+              <tt class="option">pullup</tt> vom <tt class="option">softskip</tt>-Filter gefolgt werden, sonst
+              wird <span class="application">MEncoder</span> abstürzen.
+              <tt class="option">pullup</tt> ist trotz allem die sauberste und akkurateste
+              Methode, die zum Encodieren von beidem telecine und
+              "gemischtem progressive und telecine" zur Verfügung steht.
+
+              </p><pre class="screen">mencoder dvd://1 -oac copy -vf pullup,softskip -ovc lavc -ofps 24000/1001</pre><p>
+            </p></li><li class="listitem"><p>
+              Eine ältere Methode ist, anstatt inverse-telecine auf die telecined Teile
+              anzuwenden, telecine auf nicht-telecined Teile und dann inverse-telecine auf das
+              ganze Video anzuwenden. Hört sich verwirrend an? softpulldown ist
+              ein Filter, der ein Video durchgeht und die komplette Datei telecined macht.
+              Lassen wir auf softpulldown entweder <tt class="option">detc</tt> oder <tt class="option">ivtc</tt>
+              folgen, wird das Endergebnis vollkommen progressiv. <tt class="option">-ofps 24000/1001</tt>
+              wird benötigt.
+
+              </p><pre class="screen">mencoder dvd://1 -oac copy -vf softpulldown,ivtc=1 -ovc lavc -ofps 24000/1001</pre><p>
+            </p></li><li class="listitem"><p>
+              Ich habe <tt class="option">-vf filmdint</tt> selbst verwendet, aber lies hier, was
+              D Richard Felker III zu erzählen hat:
+
+              </p><div class="blockquote"><blockquote class="blockquote"><p>
+                  Es ist OK, aber IMO versucht er zu oft eher ein deinterlace
+                  als ein inverse telecine durchzuführen (ganz wie Settop-DVD-Player
+                  &amp; progressive TVs), was ein hässliches Flimmern erzeugt und
+                  andere Artefakte. Wenn du vorhast, es anzuwenden, musst du zumindest
+                  einige Zeit darauf verwenden, die Optionen zu tunen und zuerst den Output
+                  zu beobachten, damit du auch sicher sein kannst, dass du nichts
+                  vermasselst.
+                </p></blockquote></div><p>
+            </p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-telecine-encode-mixedpi"></a>7.2.3.5. Gemischtes progressive und interlaced</h4></div></div></div><p>
+          Es gibt zwei Optionen für den Umgang mit dieser Kategorie, jede von
+          beiden stellt einen Kompromiss dar. Du solltest basierend auf
+          Dauer/Stelle jedes Typs entscheiden.
+        </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+              Behandle es wie progressive. Die interlaced Teile werden interlaced
+              aussehen und einige der interlaced Felder müssen weggelassen werden,
+              was ein wenig zu Sprüngen führt. Du kannst einen
+              Nachbearbeitungsfilter verwenden, wenn du willst, aber dies wird die
+              progressive-Anteile geringfügig verringern.
+            </p><p>
+              Diese Option sollte definitiv nicht verwendet werden, wenn du eventuell
+              Video auf einem interlaced Gerät anzeigen willst (mit einer TV-Karte
+              zum Beispiel). Wenn du interlaced Frames in einem Video mit 24000/1001
+              Frames pro Sekunde hast, werden diese zusammen mit den progressive
+              Frames telecined. Die Hälfte der interlaced "Frames" werden für die
+              Dauer von drei Feldern (3/(60000/1001) Sekunden) angezeigt, was
+              einen flimmernden "Zeitrücksprung"-Effekt zur Folge hat, der
+              ziemlich schlecht aussieht. Solltest du dies dennoch versuchen,
+              <span class="bold"><strong>musst</strong></span> du einen
+              Deinterlacing-Filter wie <tt class="option">lb</tt> oder <tt class="option">l5</tt>
+              anwenden.
+            </p><p>
+              Es wäre auch keine gute Idee für eine progressive Anzeige. Es wird
+              Paare aufeinander folgender interlaced Felder auslassen, was eine
+              Unstetigkeit zur Folge hat, die eher sichtbar ist als mit der
+              zweiten Methode, die einige progressive Frames zweimal anzeigt.
+              Ein interlaced Video mit 30000/1001 Frames pro Sekunde ist bereits
+              ein bisschen abgehackt, weil es wirklich mit 60000/1001 Felder pro
+              Sekunde angezeigt werden sollte, sodass sich die doppelten Frames
+              nicht zu sehr abzeichnen.
+            </p><p>
+              Egal welchen Weg du wählst, es ist das beste, deinen Inhalt
+              zu berücksichtigen und wie du ihn anzeigen willst. Ist dein Video
+              zu 90% progressive und du hast nie vor, es auf einem TV-Bildschirm
+              anzuzeigen, solltest du einen progressive-Ansatz wählen. Ist es nur
+              halb-progressive, willst du es eventuell so encodieren, als sei alles
+              interlaced.
+            </p></li><li class="listitem"><p>
+              Behandle es wie interlaced. Einige Frames des progressive-Anteils
+              müssen dupliziert werden, was zu Sprüngen führt. Nochmal,
+              Deinterlacing-Filter können die progressive-Anteile leicht verringern.
+            </p></li></ul></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-telecine-footnotes"></a>7.2.4. Fußnoten</h3></div></div></div><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p><b>Über das Zuschneiden (cropping): </b>
+              Videodaten auf DVDs werden in einem YUV 4:2:0 genannten Format abgelegt.
+              In einem YUV-Video, werden Helligkeit und Chrominanz separat gespeichert.
+              Da das menschliche Auge ein bisschen weniger empfindlich auf Farbe
+              reagiert als auf Helligkeit, ist in einem YUV 4:2:0 Bild nur ein
+              Chrominanz-Pixel für alle vier Helligkeits-Pixel vorhanden.
+              In einem progressive Bild, besitzt jedes Quadrat von vier luma-Pixeln (zwei
+              auf jeder Seite) ein gemeinsames chroma-Pixel. Du musst progressive YUV
+              4:2:0 zu geradzahligen Auflösungen zurechtschneiden und geradzahlige
+              Offsets verwenden. Zum Beispiel ist
+              <tt class="option">crop=716:380:2:26</tt> OK,
+              <tt class="option">crop=716:380:3:26 </tt> aber nicht.
+            </p><p>
+            Wenn du es mit interlaced YUV 4:2:0 zu tun hast, ist die Situation
+            ein wenig komplizierter. Anstatt dass immer vier luma-Pixel im
+            <span class="emphasis"><em>Frame</em></span> sich ein chroma-Pixel teilen, teilen sich
+            immer vier luma-Pixel in jedem <span class="emphasis"><em>Feld</em></span> ein
+            chroma-Pixel. Wenn Felder zur Formung eines Frames interlaced werden,
+            ist jede Scanzeile ein Pixel hoch. Jetzt liegen anstatt je vier
+            luma-Pixel in einem Quadrat immer zwei Pixel nebeneinander und die
+            anderen zwei Pixel liegen zwei Scanzeilen weiter unten nebeneinander.
+            Die zwei luma-Pixel in der dazwischen liegenden Scanzeile sind vom
+            anderen Feld und teilen sich somit ein anderes chroma-Pixel mit
+            zwei luma-Pixeln zwei Scanzeile entfernt. All diese Konfusion macht
+            es notwendig, vertikale Ausschneide-Abmessungen und Offsets zu
+            haben, die ein Vielfaches von vier sind. Horizontal kann geradzahlig
+            bleiben.
+          </p><p>
+            Für telecined Video empfehle ich, das Zuschneiden nach dem inverse
+            telecining stattfinden zu lassen. Ist das Video einmal progressive,
+            musst du nur noch mit geraden Zahlen zuschneiden. Wenn du wirklich die
+            leichte Beschleunigung haben willst, die zuerst zuzuschneiden
+            möglicherweise bietet, musst du vertikal mit einem Vielfachen von vier
+            zuschneiden, oder der inverse-telecine Filter wird keine korrekten Daten
+            haben.
+          </p><p>
+            Für interlaced (nicht telecined) Video musst du immer
+            mit einem Vielfachen von vier zuschneiden, es sei denn, du verwendest
+            <tt class="option">-vf field</tt> vor dem Schneiden.
+          </p></li><li class="listitem"><p><b>Über Encodier-Parameter und Qualität: </b>
+              Nur weil ich hier <tt class="option">mbd=2</tt> vorschlage, heißt das nicht,
+              dass es woanders benutzt werden soll. Zusammen mit <tt class="option">trell</tt>
+              ist <tt class="option">mbd=2</tt> eine der Optionen von
+              <code class="systemitem">libavcodec</code>, welche die
+              Qualität am deutlichsten heben, und du solltest stets das letzte der beiden
+              anwenden, außer das Abfallen der Encodiergeschwindigkeit ist abschreckend
+              hoch (z.B. Encodierung in Echtzeit). Es gibt eine Menge anderer Optionen für
+              <code class="systemitem">libavcodec</code>, die die Encodierqualität
+              verbessern (und die Encodiergeschwindigkeit verringern), dies liegt aber jenseits
+              des Rahmens dieses Dokuments.
+            </p></li><li class="listitem"><p><b>Über die Performance von pullup: </b>
+              <tt class="option">Pullup</tt> kann sicher (zusammen mit <tt class="option">softskip</tt>)
+              auf progressive Video angewandt werden und ist für gewöhnlich eine gute Idee,
+              es sei denn, die Quelle wurde definitiv als vollkommen progressive verifiziert.
+              Der Performaceverlust ist in den meisten Fällen gering. Bei einer Minimalencodierung
+              macht <tt class="option">pullup</tt> <span class="application">MEncoder</span>
+              50% langsamer. Das Hinzufügen von Soundverarbeitung und erweiterten
+              <tt class="option">lavcopts</tt> überschattet diesen Unterschied
+              und drückt den Performanceabfall, der mit dem Verwenden von <tt class="option">pullup</tt>
+              verbunden war, runter auf 2%.
+            </p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-dvd-mpeg4.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-enc-libavcodec.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">7.1. Erzeugen eines hochwertigen MPEG-4-Rips ("DivX") eines DVD-Films </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 7.3. Encodieren mit der <code class="systemitem">libavcodec</code>
+      Codecfamilie</td></tr></table></div></body></html>

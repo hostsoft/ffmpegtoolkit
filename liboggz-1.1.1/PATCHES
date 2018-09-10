@@ -1,0 +1,20 @@
+Generating patches
+------------------
+
+First ensure you have an up-to-date checkout of the git repository.
+liboggz is maintained in git at git://git.xiph.org/liboggz.git
+
+Please generate patches using git-format-patch. You'll just need to commit
+your changes to your local copy first:
+
+$ git commit -a
+
+then do:
+
+$ git format-patch -1
+
+which will generate a patch file with your attribution as the committer
+name and your own commit message. That file can then be applied to another
+(eg. upstream) git tree using "git am" to preserve that info.
+
+Mail that file directly or as an attachment to ogg-dev@xiph.org.

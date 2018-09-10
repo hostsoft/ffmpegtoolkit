@@ -1,0 +1,10 @@
+--- dec_lpc.c
++++ dec_lpc.c
+@@ -3,6 +3,7 @@
+  *  3GPP AMR Wideband Floating-point Speech Codec
+  *===================================================================
+  */
++#include <stdlib.h>
+ #include <math.h>
+ #include "typedef.h"
+ #include "dec_util.h"

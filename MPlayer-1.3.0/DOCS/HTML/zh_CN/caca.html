@@ -1,0 +1,47 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.10.  libcaca – Color ASCII Art library</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="video.html" title="第 4 章 Video output devices"><link rel="prev" href="aalib.html" title="4.9. AAlib – text mode displaying"><link rel="next" href="vesa.html" title="4.11. VESA - output to VESA BIOS"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.10. 
+<code class="systemitem">libcaca</code> – Color ASCII Art library
+</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="aalib.html">上一页</a> </td><th width="60%" align="center">第 4 章 Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="vesa.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="caca"></a>4.10. 
+<code class="systemitem">libcaca</code> – Color ASCII Art library
+</h2></div></div></div><p>
+The <a class="ulink" href="http://sam.zoy.org/projects/libcaca/" target="_top"><code class="systemitem">libcaca</code></a>
+library is a graphics library that outputs text instead of pixels, so that it
+can work on older video cards or text terminals. It is not unlike the famous
+<code class="systemitem">AAlib</code> library.
+<code class="systemitem">libcaca</code> needs a terminal to work, thus
+it should work on all Unix systems (including Mac OS X) using either the
+<code class="systemitem">slang</code> library or the
+<code class="systemitem">ncurses</code> library, on DOS using the
+<code class="systemitem">conio.h</code> library, and on Windows systems
+using either <code class="systemitem">slang</code> or
+<code class="systemitem">ncurses</code> (through Cygwin emulation) or
+<code class="systemitem">conio.h</code>. If
+<tt class="filename">./configure</tt>
+detects <code class="systemitem">libcaca</code>, the caca libvo driver
+will be built.
+</p><div class="itemizedlist"><p class="title"><b>The differences with <code class="systemitem">AAlib</code> are
+  the following:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+   16 available colors for character output (256 color pairs)
+</p></li><li class="listitem"><p>
+   color image dithering
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>But <code class="systemitem">libcaca</code> also has the
+  following limitations:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+   no support for brightness, contrast, gamma
+</p></li></ul></div><p>
+You can use some keys in the caca window to change rendering options:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody><tr><td><span class="keycap"><b>d</b></span></td><td>
+  Toggle <code class="systemitem">libcaca</code> dithering methods.
+</td></tr><tr><td><span class="keycap"><b>a</b></span></td><td>
+  Toggle <code class="systemitem">libcaca</code> antialiasing.
+</td></tr><tr><td><span class="keycap"><b>b</b></span></td><td>
+  Toggle <code class="systemitem">libcaca</code> background.
+</td></tr></tbody></table></div><div class="variablelist"><p class="title"><b><code class="systemitem">libcaca</code> will also look for
+  certain environment variables:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">CACA_DRIVER</tt></span></dt><dd><p>
+    Set recommended caca driver. e.g. ncurses, slang, x11.
+  </p></dd><dt><span class="term"><tt class="option">CACA_GEOMETRY (X11 only)</tt></span></dt><dd><p>
+    Specifies the number of rows and columns. e.g. 128x50.
+  </p></dd><dt><span class="term"><tt class="option">CACA_FONT (X11 only)</tt></span></dt><dd><p>
+    Specifies the font to use. e.g. fixed, nexus.
+  </p></dd></dl></div><p>
+Use the <tt class="option">-framedrop</tt> option if your computer is not fast
+enough to render all frames.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="aalib.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="vesa.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">4.9. AAlib – text mode displaying </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 4.11. VESA - output to VESA BIOS</td></tr></table></div></body></html>

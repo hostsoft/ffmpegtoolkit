@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.3. Polices</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="prev" href="skin-file.html" title="B.2. Le fichier skin"><link rel="next" href="skin-gui.html" title="B.4. Messages de la GUI"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Symboles"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.3. Polices</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-file.html">Précédent</a> </td><th width="60%" align="center">Annexe B. Format de skins <span class="application">MPlayer</span></th><td width="20%" align="right"> <a accesskey="n" href="skin-gui.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-fonts"></a>B.3. Polices</h2></div></div></div><p>
+Comme mentionné dans la section sur les parties de la skin, une police est définie
+par une image et un fichier de description. Vous pouvez placer les caractères
+n'importe ou sur l'image, mais vous devez vous assurer que leur position et taille
+correspondent précisément au fichier de description.
+</p><p>
+Le fichier descriptif des polices (avec l'extension <tt class="filename">.fnt</tt>)
+peut avoir des lignes de commentaires commençant par  '<code class="literal">;</code>'.
+Le fichier doit avoir une ligne du type
+<a name="skin-font-image"></a>
+</p><pre class="programlisting">image = <em class="replaceable"><code>image</code></em></pre><p>
+Où <code class="literal"><em class="replaceable"><code>image</code></em></code> est le nom de l'image qui
+sera utilisée pour la police (vous n'avez pas à définir d'extension).
+<a name="skin-font-char"></a>
+</p><pre class="programlisting">"char" = X, Y, largeur, hauteur</pre><p>
+Ici <code class="literal">X</code> et <code class="literal">Y</code> précisent la position du caractère
+<code class="literal">char</code> dans l'image (<code class="literal">0,0</code> est le coin supérieur
+gauche). <code class="literal">largeur</code> et <code class="literal">hauteur</code> sont les
+dimensions du caractère en pixels.
+</p><p>
+Voici un exemple définissant les caractères A, B, C utilisant <tt class="filename">font.png</tt>.
+</p><pre class="programlisting">
+; Peut être "font" au lieu de "font.png".
+image = font.png
+
+; Trois caractères suffisent pour une démonstration. :-)
+"A" =  0,0, 7,13
+"B" =  7,0, 7,13
+"C" = 14,0, 7,13
+</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-fonts-symbols"></a>B.3.1. Symboles</h3></div></div></div><p>
+Certains caractères ont une signification spéciale quand ils sont retournés par des
+variables utilisées dans <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>. Ces caractères
+sont censés s'afficher comme des symboles (par exemple, dans le cas d'une lecture
+DVD, vous pouvez afficher un beau logo DVD a la place du caractère '<code class="literal">d</code>').
+</p><p>
+La table ci-dessous liste les caractères pouvant s'afficher comme des symboles (et
+nécessitent donc une police différente).
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Caractère</th><th>Symbole</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>lecture</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>stop</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>pause</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>pas de son</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>son mono</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>son stéréo</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>lecture depuis un fichier</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>lecture depuis un Video CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>lecture depuis un DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>lecture depuis une URL</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-file.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-gui.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">B.2. Le fichier skin </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> B.4. Messages de la GUI</td></tr></table></div></body></html>

@@ -1,0 +1,22 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.3. Chtěli byste GUI?</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="install.html" title="Kapitola 2. Instalace"><link rel="prev" href="features.html" title="2.2. Vlastnosti"><link rel="next" href="fonts-osd.html" title="2.4. Fonty a OSD"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.3. Chtěli byste GUI?</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="features.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 2. Instalace</th><td width="20%" align="right"> <a accesskey="n" href="fonts-osd.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gui"></a>2.3. Chtěli byste GUI?</h2></div></div></div><p>
+  GUI potřebuje GTK 1.2.x nebo GTK 2.0 (není plně GTK, ale panely jsou).
+  Skiny jsou uloženy v PNG formátu,
+  takže GTK, <code class="systemitem">libpng</code>
+  (a jejich příslušenství, obvykle nazývané
+  <code class="systemitem">gtk-dev</code>
+  a <code class="systemitem">libpng-dev</code>) musí být nainstalovány.
+  Můžete jej zakompilovat předáním volby <tt class="option">--enable-gui</tt> skriptu
+  <tt class="filename">./configure</tt>. Aktivaci GUI režimu pak provedete spuštěním
+  binárky <span class="command"><strong>gmplayer</strong></span>.
+</p><p>
+  Protože <span class="application">MPlayer</span> nemá přibalen žádný skin, budete si
+  muset nějaký stáhnout abyste mohli používat GUI. Viz naši <a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">download stránku</a>.
+  Skiny by měly být rozbaleny do obvyklého systémového adresáře
+  (<tt class="filename">$PREFIX/share/mplayer/skins</tt>),
+  nebo do <tt class="filename">$HOME/.mplayer/skins</tt>.
+  <span class="application">MPlayer</span> ve výchozím stavu hledá v těchto adresářích
+  podadresář jménem <tt class="filename">default</tt>, ale
+  můžete použít volbu <tt class="option">-skin <em class="replaceable"><code>nový_skin</code></em></tt>
+  nebo direktivu <code class="literal">skin=nový_skin</code> konfiguračního souboru pro
+  použití skinu v adresáři <tt class="filename">*/skins/nový_skin</tt>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="features.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="fonts-osd.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">2.2. Vlastnosti </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 2.4. Fonty a OSD</td></tr></table></div></body></html>

@@ -1,0 +1,82 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Chapitre 1. Introduction</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="prev" href="howtoread.html" title="Comment lire cette documentation"><link rel="next" href="install.html" title="Chapitre 2. Installation"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapitre 1. Introduction</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="howtoread.html">Précédent</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="install.html">Suivant</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="intro"></a>Chapitre 1. Introduction</h1></div></div></div><p>
+<span class="application">MPlayer</span> est un lecteur de vidéos pour GNU/Linux
+(fonctionne sur de nombreux autres Un*x, et processeurs non-x86, voir la
+section <a class="xref" href="ports.html" title="Chapitre 5. Ports">Ports</a>).
+Il lit la majorité des fichiers MPEG, VOB, AVI, OGG/OGM, VIVO, ASF/WMA/WMV,
+QT/MOV/MP4, FLI, RM, NuppelVideo, yuv4mpeg, FILM, RoQ, PVA, Matroska supportés
+par de nombreux codecs natifs, XAnim, RealPlayer et les DLLs Win32.
+Vous pouvez regarder les VideoCD, SVCD, DVD, 3ivx, RealMedia, Sorenson,
+Theora, ainsi que les vidéos au format MPEG-4 (DivX).
+L'autre point fort de <span class="application">MPlayer</span> est la grande
+variété de pilotes de sortie supportée.
+Il fonctionne avec X11, Xv, DGA, OpenGL, SVGAlib, fbdev, AAlib, libcaca,
+DirectFB, mais vous pouvez utiliser GGI et SDL (et ainsi tous leurs pilotes)
+et également certains pilotes de bas niveau spécifiques à certaines cartes
+(pour Matrox, 3Dfx et Radeon, Mach64, Permedia3) !
+La plupart d'entre eux supportent le redimmensionnement logiciel ou
+matériel, vous pouvez donc apprécier les films en plein écran.
+<span class="application">MPlayer</span> supporte la décompression matérielle
+fournie par certaines cartes MPEG, telles que la <a class="link" href="mpeg_decoders.html#dvb" title="4.18.1. sorties et entrées DVB">DVB</a>
+et la <a class="link" href="mpeg_decoders.html#dxr3" title="4.18.3. DXR3/Hollywood+">DXR3/Hollywood+</a>.
+Et que dire de ces superbes sous-titres ombrés et lissés (14
+types supportés) avec des polices européennes/ISO 8859-1,2
+(Hongrois, Anglais, Tchèque, etc.), Cyrilliques, Coréennes, ainsi que de
+l'Affichage Sur Ecran (ou OSD = On Screen Display) ?
+</p><p>
+Ce lecteur peut lire les fichiers MPEG endommagés (utile pour certains VCDs),
+ainsi que les mauvais fichiers AVI qui ne sont pas lisibles par le célèbre
+Windows Media Player.
+Même les fichiers AVI sans index sont lisibles, et vous pouvez reconstruire
+leurs indexs soit temporairement avec l'option <tt class="option">-idx</tt>,
+soit de manière définitive avec <span class="application">MEncoder</span>, autorisant
+ainsi l'avance/retour rapide !
+Comme vous pouvez le constater, la stabilité et la qualité sont les choses
+les plus importantes, mais la vitesse est également formidable.
+Il y a également un puissant système de filtres pour faire de la manipulation
+vidéo et audio.
+</p><p>
+<span class="application">MEncoder</span> (Le Movie Encoder de
+<span class="application">MPlayer</span>) est un simple encodeur de vidéos, conçu
+pour encoder des vidéos jouables par <span class="application">MPlayer</span>
+(AVI/ASF/OGG/DVD/VCD/VOB/MPG/MOV/VIV/FLI/RM/NUV/NET/PVA)
+dans d'autres formats jouables par <span class="application">MPlayer</span>
+(voir plus bas).
+Il peut encoder avec des codecs variés comme MPEG-4 (DivX4)
+(1 ou 2 passes),<code class="systemitem">libavcodec</code>,
+audio PCM/MP3/MP3 VBR.
+</p><div class="itemizedlist"><p class="title"><b>Fonctionnalités de <span class="application">MEncoder</span></b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Encodage à partir de la grande variété de formats de fichiers
+et de décodeurs de <span class="application">MPlayer</span></p></li><li class="listitem"><p>
+  Encodage dans tous les codecs
+  <code class="systemitem">libavcodec</code> de FFmpeg
+</p></li><li class="listitem"><p>
+  Encodage vidéo depuis les tuners TV compatibles V4L
+</p></li><li class="listitem"><p>
+  Encodage/multiplexage vers fichiers AVI entrelacés avec index propre
+</p></li><li class="listitem"><p>
+  Création de fichiers à partir de flux audio externes
+</p></li><li class="listitem"><p>
+  Encodage 1, 2 ou 3 passes
+</p></li><li class="listitem"><p>
+  MP3 audio VBR
+</p></li><li class="listitem"><p>
+  PCM audio
+</p></li><li class="listitem"><p>
+  Copie de flux (stream)
+</p></li><li class="listitem"><p>
+  Synchronisation A/V de la source (basé sur PTS, peut être désactivé avec l'option
+  <tt class="option">-mc 0</tt>)
+</p></li><li class="listitem"><p>
+  Correction FPS avec l'option <tt class="option">-ofps</tt> (utile
+  pour l'encodage d'un VOB 30000/1001 fps en AVI 24000/1001 fps)
+</p></li><li class="listitem"><p>
+  Utilise notre très puissant système de plugins (crop, expand,
+  flip, postprocess, rotate, scale, conversion rgb/yuv)
+</p></li><li class="listitem"><p>
+  Peut encoder les sous-titres DVD/VOBsub et
+  le texte des sous-titres dans le fichier de destination
+</p></li><li class="listitem"><p>
+  Peut ripper les sous-titres DVD en format VOBsub
+</p></li></ul></div><p>
+<span class="application">MPlayer</span> et <span class="application">MEncoder</span>
+peuvent être distribués selon les termes de la GNU General Public License Version 2.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="howtoread.html">Précédent</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="install.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">Comment lire cette documentation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> Chapitre 2. Installation</td></tr></table></div></body></html>

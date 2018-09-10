@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.14. X11</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="vesa.html" title="4.13. VESA - вывод в VESA BIOS"><link rel="next" href="vidix.html" title="4.15. VIDIX"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.14. X11</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vesa.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="vidix.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="x11"></a>4.14. X11</h2></div></div></div><p>
+Избегайте, если возможно. Вывод в X11 (используя расширение разделяемой памяти) -
+без какого-либо ускорения.Поддерживается (MMX/3DNow/SSE ускоренное, но все равно
+медленное) программное масштабирование, используйте опции <tt class="option">-fs -zoom</tt>.
+Большинство карт имеют поддержку масштабирования,  для этого используйте вывод
+<tt class="option">-vo xv</tt>, или <tt class="option">-vo xmga</tt> для карт Matrox.
+</p><p>
+Проблема в том, что большинство драйверов карт не поддерживают аппаратное
+ускорение на втором мониторе/TV. В этом случае вы увидите окно зеленого/синего
+цвета вместо изображения, и этот драйвер будет полезным,
+но требуется мощный CPU для программного масштабирования. Не используйте
+программный вывод+масштабирование SDL драйвера, он имеет худшее качество
+картинки!
+</p><p>
+Программное масштабирование очень медленное, лучше попробуйте вместо этого
+изменить видео режим. Это очень просто. Смотрите <a class="link" href="dga.html#dga-modelines" title="ПЕРЕКЛЮЧЕНИЕ РЕЖИМОВ">раздел DGA
+режимы</a> и вставьте соответствующие строки в ваш <tt class="filename">XF86Config</tt>.
+
+</p><div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Если у вас XFree86 4.x.x: используйте <tt class="option">-vm</tt> опцию. Она
+  переключится в режим с подходящим разрешением. Если нет:
+</p></li><li class="listitem"><p>
+  C XFree86 3.x.x: циклически переключайтесь между разными разрешениями с помощью
+  клавиш
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Доп. клавиша
+  плюс</b></span>
+  и
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Доп. клавиша
+  минус</b></span>.
+</p></li></ul></div><p>
+</p><p>
+Если не находите вставленные видео режимамы, просмотрите  вывод Xfree86.
+Некоторые драйверы не могут использовать низкие частоты пикселизации (количество
+отрисовываемых пикселей в секунду), необходимые для видео режимов с низким разрешением.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vesa.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="vidix.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.13. VESA - вывод в VESA BIOS </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.15. VIDIX</td></tr></table></div></body></html>

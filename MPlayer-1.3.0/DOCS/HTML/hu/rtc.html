@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.6. RTC</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="install.html" title="2. fejezet - Telepítés"><link rel="prev" href="codec-installation.html" title="2.5. Codec telepítés"><link rel="next" href="usage.html" title="3. fejezet - Használat"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.6. RTC</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="codec-installation.html">Vissza</a> </td><th width="60%" align="center">2. fejezet - Telepítés</th><td width="20%" align="right"> <a accesskey="n" href="usage.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="rtc"></a>2.6. RTC</h2></div></div></div><p>
+Három fajta időzítési eljárás van az <span class="application">MPlayer</span>ben.
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>A régi módszer használatához</strong></span> nem kell
+  tenned semmit. Ez az <code class="systemitem">usleep()</code> függvényt használja
+  az A/V szinkronizáláshoz, +/- 10ms-es pontossággal. Van amikor ennél is
+  pontosabb szinkronizálás szükséges.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Az új időzítő</strong></span> kód az RTC-t (RealTime Clock)
+  használja, mert ennek pontos, 1 ms-es időzítői vannak. A <tt class="option">-rtc</tt>
+  kapcsoló engedélyezi, de megfelelően beállított kernel kell hozzá.
+  Ha 2.4.19pre8 vagy későbbi kernelt használsz, beállíthatod a maximum
+  RTC frekvenciát a sima felhasználóknak a <code class="systemitem">/proc
+  </code> fájl rendszer segítségével. Használd az alábbi két parancs
+  valamelyikét az RTC normál felhasználók számára történő engedélyezéséhez:
+  </p><pre class="screen">echo 1024 &gt; /proc/sys/dev/rtc/max-user-freq</pre><p>
+  </p><pre class="screen">sysctl dev/rtc/max-user-freq=1024</pre><p>
+  Ezt a beállítást állandósíthatod az utóbbi
+  <tt class="filename">/etc/sysctl.conf</tt> fájba történő írásával.
+  </p><p>
+  Az új időzítő eredményét a státusz sorban láthatod.
+  Néhány sebesség-léptetéses (speedstep) CPU-val rendelkező
+  notebook BIOS-ának energia takarékossági funkciói rosszul működnek együtt az
+  RTC-vel. Elromolhat az audió és a videó szinkronizációja. Úgy tűnik, ha bedugod
+  a hálózati csatlakozót, mielőtt bekapcsolnád a notebookot, az segít.
+  Néhány hardver összeállításban (ALi1541-es alaplapokkal használt nem DMA-s DVD
+  meghajtók esetén erősítették meg) az RTC időzítő használata kihagyásokat okoz
+  lejátszás közben. Ebben az esetben a harmadik módszer használata javasolt.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>A harmadik időzítő kód</strong></span> a <tt class="option">-softsleep</tt>
+  kapcsolóval kapcsolható be. Az RTC hatékonyságával rendelkezik, de nem használja
+  azt. Másrészről viszont jobban eszi a procit.
+</p></li></ul></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="codec-installation.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="usage.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">2.5. Codec telepítés </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 3. fejezet - Használat</td></tr></table></div></body></html>

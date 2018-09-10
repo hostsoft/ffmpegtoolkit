@@ -1,0 +1,86 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.4. Fonts and OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="install.html" title="Chapter 2. Installation"><link rel="prev" href="gui.html" title="2.3. What about the GUI?"><link rel="next" href="codec-installation.html" title="2.5. Codec installation"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="fonts-osd.html#truetype-fonts" title="2.4.1. TrueType fonts"><link rel="subsection" href="fonts-osd.html#bitmap-fonts" title="2.4.2. bitmap fonts"><link rel="subsection" href="fonts-osd.html#osdmenu" title="2.4.3. OSD menu"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.4. Fonts and OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="gui.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="codec-installation.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fonts-osd"></a>2.4. Fonts and OSD</h2></div></div></div><p>
+You need to tell <span class="application">MPlayer</span> which font to use to
+enjoy OSD and subtitles. Any TrueType font or special bitmap fonts will
+work. However, TrueType fonts are recommended as they look far better,
+can be properly scaled to the movie size and cope better with different
+encodings.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="truetype-fonts"></a>2.4.1. TrueType fonts</h3></div></div></div><p>
+There are two ways to get TrueType fonts to work. The first is to pass
+the <tt class="option">-font</tt> option to specify a TrueType font file on
+the command line. This option will be a good candidate to put in your
+configuration file (see the manual page for details).
+The second is to create a symlink called <tt class="filename">subfont.ttf</tt>
+to the font file of your choice. Either
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>/path/to/sample_font.ttf</code></em> ~/.mplayer/subfont.ttf
+</pre><p>
+for each user individually or a system-wide one:
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>/path/to/sample_font.ttf</code></em> $PREFIX/share/mplayer/subfont.ttf
+</pre><p>
+</p><p>
+If <span class="application">MPlayer</span> was compiled with
+<code class="systemitem">fontconfig</code> support, the above methods
+won't work, instead <tt class="option">-font</tt> expects a
+<code class="systemitem">fontconfig</code> font name
+and defaults to the sans-serif font. Example:
+</p><pre class="screen">
+mplayer -font <em class="replaceable"><code>'Bitstream Vera Sans'</code></em> <em class="replaceable"><code>anime.mkv</code></em>
+</pre><p>
+</p><p>
+To get a list of fonts known to
+<code class="systemitem">fontconfig</code>,
+use <span class="command"><strong>fc-list</strong></span>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bitmap-fonts"></a>2.4.2. bitmap fonts</h3></div></div></div><p>
+If for some reason you wish or need to employ bitmap fonts, download a set
+from our homepage. You can choose between various
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/fonts/" target="_top">ISO fonts</a>
+and some sets of fonts
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/fonts/" target="_top">contributed by users</a>
+in various encodings.
+</p><p>
+Uncompress the file you downloaded to
+<tt class="filename">~/.mplayer</tt> or
+<tt class="filename">$PREFIX/share/mplayer</tt>.
+Then rename or symlink one of the extracted directories to
+<tt class="filename">font</tt>, for example:
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>~/.mplayer/arial-24</code></em> ~/.mplayer/font
+</pre><p>
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>$PREFIX/share/mplayer/arial-24</code></em> $PREFIX/share/mplayer/font
+</pre><p>
+</p><p>
+Fonts should have an appropriate <tt class="filename">font.desc</tt> file
+which maps Unicode font positions to the actual code page of the
+subtitle text. Another solution is to have UTF-8-encoded subtitles
+and use the <tt class="option">-utf8</tt> option or give the subtitles
+file the same name as your video file with a <tt class="filename">.utf</tt>
+extension and have it in the same directory as the video file.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osdmenu"></a>2.4.3. OSD menu</h3></div></div></div><p>
+<span class="application">MPlayer</span> has a completely user-definable
+OSD Menu interface.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+the Preferences menu is currently UNIMPLEMENTED!
+</p></div><div class="orderedlist"><p class="title"><b>Installation</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  compile <span class="application">MPlayer</span> by passing the
+  <tt class="option">--enable-menu</tt> to <tt class="filename">./configure</tt>
+</p></li><li class="listitem"><p>
+  make sure you have an OSD font installed
+</p></li><li class="listitem"><p>
+  copy <tt class="filename">etc/menu.conf</tt> to your
+  <tt class="filename">.mplayer</tt> directory
+</p></li><li class="listitem"><p>
+  copy <tt class="filename">etc/input.conf</tt> to your
+  <tt class="filename">.mplayer</tt> directory, or to the
+  system-wide <span class="application">MPlayer</span> config dir (default:
+  <tt class="filename">/usr/local/etc/mplayer</tt>)
+</p></li><li class="listitem"><p>
+  check and edit <tt class="filename">input.conf</tt> to enable menu movement keys
+  (it is described there).
+</p></li><li class="listitem"><p>
+  start <span class="application">MPlayer</span> by the following example:
+  </p><pre class="screen">mplayer -menu <em class="replaceable"><code>file.avi</code></em></pre><p>
+  </p></li><li class="listitem"><p>
+  push any menu key you defined
+</p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="gui.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="codec-installation.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">2.3. What about the GUI? </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 2.5. Codec installation</td></tr></table></div></body></html>

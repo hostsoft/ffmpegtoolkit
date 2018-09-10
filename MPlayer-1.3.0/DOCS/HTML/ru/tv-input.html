@@ -1,0 +1,136 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.10. TV вход</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="advaudio.html" title="3.9. Расширенные возможности аудио"><link rel="next" href="tv-teletext.html" title="3.11. Телетекст"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="tv-input.html#tv-compilation" title="3.10.1. Компиляция"><link rel="subsection" href="tv-input.html#tv-tips" title="3.10.2. Советы по использованию"><link rel="subsection" href="tv-input.html#tv-examples" title="3.10.3. Примеры"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.10. TV вход</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="advaudio.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="tv-teletext.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-input"></a>3.10. TV вход</h2></div></div></div><p>
+В этой секции описывается, как включить <span class="bold"><strong>просмотр/захват
+с V4L-совместимого TV тюнера</strong></span>. См. man страницу, для описания TV опций
+и кнопок управления.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-compilation"></a>3.10.1. Компиляция</h3></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Во-первых, Вам нужно перекомпилировать <span class="application">MPlayer</span>,
+  <tt class="filename">./configure</tt> автоматически обнаружит заголовки ядра,
+  относящиеся к v4l, и наличие <tt class="filename">/dev/video*</tt> устройств.
+  Если они существуют, будет собрана поддержка TV (см. вывод
+  <tt class="filename">./configure</tt>).
+</p></li><li class="step"><p>
+  Убедитесь, что Ваш тюнер работает с другими TV приложениями под Linux,
+  например <span class="application">XawTV</span>.
+</p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-tips"></a>3.10.2. Советы по использованию</h3></div></div></div><p>
+Полный список опций доступен на страницах руководства (man).
+Вот всего несколько советов:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Используйте опцию <tt class="option">channels</tt>. Пример:
+  </p><pre class="screen">-tv channels=26-MTV1,23-TV2</pre><p>
+  Объяснение: При использовании такой опции, будут использоваться только каналы 26
+  и 23, и, кроме того, будет приятный OSD текст при переключении между каналами,
+  отображающий название канала. Пробелы в названиях каналов должны быть заменены
+  символом "_".
+</p></li><li class="listitem"><p>
+  Выберите разумные размеры изображения. Размеры полученного
+  изображения должны делиться на 16.
+</p></li><li class="listitem"><p>
+  Если Вы захватываете видео с вертикальным разрешением выше половины полного
+  разрешения (т.е. 288 для PAL или 240 для NTSC), то получаемые вами 'кадры'
+  на самом деле будут чередующимися[interleaved] парами полей. В зависимости от того,
+  что вы собираетесь делать с видео, можно оставить их в таком виде,
+  произвести разрушающую (с возможной потерей качества) построчную развёртку,
+  либо разделить пары обратно в отдельные поля.
+  </p><p>
+  Иначе Вы получите фильм с сильными искажениями в
+  сценах с быстрыми движениями, и управление битпотоком, скорее всего, будет даже не
+  в состоянии поддерживать необходимый уровень битпотока, поскольку артефакты
+  чересстрочной развёртки создают огромное количество мелких деталей и поэтому
+  отнимают большую часть полосы пропускания. Вы можете включить преобразование в
+  построчную развёртку,
+  используя <tt class="option">-vf pp=DEINT_TYPE</tt>. Обычно <tt class="option">pp=lb</tt>
+  работает хорошо, но это уже субъективное мнение. Другие алгоритмы
+  преобразования в построчную развёртку см. на man-странице и попробуйте их.
+  </p></li><li class="listitem"><p>
+  Обрежьте пустое пространство. Когда вы захватываете видео, зоны по краям, как правило,
+  черны или содержат просто шум. Это опять съедает часть битпотока.
+  Точнее, это не сами чёрные зоны, а контрастный переход от чёрного к более
+  светлому видео, но это сейчас не важно. Прежде чем Вы начнёте захватывать,
+  подстройте аргументы опции <tt class="option">crop</tt>, чтобы обрезать весь мусор по
+  краям. Ещё раз, не забудьте сохранить получившиеся размеры изображения
+  разумными.
+</p></li><li class="listitem"><p>
+  Отслеживайте загрузку CPU. Она не должна пересекать 90% границу большую часть
+  времени. Если у Вас большой размер буфера захвата,
+  <span class="application">MEncoder</span> переживёт
+  перегрузку в течение нескольких секунд, но не более того. Лучше отключить 3D
+  OpenGL, хранители экрана и другую подобную гадость.
+</p></li><li class="listitem"><p>
+  Не меняйте системные часы. <span class="application">MEncoder</span> использует
+  системные часы для A/V синхронизации. Если Вы переведёте системные часы
+  (особенно назад), <span class="application">MEncoder</span> запутается,
+  и Вы начнёте терять кадры. Это особенно
+  важный вопрос, если Вы подключены к сети и используете какие-нибудь программы
+  синхронизации времени, в духе NTP. Вы должны отключить NTP во время захвата,
+  если Вы действительно хотите сделать хорошую запись.
+</p></li><li class="listitem"><p>
+  Изменяйте значение <tt class="option">outfmt</tt> только если Вы знаете, что Вы
+  делаете, или Ваши карта/драйвер не поддерживают значение по умолчанию
+  (пространство цветов YV12). В старых версиях <span class="application">MPlayer</span>/
+  <span class="application">MEncoder</span> было необходимо выставлять нужное значение
+  формата вывода.
+  Эта проблема должна быть решена в текущих версиях и опция <tt class="option">outfmt</tt>
+  больше не требуется, поскольку значение по умолчанию подходит в
+  большинстве случаев. Например если Вы будете захватывать в DivX, используя
+  <code class="systemitem">libavcodec</code> и укажете
+  <tt class="option">outfmt=RGB24</tt> для улучшения качества
+  полученного изображения, то Вы увидите, что в действительности, изображение все
+  равно будет перекодировано в YV12, поэтому все что Вы получите, это огромная
+  загрузка CPU.
+</p></li><li class="listitem"><p>
+  Чтобы использовать пространство цветов I420 (<tt class="option">outfmt=i420</tt>), Вы
+  должны указать опцию <tt class="option">-vc rawi420</tt> в связи с конфликтом fourcc с
+  видео кодеком Intel Indeo.
+</p></li><li class="listitem"><p>
+  Есть несколько путей захвата аудио. Вы можете получить звук, либо используя Вашу
+  звуковую карту и внешний кабель, соединяющий видео карту и линейный вход[line-in],
+  либо используя встроенный АЦП на чипе bt878. В этом случае, Вы должны
+  загрузить драйвер <span class="bold"><strong>btaudio</strong></span>. Читайте файл
+  <tt class="filename">linux/Documentation/sound/btaudio</tt> (в дереве ядра, не
+  <span class="application">MPlayer</span>'а) с некоторыми инструкциями по
+  использованию этого драйвера.
+</p></li><li class="listitem"><p>
+  Если <span class="application">MEncoder</span> не может открыть аудио устройство,
+  убедитесь, что оно действительно доступно. Возможны некоторые трудности со
+  звуковыми серверами, например arts (KDE) и esd (GNOME). Если у Вас
+  полнодуплексная звуковая карта (почти все современные карты это поддерживают),
+  и Вы используете KDE, попробуйте отметить галочку "full duplex" в меню настроек
+  звукового сервера.
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-examples"></a>3.10.3. Примеры</h3></div></div></div><div class="informalexample"><p>
+Фиктивный вывод, AAlib :)
+</p><pre class="screen">mplayer -tv driver=dummy:width=640:height=480 -vo aatv://</pre><p>
+</p></div><div class="informalexample"><p>
+Ввод со стандартного V4L:
+</p><pre class="screen">
+mplayer -tv driver=v4l:width=640:height=480:outfmt=i420 -vc rawi420 -vo xv tv://
+</pre><p>
+</p></div><div class="informalexample"><p>
+Более изощрённый пример. Это заставляет <span class="application">MEncoder</span> захватывать
+полное PAL изображение, обрезать края и изменить развёртку картинки на построчную,
+используя алгоритм линейного смешивания. Аудио сжимается до постоянного
+битпотока 64 кБ/с, используя LAME кодек. Эти установки подходят для захвата фильмов.
+</p><pre class="screen">
+mencoder -tv driver=v4l:width=768:height=576 -oac mp3lame -lameopts cbr:br=64\
+     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=900 \
+     -vf crop=720:544:24:16,pp=lb -o <em class="replaceable"><code>output.avi</code></em> tv://
+</pre><p>
+</p></div><div class="informalexample"><p>
+Здесь, изображение будет дополнительно масштабировано до 384x288 и сжато с
+битпотоком 350 кБ/с в режиме высокого качества. Опция vqmax даёт волю
+квантайзеру и позволяет компрессору видео действительно достичь столь
+низкого битпотока, правда ценой качества. Это может быть полезно для захвата
+длинных TV серий, где качество не особенно важно.
+</p><pre class="screen">
+mencoder -tv driver=v4l:width=768:height=576 \
+    -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=350:vhq:vqmax=31:keyint=300 \
+    -oac mp3lame -lameopts cbr:br=48 -sws 1 -o <em class="replaceable"><code>output.avi</code></em> \
+    -vf crop=720:540:24:18,pp=lb,scale=384:288 tv://
+</pre><p>
+Также возможно указать меньшие размеры изображения в опции <tt class="option">-tv</tt>
+и пропустить программное масштабирование, но приведённый подход использует
+максимальное доступное количество информации и чуть более устойчив к шуму.
+Чипы bt8x8 из-за аппаратных ограничений могут усреднять пиксели только по
+горизонтали.
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="advaudio.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="tv-teletext.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">3.9. Расширенные возможности аудио </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 3.11. Телетекст</td></tr></table></div></body></html>

@@ -1,0 +1,64 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.11. AAlib – zobrazování v textovém režimu</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="opengl.html" title="4.10. Rozhraní OpenGL"><link rel="next" href="caca.html" title="4.12. libcaca – Barevná ASCII Art knihovna"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.11. AAlib – zobrazování v textovém režimu</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="opengl.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="caca.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aalib"></a>4.11. AAlib – zobrazování v textovém režimu</h2></div></div></div><p>
+AAlib je knihovna pro zobrazování grafiky v textovém režimu pomocí výkonného
+ASCII renderovače. Existuje <span class="emphasis"><em>spousta</em></span> programů, ktaré ji již
+podporují, jako DOOM, Quake, atd. <span class="application">MPlayer</span>
+pro ni obsahuje šikovné rozhraní. Pokud <tt class="filename">./configure</tt>
+zjistí nainstalovanou aalib, sestaví se aalib libvo rozhraní.
+</p><p>
+Můžete použít některé klávesy v AA okně pro změnu renderovacích voleb:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Klávesa</th><th>Akce</th></tr></thead><tbody><tr><td><span class="keycap"><b>1</b></span></td><td>
+  sníží kontrast
+</td></tr><tr><td><span class="keycap"><b>2</b></span></td><td>
+  zvýší kontrast
+</td></tr><tr><td><span class="keycap"><b>3</b></span></td><td>
+  sníží jas
+</td></tr><tr><td><span class="keycap"><b>4</b></span></td><td>
+  zvýší jas
+</td></tr><tr><td><span class="keycap"><b>5</b></span></td><td>
+  vypíná/zapíná rychlé renderování
+</td></tr><tr><td><span class="keycap"><b>6</b></span></td><td>
+  nastaví rozhodovací režim (žádný, error distribution, Floyd Steinberg)
+</td></tr><tr><td><span class="keycap"><b>7</b></span></td><td>
+  inverze obrazu
+</td></tr><tr><td><span class="keycap"><b>8</b></span></td><td>
+  přepíná mezi ovládáním aa a <span class="application">MPlayer</span>u
+</td></tr></tbody></table></div><div class="variablelist"><p class="title"><b>Můžete použít následující volby příkazového řádku:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aaosdcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    změna barvy OSD
+  </p></dd><dt><span class="term"><tt class="option">-aasubcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    změna barvy titulků
+  </p><p>
+    kde <em class="replaceable"><code>V</code></em> může být:
+    <code class="literal">0</code> (normální),
+    <code class="literal">1</code> (tmavé),
+    <code class="literal">2</code> (tučné),
+    <code class="literal">3</code> (polotučný font),
+    <code class="literal">4</code> (reverz),
+    <code class="literal">5</code> (speciální).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>AAlib samotná poskytuje velké množství voleb. Zde je několik
+důležitých:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aadriver</tt></span></dt><dd><p>
+    Nastaví doporučený aa ovladač (X11, curses, Linux).
+  </p></dd><dt><span class="term"><tt class="option">-aaextended</tt></span></dt><dd><p>
+    Použití všech 256 znaků.
+  </p></dd><dt><span class="term"><tt class="option">-aaeight</tt></span></dt><dd><p>
+    Použití osmibitového ASCII.
+  </p></dd><dt><span class="term"><tt class="option">-aahelp</tt></span></dt><dd><p>
+    Vypíše všechny aalib volby.
+  </p></dd></dl></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+Renderování je velmi náročné na CPU, zvlášť při použití AA-na-X
+(aalib na X) a nejméně náročné je na standardní neframebuferované
+konzoli. Použijte SVGATextMode pro nastavení velkého textového režimu
+a užijte si! (secondary head Hercules cards rock :)) (ale IMHO můžete použít
+volbu <tt class="option">-vf 1bpp</tt> pro grafiku na hgafb:)
+</p></div><p>
+Použijte volbu <tt class="option">-framedrop</tt>, pokud váš počítač není dostatečně
+rychlý pro renderování všech snímků!
+</p><p>
+Při přehrávání na terminálu dosáhnete lepší rychlosti i kvality použitím
+ovladače Linux, bez curses (<tt class="option">-aadriver linux</tt>). Ale pak budete
+potřebovat práva k zápisu do
+<tt class="filename">/dev/vcsa<em class="replaceable"><code>&lt;terminal&gt;</code></em></tt>!
+Aalib to nedetekuje, ale vo_aa zkouší najít nejlepší režim.
+Pro více ladících možností viz <a class="ulink" href="http://aa-project.sf.net/tune" target="_top">http://aa-project.sf.net/tune</a>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="opengl.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="caca.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.10. Rozhraní OpenGL </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.12. 
+<code class="systemitem">libcaca</code> – Barevná ASCII Art knihovna
+</td></tr></table></div></body></html>

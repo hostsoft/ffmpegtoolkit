@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.6. DVD回放</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="usage.html" title="第 3 章 Usage"><link rel="prev" href="drives.html" title="3.5. CD/DVD驱动器"><link rel="next" href="vcd.html" title="3.7. VCD回放"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.6. DVD回放</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="drives.html">上一页</a> </td><th width="60%" align="center">第 3 章 Usage</th><td width="20%" align="right"> <a accesskey="n" href="vcd.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dvd"></a>3.6. DVD回放</h2></div></div></div><p>
+对于完整的可用选项，请阅读man页。
+播放标准DVD的语法如下：
+</p><pre class="screen">
+mplayer dvd://<em class="replaceable"><code>&lt;track&gt;</code></em> [-dvd-device <em class="replaceable"><code>&lt;device&gt;</code></em>]
+</pre><p>
+</p><p>
+例如：
+</p><pre class="screen">mplayer dvd://1 -dvd-device /dev/hdc</pre><p>
+</p><p>
+如果你使用dvdnav支持编译<span class="application">MPlayer</span>，语法是一样的，但你要用
+dvdnav://而不用dvd://。
+</p><p>
+默认的DVD设备是<tt class="filename">/dev/dvd</tt>。如果你的设置不同，创建
+个连接或者在命令行中用<tt class="option">-dvd-device</tt>指定正确的设备。
+</p><p>
+对于DVD回放及解密，<span class="application">MPlayer</span>使用
+<code class="systemitem">libdvdread</code>及<code class="systemitem">libdvdcss</code>
+这两个库在
+<span class="application">MPlayer</span>的源码树中，你不必单独安装。你也可以使用
+全系统可用的版本，但这种做法不被推荐，因为它能导致错误，库不兼容以及更慢的
+速度。
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">注意</h3><p>
+对于DVD解码问题，尝试禁用supermount，或者其它相应特性。一些RPC-2驱动器
+可能还需要设置区域代码。
+</p></div><p><b>DVD结构. </b>
+DVD磁盘的每个簇有带有ECC/CRC的2048字节。每个轨上采用UDF文件格式，包含各种文
+件（小的.IFO及.BUK文件以极大的（1GB）的.VOB文件）。它们是真正的文件能从被挂
+载的未加密的DVD中复制/播放。
+</p><p>
+.IFO文件包含电影的浏览信息（章/标题/视角图，语言表等），它们被用于读及解析
+.VOB的内容（影片）。.BUK文件是它们的备份。他们到处使用<span class="bold"><strong>簇</strong></span>，
+所以你需要指定光盘上真正的簇地址以完成DVD浏览或对内容进行解密。
+</p><p>
+DVD支持通过原始的对设备基于簇的访问。不幸的是，（在Linux中）要得到一个文件
+的簇地址，你必须是超级用户。那就是我们不使用内核的文件系统的原因，我们在用
+户层对此进行了重新实现。<code class="systemitem">libdvdread</code> 0.9.x完成了此项
+工作。我们并不需要内核中的UDF文件系统驱动因为它们已经有了自己内置的UDF文件
+</p><p>
+有时<tt class="filename">/dev/dvd</tt>对用户不可读，所以
+<code class="systemitem">libdvdread</code>的作者实现了一个模拟层，其实现了将簇地址
+提交到文件名+偏移量中，以模拟在挂载的文件系统甚至是硬盘上的直接访问。
+</p><p>
+<code class="systemitem">libdvdread</code>对于直接访问甚至支持挂载点而不是设备名并
+检查<tt class="filename">/proc/mounts</tt>以得到设备名称。其被开发在Solaris上，
+在那系统上设备名是动态分配的。
+</p><p><b>DVD解密. </b>
+DVD解密通过<code class="systemitem">libdvdcss</code>完成。这个方法可以通过
+<code class="envar">DVDCSS_METHOD</code>环境变量设置，具体细节参考man页。
+</p><p>
+RPC-1 DVD驱动器只使用软件对区域设置进行保护。RPC-2驱动器有一个硬件保护，只准
+许做5次更改。你可能需要或被推荐把firmware升级到RPC-1，如果你有个RPC-2 DVD驱动
+器。你可以在因特网上寻找firmware的升级，
+<a class="ulink" href="http://forum.rpc-1.com/dl_all.php" target="_top">此firmware论坛</a>
+对你的搜索可能是个好起点。如果没有针对你的设备的firmware升级，使用
+<a class="ulink" href="http://linvdr.org/projects/regionset/" target="_top">区域工具</a>
+来设置你DVD的区域码（在Linux下）。
+<span class="bold"><strong>警告</strong></span>：你只可以设置5次区域。
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="drives.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="vcd.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">3.5. CD/DVD驱动器 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 3.7. VCD回放</td></tr></table></div></body></html>

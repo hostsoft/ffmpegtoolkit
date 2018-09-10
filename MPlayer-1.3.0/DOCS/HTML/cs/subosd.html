@@ -1,0 +1,63 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.2. Titulky a OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="usage.html" title="Kapitola 3. Použití"><link rel="prev" href="commandline.html" title="3.1. Příkazový řádek"><link rel="next" href="control.html" title="3.3. Ovládání"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. Titulky a OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="commandline.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 3. Použití</th><td width="20%" align="right"> <a accesskey="n" href="control.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="subosd"></a>3.2. Titulky a OSD</h2></div></div></div><p>
+<span class="application">MPlayer</span> umí zobrazovat titulky spolu s filmem.
+V současnosti podporuje tyto formáty:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>VOBsub</p></li><li class="listitem"><p>OGM</p></li><li class="listitem"><p>CC (closed caption)</p></li><li class="listitem"><p>MicroDVD</p></li><li class="listitem"><p>SubRip</p></li><li class="listitem"><p>SubViewer</p></li><li class="listitem"><p>Sami</p></li><li class="listitem"><p>VPlayer</p></li><li class="listitem"><p>RT</p></li><li class="listitem"><p>SSA</p></li><li class="listitem"><p>PJS (Phoenix Japanimation Society)</p></li><li class="listitem"><p>MPsub</p></li><li class="listitem"><p>AQTitle</p></li><li class="listitem"><p>
+    <a class="ulink" href="http://unicorn.us.com/jacosub/" target="_top">JACOsub</a>
+  </p></li></ul></div><p>
+</p><p>
+<span class="application">MPlayer</span> umí vyextrahovat výše uvedené formáty titulků
+(<span class="bold"><strong>s výjimkou prvních třech</strong></span>) do následujících
+cílových formátů zadáním příslušných voleb:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>MPsub: <tt class="option">-dumpmpsub</tt></p></li><li class="listitem"><p>SubRip: <tt class="option">-dumpsrtsub</tt></p></li><li class="listitem"><p>MicroDVD: <tt class="option">-dumpmicrodvdsub</tt></p></li><li class="listitem"><p>JACOsub: <tt class="option">-dumpjacosub</tt></p></li><li class="listitem"><p>Sami: <tt class="option">-dumpsami</tt></p></li></ul></div><p>
+</p><p>
+<span class="application">MEncoder</span> umí vyextrahovat DVD titulky do formátu
+<a class="link" href="menc-feat-extractsub.html" title="6.9. Extrakce DVD titulků do VOBsub souboru">VOBsub</a>.
+</p><p>
+Volby příkazového řádku se pro různé formáty mírně liší:
+</p><p><b>VOBsub titulky. </b>
+VOBsub titulky se skládají z velkého (řádově megabajty) <tt class="filename">.SUB</tt>
+souboru a volitelného <tt class="filename">.IDX</tt> a/nebo <tt class="filename">.IFO</tt>
+souboru. Pokud máte soubory jako
+<tt class="filename"><em class="replaceable"><code>sample.sub</code></em></tt>,
+<tt class="filename"><em class="replaceable"><code>sample.ifo</code></em></tt> (volitelný),
+<tt class="filename"><em class="replaceable"><code>sample.idx</code></em></tt> – musíte předat
+<span class="application">MPlayer</span>u volby <tt class="option">-vobsub sample
+[-vobsubid <em class="replaceable"><code>id</code></em>]</tt>
+(volitelně s plnou cestou). Volba <tt class="option">-vobsubid</tt> je jako
+<tt class="option">-sid</tt> pro DVD, můžete jí vybírat mezi titulkovými stopami
+(jazyky). Je-li <tt class="option">-vobsubid</tt> vynechána, pak se
+<span class="application">MPlayer</span> pokusí použít jazyky zadané volbou
+<tt class="option">-slang</tt> a při selhání použije
+<code class="systemitem">langidx</code> v <tt class="filename">.IDX</tt>
+souboru. Pokud selže i zde, nebudou titulky.
+</p><p><b>Ostatní titulky. </b>
+Ostatní formáty tvoří jediný textový soubor obsahující časování,
+umístění a textovou část. Použití: máte-li soubor jako
+<tt class="filename"><em class="replaceable"><code>sample.txt</code></em></tt>,
+musíte předat volbu <tt class="option">-sub
+<em class="replaceable"><code>sample.txt</code></em></tt> (volitelně s plnou cestou).
+</p><div class="variablelist"><p class="title"><b>Úpravy časování a umístění titulků:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-subdelay <em class="replaceable"><code>sec</code></em></tt></span></dt><dd><p>
+    Opozdí titulky o <tt class="option"><em class="replaceable"><code>sec</code></em></tt> sekund.
+    Může být i záporné. Hodnota je přidána k čítači pozice ve filmu.
+    </p></dd><dt><span class="term"><tt class="option">-subfps <em class="replaceable"><code>RYCHLOST</code></em></tt></span></dt><dd><p>
+    Nastavuje rychlost ve snímcích/sek titulkového souboru (desetinné číslo).
+    </p></dd><dt><span class="term"><tt class="option">-subpos <em class="replaceable"><code>0-100</code></em></tt></span></dt><dd><p>
+    Nastavuje pozici titulků.
+    </p></dd></dl></div><p>
+Pokud se vám zvětšuje rozdíl mezi filmem a titulky, při použití
+titulkového souboru formátu MicroDVD, nejspíš se snímková rychlost
+titulků a filmu liší. Poznamenejme, že MicroDVD formát používá
+pro časování absolutní čísla snímků, ale není v něm informace
+o snímkové rychlosti, a proto byste měli s tímto formátem používat volbu
+<tt class="option">-subfps</tt>. Chcete-li tento problém vyřešit trvale,
+musíte manuálně převést snímkovou rychlost souboru s titulky.
+<span class="application">MPlayer</span> může převod udělat za
+vás:
+
+</p><pre class="screen">
+mplayer -dumpmicrodvdsub -fps <em class="replaceable"><code>fps_titulků</code></em> -subfps <em class="replaceable"><code>avi_fps</code></em> \
+    -sub <em class="replaceable"><code>soubor_s_titulky</code></em> <em class="replaceable"><code>dummy.avi</code></em>
+</pre><p>
+</p><p>
+O DVD titulcích si přečtěte v sekci <a class="link" href="dvd.html" title="3.6. Přehrávání DVD">DVD</a>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="commandline.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="control.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. Příkazový řádek </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 3.3. Ovládání</td></tr></table></div></body></html>

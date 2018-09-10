@@ -1,0 +1,85 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.11. VESA - kimenet a VESA BIOS-hoz</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="caca.html" title="6.10. libcaca - Színes ASCII Art függvénykönyvtár"><link rel="next" href="x11.html" title="6.12. X11"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.11. VESA - kimenet a VESA BIOS-hoz</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="caca.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="x11.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vesa"></a>6.11. VESA - kimenet a VESA BIOS-hoz</h2></div></div></div><p>
+Ezt a vezérlőt egy <span class="bold"><strong>általános vezérlőként</strong></span>
+terveztük meg és vezettük be bármilyen, VESA VBE 2.0 kompatibilis BIOS-szal
+rendelkező monitorkártya esetében. A másik előnye ennek a vezérlőnek, hogy
+megpróbálja használni a TV kimenetet.
+<em class="citetitle">VESA BIOS EXTENSION (VBE) Version 3.0 Dátum: 1998. szeptember 16.
+</em> (70. oldal) ezt írja:
+</p><div class="blockquote"><blockquote class="blockquote"><p><b>Duál-Vezérlős Tervezés. </b>
+A VBE 3.0 támogatja a duál-vezérlős tervezést, feltételezve hogy általában
+mindkét vezérlőt ugyanaz az OEM biztosítja, egy BIOS ROM vezérlésével
+ugyan azon a grafikus kártyán, lehetséges az alkalmazás számára elrejteni
+azt a tényt, hogy valójában két vezérlő van jelen. Ez ugyan megakadályozza
+a vezérlők egyidejűleg történő egyedi használatát, azonban lehetővé teszi
+a VBE 3.0 előtt kiadott alkalmazások normális működését. A 00h VBE funció
+(Vezérlő információkkal tér vissza) a két vezérlő kombinált információit
+adja vissza, beleértve a használható módok kombinált listáját. Ha az
+alkalmazás kiválaszt egy módot, a megfelelő vezérlő aktiválódik. Az összes
+többi VBE funkció ezután az aktív vezérlővel dolgozik.
+</p></blockquote></div><p>
+Így van esélyed a TV kimenet használatára ezzel a vezérlővel.
+(Gondolom a TV-out legtöbbször legalább egyedülálló fej vagy egyedüli kimenet.)
+</p><div class="itemizedlist"><p class="title"><b>ELŐNYÖK</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Van esélyed a film nézésre akkor is <span class="bold"><strong>ha a Linux nem ismeri</strong></span>
+  a videó hardveredet.
+</p></li><li class="listitem"><p>
+  Nem kell telepítened semmiféle grafikus dolgot a Linuxodra (mint pl. X11 (AKA XFree86),
+  fbdev és így tovább). Ez a vezérlő fut <span class="bold"><strong>szöveges-módban</strong></span>.
+</p></li><li class="listitem"><p>
+  Jó eséllyel <span class="bold"><strong>működő TV-kimenetet</strong></span> kapsz.
+  (Legalábbis az ATI kártyákon).
+</p></li><li class="listitem"><p>
+  Ez a vezérlő meghívja az <code class="function">int 10h</code> kezelőt így nem
+  emulátor - <span class="bold"><strong>igazi</strong></span> dolgokat hív az
+  <span class="emphasis"><em>igazi</em></span> BIOS-ban <span class="emphasis"><em>valós-módban</em></span>
+  (valójában vm86 módban).
+</p></li><li class="listitem"><p>
+  Használhatod a VIDIX-et vele, így gyorsított videó megjelenítést kapsz
+  <span class="bold"><strong>és</strong></span> TV kimenetet egy időben!
+  (Javasolt az ATI kártyákhoz.)
+</p></li><li class="listitem"><p>
+  Ha VESA VBE 3.0+-od van, és megadtad a
+  <tt class="option">monitor-hfreq, monitor-vfreq, monitor-dotclock</tt>-ot valahol
+  (konfigurációs fájlban vagy paranccsorban), a lehető legjobb frissítési rátát kapod.
+  (Általános Időzítő Formulát használva). Ezen képesség engedélyezéséhez meg kell adnod
+  a monitorod <span class="bold"><strong>összes</strong></span> opcióját.
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>HÁTRÁNYOK</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+   Csak <span class="bold"><strong>x86 rendszereken</strong></span> működik.
+</p></li><li class="listitem"><p>
+  Csak a <code class="systemitem">root</code> használhatja.
+</p></li><li class="listitem"><p>
+  Jelenleg csak <span class="bold"><strong>Linux</strong></span> alatt elérhető.
+</p></li></ul></div><div class="variablelist"><p class="title"><b>A VESA PARANCSSORI KAPCSOLÓI</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo vesa:<em class="replaceable"><code>opts</code></em></tt></span></dt><dd><p>
+    jelenleg felismert: <code class="literal">dga</code> a dga mód használatához és
+    <code class="literal">nodga</code> a dga mód letiltásához. A dga módban engedélyezheted
+    a dupla bufferelést a <tt class="option">-double</tt> kapcsolóval. Megjegyzés: ezen
+    paraméterek elhagyásával engedélyezed a dga mód <span class="bold"><strong>automatikus
+    detektálását</strong></span>.
+  </p></dd></dl></div><div class="itemizedlist"><p class="title"><b>ISMERT PROBLÉMÁK ÉS MEGOLDÁSAIK</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Ha telepítettél <span class="bold"><strong>NLS</strong></span> betűtípust a Linux rendszeredre
+  és VESA vezérlőt használsz szöveges-módban, akkor az <span class="application">MPlayer</span>ből
+  való kilépés után a <span class="bold"><strong>ROM betűtípusa</strong></span> lesz betöltve a nemzeti
+  helyett.
+  A nemzeti betűkészletet újra betöltheted pl. a Mandrake/Mandriva disztribúcióban
+  található <span class="command"><strong>setsysfont</strong></span> nevű segédprogram használatával.
+  (<span class="bold"><strong>Tanács</strong></span>: Ugyan ez a segédprogram használható az
+  fbdev honosítására is).
+</p></li><li class="listitem"><p>
+  Some <span class="bold"><strong>Linux graphics drivers</strong></span> don't update
+  active <span class="bold"><strong>BIOS mode</strong></span> in DOS memory.
+  Tehát ha ilyen problémáid vannak - mindig csak <span class="bold"><strong>szöveges módban</strong></span>
+  használd a VESA vezérlőt. Különben a szöveges mód (#03) aktiválódik mindenképp
+  és újra kell indítanod a számítógépedet.
+</p></li><li class="listitem"><p>
+  Gyakran a VESA vezérlő bezárása után
+  <span class="bold"><strong>fekete</strong></span> képernyőt kapsz. Hogy visszaállítsd
+  a képernyődet az eredeti állapotába - egyszerűen csak válts át másik
+  konzolra (az <span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F&lt;x&gt;</b></span>
+  gombok megnyomásával) majd válts vissza ugyanígy.
+</p></li><li class="listitem"><p>
+  A <span class="bold"><strong>működő TV kimenethez</strong></span> be kell dugnod a
+  TV-csatlakozót mielőtt betöltene a PC-d, mivel a videó BIOS csak egyszer,
+  a POST eljárás során inicializálja magát.
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="caca.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="x11.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.10. 
+<code class="systemitem">libcaca</code> - Színes ASCII Art függvénykönyvtár
+ </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.12. X11</td></tr></table></div></body></html>

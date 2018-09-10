@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.3. Encodieren ins Sony PSP Video Format</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="prev" href="menc-feat-selecting-input.html" title="6.2. Auswahl von Eingabedatei oder -gerät"><link rel="next" href="menc-feat-mpeg4.html" title='6.4. Encodieren von 2-pass-MPEG4 ("DivX")'><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.3. Encodieren ins Sony PSP Video Format</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-input.html">Zurück</a> </td><th width="60%" align="center">Kapitel 6. Allgemeiner Gebrauch von <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-handheld-psp"></a>6.3. Encodieren ins Sony PSP Video Format</h2></div></div></div><p>
+      <span class="application">MEncoder</span> unterstützt das Encodieren in das
+      Sony PSP Video Format, allerdings gibt es, abhängig von der Version der PSP
+      Software, unterschiedliche Beschränkungen.
+      Wer sicher gehen möchte, sollte folgende Beschränkungen beachten:
+      </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+            <span class="bold"><strong>Bitrate</strong></span>: sollte 1500kbps
+            nicht überschreiten, frühere Versionen unterstützten allerdings fast jede
+            beliebige Bitrate, so lange der Header sagte, sie sei nicht zu hoch.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>Dimensionen</strong></span>: die Breite und Höhe des
+            PSP videos sollte ein Vielfaches von 16 sein, und das Produkt Breite
+            * Höhe muss &lt;= 64000 sein.
+            Unter gewissen Umständen kann es der PSP möglich sein, höhere
+            Auflösungen abzuspielen.
+          </p></li><li class="listitem"><p>
+            <span class="bold"><strong>Audio</strong></span>: die Samplerate sollte für
+            MPEG-4 Videos 24kHz, und für H.264 48kHz betragen.
+          </p></li></ul></div><p>
+    </p><div class="example"><a name="encode_for_psp"></a><p class="title"><b>Beispiel 6.2. Encodierung für PSP</b></p><div class="example-contents"><p>
+        </p><pre class="screen">
+          mencoder -ofps 30000/1001 -af lavcresample=24000 -vf harddup -of lavf \
+          -oac lavc -ovc lavc -lavcopts aglobal=1:vglobal=1:vcodec=mpeg4:acodec=libfaac \
+          -lavfopts format=psp \
+          <em class="replaceable"><code>input.video</code></em> -o <em class="replaceable"><code>output.psp</code></em>
+        </pre><p>
+        Der Titel des Videos kann folgendermaßen angepasst werden:
+        <tt class="option">-info name=<em class="replaceable"><code>MovieTitle</code></em></tt>.
+      </p></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-input.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">6.2. Auswahl von Eingabedatei oder -gerät </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 6.4. Encodieren von 2-pass-MPEG4 ("DivX")</td></tr></table></div></body></html>

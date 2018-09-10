@@ -1,0 +1,76 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.4. Otro hardware de visualización</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="prev" href="mpeg_decoders.html" title="4.3. Decodificadores MPEG"><link rel="next" href="tvout.html" title="4.5. Soporte de salida-TV"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="other.html#zr" title="4.4.1. Zr"><link rel="subsection" href="other.html#blinkenlights" title="4.4.2. Blinkenlights"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.4. Otro hardware de visualización</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mpeg_decoders.html">Anterior</a> </td><th width="60%" align="center">Capítulo 4. Dispositivos de salida de video</th><td width="20%" align="right"> <a accesskey="n" href="tvout.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="other"></a>4.4. Otro hardware de visualización</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="zr"></a>4.4.1. Zr</h3></div></div></div><p>
+Se trata de un controlador de pantalla (<tt class="option">-vo zr</tt>) para un número
+de tarjetas de captura/reproducción de MJPEG (probado con DC10+ y Buz, y también
+debe funcionar con LML33, el DC10). El controlador funciona codificando el marco
+a JPEG y enviándolo luego a la tarjeta. Para la codificación JPEG se usa
+<code class="systemitem">libavcodec</code>, y además es obligatorio usarlo. Con el modo
+especial <span class="emphasis"><em>cinerama</em></span>, puede ver películas en wide screen real
+suponiendo que tiene dos proyectores y dos tarjetas MJPEG. Dependiendo de la
+configuración de resolución y calidad, este controlador puede requerir una gran
+cantidad de potencia de CPU, recuerde especificar <tt class="option">-framedrop</tt>
+si su máquina es demasiado lenta. Nota: Mi AMD K6-2 350MHz es (con
+<tt class="option">-framedrop</tt>) bastante adecuada para reproducir material del
+tamaño de VCD y escalar a menor tamaño del original las películas.
+</p><p>
+Este controlador se comunica con el controlador del kernel disponible en
+<a class="ulink" href="http://mjpeg.sourceforge.net" target="_top">http://mjpeg.sourceforge.net</a>, por eso
+antes de nada deberá tener este funcionando. La presencia de una tarjeta MJPEG
+es autodetectada por el script <tt class="filename">configure</tt>, si la autodetección
+falla, fuércela con
+</p><pre class="screen">./configure --enable-zr</pre><p>
+</p><p>
+La salida puede ser controlada con varias opciones, una descripción larga
+de las opciones puede encontrarse en la página de manual, una lista corta de
+las opciones puede verse ejecutando
+</p><pre class="screen">mplayer -zrhelp</pre><p>
+</p><p>
+Piense que el escalado y el OSD (información en pantalla) no son manejados
+por este controlador pero pueden hacerse usando filtros de video. Por ejemplo,
+suponta que tiene una película con una resolución de 512x272 y desea verla
+en pantalla completa con su DC10+. Hay tres posibilidades principalmente, puede
+escalar la película a un ancho de 768, 384 o 192. Por motivos de rendimiento
+y calidad, puede que quiera elegir escalar la película a 384x204 usando el
+escalador por software rápido bilineal. La línea de órdenes es
+</p><pre class="screen">mplayer -vo zr -sws 0 -vf scale=384:204 <em class="replaceable"><code>película.avi</code></em></pre><p>
+</p><p>
+Se puede recortar con el filtro <tt class="option">crop</tt> y también
+por este controlador directamente. Supongamos que tenemos una película que
+es demasiado ancha para mostrarla en su Buz y que quiere usar <tt class="option">-zrcrop</tt>
+para hacer la película menos ancha, entonces puede que le sea útil la siguiente
+órden
+</p><pre class="screen">mplayer -vo zr -zrcrop 720x320+80+0 <em class="replaceable"><code>benhur.avi</code></em></pre><p>
+</p><p>
+si quiere usar el filtro <tt class="option">crop</tt>, puede que desee hacer
+</p><pre class="screen">mplayer -vo zr -vf crop=720:320:80:0 <em class="replaceable"><code>benhur.avi</code></em></pre><p>
+</p><p>
+Si aparece <tt class="option">-zrcrop</tt> más veces invoca el modo
+<span class="emphasis"><em>cinerama</em></span>, p.e. si quiere distribuir la película en varias
+TV's o proyectores para crear una pantalla más grande. Supongamos que tiene
+dos proyectores. Uno lo conecta a su Buz en <tt class="filename">/dev/video1</tt>
+y el otro lo conecta a su DC10+ en <tt class="filename">/dev/video0</tt>. La película
+tiene una resolución de 704x288. Supongamos también que que quiere el proyector de
+la derecha en blanco y negro y el otro debe tener imágenes JPEG con calidad 10, para
+todo esto deberá usar la siguiente órden
+</p><pre class="screen">
+mplayer -vo zr -zrdev /dev/video0 -zrcrop 352x288+352+0 -zrxdoff 0 -zrbw \
+    -zrcrop 352x288+0+0 -zrdev /dev/video1 -zrquality 10 \
+        <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p><p>
+Puede ver que las opciones que aparecen antes del segundo <tt class="option">-zrcrop</tt>
+solo se aplican al DC10+ y que las opciones después del segundo
+<tt class="option">-zrcrop</tt> se aplican al Buz. El número máximo de tarjetas
+MJPEG que pueden participar en el modo <span class="emphasis"><em>cinerama</em></span> es cuatro,
+de modo que puede construirse una pantalla de 2x2.
+</p><p>
+Finalmente un apunte importante: No inicie o pare XawTV en el dispositivo de
+reproduccion durante la misma, porque puede colgar su ordenador. Sin embargo
+sí va bien si <span class="bold"><strong>PRIMERO</strong></span> inicia XawTV,
+<span class="bold"><strong>DESPUÉS</strong></span> inicia <span class="application">MPlayer</span>,
+espera a que <span class="application">MPlayer</span> termine y
+<span class="bold"><strong>DESPUÉS</strong></span> detiene XawTV.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="blinkenlights"></a>4.4.2. Blinkenlights</h3></div></div></div><p>
+Este controlador permite la reproducción usando el protocolo UDP Blinkenlinghts. Si no
+sabe qué es <a class="ulink" href="http://www.blinkenlinghts.de/" target="_top">Blinkenlinghts</a>
+no necesita este controlador.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mpeg_decoders.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="video-dev.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="tvout.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">4.3. Decodificadores MPEG </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 4.5. Soporte de salida-TV</td></tr></table></div></body></html>

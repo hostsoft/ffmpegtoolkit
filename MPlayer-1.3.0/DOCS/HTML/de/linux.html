@@ -1,0 +1,63 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.1. Linux</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="ports.html" title="Kapitel 5. Portierungen"><link rel="prev" href="ports.html" title="Kapitel 5. Portierungen"><link rel="next" href="bsd.html" title="5.2. *BSD"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="linux.html#debian" title="5.1.1. Debian-Packaging"><link rel="subsection" href="linux.html#rpm" title="5.1.2. RPM-Packaging"><link rel="subsection" href="linux.html#arm" title="5.1.3. ARM"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.1. Linux</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ports.html">Zurück</a> </td><th width="60%" align="center">Kapitel 5. Portierungen</th><td width="20%" align="right"> <a accesskey="n" href="bsd.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="linux"></a>5.1. Linux</h2></div></div></div><p>
+      Die Hauptentwicklungsplattform ist Linux auf x86, obwohl
+      <span class="application">MPlayer</span> auf vielen anderen Linux-Portierungen
+      funktioniert.
+      Binary Packages von <span class="application">MPlayer</span> stehen auf mehreren Quellen
+      zur Verfügung. Jedoch wird <span class="bold"><strong>keines dieser Packages unterstützt</strong></span>.
+      Melde den Autoren die Probleme, nicht uns.
+    </p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="debian"></a>5.1.1. Debian-Packaging</h3></div></div></div><p>
+        Um ein Debian-Package zu bauen, führe folgenden Befehl im Source-Verzeichnis von
+        <span class="application">MPlayer</span> aus:
+
+        </p><pre class="screen">fakeroot debian/rules binary</pre><p>
+
+        Wenn du eigene Optionen an configure übergeben willst, kannst du die Umgebungsvariable
+        <code class="envar">DEB_BUILD_OPTIONS</code> einrichten. Zum Beispiel, wenn du die
+        GUI- und OSD-Menü-Unterstützung willst, die du gerne nutzen würdest:
+
+        </p><pre class="screen">DEB_BUILD_OPTIONS="--enable-gui --enable-menu" fakeroot debian/rules binary</pre><p>
+
+        Du kannst auch einige Variablen an Makefile übergeben. Zum Beispiel, wenn du
+        mit gcc 3.4 compilieren willst, auch wenn er nicht der Standard-Compiler ist:
+
+        </p><pre class="screen">CC=gcc-3.4 DEB_BUILD_OPTIONS="--enable-gui" fakeroot debian/rules binary</pre><p>
+
+        Um den Sourcetree aufzuräumen, führe folgenden Befehl aus:
+
+        </p><pre class="screen">fakeroot debian/rules clean</pre><p>
+
+        Als root kannst du dann das <tt class="filename">.deb</tt>-Package wie immer installieren:
+
+        </p><pre class="screen">dpkg -i ../mplayer_<em class="replaceable"><code>version</code></em>.deb</pre><p>
+      </p><p>
+        Christian Marillat hatte eine Weile lang inoffizielle Debian-Packages von
+        <span class="application">MPlayer</span>, <span class="application">MEncoder</span> und
+        unseren Binärcodecpaketen erstellt, du kannst sie von
+        <a class="ulink" href="http://www.debian-multimedia.org/" target="_top">seiner Homepage</a>
+        mit apt-get herunterladen.
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="rpm"></a>5.1.2. RPM-Packaging</h3></div></div></div><p>
+        Dominik Mierzejewski entwarf und wartet die inoffiziellen RPM-Packages von
+        <span class="application">MPlayer</span> für Red Hat und Fedora Core. Sie sind von
+        seinem <a class="ulink" href="http://rpm.greysector.net/mplayer/" target="_top">Repository</a>
+        verfügbar.
+      </p><p>
+        Mandrake/Mandriva RPM-Packages stehen auf <a class="ulink" href="http://plf.zarb.org/" target="_top">P.L.F.</a>
+        zur Verfügung.
+        SuSE verwendet eine verkrüppelte Version von <span class="application">MPlayer</span>
+        in seiner Distribution. Diese haben sie aus ihren neuesten Releases entfernt. Du
+        bekommst funktionierende RPMs auf
+        <a class="ulink" href="http://packman.links2linux.de/?action=128" target="_top">links2linux.de</a>.
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="arm"></a>5.1.3. ARM</h3></div></div></div><p>
+        <span class="application">MPlayer</span> läuft auf Linux PDAs mit ARM CPU, z.B. Sharp Zaurus,
+        Compaq Ipaq. Der einfachste Weg, sich <span class="application">MPlayer</span> zu besorgen ist,
+        sich ihn von einer der
+        <a class="ulink" href="http://www.openzaurus.org" target="_top">OpenZaurus</a> Package Feeds zu holen. Falls
+        du ihn dir selbst compilieren willst, solltest du im
+        <a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/mplayer?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">mplayer</a>-
+        und im
+        <a class="ulink" href="http://openzaurus.bkbits.net:8080/buildroot/src/packages/libavcodec?nav=index.html%7Csrc/.%7Csrc/packages" target="_top">libavcodec</a>-Verzeichnis
+        der OpenZaurus Distribution Buildroot nachsehen. Diese haben stets die neueste
+        Makefile und Patches, die zum Erstellen eines SVN-<span class="application">MPlayer</span>
+        verwendet werden.
+        Brauchst du ein GUI-Frontend, kannst du xmms-embedded nutzen.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ports.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="bsd.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">Kapitel 5. Portierungen </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 5.2. *BSD</td></tr></table></div></body></html>

@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.5. Codec installation</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="install.html" title="Глава 2. Установка"><link rel="prev" href="fonts-osd.html" title="2.4. Шрифты и OSD"><link rel="next" href="rtc.html" title="2.6. RTC"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="codec-installation.html#xvid" title="2.5.1. Xvid"><link rel="subsection" href="codec-installation.html#x264" title="2.5.2. x264"><link rel="subsection" href="codec-installation.html#amr" title="2.5.3. AMR кодеки"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.5. Codec installation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="fonts-osd.html">Пред.</a> </td><th width="60%" align="center">Глава 2. Установка</th><td width="20%" align="right"> <a accesskey="n" href="rtc.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="codec-installation"></a>2.5. Codec installation</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="xvid"></a>2.5.1. Xvid</h3></div></div></div><p>
+<a class="ulink" href="http://www.xvid.org" target="_top">Xvid</a> свободный, MPEG-4 ASP совместимый
+видео кодек, особенностями которого являются двухпроходное кодирование и
+полная поддержка MPEG-4 ASP.
+Имейте в виду, что Xvid не нужен для декодирования Xvid-кодированного видео.
+<code class="systemitem">libavcodec</code> используется по-умолчанию,
+т.к. обеспечивает более высокую скорость.
+</p><div class="procedure"><a name="idp40304528"></a><p class="title"><b>Установка <code class="systemitem">Xvid</code></b></p><p>
+  Как и большинство ПО с открытым исходным кодом, он доступен как в виде
+  <a class="ulink" href="http://www.xvid.org/downloads.html" target="_top">официальных релизов</a>,
+  так и в виде CVS версии.
+  Как правило, CVS версия достаточно стабильна для использования, т.к. в большинстве
+  случаев ее особенностью является отсутствие ошибок, присутствующих в релизах.
+  Далее описывается как заставить  работать
+  <code class="systemitem">Xvid</code> CVS с <span class="application">MEncoder</span>:
+</p><ol class="procedure" type="1"><li class="step"><p>
+  </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid login</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid co xvidcore</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">cd xvidcore/build/generic</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">./bootstrap.sh</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">./configure</pre><p>
+  Вам может потребоваться добавить некоторые опции (посмотрите вывод
+  <span class="command"><strong>./configure --help</strong></span>).
+</p></li><li class="step"><p>
+  </p><pre class="screen">make &amp;&amp; make install</pre><p>
+</p></li><li class="step"><p>
+  Перекомпилируйте <span class="application">MPlayer</span>.
+</p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="x264"></a>2.5.2. <code class="systemitem">x264</code></h3></div></div></div><p>
+<a class="ulink" href="http://developers.videolan.org/x264.html" target="_top"><code class="systemitem">x264</code></a>
+is a library for creating H.264 video.
+<span class="application">MPlayer</span> sources are updated whenever
+an <code class="systemitem">x264</code> API change
+occurs, so it is always suggested to use
+<span class="application">MPlayer</span> from Subversion.
+</p><p>
+If you have a GIT client installed, the latest x264
+sources can be gotten with this command:
+</p><pre class="screen">git clone git://git.videolan.org/x264.git</pre><p>
+
+Then build and install in the standard way:
+</p><pre class="screen">./configure &amp;&amp; make &amp;&amp; make install</pre><p>
+
+Now rerun <tt class="filename">./configure</tt> for
+<span class="application">MPlayer</span> to pick up
+<code class="systemitem">x264</code> support.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="amr"></a>2.5.3. AMR кодеки</h3></div></div></div><p>
+Речевой кодек Adaptive Multi-Rate используется в мобильных телефонах третьего поколения (3G).
+
+Исходная реализация доступна с
+<a class="ulink" href="http://www.3gpp.org" target="_top">The 3rd Generation Partnership Project</a>
+(бесплатна для личного использования).
+Чтобы включить поддержку, скачайте и установите библиотеки поддержки для
+<a class="ulink" href="http://www.penguin.cz/~utx/amr" target="_top">AMR-NB и AMR-WB</a>, следуя
+инструкциям на указанной странице.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="fonts-osd.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="rtc.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">2.4. Шрифты и OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 2.6. RTC</td></tr></table></div></body></html>

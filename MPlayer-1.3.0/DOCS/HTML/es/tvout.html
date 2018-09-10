@@ -1,0 +1,180 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.5. Soporte de salida-TV</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="prev" href="other.html" title="4.4. Otro hardware de visualización"><link rel="next" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="tvout.html#tvout-mga-g400" title="4.5.1. Tarjetas Matrox G400"><link rel="subsection" href="tvout.html#tv-out_matrox_g450" title="4.5.2. Tarjetas Matrox G450/G550"><link rel="subsection" href="tvout.html#tvout-ati" title="4.5.3. Tarjetas ATI"><link rel="subsection" href="tvout.html#tvout-voodoo" title="4.5.4. Voodoo 3"><link rel="subsection" href="tvout.html#tvout-nvidia" title="4.5.5. nVidia"><link rel="subsection" href="tvout.html#tvout-neomagic" title="4.5.6. Neomagic"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.5. Soporte de salida-TV</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="other.html">Anterior</a> </td><th width="60%" align="center">Capítulo 4. Dispositivos de salida de video</th><td width="20%" align="right"> <a accesskey="n" href="ports.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tvout"></a>4.5. Soporte de salida-TV</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-mga-g400"></a>4.5.1. Tarjetas Matrox G400</h3></div></div></div><p>
+Bajo Linux tiene dos maneras de que la salida de TV de la G400 funcione:
+</p><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Importante</h3><p>
+para instrucciones sobre salida-TV de Matrox G450/G550 , ¡vaya a la sección siguiente!
+</p></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">XFree86</span></dt><dd><p>
+    Usando el controladoro y el módulo HAL, disponible en
+    <a class="ulink" href="http://www.matrox.com" target="_top">el sitio web  de Matrox</a>.
+    Esto hará que tenga salida de TV bajo X.
+    </p><p>
+    <span class="bold"><strong>Este método no obtiene reproducción acelerada</strong></span>
+    ¡como bajo Windows! La segunda salida tiene solo framebuffer YUV, el
+    <span class="emphasis"><em>BES</em></span> (Back End Scaler, el escalador YUV en las tarjetas
+    G200/G400/G450/G550) no funciona allí! El controlador de windows arregla esto
+    de algún modo, probablemente usando el motor 3D para el zoom, y el framebuffer
+    YUV para mostrar la imagen ampliada. Si realmente desea usar X, use
+    las opciones <tt class="option">-vo x11 -fs -zoom</tt>, pero irá
+    <span class="bold"><strong>LENTO</strong></span>, y tendrá la protección de
+    <span class="bold"><strong>Macrovision</strong></span> activada (puede saltarse la
+    protección de Macrovisión usando éste
+    <a class="ulink" href="http://avifile.sourceforge.net/mgamacro.pl" target="_top">script en perl</a>).
+    </p></dd><dt><span class="term">Framebuffer</span></dt><dd><p>
+    Usando los <span class="bold"><strong>módulos matroxfb</strong></span> en los kernel 2.4.
+    Los kernel 2.2 no tienen la característica de TVout, por lo que no se pueden
+    usar para esto. Tiene que activar todas las características específicas de
+    matroxfb durante la compilación (excepto MultiHead), ¡y compilarlo como
+    <span class="bold"><strong>módulos</strong></span>! También necesita activar I2C.
+    </p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+      Entre en <tt class="filename">TVout</tt> y escriba
+      <span class="command"><strong>./compile.sh</strong></span>. Instale
+      <tt class="filename">TVout/matroxset/matroxset</tt>
+      en cualquier lugar de su <code class="envar">PATH</code>.
+      </p></li><li class="step"><p>
+      Si no tiene <span class="command"><strong>fbset</strong></span> instalado, ponga
+      <tt class="filename">TVout/fbset/fbset</tt>
+      en cualquier lugar de su <code class="envar">PATH</code>.
+      </p></li><li class="step"><p>
+      Si no tiene <span class="command"><strong>con2fb</strong></span> instalado, ponga
+      <tt class="filename">TVout/con2fb/con2fb</tt>
+      en cualquier lugar de su <code class="envar">PATH</code>.
+      </p></li><li class="step"><p>
+      Después entre en el directorio  <tt class="filename">TVout/</tt>
+      de los fuentes de <span class="application">MPlayer</span>, y ejecute
+      <tt class="filename">./modules</tt> como root. Su consola de modo-texto
+      entrará en modo framebuffer (¡no hay marcha atrás!).
+      </p></li><li class="step"><p>
+      A continuación, EDITE y ejecute el script <tt class="filename">./matroxtv</tt>.
+      Esto mostrará un menú muy simple. Pulse <span class="keycap"><b>2</b></span> y
+      <span class="keycap"><b>Enter</b></span>. Ahora debe tener la misma imagen en su monitor,
+      y TV. Si la imagen TV (PAL por defecto) tiene algunos efectos extraños,
+      el script no ha sido capaz de establecer la resolución correcta (a 640x512
+      por defecto). Pruebe otras resoluciones desde el menúo experimente un poco
+      con fbset.
+      </p></li><li class="step"><p>
+      Bueno. La siguiente tarea es hacer que el cursor en tty1 (o donde sea)
+      desaparezca, y desactive el apagado automático del monitor. Ejecute
+      las siguientes órdenes:
+
+      </p><pre class="screen">
+echo -e '\033[?25l'
+setterm -blank 0</pre><p>
+      or
+      </p><pre class="screen">
+setterm -cursor off
+setterm -blank 0</pre><p>
+
+      Probablemente desee poner lo de arriba en un script, y también limpiar
+      la pantalla. Para hacer que regrese el cursor:
+      </p><pre class="screen">echo -e '\033[?25h'</pre><p> o
+      </p><pre class="screen">setterm -cursor on</pre><p>
+      </p></li><li class="step"><p>
+      Muy bien chaval. Inicie la reproducción con
+      </p><pre class="screen">
+mplayer -vo mga -fs -screenw 640 -screenh 512 <em class="replaceable"><code>nombrearchivo</code></em></pre><p>
+
+      (Si usa X, ahora cambie a matroxfb con por ejemplo
+      <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F1</b></span>.)
+      Cambie <code class="literal">640</code> y <code class="literal">512</code> si establece
+      otra resolución...
+      </p></li><li class="step"><p>
+      <span class="bold"><strong>¡Disfrute de la salida de TV ultra-rápida ultra-buena
+      de Matrox (mejor que Xv)!</strong></span>
+      </p></li></ol></div></dd></dl></div><p><b>Fabricando un cable de salida de TV para Matrox. </b>
+Nadie se hace responsable, ni se ofrece ninguna garantía por ningún
+daño causado por esta documentación.
+</p><p><b>Cable para G400. </b>
+El conector de cuatro contactos de CRTC2 es una señal de video compuesto.
+La toma de tierra son los contactos sexto, séptimo y octavo. (información
+proporcionada por Balázs Rácz)
+</p><p><b>Cable para G450. </b>
+Los cuatro primeros contactos del conector CRTC2 son la señal de video
+compuesto. La tierra es el quinto, sexto, séptimo, y decimoquinto contactos
+(5, 6, 7, 15). (información proporcionada por Balázs Kerekes)
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-out_matrox_g450"></a>4.5.2. Tarjetas Matrox G450/G550</h3></div></div></div><p>
+El soporte para salida de TV en estas tarjetas ha sido introducido recientemente,
+y aún no está en la rama principal del kernel. Actualmente el
+módulo <span class="bold"><strong>mga_vid</strong></span> no puede usarse AFAIK, porque
+el controlador de G450/G550 funciona solo en una configuración: el primer chip
+CRTC (con muchas más características) en la primera pantalla (en el monitor),
+y el segundo CRTC (no <span class="bold"><strong>BES</strong></span> - para explicación
+sobre BES, vea la sección de G400 más arriba) en TV. Actualmente solo puede
+usar el controlador de salida <span class="emphasis"><em>fbdev</em></span> de
+<span class="application">MPlayer</span>.
+</p><p>
+Actualmente el primer CRTC no puede ser enrutado hacia el segundo monitor. El
+autor del controlador del kernel matroxfb - Petr Vandrovec - quizá añada soporte
+para ello, mostrando la salida del CRTC primario en ambas pantallas al mismo
+tiempo, como recomendamos actualmente para G400, vea la sección anterior.
+</p><p>
+El parche para el kernel necesario y un 'como' detallado es descargable desde
+<a class="ulink" href="http://www.bglug.ca/matrox_tvout/" target="_top">http://www.bglug.ca/matrox_tvout/</a>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-ati"></a>4.5.3. Tarjetas ATI</h3></div></div></div><p><b>PREÁMBULO. </b>
+Actualmente ATI no soporta ningún chip de salida de TV bajo Linux,
+debido a los problemas de licencia de la tecnología Macrovision.
+</p><div class="itemizedlist"><p class="title"><b>ESTADO DE LA SALIDA DE TV DE LAS TARJETAS ATI EN LINUX</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>ATI Mach64</strong></span>:
+  soportado por <a class="ulink" href="http://gatos.sf.net" target="_top">gatos</a>.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>ASIC Radeon VIVO</strong></span>:
+  soportado por <a class="ulink" href="http://gatos.sf.net" target="_top">gatos</a>.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>Radeon</strong></span> y <span class="bold"><strong>Rage128</strong></span>:
+  soportados por <span class="application">MPlayer</span>!
+  Consulte el <a class="link" href="output-trad.html#vesa" title="4.2.11. VESA - salida en VESA BIOS">controlador VESA</a> y la secciones
+  <a class="link" href="output-trad.html#vidix" title="4.2.13. VIDIX">VIDIX</a>.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>Rage Mobility P/M, Radeon, Rage 128, Mobility M3/M4</strong></span>:
+  soportado por <a class="ulink" href="http://www.stud.uni-hamburg.de/users/lennart/projects/atitvout/" target="_top">atitvout</a>.
+  </p></li></ul></div><p>
+En otras tarjetas, use el controlador <a class="link" href="output-trad.html#vesa" title="4.2.11. VESA - salida en VESA BIOS">VESA</a>,
+sin VIDIX. Lo malo es que se necesita una CPU potente.
+</p><p>
+Lo único que necesita hacer - <span class="bold"><strong>Tener el conector
+de TV conectado antes de iniciar su PC</strong></span> porque la BIOS de video
+se inicializa por sí misma solo una vez durante el proceso POST.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-voodoo"></a>4.5.4. Voodoo 3</h3></div></div></div><p>
+Consulte <a class="ulink" href="http://www.iki.fi/too/tvout-voodoo3-3000-xfree" target="_top">esta URL</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-nvidia"></a>4.5.5. nVidia</h3></div></div></div><p>
+Lo primero, DEBE descargar los controladores de fuente-cerrada desde
+<a class="ulink" href="http://nvidia.com" target="_top">http://nvidia.com</a>. No voy a describir el proceso de instalación y configuración
+porque no es el objetivo que pretende cubrir esta documentación.
+</p><p>
+Después de que XFree86, XVideo, y la aceleración 3D estén funcionando correctamente,
+edite su sección Devide sobre la tarjeta en el archivo <tt class="filename">XF86Config</tt>,
+de acuerdo con el siguiente ejemplo (adaptado para su tarjeta/TV):
+
+</p><pre class="programlisting">
+Section "Device"
+        Identifier      "GeForce"
+        VendorName      "ASUS"
+        BoardName       "nVidia GeForce2/MX 400"
+        Driver          "nvidia"
+        #Option         "NvAGP" "1"
+        Option          "NoLogo"
+        Option          "CursorShadow"  "on"
+
+        Option          "TwinView"
+        Option          "TwinViewOrientation" "Clone"
+        Option          "MetaModes" "1024x768,640x480"
+        Option          "ConnectedMonitor" "CRT, TV"
+        Option          "TVStandard" "PAL-B"
+        Option          "TVOutFormat" "Composite"
+
+EndSection
+</pre><p>
+</p><p>
+Por supuesto lo importante es la parte del TwinView.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-neomagic"></a>4.5.6. Neomagic</h3></div></div></div><p>
+Probado en un Toshiba Tecra 8000. Su chip de salida de TV es una cagada miserable.
+Evítelo si es posible.
+</p><p>
+Debe usar <tt class="option">-vo vesa</tt>. El chip probado tiene capacidad solo para
+una relación de aspecto 1.333333, por lo que debe asegurarse de que usa
+las opciones <tt class="option">-x</tt>, <tt class="option">-y</tt> y/o los filtros
+<tt class="option">-vf scale,crop,expand</tt> si la imagen no le deja habilitar
+la salida de TV. La resolución máxima es 720*576 a 16bpp.
+</p><p>
+Problemas conocidos: solo-VESA, limitación 1.33333, la imagen no está siempre
+centrada, la película aparece en 4bpp cada 10 minutos, y se queda de esa forma.
+Cuelgues frecuentes de hardware, problemas de representación en pantalla LCD.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="other.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="video-dev.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="ports.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">4.4. Otro hardware de visualización </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> Capítulo 5. Adaptaciones</td></tr></table></div></body></html>

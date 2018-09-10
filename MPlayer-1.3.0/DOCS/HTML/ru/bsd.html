@@ -1,0 +1,33 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.2. *BSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="ports.html" title="Глава 5. Портинг"><link rel="prev" href="linux.html" title="5.1. Linux"><link rel="next" href="unix.html" title="5.3. Коммерческие Unix"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="bsd.html#freebsd" title="5.2.1. FreeBSD"><link rel="subsection" href="bsd.html#openbsd" title="5.2.2. OpenBSD"><link rel="subsection" href="bsd.html#darwin" title="5.2.3. Darwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.2. *BSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="linux.html">Пред.</a> </td><th width="60%" align="center">Глава 5. Портинг</th><td width="20%" align="right"> <a accesskey="n" href="unix.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bsd"></a>5.2. *BSD</h2></div></div></div><p>
+<span class="application">MPlayer</span> работает на всех известных семействах BSD.
+Существуют портированные[ports]/пакеты сорцов[pkgsrcs]/fink/
+и т.п. версии <span class="application">MPlayer</span>, которые, наверное, проще использовать,
+чем просто исходный код.
+</p><p>
+Чтобы собрать <span class="application">MPlayer</span>, Вам понадобится GNU make (gmake —
+родной BSD make не будет работать) и свежая версия binutils.
+</p><p>
+Если <span class="application">MPlayer</span> ругается, что он не может найти
+<tt class="filename">/dev/cdrom</tt> или
+<tt class="filename">/dev/dvd</tt>, создайте соответствующую ссылку:
+</p><pre class="screen">ln -s /dev/<em class="replaceable"><code>Ваше_cdrom_устройство</code></em> /dev/cdrom</pre><p>
+</p><p>
+Чтобы использовать Win32 DLL'и с <span class="application">MPlayer</span>'ом, Вам необходимо
+перекомпилировать
+ядро с "<code class="envar">option USER_LDT</code>" (если только у Вас не FreeBSD-CURRENT,
+где это включено по умолчанию).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="freebsd"></a>5.2.1. FreeBSD</h3></div></div></div><p>
+Если Ваш CPU поддерживает SSE, перекомпилируйте ядро с
+"<code class="envar">options CPU_ENABLE_SSE</code>" (необходимо FreeBSD-STABLE
+или патчи к ядру).
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="openbsd"></a>5.2.2. OpenBSD</h3></div></div></div><p>
+В связи с ограничениями в различных версиях gas (конфликт настройки адресов и MMX),
+Вы должны будете компилировать в два шага: сначала убедитесь, что не родной as
+— первый в Вашем <code class="envar">$PATH</code> и выполните <span class="command"><strong>gmake -k
+</strong></span>, затем убедитесь, что будет использоваться родная версия и запустите
+<span class="command"><strong>gmake</strong></span>.
+</p><p>
+Начиная с OpenBSD 3.4 подобный хак больше не нужен.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="darwin"></a>5.2.3. Darwin</h3></div></div></div><p>
+См. секцию <a class="link" href="macos.html" title="5.5. Mac OS">Mac OS</a>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="linux.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="unix.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">5.1. Linux </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 5.3. Коммерческие Unix</td></tr></table></div></body></html>

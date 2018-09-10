@@ -1,0 +1,55 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.1. Szoftver követelmények</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="install.html" title="2. fejezet - Telepítés"><link rel="prev" href="install.html" title="2. fejezet - Telepítés"><link rel="next" href="features.html" title="2.2. Jellemzők"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.1. Szoftver követelmények</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="install.html">Vissza</a> </td><th width="60%" align="center">2. fejezet - Telepítés</th><td width="20%" align="right"> <a accesskey="n" href="features.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="softreq"></a>2.1. Szoftver követelmények</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>POSIX rendszer</strong></span> - Egy POSIX-kompatibilis
+  shell-re és POSIX-kompatibilis rendszer eszközökre, pl. grep, sed, awk, stb.
+  lesz szükséged a path-odban.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>GNU make</strong></span> 3.81 vagy újabb
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>binutils</strong></span> - GNU binutils 2.11 vagy újabb
+  biztosan működik.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>fordító</strong></span> - Mi leginkább gcc-t használunk,
+  a javasolt verziók x86-on a 2.95 és 3.4+. PowerPC-n használj 4.x+-ot.
+  icc 10.1+ is működik.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Xorg/XFree86</strong></span> - a javasolt verzió a
+  4.3 vagy későbbi. Győződj meg róla, hogy a
+  <span class="bold"><strong>fejlesztői csomagok</strong></span> is telepítve vannak,
+  különben nem fog működni.
+  Nem feltétlenül van szükséged az X-re, néhány videó kimeneti vezérlő
+  működik nélküle is.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>FreeType</strong></span> 2.0.9 vagy későbbi szükséges,
+  valamint egy betűtípus is az OSD-hez és a feliratokhoz.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>ALSA</strong></span> - választható, az ALSA audió kimenet
+  támogatásához. Legalább 0.9.0rc4 szükséges.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libjpeg</strong></span> - választható JPEG kódoló/dekódoló,
+  a JPEG videó kimeneti vezérlőhöz szükséges
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libpng</strong></span> - választható (M)PNG dekóder,
+  a PNG videó kimeneti vezérlőhöz szükséges
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>directfb</strong></span> - választható, 0.9.22 vagy későbbi
+  szükséges a directfb/dfbmga videó kimeneti vezérlőkhöz
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>lame</strong></span> - 3.90 vagy későbbi javasolt,
+  szükséges MP3 audió <span class="application">MEncoder</span>rel
+  történő kódolásához.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>zlib</strong></span> - javasolt, sok codec használja.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong><a class="ulink" href="http://www.live555.com/mplayer/" target="_top">LIVE555 Streaming Media</a></strong></span>
+  - választható, szükséges néhány RTSP/RTP folyamokhoz
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>cdparanoia</strong></span> - választható, szükséges a CDDA támogatáshoz
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libxmms</strong></span> - választható, XMMS input plugin támogatáshoz kell.
+  Legalább 1.2.7-es szükséges.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>libsmb</strong></span> - választható, smb hálózat támogatásához kell.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong><a class="ulink" href="http://www.underbit.com/products/mad/" target="_top">libmad</a></strong></span>
+  - választható, gyors csak egészszámos MP3 dekódolás FPU nélküli platformokon
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="install.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="features.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">2. fejezet - Telepítés </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 2.2. Jellemzők</td></tr></table></div></body></html>

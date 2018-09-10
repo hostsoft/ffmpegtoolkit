@@ -1,0 +1,231 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.3. Commercial Unix</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="ports.html" title="Capitolo 5. Ports"><link rel="prev" href="bsd.html" title="5.2. *BSD"><link rel="next" href="windows.html" title="5.4. Windows"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="subsection" href="unix.html#solaris" title="5.3.1. Solaris"><link rel="subsection" href="unix.html#hp-ux" title="5.3.2. HP-UX"><link rel="subsection" href="unix.html#aix" title="5.3.3. AIX"><link rel="subsection" href="unix.html#qnx" title="5.3.4. QNX"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.3. Commercial Unix</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bsd.html">Indietro</a> </td><th width="60%" align="center">Capitolo 5. Ports</th><td width="20%" align="right"> <a accesskey="n" href="windows.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="unix"></a>5.3. Commercial Unix</h2></div></div></div><p>
+<span class="application">MPlayer</span> has been ported to a number of commercial
+Unix variants. Since the development environments on these systems tend to be
+different from those found on free Unixes, you may have to make some manual
+adjustments to make the build work.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="solaris"></a>5.3.1. Solaris</h3></div></div></div><p>
+Solaris still has broken, POSIX-incompatible system tools and shell in default
+locations. Until a bold step out of the computing stone age is made, you will
+have to add <tt class="filename">/usr/xpg4/bin</tt> to your
+<code class="systemitem">PATH</code>.
+</p><p>
+<span class="application">MPlayer</span> should work on Solaris 2.6 or newer.
+Use the SUN audio driver with the <tt class="option">-ao sun</tt> option for sound.
+</p><p>
+On <span class="bold"><strong>UltraSPARCs</strong></span>,
+<span class="application">MPlayer</span> takes advantage of their
+<span class="bold"><strong>VIS</strong></span> extensions
+(equivalent to MMX), currently only in
+<code class="systemitem">libmpeg2</code>,
+<code class="systemitem">libvo</code>
+and <code class="systemitem">libavcodec</code>.
+You can watch a VOB file
+on a 400MHz CPU. You'll need
+<a class="ulink" href="http://www.sun.com/sparc/vis/mediaLib.html" target="_top"><code class="systemitem">mLib</code></a>
+installed.
+</p><p><span class="bold"><strong>Caveat:</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>mediaLib</strong></span> is
+  <span class="bold"><strong>currently disabled</strong></span> by default in
+  <span class="application">MPlayer</span> because of brokenness. SPARC users
+  who build MPlayer with mediaLib support have reported a thick,
+  green-tint on video encoded and decoded with libavcodec. You may enable
+  it if you wish with:
+  </p><pre class="screen">./configure --enable-mlib</pre><p>
+  You do this at your own risk. x86 users should
+  <span class="bold"><strong>never</strong></span> use mediaLib, as this will
+  result in very poor MPlayer performance.
+</p></li></ul></div><p>
+On Solaris SPARC, you need the GNU C/C++ Compiler; it does not matter if
+GNU C/C++ compiler is configured with or without the GNU assembler.
+</p><p>
+On Solaris x86, you need the GNU assembler and the GNU C/C++ compiler,
+configured to use the GNU assembler! The <span class="application">MPlayer</span>
+code on the x86 platform makes heavy use of MMX, SSE and 3DNOW! instructions
+that cannot be compiled using Sun's assembler
+<tt class="filename">/usr/ccs/bin/as</tt>.
+</p><p>
+The <tt class="filename">configure</tt> script tries to find out, which assembler
+program is used by your "gcc" command (in case the autodetection
+fails, use the
+<tt class="option">--as=<em class="replaceable"><code>/wherever/you/have/installed/gnu-as</code></em></tt>
+option to tell the <tt class="filename">configure</tt> script where it can find GNU
+"as" on your system).
+</p><p>Solutions to common problems:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Error message from <tt class="filename">configure</tt> on a Solaris x86 system
+  using GCC without GNU assembler:
+  </p><pre class="screen">
+% configure
+...
+Checking assembler (/usr/ccs/bin/as) ... , failed
+Please upgrade(downgrade) binutils to 2.10.1...</pre><p>
+  (Solution: Install and use a gcc configured with
+  <tt class="option">--with-as=gas</tt>)
+</p><p>
+Typical error you get when building with a GNU C compiler that does not
+use GNU as:
+</p><pre class="screen">
+% gmake
+...
+gcc -c -Iloader -Ilibvo -O4 -march=i686 -mcpu=i686 -pipe -ffast-math
+    -fomit-frame-pointer  -I/usr/local/include   -o mplayer.o mplayer.c
+Assembler: mplayer.c
+"(stdin)", line 3567 : Illegal mnemonic
+"(stdin)", line 3567 : Syntax error
+... more "Illegal mnemonic" and "Syntax error" errors ...
+</pre><p>
+</p></li><li class="listitem"><p>
+  <span class="application">MPlayer</span> may segfault when decoding
+  and encoding video that uses the win32codecs:
+  </p><pre class="screen">
+...
+Trying to force audio codec driver family acm...
+Opening audio decoder: [acm] Win32/ACM decoders
+sysi86(SI86DSCR): Invalid argument
+Couldn't install fs segment, expect segfault
+
+
+MPlayer interrupted by signal 11 in module: init_audio_codec
+...</pre><p>
+  This is because of a change to sysi86() in Solaris 10 and pre-Solaris
+  Nevada b31 releases. This has been fixed in Solaris Nevada b32;
+  however, Sun has yet to backport the fix to Solaris 10. The MPlayer
+  Project has made Sun aware of the problem and a patch is currently in
+  progress for Solaris 10. More information about this bug can be found
+  at:
+  <a class="ulink" href="http://bugs.opensolaris.org/bugdatabase/view_bug.do?bug_id=6308413" target="_top">http://bugs.opensolaris.org/bugdatabase/view_bug.do?bug_id=6308413</a>.
+</p></li><li class="listitem"><p>
+Due to bugs in Solaris 8,
+you may not be able to play DVD discs larger than 4 GB:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>
+  The sd(7D) driver on Solaris 8 x86 has a bug when accessing a disk block &gt;4GB
+  on a device using a logical blocksize != DEV_BSIZE
+  (i.e. CD-ROM and DVD media).
+  Due to a 32Bit int overflow, a disk address modulo 4GB is accessed
+  (<a class="ulink" href="http://groups.yahoo.com/group/solarisonintel/message/22516" target="_top">http://groups.yahoo.com/group/solarisonintel/message/22516</a>).
+  This problem does not exist in the SPARC version of Solaris 8.
+</p></li><li class="listitem"><p>
+  A similar bug is present in the hsfs(7FS) file system code (AKA ISO9660),
+  hsfs may not not support partitions/disks larger than 4GB, all data is
+  accessed modulo 4GB
+  (<a class="ulink" href="http://groups.yahoo.com/group/solarisonintel/message/22592" target="_top">http://groups.yahoo.com/group/solarisonintel/message/22592</a>).
+  The hsfs problem can be fixed by installing
+  patch 109764-04 (SPARC) / 109765-04 (x86).
+</p></li></ul></div></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="hp-ux"></a>5.3.2. HP-UX</h3></div></div></div><p>
+Joe Page hosts a detailed HP-UX <span class="application">MPlayer</span>
+<a class="ulink" href="http://users.rcn.com/joepage/mplayer_on_hpux11.htm" target="_top">HOWTO</a>
+by Martin Gansser on his homepage. With these instructions the build should
+work out of the box. The following information is taken from this HOWTO.
+</p><p>
+You need GCC 3.4.0 or later and SDL 1.2.7 or later.
+HP cc will not produce a working program, prior GCC versions are buggy.
+For OpenGL functionality you need to install Mesa and the gl and gl2 video
+output drivers should work, speed may be very bad, depending on the CPU speed,
+though. A good replacement for the rather poor native HP-UX sound system is
+GNU esound.
+</p><p>
+Create the DVD device
+scan the SCSI bus with:
+
+</p><pre class="screen">
+# ioscan -fn
+
+Class          I            H/W   Path          Driver    S/W State    H/W Type        Description
+...
+ext_bus 1    8/16/5      c720  CLAIMED INTERFACE  Built-in SCSI
+target  3    8/16/5.2    tgt   CLAIMED DEVICE
+disk    4    8/16/5.<span class="bold"><strong>2</strong></span>.<span class="bold"><strong>0</strong></span>  sdisk CLAIMED DEVICE     <span class="bold"><strong>PIONEER DVD-ROM DVD-305</strong></span>
+                         /dev/dsk/c1t2d0 <span class="bold"><strong>/dev/rdsk/c1t2d0</strong></span>
+target  4    8/16/5.7    tgt   CLAIMED DEVICE
+ctl     <span class="bold"><strong>1</strong></span>    8/16/5.7.0  sctl  CLAIMED DEVICE     Initiator
+                         /dev/rscsi/c1t7d0 /dev/rscsi/c1t7l0 /dev/scsi/c1t7l0
+...
+</pre><p>
+
+The screen output shows a Pioneer DVD-ROM at SCSI address 2.
+The card instance for hardware path 8/16 is 1.
+</p><p>
+Create a link from the raw device to the DVD device.
+</p><pre class="screen">
+ln -s /dev/rdsk/c<em class="replaceable"><code>&lt;SCSI bus instance&gt;</code></em>t<em class="replaceable"><code>&lt;SCSI target ID&gt;</code></em>d<em class="replaceable"><code>&lt;LUN&gt;</code></em> /dev/<em class="replaceable"><code>&lt;device&gt;</code></em>
+</pre><p>
+Example:
+</p><pre class="screen">ln -s /dev/rdsk/c1t2d0 /dev/dvd</pre><p>
+</p><p>
+Below are solutions for some common problems:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Crash at Start with the following error message:
+  </p><pre class="screen">
+/usr/lib/dld.sl: Unresolved symbol: finite (code) from /usr/local/lib/gcc-lib/hppa2.0n-hp-hpux11.00/3.2/../../../libGL.sl</pre><p>
+  </p><p>
+  This means that the function <code class="systemitem">.finite().</code> is not
+  available in the standard HP-UX math library.
+  Instead there is <code class="systemitem">.isfinite().</code>.
+  Solution: Use the latest Mesa depot file.
+  </p></li><li class="listitem"><p>
+  Crash at playback with the following error message:
+  </p><pre class="screen">
+/usr/lib/dld.sl: Unresolved symbol: sem_init (code) from /usr/local/lib/libSDL-1.2.sl.0</pre><p>
+  </p><p>
+  Solution: Use the extralibdir option of configure
+  <tt class="option">--extra-ldflags="/usr/lib -lrt"</tt>
+  </p></li><li class="listitem"><p>
+  MPlayer segfaults with a message like this:
+  </p><pre class="screen">
+Pid 10166 received a SIGSEGV for stack growth failure.
+Possible causes: insufficient memory or swap space, or stack size exceeded maxssiz.
+Segmentation fault</pre><p>
+  </p><p>
+  Solution:
+  The HP-UX kernel has a default stack size of 8MB(?) per process.(11.0 and
+  newer 10.20 patches let you increase <code class="systemitem">maxssiz</code> up to
+  350MB for 32-bit programs). You need to extend
+  <code class="systemitem">maxssiz</code> and recompile the kernel (and reboot).
+  You can use SAM to do this.
+  (While at it, check out the <code class="systemitem">maxdsiz</code> parameter for
+  the maximum amount of data a program can use.
+  It depends on your applications, if the default of 64MB is enough or not.)
+  </p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="aix"></a>5.3.3. AIX</h3></div></div></div><p>
+<span class="application">MPlayer</span> builds successfully on AIX 5.1,
+5.2, and 5.3, using GCC 3.3 or greater. Building
+<span class="application">MPlayer</span> on AIX 4.3.3 and below is
+untested. It is highly recommended that you build
+<span class="application">MPlayer</span> using GCC 3.4 or greater,
+or if you are building on POWER5, GCC 4.0 is required.
+</p><p>
+CPU detection is still a work in progress.
+The following architectures have been tested:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>604e</p></li><li class="listitem"><p>POWER3</p></li><li class="listitem"><p>POWER4</p></li></ul></div><p>
+The following architectures are untested, but should still work:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>POWER</p></li><li class="listitem"><p>POWER2</p></li><li class="listitem"><p>POWER5</p></li></ul></div><p>
+</p><p>
+Sound via the Ultimedia Services is not supported, as Ultimedia was
+dropped in AIX 5.1; therefore, the only option is to use the AIX Open
+Sound System (OSS) drivers from 4Front Technologies at
+<a class="ulink" href="http://www.opensound.com/aix.html" target="_top">http://www.opensound.com/aix.html</a>.
+4Front Technologies freely provides OSS drivers for AIX 5.1 for
+non-commercial use; however, there are currently no sound output
+drivers for AIX 5.2 or 5.3. This means <span class="bold"><strong>AIX 5.2
+and 5.3 are not capable of MPlayer audio output, presently.</strong></span>
+</p><p>Solutions to common problems:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  If you encounter this error message from <tt class="filename">./configure</tt>:
+  </p><pre class="screen">
+$ ./configure
+...
+Checking for iconv program ... no
+No working iconv program found, use
+--charset=US-ASCII to continue anyway.
+Messages in the GTK-2 interface will be broken then.</pre><p>
+  This is because AIX uses non-standard character set names; therefore,
+  converting MPlayer output to another character set is currently not
+  supported. The solution is to use:
+  </p><pre class="screen">$ ./configure --charset=noconv</pre><p>
+  </p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="qnx"></a>5.3.4. QNX</h3></div></div></div><p>
+You'll need to download and install SDL for QNX. Then run
+<span class="application">MPlayer</span> with <tt class="option">-vo sdl:driver=photon</tt>
+and <tt class="option">-ao sdl:nto</tt> options, it should be fast.
+</p><p>
+The <tt class="option">-vo x11</tt> output will be even slower than on Linux,
+since QNX has only X <span class="emphasis"><em>emulation</em></span> which is very slow.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bsd.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="windows.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">5.2. *BSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 5.4. Windows</td></tr></table></div></body></html>

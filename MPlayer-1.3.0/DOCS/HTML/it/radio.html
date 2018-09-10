@@ -1,0 +1,60 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.12. Radio</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="prev" href="tv-teletext.html" title="3.11. Televideo (teletext)"><link rel="next" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="subsection" href="radio.html#radio-input" title="3.12.1. Ingresso radio"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.12. Radio</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-teletext.html">Indietro</a> </td><th width="60%" align="center">Capitolo 3. Utilizzo</th><td width="20%" align="right"> <a accesskey="n" href="video.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="radio"></a>3.12. Radio</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-input"></a>3.12.1. Ingresso radio</h3></div></div></div><p>
+Questa sezione tratta di come abilitare l'ascolto della radio da un
+sintonizzatore compatibile V4L. Guarda la pagina man per una descrizione delle
+opzioni e dei controlli di tastiera per la radio.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-compilation"></a>3.12.1.1. Compilazione</h4></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Per prima cosa devi compilare <span class="application">MPlayer</span> usando
+  <tt class="filename">./configure</tt> con <tt class="option">--enable-radio</tt> e
+  (se vuoi il supporto per la cattura) <tt class="option">--enable-radio-capture</tt>.
+</p></li><li class="step"><p>
+  Assicurati che il tuo sintonizzatore funzioni con altri software radio per
+  Linux, per esempio <span class="application">XawTV</span>.
+</p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-tips"></a>3.12.1.2. Consigli per l'uso</h4></div></div></div><p>
+La lista completa delle opzioni è disponibile nella pagina di manuale.
+Qui ci sono giusto alcuni consigli:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Usa l'opzione <tt class="option">channels</tt>. Un esempio:
+  </p><pre class="screen">-radio channels=104.4-Sibir,103.9-Maximum</pre><p>
+  Spiegazione: con questa opzione, solo le stazioni radio 104.4 e 103.9 saranno
+  utilizzabili. Ci sarà un simpatico testo OSD quando cambi canale, mostrante
+  il nome del canale stesso. Gli spazi nel nome di canale devono essere
+  sostituiti con il carattere "_".
+</p></li><li class="listitem"><p>
+  Ci sono vari modi per catturare l'audio. Puoi catturare il suono sia usando
+  la tua scheda video attraverso un cavo di connessione esterno tra la scheda
+  video e la line-in, ovvero usare l'ADC integrato nel chip saa7134.
+  Nell'ultimo caso, devi caricare il driver
+  <code class="systemitem">saa7134-alsa</code> o <code class="systemitem">saa7134-oss</code>.
+</p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span> non può essere utilizzato per la cattura
+  audio, poiché per funzionare richiede un flusso video. Per cui puoi usare o
+  <span class="application">arecord</span> dal progetto ALSA oppure usare l'opzione
+  <tt class="option">-ao pcm:file=file.wav</tt>. Nell'ultimo caso non sentirai suono
+  alcuno (a meno che tu non stia usando un cavo line-in e abbia tolto il mute
+  dal line-in).
+</p></li></ul></div><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-examples"></a>3.12.1.3. Esempi</h4></div></div></div><div class="informalexample"><p>
+Ingresso da V4L standard (usando un cavo su line-in, cattura disabilitata):
+</p><pre class="screen">mplayer radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+Ingresso da V4L standard (usando un cavo su line-in, cattura disabilitata,
+interfaccia V4Lv1):
+</p><pre class="screen">mplayer -radio driver=v4l radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+Riprodurre il secondo canale della lista canali:
+</p><pre class="screen">mplayer -radio channels=104.4=Sibir,103.9=Maximm radio://2</pre><p>
+</p></div><div class="informalexample"><p>
+Ridirigere il suono dall'ADC integrato della scheda radio al bus PCI.
+In questo esempio il sintonizzatore viene usato come una seconda scheda audio
+(ALSA device hw:1,0). Per schede basate su saa7134 deve esser caricato il modulo
+<code class="systemitem">saa7134-alsa</code> o <code class="systemitem">saa7134-oss</code>.
+</p><pre class="screen">
+mplayer -rawaudio rate=32000 radio://2/capture \
+    -radio adevice=hw=1.0:arate=32000:channels=104.4=Sibir,103.9=Maximm
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+Usando i nomi dispositivi ALSA, i due punti devono esser sostituiti con il
+segno di uguale, le virgole con punti.
+</p></div><p>
+</p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-teletext.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="video.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">3.11. Televideo (teletext) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> Capitolo 4. Dispositivi di uscita video</td></tr></table></div></body></html>

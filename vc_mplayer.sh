@@ -7,7 +7,7 @@ function _install_mplayer() {
 	echo -e $RED"Installation of $_package ....... started"$RESET
 
 	cd $SOURCE_DIR/
-	rm -rf mplayer*
+	#rm -rf mplayer*
 
 	if [ -f "$_file" ]
 	then

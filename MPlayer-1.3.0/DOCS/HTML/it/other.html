@@ -1,0 +1,89 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.19. Altri dispositivi di visualizzazione</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="prev" href="mpeg_decoders.html" title="4.18. Decodificatori MPEG"><link rel="next" href="tvout.html" title="4.20. Gestione uscita TV-out"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="subsection" href="other.html#zr" title="4.19.1. Zr"><link rel="subsection" href="other.html#blinkenlights" title="4.19.2. Blinkenlights"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.19. Altri dispositivi di visualizzazione</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mpeg_decoders.html">Indietro</a> </td><th width="60%" align="center">Capitolo 4. Dispositivi di uscita video</th><td width="20%" align="right"> <a accesskey="n" href="tvout.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="other"></a>4.19. Altri dispositivi di visualizzazione</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="zr"></a>4.19.1. Zr</h3></div></div></div><p>
+Questo è un driver video (<tt class="option">-vo zr</tt>) per un buon numero di schede
+di cattura/riproduzione MJPEG (provato con DC10+ e Buz, e dovrebbe funzionare
+per LML33, la DC10). Il driver lavora codificando il fotogramma in JPEG e poi
+inviandolo alla scheda. Per la codifica JPEG viene usata, e richiesta,
+<code class="systemitem">libavcodec</code>.
+Con la modalità speciale <span class="emphasis"><em>cinerama</em></span>, puoi guardare filmati
+in verà modalità widescreen a patto che tu abbia due proiettori e due
+schede MJPEG. Proporzionalmente alla risoluzione e alle impostazioni della
+qualità, questo driver può richiedere molta potenza di CPU, ricordati di
+specificare <tt class="option">-framedrop</tt> se la tua macchina è troppo lenta.
+Nota: il mio AMD K6-2 350MHz è (con <tt class="option">-framedrop</tt>) abbastanza
+adeguato per riprodurre materiale VCD e film rimpiccioliti.
+</p><p>
+Il driver comunica col driver del kernel disponibile su
+<a class="ulink" href="http://mjpeg.sf.net" target="_top">http://mjpeg.sf.net</a>, indi devi avere per prima cosa questo
+funzionante. La presenza di una scheda MJPEG è autorilevata dallo script
+<tt class="filename">configure</tt>, se la rilevazione fallisce, forzala con
+</p><pre class="screen">./configure --enable-zr</pre><p>
+</p><p>
+L'uscita può essere controllata con varie opzioni, una descrizione dettagliata
+delle opzioni si trova nella pagina man, una lista breve delle opzioni si può
+avere eseguendo
+</p><pre class="screen">mplayer -zrhelp</pre><p>
+</p><p>
+Cose come il ridimensionamento e l'OSD (on screen display) non sono gestite da
+questo driver ma possono essere ottenute usado dei filtri video. Per esempio,
+supponi di avere un film a una risoluzione di 512x272 e vuoi vederlo a schermo
+intero con un'ampiezza di 768, 384 o 192. Per ragioni di prestazioni e di
+qualità, io sceglierei di ridimensionare il film a 384x204 usando il
+ridimensionatore software bilineae veloce. La riga comando diventa
+</p><pre class="screen">
+mplayer -vo zr -sws 0 -vf scale=384:204 <em class="replaceable"><code>filmato.avi</code></em>
+</pre><p>
+</p><p>
+Il ritaglio può essere eseguito dal filtro <tt class="option">crop</tt> e da questo
+driver di per sé. Supponi che un film sia troppo ampio per vedersi dal tuo
+Buz e che tu voglia usare <tt class="option">-zrcrop</tt> per ridurre l'ampiezza del
+film, allora dovrai lanciare il comando seguente
+</p><pre class="screen">
+mplayer -vo zr -zrcrop 720x320+80+0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Se vuoi usare il filtro <tt class="option">crop</tt>, dovresti lanciare
+</p><pre class="screen">
+mplayer -vo zr -vf crop=720:320:80:0 <em class="replaceable"><code>benhur.avi</code></em>
+</pre><p>
+</p><p>
+Ulteriori presenze di <tt class="option">-zrcrop</tt> evocano la modalità
+<span class="emphasis"><em>cinerama</em></span>, per es. puoi distribuire il filmato su varie TV
+o proiettori per creare uno schermo più grande.
+Supponi di avere due proiettori. Quello di sinistra è collegato al tuo Buz su
+<tt class="filename">/dev/video1</tt> e quello di destra è connesso al tuo DC10+ su
+<tt class="filename">/dev/video0</tt>. Il film ha una risoluzione di 704x288.
+Supponi inoltre di volere il proiettore di destra in bianco e nero e che quello
+di sinistra debba avere fotogrammi JPEG con una qualità 10, allora dovrai
+eseguire il comando seguente
+</p><pre class="screen">
+mplayer -vo zr -zrdev /dev/video0 -zrcrop 352x288+352+0 -zrxdoff 0 -zrbw \
+    -zrcrop 352x288+0+0 -zrdev /dev/video1 -zrquality 10 \
+    <em class="replaceable"><code>film.avi</code></em>
+</pre><p>
+</p><p>
+Vedi che le opzioni che ci sono prima della seconda <tt class="option">-zrcrop</tt> si
+applicano solo al DC10+ e che le opzioni dopo la seconda
+<tt class="option">-zrcrop</tt> si applicano al Buz. Il massino numero di schede MJPEG
+contemporanee in <span class="emphasis"><em>cinerama</em></span> è quattro, per cui puoi
+costruire un muro video di 2x2.
+</p><p>
+Infine una nota importante: non avviare o fermare XawTV sul dispoitivo di
+riproduzione durante la riproduzione stessa, o ti manderà in crash il
+computer. Va tuttavia bene <span class="bold"><strong>PRIMA</strong></span> lanciare
+XawTV, <span class="bold"><strong>POI</strong></span> avviare
+<span class="application">MPlayer</span>, attendere l'uscita di
+<span class="application">MPlayer</span>, e <span class="bold"><strong>DOPO</strong></span>
+fermare XawTV.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="blinkenlights"></a>4.19.2. Blinkenlights</h3></div></div></div><p>
+Il driver è in grado di riprodurre usando il protocollo UDP Blinkenlights. Se
+non sai cosa siano
+<a class="ulink" href="http://www.blinkenlights.de/" target="_top">Blinkenlights</a> o il suo
+successore  <a class="ulink" href="http://www.blinkenlights.de/arcade/" target="_top">Arcade</a>,
+scoprilo. Anche se probabilmente questo è uno degli ultimi driver video usati,
+senza dubbio è il più figo che <span class="application">MPlayer</span> abbia da
+offrire. Guarda solo alcuni dei
+<a class="ulink" href="http://www.blinkenlights.de/video.en.html" target="_top">video documentali di
+Blinkenlights</a>.
+Sul video Arcade puoi vedere il driver di uscita video Blinkenlights in azione
+alla posizione 00:07:50.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mpeg_decoders.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="tvout.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">4.18. Decodificatori MPEG </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 4.20. Gestione uscita TV-out</td></tr></table></div></body></html>

@@ -1,0 +1,32 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.2. *BSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="ports.html" title="Kapitola 5. Porty"><link rel="prev" href="linux.html" title="5.1. Linux"><link rel="next" href="unix.html" title="5.3. Komerční Unix"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="bsd.html#freebsd" title="5.2.1. FreeBSD"><link rel="subsection" href="bsd.html#openbsd" title="5.2.2. OpenBSD"><link rel="subsection" href="bsd.html#darwin" title="5.2.3. Darwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.2. *BSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="linux.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 5. Porty</th><td width="20%" align="right"> <a accesskey="n" href="unix.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bsd"></a>5.2. *BSD</h2></div></div></div><p>
+<span class="application">MPlayer</span> běží na všech známých BSD verzích.
+Existují portované/pkgsrc/fink/atd verze
+<span class="application">MPlayer</span>u, které lze pravděpodobně snadněji použít,
+než naše surové zdrojové kódy.
+</p><p>
+K sestavení <span class="application">MPlayer</span>u budete potřebovat GNU make
+(gmake - nativní BSD make nebude pracovat) a současnou verzi binutils.
+</p><p>
+Pokud si <span class="application">MPlayer</span> stěžuje, že nemůže najít
+<tt class="filename">/dev/cdrom</tt> nebo <tt class="filename">/dev/dvd</tt>,
+vytvořte příslušný symbolický link:
+</p><pre class="screen">ln -s /dev/<em class="replaceable"><code>vaše_cdrom_zařízení</code></em> /dev/cdrom</pre><p>
+</p><p>
+Chcete-li používat Win32 DLL v <span class="application">MPlayer</span>u, budete muset
+rekompilovat jádro s volbou "<code class="envar">USER_LDT</code>"
+(pokud nepoužíváte FreeBSD-CURRENT, kde je to výchozí).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="freebsd"></a>5.2.1. FreeBSD</h3></div></div></div><p>
+Pokud váš procesor má SSE, rekompilujte jádro s
+"<code class="envar">options CPU_ENABLE_SSE</code>" (vyžaduje FreeBSD-STABLE nebo patche
+do jádra).
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="openbsd"></a>5.2.2. OpenBSD</h3></div></div></div><p>
+Vzhledem k omezením v různých verzích gas (GNU assembleru – pozn. překl.)
+(relokace vs MMX), budete muset kompilovat ve dvou krocích:
+Nejprve se ujistěte že je nenativní as jako první ve vaší <code class="envar">$PATH</code>
+a proveďte <span class="command"><strong>gmake -k</strong></span>, pak zajistěte, aby se použila nativní
+verze a proveďte <span class="command"><strong>gmake</strong></span>.
+</p><p>
+Od OpenBSD 3.4 není již výše uvedená metoda potřeba.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="darwin"></a>5.2.3. Darwin</h3></div></div></div><p>
+Viz sekce <a class="link" href="macos.html" title="5.5. Mac OS">Mac OS</a>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="linux.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="unix.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">5.1. Linux </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 5.3. Komerční Unix</td></tr></table></div></body></html>

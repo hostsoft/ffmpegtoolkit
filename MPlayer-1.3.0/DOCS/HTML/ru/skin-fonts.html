@@ -1,0 +1,36 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.3. Шрифты</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="prev" href="skin-file.html" title="B.2. Файл skin"><link rel="next" href="skin-gui.html" title="B.4. GUI сообщения"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Значки"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.3. Шрифты</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-file.html">Пред.</a> </td><th width="60%" align="center">Приложение B. Формат скинов <span class="application">MPlayer</span></th><td width="20%" align="right"> <a accesskey="n" href="skin-gui.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-fonts"></a>B.3. Шрифты</h2></div></div></div><p>
+Как описано в разделе, посвященному частям скина, шрифт определяется
+изображением и файлом описания. Вы можете поместить символы в любое место изображения,
+но будьте уверены, что их позиция и размер точно указаны в файле описания.
+</p><p>
+Файл описания шрифта (с расширением <tt class="filename">.fnt</tt>) может иметь комментарии,
+начинающиеся с '<code class="literal">;</code>'. Файл должен иметь строку вида
+<a name="skin-font-image"></a>
+</p><pre class="programlisting">image = <em class="replaceable"><code>image</code></em></pre><p>,
+где <code class="literal"><em class="replaceable"><code>image</code></em></code> - это название
+файла с изображением, используемым для шрифта (расширение указывать необязательно).
+<a name="skin-font-char"></a>
+</p><pre class="programlisting">"char" = X, Y, width, height</pre><p>
+Здесь <code class="literal">X</code> и <code class="literal">Y</code> указывают позицию символа
+<code class="literal">char</code> в изображении (<code class="literal">0,0</code> - верхний левый угол),
+<code class="literal">width</code> и <code class="literal">height</code> - размеры символа в пикселах.
+</p><p>
+Этот пример определяет символы  A, B, C, используя <tt class="filename">font.png</tt>.
+</p><pre class="programlisting">
+; Can be "font" instead of "font.png".
+image = font.png
+
+; Three characters are enough for demonstration purposes :-)
+"A" =  0,0, 7,13
+"B" =  7,0, 7,13
+"C" = 14,0, 7,13
+</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-fonts-symbols"></a>B.3.1. Значки</h3></div></div></div><p>
+Некоторые символы имеют специальное значение, когда возвращаются некоторыми переменными,
+используемыми в <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>. Подразумевается, что эти символы
+должны отображаться в виде значков, так для DVD потока можно отображать значок
+красивого логотипа DVD вместо символа '<code class="literal">d</code>'.
+</p><p>
+Следующая таблица содержит список всех символов, которые могут использоваться для
+отображения значков (и поэтому требуют другой шрифт).
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Символ</th><th>Значок</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>воспроизведение</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>стоп</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>пауза</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>без звука</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>звук моно</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>звук стерео</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>файл</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>Video CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>URL</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-file.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-gui.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">B.2. Файл skin </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> B.4. GUI сообщения</td></tr></table></div></body></html>

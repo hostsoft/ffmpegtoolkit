@@ -1,0 +1,324 @@
+\section{fishsound.\-h File Reference}
+\label{fishsound_8h}\index{fishsound.\-h@{fishsound.\-h}}
+
+
+The libfishsound C A\-P\-I.  
+
+
+{\ttfamily \#include $<$fishsound/constants.\-h$>$}\\*
+{\ttfamily \#include $<$fishsound/decode.\-h$>$}\\*
+{\ttfamily \#include $<$fishsound/encode.\-h$>$}\\*
+{\ttfamily \#include $<$fishsound/comments.\-h$>$}\\*
+{\ttfamily \#include $<$fishsound/deprecated.\-h$>$}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Fish\-Sound\-Info}
+\begin{DoxyCompactList}\small\item\em Info about a particular encoder/decoder instance. \end{DoxyCompactList}\item 
+struct {\bf Fish\-Sound\-Format}
+\begin{DoxyCompactList}\small\item\em Info about a particular sound format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$ {\bf Fish\-Sound}
+\begin{DoxyCompactList}\small\item\em An opaque handle to a Fish\-Sound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf fish\-\_\-sound\-\_\-identify} (unsigned char $\ast$buf, long bytes)
+\begin{DoxyCompactList}\small\item\em Identify a codec based on the first few bytes of data. \end{DoxyCompactList}\item 
+{\bf Fish\-Sound} $\ast$ {\bf fish\-\_\-sound\-\_\-new} (int mode, {\bf Fish\-Sound\-Info} $\ast$fsinfo)
+\begin{DoxyCompactList}\small\item\em Instantiate a new Fish\-Sound$\ast$ handle. \end{DoxyCompactList}\item 
+long {\bf fish\-\_\-sound\-\_\-flush} ({\bf Fish\-Sound} $\ast$fsound)
+\begin{DoxyCompactList}\small\item\em Flush any internally buffered data, forcing encode. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-reset} ({\bf Fish\-Sound} $\ast$fsound)
+\begin{DoxyCompactList}\small\item\em Reset the codec state of a Fish\-Sound object. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-delete} ({\bf Fish\-Sound} $\ast$fsound)
+\begin{DoxyCompactList}\small\item\em Delete a Fish\-Sound object. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-command} ({\bf Fish\-Sound} $\ast$fsound, int command, void $\ast$data, int datasize)
+\begin{DoxyCompactList}\small\item\em Command interface. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-get\-\_\-interleave} ({\bf Fish\-Sound} $\ast$fsound)
+\begin{DoxyCompactList}\small\item\em Query whether a Fish\-Sound object is using interleaved P\-C\-M. \end{DoxyCompactList}\item 
+long {\bf fish\-\_\-sound\-\_\-get\-\_\-frameno} ({\bf Fish\-Sound} $\ast$fsound)
+\begin{DoxyCompactList}\small\item\em Query the current frame number of a Fish\-Sound object. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-set\-\_\-frameno} ({\bf Fish\-Sound} $\ast$fsound, long frameno)
+\begin{DoxyCompactList}\small\item\em Set the current frame number of a Fish\-Sound object. \end{DoxyCompactList}\item 
+int {\bf fish\-\_\-sound\-\_\-prepare\-\_\-truncation} ({\bf Fish\-Sound} $\ast$fsound, long next\-\_\-granulepos, int next\-\_\-eos)
+\begin{DoxyCompactList}\small\item\em Prepare truncation details for the next block of data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The libfishsound C A\-P\-I. \subsection{General usage}\label{fishsound_8h_general}
+All access is managed via a Fish\-Sound$\ast$ handle. This is instantiated using \doxyref{fish\-\_\-sound\-\_\-new()}{p.}{fishsound_8h_adecddfef35cbbddcc8a76b28c365c527} and should be deleted with \doxyref{fish\-\_\-sound\-\_\-delete()}{p.}{fishsound_8h_a002e2dee1a7f736699dba5bec0a81426} when no longer required. If there is a discontinuity in the input data (eg. after seeking in an input file), call \doxyref{fish\-\_\-sound\-\_\-reset()}{p.}{fishsound_8h_a546a521c2c3c3a2ee614ae3981fbc29f} to reset the internal codec state.\subsection{Decoding}\label{fishsound_8h_decoding}
+libfishsound provides callback based decoding\-: you feed it encoded audio data, and it will call your callback with decoded P\-C\-M. A more detailed explanation and a full example of decoding Ogg F\-L\-A\-C, Speex and Ogg Vorbis files is provided in the \doxyref{Decoding audio data }{p.}{group__decode} section.\subsection{Encoding}\label{fishsound_8h_encoding}
+libfishsound provides callback based encoding\-: you feed it P\-C\-M audio, and it will call your callback with encoded audio data. A more detailed explanation and a full example of encoding Ogg F\-L\-A\-C, Speex and Ogg Vorbis files is provided in the \doxyref{Encoding audio data }{p.}{group__encode} section. 
+
+\subsection{Typedef Documentation}
+\index{fishsound.\-h@{fishsound.\-h}!Fish\-Sound@{Fish\-Sound}}
+\index{Fish\-Sound@{Fish\-Sound}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{Fish\-Sound}]{\setlength{\rightskip}{0pt plus 5cm}typedef void$\ast$ {\bf Fish\-Sound}}\label{fishsound_8h_a8cfb7dfb102ad1af9ff35046aed3ccd9}
+
+
+An opaque handle to a Fish\-Sound. 
+
+This is returned by fishsound\-\_\-new() and is passed to all other fish\-\_\-sound\-\_\-$\ast$() functions. 
+
+\subsection{Function Documentation}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-command@{fish\-\_\-sound\-\_\-command}}
+\index{fish\-\_\-sound\-\_\-command@{fish\-\_\-sound\-\_\-command}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-command}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-command (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{int}]{command, }
+\item[{void $\ast$}]{data, }
+\item[{int}]{datasize}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_a35c5182901b71a2514bc9a8f2ec839c7}
+
+
+Command interface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+{\em command} & The command action \\
+\hline
+{\em data} & Command data \\
+\hline
+{\em datasize} & Size of the data in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-delete@{fish\-\_\-sound\-\_\-delete}}
+\index{fish\-\_\-sound\-\_\-delete@{fish\-\_\-sound\-\_\-delete}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-delete}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-delete (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_a002e2dee1a7f736699dba5bec0a81426}
+
+
+Delete a Fish\-Sound object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-flush@{fish\-\_\-sound\-\_\-flush}}
+\index{fish\-\_\-sound\-\_\-flush@{fish\-\_\-sound\-\_\-flush}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-flush}]{\setlength{\rightskip}{0pt plus 5cm}long fish\-\_\-sound\-\_\-flush (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_ab1672c542e09528b3dad3ee694b124d8}
+
+
+Flush any internally buffered data, forcing encode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-get\-\_\-frameno@{fish\-\_\-sound\-\_\-get\-\_\-frameno}}
+\index{fish\-\_\-sound\-\_\-get\-\_\-frameno@{fish\-\_\-sound\-\_\-get\-\_\-frameno}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-get\-\_\-frameno}]{\setlength{\rightskip}{0pt plus 5cm}long fish\-\_\-sound\-\_\-get\-\_\-frameno (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_ad991f9f6887487f5d833de9480bcbe43}
+
+
+Query the current frame number of a Fish\-Sound object. 
+
+For decoding, this is the greatest frame index that has been decoded and made available to a Fish\-Sound\-Decoded callback. This function is safe to call from within a Fish\-Sound\-Decoded callback, and corresponds to the frame number of the last frame in the current decoded block.
+
+For encoding, this is the greatest frame index that has been encoded. This function is safe to call from within a Fish\-Sound\-Encoded callback, and corresponds to the frame number of the last frame encoded in the current block.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current frame number 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em -\/1} & Invalid {\itshape fsound} \\
+\hline
+\end{DoxyRetVals}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-get\-\_\-interleave@{fish\-\_\-sound\-\_\-get\-\_\-interleave}}
+\index{fish\-\_\-sound\-\_\-get\-\_\-interleave@{fish\-\_\-sound\-\_\-get\-\_\-interleave}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-get\-\_\-interleave}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-get\-\_\-interleave (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_a7bc2b75ad943e2da3147bf33882860c8}
+
+
+Query whether a Fish\-Sound object is using interleaved P\-C\-M. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & {\itshape fsound} uses non-\/interleaved P\-C\-M \\
+\hline
+{\em 1} & {\itshape fsound} uses interleaved P\-C\-M \\
+\hline
+{\em -\/1} & Invalid {\itshape fsound}, or out of memory. \\
+\hline
+\end{DoxyRetVals}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-identify@{fish\-\_\-sound\-\_\-identify}}
+\index{fish\-\_\-sound\-\_\-identify@{fish\-\_\-sound\-\_\-identify}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-identify}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-identify (
+\begin{DoxyParamCaption}
+\item[{unsigned char $\ast$}]{buf, }
+\item[{long}]{bytes}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_a2776f39cfa1540b1da3c9d423de15ae9}
+
+
+Identify a codec based on the first few bytes of data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buf} & A pointer to the first few bytes of the data \\
+\hline
+{\em bytes} & The count of bytes available at buf \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-xxxxxx} & F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-V\-O\-R\-B\-I\-S, F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-S\-P\-E\-E\-X or F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-F\-L\-A\-C if {\itshape buf} was identified as the initial bytes of a supported codec \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-U\-N\-K\-N\-O\-W\-N} & if the codec could not be identified \\
+\hline
+{\em F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-R\-R\-\_\-\-S\-H\-O\-R\-T\-\_\-\-I\-D\-E\-N\-T\-I\-F\-Y} & if {\itshape bytes} is less than 8 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+If {\itshape bytes} is exactly 8, then only a weak check is performed, which is fast but may return a false positive. 
+
+If {\itshape bytes} is greater than 8, then a stronger check is performed in which an attempt is made to decode {\itshape buf} as the initial header of each supported codec. This is unlikely to return a false positive but is only useful if {\itshape buf} is the entire payload of a packet derived from a lower layer such as Ogg framing or U\-D\-P datagrams. 
+\end{DoxyNote}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-new@{fish\-\_\-sound\-\_\-new}}
+\index{fish\-\_\-sound\-\_\-new@{fish\-\_\-sound\-\_\-new}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Fish\-Sound}$\ast$ fish\-\_\-sound\-\_\-new (
+\begin{DoxyParamCaption}
+\item[{int}]{mode, }
+\item[{{\bf Fish\-Sound\-Info} $\ast$}]{fsinfo}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_adecddfef35cbbddcc8a76b28c365c527}
+
+
+Instantiate a new Fish\-Sound$\ast$ handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E or F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E \\
+\hline
+{\em fsinfo} & Encoder configuration, may be N\-U\-L\-L for F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-D\-E\-C\-O\-D\-E \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new Fish\-Sound$\ast$ handle, or N\-U\-L\-L on error 
+\end{DoxyReturn}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-prepare\-\_\-truncation@{fish\-\_\-sound\-\_\-prepare\-\_\-truncation}}
+\index{fish\-\_\-sound\-\_\-prepare\-\_\-truncation@{fish\-\_\-sound\-\_\-prepare\-\_\-truncation}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-prepare\-\_\-truncation}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-prepare\-\_\-truncation (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{long}]{next\-\_\-granulepos, }
+\item[{int}]{next\-\_\-eos}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_a6f4818e09b8323d8461331f46f13ab6a}
+
+
+Prepare truncation details for the next block of data. 
+
+The semantics of these parameters derives directly from Ogg encapsulation of Vorbis, described {\tt here}.
+
+When decoding from Ogg, you should call this function with the {\itshape granulepos} and {\itshape eos} of the {\itshape ogg\-\_\-packet} structure. This call should be made before passing the packet's data to \doxyref{fish\-\_\-sound\-\_\-decode()}{p.}{decode_8h_a070a1843d6990a00e2471945d40645c7}. Failure to do so may result in minor decode errors on the first and/or last packet of the stream.
+
+When encoding into Ogg, you should call this function with the {\itshape granulepos} and {\itshape eos} that will be used for the {\itshape ogg\-\_\-packet} structure. This call should be made before passing the block of audio data to fish\-\_\-sound\-\_\-encode\-\_\-$\ast$(). Failure to do so may result in minor encoding errors on the first and/or last packet of the stream.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+{\em next\-\_\-granulepos} & The \char`\"{}granulepos\char`\"{} for the next block to decode. If unknown, set {\itshape next\-\_\-granulepos} to -\/1. Otherwise, {\itshape next\-\_\-granulepos} specifies the frameno of the final frame in the block. This is authoritative, hence can be used to indicate various forms of truncation at the beginning or end of a stream. Mid-\/stream, a later-\/than-\/expected \char`\"{}granulepos\char`\"{} indicates that some data was missing. \\
+\hline
+{\em next\-\_\-eos} & A boolean indicating whether the next data block will be the last in the stream. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em -\/1} & Invalid {\itshape fsound} \\
+\hline
+\end{DoxyRetVals}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-reset@{fish\-\_\-sound\-\_\-reset}}
+\index{fish\-\_\-sound\-\_\-reset@{fish\-\_\-sound\-\_\-reset}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-reset}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-reset (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_a546a521c2c3c3a2ee614ae3981fbc29f}
+
+
+Reset the codec state of a Fish\-Sound object. 
+
+When decoding from a seekable file, \doxyref{fish\-\_\-sound\-\_\-reset()}{p.}{fishsound_8h_a546a521c2c3c3a2ee614ae3981fbc29f} should be called after any seek operations. See also \doxyref{fish\-\_\-sound\-\_\-set\-\_\-frameno()}{p.}{fishsound_8h_a0d508075ecdd834ab5a4504f5e85f66b}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{fishsound.\-h@{fishsound.\-h}!fish\-\_\-sound\-\_\-set\-\_\-frameno@{fish\-\_\-sound\-\_\-set\-\_\-frameno}}
+\index{fish\-\_\-sound\-\_\-set\-\_\-frameno@{fish\-\_\-sound\-\_\-set\-\_\-frameno}!fishsound.h@{fishsound.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-set\-\_\-frameno}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-set\-\_\-frameno (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{long}]{frameno}
+\end{DoxyParamCaption}
+)}\label{fishsound_8h_a0d508075ecdd834ab5a4504f5e85f66b}
+
+
+Set the current frame number of a Fish\-Sound object. 
+
+When decoding from a seekable file, \doxyref{fish\-\_\-sound\-\_\-set\-\_\-frameno()}{p.}{fishsound_8h_a0d508075ecdd834ab5a4504f5e85f66b} should be called after any seek operations, otherwise the value returned by \doxyref{fish\-\_\-sound\-\_\-get\-\_\-frameno()}{p.}{fishsound_8h_ad991f9f6887487f5d833de9480bcbe43} will simply continue to increment. See also \doxyref{fish\-\_\-sound\-\_\-reset()}{p.}{fishsound_8h_a546a521c2c3c3a2ee614ae3981fbc29f}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle \\
+\hline
+{\em frameno} & The current frame number. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em -\/1} & Invalid {\itshape fsound} \\
+\hline
+\end{DoxyRetVals}

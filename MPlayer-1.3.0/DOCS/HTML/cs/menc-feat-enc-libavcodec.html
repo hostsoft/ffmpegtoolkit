@@ -1,0 +1,312 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.3. Enkódování s rodinou kodeků libavcodec</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="prev" href="menc-feat-telecine.html" title="7.2. Jak naložit s telecine a prokladem v NTSC DVD"><link rel="next" href="menc-feat-xvid.html" title="7.4. Enkódování pomocí kodeku Xvid"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-video-codecs" title="7.3.1. Video kodeky libavcodec"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-audio-codecs" title="7.3.2. Audio kodeky libavcodec"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-dvd-mpeg4-lavc-encoding-options" title="7.3.3. Enkódovací volby libavcodecu"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-mpeg4-lavc-example-settings" title="7.3.4. Příklady nastavení enkódování"><link rel="subsection" href="menc-feat-enc-libavcodec.html#custommatrices" title="7.3.5. Uživatelské inter/intra matice"><link rel="subsection" href="menc-feat-enc-libavcodec.html#menc-feat-dvd-mpeg4-example" title="7.3.6. Příklad"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.3. Enkódování s rodinou kodeků <code class="systemitem">libavcodec</code>
+</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-telecine.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 7. Enkódování s <span class="application">MEncoder</span>em</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-xvid.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-enc-libavcodec"></a>7.3. Enkódování s rodinou kodeků <code class="systemitem">libavcodec</code>
+</h2></div></div></div><p>
+<code class="systemitem">libavcodec</code>
+zajišťuje jednoduché enkódování do mnoha zajímavých video a audio formátů.
+Můžete enkódovat do následujících kodeků (více méně aktuální):
+
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-enc-libavcodec-video-codecs"></a>7.3.1. Video kodeky
+<code class="systemitem">libavcodec</code></h3></div></div></div><p>
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Jméno video kodeku</th><th>Popis</th></tr></thead><tbody><tr><td>mjpeg</td><td>Motion JPEG</td></tr><tr><td>ljpeg</td><td>lossless (bezztrátový) JPEG</td></tr><tr><td>jpegls</td><td>JPEG LS</td></tr><tr><td>targa</td><td>Targa obrázek</td></tr><tr><td>gif</td><td>GIF obrázek</td></tr><tr><td>bmp</td><td>BMP obrázek</td></tr><tr><td>png</td><td>PNG obrázek</td></tr><tr><td>h261</td><td>H.261</td></tr><tr><td>h263</td><td>H.263</td></tr><tr><td>h263p</td><td>H.263+</td></tr><tr><td>mpeg4</td><td>standardní ISO MPEG-4 (DivX, Xvid kompatibilní)</td></tr><tr><td>msmpeg4</td><td>prvotní MPEG-4 varianta od MS, v3 (DivX3)</td></tr><tr><td>msmpeg4v2</td><td>prvotní MPEG-4 od MS, v2 (použitý ve starých ASF souborech)</td></tr><tr><td>wmv1</td><td>Windows Media Video, verze 1 (WMV7)</td></tr><tr><td>wmv2</td><td>Windows Media Video, verze 2 (WMV8)</td></tr><tr><td>rv10</td><td>RealVideo 1.0</td></tr><tr><td>rv20</td><td>RealVideo 2.0</td></tr><tr><td>mpeg1video</td><td>MPEG-1 video</td></tr><tr><td>mpeg2video</td><td>MPEG-2 video</td></tr><tr><td>huffyuv</td><td>bezztrátová komprese</td></tr><tr><td>ffvhuff</td><td>FFmpeg modifikovaná huffyuv bezztrátová komprese</td></tr><tr><td>asv1</td><td>ASUS Video v1</td></tr><tr><td>asv2</td><td>ASUS Video v2</td></tr><tr><td>ffv1</td><td>bezztrátový video kodek z FFmpeg</td></tr><tr><td>svq1</td><td>Sorenson video 1</td></tr><tr><td>flv</td><td>Sorenson H.263 používaný ve Flash Video</td></tr><tr><td>flashsv</td><td>Flash Screen Video</td></tr><tr><td>dvvideo</td><td>Sony Digital Video</td></tr><tr><td>snow</td><td>Experimentální vlnkově orientovaný kodek z FFmpeg</td></tr><tr><td>zbmv</td><td>Zip Blocks Motion Video</td></tr></tbody></table></div><p>
+
+První pole obsahuje názvy kodeků, které můžete přiřadit konfiguračnímu parametru
+<code class="literal">vcodec</code>,
+např: <tt class="option">-lavcopts vcodec=msmpeg4</tt>
+</p><div class="informalexample"><p>
+Příklad s MJPEG kompresí:
+</p><pre class="screen">
+mencoder dvd://2 -o <em class="replaceable"><code>titul2.avi</code></em> -ovc lavc -lavcopts vcodec=mjpeg -oac copy
+</pre><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-enc-libavcodec-audio-codecs"></a>7.3.2. Audio kodeky
+<code class="systemitem">libavcodec</code></h3></div></div></div><p>
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Jméno audio kodeku</th><th>Popis</th></tr></thead><tbody><tr><td>ac3</td><td>Dolby Digital (AC-3)</td></tr><tr><td>adpcm_*</td><td>Adaptivní PCM formáty – viz pomocnou tabulku</td></tr><tr><td>flac</td><td>Free Lossless Audio Codec (FLAC)</td></tr><tr><td>g726</td><td>G.726 ADPCM</td></tr><tr><td>libamr_nb</td><td>3GPP Adaptive Multi-Rate (AMR) narrow-band</td></tr><tr><td>libamr_wb</td><td>3GPP Adaptive Multi-Rate (AMR) wide-band</td></tr><tr><td>libfaac</td><td>Advanced Audio Coding (AAC) – používá FAAC</td></tr><tr><td>libgsm</td><td>ETSI GSM 06.10 plný rozsah</td></tr><tr><td>libgsm_ms</td><td>Microsoft GSM</td></tr><tr><td>libmp3lame</td><td>MPEG-1 audio layer 3 (MP3) – používá LAME</td></tr><tr><td>mp2</td><td>MPEG-1 audio layer 2 (MP2)</td></tr><tr><td>pcm_*</td><td>PCM formáty – viz pomocnou tabulku</td></tr><tr><td>adpcm_ima_wav</td><td>IMA adaptivní PCM (4 bity na vzorek, komprese 4:1)</td></tr><tr><td>sonic</td><td>experimentální FFmpeg ztrátový kodek</td></tr><tr><td>roq_dpcm</td><td>Id Software RoQ DPCM</td></tr><tr><td>sonicls</td><td>experimentální FFmpeg bezztrátový kodek</td></tr><tr><td>vorbis</td><td>Vorbis</td></tr><tr><td>wmav1</td><td>Windows Media Audio v1</td></tr><tr><td>wmav2</td><td>Windows Media Audio v2</td></tr></tbody></table></div><p>
+
+Vprvním sloupci naleznate jména kodeků, které byste měli přiřadit parametru
+<code class="literal">acodec</code>, například: <tt class="option">-lavcopts acodec=ac3</tt>
+</p><div class="informalexample"><p>
+Příklad s kompresí AC–3:
+</p><pre class="screen">
+mencoder dvd://2 -o <em class="replaceable"><code>titul2.avi</code></em> -oac lavc -lavcopts acodec=ac3 -ovc copy
+</pre><p>
+</p></div><p>
+Narozdíl od jejích videokodeků,  audio kodeky z knihovny
+<code class="systemitem">libavcodec</code>
+neprovádějí inteligentní rozdělení přidělených bitů,
+jelikož jim chybí byť jen minimální psychoakustický model (pokud vůbec),
+který obsahuje většina implementací ostatních kodeků.
+Vězte však, že všechny tyto kodeky zvuku jsou velmi rychlé a pracují
+bez potíží všude, kde máte <span class="application">MEncoder</span> se
+zakompilovanou knihovnou <code class="systemitem">libavcodec</code>
+(což je naprostá většina případů) a nezávisejí na externích knihovnách.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-enc-libavcodec-audio-codecs-pcmadpcm"></a>7.3.2.1. Pomocná tabulka pro PCM/ADPCM formát</h4></div></div></div><p>
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Název PCM/ADPCM kodeku</th><th>Popis</th></tr></thead><tbody><tr><td>pcm_s32le</td><td>signed 32-bit little-endian</td></tr><tr><td>pcm_s32be</td><td>signed 32-bit big-endian</td></tr><tr><td>pcm_u32le</td><td>unsigned 32-bit little-endian</td></tr><tr><td>pcm_u32be</td><td>unsigned 32-bit big-endian</td></tr><tr><td>pcm_s24le</td><td>signed 24-bit little-endian</td></tr><tr><td>pcm_s24be</td><td>signed 24-bit big-endian</td></tr><tr><td>pcm_u24le</td><td>unsigned 24-bit little-endian</td></tr><tr><td>pcm_u24be</td><td>unsigned 24-bit big-endian</td></tr><tr><td>pcm_s16le</td><td>signed 16-bit little-endian</td></tr><tr><td>pcm_s16be</td><td>signed 16-bit big-endian</td></tr><tr><td>pcm_u16le</td><td>unsigned 16-bit little-endian</td></tr><tr><td>pcm_u16be</td><td>unsigned 16-bit big-endian</td></tr><tr><td>pcm_s8</td><td>signed 8-bit</td></tr><tr><td>pcm_u8</td><td>unsigned 8-bit</td></tr><tr><td>pcm_alaw</td><td>G.711 A-LAW </td></tr><tr><td>pcm_mulaw</td><td>G.711 μ-LAW</td></tr><tr><td>pcm_s24daud</td><td>signed 24-bit D-Cinema Audio format</td></tr><tr><td>pcm_zork</td><td>Activision Zork Nemesis</td></tr><tr><td>adpcm_ima_qt</td><td>Apple QuickTime</td></tr><tr><td>adpcm_ima_wav</td><td>Microsoft/IBM WAVE</td></tr><tr><td>adpcm_ima_dk3</td><td>Duck DK3</td></tr><tr><td>adpcm_ima_dk4</td><td>Duck DK4</td></tr><tr><td>adpcm_ima_ws</td><td>Westwood Studios</td></tr><tr><td>adpcm_ima_smjpeg</td><td>SDL Motion JPEG</td></tr><tr><td>adpcm_ms</td><td>Microsoft</td></tr><tr><td>adpcm_4xm</td><td>4X Technologies</td></tr><tr><td>adpcm_xa</td><td>Phillips Yellow Book CD-ROM eXtended Architecture</td></tr><tr><td>adpcm_ea</td><td>Electronic Arts</td></tr><tr><td>adpcm_ct</td><td>Creative 16-&gt;4-bit</td></tr><tr><td>adpcm_swf</td><td>Adobe Shockwave Flash</td></tr><tr><td>adpcm_yamaha</td><td>Yamaha</td></tr><tr><td>adpcm_sbpro_4</td><td>Creative VOC SoundBlaster Pro 8-&gt;4-bit</td></tr><tr><td>adpcm_sbpro_3</td><td>Creative VOC SoundBlaster Pro 8-&gt;2.6-bit</td></tr><tr><td>adpcm_sbpro_2</td><td>Creative VOC SoundBlaster Pro 8-&gt;2-bit</td></tr><tr><td>adpcm_thp</td><td>Nintendo GameCube FMV THP</td></tr><tr><td>adpcm_adx</td><td>Sega/CRI ADX</td></tr></tbody></table></div><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-dvd-mpeg4-lavc-encoding-options"></a>7.3.3. Enkódovací volby libavcodecu</h3></div></div></div><p>
+V ideálním případě byste asi chtěli jen říct enkodéru, aby se přepnul do
+režimu "vysoká kvalita" a šel na to.
+To by bylo jistě hezké, ale naneštěstí je to těžké zavést, jelikož různé
+volby enkódování vedou k různé kvalitě v závislosti na zdrojovém materiálu.
+To proto, že komprese závisí na vizuálních vlastnostech daného videa.
+Například anime a živá akce mají zcela rozdílné vlastnosti a tedy vyžadují
+odlišné volby pro dosažení optimálního enkódování.
+Dobrá zpráva je, že některé volby by nikdy neměly chybět, jako
+<tt class="option">mbd=2</tt>, <tt class="option">trell</tt> a <tt class="option">v4mv</tt>.
+Podrobný popis obvyklých enkódovacích voleb naleznete níže.
+</p><div class="itemizedlist"><p class="title"><b>Volby k nastavení:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>vmax_b_frames</strong></span>: 1 nebo 2 je v pořádku,
+  v závislosti na filmu.
+  Poznamenejme, že pokud chcete mít svá videa dekódovatelná kodekem DivX5,
+  budete muset zapnout podporu uzavřeného GOP, pomocí volby
+  <code class="systemitem">libavcodec</code>u <tt class="option">cgop</tt>,
+  ale budete také muset vypnout detekci scény, což není dobrý nápad, jelikož
+  tak trochu zhoršíte efektivitu enkódování.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vb_strategy=1</strong></span>: pomáhá ve scénách s rychlým
+  pohybem.
+  Vyžaduje vmax_b_frames &gt;= 2.
+  V některých videích může vmax_b_frames snížit kvalitu, ale vmax_b_frames=2
+  spolu s vb_strategy=1 pomůže.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>dia</strong></span>: okruh vyhledávání pohybu. Čím větší, tím
+  lepší a pomalejší.
+  Záporné hodnoty mají úplně jiný význam.
+  Dobrými hodnotami jsou -1 pro rychlé enkódování, nebo 2-4 pro pomalejší.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>predia</strong></span>: předprůchod pro vyhledávání pohybu.
+  Není tak důležitý jako dia. Dobré hodnoty jsou 1 (výchozí) až 4. Vyžaduje
+  preme=2, aby byla opravdu k něčemu.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>cmp, subcmp, precmp</strong></span>: Porovnávací funkce pro
+  odhad pohybu.
+  Experimentujte s hodnotami 0 (výchozí), 2 (hadamard), 3 (dct) a 6 (omezení
+  datového toku).
+  0 je nejrychlejší a dostatečná pro precmp.
+  Pro cmp a subcmp je 2 dobrá pro anime a 3 zase pro živou akci.
+  6 může, ale nemusí být o něco lepší, ale je pomalá.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>last_pred</strong></span>: Počet prediktorů pohybu
+  přebíraných z předchozího snímku.
+  1-3 nebo tak pomůžou za cenu menšího zdržení.
+  Vyšší hodnoty jsou však pomalé a nepřináší žádný další užitek.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>cbp, mv0</strong></span>: Ovládá výběr makrobloků.
+  Malá ztráta rychlosti za malý zisk kvality.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>qprd</strong></span>: adaptivní kvantizace založená na
+  komplexnosti makrobloku.
+  Může pomoci i uškodit v závislosti na videu a ostatních volbách.
+  Toto může způsobovat artefakty, pokud nenastavíte vqmax na nějakou rozumně
+  malou hodnotu (6 je dobrá, možná byste ale měli jít až na 4); vqmin=1 může
+  také pomoci.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>qns</strong></span>: velmi pomalá, zvlášť v kombinaci
+  s qprd.
+  Tato volba nutí enkodér minimalizovat šum díky kompresi artefaktů, místo aby
+  se snažil striktně zachovávat věrnost videa. Nepoužívejte ji, pokud jste již
+  nezkusili všechno ostatní kam až to šlo a výsledek přesto není dost dobrý.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vqcomp</strong></span>: Vylepšení ovládání datového toku.
+  Dobré hodnoty se liší podle videa. Můžete to bezpečně ponechat jak to je,
+  pokud chcete.
+  Snížením vqcomp pustíte více bitů do scén s nízkou komplexností, zvýšením je
+  pošlete do scén s vysokou komplexností (výchozí: 0.5, rozsah: 0-1. doporučený
+  rozsah: 0.5-0.7).
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vlelim, vcelim</strong></span>: Nastaví jediný koeficient
+  prahu eliminace pro jasové a barevné roviny.
+  Ty jsou enkódovány odděleně ve všech MPEGu podobných algoritmech.
+  Myšlenka stojící za těmito volbami je použití dobré heuristiky pro určení,
+  zda je změna v bloku menší než vámi nastavený práh a v tom případě se blok
+  enkóduje jako "nezměněný".
+  To šetří bity a možná i zrychlí enkódování. vlelim=-4 a vcelim=9 se zdají být
+  dobré pro hrané filmy, ale příliš nepomohou s anime; pokud enkódujete
+  animované vido, měli byste je asi nechat beze změn.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>qpel</strong></span>: Odhad pohybu s přesností na čtvrt
+  pixelu. MPEG-4 používá přesnost na půl pixelu jako výchozí při vyhledávání
+  pohybu, proto je tato volba spojena s určitou režií, jelikož se do výstupního
+  souboru ukládá více informací.
+  Kompresní zisk/ztráta závisí na filmu, ale obvykle to není příliš efektivní
+  na anime.
+  qpel vždy způsobí zvýšení výpočetní náročnosti dekódování (v praxi +25% času
+  CPU).
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>psnr</strong></span>: neovlivní aktuální enkódování, ale
+  zaznamená typ/velikost/kvalitu každého snímku do log souboru a na konci vypíše
+  souhrnný PSNR (odstup signálu od šumu).
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>Volby se kterými nedoporučujeme si hrát:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>vme</strong></span>: Výchozí je nejlepší.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>lumi_mask, dark_mask</strong></span>: Psychovizuálně
+  adaptivní kvantizace.
+  Nehrajte si s těmito volbami, pokud vám jde o kvalitu. Rozumné hodnoty mohou
+  být efektivní ve vašem případě, ale pozor, je to velmi subjektivní.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>scplx_mask</strong></span>: Snaží se předcházet blokovým
+  artefaktům, ale postprocesing je lepší.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-mpeg4-lavc-example-settings"></a>7.3.4. Příklady nastavení enkódování</h3></div></div></div><p>
+Následující nastavení jsou příklady nastavení různých kombinací voleb
+enkodéru, které ovlivňují poměr rychlost versus kvalita při shodném
+cílovém datovém toku.
+</p><p>
+Veškerá nastavení byla testována na video vzorku 720x448 @30000/1001
+snímků za sekundu, cílový datový tok byl 900kbps a prováděly se na
+AMD-64 3400+ při 2400 MHz v režimu 64 bitů.
+Každá kombinace nastavení má uvedenu změřenou rychlost enkódování
+(ve snímcích za sekundu) a ztrátu PSNR (v dB) oproti nastavení
+"velmi vysoká kvalita".
+Rozumějte však že, v závislosti na vašem zdrojovém materiálu, typu
+počítače a pokrokům ve vývoji, můžete dospět k velmi odlišným výsledkům.
+</p><p>
+</p><div class="informaltable"><table border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Popis</th><th>Volby</th><th>Rychlost [fps]</th><th>Relativní ztráta PSNR [dB]</th></tr></thead><tbody><tr><td>Velmi vysoká kvalita</td><td><tt class="option">vcodec=mpeg4:mbd=2:mv0:trell:v4mv:cbp:last_pred=3:predia=2:dia=2:vmax_b_frames=2:vb_strategy=1:precmp=2:cmp=2:subcmp=2:preme=2:qns=2</tt></td><td>6</td><td>0</td></tr><tr><td>Vysoká kvalita</td><td><tt class="option">vcodec=mpeg4:mbd=2:trell:v4mv:last_pred=2:dia=-1:vmax_b_frames=2:vb_strategy=1:cmp=3:subcmp=3:precmp=0:vqcomp=0.6:turbo</tt></td><td>15</td><td>-0.5</td></tr><tr><td>Rychlé enkódování</td><td><tt class="option">vcodec=mpeg4:mbd=2:trell:v4mv:turbo</tt></td><td>42</td><td>-0.74</td></tr><tr><td>Enkódování v reálném čase</td><td><tt class="option">vcodec=mpeg4:mbd=2:turbo</tt></td><td>54</td><td>-1.21</td></tr></tbody></table></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="custommatrices"></a>7.3.5. Uživatelské inter/intra matice</h3></div></div></div><p>
+Díky této vlastnosti
+<code class="systemitem">libavcodec</code>u
+můžete nastavit uživatelskou inter (I-snímky/klíčové snímky) a intra
+(P-snímky/predikované (rozumějte vypočítané) snímky) matice. To je podporováno
+mnoha kodeky:
+<code class="systemitem">mpeg1video</code> a <code class="systemitem">mpeg2video</code>
+jsou hlášeny jako funkční.
+</p><p>
+Typické použití této vlastnosti je nastavení matic preferovaných
+<a class="ulink" href="http://www.kvcd.net/" target="_top">KVCD</a> specifikacemi.
+</p><p>
+<span class="bold"><strong>Kvantizační Matice KVCD "Notch":</strong></span>
+</p><p>
+Intra:
+</p><pre class="screen">
+ 8  9 12 22 26 27 29 34
+ 9 10 14 26 27 29 34 37
+12 14 18 27 29 34 37 38
+22 26 27 31 36 37 38 40
+26 27 29 36 39 38 40 48
+27 29 34 37 38 40 48 58
+29 34 37 38 40 48 58 69
+34 37 38 40 48 58 69 79
+</pre><p>
+
+Inter:
+</p><pre class="screen">
+16 18 20 22 24 26 28 30
+18 20 22 24 26 28 30 32
+20 22 24 26 28 30 32 34
+22 24 26 30 32 32 34 36
+24 26 28 32 34 34 36 38
+26 28 30 32 34 36 38 40
+28 30 32 34 36 38 42 42
+30 32 34 36 38 40 42 44
+</pre><p>
+</p><p>
+Použití:
+</p><pre class="screen">
+$ mencoder <em class="replaceable"><code>vstup.avi</code></em> -o <em class="replaceable"><code>výstup.avi</code></em> -oac copy -ovc lavc \
+    -lavcopts inter_matrix=...:intra_matrix=...
+</pre><p>
+</p><p>
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>vstup.avi</code></em> -ovc lavc -lavcopts \
+vcodec=mpeg2video:intra_matrix=8,9,12,22,26,27,29,34,9,10,14,26,27,29,34,37,\
+12,14,18,27,29,34,37,38,22,26,27,31,36,37,38,40,26,27,29,36,39,38,40,48,27,\
+29,34,37,38,40,48,58,29,34,37,38,40,48,58,69,34,37,38,40,48,58,69,79\
+:inter_matrix=16,18,20,22,24,26,28,30,18,20,22,24,26,28,30,32,20,22,24,26,\
+28,30,32,34,22,24,26,30,32,32,34,36,24,26,28,32,34,34,36,38,26,28,30,32,34,\
+36,38,40,28,30,32,34,36,38,42,42,30,32,34,36,38,40,42,44 -oac copy -o svcd.mpg
+</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-dvd-mpeg4-example"></a>7.3.6. Příklad</h3></div></div></div><p>
+Takže jste si koupili zbrusu novou kopii filmu Harry Potter a Tajemná komnata
+(širokoúhlou verzi samozřejmě) a chcete si toto DVD ripnout, takže si jej
+můžete přidat do svého Domácího PC kina. Je to region 1 DVD, takže je
+v NTSC. Níže uvedený příklad je stále vhodný i pro PAL, jen musíte vynechat
+<tt class="option">-ofps 24000/1001</tt> (protože výstupní snímková rychlost je
+shodná se vstupní) a přirozeně budou rozdílné souřadnice pro ořez.
+</p><p>
+Po spuštění <tt class="option">mplayer dvd://1</tt>, postupujeme podle informací
+obsažených v sekci <a class="link" href="menc-feat-telecine.html" title="7.2. Jak naložit s telecine a prokladem v NTSC DVD">Jak naložit s telecine
+a prokladem v NTSC DVD</a> a zjistíme že je to 24000/1001 neprokládané
+video, takže nepotřebujeme použít inverzní telecine filtr, jako je
+<tt class="option">pullup</tt> nebo <tt class="option">filmdint</tt>.
+</p><p><a name="menc-feat-dvd-mpeg4-example-crop"></a>
+Dále musíme zjistit vhodný ořezový obdélník, takže použijeme filtr cropdetect:
+</p><pre class="screen">mplayer dvd://1 -vf cropdetect</pre><p>
+Ujistěte se, že jste přešli přes zaplněný snímek (nějakou jasnou scénu
+mimo úvodní a koncové titulky) a
+v konzoli <span class="application">MPlayer</span>u uvidíte:
+</p><pre class="screen">crop area: X: 0..719  Y: 57..419  (-vf crop=720:362:0:58)</pre><p>
+Potom přehrajeme film s tímto filtrem, abychom otestovali jeho správnost:
+</p><pre class="screen">mplayer dvd://1 -vf crop=720:362:0:58</pre><p>
+A zjistíme, že to vypadá zcela v pořádku. Dále se ujistíme, že šířka i výška
+jsou násobky 16. Šířka je v pořádku, výška ovšem ne. Protože jsme nepropadli
+v sedmé třídě z matematiky, víme, že nejbližším násobkem 16 nižším než 362 je
+352.
+</p><p>
+Mohli bychom použít <tt class="option">crop=720:352:0:58</tt>, ale bude lepší
+ustřihnout kousek nahoře i dole, takže zachováme střed. Zkrátili jsme výšku
+o 10 pixelů, ale nechceme zvýšit odsazení v ose y o 5 pixelů, protože je to
+liché číslo, což by nepříznivě ovlivnilo kvalitu. Místo toho zvýšíme odsazení
+v ose y o 4 pixely:
+</p><pre class="screen">mplayer dvd://1 -vf crop=720:352:0:62</pre><p>
+Další důvod pro odstřižení pixelů shora i zdola je to, že si můžeme být jisti
+odstřižením napůl černých pixelů pokud existují. Pokud je však vaše video
+telecinováno, ujistěte se, že máte v řetězu filtrů <tt class="option">pullup</tt>
+filtr (nebo jiný filtr pro inverzi telecine, který hodláte použít) ještě před
+odstraněním prokladu a ořezem. (Pokud se rozhodnete zachovat vaše video
+prokládané, pak se ujistěte, že vaše vertikální odsazení (offset)
+je násobkem 4.)
+</p><p>
+Pokud si děláte starosti se ztrátou těch 10 pixelů, možná raději snížíte
+rozměry na nejbližší násobek 16. Řetězec filtrů by pak vypadal asi takto:
+</p><pre class="screen">-vf crop=720:362:0:58,scale=720:352</pre><p>
+Takto malé zmenšení videa bude znamenat ztrátu malého množství detailů,
+což bude pravděpodobně stěží postřehnutelné. Zvětšování by naopak vedlo
+ke snížení kvality (pokud byste nezvýšili datový tok). Ořez odstraní tyto
+pixely úplně. To je jedna z věcí, kterou byste si měli uvážit pro každý případ
+zvlášť. Například pokud bylo DVD video vyrobeno pro televizi, měli byste se
+vyvarovat vertikálnímu škálování, jelikož počet řádků odpovídá
+originální nahrávce.
+</p><p>
+Při prohlídce jsme zjistili, že video je poměrně akční, s vysokým počtem
+detailů, takže jsme zvolili datový tok 2400 Kbitů.
+</p><p>
+Nyní jsme připraveni provést dvouprůchodové enkódování. Průchod jedna:
+</p><pre class="screen">
++mencoder dvd://1 -ofps 24000/1001 -oac copy -o <em class="replaceable"><code>Harry_Potter_2.avi</code></em> -ovc lavc \
+    -lavcopts vcodec=mpeg4:vbitrate=2400:v4mv:mbd=2:trell:cmp=3:subcmp=3:autoaspect:vpass=1 \
+    -vf pullup,softskip,crop=720:352:0:62,hqdn3d=2:1:2
+</pre><p>
+A průchod dva je stejný, jen nastavíme <tt class="option">vpass=2</tt>:
+</p><pre class="screen">
+mencoder dvd://1 -ofps 24000/1001 -oac copy -o <em class="replaceable"><code>Harry_Potter_2.avi</code></em> -ovc lavc \
+    -lavcopts vcodec=mpeg4:vbitrate=2400:v4mv:mbd=2:trell:cmp=3:subcmp=3:autoaspect:vpass=2 \
+    -vf pullup,softskip,crop=720:352:0:62,hqdn3d=2:1:2
+</pre><p>
+</p><p>
+Volby <tt class="option">v4mv:mbd=2:trell</tt> velmi zvýší kvalitu za cenu časové
+náročnosti enkódování. Vcelku není důvod tyto volby vypustit, pokud je
+primárním cílem kvalita. Volby <tt class="option">cmp=3:subcmp=3</tt>
+vyberou porovnávací funkci, která poskytuje lepší kvalitu, než výchozí.
+S tímto parametrem můžete zkusit experimentovat (nahlédněte do man stránky pro
+seznam možných hodnot), jelikož různé funkce mohou mít velký vliv na kvalitu
+v závislosti na zdrojovém materiálu. Například pokud zjistíte, že
+<code class="systemitem">libavcodec</code> produkuje příliš mnoho
+čtverečkových artefaktů, můžete zkusit zvolit experimentální NSSE jako
+porovnávací funkci přes <tt class="option">*cmp=10</tt>.
+</p><p>
+V případě tohoto filmu bude výsledné AVI dlouhé 138 minut a veliké kolem 3GB.
+A protože jste řekli, že na velikosti nezáleží, je to přijatelná velikost.
+Ale pokud byste jej chtěli menší, můžete zkusit nižší datový tok.
+Efekt zvyšování datového toku se totiž neustále snižuje, takže zatímco je
+zlepšení po zvýšení z 1800 Kbitů na 2000 Kbitů zjevné, nemusí být již tak
+velké nad 2000 Kbitů. Beze všeho s tím experimentujte, dokud nebudete
+spokojeni.
+</p><p>
+Jelikož jsme protáhli video odšumovacím filtrem, měli bychom jej trochu přidat
+během přehrávání. To, spolu s <tt class="option">spp</tt> post-procesním filtrem,
+znatelně zvýší vnímanou kvalitu a pomůže odstranit čtverečkové artefakty ve
+videu. S <span class="application">MPlayer</span>ovou volbou <tt class="option">autoq</tt>
+může být množství postprocesingu prováděného filtrem spp přizpůsobováno
+vytížení CPU. V tuto chvíli rovněž můžete provést korekci gama a/nebo barevnou
+korekci k dosažení nejlepších výsledků. Například:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>Harry_Potter_2.avi</code></em> -vf spp,noise=9ah:5ah,eq2=1.2 -autoq 3
+</pre><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-telecine.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-xvid.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">7.2. Jak naložit s telecine a prokladem v NTSC DVD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 7.4. Enkódování pomocí kodeku <code class="systemitem">Xvid</code>
+</td></tr></table></div></body></html>

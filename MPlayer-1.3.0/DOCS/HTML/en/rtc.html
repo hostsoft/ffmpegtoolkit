@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.6. RTC</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="install.html" title="Chapter 2. Installation"><link rel="prev" href="codec-installation.html" title="2.5. Codec installation"><link rel="next" href="usage.html" title="Chapter 3. Usage"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.6. RTC</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="codec-installation.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="usage.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="rtc"></a>2.6. RTC</h2></div></div></div><p>
+There are three timing methods in <span class="application">MPlayer</span>.
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>To use the old method</strong></span>, you don't have to do
+  anything. It uses <code class="systemitem">usleep()</code> to tune
+  A/V sync, with +/- 10ms accuracy. However sometimes the sync has to be
+  tuned even finer.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>The new timer</strong></span> code uses the RTC (RealTime
+  Clock) for this task, because it has precise 1ms timers.
+  The <tt class="option">-rtc</tt> option enables it,
+  but a properly set up kernel is required.
+  If you are running kernel 2.4.19pre8 or later you can adjust the maximum RTC
+  frequency for normal users through the <code class="systemitem">/proc
+  </code> file system. Use one of the following two commands to
+  enable RTC for normal users:
+  </p><pre class="screen">echo 1024 &gt; /proc/sys/dev/rtc/max-user-freq</pre><p>
+  </p><pre class="screen">sysctl dev/rtc/max-user-freq=1024</pre><p>
+  You can make this setting permanent by adding the latter to
+  <tt class="filename">/etc/sysctl.conf</tt>.
+  </p><p>
+  You can see the new timer's efficiency in the status line.
+  The power management functions of some notebook BIOSes with speedstep CPUs
+  interact badly with RTC. Audio and video may get out of sync. Plugging the
+  external power connector in before you power up your notebook seems to help.
+  In some hardware combinations (confirmed during usage of non-DMA DVD drive
+  on an ALi1541 board) usage of the RTC timer causes skippy playback. It's
+  recommended to use the third method in these cases.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>The third timer code</strong></span> is turned on with the
+  <tt class="option">-softsleep</tt> option. It has the efficiency of the RTC, but it
+  doesn't use RTC. On the other hand, it requires more CPU.
+</p></li></ul></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="codec-installation.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="usage.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">2.5. Codec installation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. Usage</td></tr></table></div></body></html>

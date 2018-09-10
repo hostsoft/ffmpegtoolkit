@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. Wie Regressionstests mit Subversion durchgeführt werden</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="prev" href="bugreports_fix.html" title="A.2. Wie Fehler beseitigt werden"><link rel="next" href="bugreports_report.html" title="A.4. Wie Fehler berichtet werden"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. Wie Regressionstests mit Subversion durchgeführt werden</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">Zurück</a> </td><th width="60%" align="center">Anhang A. Wie Fehler (Bugs) berichtet werden</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. Wie Regressionstests mit Subversion durchgeführt werden</h2></div></div></div><p>
+      Ein Problem, das manchmal auftreten kann ist "es hat vorher funktioniert, jetzt
+      tut es das nicht mehr...".
+      Hier eine Schritt-für-Schritt-Verfahren, um herauszufinden, wann das Problem
+      aufgetreten ist. Dies ist <span class="bold"><strong>nichts</strong></span> für Gelegenheitsanwender.
+    </p><p>
+      Zuerst musst du dir MPlayers Sourcenverzeichnis aus dem Subversion-Repository besorgen.
+      Eine Anleitung hierzu findest du im
+      <a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html#svn" target="_top">Subversion-Abschnitt der Downloadseite</a>.
+    </p><p>
+      Du wirst dann im mplayer/-Verzeichnis ein Abbild des Subversion-Baums auf der Client-Seite
+      haben.
+      Führe jetzt ein Update für dieses Abbild auf das von dir gewünschte Datum durch:
+</p><pre class="screen">cd mplayer/
+svn update -r {"2004-08-23"}</pre><p>
+      Das Datumsformat ist YYYY-MM-DD HH:MM:SS.
+      Die Benutzung des Datumsformats stellt sicher, dass du in der Lage sein wirst,
+      Patches anhand des Datums, an dem sie eingespielt wurden, extrahieren kannst, wie im
+      <a class="ulink" href="http://mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">MPlayer-cvslog-Archiv</a>.
+    </p><p>
+      Gehe nun wie bei einem normalen Update vor:
+</p><pre class="screen">./configure
+make</pre><p>
+    </p><p>
+      Falls ein Nicht-Programmierer dies liest: Der schnellste Weg, zu dem Punkt zu
+      gelangen, bei dem das Problem auftrat ist eine Binärsuche - das bedeutet:
+      Suche das Datum der Bruchstelle, indem du das Suchintervall wiederholt halbierst.
+      Zum Beispiel, wenn das Problem 2003 auftrat, starte in der Mitte des Jahres und
+      frage "Ist das Problem schon da?".
+      Wenn ja, gehe zurück zum 1. April; wenn nicht, gehe zum 1. Oktober und so weiter.
+    </p><p>
+      Wenn du viel Festplattenspeicher frei hast (eine vollständige Compilierung
+      benötigt momentan 100 MB, und ungefähr 300-350 MB, wenn Debugging-Symbole mit
+      dabei sind), kopiere vor einem Update die älteste Version, von der bekannt ist,
+      dass sie funktioniert; das spart Zeit, wenn du zurückgehen musst.
+      (Es ist normalerweise nicht nötig, 'make distclean' vor einer erneuten Compilierung
+      einer früheren Version auszuführen. Wenn du also keine Backup-Kopie deines
+      Original-Sourcebaums machst, wirst du alles neu compilieren müssen, wenn du beim
+      gegenwärtigen wieder angekommen bist.)
+    </p><p>
+      Wenn du den Tag gefunden hast, an dem das Problem auftrat, fahre mit der Suche mit
+      dem mplayer-cvslog-Archiv (sortiert nach Datum) und einem genaueren svn update,
+      welches Stunde, Minute und Sekunde beinhaltet, fort:
+      </p><pre class="screen">svn update -r {"2004-08-23 15:17:25"}</pre><p>
+      Dies wird es dir leicht machen, exakt den verursachenden Patch zu finden.
+    </p><p>
+      Hast du den Patch gefunden, der Ursache des Problems ist, hast du fast gewonnen;
+      Berichte darüber im
+      <a class="ulink" href="http://bugzilla.mplayerhq.hu/" target="_top">MPlayer Bugzilla</a>-System oder melde
+      dich bei
+      <a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-Users</a>
+      an und mach es dort bekannt.
+      Es besteht die Chance, dass der Autor einspringt und eine Lösung vorschlägt.
+      Du kannst auch solange einen genauen Blick auf den Patch werfen, bis er genötigt ist,
+      zu offenbaren, wo der Fehler steckt :-).
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. Wie Fehler beseitigt werden </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> A.4. Wie Fehler berichtet werden</td></tr></table></div></body></html>

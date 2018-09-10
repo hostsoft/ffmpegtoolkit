@@ -1,0 +1,19 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.17. DirectFB/Matrox (dfbmga)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="directfb.html" title="4.16. DirectFB"><link rel="next" href="mpeg_decoders.html" title="4.18. MPEG декодеры"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.17. DirectFB/Matrox (dfbmga)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="directfb.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="mpeg_decoders.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dfbmga"></a>4.17. DirectFB/Matrox (dfbmga)</h2></div></div></div><p>
+Прочтите <a class="link" href="directfb.html" title="4.16. DirectFB">основной DirectFB</a> раздел для общей информации.
+</p><p>
+Этот драйвер вывода видео задействует CRTC2 (на втором мониторе[second head]) на картах
+Matrox G400/G450/G550, отображающий видео
+<span class="bold"><strong>независимо</strong></span> от первого монитора[first head].
+</p><p>
+Ville Syrjala имеет
+<a class="ulink" href="http://www.sci.fi/~syrjala/directfb/Matrox_TV-out_README.txt" target="_top">README</a>
+и
+<a class="ulink" href="http://www.sci.fi/~syrjala/directfb/matrox-tv-out-howto" target="_top">HOWTO</a>
+на своей странице, описывающие как задействовать вывод DirectFB TV на картах Matrox.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+Первая версия DirectFB, на которой удалось это сделать, была
+0.9.17 (имеющая ошибки, требует <code class="systemitem">surfacemanager</code>
+патч с указанного выше URL). Портирование кода CRTC2 в
+<a class="link" href="mga_vid.html" title="4.7. Matrox фреймбуфер (mga_vid)">mga_vid</a> планируется уже несколько лет,
+<a class="ulink" href="../../tech/patches.txt" target="_top">патчи</a> приветствуются.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="directfb.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="mpeg_decoders.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.16. DirectFB </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.18. MPEG декодеры</td></tr></table></div></body></html>

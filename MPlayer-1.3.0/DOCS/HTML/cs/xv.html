@@ -1,0 +1,160 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.2. Xv</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="mtrr.html" title="4.1. Nastavení MTRR"><link rel="next" href="dga.html" title="4.3. DGA"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="xv.html#tdfx" title="4.2.1. Karty 3dfx"><link rel="subsection" href="xv.html#s3" title="4.2.2. Karty S3"><link rel="subsection" href="xv.html#nvidia" title="4.2.3. Karty nVidia"><link rel="subsection" href="xv.html#ati" title="4.2.4. Karty ATI"><link rel="subsection" href="xv.html#neomagic" title="4.2.5. Karty NeoMagic"><link rel="subsection" href="xv.html#trident" title="4.2.6. Karty Trident"><link rel="subsection" href="xv.html#kyro" title="4.2.7. Karty Kyro/PowerVR"><link rel="subsection" href="xv.html#intel" title="4.2.8. Karty Intel"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.2. Xv</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mtrr.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="dga.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="xv"></a>4.2. Xv</h2></div></div></div><p>
+Pod XFree86 4.0.2, nebo novějším, můžete použít hardwarové YUV rutiny karty
+pomocí rozšíření XVideo. Přesně toto používá volba
+<tt class="option">-vo xv</tt>. Toto rozhraní také podporuje nastavování
+jasu/kontrastu/barevného tónu/atd. (pokud nepoužíváte strarý, pomalý DirectShow
+DivX kodek, který to podporuje všude), viz man stránka.
+</p><p>
+Abyste to zprovoznili, ujistěte se o následujícím:
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  Musíte používat XFree86 4.0.2 nebo novější (předchozí verze nemají XVideo)
+</p></li><li class="listitem"><p>
+  Vaše karta aktuálně podporuje hardwarovou akceleraci (moderní karty ano)
+</p></li><li class="listitem"><p>
+  X nahrává rozšíření XVideo. Zpráva ve <tt class="filename">/var/log/XFree86.0.log</tt>
+  vypadá asi takto:
+  </p><pre class="programlisting">(II) Loading extension XVideo</pre><p>
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+   Takto se nahraje pouze rozšíření pro XFree86. To je v dobré instalaci nahráno
+   vždy a neznamená to, že je načtena i podpora XVideo pro
+   <span class="bold"><strong>kartu</strong></span>!
+  </p></div><p>
+</p></li><li class="listitem"><p>
+  Vaše karta má podporu Xv pod Linuxem. Abyste si to ověřili, zkuste
+  <span class="command"><strong>xvinfo</strong></span>, které je součástí distribuce XFree86. Měl by se
+  vypsat dlouhý text podobný tomuto:
+  </p><pre class="screen">
+X-Video Extension version 2.2
+screen #0
+  Adaptor #0: "Savage Streams Engine"
+    number of ports: 1
+    port base: 43
+    operations supported: PutImage
+    supported visuals:
+      depth 16, visualID 0x22
+      depth 16, visualID 0x23
+    number of attributes: 5
+(...)
+    Number of image formats: 7
+      id: 0x32595559 (YUY2)
+        guid: 59555932-0000-0010-8000-00aa00389b71
+        bits per pixel: 16
+        number of planes: 1
+        type: YUV (packed)
+      id: 0x32315659 (YV12)
+        guid: 59563132-0000-0010-8000-00aa00389b71
+        bits per pixel: 12
+        number of planes: 3
+        type: YUV (planar)
+(...atd...)</pre><p>
+  Musí podporovat pixelové formáty YUY2 packed a YV12 planar, aby byla
+  použitelná s <span class="application">MPlayer</span>em.
+</p></li><li class="listitem"><p>
+  A nakonec si ověřte, jestli byl <span class="application">MPlayer</span> skompilován
+  s podporou 'xv'. Proveďte <span class="command"><strong>mplayer -vo help | grep xv </strong></span>.
+  Pokud byla skompilována podpora 'xv', měl by se objevi řádek podpobný tomuto:
+  </p><pre class="screen">  xv      X11/Xv</pre><p>
+</p></li></ol></div><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tdfx"></a>4.2.1. Karty 3dfx</h3></div></div></div><p>
+Starší ovladače 3dfx byly známy svými problémy s XVideo akcelerací a
+nepodporovaly barevné prostory YUY2 ani YV12. Ověřte, že máte XFree86
+verze 4.2.0 nebo vyšší, které pracuje dobře s YV12 a YUY2, zatímco předchozí
+verze, včetně 4.1.0, <span class="bold"><strong>padá s YV12</strong></span>.
+Pokud zažívate podivné situace při používání <tt class="option">-vo xv</tt>, zkuste SDL
+(má rovněž XVideo) a uvidíte, zda to pomůže. Prostudujte si sekci
+<a class="link" href="sdl.html" title="4.4. SDL">SDL</a> pro více informací.
+</p><p>
+<span class="bold"><strong>NEBO</strong></span>, zkuste NOVÉ
+<tt class="option">-vo tdfxfb</tt> rozhraní! Viz sekce
+<a class="link" href="tdfxfb.html" title="4.8. Podpora 3Dfx YUV">tdfxfb</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="s3"></a>4.2.2. Karty S3</h3></div></div></div><p>
+S3 Savage3D by měly fungovat dobře, ale pro Savage4 použijte XFree86 verze 4.0.3
+nebo vyšší (v případě problémů s obrazem, zkuste 16bpp). Stejně ajko S3 Virge:
+má sice podporu xv, ale karta samotná je velmi pomalá, takže ji raději prodejte.
+</p><p>
+Pro karty S3 Virge nyní existuje nativní framebuffer ovladač podobný
+tdfxfb. Nastavte si framebuffer (čili přidejte
+"<tt class="option">vga=792 video=vesa:mtrr</tt>" do příkazového řádku kernelu) a
+použijte <tt class="option">-vo s3fb</tt> (<tt class="option">-vf yuy2</tt> a
+<tt class="option">-dr</tt> rovněž pomůžou).
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+Zatím není jasné, kterým modelům Savage chybí podpora YV12 a konvertují
+ovladačem (pomalé). Pokud podezříváte kartu, opatřete si novější ovladač, nebo
+slušně požádejte v konferenci MPlayer-users o ovladač s MMX/3DNow!.
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="nvidia"></a>4.2.3. Karty nVidia</h3></div></div></div><p>
+nVidia není vždy pod Linuxem nejlepší volbou... Open-source ovladač
+v XFree86 podporuje většinu těchto karet, ale v některých případech musíte
+použít binární closed-source ovladač od nVidie, který je k dispozici na
+<a class="ulink" href="http://www.nvidia.com/object/linux.html" target="_top">serveru nVidia</a>.
+Tento ovladač budete potřebovat vždy, pokud zároveň chcete 3D akceleraci.
+</p><p>
+Karty Riva128 nemají podporu XVideo v nVidia ovladači z XFree86 :(
+Stěžujte si nVidii.
+</p><p>
+Ačkoli <span class="application">MPlayer</span> obsahuje
+<a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a> ovladač pro většinu nVidia karet, zatím je
+ve stavu beta verze a má jisté nedostatky. Více informací naleznete v sekci
+<a class="link" href="vidix.html#vidix-nvidia" title="4.15.5. Karty nVidia">nVidia VIDIX</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ati"></a>4.2.4. Karty ATI</h3></div></div></div><p>
+<a class="ulink" href="http://gatos.sf.net" target="_top">Ovladač GATOS</a>
+(který byste měli použít, pokud nemáte Rage128 nebo Radeon) má zapnutý VSYNC
+ve výchozím stavu. To znamená, že rychlost dekódování (!) je synchronizována
+s obnovovacím kmitočtem monitoru. Pokud se vám zdá přehrávání pomalé, zkuste
+nějak vypnout VSYNC, nebo nastavte obnovovací kmitočet na n*(snímková rychlost
+filmu) Hz.
+</p><p>
+Radeon VE - pokud potřebujete X, použijte pro tuto kartu XFree86 4.2.0 nebo
+vyšší. Není zde podpora pro TV out. Samozřejmě s
+<span class="application">MPlayer</span>em můžete mít s trochou štěstí
+<span class="bold"><strong>akcelerovaný</strong></span> display s nebo bez
+<span class="bold"><strong>TV výstupu</strong></span> a nepotřebujete žádné X knihovny.
+Přečtěte si sekci <a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="neomagic"></a>4.2.5. Karty NeoMagic</h3></div></div></div><p>
+Tyto karty lze nalézt v mnoha laptopech. Musíte použít XFree86 4.3.0 nebo
+vyšší, nebo použijte
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/NeoMagic-driver/" target="_top">ovladače s podporou Xv</a>
+od Stefana Seyfrieda.
+Stačí vybrat ten, který je vhodný pro vaši verzi XFree86.
+</p><p>
+XFree86 4.3.0 obsahuje podporu Xv, avšak Bohdan Horst poslal malý
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/NeoMagic-driver/neo_driver.patch" target="_top">patch</a>
+pro zdrojový kód XFree86, který zrychluje operace s framebufferem (čili XVideo)
+až čtyřikrát. Patch byl zařazen do XFree86 CVS a měl by být v další verzi
+vydané po 4.3.0.
+</p><p>
+Abyste mohli přehrávat obsah velikosti DVD, změňte svůj XF86Config takto:
+</p><pre class="programlisting">
+Section "Device"
+    [...]
+    Driver "neomagic"
+    <span class="emphasis"><em>Option "OverlayMem" "829440"</em></span>
+    [...]
+EndSection</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="trident"></a>4.2.6. Karty Trident</h3></div></div></div><p>
+Chcete-li používat Xv s kartou Trident, což nepracuje s 4.1.0,
+nainstalujte si XFree 4.2.0. 4.2.0 přidává podporu pro celoobrazovkové Xv
+pro kartu Cyberblade XP.
+</p><p>
+Alternativně, <span class="application">MPlayer</span> obsahuje
+<a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a> ovladač pro kartu Cyberblade/i1.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="kyro"></a>4.2.7. Karty Kyro/PowerVR</h3></div></div></div><p>
+Pokud chcete používat Xv s kartou založenou na čipu Kyro (například Hercules
+Prophet 4000XT), měli byste si stáhnout ovladače z
+<a class="ulink" href="http://www.powervr.com/" target="_top">PowerVR serveru</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="intel"></a>4.2.8. Karty Intel</h3></div></div></div><p>
+Tyto karty lze nalézt v mnoha laptopech. Doporučujeme aktuální Xorg.
+</p><p>
+Abyste umožnili přehrávání obsahu velikosti DVD (a větší), změňte svůj XF86Config/xorg.conf takto:
+</p><pre class="programlisting">
+Section "Device"
+    [...]
+    Driver "intel"
+    <span class="emphasis"><em>Option "LinearAlloc" "6144"</em></span>
+    [...]
+EndSection
+</pre><p>
+Vynechání této volby obvykle vede k chybě jako
+</p><pre class="screen">X11 error: BadAlloc (insufficient resources for operation)</pre><p>
+při pokusu použít <tt class="option">-vo xv</tt>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mtrr.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="dga.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.1. Nastavení MTRR </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.3. DGA</td></tr></table></div></body></html>

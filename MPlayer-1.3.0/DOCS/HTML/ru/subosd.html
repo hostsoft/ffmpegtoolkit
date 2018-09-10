@@ -1,0 +1,60 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.2. Субтитры и OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="usage.html" title="Глава 3. Использование"><link rel="prev" href="commandline.html" title="3.1. Командная строка"><link rel="next" href="control.html" title="3.3. Управление"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. Субтитры и OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="commandline.html">Пред.</a> </td><th width="60%" align="center">Глава 3. Использование</th><td width="20%" align="right"> <a accesskey="n" href="control.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="subosd"></a>3.2. Субтитры и OSD</h2></div></div></div><p>
+Вместе с фильмом <span class="application">MPlayer</span> может показывать и субтитры. В настоящий момент
+поддерживаются следующие форматы:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>VOBsub</p></li><li class="listitem"><p>OGM</p></li><li class="listitem"><p>CC (closed caption[скрытые титры])</p></li><li class="listitem"><p>MicroDVD</p></li><li class="listitem"><p>SubRip</p></li><li class="listitem"><p>SubViewer</p></li><li class="listitem"><p>Sami</p></li><li class="listitem"><p>VPlayer</p></li><li class="listitem"><p>RT</p></li><li class="listitem"><p>SSA</p></li><li class="listitem"><p>PJS (Phoenix Japanimation Society)</p></li><li class="listitem"><p>&gt;MPsub</p></li><li class="listitem"><p>AQTitle</p></li><li class="listitem"><p><a class="ulink" href="http://unicorn.us.com/jacosub/" target="_top">JACOsub</a></p></li></ul></div><p>
+</p><p>
+<span class="application">MPlayer</span> может конвертировать вышеперечисленные форматы
+субтитров (<span class="bold"><strong>кроме первых трёх</strong></span>) в следующие форматы
+с помощью соответствующих опций:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>MPsub: <tt class="option">-dumpmpsub</tt></p></li><li class="listitem"><p>SubRip: <tt class="option">-dumpsrtsub</tt></p></li><li class="listitem"><p>MicroDVD: <tt class="option">-dumpmicrodvdsub</tt></p></li><li class="listitem"><p>JACOsub: <tt class="option">-dumpjacosub</tt></p></li><li class="listitem"><p>Sami: <tt class="option">-dumpsami</tt></p></li></ul></div><p>
+</p><p>
+<span class="application">MEncoder</span> может выдавать DVD субтитры
+в <a class="link" href="menc-feat-extractsub.html" title="6.9. Извлечение DVD субтитров в файл VOBsub">VOBsub</a> формате.
+</p><p>
+Опции значительно различаются для различных форматов:
+</p><p><b>VOBsub субтитры. </b>
+VOBsub субтитры состоят из большого (несколько мегабайт) <tt class="filename">.SUB</tt> файла,
+и необязательных
+<tt class="filename">.IDX</tt> и/или <tt class="filename">.IFO</tt> файлов.
+Использование: если у Вас, например, есть файлы
+<tt class="filename"><em class="replaceable"><code>sample.sub</code></em></tt>,
+<tt class="filename"><em class="replaceable"><code>sample.ifo</code></em></tt> (необязательно),
+<tt class="filename"><em class="replaceable"><code>sample.idx</code></em></tt> - Вы должны указать
+<span class="application">MPlayer</span>'у опции <tt class="option">-vobsub sample [-vobsubid <em class="replaceable"><code>id</code></em>]</tt> (можно указать полный путь).
+Опция <tt class="option">-vobsubid</tt> похожа на <tt class="option">-sid</tt>
+для DVD, с её помощью, Вы можете выбирать между дорожками субтитров (языками).
+В случае, если <tt class="option">-vobsubid</tt> пропущена, MPlayer попытается использовать
+языки, полученные через опцию <tt class="option">-slang</tt> и перейти к пункту
+<code class="systemitem">langidx</code> в <tt class="filename">.IDX</tt> файле, чтобы выбрать язык субтитров. Если и это
+не удаётся, то субтитров не будет.
+</p><p><b>Другие субтитры. </b>
+Прочие форматы субтитров состоят из единого текстового файла, содержащего информацию
+о синхронизации, местоположении и тексте субтитра.
+Использование: Если у Вас есть, например, файл
+<tt class="filename"><em class="replaceable"><code>sample.txt</code></em></tt>,
+Вы должны указать опцию <tt class="option">-sub <em class="replaceable"><code>sample.txt</code></em></tt>
+(можно указать полный путь).
+</p><div class="variablelist"><p class="title"><b>Регулировка синхронизации и местоположения субтитров:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-subdelay <em class="replaceable"><code>sec</code></em></tt></span></dt><dd><p>
+    Задерживает субтитры на <tt class="option"><em class="replaceable"><code>sec</code></em></tt>
+    секунд. Это значение может быть отрицательным.
+  </p></dd><dt><span class="term"><tt class="option">-subfps <em class="replaceable"><code>RATE</code></em></tt></span></dt><dd><p>
+    Указывает количество кадров/сек для файла субтитров (вещественное число)
+  </p></dd><dt><span class="term"><tt class="option">-subpos <em class="replaceable"><code>0-100</code></em></tt></span></dt><dd><p>
+    Указывает позицию субтитров.
+  </p></dd></dl></div><p>
+Если Вы наблюдаете увеличивающуюся задержку между фильмом и субтитрами, используя
+файл субтитров в формате MicroDVD, наиболее вероятно, что частота кадров у фильма и файла
+субтитров не совпадают. Пожалуйста, обратите внимание, что формат MicroDVD
+использует абсолютные номера кадров для синхронизации, но в нем нет информациио частоте кадров
+и поэтому опция
+<tt class="option">-subfps</tt> не может использоваться с этим форматом.
+Вы должны, если хотите навсегда решить эту проблему, вручную конвертировать
+частоту кадров файла субтитров.
+<span class="application">MPlayer</span> может сделать для вас это преобразование:
+</p><pre class="screen">
+mplayer -dumpmicrodvdsub -fps <em class="replaceable"><code>subtitles_fps</code></em> -subfps <em class="replaceable"><code>avi_fps</code></em> \
+    -sub <em class="replaceable"><code>subtitle_filename</code></em> <em class="replaceable"><code>dummy.avi</code></em>
+</pre><p>
+</p><p>
+О DVD субтитрах, читайте в секции <a class="link" href="dvd.html" title="3.6. Воспроизведение DVD">DVD</a>.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="commandline.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="control.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. Командная строка </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 3.3. Управление</td></tr></table></div></body></html>

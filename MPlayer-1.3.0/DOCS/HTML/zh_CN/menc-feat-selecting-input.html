@@ -1,0 +1,27 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.2. 选择输入文件或设备</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="prev" href="menc-feat-selecting-codec.html" title="6.1. 选择编解码器及容器格式"><link rel="next" href="menc-feat-mpeg4.html" title='6.3. 编码为双通道MPEG-4 ("DivX")'><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. 选择输入文件或设备</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">上一页</a> </td><th width="60%" align="center">第 6 章 <span class="application">MEncoder</span>的基础用法</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-input"></a>6.2. 选择输入文件或设备</h2></div></div></div><p>
+<span class="application">MEncoder</span>可以从文件或直接从DVD或VCD的盘片进行编码。
+秩序在命令行中包含文件名以便从文件进行编码，或
+<tt class="option">dvd://</tt><em class="replaceable"><code>标题数</code></em>或
+<tt class="option">vcd://</tt><em class="replaceable"><code>轨道数</code></em>以便从DVD标题或VCD轨
+道进行编码。
+如果你已经把DVD复制到你的硬盘上（你可以使用像<span class="application">dvdbackup</span>
+这样的工具，大多数系统上都有），然后想从副本进行编码，你仍需使用
+<tt class="option">dvd://</tt>语法，加上附带了指向DVD副本的根目录的
+<tt class="option">-dvd-device</tt>选项。
+
+<tt class="option">-dvd-device</tt>及<tt class="option">-cdrom-device</tt>选项也能用于
+覆盖用来直接从光盘中直接读取数据的设备的路径，如果缺省的
+<tt class="filename">/dev/dvd</tt>及<tt class="filename">/dev/cdrom</tt>在你的系统上步工作
+的话。
+</p><p>
+当从DVD进行编码时，最好是选其中的一章或几章进行编码。
+为此你可以使用<tt class="option">-chapter</tt>选项。
+例如<tt class="option">-chapter</tt> <em class="replaceable"><code>1-4</code></em>将只编码DVD中的1至4章。
+如果你针对包含1400MB数据的两张CD进行编码，这将非常有用，因为你可以确定只在一章的边
+缘处分割，而不是在一个场景中间。
+</p><p>
+如果你有张被支持的电视卡，你也可以通过播放电视节目的设备进行编码。
+使用<tt class="option">tv://</tt><em class="replaceable"><code>channelnumber</code></em>为文件名，
+并用<tt class="option">-tv</tt>配置各种截取选项。
+DVB输入工作原理类似。
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. 选择编解码器及容器格式 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 6.3. 编码为双通道MPEG-4 ("DivX")</td></tr></table></div></body></html>

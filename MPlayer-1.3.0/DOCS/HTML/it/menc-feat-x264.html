@@ -1,0 +1,421 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.5. Encoding with the x264 codec</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="prev" href="menc-feat-xvid.html" title="7.4. Encoding with the Xvid codec"><link rel="next" href="menc-feat-video-for-windows.html" title="7.6.  Encoding with the Video For Windows codec family"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="subsection" href="menc-feat-x264.html#menc-feat-x264-encoding-options" title="7.5.1. Encoding options of x264"><link rel="subsection" href="menc-feat-x264.html#menc-feat-x264-example-settings" title="7.5.2. Encoding setting examples"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.5. Encoding with the
+  <code class="systemitem">x264</code> codec</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-xvid.html">Indietro</a> </td><th width="60%" align="center">Capitolo 7. La codifica con <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-video-for-windows.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-x264"></a>7.5. Encoding with the
+  <code class="systemitem">x264</code> codec</h2></div></div></div><p>
+<code class="systemitem">x264</code> is a free library for
+encoding H.264/AVC video streams.
+Before starting to encode, you need to
+<a class="link" href="codec_installation.html#x264" title="2.5.2. x264">set up <span class="application">MEncoder</span> to support it</a>.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-x264-encoding-options"></a>7.5.1. Encoding options of x264</h3></div></div></div><p>
+Please begin by reviewing the
+<code class="systemitem">x264</code> section of
+<span class="application">MPlayer</span>'s man page.
+This section is intended to be a supplement to the man page.
+Here you will find quick hints about which options are most
+likely to interest most people. The man page is more terse,
+but also more exhaustive, and it sometimes offers much better
+technical detail.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-x264-encoding-options-intro"></a>7.5.1.1. Introduction</h4></div></div></div><p>
+This guide considers two major categories of encoding options:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  Options which mainly trade off encoding time vs. quality
+</p></li><li class="listitem"><p>
+  Options which may be useful for fulfilling various personal
+  preferences and special requirements
+</p></li></ol></div><p>
+Ultimately, only you can decide which options are best for your
+purposes. The decision for the first class of options is the simplest:
+you only have to decide whether you think the quality differences
+justify the speed differences. For the second class of options,
+preferences may be far more subjective, and more factors may be
+involved. Note that some of the "personal preferences and special
+requirements" options can still have large impacts on speed or quality,
+but that is not what they are primarily useful for. A couple of the
+"personal preference" options may even cause changes that look better
+to some people, but look worse to others.
+</p><p>
+Before continuing, you need to understand that this guide uses only one
+quality metric: global PSNR.
+For a brief explanation of what PSNR is, see
+<a class="ulink" href="http://en.wikipedia.org/wiki/PSNR" target="_top">the Wikipedia article on PSNR</a>.
+Global PSNR is the last PSNR number reported when you include
+the <tt class="option">psnr</tt> option in <tt class="option">x264encopts</tt>.
+Any time you read a claim about PSNR, one of the assumptions
+behind the claim is that equal bitrates are used.
+</p><p>
+Nearly all of this guide's comments assume you are using two pass.
+When comparing options, there are two major reasons for using
+two pass encoding.
+First, using two pass often gains around 1dB PSNR, which is a
+very big difference.
+Secondly, testing options by doing direct quality comparisons
+with one pass encodes introduces a major confounding
+factor: bitrate often varies significantly with each encode.
+It is not always easy to tell whether quality changes are due
+mainly to changed options, or if they mostly reflect essentially
+random differences in the achieved bitrate.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-x264-encoding-options-speedvquality"></a>7.5.1.2. Options which primarily affect speed and quality</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>subq</strong></span>:
+  Of the options which allow you to trade off speed for quality,
+  <tt class="option">subq</tt> and <tt class="option">frameref</tt> (see below) are usually
+  by far the most important.
+  If you are interested in tweaking either speed or quality, these
+  are the first options you should consider.
+  On the speed dimension, the <tt class="option">frameref</tt> and
+  <tt class="option">subq</tt> options interact with each other fairly
+  strongly.
+  Experience shows that, with one reference frame,
+  <tt class="option">subq=5</tt> (the default setting) takes about 35% more time than
+  <tt class="option">subq=1</tt>.
+  With 6 reference frames, the penalty grows to over 60%.
+  <tt class="option">subq</tt>'s effect on PSNR seems fairly constant
+  regardless of the number of reference frames.
+  Typically, <tt class="option">subq=5</tt> achieves 0.2-0.5 dB higher global
+  PSNR in comparison <tt class="option">subq=1</tt>.
+  This is usually enough to be visible.
+  </p><p>
+  <tt class="option">subq=6</tt> is slower and yields better quality at a reasonable
+  cost.
+  In comparison to <tt class="option">subq=5</tt>, it usually gains 0.1-0.4 dB
+  global PSNR with speed costs varying from 25%-100%.
+  Unlike other levels of <tt class="option">subq</tt>, the behavior of
+  <tt class="option">subq=6</tt> does not depend much on <tt class="option">frameref</tt>
+  and <tt class="option">me</tt>.  Instead, the effectiveness of <tt class="option">subq=6
+  </tt> depends mostly upon the number of B-frames used. In normal
+  usage, this means <tt class="option">subq=6</tt> has a large impact on both speed
+  and quality in complex, high motion scenes, but it may not have much effect
+  in low-motion scenes. Note that it is still recommended to always set
+  <tt class="option">bframes</tt> to something other than zero (see below).
+  </p><p>
+  <tt class="option">subq=7</tt> is the slowest, highest quality mode.
+  In comparison to <tt class="option">subq=6</tt>, it usually gains 0.01-0.05 dB
+  global PSNR with speed costs varying from 15%-33%.
+  Since the tradeoff encoding time vs. quality is quite low, you should
+  only use it if you are after every bit saving and if encoding time is
+  not an issue.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>frameref</strong></span>:
+  <tt class="option">frameref</tt> is set to 1 by default, but this
+  should not be taken to imply that it is reasonable to set it to 1.
+  Merely raising <tt class="option">frameref</tt> to 2 gains around
+  0.15dB PSNR with a 5-10% speed penalty; this seems like a good tradeoff.
+  <tt class="option">frameref=3</tt> gains around 0.25dB PSNR over
+  <tt class="option">frameref=1</tt>, which should be a visible difference.
+  <tt class="option">frameref=3</tt> is around 15% slower than
+  <tt class="option">frameref=1</tt>.
+  Unfortunately, diminishing returns set in rapidly.
+  <tt class="option">frameref=6</tt> can be expected to gain only
+  0.05-0.1 dB over <tt class="option">frameref=3</tt> at an additional
+  15% speed penalty.
+  Above <tt class="option">frameref=6</tt>, the quality gains are
+  usually very small (although you should keep in mind throughout
+  this whole discussion that it can vary quite a lot depending on your source).
+  In a fairly typical case, <tt class="option">frameref=12</tt>
+  will improve global PSNR by a tiny 0.02dB over
+  <tt class="option">frameref=6</tt>, at a speed cost of 15%-20%.
+  At such high <tt class="option">frameref</tt> values, the only really
+  good thing that can be said is that increasing it even further will
+  almost certainly never <span class="bold"><strong>harm</strong></span>
+  PSNR, but the additional quality benefits are barely even
+  measurable, let alone perceptible.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note:</h3><p>
+  Raising <tt class="option">frameref</tt> to unnecessarily high values
+  <span class="bold"><strong>can</strong></span> and
+  <span class="bold"><strong>usually does</strong></span>
+  hurt coding efficiency if you turn CABAC off.
+  With CABAC on (the default behavior), the possibility of setting
+  <tt class="option">frameref</tt> "too high" currently seems too remote
+  to even worry about, and in the future, optimizations may remove
+  the possibility altogether.
+  </p></div><p>
+  If you care about speed, a reasonable compromise is to use low
+  <tt class="option">subq</tt> and <tt class="option">frameref</tt> values on
+  the first pass, and then raise them on the second pass.
+  Typically, this has a negligible negative effect on the final
+  quality: You will probably lose well under 0.1dB PSNR, which
+  should be much too small of a difference to see.
+  However, different values of <tt class="option">frameref</tt> can
+  occasionally affect frametype decision.
+  Most likely, these are rare outlying cases, but if you want to
+  be pretty sure, consider whether your video has either
+  fullscreen repetitive flashing patterns or very large temporary
+  occlusions which might force an I-frame.
+  Adjust the first-pass <tt class="option">frameref</tt> so it is large
+  enough to contain the duration of the flashing cycle (or occlusion).
+  For example, if the scene flashes back and forth between two images
+  over a duration of three frames, set the first pass
+  <tt class="option">frameref</tt> to 3 or higher.
+  This issue is probably extremely rare in live action video material,
+  but it does sometimes come up in video game captures.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>me</strong></span>:
+  This option is for choosing the motion estimation search method.
+  Altering this option provides a straightforward quality-vs-speed
+  tradeoff. <tt class="option">me=dia</tt> is only a few percent faster than
+  the default search, at a cost of under 0.1dB global PSNR. The
+  default setting (<tt class="option">me=hex</tt>) is a reasonable tradeoff
+  between speed and quality. <tt class="option">me=umh</tt> gains a little under
+  0.1dB global PSNR, with a speed penalty that varies depending on
+  <tt class="option">frameref</tt>.  At high values of
+  <tt class="option">frameref</tt> (e.g. 12 or so), <tt class="option">me=umh</tt>
+  is about 40% slower than the default <tt class="option"> me=hex</tt>. With
+  <tt class="option">frameref=3</tt>, the speed penalty incurred drops to
+  25%-30%.
+  </p><p>
+  <tt class="option">me=esa</tt> uses an exhaustive search that is too slow for
+  practical use.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>partitions=all</strong></span>:
+  This option enables the use of 8x4, 4x8 and 4x4 subpartitions in
+  predicted macroblocks (in addition to the default partitions).
+  Enabling it results in a fairly consistent
+  10%-15% loss of speed. This option is rather useless in source
+  containing only low motion, however in some high-motion source,
+  particularly source with lots of small moving objects, gains of
+  about 0.1dB can be expected.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>bframes</strong></span>:
+  If you are used to encoding with other codecs, you may have found
+  that B-frames are not always useful.
+  In H.264, this has changed: there are new techniques and block
+  types that are possible in B-frames.
+  Usually, even a naive B-frame choice algorithm can have a
+  significant PSNR benefit.
+  It is interesting to note that using B-frames usually speeds up
+  the second pass somewhat, and may also speed up a single
+  pass encode if adaptive B-frame decision is turned off.
+  </p><p>
+  With adaptive B-frame decision turned off
+  (<tt class="option">x264encopts</tt>'s <tt class="option">nob_adapt</tt>),
+  the optimal value for this setting is usually no more than
+  <tt class="option">bframes=1</tt>, or else high-motion scenes can suffer.
+  With adaptive B-frame decision on (the default behavior), it is
+  safe to use higher values; the encoder will reduce the use of
+  B-frames in scenes where they would hurt compression.
+  The encoder rarely chooses to use more than 3 or 4 B-frames;
+  setting this option any higher will have little effect.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>b_adapt</strong></span>:
+  Note: This is on by default.
+  </p><p>
+  With this option enabled, the encoder will use a reasonably fast
+  decision process to reduce the number of B-frames used in scenes that
+  might not benefit from them as much.
+  You can use <tt class="option">b_bias</tt> to tweak how B-frame-happy
+  the encoder is.
+  The speed penalty of adaptive B-frames is currently rather modest,
+  but so is the potential quality gain.
+  It usually does not hurt, however.
+  Note that this only affects speed and frametype decision on the
+  first pass.
+  <tt class="option">b_adapt</tt> and <tt class="option">b_bias</tt> have no
+  effect on subsequent passes.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>b_pyramid</strong></span>:
+  You might as well enable this option if you are using &gt;=2 B-frames;
+  as the man page says, you get a little quality improvement at no
+  speed cost.
+  Note that these videos cannot be read by libavcodec-based decoders
+  older than about March 5, 2005.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>weight_b</strong></span>:
+  In typical cases, there is not much gain with this option.
+  However, in crossfades or fade-to-black scenes, weighted
+  prediction gives rather large bitrate savings.
+  In MPEG-4 ASP, a fade-to-black is usually best coded as a series
+  of expensive I-frames; using weighted prediction in B-frames
+  makes it possible to turn at least some of these into much smaller
+  B-frames.
+  Encoding time cost is minimal, as no extra decisions need to be made.
+  Also, contrary to what some people seem to guess, the decoder
+  CPU requirements are not much affected by weighted prediction,
+  all else being equal.
+  </p><p>
+  Unfortunately, the current adaptive B-frame decision algorithm
+  has a strong tendency to avoid B-frames during fades.
+  Until this changes, it may be a good idea to add
+  <tt class="option">nob_adapt</tt> to your x264encopts, if you expect
+  fades to have a large effect in your particular video
+  clip.
+  </p></li><li class="listitem"><p><a name="menc-feat-x264-encoding-options-speedvquality-threads"></a>
+  <span class="bold"><strong>threads</strong></span>:
+  This option allows to spawn threads to encode in parallel on multiple CPUs.
+  You can manually select the number of threads to be created or, better, set
+  <tt class="option">threads=auto</tt> and let
+  <code class="systemitem">x264</code> detect how many CPUs are
+  available and pick an appropriate number of threads.
+  If you have a multi-processor machine, you should really consider using it
+  as it can to increase encoding speed linearly with the number of CPU cores
+  (about 94% per CPU core), with very little quality reduction (about 0.005dB
+  for dual processor, about 0.01dB for a quad processor machine).
+  </p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-x264-encoding-options-misc-preferences"></a>7.5.1.3. Options pertaining to miscellaneous preferences</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Two pass encoding</strong></span>:
+  Above, it was suggested to always use two pass encoding, but there
+  are still reasons for not using it. For instance, if you are capturing
+  live TV and encoding in realtime, you are forced to use single-pass.
+  Also, one pass is obviously faster than two passes; if you use the
+  exact same set of options on both passes, two pass encoding is almost
+  twice as slow.
+  </p><p>
+  Still, there are very good reasons for using two pass encoding. For
+  one thing, single pass ratecontrol is not psychic, and it often makes
+  unreasonable choices because it cannot see the big picture. For example,
+  suppose you have a two minute long video consisting of two distinct
+  halves.  The first half is a very high-motion scene lasting 60 seconds
+  which, in isolation, requires about 2500kbps in order to look decent.
+  Immediately following it is a much less demanding 60-second scene
+  that looks good at 300kbps. Suppose you ask for 1400kbps on the theory
+  that this is enough to accomodate both scenes. Single pass ratecontrol
+  will make a couple of "mistakes" in such a case. First of all, it
+  will target 1400kbps in both segments. The first segment may end up
+  heavily overquantized, causing it to look unacceptably and unreasonably
+  blocky. The second segment will be heavily underquantized; it may look
+  perfect, but the bitrate cost of that perfection will be completely
+  unreasonable. What is even harder to avoid is the problem at the
+  transition between the two scenes. The first seconds of the low motion
+  half will be hugely over-quantized, because the ratecontrol is still
+  expecting the kind of bitrate requirements it met in the first half
+  of the video. This "error period" of heavily over-quantized low motion
+  will look jarringly bad, and will actually use less than the 300kbps
+  it would have taken to make it look decent. There are ways to
+  mitigate the pitfalls of single-pass encoding, but they may tend to
+  increase bitrate misprediction.
+  </p><p>
+  Multipass ratecontrol can offer huge advantages over a single pass.
+  Using the statistics gathered from the first pass encode, the encoder
+  can estimate, with reasonable accuracy, the "cost" (in bits) of
+  encoding any given frame, at any given quantizer. This allows for
+  a much more rational, better planned allocation of bits between the
+  expensive (high-motion) and cheap (low-motion) scenes. See
+  <tt class="option">qcomp</tt> below for some ideas on how to tweak this
+  allocation to your liking.
+  </p><p>
+  Moreover, two passes need not take twice as long as one pass. You can
+  tweak the options in the first pass for higher speed and lower quality.
+  If you choose your options well, you can get a very fast first pass.
+  The resulting quality in the second pass will be slightly lower because size
+  prediction is less accurate, but the quality difference is normally much
+  too small to be visible. Try, for example, adding
+  <tt class="option">subq=1:frameref=1</tt> to the first pass
+  <tt class="option">x264encopts</tt>. Then, on the second pass, use slower,
+  higher-quality options:
+  <tt class="option">subq=6:frameref=15:partitions=all:me=umh</tt>
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>Three pass encoding</strong></span>?
+  x264 offers the ability to make an arbitrary number of consecutive
+  passes. If you specify <tt class="option">pass=1</tt> on the first pass,
+  then use <tt class="option">pass=3</tt> on a subsequent pass, the subsequent
+  pass will both read the statistics from the previous pass, and write
+  its own statistics. An additional pass following this one will have
+  a very good base from which to make highly accurate predictions of
+  framesizes at a chosen quantizer. In practice, the overall quality
+  gain from this is usually close to zero, and quite possibly a third
+  pass will result in slightly worse global PSNR than the pass before
+  it. In typical usage, three passes help if you get either bad bitrate
+  prediction or bad looking scene transitions when using only two passes.
+  This is somewhat likely to happen on extremely short clips. There are
+  also a few special cases in which three (or more) passes are handy
+  for advanced users, but for brevity, this guide omits discussing those
+  special cases.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>qcomp</strong></span>:
+  <tt class="option">qcomp</tt> trades off the number of bits allocated
+  to "expensive" high-motion versus "cheap" low-motion frames. At
+  one extreme, <tt class="option">qcomp=0</tt> aims for true constant
+  bitrate. Typically this would make high-motion scenes look completely
+  awful, while low-motion scenes would probably look absolutely
+  perfect, but would also use many times more bitrate than they
+  would need in order to look merely excellent. At the other extreme,
+  <tt class="option">qcomp=1</tt> achieves nearly constant quantization parameter
+  (QP). Constant QP does not look bad, but most people think it is more
+  reasonable to shave some bitrate off of the extremely expensive scenes
+  (where the loss of quality is not as noticeable) and reallocate it to
+  the scenes that are easier to encode at excellent quality.
+  <tt class="option">qcomp</tt> is set to 0.6 by default, which may be slightly
+  low for many peoples' taste (0.7-0.8 are also commonly used).
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>keyint</strong></span>:
+  <tt class="option">keyint</tt> is solely for trading off file seekability against
+  coding efficiency. By default, <tt class="option">keyint</tt> is set to 250. In
+  25fps material, this guarantees the ability to seek to within 10 seconds
+  precision. If you think it would be important and useful to be able to
+  seek within 5 seconds of precision, set <tt class="option">keyint=125</tt>;
+  this will hurt quality/bitrate slightly. If you care only about quality
+  and not about seekability, you can set it to much higher values
+  (understanding that there are diminishing returns which may become
+  vanishingly low, or even zero). The video stream will still have seekable
+  points as long as there are some scene changes.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>deblock</strong></span>:
+  This topic is going to be a bit controversial.
+  </p><p>
+  H.264 defines a simple deblocking procedure on I-blocks that uses
+  pre-set strengths and thresholds depending on the QP of the block
+  in question.
+  By default, high QP blocks are filtered heavily, and low QP blocks
+  are not deblocked at all.
+  The pre-set strengths defined by the standard are well-chosen and
+  the odds are very good that they are PSNR-optimal for whatever
+  video you are trying to encode.
+  The <tt class="option">deblock</tt> allow you to specify offsets to the preset
+  deblocking thresholds.
+  </p><p>
+  Many people seem to think it is a good idea to lower the deblocking
+  filter strength by large amounts (say, -3).
+  This is however almost never a good idea, and in most cases,
+  people who are doing this do not understand very well how
+  deblocking works by default.
+  </p><p>
+  The first and most important thing to know about the in-loop
+  deblocking filter is that the default thresholds are almost always
+  PSNR-optimal.
+  In the rare cases that they are not optimal, the ideal offset is
+  plus or minus 1.
+  Adjusting deblocking parameters by a larger amount is almost
+  guaranteed to hurt PSNR.
+  Strengthening the filter will smear more details; weakening the
+  filter will increase the appearance of blockiness.
+  </p><p>
+  It is definitely a bad idea to lower the deblocking thresholds if
+  your source is mainly low in spacial complexity (i.e., not a lot
+  of detail or noise).
+  The in-loop filter does a rather excellent job of concealing
+  the artifacts that occur.
+  If the source is high in spacial complexity, however, artifacts
+  are less noticeable.
+  This is because the ringing tends to look like detail or noise.
+  Human visual perception easily notices when detail is removed,
+  but it does not so easily notice when the noise is wrongly
+  represented.
+  When it comes to subjective quality, noise and detail are somewhat
+  interchangeable.
+  By lowering the deblocking filter strength, you are most likely
+  increasing error by adding ringing artifacts, but the eye does
+  not notice because it confuses the artifacts with detail.
+  </p><p>
+  This <span class="bold"><strong>still</strong></span> does not justify
+  lowering the deblocking filter strength, however.
+  You can generally get better quality noise from postprocessing.
+  If your H.264 encodes look too blurry or smeared, try playing with
+  <tt class="option">-vf noise</tt> when you play your encoded movie.
+  <tt class="option">-vf noise=8a:4a</tt> should conceal most mild
+  artifacting.
+  It will almost certainly look better than the results you
+  would have gotten just by fiddling with the deblocking filter.
+  </p></li></ul></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-x264-example-settings"></a>7.5.2. Encoding setting examples</h3></div></div></div><p>
+The following settings are examples of different encoding
+option combinations that affect the speed vs quality tradeoff
+at the same target bitrate.
+</p><p>
+All the encoding settings were tested on a 720x448 @30000/1001 fps
+video sample, the target bitrate was 900kbps, and the machine was an
+AMD-64 3400+ at 2400 MHz in 64 bits mode.
+Each encoding setting features the measured encoding speed (in
+frames per second) and the PSNR loss (in dB) compared to the "very
+high quality" setting.
+Please understand that depending on your source, your machine type
+and development advancements, you may get very different results.
+</p><div class="informaltable"><table border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Description</th><th>Encoding options</th><th>speed (in fps)</th><th>Relative PSNR loss (in dB)</th></tr></thead><tbody><tr><td>Very high quality</td><td><tt class="option">subq=6:partitions=all:8x8dct:me=umh:frameref=5:bframes=3:b_pyramid=normal:weight_b</tt></td><td>6fps</td><td>0dB</td></tr><tr><td>High quality</td><td><tt class="option">subq=5:8x8dct:frameref=2:bframes=3:b_pyramid=normal:weight_b</tt></td><td>13fps</td><td>-0.89dB</td></tr><tr><td>Fast</td><td><tt class="option">subq=4:bframes=2:b_pyramid=normal:weight_b</tt></td><td>17fps</td><td>-1.48dB</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-xvid.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-video-for-windows.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">7.4. Encoding with the <code class="systemitem">Xvid</code>
+  codec </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 7.6. 
+  Encoding with the <code class="systemitem">Video For Windows</code>
+  codec family
+</td></tr></table></div></body></html>

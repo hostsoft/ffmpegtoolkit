@@ -1,0 +1,3 @@
+exc_20_32_table.lo: exc_20_32_table.c /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:

@@ -1,0 +1,47 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.1. Nastavení MTRR</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="next" href="xv.html" title="4.2. Xv"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.1. Nastavení MTRR</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="video.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="xv.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mtrr"></a>4.1. Nastavení MTRR</h2></div></div></div><p>
+VELMI doporučujeme skontrolovat, zda jsou MTRR registry
+správně nastaveny, jelikož mohou velice zvýšit výkon.
+</p><p>
+Proveďte <span class="command"><strong>cat /proc/mtrr</strong></span>:
+</p><pre class="screen">
+<code class="prompt">--($:~)--</code> cat /proc/mtrr
+reg00: base=0xe4000000 (3648MB), size=  16MB: write-combining, count=9
+reg01: base=0xd8000000 (3456MB), size= 128MB: write-combining, count=1</pre><p>
+</p><p>
+Takto to správně ukazuje má Matrox G400 se 16MB paměti. Provedl jsem to z
+XFree 4.x.x, které nastavuje MTRR registry automaticky.
+</p><p>
+Pokud nic nefunguje, budete to muset udělat ručně. Nejprve musíte najít
+bázovou adresu. Máte tři možnosti, jak ji zjistit:
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  ze startovacích informací X11, například:
+  </p><pre class="screen">
+(--) SVGA: PCI: Matrox MGA G400 AGP rev 4, Memory @ 0xd8000000, 0xd4000000
+(--) SVGA: Linear framebuffer at 0xD8000000</pre><p>
+</p></li><li class="listitem"><p>
+  z <tt class="filename">/proc/pci</tt> (použijte příkaz <span class="command"><strong>lspci -v</strong></span>
+  ):
+  </p><pre class="screen">
+01:00.0 VGA compatible controller: Matrox Graphics, Inc.: Unknown device 0525
+Memory at d8000000 (32-bit, prefetchable)</pre><p>
+</p></li><li class="listitem"><p>
+  ze zpráv jaderného modulu mga_vid (použijte <span class="command"><strong>dmesg</strong></span>):
+  </p><pre class="screen">mga_mem_base = d8000000</pre><p>
+</p></li></ol></div><p>
+</p><p>
+Pak zjistěte velikost paměti. Je to velmi snadné, stačí převést velikost
+video RAM do hexadecimální soustavy, nebo použijte následující tabulku:
+</p><div class="informaltable"><table border="0"><colgroup><col><col></colgroup><tbody><tr><td>1 MB</td><td>0x100000</td></tr><tr><td>2 MB</td><td>0x200000</td></tr><tr><td>4 MB</td><td>0x400000</td></tr><tr><td>8 MB</td><td>0x800000</td></tr><tr><td>16 MB</td><td>0x1000000</td></tr><tr><td>32 MB</td><td>0x2000000</td></tr></tbody></table></div><p>
+</p><p>
+Pokud znáte bázovou adresu a velikost paměti, začněme nastavovat MTRR registry!
+Například pro výše uvedenou kartu Matrox (<code class="literal">base=0xd8000000</code>)
+s 32MB RAM (<code class="literal">size=0x2000000</code>) stačí spustit:
+</p><pre class="screen">
+echo "base=0xd8000000 size=0x2000000 type=write-combining" &gt; /proc/mtrr
+</pre><p>
+</p><p>
+Ne všechny procesory mají MTRR. Například starší CPU K6-2 (okolo 266MHz,
+stepping 0) nemají MTRR, ale stepping 12 je mají
+(pro ověření spusťte <span class="command"><strong>cat /proc/cpuinfo</strong></span>).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="video.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="xv.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">Kapitola 4. Výstupní video zařízení/rozhraní </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.2. Xv</td></tr></table></div></body></html>

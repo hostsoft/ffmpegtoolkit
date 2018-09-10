@@ -1,0 +1,1184 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Rozdział 8. FAQ - Często Zadawane Pytania</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="prev" href="menc-feat-vcd-dvd.html" title="7.8. Using MEncoder to create VCD/SVCD/DVD-compliant files"><link rel="next" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Rozdział 8. FAQ - Często Zadawane Pytania</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-vcd-dvd.html">Poprzedni</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="bugreports.html">Następny</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="faq"></a>Rozdział 8. FAQ - Często Zadawane Pytania</h1></div></div></div><div class="qandaset"><a name="idp70992592"></a><dl><dt>8.1.  <a href="faq.html#faq-development">Rozwój</a></dt><dd><dl><dt>Pyt.: <a href="faq.html#idp70994240">
+Jak mam stworzyć poprawną łatkę do MPlayera?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71040128">
+Jak mogę przetłumaczyć MPlayera na nowy język?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71044000">
+Jak mogę wesprzeć rozwój MPlayera?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71047872">
+Jak mogę zostać deweloperem MPlayera?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71052800">
+Czemu nie używacie autoconf/automake?
+</a></dt></dl></dd><dt>8.2.  <a href="faq.html#faq-compilation-installation">Kompilacja i instalacja</a></dt><dd><dl><dt>Pyt.: <a href="faq.html#idp71056960">
+Kompilacja nie udaje się z powodu błędu i gcc
+wyskakuje z tajemniczą wiadomością zawierającą zwrot
+internal compiler error lub
+unable to find a register to spill.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71063472">
+Czy istnieją binarne (RPM/Debian) paczki z MPlayerem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71067520">
+Jak mogę zbudować 32 bitowego MPlayera na 64
+bitowym Athlonie?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71070592">
+Konfiguracja kończy się takim komunikatem i MPlayer
+nie chce się skompilować!
+Your gcc does not support even i386 for '-march' and '-mcpu'
+(Twój gcc nie obsługuje nawet i386 dla '-march' oraz '-mcpu')
+</a></dt><dt>Pyt.: <a href="faq.html#idp71074608">
+Mam Matroksa G200/G400/G450/G550, jak skompilować/używać sterownika
+mga_vid?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71077728">
+Podczas 'make', MPlayer narzeka na brakujące
+biblioteki X11. Nie rozumiem, mam zainstalowane X11!?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71085040">
+Kompilowanie pod Mac OS 10.3 prowadzi do kilku błędów konsolidacji (linkowania)
+</a></dt></dl></dd><dt>8.3.  <a href="faq.html#faq-general">Pytania ogólne</a></dt><dd><dl><dt>Pyt.: <a href="faq.html#idp71098912">
+Czy są jakieś listy dyskusyjne o MPlayerze?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71101904">
+Znalazłem paskudny błąd przy próbie odtworzenia mojego ulubionego filmu! Kogo
+powinienem poinformować?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71104704">
+Mam problemy z odtwarzaniem plików przy użyciu kodeka ... Czy mogę ich używać?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71107952">
+Gdy zaczynam odtwarzanie wyświetla się następujący komunikat lecz wszystko
+wydaje się być wporządku.
+Linux RTC init: ioctl (rtc_pie_on): Permission denied
+</a></dt><dt>Pyt.: <a href="faq.html#idp71111488">
+Jak mogę zrobić zrzut ekranu?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71117216">
+Co oznaczają te liczby w wierszu stanu?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71144640">
+Dostaję komunikaty błędów o nie znalezionym pliku
+/usr/local/lib/codecs/ ...
+</a></dt><dt>Pyt.: <a href="faq.html#idp71147744">
+Jak zmusić MPlayera do zapamiętania opcji
+użytych dla określonego pliku, np film.avi?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71152640">
+Napisy są bardzo ładne, najpiękniejsze jakie widziałem, ale spowalniają
+odtwarzanie! Wiem, że to jest niezwykłe...
+</a></dt><dt>Pyt.: <a href="faq.html#idp71157232">
+Nie mogę się dostać do menu GUI. Klikam prawym przyciskiem myszy lecz
+nie mogę dostać się do żadnych elementów menu!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71165520">
+Jak uruchomić MPlayera w tle?
+</a></dt></dl></dd><dt>8.4.  <a href="faq.html#faq-playback">Problemy z odtwarzaniem</a></dt><dd><dl><dt>Pyt.: <a href="faq.html#idp71170784">
+Nie mogę zidentyfikować powodu dziwnego problemu z odtwarzaniem.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71177616">
+W jaki sposób sprawić by napisy pojawiały się na czarnym pasku pod filmem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71180912">
+Jak mogę określić ścieżkę audio/napisów z pliku OGM, Matroska, NUT lub DVD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71187776">
+Próbuję odtworzyć jakiś strumień z internetu, ale nie udaje mi się.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71189872">
+Ściągnąłem film z sieci P2P i nie chce się odtworzyć!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71192480">
+Mam problem z wyświetlaniem napisów. Pomocy!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71196384">
+Dlaczego MPlayer nie działa w Fedora Core?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71214192">
+MPlayer przerywa działanie z komunikatem
+MPlayer interrupted by signal 4 in module: decode_video
+(MPlayer przerwany przez sygnał 4 w module: decode_video).
+</a></dt><dt>Pyt.: <a href="faq.html#idp71218928">
+Gry próbuję przechwycić obraz z mojego tunera kolory są dziwne. Działa OK
+pod innymi aplikacjami.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71221728">
+Otrzymuję bardzo dziwne wartości procentowe (dużo za duże) podczas odtwarzania
+plików na moim notebooku.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71225264">
+Audio/video całowicie wychodzi z synchronizacji gdy uruchamiam
+MPlayera jako root na moim notebooku. Działa OK
+gdy robię to jako zwykły użytkownik.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71229088">
+Podczas odtwarzania filmu nagle się tnie i wyświetlany jest następujący
+komunikat:
+Badly interleaved AVI file detected - switching to -ni mode...
+(Plik AVI ze złym przeplotem - przełączam się w tryb -ni)
+</a></dt></dl></dd><dt>8.5.  <a href="faq.html#faq-driver">Problemy ze sterownikiem video/audio (vo/ao)</a></dt><dd><dl><dt>Pyt.: <a href="faq.html#idp71234240">
+Gdy przechodzę w tryb pełnoekranowy wyświetlana jest czarna ramka
+okalająca obraz. Obraz nie jest w ogóle skalowany.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71240480">
+Właśnie zainstalowałem MPlayera. W momencie gdy chcę
+otworzyć plik video wyskakuje błąd:
+Error opening/initializing the selected video_out (-vo) device.
+(Błąd przy otwarciu/inicjalizacji wybranego urządzenia video_out (-vo).)
+Jak mogę rozwiązać mój problem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71248656">
+Mam problemy z [Twój manager okien] i pełnoekranowymi trybami xv/xmga/sdl/x11...
+</a></dt><dt>Pyt.: <a href="faq.html#idp71251744">
+Dźwięk gubi synchronizację przy odtwarzaniu pliku AVI.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71255184">
+Mój komputer odtwarza zbyt wolno pliki AVI MS DivX w rozdzielczości ~ 640x300 i
+z dźwiękiem mp3 stereo. Gdy użyję opcji -nosound, wszystko jest
+OK (lecz bez dźwięku).
+</a></dt><dt>Pyt.: <a href="faq.html#idp71257712">
+Jak użyć dmix z
+MPlayerem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71261792">
+Podczas odtwarzania filmu nie ma dźwięku i dostaję komunikat podobny do tego:
+
+AO: [oss] 44100Hz 2ch Signed 16-bit (Little-Endian)
+audio_setup: Can't open audio device /dev/dsp: Device or resource busy
+couldn't open/init audio device -&gt; NOSOUND
+Audio: no sound!!!
+Start playing...
+
+</a></dt><dt>Pyt.: <a href="faq.html#idp71267024">
+Gdy uruchamiam MPlayera pod KDE, pojawia się
+czarny ekran i nic się nie dzieje. Po około minucie zaczyna się odtwarzanie
+filmu.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71271920">
+Mam problemy z synchronizacją A/V. Niektóre moje AVI są odtwarzane dobrze, a
+niektóre z podwójną szybkością.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71274704">
+Podczas odtwarzania filmu pojawia się brak synchronizacji video-audio i/lub
+MPlayer wywala się z następującym komunikatem:
+
+DEMUXER: Too many (945 in 8390980 bytes) video packets in the buffer!
+
+(DEMUXER: Za dużo (945 w 8390980 bajtach) pakietów video w buforze!)
+</a></dt><dt>Pyt.: <a href="faq.html#idp71284096">
+Jak pozbyć się braku synchronizacji audio/video przy przewijaniu strumieni
+RealMedia?
+</a></dt></dl></dd><dt>8.6.  <a href="faq.html#faq-dvd">Odtwarzanie DVD</a></dt><dd><dl><dt>Pyt.: <a href="faq.html#idp71287760">
+Co z nawigacją/menu DVD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71293520">
+Nie mogę obejrzeć żadnego nowego DVD od Sony Pictures/BMG.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71297056">
+Co z napisami? Czy MPlayer może je wyświetlać?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71300096">
+Jak mogę ustawić kod regionu w moim napędzie DVD? Nie mam Windowsów!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71302400">
+Nie mogę odtworzyć DVD, MPlayer
+się zawiesza bądź wyrzuca błędy "Encrypted VOB file!"
+(Zaszyfrowany plik VOB!).
+</a></dt><dt>Pyt.: <a href="faq.html#idp71305088">
+Czy muszę mieć uprawnienia (lub setuid) użytkownika root, aby móc odtwarzać DVD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71307824">
+Czy jest możliwe odtwarzanie/kodowanie tylko wybranych rozdziałów?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71309888">
+Odtwarzanie DVD jest bardzo wolne!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71313584">
+Skopiowałem DVD używając vobcopy.
+Jak mogę je odtworzyć/zakodować z dysku twardego?
+</a></dt></dl></dd><dt>8.7.  <a href="faq.html#faq-features">Prośby o wprowadzenie nowych możliwości</a></dt><dd><dl><dt>Pyt.: <a href="faq.html#idp71318544">
+Jeżeli MPlayer jest zatrzymany i próbuję przewijać lub
+nacisnę jakikolwiek klawisz, MPlayer z powrotem wraca
+do odtwarzania. Chciałbym móc przwijać zatrzymany film.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71322000">
+Chciałbym przewijać o +/- 1 klatkę zamiast 10 sekund.
+</a></dt></dl></dd><dt>8.8.  <a href="faq.html#faq-encoding">Kodowanie</a></dt><dd><dl><dt>Pyt.: <a href="faq.html#idp71326272">
+Jak mogę kodować?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71329008">
+Jak zrzucić całą pozycję DVD do pliku?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71333536">
+Jak mogę tworzyć automatycznie (S)VCD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71337024">
+Jak mogę stworzyć (S)VCD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71340816">
+Jak mogę połączyć dwa pliki video?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71347728">
+Jak mogę naprawić pliki AVI z popsutym indeksem lub złym przeplotem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71352480">
+Jak mogę naprawić proporcje pliku AVI?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71356992">
+Jak mogę zapisać i kodować plik VOB z popsutym początkiem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71364368">
+Nie mogę zakodować napisów z DVD do AVI!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71366400">
+Jak mogę zakodować tylko wybrane rozdziały z DVD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71368880">
+Próbuję pracować z plikami 2GB+ na systemie plików VFAT. Czy to działa?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71370560">
+Co oznaczają te liczby w wierszu stanu w czasie procesu kodowania?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71387776">
+Dlaczego zalecany bitrate wypisywany przez MEncodera
+jest ujemny?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71390368">
+Nie mogę zakodować pliku ASF do AVI/DivX, ponieważ ma on 1000 fps.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71392672">
+Jak mogę wstawić napisy do pliku wynikowego?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71395872">
+Jak zakodować wyłącznie dźwięk z teledysku?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71404080">
+Dlaczego zewnętrzne odtwarzacze nieodtwarzają filmów MPEG-4 zakodowanych
+MEncoderem w wersji nowszej niż 1.0pre7?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71417760">
+Jak mogę kodować plik zawierający tylko dźwięk?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71421760">
+Jak mogę odtwarzać napisy wbudowane w AVI?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71425888">
+MPlayer nie...
+</a></dt></dl></dd></dl><table border="0" style="width: 100%;"><colgroup><col align="left" width="1%"><col></colgroup><tbody><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-development"></a>8.1. Rozwój</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Pyt.: <a href="faq.html#idp70994240">
+Jak mam stworzyć poprawną łatkę do MPlayera?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71040128">
+Jak mogę przetłumaczyć MPlayera na nowy język?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71044000">
+Jak mogę wesprzeć rozwój MPlayera?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71047872">
+Jak mogę zostać deweloperem MPlayera?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71052800">
+Czemu nie używacie autoconf/automake?
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp70994240"></a><a name="idp70994496"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mam stworzyć poprawną łatkę do <span class="application">MPlayera</span>?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przygotowaliśmy <a class="ulink" href="../../tech/patches.txt" target="_top">krótki dokument</a>
+opisujący wszystkie potrzebne szczegóły. Kieruj się zawartymi w nim wskazówkami.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71040128"></a><a name="idp71040384"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę przetłumaczyć <span class="application">MPlayera</span> na nowy język?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przeczytaj <a class="ulink" href="../../tech/translations.txt" target="_top">HOWTO tłumaczenia</a>,
+powinno wszystko wyjaśnić. Dalszą pomoc uzyskasz na liście dyskusyjnej
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-translations" target="_top">MPlayer-translations</a>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71044000"></a><a name="idp71044256"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę wesprzeć rozwój <span class="application">MPlayera</span>?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Jesteśmy bardziej niż szczęśliwi, gdy ofiarowujecie nam sprzęt i oprogramowanie
+w formie <a class="ulink" href="http://www.mplayerhq.hu/donations.html" target="_top">darowizn</a>.
+Pomagają one nam ciągle ulepszać <span class="application">MPlayera</span>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71047872"></a><a name="idp71048128"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę zostać deweloperem <span class="application">MPlayera</span>?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Programiści i dokumentatorzy zawsze są mile widziani.
+Na początek przeczytaj <a class="ulink" href="../../tech/" target="_top">dokumentację techniczną</a>
+żeby złapać ogólny zarys.
+Następnie powinieneś zapisać się na listę dyskusyjną
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-dev-eng" target="_top">MPlayer-dev-eng</a>
+i zacząć pisać.
+Jeżeli chcesz pomóc przy dokumentacji, zapisz się na listę dyskusyjną
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-docs" target="_top">MPlayer-docs</a>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71052800"></a><a name="idp71053056"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Czemu nie używacie autoconf/automake?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Mamy modularny, ręcznie napisany system budowania. Sprawuje się on całkiem
+nieźle, więc po co zmieniać? Poza tym nie lubimy narzędzi auto* tak jak i
+<a class="ulink" href="http://freshmeat.net/articles/view/889/" target="_top">inni ludzie</a>.
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-compilation-installation"></a>8.2. Kompilacja i instalacja</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Pyt.: <a href="faq.html#idp71056960">
+Kompilacja nie udaje się z powodu błędu i gcc
+wyskakuje z tajemniczą wiadomością zawierającą zwrot
+internal compiler error lub
+unable to find a register to spill.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71063472">
+Czy istnieją binarne (RPM/Debian) paczki z MPlayerem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71067520">
+Jak mogę zbudować 32 bitowego MPlayera na 64
+bitowym Athlonie?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71070592">
+Konfiguracja kończy się takim komunikatem i MPlayer
+nie chce się skompilować!
+Your gcc does not support even i386 for '-march' and '-mcpu'
+(Twój gcc nie obsługuje nawet i386 dla '-march' oraz '-mcpu')
+</a></dt><dt>Pyt.: <a href="faq.html#idp71074608">
+Mam Matroksa G200/G400/G450/G550, jak skompilować/używać sterownika
+mga_vid?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71077728">
+Podczas 'make', MPlayer narzeka na brakujące
+biblioteki X11. Nie rozumiem, mam zainstalowane X11!?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71085040">
+Kompilowanie pod Mac OS 10.3 prowadzi do kilku błędów konsolidacji (linkowania)
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71056960"></a><a name="idp71057216"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Kompilacja nie udaje się z powodu błędu i <span class="application">gcc</span>
+wyskakuje z tajemniczą wiadomością zawierającą zwrot
+<code class="systemitem">internal compiler error</code> lub
+<code class="systemitem">unable to find a register to spill</code>.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Natknąłeś się na błąd w <span class="application">gcc</span>. Proszę
+<a class="ulink" href="http://gcc.gnu.org/bugs.html" target="_top">zgłoś go zespołowi gcc</a>
+ale nie nam. Z jakichś przyczyn <span class="application">MPlayer</span> często
+wywołuje błędy kompilatora. Jednak nie możemy ich naprawić i nie dodajemy do
+naszych źródeł obejść błędów kompilatora. Żeby uniknąć problemu albo trzymaj
+się wersji kompilatora o której wiadomo że jest stabilna i pewna, albo często
+aktualizuj.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71063472"></a><a name="idp71063728"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Czy istnieją binarne (RPM/Debian) paczki z <span class="application">MPlayerem</span>?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Więcej informacji na ten temat znajdziesz w sekcjach
+<a class="link" href="linux.html#debian" title="5.1.1. Pakiety Debiana">Debian</a> oraz <a class="link" href="linux.html#rpm" title="5.1.2. Pakiety RPM">RPM</a>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71067520"></a><a name="idp71067776"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę zbudować 32 bitowego <span class="application">MPlayera</span> na 64
+bitowym Athlonie?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Zastosuj następujące opcje konfiguracyjne.
+</p><pre class="screen">
+./configure --target=i386-linux --cc="gcc -m32" --as="as --32" --with-extralibdir=/usr/lib
+</pre><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71070592"></a><a name="idp71070848"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Konfiguracja kończy się takim komunikatem i <span class="application">MPlayer</span>
+nie chce się skompilować!
+</p><pre class="screen">Your gcc does not support even i386 for '-march' and '-mcpu'</pre><p>
+(Twój gcc nie obsługuje nawet i386 dla '-march' oraz '-mcpu')
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Twój gcc nie jest poprawnie zainstalowany. Sprawdź szczegóły
+w <tt class="filename">config.log</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71074608"></a><a name="idp71074864"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Mam Matroksa G200/G400/G450/G550, jak skompilować/używać sterownika
+<code class="systemitem">mga_vid</code>?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przeczytaj sekcję <a class="link" href="output-trad.html#mga_vid" title="4.2.6. Bufor ramki Matrox (mga_vid)">mga_vid</a>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71077728"></a><a name="idp71077984"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Podczas 'make', <span class="application">MPlayer</span> narzeka na brakujące
+biblioteki X11. Nie rozumiem, <span class="emphasis"><em>mam</em></span> zainstalowane X11!?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+...ale nie masz zainstalowanej paczki X11 development lub jest ona źle
+zainstalowana. Nazywa się ona <tt class="filename">XFree86-devel*</tt> w Red Hacie,
+<tt class="filename">xlibs-dev</tt> w Debianie Woody i
+<tt class="filename">libx11-dev</tt> w Debianie Sarge. Sprawdź także czy istnieją
+dowiązania symboliczne do
+<tt class="filename">/usr/X11</tt> oraz
+<tt class="filename">/usr/include/X11</tt>
+(problem może wystąpić w systemach Mandrake).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71085040"></a><a name="idp71085296"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Kompilowanie pod Mac OS 10.3 prowadzi do kilku błędów konsolidacji (linkowania)
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Błąd konsolidacji, który się pojawia, wygląda najprawdopodobniej tak:
+</p><pre class="screen">
+ld: Undefined symbols:
+_LLCStyleInfoCheckForOpenTypeTables referenced from QuartzCore expected to be defined in ApplicationServices
+_LLCStyleInfoGetUserRunFeatures referenced from QuartzCore expected to be defined in ApplicationServices
+</pre><p>
+Problem ten wynika z faktu, że deweloperzy Apple używają MacOS 10.4 do
+kompilowania swojego oprogramowania i dostarczają binaria
+użytkownikom 10.3 poprzez Uaktualnienia Oprogramowania.
+Niezdefiniowane symbole obecne są pod Mac OS 10.4,
+ale nie pod 10.3.
+Jednym z rozwiązań jest powrót do QuickTime w wersji 7.0.1.
+Oto lepsze rozwiązanie.
+</p><p>
+Zdobądź
+<a class="ulink" href="http://rapidshare.de/files/20281171/CompatFrameworks.tgz.html" target="_top">starszą wersję szkieletów</a>
+(frameworks; jest lepsze tłumaczenie? - przyp. tłum.).
+Otrzymasz skompresowany plik zawierający QuickTime 7.0.1 Framework
+i 10.3.9 QuartzCore Framework.
+</p><p>
+Rozpakuj pliki gdzieś poza swoim katalogiem systemowym.
+(nie instaluj szkieletów do swojego
+<tt class="filename">/System/Library/Frameworks</tt>!
+Ta starsza kopia jest przeznaczona tylko do ominięcia błędów konsolidacji!)
+</p><pre class="screen">gunzip &lt; CompatFrameworks.tgz | tar xvf -</pre><p>
+W pliku config.mak, dodaj
+<code class="systemitem">-F/ścieżka/do/rozpakowanego/archiwum</code>
+do zmiennej <code class="systemitem">OPTFLAGS</code>.
+Jeżeli używasz <span class="application">X-Code</span>, możesz po prostu
+zaznaczyć te szkielety, zamiast systemowych.
+</p><p>
+W rezultacie binarka <span class="application">MPlayer</span> będzie
+w rzeczywistości używać zainstalowanego w twoim systemie szkieletu poprzez
+dynamiczne dowiązania, rozwiązywane przy uruchamianiu.
+(Możesz to sprawdzić używając <code class="systemitem">otool -l</code>).
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-general"></a>8.3. Pytania ogólne</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Pyt.: <a href="faq.html#idp71098912">
+Czy są jakieś listy dyskusyjne o MPlayerze?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71101904">
+Znalazłem paskudny błąd przy próbie odtworzenia mojego ulubionego filmu! Kogo
+powinienem poinformować?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71104704">
+Mam problemy z odtwarzaniem plików przy użyciu kodeka ... Czy mogę ich używać?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71107952">
+Gdy zaczynam odtwarzanie wyświetla się następujący komunikat lecz wszystko
+wydaje się być wporządku.
+Linux RTC init: ioctl (rtc_pie_on): Permission denied
+</a></dt><dt>Pyt.: <a href="faq.html#idp71111488">
+Jak mogę zrobić zrzut ekranu?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71117216">
+Co oznaczają te liczby w wierszu stanu?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71144640">
+Dostaję komunikaty błędów o nie znalezionym pliku
+/usr/local/lib/codecs/ ...
+</a></dt><dt>Pyt.: <a href="faq.html#idp71147744">
+Jak zmusić MPlayera do zapamiętania opcji
+użytych dla określonego pliku, np film.avi?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71152640">
+Napisy są bardzo ładne, najpiękniejsze jakie widziałem, ale spowalniają
+odtwarzanie! Wiem, że to jest niezwykłe...
+</a></dt><dt>Pyt.: <a href="faq.html#idp71157232">
+Nie mogę się dostać do menu GUI. Klikam prawym przyciskiem myszy lecz
+nie mogę dostać się do żadnych elementów menu!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71165520">
+Jak uruchomić MPlayera w tle?
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71098912"></a><a name="idp71099168"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Czy są jakieś listy dyskusyjne o <span class="application">MPlayerze</span>?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Tak. Spójrz na sekcję
+<a class="ulink" href="http://www.mplayerhq.hu/design7/mailing_lists.html" target="_top">listy dyskusyjne</a>
+na naszej stronie domowej.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71101904"></a><a name="idp71102160"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Znalazłem paskudny błąd przy próbie odtworzenia mojego ulubionego filmu! Kogo
+powinienem poinformować?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przeczytaj proszę
+<a class="link" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy">wskazówki do zgłoszeń błędów</a>
+i kieruj się zawartymi tam instrukcjami.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71104704"></a><a name="idp71104960"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Mam problemy z odtwarzaniem plików przy użyciu kodeka ... Czy mogę ich używać?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Sprawdź <a class="ulink" href="../../codecs-status.html" target="_top">status kodeków</a>,
+jeżeli nie zawiera on Twojego kodeka przeczytaj
+<a class="ulink" href="../../tech/win32-codec-howto" target="_top">HOWTO importowania kodeków Win32</a>
+i skontaktuj się z nami.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71107952"></a><a name="idp71108208"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Gdy zaczynam odtwarzanie wyświetla się następujący komunikat lecz wszystko
+wydaje się być wporządku.
+</p><pre class="screen">Linux RTC init: ioctl (rtc_pie_on): Permission denied</pre><p>
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Potrzebujesz uprawnień roota lub specjalnie ustawionego jądra, aby używać
+nowego kodu synchronizacji czasu. Aby uzyskać szczegóły, spójrz do sekcji
+<a class="link" href="rtc.html" title="2.6. RTC">RTC</a> w dokumentacji.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71111488"></a><a name="idp71111744"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę zrobić zrzut ekranu?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Musisz skorzystać ze sterownika wyjścia video, który nie używa nakładki video.
+Pod X11 wystarczy użyć <tt class="option">-vo x11</tt>,
+pod Windows działa <tt class="option">-vo directx:noaccel</tt>
+</p><p>
+Możesz też uruchomić <span class="application">MPlayera</span> z filtrem video
+<code class="systemitem">screenshot</code> (<tt class="option">-vf screenshot</tt>).
+Wtedy wciśnięcie klawisza <span class="keycap"><b>s</b></span> spowoduje pobranie zrzutu
+ekranu.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71117216"></a><a name="idp71117472"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Co oznaczają te liczby w wierszu stanu?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przykład:
+</p><pre class="screen">
+A: 2.1 V: 2.2 A-V: -0.167 ct: 0.042 57/57 41% 0% 2.6% 0 4 49% 1.00x
+</pre><p>
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="systemitem">A: 2.1</code></span></dt><dd><p>pozycja audio w sekundach</p></dd><dt><span class="term"><code class="systemitem">V: 2.2</code></span></dt><dd><p>pozycja video w sekundach</p></dd><dt><span class="term"><code class="systemitem">A-V: -0.167</code></span></dt><dd><p>
+  różnica audio-video w sekundach (opóźnienie)
+  </p></dd><dt><span class="term"><code class="systemitem">ct: 0.042</code></span></dt><dd><p>
+  całkowita dokonana korekcja synchronizacji A-V
+  </p></dd><dt><span class="term"><code class="systemitem">57/57</code></span></dt><dd><p>
+  ramki odtworzone/zdekodowane (licząc od ostatniego przewijania)
+  </p></dd><dt><span class="term"><code class="systemitem">41%</code></span></dt><dd><p>
+  użycie procesora w procentach przez kodek video (przy renderowaniu
+  w kawałkach (slices) i bezpośrednim (DirectRendering) zawiera także video_out
+  </p></dd><dt><span class="term"><code class="systemitem">0%</code></span></dt><dd><p>użycie procesora przez video_out</p></dd><dt><span class="term"><code class="systemitem">2.6%</code></span></dt><dd><p>
+  użycie procesora w procentach przez kodek audio
+  </p></dd><dt><span class="term"><code class="systemitem">0</code></span></dt><dd><p>
+  ramki opuszczone aby zachować synchronizację A-V
+  </p></dd><dt><span class="term"><code class="systemitem">4</code></span></dt><dd><p>
+  obecny poziom postprocessingu obrazu (gdy używasz <tt class="option">-autoq</tt>)
+  </p></dd><dt><span class="term"><code class="systemitem">49%</code></span></dt><dd><p>
+  obecne wykorzystanie pamięci cache (normale jest około 50%)
+  </p></dd><dt><span class="term"><code class="systemitem">1.00x</code></span></dt><dd><p>
+  szybkość odtwarzania jako mnożnik oryginalnej szybkości
+  </p></dd></dl></div><p>
+Większość z nich obecna jest w celu debuggingu, aby się ich pozbyć użyj opcji
+<tt class="option">-quiet</tt>. Możesz zauważyć, że dla niektóych plików użycie
+procesora przez video_out wynosi zero (0%). Spowodowane to jest tym, że jest
+ono wywoływane bezpośrednio przez kodek i nie może być zmierzone osobno.
+Jeżeli chcesz znać szybkość video_out, to porównaj różnicę przy odtwarzaniu
+z <tt class="option">-vo null</tt> i normalnie przez Ciebie używanym sterownikiem
+wyjścia video.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71144640"></a><a name="idp71144896"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Dostaję komunikaty błędów o nie znalezionym pliku
+<tt class="filename">/usr/local/lib/codecs/</tt> ...
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Ściągnij i zainstaluj binarne kodeki z naszej
+<a class="ulink" href="http://www.mplayerhq.hu/design7/codecs.html" target="_top">strony kodeków</a>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71147744"></a><a name="idp71148000"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak zmusić <span class="application">MPlayera</span> do zapamiętania opcji
+użytych dla określonego pliku, np <tt class="filename">film.avi</tt>?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Stwórz plik o nazwie <tt class="filename">film.avi.conf</tt> i umieść w nim
+porządane opcje a następnie zapisz go w katalogu
+<tt class="filename">~/.mplayer</tt>
+albo w tym samym katalogu co film.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71152640"></a><a name="idp71152896"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Napisy są bardzo ładne, najpiękniejsze jakie widziałem, ale spowalniają
+odtwarzanie! Wiem, że to jest niezwykłe...
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Po odpaleniu <tt class="filename">./configure</tt>, wyedytuj
+<tt class="filename">config.h</tt> i zamień <code class="systemitem">#undef FAST_OSD</code>
+na <code class="systemitem">#define FAST_OSD</code>. Potem skompiluj ponownie.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71157232"></a><a name="idp71157488"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Nie mogę się dostać do menu GUI. Klikam prawym przyciskiem myszy lecz
+nie mogę dostać się do żadnych elementów menu!
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Czy używasz FVWM? Spróbuj tego:
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  <span class="guimenu">Start</span> → <span class="guisubmenu">Settings</span> → <span class="guisubmenu">Configuration</span> → <span class="guimenuitem">Base Configuration</span>
+</p></li><li class="listitem"><p>
+  Ustaw <code class="systemitem">Use Applications position hints</code>
+  na <code class="systemitem">Yes</code>
+</p></li></ol></div><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71165520"></a><a name="idp71165776"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak uruchomić <span class="application">MPlayera</span> w tle?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Użyj:
+</p><pre class="screen">mplayer <em class="replaceable"><code>opcje</code></em> <em class="replaceable"><code>nazwa_pliku</code></em> &lt; /dev/null &amp;</pre><p>
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-playback"></a>8.4. Problemy z odtwarzaniem</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Pyt.: <a href="faq.html#idp71170784">
+Nie mogę zidentyfikować powodu dziwnego problemu z odtwarzaniem.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71177616">
+W jaki sposób sprawić by napisy pojawiały się na czarnym pasku pod filmem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71180912">
+Jak mogę określić ścieżkę audio/napisów z pliku OGM, Matroska, NUT lub DVD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71187776">
+Próbuję odtworzyć jakiś strumień z internetu, ale nie udaje mi się.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71189872">
+Ściągnąłem film z sieci P2P i nie chce się odtworzyć!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71192480">
+Mam problem z wyświetlaniem napisów. Pomocy!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71196384">
+Dlaczego MPlayer nie działa w Fedora Core?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71214192">
+MPlayer przerywa działanie z komunikatem
+MPlayer interrupted by signal 4 in module: decode_video
+(MPlayer przerwany przez sygnał 4 w module: decode_video).
+</a></dt><dt>Pyt.: <a href="faq.html#idp71218928">
+Gry próbuję przechwycić obraz z mojego tunera kolory są dziwne. Działa OK
+pod innymi aplikacjami.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71221728">
+Otrzymuję bardzo dziwne wartości procentowe (dużo za duże) podczas odtwarzania
+plików na moim notebooku.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71225264">
+Audio/video całowicie wychodzi z synchronizacji gdy uruchamiam
+MPlayera jako root na moim notebooku. Działa OK
+gdy robię to jako zwykły użytkownik.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71229088">
+Podczas odtwarzania filmu nagle się tnie i wyświetlany jest następujący
+komunikat:
+Badly interleaved AVI file detected - switching to -ni mode...
+(Plik AVI ze złym przeplotem - przełączam się w tryb -ni)
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71170784"></a><a name="idp71171040"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Nie mogę zidentyfikować powodu dziwnego problemu z odtwarzaniem.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Czy masz jakiś zawieruszony plik <tt class="filename">codecs.conf</tt> w
+<tt class="filename">~/.mplayer/</tt>, <tt class="filename">/etc/</tt>,
+<tt class="filename">/usr/local/etc/</tt> lub podobnym miejscu? Usuń go,
+stary plik <tt class="filename">codecs.conf</tt> może powodować tajemnicze
+problemy i jest przeznaczony tylko dla deweloperów pracujących nad obsługą
+kodeków. Przesłania on wbudowane ustawienia <span class="application">MPlayera</span>
+dotyczące kodeków, co spowoduje chaos jeśli w nowszych wersjach zostaną
+wprowadzone niekompatybilne zmiany. Jeśli nie jest używany przez ekspertów
+jest to przepis na katastrofę w postaci pozornie losowych i trudnych
+do zlokalizowania awarii i problemów z odtwarzaniem. Jeśli nadal masz go
+gdzieś w swoim systemie powinieneś go teraz usunąć.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71177616"></a><a name="idp71177872"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+W jaki sposób sprawić by napisy pojawiały się na czarnym pasku pod filmem?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Użyj filtru video <code class="systemitem">expand</code> do zwiększenia pionowego
+obszaru renderowania filmu i umieść film przy jego górnej granicy.
+Na przykład:
+</p><pre class="screen">mplayer -vf expand=0:-100:0:0 -slang pl dvd://1</pre><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71180912"></a><a name="idp71181168"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę określić ścieżkę audio/napisów z pliku OGM, Matroska, NUT lub DVD?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Musisz użyć <tt class="option">-aid</tt> (ID audio) lub <tt class="option">-alang</tt>
+(język audio), <tt class="option">-sid</tt> (ID napisów) lub <tt class="option">-slang</tt>
+(język napisów), na przykład:
+</p><pre class="screen">
+mplayer -alang eng -slang eng <em class="replaceable"><code>przykład.mkv</code></em>
+mplayer -aid 1 -sid 1 <em class="replaceable"><code>przykład.mkv</code></em>
+</pre><p>
+Aby zobaczyć jakie są dostępne:
+</p><pre class="screen">
+mplayer -vo null -ao null -frames 0 -v <em class="replaceable"><code>nazwa_pliku</code></em> | grep sid
+mplayer -vo null -ao null -frames 0 -v <em class="replaceable"><code>nazwa_pliku</code></em> | grep aid
+</pre><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71187776"></a><a name="idp71188032"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Próbuję odtworzyć jakiś strumień z internetu, ale nie udaje mi się.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Spróbuj otworzyć strumień korzystając z opcji <tt class="option">-playlist</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71189872"></a><a name="idp71190128"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Ściągnąłem film z sieci P2P i nie chce się odtworzyć!
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Prawdopodobnie plik jest uszkodzony lub jest to fałszywka.
+Jeżeli dostałeś go od znajomego i on mówi, że u niego działa, to spróbuj
+porównać skróty <span class="application">md5sum</span> (md5sum hashes).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71192480"></a><a name="idp71192736"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Mam problem z wyświetlaniem napisów. Pomocy!
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Upewnij się, że poprawnie zainstalowałeś czcionki. Wykonaj jeszcze raz
+krok po kroku instrukcje z części
+<a class="link" href="fonts-osd.html" title="2.4. Czcionki i OSD">czcionki i OSD</a> z rozdziału o instalacji.
+Jeżeli używasz czcionek TrueType, upewnij się, że masz zainstalowaną
+bibliotekę <code class="systemitem">FreeType</code>.
+Sprawdź także napisy w edytorze tekstu, bądź z innymi odtwarzaczami. Spróbuj
+tekże przekonwertować je na inny format.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71196384"></a><a name="idp71196640"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Dlaczego <span class="application">MPlayer</span> nie działa w Fedora Core?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Prelink, exec-shield i aplikacje używająca windowsowych DLLi
+(takie jak <span class="application">MPlayer</span>) nie
+współdziałają ze sobą dobrze w Fedorze.
+</p><p>
+Problem powoduje exec-shield, który ustawia losowy adres, pod który będą
+ładowane biblioteki systemowe. Dzieje się to podczas prelinkowania (raz
+na dwa tygodnie)
+</p><p>
+<span class="application">MPlayer</span> próbuje załadować windowsowy DLL pod
+określony adres (0x400000). Jeżeli znajduje się tam już ważna biblioteka
+systemowa, <span class="application">MPlayer</span> się wykrzaczy. (Typowym objawem
+jest błąd naruszenia ochrony pamięci (segfault) przy próbie odtwarzania plików
+Windows Media 9.)
+</p><p>
+Jeżeli napotkasz taki problem, masz dwa wyjścia:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Poczekać dwa tygodnie... Być może znów zacznie działać.
+</p></li><li class="listitem"><p>
+  Zlinkować wszystkie biblioteki systemowe z innymi opcjami
+  prelink. Oto instrukcje krok po korku:
+  </p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>Otwórz <tt class="filename">/etc/syconfig/prelink</tt> i zmień
+  </p><pre class="programlisting">PRELINK_OPTS=-mR</pre><p> na
+  </p><pre class="programlisting">PRELINK_OPTS="-mR --no-exec-shield"</pre><p>
+  </p></li><li class="step"><p>
+    <span class="command"><strong>touch /var/lib/misc/prelink.force</strong></span>
+  </p></li><li class="step"><p>
+    <span class="command"><strong>/etc/cron.daily/prelink</strong></span>
+    (To ponownie linkuje wszystkie aplikacje i zajmuje sporo czasu.)
+  </p></li><li class="step"><p>
+    <span class="command"><strong>execstack -s <em class="replaceable"><code>/ścieżka/do/</code></em>mplayer</strong></span>
+    (To wyłącza exec-shield dla binarki <span class="application">MPlayera</span>.)
+  </p></li></ol></div></li></ul></div><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71214192"></a><a name="idp71214448"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+<span class="application">MPlayer</span> przerywa działanie z komunikatem
+</p><pre class="screen">MPlayer interrupted by signal 4 in module: decode_video</pre><p>
+(MPlayer przerwany przez sygnał 4 w module: decode_video).
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Nie używaj <span class="application">MPlayera</span> na CPU innym niż ten,
+na któym był skompilowany lub przekompiluj go z detekcją CPU podczas
+uruchamiania (<span class="command"><strong>./configure --enable-runtime-cpudetection</strong></span>).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71218928"></a><a name="idp71219184"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Gry próbuję przechwycić obraz z mojego tunera kolory są dziwne. Działa OK
+pod innymi aplikacjami.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Twoja karta prawdopodobni zgłasza obsługę penych przestrzeni kolorów,
+w rzeczywistości ich nie obsługując. Spróbuj z YUV2 zamiast domyślnego YV12
+(spójrz do sekcji <a class="link" href="tv-input.html" title="3.11. Wejście TV">TV</a>).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71221728"></a><a name="idp71221984"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Otrzymuję bardzo dziwne wartości procentowe (dużo za duże) podczas odtwarzania
+plików na moim notebooku.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Jest to efekt działania systemu zarządzania / oszczędzania energii w Twoim
+notebooku (BIOS, a nie kernel). Podłącz wtyczkę od zasilacza
+<span class="bold"><strong>przed</strong></span> włączeniem notebooka. Możesz także
+zobaczyć czy pomoże
+<a class="ulink" href="http://www.kernel.org/pub/linux/utils/kernel/cpufreq/cpufreq.html" target="_top">cpufreq</a>
+(interfejs SpeedStep dla Linuksa).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71225264"></a><a name="idp71225520"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Audio/video całowicie wychodzi z synchronizacji gdy uruchamiam
+<span class="application">MPlayera</span> jako root na moim notebooku. Działa OK
+gdy robię to jako zwykły użytkownik.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+To także jest efekt zarządzania energią (patrz wyżej). Podłącz wtyczkę od
+zasilacza <span class="bold"><strong>przed</strong></span> włączeniem notebooka lub
+użyj opcji <tt class="option">nortc</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71229088"></a><a name="idp71229344"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Podczas odtwarzania filmu nagle się tnie i wyświetlany jest następujący
+komunikat:
+</p><pre class="screen">Badly interleaved AVI file detected - switching to -ni mode...</pre><p>
+(Plik AVI ze złym przeplotem - przełączam się w tryb -ni)
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Pliki ze złym przeplotem i <tt class="option">-cache</tt> nie współdziałają
+dobrze. Spróbuj <tt class="option">-nocache</tt>
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-driver"></a>8.5. Problemy ze sterownikiem video/audio (vo/ao)</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Pyt.: <a href="faq.html#idp71234240">
+Gdy przechodzę w tryb pełnoekranowy wyświetlana jest czarna ramka
+okalająca obraz. Obraz nie jest w ogóle skalowany.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71240480">
+Właśnie zainstalowałem MPlayera. W momencie gdy chcę
+otworzyć plik video wyskakuje błąd:
+Error opening/initializing the selected video_out (-vo) device.
+(Błąd przy otwarciu/inicjalizacji wybranego urządzenia video_out (-vo).)
+Jak mogę rozwiązać mój problem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71248656">
+Mam problemy z [Twój manager okien] i pełnoekranowymi trybami xv/xmga/sdl/x11...
+</a></dt><dt>Pyt.: <a href="faq.html#idp71251744">
+Dźwięk gubi synchronizację przy odtwarzaniu pliku AVI.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71255184">
+Mój komputer odtwarza zbyt wolno pliki AVI MS DivX w rozdzielczości ~ 640x300 i
+z dźwiękiem mp3 stereo. Gdy użyję opcji -nosound, wszystko jest
+OK (lecz bez dźwięku).
+</a></dt><dt>Pyt.: <a href="faq.html#idp71257712">
+Jak użyć dmix z
+MPlayerem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71261792">
+Podczas odtwarzania filmu nie ma dźwięku i dostaję komunikat podobny do tego:
+
+AO: [oss] 44100Hz 2ch Signed 16-bit (Little-Endian)
+audio_setup: Can't open audio device /dev/dsp: Device or resource busy
+couldn't open/init audio device -&gt; NOSOUND
+Audio: no sound!!!
+Start playing...
+
+</a></dt><dt>Pyt.: <a href="faq.html#idp71267024">
+Gdy uruchamiam MPlayera pod KDE, pojawia się
+czarny ekran i nic się nie dzieje. Po około minucie zaczyna się odtwarzanie
+filmu.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71271920">
+Mam problemy z synchronizacją A/V. Niektóre moje AVI są odtwarzane dobrze, a
+niektóre z podwójną szybkością.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71274704">
+Podczas odtwarzania filmu pojawia się brak synchronizacji video-audio i/lub
+MPlayer wywala się z następującym komunikatem:
+
+DEMUXER: Too many (945 in 8390980 bytes) video packets in the buffer!
+
+(DEMUXER: Za dużo (945 w 8390980 bajtach) pakietów video w buforze!)
+</a></dt><dt>Pyt.: <a href="faq.html#idp71284096">
+Jak pozbyć się braku synchronizacji audio/video przy przewijaniu strumieni
+RealMedia?
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71234240"></a><a name="idp71234496"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Gdy przechodzę w tryb pełnoekranowy wyświetlana jest czarna ramka
+okalająca obraz. Obraz nie jest w ogóle skalowany.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Twój sterownik wyjścia video nie obsługuje sprzętowego skalowania,
+a ponieważ programowe skalowanie może być niewiarygodnie powolne,
+<span class="application">MPlayer</span> nie włącza go automatycznie.
+Prawdopodobnie używasz sterownika wyjśca <code class="systemitem">x11</code>
+zamiast <code class="systemitem">xv</code>. Spróbuj dodać do wywołania programu
+<tt class="option">-vo xv</tt> lub przeczytaj
+<a class="link" href="video.html" title="Rozdział 4. Urządzenia wyjścia video">sekcję video</a>, w której znajdziesz więcej
+informacji dotyczących alternatywnych sterowników wyjścia video.
+Opcja <tt class="option">-zoom</tt> jawnie wymusza skalowanie programowe.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71240480"></a><a name="idp71240736"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Właśnie zainstalowałem <span class="application">MPlayera</span>. W momencie gdy chcę
+otworzyć plik video wyskakuje błąd:
+</p><pre class="screen">Error opening/initializing the selected video_out (-vo) device.</pre><p>
+(Błąd przy otwarciu/inicjalizacji wybranego urządzenia video_out (-vo).)
+Jak mogę rozwiązać mój problem?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Po prostu zmień urządzenie wyjścia video. Aby uzyskać listę dostępnych
+sterowników wyjścia video wydaj następujące polecenie:
+</p><pre class="screen">mplayer -vo help</pre><p>
+Gdy juz wybierzesz odpowiedni sterownik wyjścia video, dodaj go do swojego
+pliku konfiguracyjnego.  Dodaj
+</p><pre class="programlisting">
+vo = <em class="replaceable"><code>wybrany_vo</code></em>
+</pre><p>
+do <tt class="filename">~/.mplayer/config</tt> i/lub
+</p><pre class="programlisting">
+vo_driver = <em class="replaceable"><code>wybrany_vo</code></em>
+</pre><p>
+do <tt class="filename">~/.mplayer/gui.conf</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71248656"></a><a name="idp71248912"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Mam problemy z [Twój manager okien] i pełnoekranowymi trybami xv/xmga/sdl/x11...
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przeczytaj <a class="link" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy">wskazówki do zgłaszania błędów</a> i
+wyślij nam poprawne zgłoszenie błędu.
+Popróbuj też poeksperymentować z opcją <tt class="option">-fstype</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71251744"></a><a name="idp71252000"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Dźwięk gubi synchronizację przy odtwarzaniu pliku AVI.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Wypróbuj opcje <tt class="option">-bps</tt> oraz <tt class="option">-nobps</tt>.
+Jeżeli nic się nie poprawiło, przeczytaj
+<a class="link" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy">wskazówki do zgłaszania błędów</a>
+i wgraj plik na FTP.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71255184"></a><a name="idp71255440"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Mój komputer odtwarza zbyt wolno pliki AVI MS DivX w rozdzielczości ~ 640x300 i
+z dźwiękiem mp3 stereo. Gdy użyję opcji <tt class="option">-nosound</tt>, wszystko jest
+OK (lecz bez dźwięku).
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Twój komputer jest zbyt wolny lub sterownik karty dźwiękowej jest zepsuty.
+Skonsultuj się z dokumentacją, aby zobaczyć, czy możesz poprawić wydajność.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71257712"></a><a name="idp71257968"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak użyć <span class="application">dmix</span> z
+<span class="application">MPlayerem</span>?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Po ustawieniu
+<a class="ulink" href="http://alsa.opensrc.org/index.php?page=DmixPlugin" target="_top">asoundrc</a>
+użyj <tt class="option">-ao alsa:device=dmix</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71261792"></a><a name="idp71262048"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Podczas odtwarzania filmu nie ma dźwięku i dostaję komunikat podobny do tego:
+</p><pre class="screen">
+AO: [oss] 44100Hz 2ch Signed 16-bit (Little-Endian)
+audio_setup: Can't open audio device /dev/dsp: Device or resource busy
+couldn't open/init audio device -&gt; NOSOUND
+Audio: no sound!!!
+Start playing...
+</pre><p>
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Czy masz uruchomione KDE lub GNOME z demonem dźwięku aRts lub ESD? Spróbuj
+wyłączyć demona dźwięku lub użyj opcji
+<tt class="option">-ao arts</tt> lub <tt class="option">-ao esd</tt>,
+aby <span class="application">MPlayer</span> używał aRts lub ESD.
+Możliwe jest też że masz uruchomione ALSA bez emulacji OSD, spróbuj załadować
+moduły jądra ALSA OSS lub dodaj <tt class="option">-ao alsa</tt> do wiersza poleceń
+żeby bezpośrednio używać sterownika wyjścia dźwięku ALSA.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71267024"></a><a name="idp71267280"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Gdy uruchamiam <span class="application">MPlayera</span> pod KDE, pojawia się
+czarny ekran i nic się nie dzieje. Po około minucie zaczyna się odtwarzanie
+filmu.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+aRts - demon dźwięku KDE - blokuje urządzenie dźwiękowe. Albo czekaj aż
+rozpocznie się odtwarzanie lub wyłącz demona arts w centrum sterowania. Jeżeli
+chcesz używać dźwięku aRts, określ wyjście audio przez nasz natywny sterownik
+dźwięku aRts (<tt class="option">-ao arts</tt>). Jeżeli próba się nie powiedzie lub
+sterownik nie jest wkompilowany, spróbuj użyć SDL (<tt class="option">-ao sdl</tt>)
+i upewnij się, że Twoje SDL poradzi sobie z dźwiękiem aRts. Inną możliwością
+jest uruchomienie <span class="application">MPlayera</span> z artsdsp.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71271920"></a><a name="idp71272176"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Mam problemy z synchronizacją A/V. Niektóre moje AVI są odtwarzane dobrze, a
+niektóre z podwójną szybkością.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Masz wadliwą kartę/sterownik dźwięku. Najwyraźniej jest ustawiona na stałe na
+44100Hz i próbujesz odtwarzać plik z dźwiękiem 22050Hz. Wypróbuj filtr zmiany
+częstotliwości próbkowania audio (filtr <code class="systemitem">resample</code>).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71274704"></a><a name="idp71274960"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Podczas odtwarzania filmu pojawia się brak synchronizacji video-audio i/lub
+<span class="application">MPlayer</span> wywala się z następującym komunikatem:
+</p><pre class="screen">
+DEMUXER: Too many (945 in 8390980 bytes) video packets in the buffer!
+</pre><p>
+(DEMUXER: Za dużo (945 w 8390980 bajtach) pakietów video w buforze!)
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Może istnieć kilka powodów.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Twój CPU <span class="bold"><strong>i/lub</strong></span> karta graficzna
+  <span class="bold"><strong>i/lub</strong></span> magistrala jest zbyt wolna.
+  <span class="application">MPlayer</span> w tym wypadku wyświetli komunikat
+  (i licznik porzuconych ramek szybko będzie wzrastał).
+</p></li><li class="listitem"><p>
+  Jeżeli to plik AVI, to może ma zły przeplot. Wypróbuj opcję
+  <tt class="option">-ni</tt>.
+  Może też mieć zły nagłówek. W takim przypadku może pomóc opcja
+  <tt class="option">-nobps</tt> i/lub opcja <tt class="option">-mc 0</tt>.
+</p></li><li class="listitem"><p>
+  Twój sterownik dźwięku jest wadliwy.
+</p></li></ul></div><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71284096"></a><a name="idp71284352"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak pozbyć się braku synchronizacji audio/video przy przewijaniu strumieni
+RealMedia?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Może pomóc <tt class="option">-mc 0.1</tt>
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-dvd"></a>8.6. Odtwarzanie DVD</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Pyt.: <a href="faq.html#idp71287760">
+Co z nawigacją/menu DVD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71293520">
+Nie mogę obejrzeć żadnego nowego DVD od Sony Pictures/BMG.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71297056">
+Co z napisami? Czy MPlayer może je wyświetlać?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71300096">
+Jak mogę ustawić kod regionu w moim napędzie DVD? Nie mam Windowsów!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71302400">
+Nie mogę odtworzyć DVD, MPlayer
+się zawiesza bądź wyrzuca błędy "Encrypted VOB file!"
+(Zaszyfrowany plik VOB!).
+</a></dt><dt>Pyt.: <a href="faq.html#idp71305088">
+Czy muszę mieć uprawnienia (lub setuid) użytkownika root, aby móc odtwarzać DVD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71307824">
+Czy jest możliwe odtwarzanie/kodowanie tylko wybranych rozdziałów?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71309888">
+Odtwarzanie DVD jest bardzo wolne!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71313584">
+Skopiowałem DVD używając vobcopy.
+Jak mogę je odtworzyć/zakodować z dysku twardego?
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71287760"></a><a name="idp71288016"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Co z nawigacją/menu DVD?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+<span class="application">MPlayer</span> nie obsługuje menu DVD ze względu na poważne
+ograniczenia konstrukcyjne, które uniemożliwiają poprawną obsługę stałych
+obrazów i treści interaktywnej. Jeżeli chcesz mieć fajne menu, będziesz musiał
+użyć innego odtwarzacza, takiego jak <span class="application">xine</span>,
+<span class="application">vlc</span> lub <span class="application">Ogle</span>.
+Jeżeli chcesz nawigacji DVD w <span class="application">MPlayerze</span>, to będziesz
+musiał sam ją zaimplementować. Bierz jednak pod uwagę, że jest to poważne
+przedsięwzięcie.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71293520"></a><a name="idp71293776"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Nie mogę obejrzeć żadnego nowego DVD od Sony Pictures/BMG.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Jest to normalne; zostałeś oszukany i przedano Ci świadomie wadliwą płytę.
+Jedyną metodą odtworzenia tych DVD jest ominięcie wadliwych bloków na dysku
+przy użyciu DVDnav zamiast mpdvdkit2.
+Możesz to zrobić kompilując <span class="application">MPlayera</span> z obsługą
+DVDnav a potem zamieniając dvd:// na dvdnav:// w wierszu poleceń.
+Jak na razie DVDnav i mpdvdkit2 wzajemnie się wykluczają, więc musisz podać
+opcję <tt class="option">--disable-mpdvdkit2</tt> skryptowi konfiguracyjnemu.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71297056"></a><a name="idp71297312"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Co z napisami? Czy <span class="application">MPlayer</span> może je wyświetlać?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Tak. Spójrz do rozdziału <a class="link" href="dvd.html" title="3.7. Odtwarzanie DVD">DVD</a>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71300096"></a><a name="idp71300352"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę ustawić kod regionu w moim napędzie DVD? Nie mam Windowsów!
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Użyj <a class="ulink" href="http://linvdr.org/projects/regionset/" target="_top">narzędzia regionset</a>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71302400"></a><a name="idp71302656"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Nie mogę odtworzyć DVD, <span class="application">MPlayer</span>
+się zawiesza bądź wyrzuca błędy "Encrypted VOB file!"
+(Zaszyfrowany plik VOB!).
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Kod deszyfrowania CSS nie działa z niektórymi odtwarzaczami DVD
+dopóki nie ustawisz odpowiednio kodu regionu. Przeczytaj odpowiedź na
+poprzednie pytanie.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71305088"></a><a name="idp71305344"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Czy muszę mieć uprawnienia (lub setuid) użytkownika root, aby móc odtwarzać DVD?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Nie. Jednakże musisz mieć poprawne prawa ustawione dla wpisu urządzenia DVD
+(w <tt class="filename">/dev/</tt>).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71307824"></a><a name="idp71308080"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Czy jest możliwe odtwarzanie/kodowanie tylko wybranych rozdziałów?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Tak, spróbuj użyć opcji <tt class="option">-chapter</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71309888"></a><a name="idp71310144"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Odtwarzanie DVD jest bardzo wolne!
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Użyj opcji <tt class="option">-cache</tt> (opisana na stronie man) i spróbuj włączyć
+DMA dla napędu DVD, używając narzędzia <span class="command"><strong>hdparm</strong></span> (opisane
+w rozdziale <a class="link" href="drives.html" title="3.6. Napędy CD/DVD">CD</a>).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71313584"></a><a name="idp71313840"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Skopiowałem DVD używając vobcopy.
+Jak mogę je odtworzyć/zakodować z dysku twardego?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Użyj opcji <tt class="option">-dvd-device</tt> aby odwołać się do katalogu
+zawierającego pliki:
+</p><pre class="screen">
+mplayer dvd://1 -dvd-device <em class="replaceable"><code>/ścieżka/do/katalogu</code></em>
+</pre><p>
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-features"></a>8.7. Prośby o wprowadzenie nowych możliwości</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Pyt.: <a href="faq.html#idp71318544">
+Jeżeli MPlayer jest zatrzymany i próbuję przewijać lub
+nacisnę jakikolwiek klawisz, MPlayer z powrotem wraca
+do odtwarzania. Chciałbym móc przwijać zatrzymany film.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71322000">
+Chciałbym przewijać o +/- 1 klatkę zamiast 10 sekund.
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71318544"></a><a name="idp71318800"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jeżeli <span class="application">MPlayer</span> jest zatrzymany i próbuję przewijać lub
+nacisnę jakikolwiek klawisz, <span class="application">MPlayer</span> z powrotem wraca
+do odtwarzania. Chciałbym móc przwijać zatrzymany film.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Zaimplementowanie tego bez utraty synchronizacji A/V jest bardzo podchwytliwe.
+Wszelkie próby do tej pory zakończyły się porażką. Łatki mile widziane.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71322000"></a><a name="idp71322256"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Chciałbym przewijać o +/- 1 klatkę zamiast 10 sekund.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Możesz przejść w przód o jedną klatkę przez naciśnięcie <span class="keycap"><b>.</b></span>.
+Film zostanie zatrzymany (po szczegóły zajrzyj do strony man).
+Wątpliwe jest, żeby przechodzenie w tył zostało
+zaimplementowane w najbliższym czasie.
+</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><h3 class="title"><a name="faq-encoding"></a>8.8. Kodowanie</h3></td></tr><tr class="toc"><td align="left" valign="top" colspan="2"><dl><dt>Pyt.: <a href="faq.html#idp71326272">
+Jak mogę kodować?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71329008">
+Jak zrzucić całą pozycję DVD do pliku?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71333536">
+Jak mogę tworzyć automatycznie (S)VCD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71337024">
+Jak mogę stworzyć (S)VCD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71340816">
+Jak mogę połączyć dwa pliki video?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71347728">
+Jak mogę naprawić pliki AVI z popsutym indeksem lub złym przeplotem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71352480">
+Jak mogę naprawić proporcje pliku AVI?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71356992">
+Jak mogę zapisać i kodować plik VOB z popsutym początkiem?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71364368">
+Nie mogę zakodować napisów z DVD do AVI!
+</a></dt><dt>Pyt.: <a href="faq.html#idp71366400">
+Jak mogę zakodować tylko wybrane rozdziały z DVD?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71368880">
+Próbuję pracować z plikami 2GB+ na systemie plików VFAT. Czy to działa?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71370560">
+Co oznaczają te liczby w wierszu stanu w czasie procesu kodowania?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71387776">
+Dlaczego zalecany bitrate wypisywany przez MEncodera
+jest ujemny?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71390368">
+Nie mogę zakodować pliku ASF do AVI/DivX, ponieważ ma on 1000 fps.
+</a></dt><dt>Pyt.: <a href="faq.html#idp71392672">
+Jak mogę wstawić napisy do pliku wynikowego?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71395872">
+Jak zakodować wyłącznie dźwięk z teledysku?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71404080">
+Dlaczego zewnętrzne odtwarzacze nieodtwarzają filmów MPEG-4 zakodowanych
+MEncoderem w wersji nowszej niż 1.0pre7?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71417760">
+Jak mogę kodować plik zawierający tylko dźwięk?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71421760">
+Jak mogę odtwarzać napisy wbudowane w AVI?
+</a></dt><dt>Pyt.: <a href="faq.html#idp71425888">
+MPlayer nie...
+</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71326272"></a><a name="idp71326528"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę kodować?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przeczytaj sekcję
+<a class="link" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><span class="application">MEncoder</span></a>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71329008"></a><a name="idp71329264"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak zrzucić całą pozycję DVD do pliku?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Gdy już wybierzesz pozycję i upewnisz się, że jest poprawnie odtwarzana przez
+<span class="application">MPlayera</span>, użyj opcji <tt class="option">-dumpstream</tt>.
+Na przykład:
+</p><pre class="screen">
+mplayer dvd://5 -dumpstream -dumpfile <em class="replaceable"><code>zrzut_dvd.vob</code></em>
+</pre><p>
+zrzuci piątą pozycję DVD do pliku <em class="replaceable"><code>zrzut_dvd.vob</code></em>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71333536"></a><a name="idp71333792"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę tworzyć automatycznie (S)VCD?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Wypróbuj skrypt <tt class="filename">mencvcd.sh</tt> z podkatalogu
+<tt class="filename">TOOLS</tt>.
+Korzystając z niego, możesz kodować DVD lub inne filmy do formatu VCD lub SVCD,
+a nawet wypalać bezpośrednio na CD.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71337024"></a><a name="idp71337280"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę stworzyć (S)VCD?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Nowsze wersje <span class="application">MEncodera</span> potrafią bezpośrednio
+generować pliki MPEG-2, które mogą być użyte jako podstawa do stworzenia VCD
+lub SVCD i prawdopodobnie są od ręki odtwarzalne na wszelkich platformach (na
+przykład aby podzielić się nagraniem z kamery cyfrowej z Twoimi nieobytymi
+z komputerem przyjaciółmi).
+Aby zdobyć więcej informacji przeczytaj sekcję
+<a class="link" href="menc-feat-vcd-dvd.html" title="7.8. Using MEncoder to create VCD/SVCD/DVD-compliant files">Używanie MEncodera do tworzenia plików zgodnych z VCD/SVCD/DVD</a>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71340816"></a><a name="idp71341072"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę połączyć dwa pliki video?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przy odrobinie szczęścia zbiory MPEG można połączyć (zkonkatenować).
+Do zbiorów AVI możesz używać obsługi wielu zbiorów
+<span class="application">MEncodera</span> w następujący sposób:
+</p><pre class="screen">
+mencoder -ovc copy -oac copy -o <em class="replaceable"><code>wyjście.avi</code></em> <em class="replaceable"><code>plik1.avi</code></em> <em class="replaceable"><code>plik2.avi</code></em>
+</pre><p>
+Zadziała to tylko jeśli zbiory mają tę samą rozdzielczość i używają tego samego kodeka.
+Możesz też spróbować
+<a class="ulink" href="http://fixounet.free.fr/avidemux/" target="_top">avidemux</a> i
+<span class="application">avimerge</span> (część zestawu narzędzi
+<a class="ulink" href="http://www.transcoding.org/" target="_top">transcode</a>).
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71347728"></a><a name="idp71347984"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę naprawić pliki AVI z popsutym indeksem lub złym przeplotem?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Aby unknąć używania <tt class="option">-idx</tt> aby móc przewijać w plikach AVI
+z zepsutym indeksem lub <tt class="option">-ni</tt> do odtwarzania plików AVI ze złym
+przeplotem, użyj polecenia
+</p><pre class="screen">
+mencoder -idx <em class="replaceable"><code>wejście.avi</code></em> -ovc copy -oac copy -o <em class="replaceable"><code>wyjście.avi</code></em>
+</pre><p>
+aby skopiować strumienie audio i video do nowego pliku, równocześnie
+odtwarzając indeks i poprawnie przeplatając dane.
+Oczywiście to nie może naprawić ewentualnych błędów w strumieniach audio i/lub
+video.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71352480"></a><a name="idp71352736"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę naprawić proporcje pliku AVI?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Możesz to zrobić dzięki opcji <span class="application">MEncodera</span>
+<tt class="option">-force-avi-aspect</tt>, która nadpisuje proporcje zachowane w opcji
+nagłówka AVI vprp OpenDML. Na przykład:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>wejście.avi</code></em> -ovc copy -oac copy -o <em class="replaceable"><code>wyjście.avi</code></em> -force-avi-acpect 4/3
+</pre><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71356992"></a><a name="idp71357248"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę zapisać i kodować plik VOB z popsutym początkiem?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Głównym problemem gdy chcesz kodować popsuty
+<a href="#ftn.fn-corrupted-files-or-copy-protection" class="footnote" name="fn-corrupted-files-or-copy-protection"><sup class="footnote">[3]</sup></a>
+plik VOB jest to, że będzie bardzo ciężko uzyskać wynik z doskonałą
+synchronizacją A/V. Jednym sposobem ominięcia tego jest obcięcie uszkodzonej
+części i kodowanie tylko tej dobrej.
+Najpierw musisz się zorientować gdzie zaczyna się poprawna część:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>wejście.vob</code></em> -sb <em class="replaceable"><code>ilość_bajtów_do_pominięcia</code></em>
+</pre><p>
+Potem możesz stworzyć nowy plik, zawierający tylko poprawną część:
+</p><pre class="screen">
+dd if=<em class="replaceable"><code>wejście.vob</code></em> of=<em class="replaceable"><code>obcięte_wyjście.vob</code></em> skip=1 ibs=<em class="replaceable"><code>ilość_bajtów_do_pominięcia</code></em>
+</pre><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71364368"></a><a name="idp71364624"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Nie mogę zakodować napisów z DVD do AVI!
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Musisz poprawnie określić opcję <tt class="option">-sid</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71366400"></a><a name="idp71366656"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę zakodować tylko wybrane rozdziały z DVD?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Użyj poprawnie opcji <tt class="option">-chapter</tt>,
+na przykład: <tt class="option">-chapter 5-7</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71368880"></a><a name="idp71369136"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Próbuję pracować z plikami 2GB+ na systemie plików VFAT. Czy to działa?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Nie, VFAT nie obsługuje plików 2GB+.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71370560"></a><a name="idp71370816"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Co oznaczają te liczby w wierszu stanu w czasie procesu kodowania?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przykład:
+</p><pre class="screen">
+Pos: 264.5s   6612f ( 2%)  7.12fps Trem: 576min 2856mb  A-V:0.065 [2126:192]
+</pre><p>
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="systemitem">Pos: 264.5s</code></span></dt><dd><p>aktualny czas w kodowanym strumieniu</p></dd><dt><span class="term"><code class="systemitem">6612f</code></span></dt><dd><p>liczba zakodowanych klatek video</p></dd><dt><span class="term"><code class="systemitem">( 2%)</code></span></dt><dd><p>
+  jaki procent strumienia wejściowego został zakodowany
+  </p></dd><dt><span class="term"><code class="systemitem">7.12fps</code></span></dt><dd><p>szybkość kodowania</p></dd><dt><span class="term"><code class="systemitem">Trem: 576min</code></span></dt><dd><p>szacowany pozostały czas kodowania</p></dd><dt><span class="term"><code class="systemitem">2856mb</code></span></dt><dd><p>
+  szacowana wielkość wyniku ostatecznego kodowania
+  </p></dd><dt><span class="term"><code class="systemitem">A-V:0.065</code></span></dt><dd><p>
+  aktualne opóźnienie między strumieniami audio i video
+  </p></dd><dt><span class="term"><code class="systemitem">[2126:192]</code></span></dt><dd><p>
+  średni bitrate video (w kb/s) i średni bitrate audio (w kb/s)
+  </p></dd></dl></div><p>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71387776"></a><a name="idp71388032"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Dlaczego zalecany bitrate wypisywany przez <span class="application">MEncodera</span>
+jest ujemny?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Ponieważ bitrate (ilość bitów na sekundę) z którym zakodowałeś audio jest za
+duże, aby film się zmieścił na jakimkolwiek CD. Sprawdź czy libmp3lame jest
+zainstalowana poprawnie.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71390368"></a><a name="idp71390624"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Nie mogę zakodować pliku ASF do AVI/DivX, ponieważ ma on 1000 fps.
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Ponieważ ASF używa zmiennego framerate (ilość ramek na sekundę),
+a AVI używa ustalonej wartości,
+musisz ustawić ją ręcznie używając opcji <tt class="option">-ofps</tt>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71392672"></a><a name="idp71392928"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę wstawić napisy do pliku wynikowego?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Po prostu przekaż opcję <tt class="option">-sub &lt;nazwa_pliku&gt;</tt>
+(lub odpowiednio <tt class="option">-sid</tt>) do <span class="application">MEncodera</span>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71395872"></a><a name="idp71396128"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak zakodować wyłącznie dźwięk z teledysku?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Nie jest to możliwe bezpośrednio lecz możesz sprówować następującego
+sposobu (zwróć uwagę na znak
+<span class="bold"><strong>&amp;</strong></span> na końcu polecenia
+<span class="command"><strong>mplayer</strong></span>):
+</p><pre class="screen">
+mkfifo <em class="replaceable"><code>encode</code></em>
+mplayer -ao pcm -aofile <em class="replaceable"><code>encode</code></em> dvd://1 &amp;
+lame <em class="replaceable"><code>Twoje_opcje</code></em> <em class="replaceable"><code>encode</code></em> <em class="replaceable"><code>music.mp3</code></em>
+rm <em class="replaceable"><code>encode</code></em>
+</pre><p>
+Ten sposób pozwala na użycie dowolnego kodera, nie tylko
+<span class="application">LAME</span>.
+Po prostu zamień <span class="command"><strong>lame</strong></span> w powyższym poleceniu
+na swój ulubiony koder audio.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71404080"></a><a name="idp71404336"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Dlaczego zewnętrzne odtwarzacze nieodtwarzają filmów MPEG-4 zakodowanych
+<span class="application">MEncoderem</span> w wersji nowszej niż 1.0pre7?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+<code class="systemitem">libavcodec</code>, natywna biblioteka
+kodowania MPEG-4 zwykle dostarczana z <span class="application">MEncoderem</span>
+ustawiała FourCC na 'DIVX' podczas kodowania video MPEG-4 (FourCC to
+etykieta AVI identyfikująca oprogramowanie użyte do kodowania
+i przewidziane do dekodowania video).
+To powodowało przekonanie u wielu ludzi, że
+<code class="systemitem">libavcodec</code> jest biblioteką kodowania
+DivX, gdy w rzeczywistości jest zupełnie inną biblioteką kodowania MPEG-4,
+która dużo lepiej niż DivX implementuje standard MPEG-4.
+Dlatego też nowym domyślnym kodem FourCC używanym przez
+<code class="systemitem">libavcodec</code> jest 'FMP4', lecz możesz
+obejść to zachowanie używając opcji <span class="application">MEncodera</span>
+<tt class="option">-ffourcc</tt>.
+Tak samo możesz zmienić FourCC istniejącego pliku:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>wejście.avi</code></em> -o <em class="replaceable"><code>wyjście.avi</code></em> -ffourcc XVID
+</pre><p>
+Zauważ, że to ustawi FourCC na XVID, a nie na DIVX. Jest to zalecane, ze
+względu na to, że kod FourCC DIVX oznacza DivX4, który jest bardzo prostym
+kodekiem MPEG-4, a DX50 i XVID oba oznaczają pełne MPEG-4 (ASP). Dlatego
+gdy ustawisz FourCC na DIVX, pewne programy lub sprzętowe odtwarzacze mogą
+się dławić na niektórych zaawansowanych funkcjach, które obsługuje
+<code class="systemitem">libavcodec</code>, a DivX nie; z drugiej
+strony <code class="systemitem">Xvid</code> jest bliższy
+funkjonalnością <code class="systemitem">libavacodec</code>,
+a jest obsługiwany przez wszystkie sensowne odtwarzacze.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71417760"></a><a name="idp71418016"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę kodować plik zawierający tylko dźwięk?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Użyj <tt class="filename">aconvert.sh</tt> z podkatalogu
+<tt class="filename">TOOLS</tt> w drzewie źródeł
+<span class="application">MPlayera</span>.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71421760"></a><a name="idp71422016"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+Jak mogę odtwarzać napisy wbudowane w AVI?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Użyj <tt class="filename">avisubdump.c</tt> z podkatalogu
+<tt class="filename">TOOLS</tt> lub przeczytaj
+<a class="ulink" href="http://xlife.zuavra.net/curse/0012/" target="_top">ten dokument o wydobywaniu/demultipleksowaniu napisów wbudowanych w pliki AVI OpenDML</a>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="idp71425888"></a><a name="idp71426144"></a><p><b>Pyt.:</b></p></td><td align="left" valign="top"><p>
+<span class="application">MPlayer</span> nie...
+</p></td></tr><tr class="answer"><td align="left" valign="top"><p><b>Odp.:</b></p></td><td align="left" valign="top"><p>
+Przejrzyj podkatalog <tt class="filename">TOOLS</tt>.
+Znajduje się tam kolekcja losowych skryptów i hacków.
+Dokumentację znajdziesz w <tt class="filename">TOOLS/README</tt>.
+</p></td></tr></tbody></table></div><div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0"><div id="ftn.fn-corrupted-files-or-copy-protection" class="footnote"><p><a href="#fn-corrupted-files-or-copy-protection" class="para"><sup class="para">[3] </sup></a>
+W pewnym stopniu, niektóre formy zabezpieczenia przed kopiowaniem używane na
+DVD mogą zostać uznane za uszkodzenie zawartości.
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-vcd-dvd.html">Poprzedni</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="bugreports.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">7.8. Using <span class="application">MEncoder</span>
+  to create VCD/SVCD/DVD-compliant files </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> Dodatek A. Jak zgłaszać błędy</td></tr></table></div></body></html>

@@ -1,0 +1,39 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.3. Czcionki</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="prev" href="skin-file.html" title="B.2. Plik skin"><link rel="next" href="skin-gui.html" title="B.4. Sygnały GUI"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="subsection" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Znaki specjalne (symbole)"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.3. Czcionki</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-file.html">Poprzedni</a> </td><th width="60%" align="center">Dodatek B. Format skórki <span class="application">MPlayera</span></th><td width="20%" align="right"> <a accesskey="n" href="skin-gui.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-fonts"></a>B.3. Czcionki</h2></div></div></div><p>
+Jak wspomniano w sekcji na temat fragmentów skórki, czcionka jest definiowana
+przez obrazek i plik opisujący. Możesz umieścić znaki gdziekolwiek na obrazku,
+ale miej pewność, żeich pozycja i rozmiar jest dokładnie podana w pliku
+opisującym.
+</p><p>
+Plik opisujący czcionkę (o rozszerzeniu <tt class="filename">.fnt</tt>) może posiadać
+linie komentarzy zaczynające się znakiem '<code class="literal">;</code>'. Plik musi
+zawierać linie w postaci:
+<a name="skin-font-image"></a>
+</p><pre class="programlisting">image = <em class="replaceable"><code>obrazek</code></em></pre><p>
+Gdzie <code class="literal"><em class="replaceable"><code>obrazek</code></em></code> jest nazwą pliku
+graficznego, który zawiera czcionkę (nie musisz dopisywać jego rozszerzenia).
+<a name="skin-font-char"></a>
+</p><pre class="programlisting">"char" = X, Y, szerokość, wysokość</pre><p>
+<code class="literal">X</code> oraz <code class="literal">Y</code> określają pozycję znaku
+<code class="literal">char</code> na obrazku (<code class="literal">0,0</code> to górny lewy narożnik).
+<code class="literal">szerokość</code> i <code class="literal">wysokość</code> to rozmiar znaku
+w pikselach.
+</p><p>
+Przykład: definiujemy znaki A, B, C przy użyciu pliku <tt class="filename">font.png</tt>.
+</p><pre class="programlisting">
+; Może być "font" zamiast "font.png".
+image = font.png
+
+; Trzy znaki wystarczą do tej demonstracji :-)
+"A" =  0,0, 7,13
+"B" =  7,0, 7,13
+"C" = 14,0, 7,13
+</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-fonts-symbols"></a>B.3.1. Znaki specjalne (symbole)</h3></div></div></div><p>
+Niektóre znaki mają specjalne znaczenie, gdy są zwracane przez pewne zmienne
+używane w <a class="link" href="skin-file.html#skin-dlabel">dlabel</a>. Znaki te mogą być
+wyświetlane jako symbole w ten sposób, że np. podczas odtwarzania strumienia DVD
+widoczne jest ładne logo zamiast znaku '<code class="literal">d</code>'.
+</p><p>
+Poniższa tablica zawiera znaki używane do wyświetlania symboli (wymagają one
+oddzielnych czcionek).
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Znak</th><th>Symbol</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>odtwarzanie</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>stop</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>pauza</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>bez dźwięku</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>dźwięk mono</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>dźwięk stereo</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>strumień z pliku</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>strumień z Video CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>strumień z DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>strumień z URL</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-file.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-gui.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">B.2. Plik skin </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> B.4. Sygnały GUI</td></tr></table></div></body></html>

@@ -1,0 +1,20 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.10. OpenGL вывод</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="tdfx_vid.html" title="4.9. tdfx_vid"><link rel="next" href="aalib.html" title="4.11. AAlib - отображение в текстовом режиме"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.10. OpenGL вывод</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tdfx_vid.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="aalib.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="opengl"></a>4.10. OpenGL вывод</h2></div></div></div><p>
+<span class="application">MPlayer</span> поддерживает воспроизведение фильмов через OpenGL,
+но если ваша платформа/драйвер поддерживает xv, как в случае PC с Linux,
+лучше используйте xv, производительность OpenGL значительно ниже. Если у вас
+реализация X11 без поддержки xv, OpenGL жизнеспособная замена.
+</p><p>
+К сожалению, не все драйвера поддерживают эту возможность. Драйвера
+Utah-GLX (для XFree86 3.3.6) имеют ее для всех карт.
+Подробности установки смотрите <a class="ulink" href="http://utah-glx.sf.net" target="_top">http://utah-glx.sf.net</a>.
+</p><p>
+XFree86(DRI) 4.0.3 или новее поддерживает OpenGL с картами Matrox и Radeon,
+4.2.0 или более поздние поддерживают и Rage128.
+Инструкции по закачиванию и установке смотрите на <a class="ulink" href="http://dri.sf.net" target="_top">http://dri.sf.net</a> .
+</p><p>
+Подсказка от одного из наших пользователей: видео вывод GL может использоваться
+для получения синхронизированного по вертикали TV вывода. Необходимо установить
+переменную окружения (как минимум для nVidia):
+</p><p>
+<span class="command"><strong>export __GL_SYNC_TO_VBLANK=1</strong></span>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tdfx_vid.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="aalib.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.9. tdfx_vid </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.11. AAlib - отображение в текстовом режиме</td></tr></table></div></body></html>

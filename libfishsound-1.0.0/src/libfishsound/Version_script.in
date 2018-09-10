@@ -1,0 +1,44 @@
+#
+# Export file for libfishsound
+#
+# Only the symbols listed in the global section will be callable from
+# applications linking to libfishsound.
+#
+
+@PACKAGE@.so
+{
+        global:
+		fish_sound_identify;
+		fish_sound_new;
+		fish_sound_set_decoded_callback;
+		fish_sound_set_encoded_callback;
+		fish_sound_decode;
+		fish_sound_encode;
+		fish_sound_reset;
+		fish_sound_flush;
+		fish_sound_delete;
+		fish_sound_command;
+		fish_sound_get_interleave;
+		fish_sound_set_interleave;
+		fish_sound_get_frameno;
+		fish_sound_set_frameno;
+		fish_sound_prepare_truncation;
+
+		fish_sound_set_decoded_float;
+		fish_sound_set_decoded_float_ilv;
+
+		fish_sound_encode_float;
+		fish_sound_encode_float_ilv;
+
+		fish_sound_comment_get_vendor;
+		fish_sound_comment_first;
+		fish_sound_comment_first_byname;
+		fish_sound_comment_next;
+		fish_sound_comment_next_byname;
+		fish_sound_comment_add;
+		fish_sound_comment_add_byname;
+		fish_sound_comment_remove;
+		fish_sound_comment_remove_byname;
+        local:
+                *;
+};

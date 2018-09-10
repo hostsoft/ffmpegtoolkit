@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.5. Codec telepítés</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="install.html" title="2. fejezet - Telepítés"><link rel="prev" href="fonts-osd.html" title="2.4. Betűtípusok és OSD"><link rel="next" href="rtc.html" title="2.6. RTC"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="codec-installation.html#xvid" title="2.5.1. Xvid"><link rel="subsection" href="codec-installation.html#x264" title="2.5.2. x264"><link rel="subsection" href="codec-installation.html#amr" title="2.5.3. AMR"><link rel="subsection" href="codec-installation.html#xmms" title="2.5.4. XMMS"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.5. Codec telepítés</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="fonts-osd.html">Vissza</a> </td><th width="60%" align="center">2. fejezet - Telepítés</th><td width="20%" align="right"> <a accesskey="n" href="rtc.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="codec-installation"></a>2.5. Codec telepítés</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="xvid"></a>2.5.1. Xvid</h3></div></div></div><p>
+Az <a class="ulink" href="http://www.xvid.org" target="_top">Xvid</a> egy szabad szoftveres MPEG-4
+ASP kompatibilis videó codec. Jegyezd meg, hogy az Xvid nem szükséges az Xvid-es
+videók dekódolásához. A <code class="systemitem">libavcodec</code> az
+alapértelmezett, mivel jobb a sebessége.
+</p><div class="procedure"><a name="idp41148048"></a><p class="title"><b>Az <code class="systemitem">Xvid</code> telepítése</b></p><p>
+  Mint a legtöbb nyílt forráskódú program, ez is két formában érhető el:
+  <a class="ulink" href="http://www.xvid.org/downloads.html" target="_top">hivatalos kiadás</a>
+  és a CVS verzió.
+  A CVS verzió általában elég stabil a használathoz, mivel legtöbbször csak
+  a kiadásokban benne lévő hibák javításait tartalmazza.
+  Itt van lépésről lépésre, hogy mit kell tenned, ha az <code class="systemitem">Xvid</code>
+  CVS-t használni akarod a <span class="application">MEncoder</span>rel:
+</p><ol class="procedure" type="1"><li class="step"><p>
+  </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid login</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">cvs -z3 -d:pserver:anonymous@cvs.xvid.org:/xvid co xvidcore</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">cd xvidcore/build/generic</pre><p>
+</p></li><li class="step"><p>
+  </p><pre class="screen">./bootstrap.sh &amp;&amp; ./configure</pre><p>
+  Meg kell adnod pár kapcsolót (tanulmányozd a
+  <span class="command"><strong>./configure --help</strong></span> kimenetét).
+</p></li><li class="step"><p>
+  </p><pre class="screen">make &amp;&amp; make install</pre><p>
+</p></li><li class="step"><p>
+  Fordítsd újra az <span class="application">MPlayer</span>t.
+</p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="x264"></a>2.5.2. <code class="systemitem">x264</code></h3></div></div></div><p>
+Az <a class="ulink" href="http://developers.videolan.org/x264.html" target="_top"><code class="systemitem">x264</code></a>
+egy függvénykönyvtár a H.264 videó létrehozásához.
+Az <span class="application">MPlayer</span> forrás mindig frissül, ha
+egy <code class="systemitem">x264</code> API változás
+jelenik meg, így javasolt az <span class="application">MPlayer</span>
+Subversion verziójának használata.
+</p><p>
+Ha van feltelepítve GIT kliensed, a legújabb x264
+forrást letöltheted ezzel a paranccsal:
+</p><pre class="screen">git clone git://git.videolan.org/x264.git</pre><p>
+
+Majd fordíts és telepíts a szabványos módon:
+</p><pre class="screen">./configure &amp;&amp; make &amp;&amp; make install</pre><p>
+
+Ezután futtasd újra a <tt class="filename">./configure</tt>-t, hogy
+az <span class="application">MPlayer</span>be belekerüljön az
+<code class="systemitem">x264</code> támogatás.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="amr"></a>2.5.3. AMR</h3></div></div></div><p>
+Az MPlayer használni tudja az OpenCORE AMR függvénykönyvtárakat a FFmpeg-en keresztül.
+Töltsd le a könyvtárakat az AMR-NB-hez és az AMR-WB-hez az
+<a class="ulink" href="http://sourceforge.net/projects/opencore-amr/" target="_top">opencore-amr</a>
+projectből és telepítsd őket az oldalon lévő utasítások szerint.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="xmms"></a>2.5.4. XMMS</h3></div></div></div><p>
+Az <span class="application">MPlayer</span> tudja használni az <span class="application">XMMS</span>
+bemeneti plugin-jait több fájlformátum lejátszásához. Van plugin SNES játék hangokhoz, SID
+hangokhoz (Commodore 64-ről), több Amiga formátumhoz, .xm, .it, VQF, Musepack, Bonk
+és még számos máshoz. Megtalálhatod őket az
+<a class="ulink" href="http://www.xmms.org/plugins.php?category=input" target="_top">XMMS bemenetu plugin oldalán</a>.
+</p><p>
+Ehhez a tulajdonsághoz rendelkezden kell az <span class="application">XMMS</span>-sel, az
+<span class="application">MPlayer</span>t pedig ezzel kell fordítanod:
+<tt class="filename">./configure --enable-xmms</tt>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="fonts-osd.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="rtc.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">2.4. Betűtípusok és OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 2.6. RTC</td></tr></table></div></body></html>

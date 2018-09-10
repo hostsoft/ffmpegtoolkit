@@ -1,0 +1,46 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.1. Настройка MTRR</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="next" href="xv.html" title="4.2. Xv"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.1. Настройка MTRR</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="video.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="xv.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mtrr"></a>4.1. Настройка MTRR</h2></div></div></div><p>
+ОЧЕНЬ важно проверить, правильно ли установлены MTRR регистры,
+поскольку они могут дать большой прирост производительности.
+</p><p>
+Выполните <span class="command"><strong>cat /proc/mtrr</strong></span>:
+</p><pre class="screen">
+<code class="prompt">--($:~)--</code> cat /proc/mtrr
+reg00: base=0xe4000000 (3648MB), size=  16MB: write-combining, count=9
+reg01: base=0xd8000000 (3456MB), size= 128MB: write-combining, count=1</pre><p>
+</p><p>
+Здесь все верно, показана моя Matrox G400 с 16Мб памяти. Я выполнил это из-под
+XFree 4.x.x, который автоматически устанавливает регистры MTRR.
+</p><p>
+Если ничего не сработало, вам придется сделать это вручную. Во-первых,
+вы должны определить базовый  адрес. Существует три способа выяснить его:
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  из сообщений запуска X11, например:
+  </p><pre class="screen">
+(--) SVGA: PCI: Matrox MGA G400 AGP rev 4, Memory @ 0xd8000000, 0xd4000000
+(--) SVGA: Linear framebuffer at 0xD8000000</pre><p>
+</p></li><li class="listitem"><p>
+  из <tt class="filename">/proc/pci</tt> (используйте команду <span class="command"><strong>lspci -v</strong></span>):
+  </p><pre class="screen">
+01:00.0 VGA compatible controller: Matrox Graphics, Inc.: Unknown device 0525
+Memory at d8000000 (32-bit, prefetchable)</pre><p>
+</p></li><li class="listitem"><p>
+  из сообщений драйвера ядра mga_vid (используйте <span class="command"><strong>dmesg</strong></span>):
+  </p><pre class="screen">mga_mem_base = d8000000</pre><p>
+</p></li></ol></div><p>
+</p><p>
+Теперь давайте найдем объем памяти. Это очень просто, просто преобразуйте
+размер видео памяти в шестнадцатеричный формат, или используйте таблицу:
+</p><div class="informaltable"><table border="0"><colgroup><col><col></colgroup><tbody><tr><td>1 MB</td><td>0x100000</td></tr><tr><td>2 MB</td><td>0x200000</td></tr><tr><td>4 MB</td><td>0x400000</td></tr><tr><td>8 MB</td><td>0x800000</td></tr><tr><td>16 MB</td><td>0x1000000</td></tr><tr><td>32 MB</td><td>0x2000000</td></tr></tbody></table></div><p>
+</p><p>
+Вы знаете базовый адрес и размер памяти, так давайте настроим регистры MTRR!
+Например, для вышеуказанной карты Matrox (<code class="literal">base=0xd8000000</code>)
+с 32Мб памяти (<code class="literal">size=0x2000000</code>) просто выполните:
+</p><pre class="screen">
+echo "base=0xd8000000 size=0x2000000 type=write-combining" &gt; /proc/mtrr
+</pre><p>
+</p><p>
+Не все CPU имеют MTRR. Например, старый K6-2 (около  266MHz,
+степпинг 0) не имеет MTRR, но у степпинга 12 они уже есть
+(запустите <span class="command"><strong>cat /proc/cpuinfo</strong></span> чтобы это проверить).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="video.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="xv.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">Глава 4. Устройства вывода видео </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.2. Xv</td></tr></table></div></body></html>

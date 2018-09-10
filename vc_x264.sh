@@ -7,7 +7,7 @@ function _install_x264() {
 	echo -e $RED"Installation of $_package ....... started"$RESET
 
 	cd $SOURCE_DIR/
-	rm -vrf x264-snapshot*
+	#rm -vrf x264-snapshot*
 	if [ -f "$_file" ]
 	then
 		echo "$_file found, Skip Downloads"

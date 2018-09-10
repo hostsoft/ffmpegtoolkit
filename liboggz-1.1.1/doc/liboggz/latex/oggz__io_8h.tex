@@ -1,0 +1,438 @@
+\section{oggz\-\_\-io.\-h File Reference}
+\label{oggz__io_8h}\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}}
+
+
+Overriding the functions used for input and output of raw data.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef size\-\_\-t($\ast$ {\bf Oggz\-I\-O\-Read} )(void $\ast$user\-\_\-handle, void $\ast$buf, size\-\_\-t n)
+\begin{DoxyCompactList}\small\item\em This is the signature of a function which you provide for Oggz to call when it needs to acquire raw input data. \end{DoxyCompactList}\item 
+typedef size\-\_\-t($\ast$ {\bf Oggz\-I\-O\-Write} )(void $\ast$user\-\_\-handle, void $\ast$buf, size\-\_\-t n)
+\begin{DoxyCompactList}\small\item\em This is the signature of a function which you provide for Oggz to call when it needs to output raw data. \end{DoxyCompactList}\item 
+typedef int($\ast$ {\bf Oggz\-I\-O\-Seek} )(void $\ast$user\-\_\-handle, long offset, int whence)
+\begin{DoxyCompactList}\small\item\em This is the signature of a function which you provide for Oggz to call when it needs to seek on the raw input or output data. \end{DoxyCompactList}\item 
+typedef long($\ast$ {\bf Oggz\-I\-O\-Tell} )(void $\ast$user\-\_\-handle)
+\begin{DoxyCompactList}\small\item\em This is the signature of a function which you provide for Oggz to call when it needs to determine the current offset of the raw input or output data. \end{DoxyCompactList}\item 
+typedef int($\ast$ {\bf Oggz\-I\-O\-Flush} )(void $\ast$user\-\_\-handle)
+\begin{DoxyCompactList}\small\item\em This is the signature of a function which you provide for Oggz to call when it needs to flush the output data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf oggz\-\_\-io\-\_\-set\-\_\-read} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf Oggz\-I\-O\-Read} read, void $\ast$user\-\_\-handle)
+\begin{DoxyCompactList}\small\item\em Set a function for Oggz to call when it needs to read input data. \end{DoxyCompactList}\item 
+void $\ast$ {\bf oggz\-\_\-io\-\_\-get\-\_\-read\-\_\-user\-\_\-handle} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Retrieve the user\-\_\-handle associated with the function you have provided for reading input data. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-io\-\_\-set\-\_\-write} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf Oggz\-I\-O\-Write} write, void $\ast$user\-\_\-handle)
+\begin{DoxyCompactList}\small\item\em Set a function for Oggz to call when it needs to write output data. \end{DoxyCompactList}\item 
+void $\ast$ {\bf oggz\-\_\-io\-\_\-get\-\_\-write\-\_\-user\-\_\-handle} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Retrieve the user\-\_\-handle associated with the function you have provided for writing output data. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-io\-\_\-set\-\_\-seek} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf Oggz\-I\-O\-Seek} seek, void $\ast$user\-\_\-handle)
+\begin{DoxyCompactList}\small\item\em Set a function for Oggz to call when it needs to seek on its raw data. \end{DoxyCompactList}\item 
+void $\ast$ {\bf oggz\-\_\-io\-\_\-get\-\_\-seek\-\_\-user\-\_\-handle} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Retrieve the user\-\_\-handle associated with the function you have provided for seeking on input or output data. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-io\-\_\-set\-\_\-tell} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf Oggz\-I\-O\-Tell} tell, void $\ast$user\-\_\-handle)
+\begin{DoxyCompactList}\small\item\em Set a function for Oggz to call when it needs to determine the offset within its input data (if O\-G\-G\-Z\-\_\-\-R\-E\-A\-D) or output data (if O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E). \end{DoxyCompactList}\item 
+void $\ast$ {\bf oggz\-\_\-io\-\_\-get\-\_\-tell\-\_\-user\-\_\-handle} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Retrieve the user\-\_\-handle associated with the function you have provided for determining the current offset in input or output data. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-io\-\_\-set\-\_\-flush} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf Oggz\-I\-O\-Flush} flush, void $\ast$user\-\_\-handle)
+\begin{DoxyCompactList}\small\item\em Set a function for Oggz to call when it needs to flush its output. \end{DoxyCompactList}\item 
+void $\ast$ {\bf oggz\-\_\-io\-\_\-get\-\_\-flush\-\_\-user\-\_\-handle} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Retrieve the user\-\_\-handle associated with the function you have provided for flushing output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Overriding the functions used for input and output of raw data. Oggz\-I\-O provides a way of overriding the functions Oggz uses to access its raw input or output data. This is required in many situations where the raw stream cannot be accessed via stdio, but can be accessed by other means. This is typically useful within media frameworks, where accessing and moving around in the data is possible only using methods provided by the framework.
+
+The functions you provide for overriding I\-O will be used by Oggz whenever you call \doxyref{oggz\-\_\-read()}{p.}{group__read__api_ga3ce7a31de5da56375057436c6b5108f2} or \doxyref{oggz\-\_\-write()}{p.}{group__write__api_ga3c97d94ea425d64546adf9c368b71904}. They will also be used repeatedly by Oggz when you call \doxyref{oggz\-\_\-seek()}{p.}{group__seek__api_gaeef4b261d443701207954e5a636d6817}.
+
+\begin{DoxyNote}{Note}
+Opening a file with \doxyref{oggz\-\_\-open()}{p.}{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db} or \doxyref{oggz\-\_\-open\-\_\-stdio()}{p.}{oggz_8h_ac49e9de0bc4ef1d91b43b13605f98b19} is equivalent to calling \doxyref{oggz\-\_\-new()}{p.}{oggz_8h_a6eb34d123389ae38d993601f9e7bb9d6} and setting stdio based functions for data I\-O. 
+\end{DoxyNote}
+
+
+\subsection{Typedef Documentation}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!Oggz\-I\-O\-Flush@{Oggz\-I\-O\-Flush}}
+\index{Oggz\-I\-O\-Flush@{Oggz\-I\-O\-Flush}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{Oggz\-I\-O\-Flush}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ Oggz\-I\-O\-Flush)(void $\ast$user\-\_\-handle)}\label{oggz__io_8h_a2d41d748db3b60bb25f716bcebf2f1e3}
+
+
+This is the signature of a function which you provide for Oggz to call when it needs to flush the output data. 
+
+The behaviour of this function is similar to that of fflush() in stdio.
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\-\_\-handle} & A generic pointer you have provided earlier \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em $<$  0} & An error condition \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!Oggz\-I\-O\-Read@{Oggz\-I\-O\-Read}}
+\index{Oggz\-I\-O\-Read@{Oggz\-I\-O\-Read}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{Oggz\-I\-O\-Read}]{\setlength{\rightskip}{0pt plus 5cm}typedef size\-\_\-t($\ast$ Oggz\-I\-O\-Read)(void $\ast$user\-\_\-handle, void $\ast$buf, size\-\_\-t n)}\label{oggz__io_8h_ae4995dabd7027c5a2273fe6db94c4733}
+
+
+This is the signature of a function which you provide for Oggz to call when it needs to acquire raw input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\-\_\-handle} & A generic pointer you have provided earlier \\
+\hline
+{\em n} & The length in bytes that Oggz wants to read \\
+\hline
+{\em buf} & The buffer that you read data into \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em $>$  0} & The number of bytes successfully read into the buffer \\
+\hline
+{\em 0} & to indicate that there is no more data to read (End of file) \\
+\hline
+{\em $<$  0} & An error condition \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!Oggz\-I\-O\-Seek@{Oggz\-I\-O\-Seek}}
+\index{Oggz\-I\-O\-Seek@{Oggz\-I\-O\-Seek}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{Oggz\-I\-O\-Seek}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ Oggz\-I\-O\-Seek)(void $\ast$user\-\_\-handle, long offset, int whence)}\label{oggz__io_8h_ab92c1e4e1bc98165cb7e9a0920a09b75}
+
+
+This is the signature of a function which you provide for Oggz to call when it needs to seek on the raw input or output data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\-\_\-handle} & A generic pointer you have provided earlier \\
+\hline
+{\em offset} & The offset in bytes to seek to \\
+\hline
+{\em whence} & S\-E\-E\-K\-\_\-\-S\-E\-T, S\-E\-E\-K\-\_\-\-C\-U\-R or S\-E\-E\-K\-\_\-\-E\-N\-D (as for stdio.\-h) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em $>$= 0} & The offset seeked to \\
+\hline
+{\em $<$  0} & An error condition\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+If you provide an Oggz\-I\-O\-Seek function, you M\-U\-S\-T also provide an Oggz\-I\-O\-Tell function, or else all your seeks will fail. 
+\end{DoxyNote}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!Oggz\-I\-O\-Tell@{Oggz\-I\-O\-Tell}}
+\index{Oggz\-I\-O\-Tell@{Oggz\-I\-O\-Tell}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{Oggz\-I\-O\-Tell}]{\setlength{\rightskip}{0pt plus 5cm}typedef long($\ast$ Oggz\-I\-O\-Tell)(void $\ast$user\-\_\-handle)}\label{oggz__io_8h_adac7e4773781ad067f0591e1699fd669}
+
+
+This is the signature of a function which you provide for Oggz to call when it needs to determine the current offset of the raw input or output data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\-\_\-handle} & A generic pointer you have provided earlier \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em $>$= 0} & The offset \\
+\hline
+{\em $<$  0} & An error condition \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!Oggz\-I\-O\-Write@{Oggz\-I\-O\-Write}}
+\index{Oggz\-I\-O\-Write@{Oggz\-I\-O\-Write}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{Oggz\-I\-O\-Write}]{\setlength{\rightskip}{0pt plus 5cm}typedef size\-\_\-t($\ast$ Oggz\-I\-O\-Write)(void $\ast$user\-\_\-handle, void $\ast$buf, size\-\_\-t n)}\label{oggz__io_8h_a0274a389b81ba93dae32d3d2fe39637f}
+
+
+This is the signature of a function which you provide for Oggz to call when it needs to output raw data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\-\_\-handle} & A generic pointer you have provided earlier \\
+\hline
+{\em n} & The length in bytes of the data \\
+\hline
+{\em buf} & A buffer containing data to write \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em $>$= 0} & The number of bytes successfully written (may be less than {\itshape n} if a write error has occurred) \\
+\hline
+{\em $<$  0} & An error condition \\
+\hline
+\end{DoxyRetVals}
+
+
+\subsection{Function Documentation}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-get\-\_\-flush\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-flush\-\_\-user\-\_\-handle}}
+\index{oggz\-\_\-io\-\_\-get\-\_\-flush\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-flush\-\_\-user\-\_\-handle}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-get\-\_\-flush\-\_\-user\-\_\-handle}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ oggz\-\_\-io\-\_\-get\-\_\-flush\-\_\-user\-\_\-handle (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_a6150bee0cc28c68553bdcc6d020f6932}
+
+
+Retrieve the user\-\_\-handle associated with the function you have provided for flushing output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the associated user\-\_\-handle 
+\end{DoxyReturn}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-get\-\_\-read\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-read\-\_\-user\-\_\-handle}}
+\index{oggz\-\_\-io\-\_\-get\-\_\-read\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-read\-\_\-user\-\_\-handle}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-get\-\_\-read\-\_\-user\-\_\-handle}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ oggz\-\_\-io\-\_\-get\-\_\-read\-\_\-user\-\_\-handle (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_af5bbd37e9a390e3c282fdc8bfadc43f6}
+
+
+Retrieve the user\-\_\-handle associated with the function you have provided for reading input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the associated user\-\_\-handle 
+\end{DoxyReturn}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-get\-\_\-seek\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-seek\-\_\-user\-\_\-handle}}
+\index{oggz\-\_\-io\-\_\-get\-\_\-seek\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-seek\-\_\-user\-\_\-handle}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-get\-\_\-seek\-\_\-user\-\_\-handle}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ oggz\-\_\-io\-\_\-get\-\_\-seek\-\_\-user\-\_\-handle (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_a718ea817110f0d94d9d6f3a457707a08}
+
+
+Retrieve the user\-\_\-handle associated with the function you have provided for seeking on input or output data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the associated user\-\_\-handle 
+\end{DoxyReturn}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-get\-\_\-tell\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-tell\-\_\-user\-\_\-handle}}
+\index{oggz\-\_\-io\-\_\-get\-\_\-tell\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-tell\-\_\-user\-\_\-handle}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-get\-\_\-tell\-\_\-user\-\_\-handle}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ oggz\-\_\-io\-\_\-get\-\_\-tell\-\_\-user\-\_\-handle (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_a54b69e5159280c1224025df925e67b50}
+
+
+Retrieve the user\-\_\-handle associated with the function you have provided for determining the current offset in input or output data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the associated user\-\_\-handle 
+\end{DoxyReturn}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-get\-\_\-write\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-write\-\_\-user\-\_\-handle}}
+\index{oggz\-\_\-io\-\_\-get\-\_\-write\-\_\-user\-\_\-handle@{oggz\-\_\-io\-\_\-get\-\_\-write\-\_\-user\-\_\-handle}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-get\-\_\-write\-\_\-user\-\_\-handle}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ oggz\-\_\-io\-\_\-get\-\_\-write\-\_\-user\-\_\-handle (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_a024a62f080f1b64c465b0bf475ebfd2e}
+
+
+Retrieve the user\-\_\-handle associated with the function you have provided for writing output data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the associated user\-\_\-handle 
+\end{DoxyReturn}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-set\-\_\-flush@{oggz\-\_\-io\-\_\-set\-\_\-flush}}
+\index{oggz\-\_\-io\-\_\-set\-\_\-flush@{oggz\-\_\-io\-\_\-set\-\_\-flush}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-set\-\_\-flush}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-io\-\_\-set\-\_\-flush (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{{\bf Oggz\-I\-O\-Flush}}]{flush, }
+\item[{void $\ast$}]{user\-\_\-handle}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_af45a2d33c7e17d1b64f794b32d69e7da}
+
+
+Set a function for Oggz to call when it needs to flush its output. 
+
+The meaning of this is similar to that of fflush() in stdio.
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em flush} & Your flushing function \\
+\hline
+{\em user\-\_\-handle} & Any arbitrary data you wish to pass to the function \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z; {\itshape oggz} not open for writing. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-set\-\_\-read@{oggz\-\_\-io\-\_\-set\-\_\-read}}
+\index{oggz\-\_\-io\-\_\-set\-\_\-read@{oggz\-\_\-io\-\_\-set\-\_\-read}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-set\-\_\-read}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-io\-\_\-set\-\_\-read (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{{\bf Oggz\-I\-O\-Read}}]{read, }
+\item[{void $\ast$}]{user\-\_\-handle}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_a640ecb60fcee9323f1f735ad23f7abc4}
+
+
+Set a function for Oggz to call when it needs to read input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em read} & Your reading function \\
+\hline
+{\em user\-\_\-handle} & Any arbitrary data you wish to pass to the function \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z; {\itshape oggz} not open for reading. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-set\-\_\-seek@{oggz\-\_\-io\-\_\-set\-\_\-seek}}
+\index{oggz\-\_\-io\-\_\-set\-\_\-seek@{oggz\-\_\-io\-\_\-set\-\_\-seek}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-set\-\_\-seek}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-io\-\_\-set\-\_\-seek (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{{\bf Oggz\-I\-O\-Seek}}]{seek, }
+\item[{void $\ast$}]{user\-\_\-handle}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_a8482fb0783df2621e811c14d642b01fc}
+
+
+Set a function for Oggz to call when it needs to seek on its raw data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em seek} & Your seeking function \\
+\hline
+{\em user\-\_\-handle} & Any arbitrary data you wish to pass to the function \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+If you provide an Oggz\-I\-O\-Seek function, you M\-U\-S\-T also provide an Oggz\-I\-O\-Tell function, or else all your seeks will fail. 
+\end{DoxyNote}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-set\-\_\-tell@{oggz\-\_\-io\-\_\-set\-\_\-tell}}
+\index{oggz\-\_\-io\-\_\-set\-\_\-tell@{oggz\-\_\-io\-\_\-set\-\_\-tell}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-set\-\_\-tell}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-io\-\_\-set\-\_\-tell (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{{\bf Oggz\-I\-O\-Tell}}]{tell, }
+\item[{void $\ast$}]{user\-\_\-handle}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_ad97da84267d72ab9abf8dbb9ff5e8931}
+
+
+Set a function for Oggz to call when it needs to determine the offset within its input data (if O\-G\-G\-Z\-\_\-\-R\-E\-A\-D) or output data (if O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em tell} & Your tell function \\
+\hline
+{\em user\-\_\-handle} & Any arbitrary data you wish to pass to the function \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-io.\-h@{oggz\-\_\-io.\-h}!oggz\-\_\-io\-\_\-set\-\_\-write@{oggz\-\_\-io\-\_\-set\-\_\-write}}
+\index{oggz\-\_\-io\-\_\-set\-\_\-write@{oggz\-\_\-io\-\_\-set\-\_\-write}!oggz_io.h@{oggz\-\_\-io.\-h}}
+\subsubsection[{oggz\-\_\-io\-\_\-set\-\_\-write}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-io\-\_\-set\-\_\-write (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{{\bf Oggz\-I\-O\-Write}}]{write, }
+\item[{void $\ast$}]{user\-\_\-handle}
+\end{DoxyParamCaption}
+)}\label{oggz__io_8h_af92f5b20bb5f247b5302dfc8b4edfbee}
+
+
+Set a function for Oggz to call when it needs to write output data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em write} & Your writing function \\
+\hline
+{\em user\-\_\-handle} & Any arbitrary data you wish to pass to the function \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z; {\itshape oggz} not open for writing. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} & Out of memory \\
+\hline
+\end{DoxyRetVals}

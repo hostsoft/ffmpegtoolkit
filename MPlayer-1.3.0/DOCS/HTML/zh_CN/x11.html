@@ -1,0 +1,33 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.12. X11</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="video.html" title="第 4 章 Video output devices"><link rel="prev" href="vesa.html" title="4.11. VESA - output to VESA BIOS"><link rel="next" href="vidix.html" title="4.13. VIDIX"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.12. X11</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vesa.html">上一页</a> </td><th width="60%" align="center">第 4 章 Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="vidix.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="x11"></a>4.12. X11</h2></div></div></div><p>
+Avoid if possible. Outputs to X11 (uses shared memory extension), with no
+hardware acceleration at all. Supports (MMX/3DNow/SSE accelerated, but
+still slow) software scaling, use the options <tt class="option">-fs -zoom</tt>.
+Most cards have hardware scaling support, use the <tt class="option">-vo xv</tt>
+output for them, or <tt class="option">-vo xmga</tt> for Matrox cards.
+</p><p>
+The problem is that most cards' driver doesn't support hardware
+acceleration on the second head/TV. In those cases, you see green/blue
+colored window instead of the movie. This is where this driver comes in
+handy, but you need powerful CPU to use software scaling. Don't use the SDL
+driver's software output+scaler, it has worse image quality!
+</p><p>
+Software scaling is very slow, you better try changing video modes instead.
+It's very simple. See the <a class="link" href="dga.html#dga-modelines" title="RESOLUTION SWITCHING">DGA section's
+modelines</a>, and insert them into your <tt class="filename">XF86Config</tt>.
+
+</p><div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  If you have XFree86 4.x.x: use the <tt class="option">-vm</tt> option. It will
+  change to a resolution your movie fits in. If it doesn't:
+</p></li><li class="listitem"><p>
+  With XFree86 3.x.x: you have to cycle through available resolutions
+  with the
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad +</b></span>
+  and
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad -</b></span>
+  keys.
+</p></li></ul></div><p>
+</p><p>
+If you can't find the modes you inserted, browse XFree86's output. Some
+drivers can't use low pixelclocks that are needed for low resolution
+video modes.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vesa.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="vidix.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">4.11. VESA - output to VESA BIOS </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 4.13. VIDIX</td></tr></table></div></body></html>

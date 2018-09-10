@@ -1,0 +1,84 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Глава 1. Введение</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="prev" href="howtoread.html" title="Как читать эту документацию"><link rel="next" href="install.html" title="Глава 2. Установка"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Глава 1. Введение</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="howtoread.html">Пред.</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="install.html">След.</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="intro"></a>Глава 1. Введение</h1></div></div></div><p>
+<span class="application">MPlayer</span> — это проигрыватель фильмов для LINUX'а
+(работает на многих других UNIX'ах и не-x86
+CPU, см. <a class="xref" href="ports.html" title="Глава 5. Портинг">Портинг</a>). Он проигрывает большинство MPEG, VOB, AVI,
+Ogg/OGM, VIVO, ASF/WMA/WMV, QT/MOV/MP4, FLI, RM, NuppelVideo, yuv4mpeg, FILM,
+RoQ, PVA, Matroska файлов, опираясь на множество "родных", XAnim'овских,
+RealPlayer'овских и Win32 DLL кодеков. Вы также можете смотреть VideoCD, SVCD,
+DVD, 3ivx, RealMedia, Sorenson, Theora, и MPEG-4 (DivX) фильмы.
+Другой важной особенностью
+<span class="application">MPlayer</span>'а является широкий спектр поддерживаемых
+устройств вывода. Он работает с X11, Xv, DGA, OpenGL, SVGAlib,
+fbdev, AAlib, libcaca, DirectFB, и кроме того Вы можете
+использовать GGI and SDL (и таким образом все их драйверы) и также несколько
+низкоуровневых драйверов для конкретных карт (для Matrox, 3Dfx и Radeon,
+Mach64, Permedia3)! Большинство из них поддерживают программное или аппаратное
+масштабирование, поэтому Вы можете насладиться просмотром фильма на полном
+экране.<span class="application">MPlayer</span> поддерживает некоторые аппаратные
+MPEG декодеры, такие как <a class="link" href="mpeg_decoders.html#dvb" title="4.18.1. DVB ввод и вывод">DVB</a> и
+<a class="link" href="mpeg_decoders.html#dxr3" title="4.18.3. DXR3/Hollywood+">DXR3/Hollywood+</a>. А как насчёт славных больших
+сглаженных затенённых субтитров (14 поддерживаемых
+типов) с Европейскими/ISO 8859-1,2 (венгерский, английский, чешский,
+и т.п.), кириллическими, корейскими шрифтами и вывода информации на экран
+[On Screen Display (OSD)]?
+</p><p>
+Плеер без проблем проигрывает повреждённые MPEG файлы (полезно для некоторых VCD),
+плохие AVI файлы, которые не проигрываются известным
+<span class="application">Windows Media Player</span>.
+Даже AVI файлы без индекса являются проигрываемыми.
+Вы можете временно сделать индекс с помощью ключа <tt class="option">-idx</tt> или
+перманентно с помощью <span class="application">MEncoder</span>'а,
+таким образом получив возможность перемещаться
+по фильму! Как видите стабильность и качество — наиболее важные вещи,
+но скорость также изумительна. Кроме того имеется мощная
+система фильтров для манипуляции с видео и аудио.
+</p><p>
+<span class="application">MEncoder</span> (Кодировщик фильмов <span class="application">MPlayer
+</span>'a) — это простой
+кодировщик фильмов предназначенный для кодирования фильмов, проигрываемых MPlayer'ом
+AVI/ASF/OGG/DVD/VCD/VOB/MPG/MOV/VIV/FLI/RM/NUV/NET/PVA в другие
+проигрываемые <span class="application">MPlayer</span>'ом форматы (см. ниже).
+Он может кодировать такими разными кодеками, как
+MPEG-4 (DivX4) (1 или 2 прохода),
+<code class="systemitem">libavcodec</code>,
+PCM/MP3/VBR MP3 звук.
+</p><div class="itemizedlist"><p class="title"><b>Возможности <span class="application">MEncoder</span>'а</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Кодирование из широкого спектра форматов файлов и декодеров
+  <span class="application">MPlayer'а</span>
+</p></li><li class="listitem"><p>
+  Кодирование во все кодеки FFmpeg'овской библиотеки
+  <code class="systemitem">libavcodec</code>
+</p></li><li class="listitem"><p>
+  Кодирование видео с V4L совместимых TV тюнеров
+</p></li><li class="listitem"><p>
+  Кодирование/мультиплексирование в "слоёные"[interleaved] AVI файлы
+  с соответствующим индексом
+</p></li><li class="listitem"><p>
+  Создание файлов с аудио потоком из внешнего файла
+</p></li><li class="listitem"><p>
+  Кодирование в 1, 2 или 3 прохода
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>VBR</strong></span> MP3 аудио
+</p></li><li class="listitem"><p>
+  PCM аудио
+</p></li><li class="listitem"><p>
+  Копирование потоков
+</p></li><li class="listitem"><p>
+  Входная A/V синхронизация (основана на PTS, может быть отключена с помощью
+  ключа <tt class="option">-mc 0</tt> )
+</p></li><li class="listitem"><p>
+  Коррекция FPS[кадров/сек] ключом <tt class="option">-ofps</tt> (полезно при кодировании
+  30000/1001 fps VOB в 24000/1001 fps AVI)
+</p></li><li class="listitem"><p>
+  Использование нашей очень мощной системы плагинов (обрезание[crop],
+  расширение[expand], отражение[flip], пост-обработка[postprocess],
+  поворот[rotate], масштабирование[scale], RGB/YUV преобразования)
+</p></li><li class="listitem"><p>
+  Может кодировать DVD/VOBsub и текстовые субтитры
+  в один выходной файл
+</p></li><li class="listitem"><p>
+  Может извлекать DVD субтитры в VOBsub формат
+</p></li></ul></div><p>
+<span class="application">MPlayer</span> и <span class="application">MEncoder</span> могут распространяться в соответствии с GNU General
+Public License Version 2.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="howtoread.html">Пред.</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="install.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">Как читать эту документацию </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> Глава 2. Установка</td></tr></table></div></body></html>

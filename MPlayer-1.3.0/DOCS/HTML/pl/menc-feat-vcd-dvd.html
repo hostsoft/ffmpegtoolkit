@@ -1,0 +1,312 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.8. Using MEncoder to create VCD/SVCD/DVD-compliant files</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="prev" href="menc-feat-quicktime-7.html" title="7.7. Using MEncoder to create QuickTime-compatible files"><link rel="next" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-constraints" title="7.8.1. Format Constraints"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-output" title="7.8.2. Output Options"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-lavc" title="7.8.3. Using libavcodec for VCD/SVCD/DVD Encoding"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-audio" title="7.8.4. Encoding Audio"><link rel="subsection" href="menc-feat-vcd-dvd.html#menc-feat-vcd-dvd-all" title="7.8.5. Putting it all Together"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.8. Using <span class="application">MEncoder</span>
+  to create VCD/SVCD/DVD-compliant files</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-quicktime-7.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 7. Kodowanie przy użyciu <span class="application">MEncodera</span></th><td width="20%" align="right"> <a accesskey="n" href="faq.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-vcd-dvd"></a>7.8. Using <span class="application">MEncoder</span>
+  to create VCD/SVCD/DVD-compliant files</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-constraints"></a>7.8.1. Format Constraints</h3></div></div></div><p>
+<span class="application">MEncoder</span> is capable of creating VCD, SCVD
+and DVD format MPEG files using the
+<code class="systemitem">libavcodec</code> library.
+These files can then be used in conjunction with
+<a class="ulink" href="http://www.gnu.org/software/vcdimager/vcdimager.html" target="_top">vcdimager</a>
+or
+<a class="ulink" href="http://dvdauthor.sourceforge.net/" target="_top">dvdauthor</a>
+to create discs that will play on a standard set-top player.
+</p><p>
+The DVD, SVCD, and VCD formats are subject to heavy constraints.
+Only a small selection of encoded picture sizes and aspect ratios are
+available.
+If your movie does not already meet these requirements, you may have
+to scale, crop or add black borders to the picture to make it
+compliant.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-constraints-resolution"></a>7.8.1.1. Format Constraints</h4></div></div></div><div class="informaltable"><table border="1"><colgroup><col><col><col><col><col><col><col><col><col></colgroup><thead><tr><th>Format</th><th>Resolution</th><th>V. Codec</th><th>V. Bitrate</th><th>Sample Rate</th><th>A. Codec</th><th>A. Bitrate</th><th>FPS</th><th>Aspect</th></tr></thead><tbody><tr><td>NTSC DVD</td><td>720x480, 704x480, 352x480, 352x240</td><td>MPEG-2</td><td>9800 kbps</td><td>48000 Hz</td><td>AC-3,PCM</td><td>1536 kbps (max)</td><td>30000/1001, 24000/1001</td><td>4:3, 16:9 (only for 720x480)</td></tr><tr><td>NTSC DVD</td><td>352x240<a href="#ftn.fn-rare-resolutions" class="footnote" name="fn-rare-resolutions"><sup class="footnote">[a]</sup></a></td><td>MPEG-1</td><td>1856 kbps</td><td>48000 Hz</td><td>AC-3,PCM</td><td>1536 kbps (max)</td><td>30000/1001, 24000/1001</td><td>4:3, 16:9</td></tr><tr><td>NTSC SVCD</td><td>480x480</td><td>MPEG-2</td><td>2600 kbps</td><td>44100 Hz</td><td>MP2</td><td>384 kbps (max)</td><td>30000/1001</td><td>4:3</td></tr><tr><td>NTSC VCD</td><td>352x240</td><td>MPEG-1</td><td>1150 kbps</td><td>44100 Hz</td><td>MP2</td><td>224 kbps</td><td>24000/1001, 30000/1001</td><td>4:3</td></tr><tr><td>PAL DVD</td><td>720x576, 704x576, 352x576, 352x288</td><td>MPEG-2</td><td>9800 kbps</td><td>48000 Hz</td><td>MP2,AC-3,PCM</td><td>1536 kbps (max)</td><td>25</td><td>4:3, 16:9 (only for 720x576)</td></tr><tr><td>PAL DVD</td><td>352x288<a href="menc-feat-vcd-dvd.html#ftn.fn-rare-resolutions" class="footnoteref"><sup class="footnoteref">[a]</sup></a></td><td>MPEG-1</td><td>1856 kbps</td><td>48000 Hz</td><td>MP2,AC-3,PCM</td><td>1536 kbps (max)</td><td>25</td><td>4:3, 16:9</td></tr><tr><td>PAL SVCD</td><td>480x576</td><td>MPEG-2</td><td>2600 kbps</td><td>44100 Hz</td><td>MP2</td><td>384 kbps (max)</td><td>25</td><td>4:3</td></tr><tr><td>PAL VCD</td><td>352x288</td><td>MPEG-1</td><td>1152 kbps</td><td>44100 Hz</td><td>MP2</td><td>224 kbps</td><td>25</td><td>4:3</td></tr></tbody><tbody class="footnotes"><tr><td colspan="9"><div id="ftn.fn-rare-resolutions" class="footnote"><p><a href="#fn-rare-resolutions" class="para"><sup class="para">[a] </sup></a>
+  These resolutions are rarely used for DVDs because
+  they are fairly low quality.</p></div></td></tr></tbody></table></div><p>
+If your movie has 2.35:1 aspect (most recent action movies), you will
+have to add black borders or crop the movie down to 16:9 to make a DVD or VCD.
+If you add black borders, try to align them at 16-pixel boundaries in
+order to minimize the impact on encoding performance.
+Thankfully DVD has sufficiently excessive bitrate that you do not have
+to worry too much about encoding efficiency, but SVCD and VCD are
+highly bitrate-starved and require effort to obtain acceptable quality.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-constraints-gop"></a>7.8.1.2. GOP Size Constraints</h4></div></div></div><p>
+DVD, VCD, and SVCD also constrain you to relatively low
+GOP (Group of Pictures) sizes.
+For 30 fps material the largest allowed GOP size is 18.
+For 25 or 24 fps, the maximum is 15.
+The GOP size is set using the <tt class="option">keyint</tt> option.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-constraints-bitrate"></a>7.8.1.3. Bitrate Constraints</h4></div></div></div><p>
+VCD video is required to be CBR at 1152 kbps.
+This highly limiting constraint also comes along with an extremely low vbv
+buffer size of 327 kilobits.
+SVCD allows varying video bitrates up to 2500 kbps, and a somewhat less
+restrictive vbv buffer size of 917 kilobits is allowed.
+DVD video bitrates may range anywhere up to 9800 kbps (though typical
+bitrates are about half that), and the vbv buffer size is 1835 kilobits.
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-output"></a>7.8.2. Output Options</h3></div></div></div><p>
+<span class="application">MEncoder</span> has options to control the output
+format.
+Using these options we can instruct it to create the correct type of
+file.
+</p><p>
+The options for VCD and SVCD are called xvcd and xsvcd, because they
+are extended formats.
+They are not strictly compliant, mainly because the output does not
+contain scan offsets.
+If you need to generate an SVCD image, you should pass the output file to
+<a class="ulink" href="http://www.gnu.org/software/vcdimager/vcdimager.html" target="_top">vcdimager</a>.
+</p><p>
+VCD:
+</p><pre class="screen">-of mpeg -mpegopts format=xvcd</pre><p>
+</p><p>
+SVCD:
+</p><pre class="screen">-of mpeg -mpegopts format=xsvcd</pre><p>
+</p><p>
+DVD (with timestamps on every frame, if possible):
+</p><pre class="screen">-of mpeg -mpegopts format=dvd:tsaf</pre><p>
+</p><p>
+DVD with NTSC Pullup:
+</p><pre class="screen">-of mpeg -mpegopts format=dvd:tsaf:telecine -ofps 24000/1001</pre><p>
+This allows 24000/1001 fps progressive content to be encoded at 30000/1001
+fps whilst maintaining DVD-compliance.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-output-aspect"></a>7.8.2.1. Aspect Ratio</h4></div></div></div><p>
+The aspect argument of <tt class="option">-lavcopts</tt> is used to encode
+the aspect ratio of the file.
+During playback the aspect ratio is used to restore the video to the
+correct size.
+</p><p>
+16:9 or "Widescreen"
+</p><pre class="screen">-lavcopts aspect=16/9</pre><p>
+</p><p>
+4:3 or "Fullscreen"
+</p><pre class="screen">-lavcopts aspect=4/3</pre><p>
+</p><p>
+2.35:1 or "Cinemascope" NTSC
+</p><pre class="screen">-vf scale=720:368,expand=720:480 -lavcopts aspect=16/9</pre><p>
+To calculate the correct scaling size, use the expanded NTSC width of
+854/2.35 = 368
+</p><p>
+2.35:1 or "Cinemascope" PAL
+</p><pre class="screen">-vf scale=720:432,expand=720:576 -lavcopts aspect=16/9</pre><p>
+To calculate the correct scaling size, use the expanded PAL width of
+1024/2.35 = 432
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-a-v-sync"></a>7.8.2.2. Maintaining A/V sync</h4></div></div></div><p>
+In order to maintain audio/video synchronization throughout the encode,
+<span class="application">MEncoder</span> has to drop or duplicate frames.
+This works rather well when muxing into an AVI file, but is almost
+guaranteed to fail to maintain A/V sync with other muxers such as MPEG.
+This is why it is necessary to append the
+<tt class="option">harddup</tt> video filter at the end of the filter chain
+to avoid this kind of problem.
+You can find more technical information about <tt class="option">harddup</tt>
+in the section
+<a class="link" href="menc-feat-dvd-mpeg4.html#menc-feat-dvd-mpeg4-muxing-filter-issues" title="7.1.12.1. Improving muxing and A/V sync reliability">Improving muxing and A/V sync reliability</a>
+or in the manual page.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-output-srate"></a>7.8.2.3. Sample Rate Conversion</h4></div></div></div><p>
+If the audio sample rate in the original file is not the same as
+required by the target format, sample rate conversion is required.
+This is achieved using the <tt class="option">-srate</tt> option and
+the <tt class="option">-af lavcresample</tt> audio filter together.
+</p><p>
+DVD:
+</p><pre class="screen">-srate 48000 -af lavcresample=48000</pre><p>
+</p><p>
+VCD and SVCD:
+</p><pre class="screen">-srate 44100 -af lavcresample=44100</pre><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-lavc"></a>7.8.3. Using libavcodec for VCD/SVCD/DVD Encoding</h3></div></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-lavc-intro"></a>7.8.3.1. Introduction</h4></div></div></div><p>
+<code class="systemitem">libavcodec</code> can be used to
+create VCD/SVCD/DVD compliant video by using the appropriate options.
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-lavc-options"></a>7.8.3.2. lavcopts</h4></div></div></div><p>
+This is a list of fields in <tt class="option">-lavcopts</tt> that you may
+be required to change in order to make a complaint movie for VCD, SVCD,
+or DVD:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>acodec</strong></span>:
+  <tt class="option">mp2</tt> for VCD, SVCD, or PAL DVD;
+  <tt class="option">ac3</tt> is most commonly used for DVD.
+  PCM audio may also be used for DVD, but this is mostly a big waste of
+  space.
+  Note that MP3 audio is not compliant for any of these formats, but
+  players often have no problem playing it anyway.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>abitrate</strong></span>:
+  224 for VCD; up to 384 for SVCD; up to 1536 for  DVD, but commonly
+  used values range from 192 kbps for stereo to 384 kbps for 5.1 channel
+  sound.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vcodec</strong></span>:
+  <tt class="option">mpeg1video</tt> for VCD;
+  <tt class="option">mpeg2video</tt> for SVCD;
+  <tt class="option">mpeg2video</tt> is usually used for DVD but you may also use
+  <tt class="option">mpeg1video</tt> for CIF resolutions.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>keyint</strong></span>:
+  Used to set the GOP size.
+  18 for 30fps material, or 15 for 25/24 fps material.
+  Commercial producers seem to prefer keyframe intervals of 12.
+  It is possible to make this much larger and still retain compatibility
+  with most players.
+  A <tt class="option">keyint</tt> of 25 should never cause any problems.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vrc_buf_size</strong></span>:
+  327 for VCD, 917 for SVCD, and 1835 for DVD.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vrc_minrate</strong></span>:
+  1152, for VCD. May be left alone for SVCD and DVD.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vrc_maxrate</strong></span>:
+  1152 for VCD; 2500 for SVCD; 9800 for DVD.
+  For SVCD and DVD, you might wish to use lower values depending on your
+  own personal preferences and requirements.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vbitrate</strong></span>:
+  1152 for VCD;
+  up to 2500 for SVCD;
+  up to 9800 for DVD.
+  For the latter two formats, vbitrate should be set based on personal
+  preference.
+  For instance, if you insist on fitting 20 or so hours on a DVD, you
+  could use vbitrate=400.
+  The resulting video quality would probably be quite bad.
+  If you are trying to squeeze out the maximum possible quality on a DVD,
+  use vbitrate=9800, but be warned that this could constrain you to less
+  than an hour of video on a single-layer DVD.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>vstrict</strong></span>:
+  <tt class="option">vstrict</tt>=0 should be used to create DVDs.
+  Without this option, <span class="application">MEncoder</span> creates a
+  stream that cannot be correctly decoded by some standalone DVD
+  players.
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-lavc-examples"></a>7.8.3.3. Examples</h4></div></div></div><p>
+This is a typical minimum set of <tt class="option">-lavcopts</tt> for
+encoding video:
+</p><p>
+VCD:
+</p><pre class="screen">
+-lavcopts vcodec=mpeg1video:vrc_buf_size=327:vrc_minrate=1152:\
+vrc_maxrate=1152:vbitrate=1152:keyint=15:acodec=mp2
+</pre><p>
+</p><p>
+SVCD:
+</p><pre class="screen">
+-lavcopts vcodec=mpeg2video:vrc_buf_size=917:vrc_maxrate=2500:vbitrate=1800:\
+keyint=15:acodec=mp2
+</pre><p>
+</p><p>
+DVD:
+</p><pre class="screen">
+-lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:\
+keyint=15:vstrict=0:acodec=ac3
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-lavc-advanced"></a>7.8.3.4. Advanced Options</h4></div></div></div><p>
+For higher quality encoding, you may also wish to add quality-enhancing
+options to lavcopts, such as <tt class="option">trell</tt>,
+<tt class="option">mbd=2</tt>, and others.
+Note that <tt class="option">qpel</tt> and <tt class="option">v4mv</tt>, while often
+useful with MPEG-4, are not usable with MPEG-1 or MPEG-2.
+Also, if you are trying to make a very high quality DVD encode, it may
+be useful to add <tt class="option">dc=10</tt> to lavcopts.
+Doing so may help reduce the appearance of blocks in flat-colored areas.
+Putting it all together, this is an example of a set of lavcopts for a
+higher quality DVD:
+</p><p>
+</p><pre class="screen">
+-lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=8000:\
+keyint=15:trell:mbd=2:precmp=2:subcmp=2:cmp=2:dia=-10:predia=-10:cbp:mv0:\
+vqmin=1:lmin=1:dc=10:vstrict=0
+</pre><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-audio"></a>7.8.4. Encoding Audio</h3></div></div></div><p>
+VCD and SVCD support MPEG-1 layer II audio, using one of
+<code class="systemitem">toolame</code>,
+<code class="systemitem">twolame</code>,
+or <code class="systemitem">libavcodec</code>'s MP2 encoder.
+The libavcodec MP2 is far from being as good as the other two libraries,
+however it should always be available to use.
+VCD only supports constant bitrate audio (CBR) whereas SVCD supports
+variable bitrate (VBR), too.
+Be careful when using VBR because some bad standalone players might not
+support it too well.
+</p><p>
+For DVD audio, <code class="systemitem">libavcodec</code>'s
+AC-3 codec is used.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-audio-toolame"></a>7.8.4.1. toolame</h4></div></div></div><p>
+For VCD and SVCD:
+</p><pre class="screen">-oac toolame -toolameopts br=224</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-audio-twolame"></a>7.8.4.2. twolame</h4></div></div></div><p>
+For VCD and SVCD:
+</p><pre class="screen">-oac twolame -twolameopts br=224</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-audio-lavc"></a>7.8.4.3. libavcodec</h4></div></div></div><p>
+For DVD with 2 channel sound:
+</p><pre class="screen">-oac lavc -lavcopts acodec=ac3:abitrate=192</pre><p>
+</p><p>
+For DVD with 5.1 channel sound:
+</p><pre class="screen">-channels 6 -oac lavc -lavcopts acodec=ac3:abitrate=384</pre><p>
+</p><p>
+For VCD and SVCD:
+</p><pre class="screen">-oac lavc -lavcopts acodec=mp2:abitrate=224</pre><p>
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="menc-feat-vcd-dvd-all"></a>7.8.5. Putting it all Together</h3></div></div></div><p>
+This section shows some complete commands for creating VCD/SVCD/DVD
+compliant videos.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-pal-dvd"></a>7.8.5.1. PAL DVD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=dvd:tsaf \
+  -vf scale=720:576,harddup -srate 48000 -af lavcresample=48000 \
+  -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:\
+keyint=15:vstrict=0:acodec=ac3:abitrate=192:aspect=16/9 -ofps 25 \
+  -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-ntsc-dvd"></a>7.8.5.2. NTSC DVD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=dvd:tsaf \
+  -vf scale=720:480,harddup -srate 48000 -af lavcresample=48000 \
+  -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:\
+keyint=18:vstrict=0:acodec=ac3:abitrate=192:aspect=16/9 -ofps 30000/1001 \
+  -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-pal-ac3-copy"></a>7.8.5.3. PAL AVI Containing AC-3 Audio to DVD</h4></div></div></div><p>
+If the source already has AC-3 audio, use -oac copy instead of re-encoding it.
+</p><pre class="screen">
+mencoder -oac copy -ovc lavc -of mpeg -mpegopts format=dvd:tsaf \
+  -vf scale=720:576,harddup -ofps 25 \
+  -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:vrc_maxrate=9800:vbitrate=5000:\
+keyint=15:vstrict=0:aspect=16/9 -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-ntsc-ac3-copy"></a>7.8.5.4. NTSC AVI Containing AC-3 Audio to DVD</h4></div></div></div><p>
+If the source already has AC-3 audio, and is NTSC @ 24000/1001 fps:
+</p><pre class="screen">
+mencoder -oac copy -ovc lavc -of mpeg -mpegopts format=dvd:tsaf:telecine \
+  -vf scale=720:480,harddup -lavcopts vcodec=mpeg2video:vrc_buf_size=1835:\
+  vrc_maxrate=9800:vbitrate=5000:keyint=15:vstrict=0:aspect=16/9 -ofps 24000/1001 \
+  -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-pal-svcd"></a>7.8.5.5. PAL SVCD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=xsvcd -vf \
+    scale=480:576,harddup -srate 44100 -af lavcresample=44100 -lavcopts \
+    vcodec=mpeg2video:mbd=2:keyint=15:vrc_buf_size=917:vrc_minrate=600:\
+vbitrate=2500:vrc_maxrate=2500:acodec=mp2:abitrate=224:aspect=16/9 -ofps 25 \
+    -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+  </pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-ntsc-svcd"></a>7.8.5.6. NTSC SVCD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=xsvcd  -vf \
+    scale=480:480,harddup -srate 44100 -af lavcresample=44100 -lavcopts \
+    vcodec=mpeg2video:mbd=2:keyint=18:vrc_buf_size=917:vrc_minrate=600:\
+vbitrate=2500:vrc_maxrate=2500:acodec=mp2:abitrate=224:aspect=16/9 -ofps 30000/1001 \
+    -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-pal-vcd"></a>7.8.5.7. PAL VCD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=xvcd -vf \
+    scale=352:288,harddup -srate 44100 -af lavcresample=44100 -lavcopts \
+    vcodec=mpeg1video:keyint=15:vrc_buf_size=327:vrc_minrate=1152:\
+vbitrate=1152:vrc_maxrate=1152:acodec=mp2:abitrate=224:aspect=16/9 -ofps 25 \
+    -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="menc-feat-vcd-dvd-all-ntsc-vcd"></a>7.8.5.8. NTSC VCD</h4></div></div></div><p>
+</p><pre class="screen">
+mencoder -oac lavc -ovc lavc -of mpeg -mpegopts format=xvcd -vf \
+    scale=352:240,harddup -srate 44100 -af lavcresample=44100 -lavcopts \
+    vcodec=mpeg1video:keyint=18:vrc_buf_size=327:vrc_minrate=1152:\
+vbitrate=1152:vrc_maxrate=1152:acodec=mp2:abitrate=224:aspect=16/9 -ofps 30000/1001 \
+    -o <em class="replaceable"><code>movie.mpg</code></em> <em class="replaceable"><code>movie.avi</code></em>
+</pre><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-quicktime-7.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="encoding-guide.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="faq.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">7.7. Using <span class="application">MEncoder</span> to create
+<span class="application">QuickTime</span>-compatible files </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> Rozdział 8. FAQ - Często Zadawane Pytania</td></tr></table></div></body></html>

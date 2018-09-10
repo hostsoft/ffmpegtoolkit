@@ -1,0 +1,186 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.2. DGA</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="Chapter 4. Video output devices"><link rel="prev" href="xv.html" title="4.1. Xv"><link rel="next" href="svgalib.html" title="4.3. SVGAlib"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.2. DGA</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="xv.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="svgalib.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dga"></a>4.2. DGA</h2></div></div></div><p><b>PREAMBLE. </b>
+This document tries to explain in some words what DGA is in general and
+what the DGA video output driver for <span class="application">MPlayer</span>
+can do (and what it can't).
+</p><p><b>WHAT IS DGA. </b>
+<acronym class="acronym">DGA</acronym> is short for <span class="emphasis"><em>Direct Graphics
+Access</em></span> and is a means for a program to bypass the X server and
+directly modifying the framebuffer memory. Technically spoken this happens
+by mapping the framebuffer memory into the memory range of your process.
+This is allowed by the kernel only if you have superuser privileges. You
+can get these either by logging in as <code class="systemitem">root</code> or by setting the SUID bit on the
+<span class="application">MPlayer</span> executable (<span class="bold"><strong>not
+recommended</strong></span>).
+</p><p>
+There are two versions of DGA: DGA1 is used by XFree 3.x.x and DGA2 was
+introduced with XFree 4.0.1.
+</p><p>
+DGA1 provides only direct framebuffer access as described above. For
+switching the resolution of the video signal you have to rely on the
+XVidMode extension.
+</p><p>
+DGA2 incorporates the features of XVidMode extension and also allows
+switching the depth of the display. So you may, although basically
+running a 32 bit depth X server, switch to a depth of 15 bits and vice
+versa.
+</p><p>
+However DGA has some drawbacks. It seems it is somewhat dependent on the
+graphics chip you use and on the implementation of the X server's video
+driver that controls this chip. So it does not work on every system...
+</p><p><b>INSTALLING DGA SUPPORT FOR MPLAYER. </b>
+First make sure X loads the DGA extension, see in
+<tt class="filename">/var/log/XFree86.0.log</tt>:
+
+</p><pre class="programlisting">(II) Loading extension XFree86-DGA</pre><p>
+
+See, XFree86 4.0.x or greater is
+<span class="bold"><strong>highly recommended</strong></span>!
+<span class="application">MPlayer</span>'s DGA driver is autodetected by
+<tt class="filename">./configure</tt>, or you can force it
+with <tt class="option">--enable-dga</tt>.
+</p><p>
+If the driver couldn't switch to a smaller resolution, experiment with
+options <tt class="option">-vm</tt> (only with X 3.3.x), <tt class="option">-fs</tt>,
+<tt class="option">-bpp</tt>, <tt class="option">-zoom</tt> to find a video mode that
+the movie fits in. There is no converter right now :(
+</p><p>
+Become <code class="systemitem">root</code>. DGA needs root
+access to be able to write directly video memory. If you want to run it as
+user, then install <span class="application">MPlayer</span> SUID root:
+
+</p><pre class="screen">
+chown root <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod 750 <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+chmod +s <em class="replaceable"><code>/usr/local/bin/mplayer</code></em>
+</pre><p>
+
+Now it works as a simple user, too.
+</p><div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Security risk</h3><p>
+This is a <span class="bold"><strong>big</strong></span> security risk!
+<span class="bold"><strong>Never</strong></span> do this on a server or on a computer
+that can be accessed by other people because they can gain root privileges
+through SUID root <span class="application">MPlayer</span>.
+</p></div><p>
+Now use <tt class="option">-vo dga</tt> option, and there you go! (hope so:) You
+should also try if the <tt class="option">-vo sdl:driver=dga</tt> option works for you!
+It's much faster!
+</p><p><a name="dga-modelines"></a><b>RESOLUTION SWITCHING. </b>
+The DGA driver allows for switching the resolution of the output signal.
+This avoids the need for doing (slow) software scaling and at the same time
+provides a fullscreen image. Ideally it would switch to the exact
+resolution (except for honoring aspect ratio) of the video data, but the X
+server only allows switching to resolutions predefined in
+<tt class="filename">/etc/X11/XF86Config</tt>
+(<tt class="filename">/etc/X11/XF86Config-4</tt> for XFree 4.X.X respectively).
+Those are defined by so-called modelines and depend on
+the capabilities of your video hardware. The X server scans this config
+file on startup and disables the modelines not suitable for your hardware.
+You can find out which modes survive with the X11 log file. It can be found
+at: <tt class="filename">/var/log/XFree86.0.log</tt>.
+</p><p>
+These entries are known to work fine with a Riva128 chip, using the nv.o X
+server driver module.
+</p><pre class="programlisting">
+Section "Modes"
+  Identifier "Modes[0]"
+  Modeline "800x600"  40     800 840 968 1056  600 601 605 628
+  Modeline "712x600"  35.0   712 740 850 900   400 410 412 425
+  Modeline "640x480"  25.175 640 664 760 800   480 491 493 525
+  Modeline "400x300"  20     400 416 480 528   300 301 303 314 Doublescan
+  Modeline "352x288"  25.10  352 368 416 432   288 296 290 310
+  Modeline "352x240"  15.750 352 368 416 432   240 244 246 262 Doublescan
+  Modeline "320x240"  12.588 320 336 384 400   240 245 246 262 Doublescan
+EndSection
+</pre><p><b>DGA &amp; MPLAYER. </b>
+DGA is used in two places with <span class="application">MPlayer</span>: The SDL
+driver can be made to make use of it (<tt class="option">-vo sdl:driver=dga</tt>) and
+within the DGA driver (<tt class="option">-vo dga</tt>). The above said is true
+for both; in the following sections I'll explain how the DGA driver for
+<span class="application">MPlayer</span> works.
+</p><p><b>FEATURES. </b>
+The DGA driver is invoked by specifying <tt class="option">-vo dga</tt> at the
+command line. The default behavior is to switch to a resolution matching
+the original resolution of the video as close as possible. It deliberately
+ignores the <tt class="option">-vm</tt> and <tt class="option">-fs</tt> options
+(enabling of video mode switching and fullscreen) - it always tries to
+cover as much area of your screen as possible by switching the video mode,
+thus refraining from using additional cycles of your CPU to scale the
+image. If you don't like the mode it chooses you may force it to choose
+the mode matching closest the resolution you specify by <tt class="option">-x</tt>
+and <tt class="option">-y</tt>. By providing the <tt class="option">-v</tt> option, the
+DGA driver will print, among a lot of other things, a list of all
+resolutions supported by your current <tt class="filename">XF86Config</tt> file.
+Having DGA2 you may also force it to use a certain depth by using the
+<tt class="option">-bpp</tt> option. Valid depths are 15, 16, 24 and 32. It
+depends on your hardware whether these depths are natively supported or if
+a (possibly slow) conversion has to be done.
+</p><p>
+If you should be lucky enough to have enough offscreen memory left to
+put a whole image there, the DGA driver will use double buffering, which
+results in much smoother movie playback. It will tell you whether
+double buffering is enabled or not.
+</p><p>
+Double buffering means that the next frame of your video is being drawn in
+some offscreen memory while the current frame is being displayed. When the
+next frame is ready, the graphics chip is just told the location in memory
+of the new frame and simply fetches the data to be displayed from there.
+In the meantime the other buffer in memory will be filled again with new
+video data.
+</p><p>
+Double buffering may be switched on by using the option
+<tt class="option">-double</tt> and may be disabled with
+<tt class="option">-nodouble</tt>. Current default option is to disable
+double buffering. When using the DGA driver, onscreen display (OSD) only
+works with double buffering enabled. However, enabling double buffering may
+result in a big speed penalty (on my K6-II+ 525 it used an additional 20%
+of CPU time!) depending on the implementation of DGA for your hardware.
+</p><p><b>SPEED ISSUES. </b>
+Generally spoken, DGA framebuffer access should be at least as fast as
+using the X11 driver with the additional benefit of getting a fullscreen
+image. The percentage speed values printed by
+<span class="application">MPlayer</span> have to be interpreted with some care,
+as for example, with the X11 driver they do not include the time used by
+the X server needed for the actual drawing. Hook a terminal to a serial
+line of your box and start <span class="command"><strong>top</strong></span> to see what is really
+going on in your box.
+</p><p>
+Generally spoken, the speedup done by using DGA against 'normal' use of X11
+highly depends on your graphics card and how well the X server module for it
+is optimized.
+</p><p>
+If you have a slow system, better use 15 or 16 bit depth since they require
+only half the memory bandwidth of a 32 bit display.
+</p><p>
+Using a depth of 24 bit is a good idea even if your card natively just supports
+32 bit depth since it transfers 25% less data compared to the 32/32 mode.
+</p><p>
+I've seen some AVI files be played back on a Pentium MMX 266. AMD K6-2
+CPUs might work at 400 MHZ and above.
+</p><p><b>KNOWN BUGS. </b>
+Well, according to some developers of XFree, DGA is quite a beast. They
+tell you better not to use it. Its implementation is not always flawless
+with every chipset driver for XFree out there.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  With XFree 4.0.3 and <tt class="filename">nv.o</tt> there is a bug resulting
+  in strange colors.
+</p></li><li class="listitem"><p>
+  ATI driver requires to switch mode back more than once after finishing
+  using of DGA.
+</p></li><li class="listitem"><p>
+  Some drivers simply fail to switch back to normal resolution (use
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad +</b></span>
+  and
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>Keypad -</b></span>
+  to switch back manually).
+</p></li><li class="listitem"><p>
+  Some drivers simply display strange colors.
+</p></li><li class="listitem"><p>
+  Some drivers lie about the amount of memory they map into the process's
+  address space, thus vo_dga won't use double buffering (SIS?).
+</p></li><li class="listitem"><p>
+  Some drivers seem to fail to report even a single valid mode. In this
+  case the DGA driver will crash telling you about a nonsense mode of
+  100000x100000 or something like that.
+</p></li><li class="listitem"><p>
+  OSD only works with double buffering enabled (else it flickers).
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="xv.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="svgalib.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4.1. Xv </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4.3. SVGAlib</td></tr></table></div></body></html>

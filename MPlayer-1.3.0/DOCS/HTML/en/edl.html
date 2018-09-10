@@ -1,0 +1,38 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.7. Edit Decision Lists (EDL)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="Chapter 3. Usage"><link rel="prev" href="vcd.html" title="3.6. VCD playback"><link rel="next" href="networksync.html" title="3.8. Synchronized playback over a network"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="edl.html#edl_using" title="3.7.1. Using an EDL file"><link rel="subsection" href="edl.html#edl_making" title="3.7.2. Making an EDL file"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.7. Edit Decision Lists (EDL)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vcd.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Usage</th><td width="20%" align="right"> <a accesskey="n" href="networksync.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="edl"></a>3.7. Edit Decision Lists (EDL)</h2></div></div></div><p>
+The edit decision list (EDL) system allows you to automatically skip
+or mute sections of videos during playback, based on a movie specific
+EDL configuration file.
+</p><p>
+This is useful for those who may want to watch a film in "family-friendly"
+mode. You can cut out any violence, profanity, Jar-Jar Binks .. from a movie
+according to your own personal preferences. Aside from this, there are other
+uses, like automatically skipping over commercials in video files you watch.
+</p><p>
+The EDL file format is pretty bare-bones. There is one command per line that
+indicates what to do (skip/mute) and when to do it (using pts in seconds).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_using"></a>3.7.1. Using an EDL file</h3></div></div></div><p>
+Include the <tt class="option">-edl &lt;filename&gt;</tt> flag when you run
+<span class="application">MPlayer</span>, with the name of the EDL file you
+want applied to the video.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="edl_making"></a>3.7.2. Making an EDL file</h3></div></div></div><p>
+The current EDL file format is:
+</p><pre class="programlisting">[begin second] [end second] [action]</pre><p>
+Where the seconds are floating-point numbers and the action is either
+<code class="literal">0</code> for skip or <code class="literal">1</code> for mute. Example:
+</p><pre class="programlisting">
+5.3   7.1    0
+15    16.7   1
+420   422    0
+</pre><p>
+This will skip from second 5.3 to second 7.1 of the video, then mute at
+15 seconds, unmute at 16.7 seconds and skip from second 420 to second 422
+of the video. These actions will be performed when the playback timer
+reaches the times given in the file.
+</p><p>
+To create an EDL file to work from, use the <tt class="option">-edlout
+&lt;filename&gt;</tt> flag. During playback, just hit <span class="keycap"><b>i</b></span> to
+mark the beginning and end of a skip block.
+A corresponding entry will be written to the file for that time.
+You can then go back and fine-tune the generated EDL file as well as
+change the default operation which is to skip the block described by each line.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vcd.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="networksync.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.6. VCD playback </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.8. Synchronized playback over a network</td></tr></table></div></body></html>

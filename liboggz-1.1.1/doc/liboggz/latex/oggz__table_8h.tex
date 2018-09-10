@@ -1,0 +1,202 @@
+\section{oggz\-\_\-table.\-h File Reference}
+\label{oggz__table_8h}\index{oggz\-\_\-table.\-h@{oggz\-\_\-table.\-h}}
+
+
+A lookup table.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void {\bf Oggz\-Table}\label{oggz__table_8h_a72c5d21d2254089d192176e1c310b023}
+
+\begin{DoxyCompactList}\small\item\em A table of key-\/value pairs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Oggz\-Table} $\ast$ {\bf oggz\-\_\-table\-\_\-new} (void)
+\begin{DoxyCompactList}\small\item\em Instantiate a new Oggz\-Table. \end{DoxyCompactList}\item 
+void {\bf oggz\-\_\-table\-\_\-delete} ({\bf Oggz\-Table} $\ast$table)
+\begin{DoxyCompactList}\small\item\em Delete an Oggz\-Table. \end{DoxyCompactList}\item 
+void $\ast$ {\bf oggz\-\_\-table\-\_\-insert} ({\bf Oggz\-Table} $\ast$table, long key, void $\ast$data)
+\begin{DoxyCompactList}\small\item\em Insert an element into a table. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-table\-\_\-remove} ({\bf Oggz\-Table} $\ast$table, long key)
+\begin{DoxyCompactList}\small\item\em Remove the element of an Oggz\-Table indexed by a given key. \end{DoxyCompactList}\item 
+void $\ast$ {\bf oggz\-\_\-table\-\_\-lookup} ({\bf Oggz\-Table} $\ast$table, long key)
+\begin{DoxyCompactList}\small\item\em Retrieve the element of an Oggz\-Table indexed by a given key. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-table\-\_\-size} ({\bf Oggz\-Table} $\ast$table)
+\begin{DoxyCompactList}\small\item\em Query the number of elements in an Oggz\-Table. \end{DoxyCompactList}\item 
+void $\ast$ {\bf oggz\-\_\-table\-\_\-nth} ({\bf Oggz\-Table} $\ast$table, int n, long $\ast$key)
+\begin{DoxyCompactList}\small\item\em Retrieve the nth element of an Oggz\-Table, and optionally its key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A lookup table. Oggz\-Table is provided for convenience to allow the storage of serialno-\/specific data. 
+
+\subsection{Function Documentation}
+\index{oggz\-\_\-table.\-h@{oggz\-\_\-table.\-h}!oggz\-\_\-table\-\_\-delete@{oggz\-\_\-table\-\_\-delete}}
+\index{oggz\-\_\-table\-\_\-delete@{oggz\-\_\-table\-\_\-delete}!oggz_table.h@{oggz\-\_\-table.\-h}}
+\subsubsection[{oggz\-\_\-table\-\_\-delete}]{\setlength{\rightskip}{0pt plus 5cm}void oggz\-\_\-table\-\_\-delete (
+\begin{DoxyParamCaption}
+\item[{{\bf Oggz\-Table} $\ast$}]{table}
+\end{DoxyParamCaption}
+)}\label{oggz__table_8h_a989e307feecf2adc2ebe905c067051c4}
+
+
+Delete an Oggz\-Table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & An Oggz\-Table \\
+\hline
+\end{DoxyParams}
+\index{oggz\-\_\-table.\-h@{oggz\-\_\-table.\-h}!oggz\-\_\-table\-\_\-insert@{oggz\-\_\-table\-\_\-insert}}
+\index{oggz\-\_\-table\-\_\-insert@{oggz\-\_\-table\-\_\-insert}!oggz_table.h@{oggz\-\_\-table.\-h}}
+\subsubsection[{oggz\-\_\-table\-\_\-insert}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ oggz\-\_\-table\-\_\-insert (
+\begin{DoxyParamCaption}
+\item[{{\bf Oggz\-Table} $\ast$}]{table, }
+\item[{long}]{key, }
+\item[{void $\ast$}]{data}
+\end{DoxyParamCaption}
+)}\label{oggz__table_8h_adbcdb0cdf6e8392c78956e911cbf6634}
+
+
+Insert an element into a table. 
+
+If a previous value existed for this key, it is overwritten with the new data element. 
+\begin{DoxyParams}{Parameters}
+{\em table} & An Oggz\-Table \\
+\hline
+{\em key} & Key to access this data element \\
+\hline
+{\em data} & The new element to add \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em data} & If the element was successfully added \\
+\hline
+{\em N\-U\-L\-L} & If adding the element failed due to a realloc() error \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-table.\-h@{oggz\-\_\-table.\-h}!oggz\-\_\-table\-\_\-lookup@{oggz\-\_\-table\-\_\-lookup}}
+\index{oggz\-\_\-table\-\_\-lookup@{oggz\-\_\-table\-\_\-lookup}!oggz_table.h@{oggz\-\_\-table.\-h}}
+\subsubsection[{oggz\-\_\-table\-\_\-lookup}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ oggz\-\_\-table\-\_\-lookup (
+\begin{DoxyParamCaption}
+\item[{{\bf Oggz\-Table} $\ast$}]{table, }
+\item[{long}]{key}
+\end{DoxyParamCaption}
+)}\label{oggz__table_8h_a92ea55bffd5657be29cf1972f33364e3}
+
+
+Retrieve the element of an Oggz\-Table indexed by a given key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & An Oggz\-Table \\
+\hline
+{\em key} & a key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The element indexed by {\itshape key} 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & {\itshape table} is undefined, or no element is indexed by {\itshape key} \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-table.\-h@{oggz\-\_\-table.\-h}!oggz\-\_\-table\-\_\-new@{oggz\-\_\-table\-\_\-new}}
+\index{oggz\-\_\-table\-\_\-new@{oggz\-\_\-table\-\_\-new}!oggz_table.h@{oggz\-\_\-table.\-h}}
+\subsubsection[{oggz\-\_\-table\-\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Oggz\-Table}$\ast$ oggz\-\_\-table\-\_\-new (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{oggz__table_8h_a40772505443484de93526882c48f0dd8}
+
+
+Instantiate a new Oggz\-Table. 
+
+\begin{DoxyReturn}{Returns}
+A new Oggz\-Table 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & Could not allocate memory for table \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-table.\-h@{oggz\-\_\-table.\-h}!oggz\-\_\-table\-\_\-nth@{oggz\-\_\-table\-\_\-nth}}
+\index{oggz\-\_\-table\-\_\-nth@{oggz\-\_\-table\-\_\-nth}!oggz_table.h@{oggz\-\_\-table.\-h}}
+\subsubsection[{oggz\-\_\-table\-\_\-nth}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ oggz\-\_\-table\-\_\-nth (
+\begin{DoxyParamCaption}
+\item[{{\bf Oggz\-Table} $\ast$}]{table, }
+\item[{int}]{n, }
+\item[{long $\ast$}]{key}
+\end{DoxyParamCaption}
+)}\label{oggz__table_8h_a285c3cbdb46e9b8c2a831728182856f1}
+
+
+Retrieve the nth element of an Oggz\-Table, and optionally its key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & An Oggz\-Table \\
+\hline
+{\em n} & An index into the {\itshape table} \\
+\hline
+{\em key} & Return pointer for key corresponding to nth data element of {\itshape table}. Ignored if N\-U\-L\-L. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The nth data element of {\itshape table} 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em N\-U\-L\-L} & {\itshape table} is undefined, or {\itshape n} is out of range \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-table.\-h@{oggz\-\_\-table.\-h}!oggz\-\_\-table\-\_\-remove@{oggz\-\_\-table\-\_\-remove}}
+\index{oggz\-\_\-table\-\_\-remove@{oggz\-\_\-table\-\_\-remove}!oggz_table.h@{oggz\-\_\-table.\-h}}
+\subsubsection[{oggz\-\_\-table\-\_\-remove}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-table\-\_\-remove (
+\begin{DoxyParamCaption}
+\item[{{\bf Oggz\-Table} $\ast$}]{table, }
+\item[{long}]{key}
+\end{DoxyParamCaption}
+)}\label{oggz__table_8h_ac137e535f1da63ee52266b47f114020f}
+
+
+Remove the element of an Oggz\-Table indexed by a given key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & An Oggz\-Table \\
+\hline
+{\em key} & a key \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em -\/1} & Not found \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-table.\-h@{oggz\-\_\-table.\-h}!oggz\-\_\-table\-\_\-size@{oggz\-\_\-table\-\_\-size}}
+\index{oggz\-\_\-table\-\_\-size@{oggz\-\_\-table\-\_\-size}!oggz_table.h@{oggz\-\_\-table.\-h}}
+\subsubsection[{oggz\-\_\-table\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-table\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{{\bf Oggz\-Table} $\ast$}]{table}
+\end{DoxyParamCaption}
+)}\label{oggz__table_8h_a62db2037df45db88a75b89b8a8ac7766}
+
+
+Query the number of elements in an Oggz\-Table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & An Oggz\-Table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of elements in {\itshape table} 
+\end{DoxyReturn}

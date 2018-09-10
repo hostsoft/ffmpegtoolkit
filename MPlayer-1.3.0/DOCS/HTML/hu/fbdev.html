@@ -1,0 +1,54 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.4. Framebuffer kimenet (FBdev)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="svgalib.html" title="6.3. SVGAlib"><link rel="next" href="mga_vid.html" title="6.5. Matrox framebuffer (mga_vid)"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.4. Framebuffer kimenet (FBdev)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="svgalib.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="mga_vid.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fbdev"></a>6.4. Framebuffer kimenet (FBdev)</h2></div></div></div><p>
+Az FBdev elkészítése automatikusan kiválasztódik a
+<tt class="filename">./configure</tt> során. Olvasd el a framebuffer dokumentációt
+a kernel forrásban (<tt class="filename">Documentation/fb/*</tt>) a bővebb
+információkért.
+</p><p>
+Ha a kártyád nem támogatja a VBE 2.0 szabványt (régebbi ISA/PCI kártyák, mint
+például az S3 Trio64), csak a VBE 1.2-t (vagy régebbit?): Nos, a VESAfb még
+elérhető, de be kell töltened a SciTech Display Doctor-t (egykori UniVBE),
+mielőtt betöltenéd a Linuxot. Használj DOS boot lemezt vagy valamit. És ne
+felejtsd el regisztrálni az UniVBE-det! ;))
+</p><p>
+Az FBdev kimenetnek a fentiek mellett van néhány paramétere is:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><tt class="option">-fb</tt></span></dt><dd><p>
+    megadhatod a használni kívánt framebuffer eszközt (alapértelmezett: <tt class="filename">/dev/fb0</tt>)
+  </p></dd><dt><span class="term"><tt class="option">-fbmode</tt></span></dt><dd><p>
+    használni kívánt mód neve (a <tt class="filename">/etc/fb.modes</tt> fájlnak megfelelően)
+  </p></dd><dt><span class="term"><tt class="option">-fbmodeconfig</tt></span></dt><dd><p>
+    módokat tartalmazó konfigurációs fájl (alapértelmezett: <tt class="filename">/etc/fb.modes</tt>)
+  </p></dd><dt><span class="term"><tt class="option">-monitor-hfreq</tt>, </span><span class="term"><tt class="option">-monitor-vfreq</tt>, </span><span class="term"><tt class="option">-monitor-dotclock</tt></span></dt><dd><p>
+    <span class="bold"><strong>fontos</strong></span> értékek, lásd
+    <tt class="filename">example.conf</tt>
+  </p></dd></dl></div><p>
+Ha egy különleges módra akarsz váltani, akkor így használd:
+</p><pre class="screen">
+mplayer -vm -fbmode <em class="replaceable"><code>mod_neve</code></em> <em class="replaceable"><code>fajlnev</code></em>
+</pre><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Magában a <tt class="option">-vm</tt> kiválasztja a legmegfelelőbb módot a
+  <tt class="filename">/etc/fb.modes</tt> fájlból. Használható együtt a
+  <tt class="option">-x</tt> és <tt class="option">-y</tt> kapcsolókkal is. A
+  <tt class="option">-flip</tt> kapcsoló csak akkor támogatott, ha a film pixel
+  formátuma megfelel a videó mód pixel formátumának. Figyelj a bpp
+  értékére, az fbdev vezérlő az aktuálisat próbálja meg használni, vagy
+  ha megadsz valamit a <tt class="option">-bpp</tt> kapcsolóval, akkor azt.
+</p></li><li class="listitem"><p>
+  A <tt class="option">-zoom</tt> kapcsoló nem támogatott (használd a
+  <tt class="option">-vf scale</tt>-t). Nem használhatsz 8bpp (vagy kevesebb) módokat.
+</p></li><li class="listitem"><p>
+  Valószínűleg el szeretnéd tüntetni a kurzort:
+  </p><pre class="screen">echo -e '\033[?25l'</pre><p>
+  vagy
+  </p><pre class="screen">setterm -cursor off</pre><p>
+  és a képernyővédőt:
+  </p><pre class="screen">setterm -blank 0</pre><p>
+  Kurzor visszakapcsolása:
+  </p><pre class="screen">echo -e '\033[?25h'</pre><p>
+  vagy
+  </p><pre class="screen">setterm -cursor on</pre><p>
+</p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+Az FBdev videó mód váltása <span class="emphasis"><em>nem működik</em></span> a VESA
+framebufferrel és ne is kérd, hogy működjön, mivel ez nem az
+<span class="application">MPlayer</span> korlátja.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="svgalib.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="mga_vid.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.3. SVGAlib </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.5. Matrox framebuffer (mga_vid)</td></tr></table></div></body></html>

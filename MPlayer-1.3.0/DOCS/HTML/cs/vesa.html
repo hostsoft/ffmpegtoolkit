@@ -1,0 +1,88 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.13. VESA - výstup do VESA BIOSu</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="caca.html" title="4.12. libcaca – Barevná ASCII Art knihovna"><link rel="next" href="x11.html" title="4.14. X11"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.13. VESA - výstup do VESA BIOSu</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="caca.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="x11.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vesa"></a>4.13. VESA - výstup do VESA BIOSu</h2></div></div></div><p>
+Tento ovladač byl navržen a představen jako <span class="bold"><strong>obecný
+ovladač</strong></span> pro jakoukoli video kartu, která má VESA VBE 2.0 kompatibilní
+BIOS. Další výhodou tohoto ovladače je, že zkouší vynutit zapnutí výstupu na TV.
+<em class="citetitle">VESA BIOS EXTENSION (VBE) Version 3.0 Date: September 16,
+1998</em> (Strana 70) uvádí:
+</p><div class="blockquote"><blockquote class="blockquote"><p><b>Karty Dual-Controller. </b>
+VBE 3.0 podporuje karty s dual-controllerem za předpokladu že, jelikož jsou
+typicky oba controllery vybaveny stejným OEM a nastavovány jedinou
+BIOS ROM na stejné grafické kartě, je možné skrýt před aplikací přítomnost
+dvou controllerů. To omezuje nezávislé použití jednotlivých controllerů,
+ale umožňuje aplikacím vydaným před VBE 3.0 pracovat normálně.
+VBE funkce 00h (Návrat informací o controlleru) vrací kombinované informace
+obou conrollerů, včetně kombinovaného seznamu platných režimů.
+Příslušný controller je aktivován jakmile aplikace vybere režim. Všechny
+ostatní VBE funkce pak pracují s aktivním controllerem.
+</p></blockquote></div><p>
+Máte tedy možnost s tímto rozhraním dostat funkční TV výstup.
+(Soudím že TV výstup má velmi často samostatnou jednotku, nebo aspoň samostatný
+výstup.)
+</p><div class="itemizedlist"><p class="title"><b>VÝHODY</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Máte šanci sledovat video <span class="bold"><strong>dokonce i když Linux nezná
+  </strong></span> váš video hardware.
+</p></li><li class="listitem"><p>
+  Nepotřebujete mít ve svém Linuxu nainstalovány žádné věci související s
+  grafikou (jako X11 (alias XFree86), fbdev atd). Toto rozhraní lze provozovat
+  z <span class="bold"><strong>textového režimu</strong></span>.
+</p></li><li class="listitem"><p>
+  Máte šanci získat <span class="bold"><strong>funkční TV-out</strong></span>.
+  (Je to pravda minimálně s kartami ATI).
+</p></li><li class="listitem"><p>
+  Toto rozhraní volá <code class="function">int 10h</code> handler, takže není
+  emulátorem – volá <span class="bold"><strong>skutečné</strong></span> věci
+  <span class="emphasis"><em>skutečného</em></span> BIOSu v <span class="emphasis"><em>reálném režimu</em></span>
+  (ve skutečnosti v režimu vm86).
+</p></li><li class="listitem"><p>
+  Můžete s ním použít VIDIX, takže dostanete akcelerované video
+  <span class="bold"><strong>a</strong></span> TV výstup současně!
+  (Doporučeno pro karty ATI.)
+</p></li><li class="listitem"><p>
+  Máte-li VESA VBE 3.0+ a nastavili jste si někde
+  <tt class="option">monitor-hfreq, monitor-vfreq, monitor-dotclock</tt>
+  (config soubor nebo příkazový řádek) dostanete nejvyšší možný obnovovací
+  kmitočet. (Using General Timing Formula). Abyste této funkce dosáhli, musíte
+  nastavit <span class="bold"><strong>všechna</strong></span> nastavení monitoru.
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>NEVÝHODY</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+   Pracuje pouze na <span class="bold"><strong>systémech x86</strong></span>.
+</p></li><li class="listitem"><p>
+  Může to použít pouze <code class="systemitem">root</code>.
+</p></li><li class="listitem"><p>
+  Zatím je dostupné pouze pro <span class="bold"><strong>Linux</strong></span>.
+</p></li></ul></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Důležité</h3><p>
+Nepoužívejte toto rozhraní s <span class="bold"><strong>GCC 2.96</strong></span>!
+Nefunguje!
+</p></div><div class="variablelist"><p class="title"><b>VOLBY PŘÍKAZOVÉHO ŘÁDKU DOSTUPNÉ PRO VESA</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-vo vesa:<em class="replaceable"><code>volby</code></em></tt></span></dt><dd><p>
+    zatím dostupné: <code class="literal">dga</code> pro vynucení dga režimu a
+    <code class="literal">nodga</code> pro jeho potlačení. V režimu dga můžete zapnout
+    dvojitou vyrovnávací paměť pomocí volby <tt class="option">-double</tt>.
+    Poznámka: Tyto volby můžete vynechat, abyste zapli
+    <span class="bold"><strong>autodetekci</strong></span> dga režimu.
+  </p></dd></dl></div><div class="itemizedlist"><p class="title"><b>ZNÁMÉ PROBLÉMY A KLIČKY</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Pokud máte nainstalován <span class="bold"><strong>NLS</strong></span> font v
+  Linuxové konzoli a použijete VESA rozhraní v textovém režimu, pak po
+  ukončení <span class="application">MPlayer</span>u budete mít nahrán
+  <span class="bold"><strong>ROM font</strong></span> místo národního.
+  Můžete si opět nahrát národní font například pomocí utility
+  <span class="command"><strong>setsysfont</strong></span> z distribuce Mandrake/Mandriva.
+  (<span class="bold"><strong>Tip</strong></span>: Stejná utilita je použita pro
+  lokalizaci fbdev).
+</p></li><li class="listitem"><p>
+  Některé <span class="bold"><strong>Linuxové grafické ovladače</strong></span> neobnovují
+  aktivní <span class="bold"><strong>režim BIOSu</strong></span> v DOSové paměti.
+  Takže pokud máte tento problém – vždy používejte VESA rozhraní pouze v
+  <span class="bold"><strong>textovém režimu</strong></span>. Jinak bude přesto aktivován
+  textový režim (#03) a budete muset restartovat počítač.
+</p></li><li class="listitem"><p>
+  Často po ukončení VESA rozhraní dostanete
+  <span class="bold"><strong>černou</strong></span> obrazovku. Chcete-li vrátit obraz do
+  původního stavu – jednoduše se přepněte do jiné konzole (stiskem
+  <span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F&lt;x&gt;</b></span>)
+  a pak se přepněte zpět stejným způsobem.
+</p></li><li class="listitem"><p>
+  Chcete-li <span class="bold"><strong>funkční TV-out</strong></span>, musíte mít
+  připojený TV konektor před startem počítače, jelikož se video BIOS
+  inicializuje pouze jednou během POST procedury.
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="caca.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="x11.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.12. 
+<code class="systemitem">libcaca</code> – Barevná ASCII Art knihovna
+ </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.14. X11</td></tr></table></div></body></html>

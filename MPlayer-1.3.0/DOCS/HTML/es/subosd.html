@@ -1,0 +1,219 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.4. Subtítulos y OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="install.html" title="Capítulo 2. Instalación"><link rel="prev" href="gui.html" title="2.3. ¿Qué hay acerca de la GUI?"><link rel="next" href="codec-installation.html" title="2.5. instalación de codecs"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="subosd.html#mpsub" title="2.4.1. El formato de subtítulos propio de MPlayer (MPsub)"><link rel="subsection" href="subosd.html#mpsub-install" title="2.4.2. Instalando OSD y subtítulos"><link rel="subsection" href="subosd.html#osdmenu" title="2.4.3. Menú en pantalla"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.4. Subtítulos y OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="gui.html">Anterior</a> </td><th width="60%" align="center">Capítulo 2. Instalación</th><td width="20%" align="right"> <a accesskey="n" href="codec-installation.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="subosd"></a>2.4. Subtítulos y OSD</h2></div></div></div><p>
+<span class="application">MPlayer</span> puede mostrar subtítulos juntos con
+los archivos de películas. Actualmente los siguientes formatos están soportados:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>VobSub</p></li><li class="listitem"><p>OGM</p></li><li class="listitem"><p>CC (closed caption)</p></li><li class="listitem"><p>MicroDVD</p></li><li class="listitem"><p>SubRip</p></li><li class="listitem"><p>SubViewer</p></li><li class="listitem"><p>Sami</p></li><li class="listitem"><p>VPlayer</p></li><li class="listitem"><p>RT</p></li><li class="listitem"><p>SSA</p></li><li class="listitem"><p>PJS (Phonenix Japanimation Society)</p></li><li class="listitem"><p><a class="link" href="subosd.html#mpsub" title="2.4.1. El formato de subtítulos propio de MPlayer (MPsub)">MPsub</a></p></li><li class="listitem"><p>AQTitle</p></li><li class="listitem"><p>JACOsub</p></li></ul></div><p>
+</p><p>
+<span class="application">MPlayer</span> puede volcar los formatos de subtítulos
+listados anteriormente (<span class="bold"><strong>con excepción de los 3
+primeros</strong></span>) en los siguientes formatos de salida con las opciones
+correspondientes:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>MPsub: <tt class="option">-dumpmpsub</tt></p></li><li class="listitem"><p>SubRip: <tt class="option">-dumpsrtsub</tt></p></li><li class="listitem"><p>MicroDVD: <tt class="option">-dumpmicrodvdsub</tt></p></li><li class="listitem"><p>JACOsub: <tt class="option">-dumpjacosub</tt></p></li><li class="listitem"><p>Sami: <tt class="option">-dumpsami</tt></p></li></ul></div><p>
+</p><p>
+<span class="application">MEncoder</span> puede volcar subtítulos de DVD en
+formato <a class="link" href="menc-feat-extractsub.html" title="6.7. Extrayendo subtítulos DVD a archivo Vobsub">VobSub</a>.
+</p><p>
+La linea de comando difiere levemente para los diferentes formatos:
+</p><p><b>Subtítulos VobSub. </b>
+Los subtítulos VobSub consisten de un gran (varios megabytes) archivo <tt class="filename">
+.SUB</tt>, y opcionalmente un archivo <tt class="filename">.IDX</tt> y/o un archivo
+<tt class="filename">.IFO</tt>. Si tiene archivos como
+<tt class="filename"><em class="replaceable"><code>ejemplo.sub</code></em></tt>,
+<tt class="filename"><em class="replaceable"><code>ejemplo.ifo</code></em></tt> (opcional),
+<tt class="filename"><em class="replaceable"><code>ejemplo.idx</code></em></tt> - entonces
+debe pasarle a <span class="application">MPlayer</span> la opción
+<tt class="option">-vobsub <em class="replaceable"><code>ejemplo</code></em> [-vobsubid
+<em class="replaceable"><code>id</code></em>]</tt> (la ruta completa es opcional).
+La opción <tt class="option">-vobsubid</tt> es como la opción
+<tt class="option">-sid</tt> para DVDs, puede elegir entre pistas de subtítulos
+(lenguajes) con ella. En el caso que <tt class="option">-vobsubid</tt> se omita,
+<span class="application">MPlayer</span> tratará de usar el lenguaje dado por la
+opción <tt class="option">-slang</tt> y sino usará el <code class="systemitem">langidx</code>
+en el archivo <tt class="filename">.IDX</tt> para configurar el lenguaje de los
+subtítulos. Si esto falla no habrá subtítulos.
+</p><p><b>Otros subtítulos. </b>
+Los otros formatos consisten de un archivo de texto simple conteniendo el
+tiempo y la información del texto a colocar. Uso: si tiene un archivo como
+<tt class="filename"><em class="replaceable"><code>ejemplo.txt</code></em></tt>, debe pasarle a
+<span class="application">MPlayer</span> la opción
+<tt class="option">-sub <em class="replaceable"><code>ejemplo.txt</code></em></tt>
+(la ruta completa es opcional).
+</p><div class="variablelist"><p class="title"><b>Ajustando la sincronización de subtítulos y su ubicación:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-subdelay <em class="replaceable"><code>seg</code></em></tt></span></dt><dd><p>
+    Retrasa los subtítulos en <tt class="option"><em class="replaceable"><code>seg</code></em></tt> segundos.
+    Puede ser un número negativo.
+    </p></dd><dt><span class="term"><tt class="option">-subfps <em class="replaceable"><code>TASA</code></em></tt></span></dt><dd><p>
+    Especifica la tasa de cuadros por segundo del archivo de subtítulos
+    (número flotante).
+    </p></dd><dt><span class="term"><tt class="option">-subpos <em class="replaceable"><code>0-100</code></em></tt></span></dt><dd><p>
+    Especifica la posición de los subtítulos.
+    </p></dd></dl></div><p>
+Si experimenta un retraso creciente de retraso entre la película y los subtítulos
+cuando esta usando un archivo de subtítulos de MicroDVD, lo más probable es que
+la tasa de cuadros por segundo de la película y de los subtítulos sea diferente.
+Note que el formato de subtítulos de MicroDVD usa números de cuadros absoluto para
+su temporización, y por lo tanto la opción <tt class="option">-subfps</tt> no puede ser
+usada con este formato. Como <span class="application">MPlayer</span> no tiene una
+manera de adivinar la tasa de cuadros por segundo del archivo de subtítulos,
+debe convertirlo manualmente. Hay un pequeño guión de perl en el directorio
+<tt class="filename">contrib</tt> del sitio FTP de<span class="application">MPlayer</span>
+que hace esa conversión.
+</p><p>
+Para más información acerca de subtítulos para DVD, lea la sección
+<a class="link" href="dvd.html" title="3.6. Reproducción de DVD">DVD</a>.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mpsub"></a>2.4.1. El formato de subtítulos propio de <span class="application">MPlayer</span> (MPsub)</h3></div></div></div><p>
+<span class="application">MPlayer</span> introduce un nuevo formato de subtítulos
+llamado <span class="bold"><strong>MPsub</strong></span>. Fue diseñado por Gabucino.
+Básicamente su característica más importante es ser basado <span class="emphasis"><em>
+dinámicamente</em></span> en el tiempo (a pesar de que tiene un modo por
+cuadros también). Un ejemplo (de <a class="ulink" href="../../tech/mpsub.sub" target="_top">DOCS/tech/mpsub.sub</a>):
+</p><pre class="programlisting">
+FORMAT=TIME
+# primer número  : espera esto desde que el subtitulo anterior desapareció
+# segundo número : mostrar el subtitulo actual esta cantidad de segundos
+
+15 3
+Hace mucho, mucho tiempo atrás...
+
+0 3
+en una galaxia muy lejana...
+
+0 3
+Naboo estaba bajo un ataque.</pre><p>
+</p><p>
+Como puede ver, el objetivo principal fue <span class="bold"><strong>hacer
+la edición/temporización/unión y cortado de subtítulos más fácil</strong></span>.
+Y, si - por decirlo - consigue un subtitulo SSA pero esta mal temporizado
+o tiene problemas de retraso con su versión de la película, entonces puede
+hacer
+</p><pre class="screen">mplayer <em class="replaceable"><code>vacío.avi</code></em> -sub fuente.ssa -dumpmpsub</pre><p>.
+Un archivo <tt class="filename">dump.mpsub</tt> se creara en el directorio actual,
+que contendrá la fuente del texto de los subtítulos, pero en el formato
+<span class="bold"><strong>MPsub</strong></span>. Ahora puede agregar/quitar segundos a los
+subtítulos.
+</p><p>
+Los subtítulos son mostrados con una técnica llamada <span class="bold"><strong>'OSD',
+On Screen Display</strong></span> (Muestra en Pantalla). La muestra en pantalla se muestra
+para mostrar el tiempo, la barra de volumen, la barra de búsqueda, etc.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mpsub-install"></a>2.4.2. Instalando OSD y subtítulos</h3></div></div></div><p>
+Necesita un paquete de tipografías para <span class="application">MPlayer</span>
+para poder usar OSD/subtítulos.
+Hay muchas maneras de conseguirlo:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Use la herramienta generadora de tipografías en
+  <tt class="filename">TOOLS/subfont-c</tt>. Es una
+  herramienta completa para convertir una tipografía TTF/Type1/etc
+  a tipografía pkg de <span class="application">MPlayer</span> (lea
+  <tt class="filename">TOOLS/subfont-c/README</tt> para más detalles).
+  </p></li><li class="listitem"><p>
+  Use el plugin de <span class="application">GIMP</span> generador de
+  tipografías en <tt class="filename">TOOLS/subfont-GIMP
+  </tt> (nota: debe tener también el plugin HSI RAW,
+  vea <a class="ulink" href="http://realtime.ssu.ac.kr/~lethean/mplayer/" target="_top">http://realtime.ssu.ac.kr/~lethean/mplayer/</a>).
+  </p></li><li class="listitem"><p>
+  usando una tipografía TrueType (TTF), gracias a la biblioteca
+  <code class="systemitem">freetype</code>.
+  ¡La versión debe ser 2.0.9 o mayor! Entonces tiene 2 métodos:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>
+      use la opción
+      <tt class="option">-font <em class="replaceable"><code>/ruta/a/tipografía_ejemplo.ttf</code></em></tt>
+      para especificar un archivo de tipografía TrueType en cada ocasión
+      </p></li><li class="listitem"><p>
+      cree un enlace simbólico:
+      </p><pre class="screen">ln -s <em class="replaceable"><code>/ruta/a/tipografía_ejemplo.ttf</code></em> ~/.mplayer/subfont.ttf</pre><p>
+      </p></li></ul></div><p>
+      Si <span class="application">MPlayer</span> fue compilado con soporte para
+      <code class="systemitem">fontconfig</code>, los métodos de arriba no
+      funcionarán, en su lugar la opción <tt class="option">-font</tt> espera un nombre
+      de tipografía <code class="systemitem">fontconfig</code> y por
+      defecto se usa la tipografía sans-serif.
+      Para obtener una lista de los tipos de letra que conoce
+      <code class="systemitem">fontconfig</code>,
+      use <span class="command"><strong>fc-list</strong></span>.
+      Ejemplo: <tt class="option">-font <em class="replaceable"><code>'Bitstream Vera Sans'</code></em></tt>
+  </p></li><li class="listitem"><p>
+  Descargue paquetes de fuentes listos para usar del sitio de
+  <span class="application">MPlayer</span>.
+  Nota: actualmente las fuentes disponibles están limitadas al soporte ISO
+  8859-1/2, pero existen algunas otras fuentes (incluyendo Koreano, Ruso,
+  ISO 8859-8, etc)en la sección contrib/font del FTP, hechas por los usuarios.
+  </p><p>
+  
+  Las fuentes deberían tener el archivo apropiado <tt class="filename">font.desc</tt>
+  que mapea las posiciones de la fuente unicode al código de página real
+  del texto de los subtítulos. Otra solución es tener los subtítulos codificados
+  en formato UTF8 y usar la opción <tt class="option">-utf8</tt> o simplemente nombrar
+  a los archivos de subtítulos <tt class="filename">&lt;nombre_del_video&gt;utf</tt> y
+  tenerlo en el mismo directorio que el archivo de vídeo. La recodificación desde
+  diferentes códigos de página a UTF8 lo puede hacer usando los programas
+  <span class="command"><strong>konwert</strong></span> o <span class="command"><strong>iconv</strong></span>.
+  </p><p>
+
+  </p><div class="table"><a name="algunas_urls"></a><p class="title"><b>Tabla 2.1. Algunas URLs</b></p><div class="table-contents"><table summary="Algunas URLs" border="1"><colgroup><col><col></colgroup><thead><tr><th>URL</th><th>Comentario</th></tr></thead><tbody><tr><td>
+    <a class="ulink" href="ftp://ftp.mplayerhq.hu/MPlayer/releases/fonts/" target="_top">ftp://ftp.mplayerhq.hu/MPlayer/releases/fonts/</a>
+    </td><td>
+    Fuentes ISO
+    </td></tr><tr><td>
+    <a class="ulink" href="ftp://ftp.mplayerhq.hu/MPlayer/contrib/fonts/" target="_top">ftp://ftp.mplayerhq.hu/MPlayer/contrib/fonts/</a>
+    </td><td>
+    varias fuentes hechas por usuarios
+    </td></tr><tr><td>
+    <a class="ulink" href="http://realtime.ssu.ac.kr/~lethean/mplayer/" target="_top">http://realtime.ssu.ac.kr/~lethean/mplayer/</a>
+    </td><td>
+    Tipografías Coreanas y plugin RAW
+    </td></tr></tbody></table></div></div><p><br class="table-break">
+
+  </p></li></ul></div><p>
+Si elige fuentes no TTF, descomprima el archivo que haya descargado a
+<tt class="filename">~/.mplayer</tt> o <tt class="filename">$PREFIX/share/mplayer</tt>. Entonces renombre o
+enlace simbólicamente uno de los directorios extraídos a
+<tt class="filename">font</tt>, por ejemplo:
+
+</p><pre class="screen">ln -s ~/.mplayer/<em class="replaceable"><code>arial-24</code></em> ~/.mplayer/font</pre><p>
+
+Ahora debería ver un reloj en la esquina superior izquierda de la película
+(apaguelo pulsado la tecla <span class="keycap"><b>o</b></span>).
+</p><p>
+(los subtítulos están <span class="emphasis"><em>siempre activos</em></span>, para desactivarlos
+por favor lea la página del manual).
+</p><p>
+OSD tiene 4 estados (cambielo con <span class="keycap"><b>o</b></span>):
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  barra de volumen + barra de búsqueda (por omisión)
+  </p></li><li class="listitem"><p>
+  barra de volumen + barra de búsqueda + reloj + posición porcentual del archivo cuando se busca
+  </p></li><li class="listitem"><p>
+  barra de volumen + barra de búsqueda + reloj + duración total de la pelicula
+  </p></li><li class="listitem"><p>
+  solamente subtítulos
+  </p></li></ol></div><p>
+
+Puede cambiar el comportamiento por omisión cambiando la variable
+<code class="varname">osdlevel</code> en el archivo de configuración, o con la opción
+<tt class="option">-osdlevel</tt> de la línea de comando.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osdmenu"></a>2.4.3. Menú en pantalla</h3></div></div></div><p>
+<span class="application">MPlayer</span> trae una interfaz de Menú en pantalla
+completamente configurable por el usuario.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+¡el menú Preferencias no esta actualmente implementado!
+</p></div><div class="orderedlist"><p class="title"><b>Instalación</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  compile <span class="application">MPlayer</span> pasándole la opción <tt class="option">--enable-menu</tt>
+  a <tt class="filename">./configure</tt>
+  </p></li><li class="listitem"><p>
+  asegúrese de tener una fuente OSD instalada
+  </p></li><li class="listitem"><p>
+  copie el archivo <tt class="filename">etc/menu.conf</tt> a su directorio
+  <tt class="filename">.mplayer</tt>
+  </p></li><li class="listitem"><p>
+  copie el archivo <tt class="filename">etc/input.conf</tt> a su directorio
+  <tt class="filename">.mplayer</tt>, o al directorio general de configuración de
+  <span class="application">MPlayer</span> (por omisión:
+  <tt class="filename">/usr/local/etc/mplayer</tt>)
+  </p></li><li class="listitem"><p>
+  verifique y edite el archivo <tt class="filename">input.conf</tt> para activar las
+  teclas de movimiento en el menú (está descripto en el archivo).
+  </p></li><li class="listitem"><p>
+  inicie <span class="application">MPlayer</span> como en el ejemplo:
+  </p><pre class="screen">$ mplayer -menu <em class="replaceable"><code>archivo.avi</code></em></pre><p>
+  </p></li><li class="listitem"><p>
+  pulse cualquier tecla de menú que haya definido
+  </p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="gui.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="codec-installation.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">2.3. ¿Qué hay acerca de la GUI? </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 2.5. instalación de codecs</td></tr></table></div></body></html>

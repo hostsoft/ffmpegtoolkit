@@ -1,0 +1,49 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.14. 广播电台</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="usage.html" title="第 3 章 Usage"><link rel="prev" href="tv-teletext.html" title="3.13. Teletext"><link rel="next" href="video.html" title="第 4 章 Video output devices"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"><link rel="subsection" href="radio.html#radio-input" title="3.14.1. 电台输入"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.14. 广播电台</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-teletext.html">上一页</a> </td><th width="60%" align="center">第 3 章 Usage</th><td width="20%" align="right"> <a accesskey="n" href="video.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="radio"></a>3.14. 广播电台</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-input"></a>3.14.1. 电台输入</h3></div></div></div><p>
+这一部分将说明如何从V4L兼容的电台调谐器收听电台广播。
+请阅读手册中关于电台的可选项和键盘控制的描述。
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-compilation"></a>3.14.1.1. 编译</h4></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  首先, 你需要重新编译MPlayer, 使用<tt class="filename">./configure</tt>带上选项
+  <tt class="option">--enable-radio</tt> 和(如果你想要支持捕捉)
+  <tt class="option">--enable-radio-capture</tt>
+</p></li><li class="step"><p>
+  确认你的电台调谐器可以和Linux的其他收音软件工作。 比如<span class="application">XawTV</span>。
+</p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-tips"></a>3.14.1.2. 使用技巧</h4></div></div></div><p>
+可用选项的完整列表在手册中有列出。
+这里只给出一些技巧:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  使用<tt class="option">channels</tt>选项。 例子:
+  </p><pre class="screen">-radio channels=104.4-Sibir,103.9-Maximum</pre><p>
+  解释: 使用该选项, 则只可使用104.4和103.9电台。 在频道切换时, 将会有个不错的OSD文字,
+  显示频道的名字。 频道的名字中的空格必须替换成下划线("_")。
+</p></li><li class="listitem"><p>
+  有好几种方法可以捕捉声音。 为捕捉音频, 你可以通过连接视频卡和音频输入的外接线用你的声卡捕捉,
+  也可以使用saa7134芯片内置的ADC。 在后一种情况下, 你要加载<code class="systemitem">saa7134-alsa</code>
+  或<code class="systemitem">saa7134-oss</code>驱动。
+</p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span>不能用于音频捕捉,
+  因为它需要视频流才工作。 因此你可以, 或使用ALSA项目的<span class="application">arecord</span>,
+  或者使用选项<tt class="option">-ao pcm:file=file.wav</tt>。 在后一种情况下,
+  你将听不到任何声音 (除非你用了输入线, 并且关闭了输入线静音)。
+</p></li></ul></div><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-examples"></a>3.14.1.3. 例子</h4></div></div></div><div class="informalexample"><p>
+从标准的V4L输入 (使用输入线, 捕捉开关关闭):
+</p><pre class="screen">mplayer radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+从标准的V4L输入 (使用输入线, 捕捉开关关闭, V4Lv1接口):
+</p><pre class="screen">mplayer -radio driver=v4l radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+播放频道列表中的第二个频道:
+</p><pre class="screen">mplayer -radio channels=104.4=Sibir,103.9=Maximm radio://2</pre><p>
+</p></div><div class="informalexample"><p>
+把声音从收音卡的内置ADC传到PCI总线。
+在这个例子中, 调谐器被用成是第二块声卡(ALSA device hw:1,0)。
+对于基于saa7134的卡, 必须加载 saa7134-alsa 或 saa7134-oss 模块。
+</p><pre class="screen">
+mplayer -rawaudio rate=32000 radio://2/capture \
+    -radio adevice=hw=1.0:arate=32000:channels=104.4=Sibir,103.9=Maximm
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">注意</h3><p>当使用ALSA设备名时, 冒号(:)必须替换成等号(=),
+逗号(,)要替换成句点(.)
+</p></div><p>
+</p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-teletext.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="video.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">3.13. Teletext </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 第 4 章 Video output devices</td></tr></table></div></body></html>

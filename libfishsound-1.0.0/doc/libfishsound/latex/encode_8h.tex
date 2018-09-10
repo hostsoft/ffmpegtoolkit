@@ -1,0 +1,136 @@
+\section{encode.\-h File Reference}
+\label{encode_8h}\index{encode.\-h@{encode.\-h}}
+
+
+Encode functions and callback prototypes.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int($\ast$ {\bf Fish\-Sound\-Encoded} )({\bf Fish\-Sound} $\ast$fsound, unsigned char $\ast$buf, long bytes, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Signature of a callback for libfishsound to call when it has encoded data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf fish\-\_\-sound\-\_\-set\-\_\-encoded\-\_\-callback} ({\bf Fish\-Sound} $\ast$fsound, {\bf Fish\-Sound\-Encoded} encoded, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Set the callback for libfishsound to call when it has a block of encoded data ready. \end{DoxyCompactList}\item 
+long {\bf fish\-\_\-sound\-\_\-encode\-\_\-float} ({\bf Fish\-Sound} $\ast$fsound, float $\ast$pcm[$\,$], long frames)
+\begin{DoxyCompactList}\small\item\em Encode a block of P\-C\-M audio given as non-\/interleaved floats. \end{DoxyCompactList}\item 
+long {\bf fish\-\_\-sound\-\_\-encode\-\_\-float\-\_\-ilv} ({\bf Fish\-Sound} $\ast$fsound, float $\ast$$\ast$pcm, long frames)
+\begin{DoxyCompactList}\small\item\em Encode a block of audio given as interleaved floats. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Encode functions and callback prototypes. 
+
+\subsection{Typedef Documentation}
+\index{encode.\-h@{encode.\-h}!Fish\-Sound\-Encoded@{Fish\-Sound\-Encoded}}
+\index{Fish\-Sound\-Encoded@{Fish\-Sound\-Encoded}!encode.h@{encode.\-h}}
+\subsubsection[{Fish\-Sound\-Encoded}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ Fish\-Sound\-Encoded)({\bf Fish\-Sound} $\ast$fsound, unsigned char $\ast$buf, long bytes, void $\ast$user\-\_\-data)}\label{encode_8h_a7611595d35d3a08253341783adb2c0c9}
+
+
+Signature of a callback for libfishsound to call when it has encoded data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & The Fish\-Sound$\ast$ handle \\
+\hline
+{\em buf} & The encoded data \\
+\hline
+{\em bytes} & The count of bytes encoded \\
+\hline
+{\em user\-\_\-data} & Arbitrary user data \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & to continue \\
+\hline
+{\em non-\/zero} & to stop encoding immediately and return control to the \doxyref{fish\-\_\-sound\-\_\-encode()}{p.}{deprecated_8h_a6cd1117b2d09f0f9589c8b10cccae75c} caller \\
+\hline
+\end{DoxyRetVals}
+
+
+\subsection{Function Documentation}
+\index{encode.\-h@{encode.\-h}!fish\-\_\-sound\-\_\-encode\-\_\-float@{fish\-\_\-sound\-\_\-encode\-\_\-float}}
+\index{fish\-\_\-sound\-\_\-encode\-\_\-float@{fish\-\_\-sound\-\_\-encode\-\_\-float}!encode.h@{encode.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-encode\-\_\-float}]{\setlength{\rightskip}{0pt plus 5cm}long fish\-\_\-sound\-\_\-encode\-\_\-float (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{float $\ast$}]{pcm[$\,$], }
+\item[{long}]{frames}
+\end{DoxyParamCaption}
+)}\label{encode_8h_ad06e3a04cde6e56a0accfc948c9748a6}
+
+
+Encode a block of P\-C\-M audio given as non-\/interleaved floats. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E) \\
+\hline
+{\em pcm} & The audio data to encode \\
+\hline
+{\em frames} & A count of frames to encode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of frames encoded 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+For multichannel audio, the audio data is interpreted according to the current P\-C\-M style 
+\end{DoxyNote}
+\index{encode.\-h@{encode.\-h}!fish\-\_\-sound\-\_\-encode\-\_\-float\-\_\-ilv@{fish\-\_\-sound\-\_\-encode\-\_\-float\-\_\-ilv}}
+\index{fish\-\_\-sound\-\_\-encode\-\_\-float\-\_\-ilv@{fish\-\_\-sound\-\_\-encode\-\_\-float\-\_\-ilv}!encode.h@{encode.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-encode\-\_\-float\-\_\-ilv}]{\setlength{\rightskip}{0pt plus 5cm}long fish\-\_\-sound\-\_\-encode\-\_\-float\-\_\-ilv (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{float $\ast$$\ast$}]{pcm, }
+\item[{long}]{frames}
+\end{DoxyParamCaption}
+)}\label{encode_8h_a71608dd5615a314a16e2bc4522e5fbde}
+
+
+Encode a block of audio given as interleaved floats. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E) \\
+\hline
+{\em pcm} & The audio data to encode \\
+\hline
+{\em frames} & A count of frames to encode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of frames encoded 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+For multichannel audio, the audio data is interpreted according to the current P\-C\-M style 
+\end{DoxyNote}
+\index{encode.\-h@{encode.\-h}!fish\-\_\-sound\-\_\-set\-\_\-encoded\-\_\-callback@{fish\-\_\-sound\-\_\-set\-\_\-encoded\-\_\-callback}}
+\index{fish\-\_\-sound\-\_\-set\-\_\-encoded\-\_\-callback@{fish\-\_\-sound\-\_\-set\-\_\-encoded\-\_\-callback}!encode.h@{encode.\-h}}
+\subsubsection[{fish\-\_\-sound\-\_\-set\-\_\-encoded\-\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}int fish\-\_\-sound\-\_\-set\-\_\-encoded\-\_\-callback (
+\begin{DoxyParamCaption}
+\item[{{\bf Fish\-Sound} $\ast$}]{fsound, }
+\item[{{\bf Fish\-Sound\-Encoded}}]{encoded, }
+\item[{void $\ast$}]{user\-\_\-data}
+\end{DoxyParamCaption}
+)}\label{encode_8h_a31549d7a9181bfd33945c3f516f05d12}
+
+
+Set the callback for libfishsound to call when it has a block of encoded data ready. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fsound} & A Fish\-Sound$\ast$ handle (created with mode F\-I\-S\-H\-\_\-\-S\-O\-U\-N\-D\-\_\-\-E\-N\-C\-O\-D\-E) \\
+\hline
+{\em encoded} & The callback to call \\
+\hline
+{\em user\-\_\-data} & Arbitrary user data to pass to the callback \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}

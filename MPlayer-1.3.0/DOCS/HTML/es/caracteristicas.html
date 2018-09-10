@@ -1,0 +1,64 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.2. Características</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="install.html" title="Capítulo 2. Instalación"><link rel="prev" href="softreq.html" title="2.1. Requerimientos de Software"><link rel="next" href="gui.html" title="2.3. ¿Qué hay acerca de la GUI?"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.2. Características</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="softreq.html">Anterior</a> </td><th width="60%" align="center">Capítulo 2. Instalación</th><td width="20%" align="right"> <a accesskey="n" href="gui.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="caracteristicas"></a>2.2. Características</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Decida si necesita GUI (interfaz gráfica de usuario). Si lo necesita, vea la sección
+  <a class="link" href="gui.html" title="2.3. ¿Qué hay acerca de la GUI?">GUI</a> antes de compilar.
+  </p></li><li class="listitem"><p>
+  Si desea instalar <span class="application">MEncoder</span> (nuestro gran codificador
+  multiproposito), vea la sección
+  <a class="link" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><span class="application">MEncoder</span></a>.
+  </p></li><li class="listitem"><p>
+  Si tiene una placa <span class="bold"><strong>sintonizadora de TV</strong></span> compatible con
+  V4L, y desea usarla para ver/capturar y codificar películas con <span class="application">MPlayer</span>,
+  lea la sección <a class="link" href="tv-input.html" title="3.9. Entrada de TV">entrada de TV</a>.
+  </p></li><li class="listitem"><p>
+  Existe un buen soporte de <span class="bold"><strong>Menu en Pantalla</strong></span> listo
+  para ser usado. Verifique la sección <a class="link" href="subosd.html" title="2.4. Subtítulos y OSD">Menú en Pantalla</a>.
+  </p></li></ul></div><p>
+Lo siguiente es armar <span class="application">MPlayer</span>:
+</p><pre class="screen">
+./configure
+make
+make install</pre><p>
+</p><p>
+En este punto, <span class="application">MPlayer</span> ya está listo para usar. El
+directorio <tt class="filename">$PREFIX/share/mplayer</tt>
+contiene el archivo <tt class="filename">codecs.conf</tt>, que se lo usa para
+decirle al programa todos los codecs y sus posibilidades. Este archivo es
+necesario solo cuando quiera cambiar sus propiedades, ya que el archivo
+ejecutable principal contiene una copia interna del mismo. Revise si tiene
+el archivo <tt class="filename">codecs.conf</tt> en su directorio de inicio
+(<tt class="filename">~/.mplayer/codecs.conf</tt>) olvidado de alguna instalación
+previa de <span class="application">MPlayer</span> y borrela.
+</p><p>Note que si tiene un <tt class="filename">codecs.conf</tt> en
+<tt class="filename">~/.mplayer/</tt>, el <tt class="filename">codecs.conf</tt>
+interno y el de sistema serán ignorados por completo.
+No use esto a menos que quiera trapichear con las cosas internas
+de <span class="application">MPlayer</span> lo que puede ocasionarle problemas.
+Si quiere cambiar el órden de búsqueda de los codecs, use la opción
+<tt class="option">-vc</tt>, <tt class="option">-ac</tt>, <tt class="option">-vfm</tt>,
+o <tt class="option">-afm</tt> en la línea de órdenes o en su archivo de
+configuración (vea la página de manual).
+</p><p>
+Los usuarios de Debian pueden construir un paquete .deb, es muy simple.
+Simplemente ejecute
+</p><pre class="screen">fakeroot debian/rules binary</pre><p>
+en el directorio raíz de <span class="application">MPlayer</span>. Vea la
+sección <a class="link" href="linux.html#debian" title="5.1.1. Empaquetado para Debian">paquetes de Debian</a> para instrucciones
+más detalladas.
+</p><p>
+<span class="bold"><strong>Siempre revise la salida de</strong></span>
+<tt class="filename">./configure</tt>, y el archivo
+<tt class="filename">config.log</tt>, ellos contienen información acerca
+de lo que se compilará, y que no. Quizá quiera ver también los archivos
+<tt class="filename">config.h</tt> y <tt class="filename">config.mak</tt>.
+Si alguna de las librerías que tiene instaladas no fueron detectadas
+por <tt class="filename">./configure</tt>, por favor revise si tiene los
+archivos de encabezados correspondientes (normalmente los paquetes -dev)
+y que sus versiones sean las mismas. El archivo <tt class="filename">config.log</tt>
+normalmente dice que falta.
+</p><p>
+Aunque no es obligatorio, las fuentes deberían ser instaladas para poder usar
+el texto en pantalla (OSD) y los subtítulos. El método recomendado es instalar
+una fuente TTF y avisarle a <span class="application">MPlayer</span>
+que lo use. Vea la sección <a class="link" href="subosd.html" title="2.4. Subtítulos y OSD">Subtítulos y OSD</a>
+para más detalles.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="softreq.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="gui.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">2.1. Requerimientos de Software </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 2.3. ¿Qué hay acerca de la GUI?</td></tr></table></div></body></html>

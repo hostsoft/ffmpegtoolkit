@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.5. SVGAlib</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="sdl.html" title="4.4. SDL"><link rel="next" href="fbdev.html" title="4.6. Výstup na Framebuffer (FBdev)"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.5. SVGAlib</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sdl.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="fbdev.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="svgalib"></a>4.5. SVGAlib</h2></div></div></div><p><b>INSTALACE. </b>
+Budete muset nainstalovat svgalib i s development balíčkem, aby
+<span class="application">MPlayer</span> vytvořil své SVGAlib rozhraní
+(autodetekováno, ale nelze vynutit) a nezapomeňte upravit
+<tt class="filename">/etc/vga/libvga.config</tt> tak, aby odpovídal vaší kartě a
+monitoru.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+Ujistěte se, že nepoužíváte volbu <tt class="option">-fs</tt>, jelikož zapíná
+použití softwarového škálování, což je pomalé. Pokud jej opravdu potřebujete,
+použijte volbu <tt class="option">-sws 4</tt>, což poskytuje špatnou kvalitu, ale je
+o poznání rychlejší.
+</p></div><p><b>PODPORA EGA (4BPP). </b>
+SVGAlib obsahuje EGAlib a <span class="application">MPlayer</span> umí zobrazovat
+jakýkoli film v 16 barvách, což je vhodné v následujících konfiguracích:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  EGA karta s EGA monitorem: 320x200x4bpp, 640x200x4bpp, 640x350x4bpp
+</p></li><li class="listitem"><p>
+  EGA karta s CGA monitorem: 320x200x4bpp, 640x200x4bpp
+</p></li></ul></div><p>
+Hodnota bpp (bitů na pixel) musí být nastavena na 4 ručně:
+<tt class="option">-bpp 4</tt>
+</p><p>
+Obraz bude nejspíš muset být zmenšený tak, aby se vešel v EGA režimu:
+</p><pre class="screen">-vf scale=640:350</pre><p>
+nebo
+</p><pre class="screen">-vf scale=320:200</pre><p>
+</p><p>
+Když potřebujeme rychlou, ale nekvalitní škálovací rutinu:
+</p><pre class="screen">-sws 4</pre><p>
+</p><p>
+Možná bude muset být vypnuta automatická korekce poměru stran:
+</p><pre class="screen">-noaspect</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+Podle mých zkušeností lze dosáhnout nejlepší kvality obrazu na
+EGA obrazovkách mírným snížením jasu:
+<tt class="option">-vf eq=-20:0</tt>. Na svém počítači jsem rovněž musel snížit
+vzorkovací kmitočet zvuku, protože zvuk pří 44kHz byl vadný:
+<tt class="option">-srate 22050</tt>.
+</p></div><p>
+Zapnout OSD a titulky můžete pouze v kombinaci s <tt class="option">expand</tt>
+filtrem, viz man stránka pro přesné parametry.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sdl.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="fbdev.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.4. SDL </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.6. Výstup na Framebuffer (FBdev)</td></tr></table></div></body></html>

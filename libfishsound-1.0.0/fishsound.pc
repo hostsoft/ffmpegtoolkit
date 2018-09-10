@@ -1,0 +1,12 @@
+prefix=/usr/local/ffmpegtoolkit
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: fishsound
+Description: Encode and decode Vorbis, Speex, FLAC audio
+Requires:  vorbis vorbisenc speex flac
+Version: 1.0.0
+Libs: -L${libdir} -lfishsound
+Libs.private: -L/usr/local/ffmpegtoolkit/lib -lvorbisenc   -L/usr/local/ffmpegtoolkit/lib -lvorbis   -L/usr/local/ffmpegtoolkit/lib -lspeex   -L/usr/local/ffmpegtoolkit/lib -lFLAC  
+Cflags: -I${includedir}

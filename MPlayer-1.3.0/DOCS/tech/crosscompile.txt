@@ -1,0 +1,48 @@
+Due to a lack of Windows developers, it is a good idea to allow Linux
+developers to do at least some basic check of their code.
+This HOWTO explains how to set up cross-compilation.
+
+
+MinGW under Debian
+==================
+
+First, you need to install the "gcc-mingw-w64" package and get a MPlayer SVN
+checkout.
+
+To get a fully functional build, you need to get a lot of dependencies
+compiled first. This is outside the scope of this document.
+
+Then you need to run
+./configure --enable-cross-compile --windres=i686-w64-mingw32-windres --cc=i686-w64-mingw32-gcc
+and make.
+To compile a 64-bit Windows binary, use
+./configure --enable-cross-compile --windres=x86_64-w64-mingw32-windres --cc=x86_64-w64-mingw32-gcc
+instead.
+For files meant to run on a different computer you should usually
+use --enable-runtime-cpudetection.
+
+You should be able to run the generated binary with Wine, if you want to.
+
+The steps as command-lines:
+
+sudo apt-get install gcc-mingw-w64
+svn co svn://svn.mplayerhq.hu/mplayer/trunk MPlayer-mingw
+cd MPlayer-mingw
+./configure --enable-cross-compile --windres=i686-w64-mingw32-windres --cc=i686-w64-mingw32-gcc
+make
+
+
+Wine
+====
+
+First, you need to install the "Wine" package and get a MPlayer SVN
+checkout.
+
+You don't need any dependencies other than those you already have for
+your Linux build, because the Wine and Linux build will use them together.
+
+Configure with
+
+  ./configure --target=i686-wine --cc="winegcc -m32" --windres=wrc --enable-gui
+
+and add any options you normally use for your Linux build, then run make.

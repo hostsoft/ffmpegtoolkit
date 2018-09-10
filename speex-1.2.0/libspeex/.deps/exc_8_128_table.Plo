@@ -1,0 +1,3 @@
+exc_8_128_table.lo: exc_8_128_table.c /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:

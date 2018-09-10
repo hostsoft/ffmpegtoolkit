@@ -1,0 +1,118 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>7.5. Mac OS</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="ports.html" title="7. fejezet - Portok"><link rel="prev" href="windows.html" title="7.4. Windows"><link rel="next" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="macos.html#osx_gui" title="7.5.1. MPlayer OS X GUI"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">7.5. Mac OS</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="windows.html">Vissza</a> </td><th width="60%" align="center">7. fejezet - Portok</th><td width="20%" align="right"> <a accesskey="n" href="mencoder.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="macos"></a>7.5. Mac OS</h2></div></div></div><p>
+Az <span class="application">MPlayer</span> nem működik a 10-esnél régebbi Mac OS-eken,
+de könnyedén lefordítható Mac OS X 10.2 és későbbi verziók alatt.
+A javasolt fordító a GCC 3.x vagy későbbi Apple féle változata.
+Az alap fordítási környezetet az Apple
+<a class="ulink" href="http://developer.apple.com/tools/download/" target="_top">Xcode</a>
+telepítésével kapod meg.
+Ha Mac OS X 10.3.9 vagy régebbi verziód és QuickTime 7-esed van,
+használhatod a <tt class="option">corevideo</tt> videó kimeneti vezérlőt is.
+</p><p>
+Sajnos az alap környezet nem teszi lehetővé az <span class="application">MPlayer</span>
+összes képességének kihasználását.
+Például ha befordított OSD támogatást szeretnél, telepített
+<code class="systemitem">fontconfig</code> és a
+<code class="systemitem">freetype</code> függvénykönyvtárakra
+lesz szükséged. Más Unix-okkal ellentétben, mint amilyen a legtöbb
+Linux és BSD variáns, az OS X nem rendelkezik alapértelmezett csomag
+kezelővel, ami az operációs rendszerhez tartozna.
+</p><p>
+Két független közül választhatsz:
+<a class="ulink" href="http://fink.sourceforge.net/" target="_top">Fink</a> és
+<a class="ulink" href="http://www.macports.org/" target="_top">MacPorts</a>.
+Mindkettő nagyjából ugyan azt a szolgáltatást nyújtja (pl. rengeteg választható
+csomag, függőségek kezelése, csomagok egyszerű telepítése/frissítése/eltávolítása,
+stb...).
+A Fink biztosít előfordított bináris csomagokat, de forrásból is lefordítható
+bármi, míg a MacPorts csak forrásból történő fordítást tesz lehetővé.
+Ezen leírás szerzője a MacPorts-ot választotta, azon egyszerű okból kifolyólag,
+hogy a beállítása sokkal egyszerűbb.
+A későbbi példák mind MacPorts-on alapszanak.
+</p><p>
+Például az <span class="application">MPlayer</span> lefordítása OSD támogatással:
+</p><pre class="screen">sudo port install pkg-config</pre><p>
+Ez telepíti a <span class="application">pkg-config</span>-ot, ami a függvénykönyvtárak
+fordítási/szerkesztési flag-jeinek kezelését végző rendszer.
+Az <span class="application">MPlayer</span> <code class="systemitem">configure</code> script-je
+is ezt használja a függvénykönyvtárak megfelelő detektálásához.
+Ezután hasonló módon telepítheted a
+<span class="application">fontconfig</span>-ot:
+</p><pre class="screen">sudo port install fontconfig</pre><p>
+Ezek után indíthatod az <span class="application">MPlayer</span>
+<code class="systemitem">configure</code> script-jét (figyelj a
+<code class="systemitem">PKG_CONFIG_PATH</code> és <code class="systemitem">PATH</code>
+környezeti változók beállítására, hogy a <code class="systemitem">configure</code>
+megtalálja a MacPorts-szal telepített függvénykönyvtárakat):
+</p><pre class="screen">
+PKG_CONFIG_PATH=/opt/local/lib/pkgconfig/ PATH=$PATH:/opt/local/bin/ ./configure
+</pre><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osx_gui"></a>7.5.1. MPlayer OS X GUI</h3></div></div></div><p>
+Van egy natív GUI az <span class="application">MPlayer</span>hez egy előfordított
+<span class="application">MPlayer</span> binárissal együtt Mac OS X alá a
+<a class="ulink" href="http://mplayerosx.sf.net/" target="_top">MPlayerOSX</a> projektből, de
+emlékezz rá: ez a projekt már nem aktív.
+</p><p>
+Szerencsére az <span class="application">MPlayerOSX</span> projektet az
+<span class="application">MPlayer</span> csapat egyik tagja átvette.
+Előzetes kiadások elérhetőek a
+<a class="ulink" href="http://mplayerhq.hu/dload.html" target="_top">letöltési oldalunkról</a>
+és hamarosan jön a hivatalos kiadás is.
+</p><p>
+Ha saját magad akarod lefordítani forrásból az <span class="application">MPlayerOSX</span>et,
+szükséged lesz az <code class="systemitem">mplayerosx</code>-re, a
+<code class="systemitem">main</code>-re és a
+<code class="systemitem">main</code> SVN modul
+<code class="systemitem">main_noaltivec</code>-re átnevezett másolatára.
+<code class="systemitem">mplayerosx</code> a GUI frontend,
+<code class="systemitem">main</code> az MPlayer és a
+<code class="systemitem">main_noaltivec</code> az MPlayer AltiVec támogatás
+nélkül.
+</p><p>
+Az SVN modulok letöltéséhez használt az alábbi parancsokat:
+</p><pre class="screen">
+svn checkout svn://svn.mplayerhq.hu/mplayerosx/trunk/ mplayerosx
+svn checkout svn://svn.mplayerhq.hu/mplayer/trunk/ main
+</pre><p>
+</p><p>
+Az <span class="application">MPlayerOSX</span> elkészítéséhez valami ilyesmit kell
+csinálnod:
+</p><pre class="screen">
+MPlayer_forras_konyvtar
+   |
+   |---&gt;main           (MPlayer Subversion forrás)
+   |
+   |---&gt;main_noaltivec (MPlayer Subversion forrás --disable-altivec -kel konfigurálva)
+   |
+   |---&gt;mplayerosx     (MPlayer OS X Subversion forrás)
+</pre><p>
+Először a main és main_noaltivec-et kell lefordítanod.
+</p><p>
+Kezdetnek a maximális kompatibilítás biztosítása érdekében állíts be egy
+környezeti változót:
+</p><pre class="screen">export MACOSX_DEPLOYMENT_TARGET=10.3</pre><p>
+</p><p>
+Majd konfigurálj:
+</p><p>
+Ha a G4 vagy későbbi, AltiVec támogatással rendelkező CPU-ra konfigurálsz:
+</p><pre class="screen">
+./configure --disable-gl --disable-x11
+</pre><p>
+Ha G3-as, AltiVec nélküli gépre:
+</p><pre class="screen">
+./configure --disable-gl --disable-x11 --disable-altivec
+</pre><p>
+Lehet, hogy szerkesztened kell a <tt class="filename">config.mak</tt> fájlt és
+át kell írnod az <code class="systemitem">-mcpu</code>-t és <code class="systemitem">-mtune</code>-t
+<code class="systemitem">74XX</code>-ről <code class="systemitem">G3</code>-ra.
+</p><p>
+Folytasd a
+</p><pre class="screen">make</pre><p>
+paranccsal, majd menj a mplayerosx könyvtárba és írd be
+</p><pre class="screen">make dist</pre><p>
+Ez egy tömörített <code class="systemitem">.dmg</code> archívot hoz létre
+egy használatra kész binárissal.
+</p><p>
+Használhatod az <span class="application">Xcode</span> 2.1 projektet is;
+a régi, <span class="application">Xcode</span> 1.x projekt nem működik
+már.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="windows.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="mencoder.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">7.4. Windows </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 8. fejezet - A <span class="application">MEncoder</span> használatának alapjai</td></tr></table></div></body></html>

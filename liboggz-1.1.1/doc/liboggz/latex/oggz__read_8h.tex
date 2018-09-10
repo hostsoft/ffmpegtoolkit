@@ -1,0 +1,151 @@
+\section{oggz\-\_\-read.\-h File Reference}
+\label{oggz__read_8h}\index{oggz\-\_\-read.\-h@{oggz\-\_\-read.\-h}}
+
+
+Interfaces for reading Ogg files and streams.  
+
+
+{\ttfamily \#include $<$oggz/oggz\-\_\-packet.\-h$>$}\\*
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int($\ast$ {\bf Oggz\-Read\-Packet} )({\bf O\-G\-G\-Z} $\ast$oggz, {\bf oggz\-\_\-packet} $\ast$packet, long serialno, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em This is the signature of a callback which you must provide for Oggz to call whenever it finds a new packet in the Ogg stream associated with {\itshape oggz}. \end{DoxyCompactList}\item 
+typedef int($\ast$ {\bf Oggz\-Read\-Page} )({\bf O\-G\-G\-Z} $\ast$oggz, const ogg\-\_\-page $\ast$og, long serialno, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em This is the signature of a callback which you must provide for Oggz to call whenever it finds a new page in the Ogg stream associated with {\itshape oggz}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf oggz\-\_\-set\-\_\-read\-\_\-callback} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, {\bf Oggz\-Read\-Packet} read\-\_\-packet, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Set a callback for Oggz to call when a new Ogg packet is found in the stream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-read\-\_\-page} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, {\bf Oggz\-Read\-Page} read\-\_\-page, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Set a callback for Oggz to call when a new Ogg page is found in the stream. \end{DoxyCompactList}\item 
+long {\bf oggz\-\_\-read} ({\bf O\-G\-G\-Z} $\ast$oggz, long n)
+\begin{DoxyCompactList}\small\item\em Read n bytes into {\itshape oggz}, calling any read callbacks on the fly. \end{DoxyCompactList}\item 
+long {\bf oggz\-\_\-read\-\_\-input} ({\bf O\-G\-G\-Z} $\ast$oggz, unsigned char $\ast$buf, long n)
+\begin{DoxyCompactList}\small\item\em Input data into {\itshape oggz}. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-purge} ({\bf O\-G\-G\-Z} $\ast$oggz)
+\begin{DoxyCompactList}\small\item\em Erase any input buffered in Oggz. \end{DoxyCompactList}\item 
+{\bf Oggz\-Stream\-Content} {\bf oggz\-\_\-stream\-\_\-get\-\_\-content} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Determine the content type of the oggz stream referred to by {\itshape serialno}. \end{DoxyCompactList}\item 
+const char $\ast$ {\bf oggz\-\_\-stream\-\_\-get\-\_\-content\-\_\-type} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Return human-\/readable string representation of content type of oggz stream referred to by {\itshape serialno}. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-stream\-\_\-get\-\_\-numheaders} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Determine the number of headers of the oggz stream referred to by {\itshape serialno}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interfaces for reading Ogg files and streams. 
+
+\subsection{Function Documentation}
+\index{oggz\-\_\-read.\-h@{oggz\-\_\-read.\-h}!oggz\-\_\-purge@{oggz\-\_\-purge}}
+\index{oggz\-\_\-purge@{oggz\-\_\-purge}!oggz_read.h@{oggz\-\_\-read.\-h}}
+\subsubsection[{oggz\-\_\-purge}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-purge (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz}
+\end{DoxyParamCaption}
+)}\label{oggz__read_8h_adf606e6641a7d59eff2030b7b9ce51f8}
+
+
+Erase any input buffered in Oggz. 
+
+This discards any input read from the underlying I\-O system but not yet delivered as ogg\-\_\-packets.
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em 0} & Success \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M} & Error seeking on underlying I\-O. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} & Operation not suitable for this O\-G\-G\-Z \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-read.\-h@{oggz\-\_\-read.\-h}!oggz\-\_\-stream\-\_\-get\-\_\-content@{oggz\-\_\-stream\-\_\-get\-\_\-content}}
+\index{oggz\-\_\-stream\-\_\-get\-\_\-content@{oggz\-\_\-stream\-\_\-get\-\_\-content}!oggz_read.h@{oggz\-\_\-read.\-h}}
+\subsubsection[{oggz\-\_\-stream\-\_\-get\-\_\-content}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Oggz\-Stream\-Content} oggz\-\_\-stream\-\_\-get\-\_\-content (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{oggz__read_8h_a1cd43b28f34bf82dc1830cc517b19e14}
+
+
+Determine the content type of the oggz stream referred to by {\itshape serialno}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & An ogg stream serialno \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-T\-H\-E\-O\-R\-A..\-O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-U\-N\-K\-N\-O\-W\-N} & content successfully identified \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not refer to an existing stream \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-read.\-h@{oggz\-\_\-read.\-h}!oggz\-\_\-stream\-\_\-get\-\_\-content\-\_\-type@{oggz\-\_\-stream\-\_\-get\-\_\-content\-\_\-type}}
+\index{oggz\-\_\-stream\-\_\-get\-\_\-content\-\_\-type@{oggz\-\_\-stream\-\_\-get\-\_\-content\-\_\-type}!oggz_read.h@{oggz\-\_\-read.\-h}}
+\subsubsection[{oggz\-\_\-stream\-\_\-get\-\_\-content\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ oggz\-\_\-stream\-\_\-get\-\_\-content\-\_\-type (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{oggz__read_8h_a85665d758dbc159bc48055bf3f572b37}
+
+
+Return human-\/readable string representation of content type of oggz stream referred to by {\itshape serialno}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & An ogg stream serialno \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em string} & the name of the content type \\
+\hline
+{\em N\-U\-L\-L} & {\itshape oggz} or {\itshape serialno} invalid \\
+\hline
+\end{DoxyRetVals}
+\index{oggz\-\_\-read.\-h@{oggz\-\_\-read.\-h}!oggz\-\_\-stream\-\_\-get\-\_\-numheaders@{oggz\-\_\-stream\-\_\-get\-\_\-numheaders}}
+\index{oggz\-\_\-stream\-\_\-get\-\_\-numheaders@{oggz\-\_\-stream\-\_\-get\-\_\-numheaders}!oggz_read.h@{oggz\-\_\-read.\-h}}
+\subsubsection[{oggz\-\_\-stream\-\_\-get\-\_\-numheaders}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-stream\-\_\-get\-\_\-numheaders (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{oggz__read_8h_ae3b1aa364b5bf0d7b331aab70646ab10}
+
+
+Determine the number of headers of the oggz stream referred to by {\itshape serialno}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & An ogg stream serialno \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-T\-H\-E\-O\-R\-A..\-O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-U\-N\-K\-N\-O\-W\-N} & content successfully identified \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not refer to an existing stream \\
+\hline
+\end{DoxyRetVals}

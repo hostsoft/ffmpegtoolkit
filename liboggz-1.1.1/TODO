@@ -1,0 +1,175 @@
+
+This is a loosely-categorized list of outstanding tasks and ideas for improving
+liboggz and the oggz tools. When implementing any of these, please include an
+update to this TODO file removing that task, in the same commit.
+
+Library
+=======
+
+Documentation
+-------------
+
+	Doxygen
+	* add docs about auto gp functionality
+	* review: is all functionality covered?
+	* separate into intro/advanced topics
+	* rewrite intro so that newer, simpler functionality is covered.
+
+Seeking
+-------
+(See seek-rewrite branch for updates)
+
+	State
+	* add seek_packet() function to return to a previous packet
+
+	Keyframe seeking
+	* add seek_keyframe() (double-seek) function, using method from thread
+	titled "ogg double seek algorithm" to a11y list 18/11/2008 including
+	Ralph's corrections
+
+	* seek to a specific gp (not time)
+
+	* switch table to a vector
+	* seek_units (SET, CUR, END)
+
+	oggz_get_duration()
+	* add new public API call
+	* subtract file start / presentation time from duration
+
+	Large file offsets
+	* introduce seek_offset(), tell_offset() variants using oggz_off_t
+	interface, and deprecate oggz_seek(), oggz_tell()
+
+	* s/units/time/ throughout (or more explicitly "milliseconds" or
+	"nanoseconds")
+
+	New seek API calls:
+	* next(), prev(), key(): seek to the next, prev or keyframe of this packet
+
+Internals
+---------
+
+	* replace table implementation, allow NULL insertion
+
+	* use debug_printf() (eg. from libshcodecs) instead of #ifdef DEBUG
+	throughout
+
+Cleanups
+--------
+	* dirac.c is included in tools/Makefile.am in LIBS. Instead, include it
+	where it is actually used (by oggz_tools.c)
+
+API
+---
+	* rename all track-specific functions to oggz_track_*() ?
+
+	* add a OGGZ_SORT option (flag w/ OGGZ_WRITE) which queues pages like
+	oggz-merge internally. Use this for oggz-merge (and libannodex ...)
+
+	* add low-level public functions to extract packets from a page?
+	(like in fix-eos)
+
+
+Tools
+===== 
+
+	* verbose operation in oggz-sort, oggz-merge etc. should print to stderr,
+	not clobber stdout
+
+	* use libexplain in tools, esp. oggz-chop logging errors.
+
+oggz-addskel
+------------
+	* new tool to add skeleton (though oggz-chop with no args does this)
+
+oggz-chop
+---------
+(See chop-rewrite branch for updates)
+
+	Content-Duration
+	* add Content-Duration header
+	* use get_duration() in oggz-chop
+
+	Content-Length
+	* if no subview, return length of file
+	* if supports byte range redirect, cache control section and return its
+	length. Print that, then sendfile() the control section.
+	Else, build, write and send the whole subview.
+
+	* use seek_keyframe() to find chop point, from which to accumulate headers.
+	Confirm same output as current version.
+
+	Error handling
+	* handle failed parse of query: redirect to canonical file rather than
+	producing output (for caching sanity), or reject the request?
+	* strip unknown parameters and redirect to canonical form?
+
+	Range requests
+	* handle Range requests
+
+	Skeleton
+	* add message header fields for Chopped-By, Encoded-By etc.
+
+	Multiple time ranges
+	* support multiple time ranges, convert to byte ranges
+
+	* Terminate when all tracks are at EOS, don't spin to end of file.
+
+	FastCGI support
+
+	sndfile()
+
+	TCP_CORK
+
+oggz-comment
+------------
+	* add a -p option to add padding, like rareware's oggenc2. This will need
+	to track page boundaries accurately, ie. when inserting tags, see if it
+	can be done inplace and do that if possible.
+
+oggz-diff
+---------
+	* is not using mkfifo
+
+oggz-dump
+---------
+	* add info to "oggz-dump --help" explaining how to interpret the info.
+	Point to RFC3533 for details. Explain serialno, and explain granulepos for
+	audio, Theora and Dirac -- ie. how to interpret keyframe.
+
+oggz-optimize
+-------------
+	* new tool: optimize the flushing on an ogg stream. Give limits on page
+	duration or size.
+
+oggz-merge
+----------
+	* Accumulate gp -1 pages rather than writing them out as soon as they
+	are available, so that single-packet continued pages are placed immediately
+	prior to the page their contained packet finishes on.
+	(reported by gmaxwell, 20100318)
+
+	* Dirac: take pt,dt into account. See
+	http://lists.xiph.org/pipermail/ogg-dev/2008-November/001264.html
+	* but first, reject Dirac streams
+
+oggz-sort
+---------
+	* Accumulate gp -1 pages rather than writing them out as soon as they
+	are available, so that single-packet continued pages are placed immediately
+	prior to the page their contained packet finishes on.
+	(reported by gmaxwell, 20100318)
+
+	* Dirac: take pt,dt into account. See
+	http://lists.xiph.org/pipermail/ogg-dev/2008-November/001264.html
+	* but first, reject Dirac streams
+
+oggz-validate
+-------------
+	* Throw an error for pages with gp -1 that have a packet finishing on them
+	(requested by derf 20100316, framing spec clearly states that "A special
+	value of '-1' (in two's complement) indicates that no packets finish on this
+	page."
+
+	* validate skeleton
+

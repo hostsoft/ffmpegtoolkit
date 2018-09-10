@@ -1,0 +1,80 @@
+.TH "oggz-validate" "1" 
+.SH "NAME" 
+oggz-validate \(em Validate the Ogg framing of one or more files 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-validate \fR [\-M \fBnum\fR  | \-\-max-errors \fBnum\fR ]  [\-p  | \-\-prefix ]  [\-s  | \-\-suffix ]  [\-P  | \-\-partial ] filename \&...  
+.PP 
+\fBoggz-validate\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-validate\fR validates the Ogg framing of one or more 
+Ogg files. 
+.PP 
+\fBoggz-validate\fR detects the following errors 
+in Ogg framing: 
+ 
+.IP "   \(bu" 6 
+File contains no Ogg packets 
+.IP "   \(bu" 6 
+Packets out of order 
+.IP "   \(bu" 6 
+Packet belongs to unknown serialno 
+.IP "   \(bu" 6 
+Granulepos decreasing within track 
+.IP "   \(bu" 6 
+Multiple bos pages 
+.IP "   \(bu" 6 
+Multiple eos pages 
+.IP "   \(bu" 6 
+eos marked but no bos 
+.IP "   \(bu" 6 
+Missing eos packets 
+.IP "   \(bu" 6 
+eos marked on page with no completed packets 
+.IP "   \(bu" 6 
+Granulepos on page with no completed packets 
+.IP "   \(bu" 6 
+Theora video bos page after audio bos page 
+.IP "   \(bu" 6 
+Terminal header page has non-zero granulepos 
+.IP "   \(bu" 6 
+Terminal header page contains non-header packet 
+.IP "   \(bu" 6 
+Terminal header page contains non-header segment      
+.PP 
+\fBoggz-validate\fR exits with status 0 if all files 
+are valid Ogg files, and with status 1 if one or more errors are found. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-validate\fR accepts the following options: 
+ 
+.SS "Error reporting options" 
+.IP "\-M \fBnum\fR, \-\-max-errors \fBnum\fR" 10 
+Exit after the specified number of errors. A value of 0 specifies no maximum. 
+.IP "\-p, \-\-prefix" 10 
+Treat input as the prefix of a stream; suppress warnings about missing end-of-stream markers 
+.IP "\-s, \-\-suffix" 10 
+Treat input as the suffix of a stream; suppress warnings about missing beginning-of-stream markers on the first chain 
+.IP "\-P, \-\-partial" 10 
+Treat input as a the middle portion of a stream. Equivalent to both \-\-prefix and \-\-suffix 
+.SS "Miscellaneous options" 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+.SH "AUTHOR" 
+.PP 
+Conrad Parker        April 3, 2005;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2005 CSIRO Australia 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-sort\fP\fB(1)\fP, 
+\fBoggz-dump\fP\fB(1)\fP, 
+\fBoggz-info\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Sat 11 Apr 2009, 16:34 

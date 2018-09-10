@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.1. Réglage MTRR</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="prev" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="next" href="xv.html" title="4.2. Xv"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.1. Réglage MTRR</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="video.html">Précédent</a> </td><th width="60%" align="center">Chapitre 4. Sorties vidéo</th><td width="20%" align="right"> <a accesskey="n" href="xv.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mtrr"></a>4.1. Réglage MTRR</h2></div></div></div><p>
+Il est FORTEMENT recommandé de bien ajuster ses registres MTRR, qui apportent
+un gain important de performances.
+</p><p>
+  Faites un <span class="command"><strong>cat /proc/mtrr</strong></span> :
+</p><pre class="screen">
+<code class="prompt">--($:~)--</code> cat /proc/mtrr
+reg00: base=0xe4000000 (3648MB), size=  16MB: write-combining, count=9
+reg01: base=0xd8000000 (3456MB), size= 128MB: write-combining, count=1</pre><p>
+</p><p>
+C'est bon, il montre ma Matrox G400 avec 16Mo de mémoire.
+J'ai fais cela avec XFree 4.x.x, qui ajuste les registres MTRR
+automatiquement.
+</p><p>
+Si rien n'a fonctionné, vous devrez procéder manuellement.
+D'abord, vous devez trouver l'adresse de base.
+Vous pouvez la trouver de trois façons :
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+    à partir des messages au démarrage de X11, par exemple :
+  </p><pre class="screen">
+(--) SVGA: PCI: Matrox MGA G400 AGP rev 4, Memory @ 0xd8000000, 0xd4000000
+(--) SVGA: Linear framebuffer at 0xD8000000</pre><p>
+  </p></li><li class="listitem"><p>
+  à partir de <tt class="filename">/proc/pci</tt> (utilisez la commande
+  <span class="command"><strong>lspci -v</strong></span>) :
+  </p><pre class="screen">
+01:00.0 VGA compatible controller: Matrox Graphics, Inc.: Unknown device 0525
+Memory at d8000000 (32-bit, prefetchable)
+  </pre><p>
+  </p></li><li class="listitem"><p>
+  à partir des messages noyau du pilote mga_vid (utilisez
+  <span class="command"><strong>dmesg</strong></span>) :
+  </p><pre class="screen">mga_mem_base = d8000000</pre><p>
+  </p></li></ol></div><p>
+</p><p>
+Trouvons maintenant la taille mémoire. Simplement, convertissez la taille de
+la
+mémoire vidéo en hexadécimal, ou utilisez cette table :
+</p><div class="informaltable"><table border="0"><colgroup><col><col></colgroup><tbody><tr><td>1 Mo</td><td>0x100000</td></tr><tr><td>2 Mo</td><td>0x200000</td></tr><tr><td>4 Mo</td><td>0x400000</td></tr><tr><td>8 Mo</td><td>0x800000</td></tr><tr><td>16 Mo</td><td>0x1000000</td></tr><tr><td>32 Mo</td><td>0x2000000</td></tr></tbody></table></div><p>
+</p><p>
+Vous connaissez l'adresse de base ainsi que la taille, ajustons vos registres
+MTRR !
+Par exemple, pour la carte Matrox utilisée ci-dessus
+(<code class="literal">base=0xd8000000</code>)
+avec 32Mo de ram (<code class="literal">size=0x2000000</code>) faites simplement :
+</p><pre class="screen">
+echo "base=0xd8000000 size=0x2000000 type=write-combining" &gt; /proc/mtrr
+</pre><p>
+</p><p>
+Tous les processeurs ne supportent pas les MTRR. Les anciens K6-2 par exemple
+(vers 266Mhz, stepping 0) ne sont pas compatibles avec les MTRR, mais les
+stepping 12
+le sont
+(<span class="command"><strong>cat /proc/cpuinfo</strong></span> pour le vérifier).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="video.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="xv.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">Chapitre 4. Sorties vidéo </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 4.2. Xv</td></tr></table></div></body></html>

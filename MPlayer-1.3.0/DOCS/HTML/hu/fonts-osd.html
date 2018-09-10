@@ -1,0 +1,87 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.4. Betűtípusok és OSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="install.html" title="2. fejezet - Telepítés"><link rel="prev" href="gui.html" title="2.3. Mi a helyzet a GUI-val?"><link rel="next" href="codec-installation.html" title="2.5. Codec telepítés"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="fonts-osd.html#truetype-fonts" title="2.4.1. TrueType betűk"><link rel="subsection" href="fonts-osd.html#bitmap-fonts" title="2.4.2. bittérképes betűk"><link rel="subsection" href="fonts-osd.html#osdmenu" title="2.4.3. OSD menü"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.4. Betűtípusok és OSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="gui.html">Vissza</a> </td><th width="60%" align="center">2. fejezet - Telepítés</th><td width="20%" align="right"> <a accesskey="n" href="codec-installation.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fonts-osd"></a>2.4. Betűtípusok és OSD</h2></div></div></div><p>
+Meg kell mondanod az <span class="application">MPlayer</span>nek, hogy melyik
+betűtípust szeretnéd használni az OSD-hez és a feliratokhoz. Bármilyen
+TrueType betűtípus vagy speciális bittérképes betű működni fog.
+Azonban ajánlott a TrueType használata, mivel sokkal jobban néz ki,
+megfelelően méretezhető a film méretéhez és jobban együttműködik a
+különböző kódolásokkal.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="truetype-fonts"></a>2.4.1. TrueType betűk</h3></div></div></div><p>
+A TrueType betűtípusok kétféle módon használhatóak. Az egyik a
+<tt class="option">-font</tt> opcióval egy TrueType betűtípus fájl megadása
+a parancssorban. Ez az opció jó eséllyel pályázik arra, hogy
+bekerüljön a konfigurációs fájlodba (lásd a man oldalt a részletekért).
+A másik, hogy készítesz egy <tt class="filename">subfont.ttf</tt> nevű
+symlink-et a választott betűtípus fájlhoz. Vagy
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>/eleresi/ut/pelda_betu.ttf</code></em> ~/.mplayer/subfont.ttf
+</pre><p>
+külön minden egyes felhasználóhoz, vagy az egész rendszerre vonatkozóan:
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>/eleresi/ut/pelda_betu.ttf</code></em> $PREFIX/share/mplayer/subfont.ttf
+</pre><p>
+</p><p>
+Ha az <span class="application">MPlayer</span> <code class="systemitem">fontconfig</code>
+támogatással lett lefordítva, a fenti módszerek nem fognak működni,
+helyettük a <tt class="option">-font</tt> egy <code class="systemitem">fontconfig</code>
+betűtípus nevet vár és alapértelmezetté teszi a sans-serif betűt.
+Például:
+
+</p><pre class="screen">mplayer -font <em class="replaceable"><code>'Bitstream Vera Sans'</code></em> <em class="replaceable"><code>anime.mkv</code></em></pre><p>
+</p><p>
+A <code class="systemitem">fontconfig</code>
+által ismert betűtípusok listáját az
+<span class="command"><strong>fc-list</strong></span> paranccsal nézheted meg.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bitmap-fonts"></a>2.4.2. bittérképes betűk</h3></div></div></div><p>
+Ha valamilyen okból kifolyólag bittérképes betűtípusokat szeretnél vagy kell
+használnod, tölts le egy készletet a weboldalunkról. Választhatsz a különböző
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/fonts/" target="_top">ISO betűk</a>
+és néhány
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/fonts/" target="_top">felhasználói készlet</a>
+közül, különböző kódolásokban.
+</p><p>
+Csomagold ki a letöltött fájlokat a
+<tt class="filename">~/.mplayer</tt> vagy a
+<tt class="filename">$PREFIX/share/mplayer</tt> könyvtárba.
+Ezután nevezd át vagy készíts egy symlink-et valamelyik kicsomagolt könyvtárra
+<tt class="filename">font</tt> néven, például:
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>~/.mplayer/arial-24</code></em> ~/.mplayer/font
+</pre><p>
+</p><pre class="screen">
+ln -s <em class="replaceable"><code>$PREFIX/share/mplayer/arial-24</code></em> $PREFIX/share/mplayer/font
+</pre><p>
+</p><p>
+A betűtípusoknak rendelkezniük kell egy megfelelő <tt class="filename">font.desc</tt>
+fájllal, ami leképezi a Unicode betűpozíciókat az aktuális felirat szöveg
+kódlapjára. A másik megoldás UTF-8 kódolású feliratok használata és a
+<tt class="option">-utf8</tt> kapcsoló megadása vagy add meg a felirat
+fájl neveként ugyan azt a nevet, mint a videó fájlé, de <tt class="filename">.utf</tt>
+kiterjesztéssel és tedd a videóval azonos könyvtárba.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="osdmenu"></a>2.4.3. OSD menü</h3></div></div></div><p>
+Az <span class="application">MPlayer</span>nek az OSD Menüje teljesen
+igényre szabható.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+a Tulajdonságok menü még NINCS KIFEJLESZTVE!
+</p></div><div class="orderedlist"><p class="title"><b>Telepítés</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  fordítsd le az <span class="application">MPlayer</span>t a <tt class="filename">./configure</tt>-nak
+  az <tt class="option">--enable-menu</tt> kapcsoló megadásával
+</p></li><li class="listitem"><p>
+  bizonyosodj meg róla, hogy van telepített OSD betűkészleted
+</p></li><li class="listitem"><p>
+  másold át az <tt class="filename">etc/menu.conf</tt> fájlt a
+  <tt class="filename">.mplayer</tt> könyvtárba
+</p></li><li class="listitem"><p>
+  másold át az <tt class="filename">etc/input.conf</tt> fájlt a
+  <tt class="filename">.mplayer</tt> könyvtárba, vagy egy
+  rendszerszinten elérhető <span class="application">MPlayer</span> konfigurációs
+  könyvtárba (alapértelmezett: <tt class="filename">/usr/local/etc/mplayer</tt>)
+</p></li><li class="listitem"><p>
+  ellenőrizd le és írd át az <tt class="filename">input.conf</tt> fájlt a menüben
+  történő mozgáshoz használt billentyűk engedélyezéséhez
+  (ott le van írva).
+</p></li><li class="listitem"><p>
+  indítsd el az <span class="application">MPlayer</span>t az alábbi példa alapján:
+  </p><pre class="screen">mplayer -menu <em class="replaceable"><code>file.avi</code></em></pre><p>
+</p></li><li class="listitem"><p>
+  nyomd meg valamelyik menü gombot, amit megadtál
+</p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="gui.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="codec-installation.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">2.3. Mi a helyzet a GUI-val? </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 2.5. Codec telepítés</td></tr></table></div></body></html>

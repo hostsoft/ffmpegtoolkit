@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.2. *BSD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="ports.html" title="Rozdział 5. Porty"><link rel="prev" href="linux.html" title="5.1. Linux"><link rel="next" href="unix.html" title="5.3. Komercyjny Unix"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="subsection" href="bsd.html#freebsd" title="5.2.1. FreeBSD"><link rel="subsection" href="bsd.html#openbsd" title="5.2.2. OpenBSD"><link rel="subsection" href="bsd.html#darwin" title="5.2.3. Darwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.2. *BSD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="linux.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 5. Porty</th><td width="20%" align="right"> <a accesskey="n" href="unix.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bsd"></a>5.2. *BSD</h2></div></div></div><p>
+<span class="application">MPlayer</span> działa na FreeBSD, OpenBSD, NetBSD,
+BSD/OS i Darwinie. Dostępne są wersje portów/pkgsrc/fink/itp., które
+prawdopodobnie są łatwiejsze w instalacji, niż kompilacja ze źródeł.
+</p><p>
+Do zbudowania <span class="application">MPlayera</span> będziesz potrzebował
+GNU make (gmake - rdzenne make BSD nie zadziała) i najnowszej wersji binutils.
+</p><p>
+Jeżeli <span class="application">MPlayer</span> nie może znaleźć
+<tt class="filename">/dev/cdrom</tt> lub <tt class="filename">/dev/dvd</tt>,
+stwórz odpowiednie dowiązanie symboliczne:
+</p><pre class="screen">ln -s /dev/<em class="replaceable"><code>twoje_urządzenie_cdrom</code></em> /dev/cdrom</pre><p>
+</p><p>
+Aby używać bibliotek Win32 z <span class="application">MPlayerem</span>, będziesz
+potrzebował przekompilować jądro z opcją "<code class="envar">USER_LDT</code>"
+(chyba, że używasz FreeBSD-CURRENT, tam jest domyślnie włączona).
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="freebsd"></a>5.2.1. FreeBSD</h3></div></div></div><p>
+Jeżeli Twój procesor ma rozszerzenie SSE, przekompiluj jądro z opcją
+"<code class="envar">CPU_ENABLE_SSE</code>" (wymagany FreeBSD-STABLE lub łaty na jądro).
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="openbsd"></a>5.2.2. OpenBSD</h3></div></div></div><p>Ze względu na ograniczenia w różnych wersjach gas (GNU assemblera - przyp. tłumacza)
+(dotyczące relokacji i MMX), będziesz musiał przeprowadzić kompilację w dwóch krokach:
+Po pierwsze, upewnij się, że wersja nierdzenna występuje w zmiennej <code class="envar">$PATH</code>
+i wykonaj <span class="command"><strong>gmake -k</strong></span>, a następnie upewnij się, że używana jest wersja rdzenna
+i wykonaj <span class="command"><strong>gmake</strong></span>.
+</p><p>
+Powyższa metoda nie jest już potrzebna w OpenBSD 3.4.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="darwin"></a>5.2.3. Darwin</h3></div></div></div><p>
+Zobacz rozdział <a class="link" href="macos.html" title="5.5. Mac OS">Mac OS</a>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="linux.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="unix.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">5.1. Linux </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 5.3. Komercyjny Unix</td></tr></table></div></body></html>

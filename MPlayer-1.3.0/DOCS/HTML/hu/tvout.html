@@ -1,0 +1,188 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.19. TV-kimenet támogatás</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="blinkenlights.html" title="6.18. Blinkenlights"><link rel="next" href="ports.html" title="7. fejezet - Portok"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="tvout.html#tvout-mga-g400" title="6.19.1. Matrox G400 kártyák"><link rel="subsection" href="tvout.html#tv-out_matrox_g450" title="6.19.2. Matrox G450/G550 kártyák"><link rel="subsection" href="tvout.html#tv-out_matrox_cable" title="6.19.3. Matrox TV-kimeneti kábel készítése"><link rel="subsection" href="tvout.html#tvout-ati" title="6.19.4. ATI kártyák"><link rel="subsection" href="tvout.html#tvout-nvidia" title="6.19.5. nVidia"><link rel="subsection" href="tvout.html#tvout-neomagic" title="6.19.6. NeoMagic"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.19. TV-kimenet támogatás</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="blinkenlights.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="ports.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tvout"></a>6.19. TV-kimenet támogatás</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-mga-g400"></a>6.19.1. Matrox G400 kártyák</h3></div></div></div><p>
+Linux alatt két módon bírhatod működésre a G400 TV kimenetét:
+</p><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Fontos</h3><p>
+a Matrox G450/G550 TV-kimenet utasításaiért lásd a következő részt!
+</p></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">XFree86</span></dt><dd><p>
+    A vezérlő és a HAL modul használatával, mely elérhető a <a class="ulink" href="http://www.matrox.com" target="_top">Matrox oldalán</a>. Ezzel X-et
+    kapsz a TV-n.
+    </p><p>
+    <span class="bold"><strong>Ez a módszer nem nyújt gyorsított lejátszást</strong></span>
+    Windows alatt! A második fejnek csak YUV framebuffer-e van, a <span class="emphasis"><em>BES</em></span>
+    (Back End Scaler, a YUV méretező a G200/G400/G450/G550 kártyákon) nem
+    működik rajta! A Windows-os vezérlők ezt valahogy megkerülik, talán 3D
+    motort használnak a nagyításhoz és a YUV framebuffer-t a nagyított
+    képek megjelenítéséhez. Ha tényleg X-et akarsz használni, válaszd a
+    <tt class="option">-vo x11 -fs -zoom</tt> kapcsolókat, de
+    <span class="bold"><strong>LASSÚ</strong></span> lesz,
+    és <span class="bold"><strong>Macrovision</strong></span> másolásvédelem van rajta
+    (ezzel a <a class="ulink" href="http://avifile.sf.net/mgamacro.pl" target="_top">Perl script</a>-tel
+    "megkerülheted" a Macrovisiont).
+    </p></dd><dt><span class="term">Framebuffer</span></dt><dd><p>
+    A 2.4-es kernelekben lévő <span class="bold"><strong>matroxfb modulok</strong></span>
+    használatával. A 2.2-es kernel-ekben nincs TV-out tulajdonság hozzájuk, így
+    használhatatlanok erre. Engedélyezned kell az ÖSSZES matroxfb-specifikus
+    tulajdonságot a fordítás alatt (kivéve a MultiHead-et) és
+    <span class="bold"><strong>modulokba</strong></span> kell fordítanod!
+    Az I2C-t is engedélyezned kell és a
+    <span class="application">matroxset</span>, <span class="application">fbset</span>
+    és <span class="application">con2fb</span> eszközöknek az elérési úton kell lenniük.
+    </p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+      Majd töltsd be a <code class="systemitem">matroxfb_Ti3026, matroxfb_maven, i2c-matroxfb,
+      matroxfb_crtc2</code> modulokat a kerneledbe. A szöveges-módú
+      konzolod framebuffer módba vált (nincs visszaút!).
+    </p></li><li class="step"><p>
+      Ezután állítsd be a monitorod és a TV-t a kedvednek megfelelően a fenti eszközökkel.
+    </p></li><li class="step"><p>
+      Yoh. A következő dolog, hogy a kurzort eltűntesd a tty1-ről (vagy
+      akármiről) és kikapcsold a képernyő törlést. Futtasd le a következő
+      parancsokat:
+
+      </p><pre class="screen">
+echo -e '\033[?25l'
+setterm -blank 0</pre><p>
+      vagy
+      </p><pre class="screen">
+setterm -cursor off
+setterm -blank 0</pre><p>
+
+      A fentieket valószínűleg beleírod egy script-be, egy képernyő
+      törléssel együtt. A kurzor visszakapcsolása:
+      </p><pre class="screen">echo -e '\033[?25h'</pre><p> vagy
+      </p><pre class="screen">setterm -cursor on</pre><p>
+    </p></li><li class="step"><p>
+      Yeah sirály. Indítsd el a film lejátszást:
+      </p><pre class="screen">
+mplayer -vo mga -fs -screenw 640 -screenh 512 <em class="replaceable"><code>filename</code></em></pre><p>
+
+      (Ha X-et használsz, most válts át matroxfb-re, például a
+      <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F1</b></span> gombokkal.)
+      Változtasd meg a <code class="literal">640</code>-et és az <code class="literal">512</code>-t,
+      ha másra állítottad a felbontást...
+    </p></li><li class="step"><p>
+      <span class="bold"><strong>Élvezd az ultra-gyors ultra-különleges Matrox TV
+      kimenetet (jobb mint az Xv)!</strong></span>
+    </p></li></ol></div></dd></dl></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-out_matrox_g450"></a>6.19.2. Matrox G450/G550 kártyák</h3></div></div></div><p>
+A TV kimenet támogatása ezeken a kártyákon csak nemrég jelent meg, és még
+nincs a a fő kernelben. Jelenleg az <span class="bold"><strong>mga_vid</strong></span>
+modul nem használható AFAIK, mert a G450/G550-es vezérlő csak egy konfigurációban
+működik: az első CRTC chip (a sokkal több képességgel) az első képernyőn
+(a monitoron) és a második CRTC (nincs <span class="bold"><strong>BES</strong></span> - a
+BES magyarázatához lásd a G400-as részt fent) TV-n. Így csak az
+<span class="application">MPlayer</span> <span class="emphasis"><em>fbdev</em></span> kimeneti
+vezérlőjét használhatod jelenleg.
+</p><p>
+Az első CRTC nem irányítható át a második fejre jelenleg. A matroxfb kernel
+vezérlő szerzője - Petr Vandrovec - talán készít támogatást ehhez, az
+első CRTC kimenetét egyszerre mindkét fejen megjelenítve, mint ahogy most is
+javasolt a G400-on, lásd a fenti részt.
+</p><p>
+A szükséges kernel javítás és a bővebb HOWTO letölthető:
+<a class="ulink" href="http://www.bglug.ca/matrox_tvout/" target="_top">http://www.bglug.ca/matrox_tvout/</a>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-out_matrox_cable"></a>6.19.3. Matrox TV-kimeneti kábel készítése</h3></div></div></div><p>
+Senki sem vállal ezért semmilyen felelősséget, sem garanciát bármilyen,
+ezen leírásból származó kárért.
+</p><p><b>Kábel a G400-hoz. </b>
+A CRTC2 csatlakozójának negyedik pin-je a kompozit videó jel. A
+földelés a hatodik, hetedik és nyolcadik pin. (az infót Rácz Balázs
+adta)
+</p><p><b>Kábel a G450-hez. </b>
+A CRTC2 csatlakozójának első pin-je a kompozit videó jel. A
+földelés az ötödik, hatodik, hetedik és tizenötödik (5, 6, 7, 15)
+pin. (az infót Kerekes Balázs adta)
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-ati"></a>6.19.4. ATI kártyák</h3></div></div></div><p><b>BEVEZETÉS. </b>
+Jelenleg az ATI nem akarja támogatni semelyik TV-out chip-jét sem Linux alatt,
+a licenszelt Macrovision technológiájuk miatt.
+</p><div class="itemizedlist"><p class="title"><b>ATI KÁRTYÁK TV-KIMENETÉNEK ÁLLAPOTA LINUXON</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>ATI Mach64</strong></span>:
+  támogatja a <a class="ulink" href="http://gatos.sf.net" target="_top">GATOS</a>.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>ASIC Radeon VIVO</strong></span>:
+  támogatja a <a class="ulink" href="http://gatos.sf.net" target="_top">GATOS</a>.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Radeon</strong></span> és <span class="bold"><strong>Rage128</strong></span>:
+  támogatja az <span class="application">MPlayer</span>!
+  Lásd a <a class="link" href="vesa.html" title="6.11. VESA - kimenet a VESA BIOS-hoz">VESA vezérlő</a> és
+  a <a class="link" href="vidix.html" title="6.13. VIDIX">VIDIX</a> részt.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Rage Mobility P/M, Radeon, Rage 128, Mobility M3/M4</strong></span>:
+  támogatja az
+  <a class="ulink" href="http://www.stud.uni-hamburg.de/users/lennart/projects/atitvout/" target="_top">atitvout</a>.
+</p></li></ul></div><p>
+Egyéb kártyák esetében lásd a <a class="link" href="vesa.html" title="6.11. VESA - kimenet a VESA BIOS-hoz">VESA</a> vezérlőt,
+VIDIX nélkül. Bár ehhez erős CPU kell.
+</p><p>
+Az egyeten dolog, amit tenned kell - <span class="bold"><strong>Be kell dugnod a
+TV csatlakozóját, mielőtt bekapcsolnád a PC-t</strong></span> mivel a videó BIOS
+csak egyszer, a POST folyamat során inicializálja magát.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-nvidia"></a>6.19.5. nVidia</h3></div></div></div><p>
+Először le KELL töltened a zárt-forrású vezérlőt az
+<a class="ulink" href="http://nvidia.com" target="_top">http://nvidia.com</a>-ról.
+Nem írom le a telepítés és a konfiguráció lépéseit, mert ez nem tartozik
+ezen dokumentáció céljához.
+</p><p>
+Miután az XFree86, az XVideo és a 3D gyorsítás is megfelelően működik,
+írd át a kártya Device részét az <tt class="filename">XF86Config</tt> fájlban,
+a következő példának megfelelően (a te kártyádhoz/TV-dhez igazítva):
+
+</p><pre class="programlisting">
+Section "Device"
+        Identifier      "GeForce"
+        VendorName      "ASUS"
+        BoardName       "nVidia GeForce2/MX 400"
+        Driver          "nvidia"
+        #Option         "NvAGP" "1"
+        Option          "NoLogo"
+        Option          "CursorShadow"  "on"
+
+        Option          "TwinView"
+        Option          "TwinViewOrientation" "Clone"
+        Option          "MetaModes" "1024x768,640x480"
+        Option          "ConnectedMonitor" "CRT, TV"
+        Option          "TVStandard" "PAL-B"
+        Option          "TVOutFormat" "Composite"
+EndSection
+</pre><p>
+</p><p>
+Természetesen a legfontosabb a TwinView rész.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tvout-neomagic"></a>6.19.6. NeoMagic</h3></div></div></div><p>
+A NeoMagic chip számos laptop-ban megtalálható, pár közülük egy egyszerű
+analóg TV kódolóval van felszerelve, mások sokkal fejlettebbel rendelkeznek.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Analóg kódoló chip</strong></span>:
+  A visszajelzések szerint megbízható TV kimenet a <tt class="option">-vo fbdev</tt>
+  vagy <tt class="option">-vo fbdev2</tt> kapcsolókkal érhető el.
+  Kernelbe forgatott vesafb szükséges és a következő paramétereket
+  kell megadni a kernel parancssorában:
+  <tt class="option">append="video=vesafb:ywrap,mtrr" vga=791</tt>.
+  Ajánlott elindítani az <span class="application">X</span>-et, majd átváltani
+  konzol módba pl. a
+  <span class="keycap"><b>Ctrl</b></span>+<span class="keycap"><b>Alt</b></span>+<span class="keycap"><b>F1</b></span>-gyel.
+  Ha nem sikerül elindítani az <span class="application">X</span>-et az
+  <span class="application">MPlayer</span> konzolból történő elindítása előtt,
+  a videó lassú és zavaros lesz (a magyarázatokat szívesen fogadjuk).
+  Jelentkezz be a konzolodra majd add ki a következő parancsot:
+
+  </p><pre class="screen">clear; mplayer -vo fbdev -zoom -cache 8192 dvd://</pre><p>
+
+  Ezután a filmet konzol módban, kb. a laptop LCD képernyőjének felét
+  kitöltve kell látnod.
+  A TV-re váltáshoz nyomd meg az <span class="keycap"><b>Fn</b></span>+<span class="keycap"><b>F5</b></span>-öt
+  háromszor. Tesztelve Tecra 8000-en, 2.6.15 kernel vesafb-vel, ALSA v1.0.10-en.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Chrontel 70xx kódoló chip</strong></span>:
+  Az IBM Thinkpad 390E és talán más Thinkpad-okban és notebook-okban található.
+  </p><p>
+  A <tt class="option">-vo vesa:neotv_pal</tt>-t kell használnod a PAL-hoz vagy
+  a <tt class="option">-vo vesa:neotv_ntsc</tt>-t az NTSC-hez.
+  TV kimenetet biztosít az alábbi 16 bpp és 8 bpp módokban:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>NTSC 320x240, 640x480 és talán 800x600 is.</p></li><li class="listitem"><p>PAL  320x240, 400x300, 640x480, 800x600.  </p></li></ul></div><p>Az 512x384-es módot nem támogatja a BIOS. Át kell méretezned a képet
+  egy másik felbontásra a TV kimenet aktiválásához. Ha egy képet látsz a
+  képernyőn 640x480-ban vagy 800x600-ban, de semmit 320x240-ben vagy kisebb
+  felbontáson, ki kell cserélned két táblázatot a <tt class="filename">vbelib.c</tt>
+  fájlban. Lásd a vbeSetTV függvényeket a részletekért. Kérlek keresd meg a szerzőt
+  ebben az esetben.
+  </p><p>
+  Ismert dolgok: Csak VESA, semmilyen más beállítás, pl. fényesség, kontraszt,
+  blacklevel, flickfilter nincs implementálva.
+  </p></li></ul></div><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="blinkenlights.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="ports.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.18. Blinkenlights </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 7. fejezet - Portok</td></tr></table></div></body></html>

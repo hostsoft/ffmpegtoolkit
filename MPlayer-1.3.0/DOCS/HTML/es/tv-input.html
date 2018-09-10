@@ -1,0 +1,130 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.9. Entrada de TV</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="usage.html" title="Capítulo 3. Uso"><link rel="prev" href="edl.html" title="3.8. Listas de Decisión de Edición (EDL)"><link rel="next" href="radio.html" title="3.10. Radio"><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="tv-input.html#tv-compilation" title="3.9.1. Compilación"><link rel="subsection" href="tv-input.html#tv-tips" title="3.9.2. Consejos de Uso"><link rel="subsection" href="tv-input.html#tv-examples" title="3.9.3. Ejemplos"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.9. Entrada de TV</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="edl.html">Anterior</a> </td><th width="60%" align="center">Capítulo 3. Uso</th><td width="20%" align="right"> <a accesskey="n" href="radio.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-input"></a>3.9. Entrada de TV</h2></div></div></div><p>
+Esta sección es acerca de como poder <span class="bold"><strong>mirar/capturar
+desde un dispositivo sintonizador de TV compatible con V4L</strong></span>. Vea
+la página del manual para una descripción de las opciones de TV y los controles
+del teclado.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-compilation"></a>3.9.1. Compilación</h3></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Primero, deberá recompilar. <tt class="filename">./configure</tt> detectará
+  los archivos de encabezados de las cosas de v4l y la existencia de
+  las entradas <tt class="filename">/dev/video*</tt>. Si existen, el soporte
+  de TV se compilará (vea la salida de <tt class="filename">./configure</tt>).
+  </p></li><li class="step"><p>
+  Asegúrese de que su sintonizador funcione bien con otro software de TV
+  en Linux, como por ejemplo con <span class="application">XawTV</span>.
+  </p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-tips"></a>3.9.2. Consejos de Uso</h3></div></div></div><p>
+El listado completo de opciones esta disponible en la página del manual.
+Aquí hay solamente un par de consejos:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+Use la opción <tt class="option">channels</tt>(canales). Ejemplo:
+</p><pre class="screen">-tv channels=26-MTV,23-TV2</pre><p>
+Explicación: usando esta opción, solo se podrá ver el canal 26 y el 23 y
+habrá un bonito texto en pantalla (OSD) por cada cambio de canal, mostrando
+el nombre del canal. Los espacios en el nombre del canal deben ser reemplazados
+por el carácter "_".
+</p></li><li class="listitem"><p>
+Elija varias dimensiones de imagen razonables. Las dimensiones de la imagen
+resultante deberían ser divisibles por 16.
+</p></li><li class="listitem"><p>
+Si captura el vídeo con una resolución vertical más grande que la mitad de
+la resolución total (por ejemplo: 288 para PAL o 240 para NTSC), asegúrese que
+activó el desentrelazado. De otro modo obtendrá una película la cual esta
+distorsionada durante las escenas con movimientos rápidos y el controlador de tasa
+de bits probablemente no podrá ser capaz de retener la cantidad de información necesaria
+ya que el entrelazado produce una gran cantidad de detalles y por lo tanto consume
+una gran cantidad de ancho de banda. Puede activar el desentrelazado con
+la opción <tt class="option">-vf pp=DEINT_TYPE</tt>. Normalmente
+<tt class="option">pp=lb</tt> funciona bien, pero es un problema de preferencias
+personales. Vea otros algoritmos de desentrelazado en el manual y pruebelos.
+</p></li><li class="listitem"><p>
+Corte el área no usada. Cuando captura vídeo, las áreas en los bordes normalmente
+son negras y contienen algo de ruido. Esto también consume un montón de ancho
+de banda innecesario. Más precisamente no son las áreas en negro por si mismas
+pero si las bruscas transcisiones entre el negro y la imagen de vídeo brillante
+pero por ahora eso no es importante por ahora. Antes de empezar a capturar,
+ajuste los argumentos de la opción <tt class="option">crop</tt> de tal manera que todo
+lo negro quede afuera. Nuevamente, no se olvide de mantener las dimensiones
+de manera razonables.
+</p></li><li class="listitem"><p>
+Observe la carga de CPU. La mayoría del tiempo no debería cruzar el límite
+del 90%. Si tiene un gran buffer de captura, <span class="application">MEncoder</span>
+puede sobrevivir una sobrecarga por unos pocos segundos y nada más. Es mejor apagar
+los salvadores de pantalla 3D OpenGL y ese tipo de cosas.
+</p></li><li class="listitem"><p>
+No se meta con el reloj del sistema. <span class="application">MEncoder</span> usa
+el reloj del sistema para mantener sincronía entre Audio y Vídeo. Si ajusta
+el reloj del sistema (particularmente volviendo hacia atrás en el tiempo),
+<span class="application">MEncoder</span> se confunde y pierde cuadros. Esto es un
+problema importante si está conectado a una red y corre algún tipo de software
+de sincronización como NTP. Debería desactivar NTP durante el proceso de captura
+si quiere capturar en forma confiable.
+</p></li><li class="listitem"><p>
+No cambie la opción <tt class="option">outfmt</tt> a menos que sepa lo que está haciendo
+o su tarjeta/controlador realmente no soporte la opción por omisión (espacio de color
+YV12). En las versiones viejas de <span class="application">MPlayer</span>/<span class="application">
+MEncoder</span> era necesario especificar el formato de salida. Este
+problema se debería estar resuelto en las versiones actuales y la opción <tt class="option">outfmt</tt>
+no se requiere más, ya que la opción por omisión sirve para la mayoría de los propósitos. Por
+ejemplo si está capturando en DivX usando
+<code class="systemitem">libavcodec</code> y especifica <tt class="option">outfmt=RGB24</tt>
+para incrementar la calidad de las imágenes capturadas, las imágenes capturadas serán
+realmente convertidas nuevamente a YV12 por lo que lo único que logra es un desperdicio
+masivo de ciclos de CPU.
+</p></li><li class="listitem"><p>
+Para especificar el espacio de colores I420 (<tt class="option">outfmt=i420</tt>), deberá
+agregar una opción <tt class="option">-vc rawi420</tt> debido a un conflicto de fourcc con
+un codec de vídeo de Intel Indeo.
+</p></li><li class="listitem"><p>
+Hay muchas maneras de capturar audio. Puede capturar el sonido ya sea usando
+su tarjeta de sonido por medio de un cable de conexión externo entre la placa
+sintonizadora y la linea de entrada, o usando el chip ADC incorporado en el chip
+bt878. En este ultimo caso, deberá cargar el controlador <span class="bold"><strong>btaudio
+</strong></span>. Lea el archivo <tt class="filename">linux/Documentation/sound/btaudio</tt>
+(en el árbol de directorio del núcleo, no el de
+<span class="application">MPlayer</span>) para instrucciones de como
+usar este controlador.
+</p></li><li class="listitem"><p>
+Si <span class="application">MEncoder</span> no puede abrir el dispositivo de audio,
+asegúrese que este realmente disponible. Puede haber algunos problemas con
+algunos servidores de sonido como arts (KDE) o esd (GNOME). Si tiene una placa
+de sonido full dúplex (casi todas las placas decentes lo soportan hoy en día), y
+está usando KDE, trate activando la opción "full dúplex" en el menú de preferencias del
+servidor de sonido.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-examples"></a>3.9.3. Ejemplos</h3></div></div></div><div class="informalexample"><p>
+Salida ficticia, a AAlib :)
+</p><pre class="screen">
+mplayer -tv driver=dummy:width=640:height=480 -vo aa tv://</pre><p>
+</p></div><div class="informalexample"><p>
+Entrada desde un dispositivo estándar V4L:
+</p><pre class="screen">
+mplayer -tv driver=v4l:width=640:height=480:outfmt=i420 -vc rawi420 -vo xv tv://</pre><p>
+</p></div><div class="informalexample"><p>
+Un ejemplo más sofisticado. Esto hace que <span class="application">MEncoder</span>
+capture la imagen completa PAL, corte los margenes y desentrelazando la
+imagen usando un algoritmo linear blend. El audio es comprimido con una
+tasa de bits constante de 64kbps, usando el codec LAME. Esta configuración
+es satisfactoria para capturar películas.
+</p><pre class="screen">
+     mencoder -tv driver=v4l:width=768:height=576 \
+     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=900 \
+     -oac mp3lame -lameopts cbr:br=64 \
+     -vf crop=720:544:24:16,pp=lb -o <em class="replaceable"><code>salida.avi</code></em> tv://
+</pre><p>
+</p></div><div class="informalexample"><p>
+Esto adicionalmente escalará la imagen a 384x288 y comprimirá el vídeo
+a una tasa de bits de 350kbps en modo alta calidad. La opción <tt class="option">
+vqmax</tt> suelta al cuantizador y le permite al compresor de vídeo
+alcanzar tasas de bits muy bajas a expensas de la calidad. Esto puede ser
+usado para capturar series de TV largas, donde la calidad del vídeo no
+es tan importante.
+</p><pre class="screen">
+     mencoder -tv driver=v4l:width=768:height=576 \
+     -ovc lavc -lavcopts vcodec=mpeg4:vbitrate=350:vhq:vqmax=31:keyint=300 \
+     -oac mp3lame -lameopts cbr:br=48 \
+     -vf crop=720:540:24:18,pp=tn/lb,scale=384:288 -sws 1 \
+     -o <em class="replaceable"><code>salida.avi</code></em> tv://
+</pre><p>
+Es posible especificar una dimensión de imagen más chica en la opción <tt class="option">-tv</tt>
+y omitir el escalado de software pero este enfoque usa la máxima cantidad de información
+disponible y es un poco más resistente al ruido. Los chips bt8x8 pueden hacer
+el promediado de pixels solo en dirección horizontal debido a limitaciones de hardware.
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="edl.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="radio.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">3.8. Listas de Decisión de Edición (EDL) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> 3.10. Radio</td></tr></table></div></body></html>

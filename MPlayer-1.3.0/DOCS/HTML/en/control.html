@@ -1,0 +1,85 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.3. Control</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="usage.html" title="Chapter 3. Usage"><link rel="prev" href="subosd.html" title="3.2. Subtitles and OSD"><link rel="next" href="streaming.html" title="3.4. Streaming from network or pipes"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"><link rel="subsection" href="control.html#ctrl-cfg" title="3.3.1. Controls configuration"><link rel="subsection" href="control.html#lirc" title="3.3.2. Control from LIRC"><link rel="subsection" href="control.html#slave-mode" title="3.3.3. Slave mode"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.3. Control</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="subosd.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Usage</th><td width="20%" align="right"> <a accesskey="n" href="streaming.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="control"></a>3.3. Control</h2></div></div></div><p>
+<span class="application">MPlayer</span> has a fully configurable, command
+driven, control layer which lets you control
+<span class="application">MPlayer</span> with keyboard, mouse, joystick or remote
+control (using LIRC). See the man page for the complete list of keyboard controls.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ctrl-cfg"></a>3.3.1. Controls configuration</h3></div></div></div><p>
+<span class="application">MPlayer</span> allows you bind any key/button to any
+<span class="application">MPlayer</span> command using a simple config file.
+The syntax consist of a key name followed by a command. The default config file location is
+<tt class="filename">$HOME/.mplayer/input.conf</tt> but it can be overridden
+using the <tt class="option">-input <em class="replaceable"><code>conf</code></em></tt> option
+(relative path are relative to <tt class="filename">$HOME/.mplayer</tt>).
+</p><p>
+You can get a full list of supported key names by running
+<span class="command"><strong>mplayer -input keylist</strong></span>
+and a full list of available commands by running
+<span class="command"><strong>mplayer -input cmdlist</strong></span>.
+</p><div class="example"><a name="input_control_file"></a><p class="title"><b>Example 3.1. A simple input control file</b></p><div class="example-contents"><pre class="programlisting">
+##
+## MPlayer input control file
+##
+
+RIGHT seek +10
+LEFT seek -10
+- audio_delay 0.100
++ audio_delay -0.100
+q quit
+&gt; pt_step 1
+&lt; pt_step -1
+ENTER pt_step 1 1</pre></div></div><br class="example-break"></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="lirc"></a>3.3.2. Control from LIRC</h3></div></div></div><p>
+Linux Infrared Remote Control - use an easy to build home-brewed IR-receiver,
+an (almost) arbitrary remote control and control your Linux box with it!
+More about it on the <a class="ulink" href="http://www.lirc.org" target="_top">LIRC homepage</a>.
+</p><p>
+If you have the LIRC package installed, <tt class="filename">configure</tt> will
+autodetect it. If everything went fine, <span class="application">MPlayer</span>
+will print "<code class="systemitem">Setting up LIRC support...</code>"
+on startup. If an error occurs it will tell you. If there is no message about
+LIRC there is no support compiled in. That's it :-)
+</p><p>
+The application name for <span class="application">MPlayer</span> is - surprise -
+<tt class="filename">mplayer</tt>. You can use any <span class="application">MPlayer</span>
+commands and even pass more than one command by separating them with
+<code class="literal">\n</code>.
+Do not forget to enable the repeat flag in <tt class="filename">.lircrc</tt> when
+it makes sense (seek, volume, etc). Here is an excerpt from a sample
+<tt class="filename">.lircrc</tt>:
+</p><pre class="programlisting">
+begin
+     button = VOLUME_PLUS
+     prog = mplayer
+     config = volume 1
+     repeat = 1
+end
+
+begin
+    button = VOLUME_MINUS
+    prog = mplayer
+    config = volume -1
+    repeat = 1
+end
+
+begin
+    button = CD_PLAY
+    prog = mplayer
+    config = pause
+end
+
+begin
+    button = CD_STOP
+    prog = mplayer
+    config = seek 0 1\npause
+end</pre><p>
+If you do not like the standard location for the lirc-config file
+(<tt class="filename">~/.lircrc</tt>) use the <tt class="option">-lircconf
+<em class="replaceable"><code>filename</code></em></tt> switch to specify another
+file.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="slave-mode"></a>3.3.3. Slave mode</h3></div></div></div><p>
+The slave mode allows you to build simple frontends to
+<span class="application">MPlayer</span>. When run with the
+<tt class="option">-slave</tt> option <span class="application">MPlayer</span> will
+read commands separated by a newline (\n) from stdin.
+The commands are documented in the
+<a class="ulink" href="../../tech/slave.txt" target="_top">slave.txt</a> file.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="subosd.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="streaming.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.2. Subtitles and OSD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.4. Streaming from network or pipes</td></tr></table></div></body></html>

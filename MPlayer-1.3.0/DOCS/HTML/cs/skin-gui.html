@@ -1,0 +1,93 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.4. GUI zprávy</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="prev" href="skin-fonts.html" title="B.3. Fonty"><link rel="next" href="skin-quality.html" title="B.5. Tvorba kvalitních skinů"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.4. GUI zprávy</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-fonts.html">Předcházející</a> </td><th width="60%" align="center">Příloha B. Formát skinů <span class="application">MPlayer</span>u</th><td width="20%" align="right"> <a accesskey="n" href="skin-quality.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-gui"></a>B.4. GUI zprávy</h2></div></div></div><p>
+Tyto zprávy mohou být generovány tlačítky, potenciometry a položkami
+nabídky.
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evNone</strong></span></span></dt><dd><p>
+  Prázdná zpráva, nemá žádný efekt (možná s výjimkou Subversion verzí :-)).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Ovládání přehrávání:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evPlay</strong></span></span></dt><dd><p>
+  Zahájí přehrávání.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evStop</strong></span></span></dt><dd><p>
+  Zastaví přehrávání.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPause</strong></span></span></dt><dd><p>
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPrev</strong></span></span></dt><dd><p>
+  Skočí na předchozí stopu v playlistu.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evNext</strong></span></span></dt><dd><p>
+  Skočí na následující stopu v playlistu.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoad</strong></span></span></dt><dd><p>
+  Otevře soubor (otevřením okna prohlížeče souborů, kde si soubor vyberete).
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoadPlay</strong></span></span></dt><dd><p>
+  Stejné jako <code class="literal">evLoad</code>, ale navíc se okamžitě spustí přehrávání
+  otevřeného souboru.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoadAudioFile</strong></span></span></dt><dd><p>
+  Otevře soubor se zvukem (pomocí prohlížeče souborů)
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoadSubtitle</strong></span></span></dt><dd><p>
+  Otevře soubor s titulky (pomocí prohlížeče souborů)
+  </p></dd><dt><span class="term"><span class="bold"><strong>evDropSubtitle</strong></span></span></dt><dd><p>
+  Vypne aktuálně použité titulky.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPlaylist</strong></span></span></dt><dd><p>
+  Otevře/zavře okno playlistu.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPlayVCD</strong></span></span></dt><dd><p>
+  Zkusí otevřít disk v zadané CD-ROM mechanice.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPlayDVD</strong></span></span></dt><dd><p>
+  Zkusí otevřít disk v zadané DVD-ROM mechanice.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evLoadURL</strong></span></span></dt><dd><p>
+  Zobrazí dialogové okno pro volbu URL.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPlaySwitchToPause</strong></span></span></dt><dd><p>
+  Protiklad <code class="literal">evPauseSwitchToPlay</code>. Tato zpráva zahájí přehrávání
+  a zobrazí obrázek pro tlačítko <code class="literal">evPauseSwitchToPlay</code>
+  (pro indikaci, že tlačítko může být stisknuto pro pozastavení přehrávání).
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPauseSwitchToPlay</strong></span></span></dt><dd><p>
+  Tvoří přepínač společně s <code class="literal">evPlaySwitchToPause</code>. Ty mohou
+  být použity k vytvoření tradičního play/pauza tlačítka. Obě zprávy by měly
+  být přiřazeny tlačítkům umístěným na stejné pozici v okně. Tato zpráva
+  pozastaví přehrávání a zobrazen bude obrázek pro
+  <code class="literal">evPlaySwitchToPause</code> talčítko (pro indikaci, že tlačítko
+  může být stisknuto pro obnovení přehrávání).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Převíjení:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evBackward10sec</strong></span></span></dt><dd><p>
+  Převine zpět o 10 sekund.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evBackward1min</strong></span></span></dt><dd><p>
+  Převine zpět o 1 minutu.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evBackward10min</strong></span></span></dt><dd><p>
+  Převine zpět o 10 minut.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evForward10sec</strong></span></span></dt><dd><p>
+  Převine vpřed o 10 sekund.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evForward1min</strong></span></span></dt><dd><p>
+  Převine vpřed o 1 minutu.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evForward10min</strong></span></span></dt><dd><p>
+  Převine vpřed o 10 minut.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSetMoviePosition</strong></span></span></dt><dd><p>
+  Převine na danou pozici (může být přiřazeno potenciometru; použije se
+  relativní hodnota (0-100%) potenciometru).
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Ovládání videa:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evHalfSize</strong></span></span></dt><dd><p>
+  Nastaví velikost okna filmu na poloviční velikost.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evDoubleSize</strong></span></span></dt><dd><p>
+  Nastaví velikost okna filmu na dvojnásobnou velikost.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evFullScreen</strong></span></span></dt><dd><p>
+  Přepíná do celoobrazovkového režimu a zpět.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evNormalSize</strong></span></span></dt><dd><p>
+  Nastaví velikost okna na normální velikost.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSetAspect</strong></span></span></dt><dd><p>
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Ovládání zvuku:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evDecVolume</strong></span></span></dt><dd><p>
+  Sníží hlasitost.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evIncVolume</strong></span></span></dt><dd><p>
+  Zvýší hlasitost.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSetVolume</strong></span></span></dt><dd><p>
+  Nastaví hlasitost (může být sdruženo s potenciometrem; použije se
+  relativní hodnota potenciometru (0-100%)).
+  </p></dd><dt><span class="term"><span class="bold"><strong>evMute</strong></span></span></dt><dd><p>
+  Vypne/zapne zvuk.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSetBalance</strong></span></span></dt><dd><p>
+  Nastaví stereováhu (může být sdruženo s potenciometrem; použije se
+  relativní hodnota potenciometru (0-100%)).
+  </p></dd><dt><span class="term"><span class="bold"><strong>evEqualizer</strong></span></span></dt><dd><p>
+  Zapne/vypne ekvalizér.
+  </p></dd></dl></div><div class="variablelist"><p class="title"><b>Různé:</b></p><dl class="variablelist"><dt><span class="term"><span class="bold"><strong>evAbout</strong></span></span></dt><dd><p>
+  Otevře okno o aplikaci.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evPreferences</strong></span></span></dt><dd><p>
+  Otevře okno předvoleb.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evSkinBrowser</strong></span></span></dt><dd><p>
+  Otevře okno voliče skinů.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evIconify</strong></span></span></dt><dd><p>
+  Minimalizuje okno.
+  </p></dd><dt><span class="term"><span class="bold"><strong>evExit</strong></span></span></dt><dd><p>
+  Ukončí program.
+  </p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-fonts.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-quality.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">B.3. Fonty </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> B.5. Tvorba kvalitních skinů</td></tr></table></div></body></html>

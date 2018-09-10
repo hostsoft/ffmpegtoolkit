@@ -1,0 +1,51 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.12.  libcaca – Libreria Color ASCII Art</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="prev" href="aalib.html" title="4.11. AAlib – Visualizzazione in modalità testuale"><link rel="next" href="vesa.html" title="4.13. VESA - uscita attraverso il VESA BIOS"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.12. 
+<code class="systemitem">libcaca</code> – Libreria Color ASCII Art
+</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="aalib.html">Indietro</a> </td><th width="60%" align="center">Capitolo 4. Dispositivi di uscita video</th><td width="20%" align="right"> <a accesskey="n" href="vesa.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="caca"></a>4.12. 
+<code class="systemitem">libcaca</code> – Libreria Color ASCII Art
+</h2></div></div></div><p>
+La libreria <a class="ulink" href="http://sam.zoy.org/projects/libcaca/" target="_top"><code class="systemitem">libcaca</code></a>
+è una libreria grafica che emette testo al posto di pixel, indi può funzionare
+su schede video più vecchie o su terminali di testo. Non è dissimile dalla
+famosa libreria <code class="systemitem">AAlib</code>.
+<code class="systemitem">libcaca</code> ha bisogno di un terminale per
+poter funzionare, perciò dovrebbe funzionare su tutti i sistemi Unix (incluso
+Mac OS X) usando la libreria <code class="systemitem">slang</code>
+ovvero la libreria <code class="systemitem">ncurses</code>, sotto DOS
+usando la libreria <code class="systemitem">conio.h</code>, e nei
+sistemi Windows usando <code class="systemitem">slang</code> o
+<code class="systemitem">ncurses</code> (tramite l'emulazione Cygwin)
+oppure <code class="systemitem">conio.h</code>. Se
+<tt class="filename">./configure</tt> rileva la presenza di
+<code class="systemitem">libcaca</code>, il driver di uscita video per
+caca verrà compilato.
+</p><div class="itemizedlist"><p class="title"><b>Le differenze rispetto ad <code class="systemitem">AAlib</code>
+  sono le seguenti:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+   16 colori disponibili per l'emissione a caratteri (256 coppie di colori)
+</p></li><li class="listitem"><p>
+   dithering del colore dell'immagine
+</p></li></ul></div><div class="itemizedlist"><p class="title"><b>Ma <code class="systemitem">libcaca</code> ha anche le seguenti
+  limitazioni:</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+   nessun supporto per luminosià, contrasto, gamma
+</p></li></ul></div><p>
+Puoi utilizzare alcuni tasti nella finestra caca per modificare le opzioni di
+renderizzazione:
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Chiave</th><th>Azione</th></tr></thead><tbody><tr><td><span class="keycap"><b>d</b></span></td><td>
+  Attiva/disattiva il metodo di dithering di
+  <code class="systemitem">libcaca</code>.
+</td></tr><tr><td><span class="keycap"><b>a</b></span></td><td>
+  Attiva/disattiva l'antialias di
+  <code class="systemitem">libcaca</code>.
+</td></tr><tr><td><span class="keycap"><b>b</b></span></td><td>
+  Attiva/disattiva lo sfondo di
+  <code class="systemitem">libcaca</code>.
+</td></tr></tbody></table></div><div class="variablelist"><p class="title"><b><code class="systemitem">libcaca</code> terrà anche conto di
+  alcune variabili d'ambiente:</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">CACA_DRIVER</tt></span></dt><dd><p>
+    Imposta il driver caca richiesto. Per es. ncurses, slang, x11.
+  </p></dd><dt><span class="term"><tt class="option">CACA_GEOMETRY (solo X11)</tt></span></dt><dd><p>
+    Specifica il numero di righe e colonne. Per es. 128x50.
+  </p></dd><dt><span class="term"><tt class="option">CACA_FONT (solo X11)</tt></span></dt><dd><p>
+    Specifica il font da usare. Per es. fixed, nexus.
+  </p></dd></dl></div><p>
+Usa l'opzione <tt class="option">-framedrop</tt> se il tuo computer non è abbastanza
+veloce per renderizzare tutti i fotogrammi.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="aalib.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="vesa.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">4.11. AAlib – Visualizzazione in modalità testuale </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 4.13. VESA - uscita attraverso il VESA BIOS</td></tr></table></div></body></html>

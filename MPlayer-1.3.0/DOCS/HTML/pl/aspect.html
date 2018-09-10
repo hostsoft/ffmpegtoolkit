@@ -1,0 +1,30 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.10. Utrzymywanie proporcji obrazu (aspect ratio)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="prev" href="menc-feat-extractsub.html" title="6.9. Wydobywanie napisów z DVD do pliku VOBsub"><link rel="next" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10. Utrzymywanie proporcji obrazu (aspect ratio)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 6. Podstawy używania <span class="application">MEncodera</span></th><td width="20%" align="right"> <a accesskey="n" href="encoding-guide.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aspect"></a>6.10. Utrzymywanie proporcji obrazu (aspect ratio)</h2></div></div></div><p>
+Pliki DVD i SVCD (tzn. MPEG-1/2) zawierają informacje o proporcji obrazu, która
+opisuje, jak odtwarzacz ma skalować strumień video, żeby ludzie nie byli
+jajogłowi (np.: 480x480 + 4:3 = 640x480).
+Jednak przy kodowaniu plików AVI (DivX) musisz być świadom, że nagłówek AVI nie
+przechowuje tej wartości.
+Przeskalowywanie jest obrzydliwe i czasochłonne, musi być jakiś lepszy sposób!
+</p><p>Jest</p><p>
+MPEG-4 posiada unikalną cechę: strumień video może posiadać swoją wartość
+proporcji obrazu.  Tak, dokładnie jak pliki MPEG-1/2 (DVD, SVCD) i H.263.
+Niestety, istnieje tylko kilka odtwarzaczy video, pomijając
+<span class="application">MPlayera</span>, które obsługują tę cechę MPEG-4.
+</p><p>
+Możliwość ta może być jedynie używana z kodekiem <code class="systemitem">mpeg4</code>
+z biblioteki
+<code class="systemitem">libavcodec</code>.
+Pamiętaj: chociaż <span class="application">MPlayer</span> poprawnie odtworzy
+stworzone pliki, inne odtwarzacze mogą użyć złych proporcji obrazu
+(aspect ratio).
+</p><p>
+Z pewnością powinieneś wyciąć czarne pasy nad i pod obrazem.
+Zobacz jak używać filtrów <code class="systemitem">cropdetect</code>
+i <code class="systemitem">crop</code> na stronie man.
+</p><p>
+Sposób użycia:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>przykładowy-svcd.mpg</code></em> -vf crop=714:548:0:14 -oac copy -ovc lavc \
+    -lavcopts vcodec=mpeg4:mbd=2:trell:autoaspect -o <em class="replaceable"><code>wyjście.avi</code></em>
+</pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="encoding-guide.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">6.9. Wydobywanie napisów z DVD do pliku VOBsub </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> Rozdział 7. Kodowanie przy użyciu <span class="application">MEncodera</span></td></tr></table></div></body></html>

@@ -1,0 +1,116 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.6. Was berichtet werden soll</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="prev" href="bugreports_where.html" title="A.5. Wo Fehler berichtet werden sollen"><link rel="next" href="bugreports_advusers.html" title="A.7. Ich weiß, was ich tue..."><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="bugreports_what.html#bugreports_system" title="A.6.1. Systeminformationen"><link rel="subsection" href="bugreports_what.html#bugreports_hardware" title="A.6.2. Hardware und Treiber"><link rel="subsection" href="bugreports_what.html#bugreports_configure" title="A.6.3. Configure-Probleme"><link rel="subsection" href="bugreports_what.html#bugreports_compilation" title="A.6.4. Compilierungsprobleme"><link rel="subsection" href="bugreports_what.html#bugreports_playback" title="A.6.5. Wiedergabeprobleme"><link rel="subsection" href="bugreports_what.html#bugreports_crash" title="A.6.6. Abstürze"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.6. Was berichtet werden soll</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_where.html">Zurück</a> </td><th width="60%" align="center">Anhang A. Wie Fehler (Bugs) berichtet werden</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_what"></a>A.6. Was berichtet werden soll</h2></div></div></div><p>
+      Du wirst wahrscheinlich Logdateien, Konfigurationsinformationen und Beispieldateien
+      in deinen Fehlerbericht aufnehmen müssen. Werden einige von ihnen ziemlich groß,
+      ist es besser, wenn du sie auf unseren
+      <a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">FTP-Server</a>
+      hochlädst, und zwar in komprimierter Form (gzip und bzip2 bevorzugt). Gib dann in deinem
+      Fehlerbericht nur den Pfad- und den Dateinamen an. Unsere Mailinglisten haben ein
+      Nachrichten-Größenlimit von 80k, wenn du etwas größeres hast, musst du es
+      komprimieren und hochladen.
+    </p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_system"></a>A.6.1. Systeminformationen</h3></div></div></div><p>
+        </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+              Deine Linuxdistribution, Betriebssystem und Version, z.B.:
+              </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Red Hat 7.1</p></li><li class="listitem"><p>Slackware 7.0 + Entwicklerpakete von 7.1 ...</p></li></ul></div><p>
+            </p></li><li class="listitem"><p>
+              Kernelversion:
+              </p><pre class="screen">uname -a</pre><p>
+            </p></li><li class="listitem"><p>
+              libc-Version:
+              </p><pre class="screen">ls -l /lib/libc[.-]*</pre><p>
+            </p></li><li class="listitem"><p>
+              gcc- und ld-Versionen:
+</p><pre class="screen">gcc -v
+ld -v</pre><p>
+            </p></li><li class="listitem"><p>
+              binutils-Version:
+              </p><pre class="screen">as --version</pre><p>
+            </p></li><li class="listitem"><p>
+              Wenn du Probleme mit dem Vollbildmodus hast:
+              </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Window-Manager-Typ und Version</p></li></ul></div><p>
+            </p></li><li class="listitem"><p>
+              Wenn du Probleme mit XVIDIX hast:
+              </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Farbtiefe von X:
+                    </p><pre class="screen">xdpyinfo | grep "depth of root"</pre><p>
+                  </p></li></ul></div><p>
+            </p></li><li class="listitem"><p>
+              Wenn nur die GUI fehlerhaft ist:
+              </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>GTK-Version</p></li><li class="listitem"><p>GLIB-Version</p></li><li class="listitem"><p>GUI-Situation, in welcher der Fehler auftritt</p></li></ul></div><p>
+            </p></li></ul></div><p>
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_hardware"></a>A.6.2. Hardware und Treiber</h3></div></div></div><p>
+        </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+              CPU-Info (funktioniert nur unter Linux):
+              </p><pre class="screen">cat /proc/cpuinfo</pre><p>
+            </p></li><li class="listitem"><p>
+              Videokartenhersteller und -modell, z.B.:
+              </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>ASUS V3800U chip: nVidia TNT2 Ultra pro 32MB SDRAM</p></li><li class="listitem"><p>Matrox G400 DH 32MB SGRAM</p></li></ul></div><p>
+            </p></li><li class="listitem"><p>
+              Videotreibertyp und -version, .z.B.:
+              </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>eingebauter Treiber von X</p></li><li class="listitem"><p>nVidia 0.9.623</p></li><li class="listitem"><p>Utah-GLX CVS 2001-02-17</p></li><li class="listitem"><p>DRI von X 4.0.3</p></li></ul></div><p>
+            </p></li><li class="listitem"><p>
+              Soundkartentyp und -treiber, z.B.:
+              </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Creative SBLive! Gold mit OSS-Treiber von oss.creative.com</p></li><li class="listitem"><p>Creative SB16 mit Kernel-OSS-Treibern</p></li><li class="listitem"><p>GUS PnP mit OSS-Emulation von ALSA</p></li></ul></div><p>
+            </p></li><li class="listitem"><p>
+              Füge bei Linuxsystemen im Zweifel die Ausgabe von <span class="command"><strong>lspci -vv</strong></span> bei.
+            </p></li></ul></div><p>
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_configure"></a>A.6.3. Configure-Probleme</h3></div></div></div><p>
+        Wenn du Fehlermeldungen beim Aufruf von <span class="command"><strong>./configure</strong></span> bekommst oder
+        die automatische Erkennung von etwas fehlschlägt, so lies <tt class="filename">config.log</tt>.
+        Du könntest dort die Antwort finden, zum Beispiel mehrere Versionen derselben Bibliothek,
+        die gemischt auf deinem System vorliegen, oder du hast vergessen, das Entwicklerpaket
+        (die mit dem Suffix -dev) zu installieren. Wenn du denkst, dass es sich um einen
+        Fehler handelt, binde <tt class="filename">config.log</tt> in deinen Fehlerbericht ein.
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_compilation"></a>A.6.4. Compilierungsprobleme</h3></div></div></div><p>
+        Bitte füge diese Dateien an:
+        </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>config.h</p></li><li class="listitem"><p>config.mak</p></li></ul></div><p>
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_playback"></a>A.6.5. Wiedergabeprobleme</h3></div></div></div><p>
+        Bitte füge die Ausgabe von <span class="application">MPlayer</span> im ausführlichen Modus
+        bei Level 1 an, denke aber daran, <span class="bold"><strong>die Ausgabe nicht zu kürzen</strong></span>,
+        wenn du sie in deine Mail einfügst. Die Entwickler benötigen alle Ausgaben, um das Problem
+        angemessen zu untersuchen. Du kannst die Ausgabe folgendermaßen in eine Datei ausgeben:
+        </p><pre class="screen">mplayer -v <em class="replaceable"><code>Optionen</code></em> <em class="replaceable"><code>Dateiname</code></em> &gt; mplayer.log 2&gt;&amp;1</pre><p>
+      </p><p>
+        Wenn dein Problem speziell mit einer oder mehreren Dateien zu tun hat, lade diese bitte hoch nach:
+        <a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">ftp://upload.mplayerhq.hu/incoming/</a>
+      </p><p>
+        Lade bitte auch eine kleine Textdatei hoch, die denselben Basisnamen wie deine Datei
+        hat, mit der Erweiterung .txt. Beschreibe dort das Problem, das du mit dieser speziellen
+        Datei hast und gib sowohl deine Emailadresse als auch die Ausgabe von
+        <span class="application">MPlayer</span> im ausführlichen Modus bei Level 1 an. Normalerweise
+        reichen die ersten 1-5 MB einer Datei aus, um das Problem zu reproduzieren. Um ganz sicher
+        zu gehen, bitten wir dich, folgendes zu tun:
+        </p><pre class="screen">dd if=<em class="replaceable"><code>deine-datei</code></em> of=<em class="replaceable"><code>kleine-datei</code></em> bs=1024k count=5</pre><p>
+        Dies wird die ersten fünf Megabyte von '<span class="bold"><strong>deine-datei</strong></span>' nehmen
+        und nach '<span class="bold"><strong>kleine-datei</strong></span>' schreiben. Probiere es dann erneut
+        mit dieser kleinen Datei, und wenn der Fehler noch immer auftritt, ist dieses Beispiel für uns
+        ausreichend.
+        Bitte sende <span class="bold"><strong>niemals</strong></span> solche Dateien via Mail!
+        Lade sie hoch und schicke nur den Pfad/Dateinamen der Datei auf dem FTP-Server. Ist
+        die Datei im Netz verfügbar, reicht es, die <span class="bold"><strong>exakte</strong></span>
+        URL zu schicken.
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_crash"></a>A.6.6. Abstürze</h3></div></div></div><p>
+        Du musst <span class="application">MPlayer</span> in <span class="command"><strong>gdb</strong></span> aufrufen und
+        uns die komplette Ausgabe schicken, oder du kannst, wenn du ein <tt class="filename">core</tt>-Dump
+        des Absturzes hast, nützliche Informationen aus der Core-Datei extrahieren,
+        und zwar folgendermaßen:
+      </p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_debug"></a>A.6.6.1. Wie man Informationen eines reproduzierbaren Absturzes erhält</h4></div></div></div><p>
+          Compiliere <span class="application">MPlayer</span> neu mit Debugging-Code aktiviert:
+</p><pre class="screen">./configure --enable-debug=3
+make</pre><p>
+          und rufe dann <span class="application">MPlayer</span> innerhalb gdb auf mit:
+          </p><pre class="screen">gdb ./mplayer</pre><p>
+          Du befindest dich nun innerhalb gdb. Gib ein
+          </p><pre class="screen">run -v <em class="replaceable"><code>Optionen-an-mplayer</code></em> <em class="replaceable"><code>Dateiname</code></em></pre><p>
+          und reproduziere den Absturz. Sobald du das getan hast, wird gdb zur Eingabeaufforderung
+          zurückkehren, wo du folgendes eingeben musst:
+</p><pre class="screen">bt
+disass $pc-32,$pc+32
+info all-registers</pre><p>
+Benutze disass $pc-32 $pc+32 mit alten gdb Versionen.
+        </p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_core"></a>A.6.6.2. Wie man aussagekräftige Informationen aus einem Core-Dump extrahiert</h4></div></div></div><p>
+          Erzeuge die folgende Befehlsdatei:
+</p><pre class="screen">bt
+disass $pc-32,$pc+32
+info all-registers</pre><p>
+          Führe dann einfach folgenden Befehl aus:
+          </p><pre class="screen">gdb mplayer --core=core -batch --command=<em class="replaceable"><code>Kommando_Datei</code></em> &gt; mplayer.bug</pre><p>
+        </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_where.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">A.5. Wo Fehler berichtet werden sollen </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> A.7. Ich weiß, was ich tue...</td></tr></table></div></body></html>

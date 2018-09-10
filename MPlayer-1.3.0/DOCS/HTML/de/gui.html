@@ -1,0 +1,25 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.3. Was ist mit der GUI?</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="install.html" title="Kapitel 2. Installation"><link rel="prev" href="features.html" title="2.2. Features"><link rel="next" href="fonts-osd.html" title="2.4. Schriften und OSD"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.3. Was ist mit der GUI?</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="features.html">Zurück</a> </td><th width="60%" align="center">Kapitel 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="fonts-osd.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gui"></a>2.3. Was ist mit der GUI?</h2></div></div></div><p>
+      Die GUI benötigt GTK 1.2.x oder GTK 2.0 (sie ist nicht vollständig GTK, aber
+      die Panels). Die Skins werden im PNG-Format gespeichert, daher müssen GTK,
+      <code class="systemitem">libpng</code> (und deren Entwicklungskram,
+      normalerweise <code class="systemitem">gtk-dev</code> genannt),
+      installiert sein. Du kannst die GUI durch Angabe von <tt class="option">--enable-gui</tt>
+      während <tt class="filename">./configure</tt> aktivieren. Dann musst du, um den
+      GUI-Modus zu aktivieren, die Binärdatei <span class="command"><strong>gmplayer</strong></span> starten.
+    </p><p>
+      Da <span class="application">MPlayer</span> kein Skin mitbringt, musst du zumindest eines
+      herunterladen, um die GUI benutzen zu können. Siehe dazu Skins auf der
+      <a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">Download-Seite</a>.
+      Ein Skin sollte in das normale systemweite Verzeichnis
+      <tt class="filename">$PREFIX/share/mplayer/skins</tt> oder in das
+      benutzerspezifische <tt class="filename">$HOME/.mplayer/skins</tt>
+      installiert werden und liegt dann dort als Unterverzeichnis.
+      <span class="application">MPlayer</span> sucht standardmäßig zuerst in dem
+      benutzerspezifischen und dann in dem systemweiten Verzeichnis nach einem
+      Unterverzeichnis mit dem Namen <tt class="filename">default</tt>
+      (das einfach ein Link auf das Lieblingsskin sein kann), um das Skin zu laden.
+      Du kannst aber auch die Option <tt class="option">-skin <em class="replaceable"><code>meinskin</code></em></tt>
+      oder die Konfigurationsdateianweisung <code class="literal">skin=meinskin</code> benutzen,
+      um ein anderes Skin aus den <tt class="filename">skins</tt>-Verzeichnissen
+      zu verwenden.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="features.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="fonts-osd.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">2.2. Features </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 2.4. Schriften und OSD</td></tr></table></div></body></html>

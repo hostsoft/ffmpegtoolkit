@@ -1,0 +1,54 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.2. Features</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="install.html" title="Chapter 2. Installation"><link rel="prev" href="softreq.html" title="2.1. Software requirements"><link rel="next" href="gui.html" title="2.3. What about the GUI?"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.2. Features</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="softreq.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="gui.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="features"></a>2.2. Features</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Decide if you need GUI. If you do, see the <a class="link" href="gui.html" title="2.3. What about the GUI?">GUI</a>
+  section before compiling.
+</p></li><li class="listitem"><p>
+  If you want to install <span class="application">MEncoder</span> (our great
+  all-purpose encoder), see the
+  <a class="link" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><span class="application">MEncoder</span></a> section.
+</p></li><li class="listitem"><p>
+  If you have a V4L compatible <span class="bold"><strong>TV tuner</strong></span> card,
+  and wish to watch/grab and encode movies with
+  <span class="application">MPlayer</span>,
+  read the <a class="link" href="tv-input.html" title="3.12. TV input">TV input</a> section.
+</p></li><li class="listitem"><p>
+  If you have a V4L compatible <span class="bold"><strong>radio tuner</strong></span>
+  card, and wish to listen and capture sound with
+  <span class="application">MPlayer</span>,
+  read the <a class="link" href="radio.html" title="3.14. Radio">radio</a> section.
+</p></li><li class="listitem"><p>
+  There is a neat <span class="bold"><strong>OSD Menu</strong></span> support ready to be
+  used. Check the <a class="link" href="subosd.html" title="3.2. Subtitles and OSD">OSD menu</a> section.
+</p></li></ul></div><p>
+Then build <span class="application">MPlayer</span>:
+</p><pre class="screen">
+./configure
+make
+make install
+</pre><p>
+</p><p>
+At this point, <span class="application">MPlayer</span> is ready to use.
+Check if you have a <tt class="filename">codecs.conf</tt> file in your home
+directory at (<tt class="filename">~/.mplayer/codecs.conf</tt>) left from old
+<span class="application">MPlayer</span> versions. If you find one, remove it.
+</p><p>
+Debian users can build a .deb package for themselves, it's very simple.
+Just exec
+</p><pre class="screen">fakeroot debian/rules binary</pre><p>
+in <span class="application">MPlayer</span>'s root directory. See
+<a class="link" href="linux.html#debian" title="5.1.1. Debian packaging">Debian packaging</a> for detailed instructions.
+</p><p>
+<span class="bold"><strong>Always browse the output of</strong></span>
+<tt class="filename">./configure</tt>, and the
+<tt class="filename">config.log</tt> file, they contain information about
+what will be built, and what will not. You may also want to view
+<tt class="filename">config.h</tt> and <tt class="filename">config.mak</tt> files.
+If you have some libraries installed, but not detected by
+<tt class="filename">./configure</tt>, then check if you also have the proper
+header files (usually the -dev packages) and their version matches. The
+<tt class="filename">config.log</tt> file usually tells you what is missing.
+</p><p>
+Though not mandatory, the fonts should be installed in order to gain OSD,
+and subtitle functionality. The recommended method is installing a TTF
+font file and telling <span class="application">MPlayer</span> to use it.
+See the <a class="link" href="subosd.html" title="3.2. Subtitles and OSD">Subtitles and OSD</a> section for details.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="softreq.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="gui.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">2.1. Software requirements </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 2.3. What about the GUI?</td></tr></table></div></body></html>

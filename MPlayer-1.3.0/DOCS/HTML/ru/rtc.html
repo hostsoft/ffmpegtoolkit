@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.6. RTC</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="install.html" title="Глава 2. Установка"><link rel="prev" href="codec-installation.html" title="2.5. Codec installation"><link rel="next" href="usage.html" title="Глава 3. Использование"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.6. RTC</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="codec-installation.html">Пред.</a> </td><th width="60%" align="center">Глава 2. Установка</th><td width="20%" align="right"> <a accesskey="n" href="usage.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="rtc"></a>2.6. RTC</h2></div></div></div><p>
+У <span class="application">MPlayer</span>'а есть три метода синхронизации.
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Чтобы использовать старый метод синхронизации</strong></span>,
+  Вам ничего не надо делать. Он использует <code class="systemitem">usleep()</code>,
+  чтобы подстроить A/V синхронизацию, с точностью +/- 10ms. Однако, иногда
+  требуется даже большая точность синхронизации.
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Новый таймер</strong></span> использует RTC (Real Time
+  Clock[часы истинного времени]) для этой задачи потому, что это таймер
+  точностью 1ms. Он включается опцией <tt class="option">-rtc</tt>, но требует
+  правильно настроенного ядра.
+  Если Вы работаете с ядром 2.4.19pre8 или более поздним, Вы можете настроить
+  максимальную частоту RTC для обычных пользователей через файловую систему
+  <code class="systemitem">/proc</code>.
+  Используйте одну из этих двух команд, чтобы сделать RTC доступным для обычных
+  пользователей:
+  </p><pre class="screen">echo 1024 &gt; /proc/sys/dev/rtc/max-user-freq</pre><p>
+  </p><pre class="screen">sysctl dev/rtc/max-user-freq=1024</pre><p>
+  Можно сделать эти изменения постоянными, добавив последнюю в
+  <tt class="filename">/etc/sysctl.conf</tt>.
+  </p><p>
+  Вы увидите эффективность нового кода таймера по строке состояния.
+  Функции управления потребляемой мощностью[power management] у некоторых
+  ноутбуковских BIOS'ов со speedstep-CPU плохо взаимодействуют с RTC. Аудио и
+  видео могут десинхронизироваться. Вероятно, если Вы вставите штекер внешнего
+  питания до включения ноутбука, то это поможет. В некоторых аппаратных
+  комбинациях (подтверждено при использовании не-DMA DVD драйва с материнской
+  платой ALi1541) использование RTC таймера приводит к "прыгающему"[skippy]
+  проигрыванию. В этом случае рекомендуется использовать третий метод.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>Третий код таймера</strong></span> включается опцией
+  <tt class="option">-softsleep</tt>. У него эффективность RTC, но он не использует
+  RTC. С другой стороны, он сильнее использует CPU.
+</p></li></ul></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="codec-installation.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="usage.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">2.5. Codec installation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> Глава 3. Использование</td></tr></table></div></body></html>

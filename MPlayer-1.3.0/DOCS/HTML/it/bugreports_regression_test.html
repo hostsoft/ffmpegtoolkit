@@ -1,0 +1,65 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. Come fare delle prove retroattive usando Subversion</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="prev" href="bugreports_fix.html" title="A.2. Come correggere i bug"><link rel="next" href="bugreports_report.html" title="A.4. Come segnalare i bug"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. Come fare delle prove retroattive usando Subversion</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">Indietro</a> </td><th width="60%" align="center">Appendice A. Come segnalare i bug (errori)</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. Come fare delle prove retroattive usando Subversion</h2></div></div></div><p>
+Un problema che può capitare delle volte è 'prima funzionava, ora non
+funziona più...'.
+C'è una procedura passo passo per cercare di scoprire dove il problema si sia
+presentato. <span class="bold"><strong>Non</strong></span> è destinata agli utenti
+casuali.
+</p><p>
+Per prima cosa, dovresti scaricare l'alberatura dei sorgenti di MPlayer da
+Subversion. Le istruzioni si possono trovare nella
+<a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html#svn" target="_top">sezione su Subversion nella pagina dei download</a>.
+</p><p>
+Troverai ora un immagine dell'archivio Subversion dentro alla directory
+mplayer/, dal lato client.
+Ora aggiorna questa immagine alla data che desideri:
+</p><pre class="screen">
+cd mplayer/
+svn update -r {"2004-08-23"}
+</pre><p>
+Il formato della data è YYYY-MM-DD HH:MM:SS.
+Usando questo formato di data ti garantisce di essere in grado di estrarre le
+path in base alla data in cui sono state applicate, come
+nell'<a class="ulink" href="http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">archivio
+MPlayer-cvslog</a>.
+</p><p>
+Ora procedi come per un normale aggiornamento:
+</p><pre class="screen">
+./configure
+make
+</pre><p>
+</p><p>
+Per chi sta leggendo e non è un programmatore, il modo più veloce di trovare
+il punto dove si è presentato il problema è effettuare una ricerca binaria
+— che significa cercare la data della 'rottura' dividendo ripetutamente a
+metà l'intervallo di ricerca.
+Per esempio, se il problema si è presentato nel 2003, inizia da metà anno,
+poi chiediti "C'è già il problema qui?".
+Se sì, retrocedi fino al primo di aprile; se no, vai al primo di ottobre, e
+così via.
+</p><p>
+Se hai tanto spazio libero sul disco rigido (una compilazione completa occupa
+attualmente 100 MB, e circa 300-350 MB se si abilitano i simboli di debug),
+copiati la versione funzionante più vecchia prima di aggiornarla; questo ti
+farà risparmiare tempo se devi retrocedere.
+(Solitamente bisogna eseguire 'make distclean' prima di ricompilare una versione
+precedente, perciò se non ne hai una salvata, dovrai ricompilare tutto quanto
+quando ritorni alla verisone attuale.)
+</p><p>
+Dopo aver trovato il giorno in cui è nato l'errore, continua a cercare usando
+l'archivio mplayer-cvslog (ordinato per data) e un più preciso aggiornamento
+su svn con ora, minuto e secondo:
+</p><pre class="screen">
+svn update -r {"2004-08-23 15:17:25"}
+</pre><p>
+Questo ti permetterà di trovare facilmente la patch esatta che lo ha generato.
+</p><p>
+Se trovi la patch che è stata la causa del problema, hai quasi vinto;
+fai un rapporto su
+<a class="ulink" href="http://bugzilla.mplayerhq.hu/" target="_top">MPlayer Bugzilla</a> o
+iscriviti a
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-users</a>
+e postalo là.
+C'è anche la possibilità che l'autore intervenga consigliando una correzione.
+Puoi anche controllare attentamente la patch fino a quando la costringi a
+rivelarti dove stia il bug :-).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. Come correggere i bug </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> A.4. Come segnalare i bug</td></tr></table></div></body></html>

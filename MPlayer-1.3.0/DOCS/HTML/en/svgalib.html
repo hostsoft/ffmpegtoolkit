@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.3. SVGAlib</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="Chapter 4. Video output devices"><link rel="prev" href="dga.html" title="4.2. DGA"><link rel="next" href="fbdev.html" title="4.4. Framebuffer output (FBdev)"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.3. SVGAlib</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dga.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="fbdev.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="svgalib"></a>4.3. SVGAlib</h2></div></div></div><p><b>INSTALLATION. </b>
+You'll have to install svgalib and its development package in order for
+<span class="application">MPlayer</span> build its SVGAlib driver (autodetected,
+but can be forced), and don't forget to edit
+<tt class="filename">/etc/vga/libvga.config</tt> to suit your card and monitor.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+Be sure not to use the <tt class="option">-fs</tt> switch, since it toggles the
+usage of the software scaler, and it's slow. If you really need it, use the
+<tt class="option">-sws 4</tt> option which will produce bad quality, but is
+somewhat faster.
+</p></div><p><b>EGA (4BPP) SUPPORT. </b>
+SVGAlib incorporates EGAlib, and <span class="application">MPlayer</span> has the
+possibility to display any movie in 16 colors, thus usable in the following
+sets:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  EGA card with EGA monitor: 320x200x4bpp, 640x200x4bpp, 640x350x4bpp
+</p></li><li class="listitem"><p>
+  EGA card with CGA monitor: 320x200x4bpp, 640x200x4bpp
+</p></li></ul></div><p>
+The bpp (bits per pixel) value must be set to 4 by hand:
+<tt class="option">-bpp 4</tt>
+</p><p>
+The movie probably must be scaled down to fit in EGA mode:
+</p><pre class="screen">-vf scale=640:350</pre><p>
+or
+</p><pre class="screen">-vf scale=320:200</pre><p>
+</p><p>
+For that we need fast but bad quality scaling routine:
+</p><pre class="screen">-sws 4</pre><p>
+</p><p>
+Maybe automatic aspect correction has to be shut off:
+</p><pre class="screen">-noaspect</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+According to my experience the best image quality on
+EGA screens can be achieved by decreasing the brightness a bit:
+<tt class="option">-vf eq=-20:0</tt>. I also needed to lower the audio
+samplerate on my box, because the sound was broken on 44kHz:
+<tt class="option">-srate 22050</tt>.
+</p></div><p>
+You can turn on OSD and subtitles only with the <tt class="option">expand</tt>
+filter, see the man page for exact parameters.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dga.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="fbdev.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4.2. DGA </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4.4. Framebuffer output (FBdev)</td></tr></table></div></body></html>

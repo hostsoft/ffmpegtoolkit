@@ -1,0 +1,173 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.2. Xv</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="prev" href="mtrr.html" title="4.1. MTRR einrichten"><link rel="next" href="dga.html" title="4.3. DGA"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="xv.html#tdfx" title="4.2.1. 3dfx-Karten"><link rel="subsection" href="xv.html#s3" title="4.2.2. S3-Karten"><link rel="subsection" href="xv.html#nvidia" title="4.2.3. nVidia-Karten"><link rel="subsection" href="xv.html#ati" title="4.2.4. ATI-Karten"><link rel="subsection" href="xv.html#neomagic" title="4.2.5. NeoMagic-Karten"><link rel="subsection" href="xv.html#trident" title="4.2.6. Trident-Karten"><link rel="subsection" href="xv.html#kyro" title="4.2.7. Kyro/PowerVR-Karten"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.2. Xv</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mtrr.html">Zurück</a> </td><th width="60%" align="center">Kapitel 4. Videoausgabegeräte</th><td width="20%" align="right"> <a accesskey="n" href="dga.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="xv"></a>4.2. Xv</h2></div></div></div><p>
+  Mit XFree86 4.0.2 oder neueren Versionen kannst du die Hardware-YUV-Routinen
+  deiner Grafikkarte mit Hilfe der XVideo-Erweiterungen benutzen. Das ist die
+  Technik, die <tt class="option">-vo xv</tt> benutzt. Dieser Treiber unterstützt
+  darüber hinaus die Anpassung von Helligkeit/Kontrast/Sättigung etc.
+  (es sei denn, du benutzt den alten und langsamen DirectShow DivX-Codec,
+  welcher diese Anpassungen unabhängig vom Videoausgabetreiber unterstützt).
+  Schau in der Manpage nach.
+</p><p>
+  Um Xv zum Laufen zu bringen, musst du auf die folgenden Punkte achten:
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  Du musst XFree86 4.0.2 oder eine neuere Version verwenden, da die
+  älteren Versionen XVideo noch nicht kannten.
+  </p></li><li class="listitem"><p>
+  Deine Grafikkarte muss Hardware-Unterstützung für YUV bieten, was alle
+  modernen Karten tun.
+  </p></li><li class="listitem"><p>
+  X muss die XVideo-Erweiterung auch tatsächlich laden, was zu
+  Meldungen ähnlich der folgenden führt:
+
+  </p><pre class="programlisting">(II) Loading extension XVideo</pre><p>
+
+  in <tt class="filename">/var/log/XFree86.0.log</tt>
+
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Anmerkung</h3><p>
+  Diese Meldung besagt nur, dass die XFree86-Erweiterung
+  geladen wird. Bei einer guten Installation sollte das immer der Fall
+  sein. Das heißt allerdings noch nicht, dass die
+  <span class="bold"><strong>XVideo-Unterstützung der Grafikkarte</strong></span>
+  auch geladen wurde!
+  </p></div><p>
+  </p></li><li class="listitem"><p>
+  Deine Karte muss unter Linux Xv-Unterstützung haben. Du kannst dich
+  dessen mit <span class="command"><strong>xvinfo</strong></span> vergewissern, das Teil der
+  XFree86-Distribution ist. Es sollte einen längeren Text ausgeben,
+  der ungefähr so aussieht:
+
+</p><pre class="screen">
+X-Video Extension version 2.2
+screen #0
+  Adaptor #0: "Savage Streams Engine"
+    number of ports: 1
+    port base: 43
+    operations supported: PutImage
+    supported visuals:
+      depth 16, visualID 0x22
+      depth 16, visualID 0x23
+    number of attributes: 5
+(...)
+    Number of image formats: 7
+      id: 0x32595559 (YUY2)
+        guid: 59555932-0000-0010-8000-00aa00389b71
+        bits per pixel: 16
+        number of planes: 1
+        type: YUV (packed)
+      id: 0x32315659 (YV12)
+        guid: 59563132-0000-0010-8000-00aa00389b71
+        bits per pixel: 12
+        number of planes: 3
+        type: YUV (planar)
+(...etc...)</pre><p>
+  Damit <span class="application">MPlayer</span> Xv benutzen kann, müssen die
+  Pixelformate YUY2 packed und YV12 planar unterstützt werden.
+  </p></li><li class="listitem"><p>
+  Stelle als letztes sicher, dass <span class="application">MPlayer</span> mit
+  Unterstützung für Xv compiliert wurde. <span class="command"><strong>configure</strong></span> gibt eine
+  entsprechende Meldung aus.
+  Führe den Befehl <span class="command"><strong>mplayer -vo help | grep xv </strong></span> aus.
+  Wurde Unterstützung für Xv eingebaut, sollte eine ähnliche Meldung
+  wie diese erscheinen:
+  </p><pre class="screen">xv      X11/Xv</pre><p>
+  </p></li></ol></div><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tdfx"></a>4.2.1. 3dfx-Karten</h3></div></div></div><p>
+  Ältere 3dfx-Treiber hatten bekanntermaßen Probleme mit der
+  XVideo-Beschleuningung, die weder YUY2 noch YV12 unterstützte.
+  Stelle sicher, dass du XFree86 Version 4.2.0 oder neuer verwendest, da diese
+  Versionen mit YV12 und YUY2 keine Probleme haben, während frühere Versionen, auch
+  4.1.0, <span class="bold"><strong>bei YV12 abgestürzen</strong></span>.
+  Wenn du merkwürdige Effekte bei der Verwendung von <tt class="option">-vo xv</tt>
+  bemerkst, dann probier aus, ob mit SDL, das ebenfalls XVideo nutzen kann,
+  diese Effekte verschwinden. In der <a class="link" href="sdl.html" title="4.4. SDL">SDL</a> stehen
+  Details darüber.
+</p><p>
+  <span class="bold"><strong>Alternativ</strong></span> kannst du auch den NEUEN
+  tdfxfb-Treiber mit <tt class="option">-vo tdfxfb</tt> verwenden!
+  Lies dazu die <a class="link" href="tdfxfb.html" title="4.8. 3dfx-YUV-Unterstützung (tdfxfb)">tdfxfb</a>-Sektion.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="s3"></a>4.2.2. S3-Karten</h3></div></div></div><p>
+  S3 Savage3D-Karten sollten problemlos funktionieren, aber bei Savage4-
+  Chips solltest du XFree86 4.0.3 oder neuer verwenden. Probier bei Problemen
+  den 16bpp-Farbmodus aus. Und der S3 Virge... Es gibt für ihn zwar Xv-
+  Unterstützung, aber die Karte selbst ist so langsam, dass du sie besser
+  verkaufst.
+</p><p>
+  Es gibt inzwischen einen nativen Framebuffer-Treiber für S3 Virge-Karten, ähnlich
+  tdfxfb. Mache die Einstellungen (hänge z.B.
+  "<tt class="option">vga=792 video=vesa:mtrr</tt>" an die Kernelkommandozeile an) und benutze
+  <tt class="option">-vo s3fb</tt> (<tt class="option">-vf yuy2</tt> und <tt class="option">-dr</tt>
+  helfen auch).
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Anmerkung</h3><p>
+  Momentan ist nicht ganz klar, welche Savage-Modelle keine Unterstützung
+  für YV12 in Hardware haben, sodass bei ihnen der Treiber diese Konvertierung
+  sehr langsam vornimmt. Hast du deine Karte in Verdacht, dann
+  besorg dir einen neueren Treiber, oder frag auf der MPlayer-Users-Mailingliste
+  freundlich nach einem Treiber, der MMX/3DNow unterstützt.
+</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="nvidia"></a>4.2.3. nVidia-Karten</h3></div></div></div><p>
+  nVidia ist für Linux keine optimale Wahll.
+  XFree86's Open-Source-Treiber unterstützt die meisten dieser Karten, jedoch
+  musst du in einigen Fällen die binären Closed-Source-Treiber von nVidia
+  verwenden, verfügbar auf der
+  <a class="ulink" href="http://www.nvidia.com/object/linux.html" target="_top">nVidia-Webseite</a>.
+  Du brauchst diese Treiber immer, wenn du zusätzlich 3D-Beschleunigung
+  haben willst.
+</p><p>
+  Riva128-Karten bieten nicht einmal mit den binären nVidia-Treibern
+  XVideo-Unterstützung (beklag dich bei nVidia).
+</p><p>
+  Wie auch immer, <span class="application">MPlayer</span> enthält einen
+  <a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a> -Treiber für die meisten nVidia-Karten.
+  Er ist aktuell in der Beta-Phase und besitzt einige Nachteile. Mehr
+  Informationen findest du in der
+  <a class="link" href="vidix.html#vidix-nvidia" title="4.15.5. nVidia-Karten">nVidia-VIDIX</a>-Sektion.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ati"></a>4.2.4. ATI-Karten</h3></div></div></div><p>
+  Die <a class="ulink" href="http://gatos.sf.net" target="_top">GATOS-Treiber</a>, die du
+  einsetzen solltest, sofern du keine Rage128- oder Radeon-Karte hast,
+  haben per Voreinstellung VSYNC angeschaltet. Dies bedeutet, dass
+  die Decodiergeschwindigkeit (!) zur Bildwiederholrate des Monitors
+  synchronisiert wird. Wenn dir die Wiedergabe langsam vorkommt, dann
+  versuche, irgendwie VSYNC abzuschalten, oder setze die Bildwiederholrate
+  des Monitors auf n * (fps des Films) Hz.
+</p><p>
+  Radeon VE - wenn du X benötigst, verwende XFree86 4.2.0 oder höher für
+  diese Karte. Außerdem gibt es keine Unterstützung für den TV-Ausgang.
+  Natürlich bekommst du mit <span class="application">MPlayer</span>
+  <span class="bold"><strong>Hardware-beschleunigte</strong></span> Wiedergabe, das
+  ganze wahlweise <span class="bold"><strong>mit oder ohne TV-Ausgang</strong></span>,
+  und es werden dabei nicht einmal weitere Bibliotheken oder X selber benötigt.
+  Lies dazu die <a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX-Sektion</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="neomagic"></a>4.2.5. NeoMagic-Karten</h3></div></div></div><p>
+  Diese Chips befinden sich in vielen Laptops. Du musst XFree86 4.3.0 oder
+  höher oder andernfalls die
+  <a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/NeoMagic-driver/" target="_top">Xv-fähigen
+  Treiber</a> von Stefan Seyfried verwenden.
+  Wähle einfach einen, der zu deiner XFree86-Version passt.
+</p><p>
+  XFree86 4.3.0 beinhaltet die Unterstützung für Xv, Bohdan Horst schickte jetzt
+  einen kleinen
+  <a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/NeoMagic-driver/neo_driver.patch" target="_top">Patch</a>
+  auf die XFree86-Quellen, der Framebuffer-Operationen (daher XVideo)
+  bis auf das Vierfache beschleunigt. Der Patch wurde in das XFree86-CVS
+  eingebunden und sollte im nächsten Release nach 4.3.0 vorhanden sein.
+</p><p>
+  Um die Wiedergabe von Video in DVD-Auflösung zu ermöglichen,
+  ändere deine XF86Config wie folgt:
+</p><pre class="programlisting">
+Section "Device"
+    [...]
+    Driver "neomagic"
+    <span class="emphasis"><em>Option "OverlayMem" "829440"</em></span>
+    [...]
+EndSection</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="trident"></a>4.2.6. Trident-Karten</h3></div></div></div><p>
+  Wenn du Xv mit einer Trident-Grafikkarte benutzen willst, dann installiere
+  XFree86 4.2.0, sofern Xv nicht schon mit 4.1.0 funktioniert. Version 4.2.0
+  enthält Unterstützung für Xv im Vollbild für Cyberblade XP-Karten.
+</p><p>
+  Alternativ enthält <span class="application">MPlayer</span> einen
+  <a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a>-Treiber für the Cyberblade/i1-Karten.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="kyro"></a>4.2.7. Kyro/PowerVR-Karten</h3></div></div></div><p>
+  Wenn du Xv mit einer Kyro-basierten Karte (wie z.B. der Hercules Prophet 4000XT)
+  verwenden möchstest, dann solltest du die Treiber von der
+  <a class="ulink" href="http://www.powervr.com/" target="_top">PowerVR-Seite</a> herunterladen.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mtrr.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="dga.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">4.1. MTRR einrichten </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 4.3. DGA</td></tr></table></div></body></html>

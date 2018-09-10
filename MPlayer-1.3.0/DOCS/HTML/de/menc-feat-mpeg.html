@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.5. Encodieren ins MPEG-Format</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="prev" href="menc-feat-mpeg4.html" title='6.4. Encodieren von 2-pass-MPEG4 ("DivX")'><link rel="next" href="menc-feat-rescale.html" title="6.6. Reskalierung von Filmen"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.5. Encodieren ins MPEG-Format</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-mpeg4.html">Zurück</a> </td><th width="60%" align="center">Kapitel 6. Allgemeiner Gebrauch von <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-rescale.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-mpeg"></a>6.5. Encodieren ins MPEG-Format</h2></div></div></div><p>
+      <span class="application">MEncoder</span> kann Ausgabedateien im Format
+      MPEG (MPEG-PS) erzeugen.
+      Gewöhnlich, wenn du MPEG1- oder MPEG2-Videos benutzt, tust du dies, weil
+      du in ein erzwungenes Format wie SVCD, VCD oder DVD encodierst.
+      Die spezifischen Anforderungen an diese Formate werden im Abschnitt
+      <a class="link" href="menc-feat-vcd-dvd.html" title="7.8. Verwendung von MEncoder zum Erzeugen VCD/SVCD/DVD-konformer Dateien.">Verwenden von MEncoder zum Erzeugen
+        VCD/SVCD/DVD-konformer Dateien</a>
+      beschrieben.
+    </p><p>
+      Verwende die Option <tt class="option">-of mpeg</tt>, um das Format der
+      Ausgabedatei von <span class="application">MEncoder</span> zu ändern.
+    </p><div class="informalexample"><p>
+        Beispiel:
+        </p><pre class="screen">
+          mencoder <em class="replaceable"><code>input.avi</code></em> -of mpeg -ovc lavc -lavcopts vcodec=mpeg1video \
+          -oac copy <em class="replaceable"><code>other_options</code></em> -o <em class="replaceable"><code>output.mpg</code></em>
+        </pre><p>
+        Erzeugen einer für das Abspielen auf Systemen mit minimalem Multimedia-Support
+        geeigneten MPEG1-Datei, wie etwa auf Standard-Windows-Installationen:
+        </p><pre class="screen">
+          mencoder <em class="replaceable"><code>input.avi</code></em> -of mpeg -mpegopts format=mpeg1:tsaf:muxrate=2000 \
+          -o <em class="replaceable"><code>output.mpg</code></em> -oac lavc -ovc lavc \
+          -lavcopts acodec=mp2:abitrate=224:vcodec=mpeg1video:vbitrate=1152:keyint=15:mbd=2:aspect=4/3
+        </pre><p>
+        Das gleiche bei Benutzung des MPEG-Muxers von <code class="systemitem">libavformat</code>:
+        </p><pre class="screen">
+          mencoder <em class="replaceable"><code>input.avi</code></em> -o <em class="replaceable"><code>VCD.mpg</code></em> -ofps 25 -vf scale=352:288,harddup -of lavf \
+          -lavfopts format=mpg -oac lavc -lavcopts acodec=mp2:abitrate=224 -ovc lavc \
+          -lavcopts vcodec=mpeg1video:vrc_buf_size=327:keyint=15:vrc_maxrate=1152:vbitrate=1152:vmax_b_frames=0
+        </pre><p>
+      </p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Hinweis:</h3><p>
+        Wenn dich die Video-Qualität des zweiten Durchgangs aus irgendeinem
+        Grund nicht zufrieden gestellt hat, kannst du deine Encodierung
+        mit einer anderen Zielbitrate erneut durchlaufen lassen, vorausgesetzt,
+        du hast die Statistikdateien des vorherigen Durchgangs gesichert.
+        Dies ist möglich, weil das Primärziel der Statistikdateien die Aufzeichnung
+        der Komplexität jedes Frames ist, was nicht allzusehr von der Bitrate
+        abhängt. Du solltest daher beachten, dass du die besten Ergebnisse bekommst,
+        wenn alle Durchgänge mit nicht zu sehr voneinander abweichenden
+        Ziel-Bitraten durchlaufen werden.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-mpeg4.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-rescale.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">6.4. Encodieren von 2-pass-MPEG4 ("DivX") </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> 6.6. Reskalierung von Filmen</td></tr></table></div></body></html>

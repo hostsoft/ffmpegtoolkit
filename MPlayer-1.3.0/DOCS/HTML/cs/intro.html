@@ -1,0 +1,83 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Kapitola 1. Představení</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="prev" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="next" href="install.html" title="Kapitola 2. Instalace"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Kapitola 1. Představení</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="howtoread.html">Předcházející</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="install.html">Další</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="intro"></a>Kapitola 1. Představení</h1></div></div></div><p>
+<span class="application">MPlayer</span> je multimediální přehrávač pro Linux (běží na mnoha
+jiných Unixech a <span class="bold"><strong>ne-x86</strong></span> CPU, viz
+<a class="xref" href="ports.html" title="Kapitola 5. Porty">Ports</a>).
+Přehraje většinu MPEG, VOB, AVI, OGG/OGM, VIVO, ASF/WMA/WMV, QT/MOV/MP4, FLI,
+RM, NuppelVideo, yuv4mpeg, FILM, RoQ, PVA, Matroska souborů s podporou
+mnoha nativních XAnim, RealPlayer a Win32 DLL kodeků. Můžete sledovat
+<span class="bold"><strong>VideoCD, SVCD, DVD, 3ivx, RealMedia, Sorenson, Theora</strong></span>
+a také <span class="bold"><strong>MPEG-4 (DivX)</strong></span> filmy. Další skvělou vlastností
+<span class="application">MPlayer</span>u je velké množství podporovaných
+výstupních rozhraní. Pracuje s X11, Xv, DGA, OpenGL, SVGAlib,
+fbdev, AAlib, libcaca, DirectFB, rovněž můžete použít GGI a SDL (a takto i jejich ovladače)
+a také některé nízkoúrovňové ovladače konkrétních karet (pro Matrox, 3Dfx a
+Radeon, Mach64, Permedia3)! Většina z nich podporuje softwarové nebo hardwarové škálování
+(změna velikosti obrazu), takže si můžete užít video na celé obrazovce.
+<span class="application">MPlayer</span> podporuje zobrazování přes některé hardwarové MPEG
+dekódovací karty, jako je <a class="link" href="mpeg_decoders.html#dvb" title="4.18.1. DVB výstup a vstup">DVB</a> a
+<a class="link" href="mpeg_decoders.html#dxr3" title="4.18.3. DXR3/Hollywood+">DXR3/Hollywood+</a>. A což teprve velké krásné vyhlazené a
+stínované titulky
+(<span class="bold"><strong>14 podporovaných typů</strong></span>)
+spolu s Evropskými/ISO 8859-1,2 (Bulharskými, Anglickými, Českými, atd), Cyrilickými a Korejskými
+fonty a displej na obrazovce (OSD)?
+</p><p>
+Přehrávač je pevný jako skála při přehrávání poškozených MPEG souborů
+(použitelné pro některá VCD), také přehrává špatné AVI soubory, které
+nelze přehrávat ani věhlasným windows media playerem.
+Dokonce lze přehrávat i AVI bez indexu a navíc můžete jejich indexy dočasně
+obnovit pomocí volby <tt class="option">-idx</tt>, nebo trvale pomocí
+<span class="application">MEncoder</span>u, což umožní převíjení!
+Jak vidíte, kvalita a stabilita jsou těmi nejdůležitějšími vlastnostmi,
+rychlost je ovšem také skvělá. Rovněž máme účinný systém filtrů pro manipulaci
+s videem i se zvukem.
+</p><p>
+<span class="application">MEncoder</span> (<span class="application">MPlayer</span>ův Filmový
+Enkodér) je jednoduchý filmový enkodér, navržený k enkódování
+<span class="application">MPlayer</span>em přehrávatelných filmů
+(<span class="bold"><strong>AVI/ASF/OGG/DVD/VCD/VOB/MPG/MOV/VIV/FLI/RM/NUV/NET/PVA</strong></span>)
+do jiných <span class="application">MPlayer</span>em přehrávatelných formátů (viz níže).
+Může enkódovat různými kodeky, třeba <span class="bold"><strong>MPEG-4 (DivX4)</strong></span>
+(jedním nebo dvěma průchody), <code class="systemitem">libavcodec</code>,
+<span class="bold"><strong>PCM/MP3/VBR MP3</strong></span>
+audia.
+</p><div class="itemizedlist"><p class="title"><b>Vlastnosti <span class="application">MEncoder</span>u</b></p><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Enkódování ze široké řady formátů souboru a dekodérů
+  <span class="application">MPlayer</span>u
+</p></li><li class="listitem"><p>
+  Enkódování pomocí všech FFmpeg
+  <code class="systemitem">libavcodec</code> kodeků
+</p></li><li class="listitem"><p>
+  Video enkódování z <span class="bold"><strong>V4L kompatibilních TV tunerů</strong></span>
+</p></li><li class="listitem"><p>
+  Enkódování/multiplexování do prokládaných AVI souborů se správným indexem
+</p></li><li class="listitem"><p>
+  Tvorba souborů z externího audio proudu
+</p></li><li class="listitem"><p>
+  1, 2 nebo 3 průchodové enkódování
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>VBR</strong></span> MP3 zvuk
+  </p><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Důležité</h3><p>
+  VBR MP3 zvuk není vždy přehráván dobře přehrávači pro windows!
+  </p></div><p>
+</p></li><li class="listitem"><p>
+  PCM zvuk
+</p></li><li class="listitem"><p>
+  Kopírování datového proudu
+</p></li><li class="listitem"><p>
+  Vstupní A/V synchronizace (založená na PTS, lze ji vypnout pomocí
+  volby <tt class="option">-mc 0</tt>)
+</p></li><li class="listitem"><p>
+  Korekce snímkové rychlosti pomocí volby <tt class="option">-ofps</tt> (užitečné při enkódování
+  30000/1001 fps VOB do 24000/1001 fps AVI)
+</p></li><li class="listitem"><p>
+  Používá výkonný systém filtrů (ořez, expanze, postproces, rotace, škálování (změna velikosti),
+  konverze rgb/yuv)
+</p></li><li class="listitem"><p>
+  Umí enkódovat DVD/VOBsub <span class="bold"><strong>A</strong></span> textové titulky do výstupního
+  souboru
+</p></li><li class="listitem"><p>
+  Umí ripovat DVD titulky do VOBsub formátu
+</p></li></ul></div><p>
+<span class="application">MPlayer</span> a <span class="application">MEncoder</span>
+mohou být distribuovány za podmínek stanovených v GNU General Public License Version 2.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="howtoread.html">Předcházející</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="install.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">Jak číst tuto  dokumentaci </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> Kapitola 2. Instalace</td></tr></table></div></body></html>

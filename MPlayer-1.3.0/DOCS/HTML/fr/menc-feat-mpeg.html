@@ -1,0 +1,45 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.5. Encodage au format MPEG</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="prev" href="menc-feat-handheld-psp.html" title="6.4. Encodage au format vidéo Sony PSP"><link rel="next" href="menc-feat-rescale.html" title="6.6. Redimensionnement des films"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.5. Encodage au format MPEG</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-handheld-psp.html">Précédent</a> </td><th width="60%" align="center">Chapitre 6. Utilisation basique de <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-rescale.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-mpeg"></a>6.5. Encodage au format MPEG</h2></div></div></div><p>
+<span class="application">MEncoder</span> peut créer des fichiers au
+format MPEG (MPEG-PS).
+Habituellement, vous utilisez des formats vidéos comme le
+MPEG-1 ou MPEG-2 pour l'encodage vers des formats avec des contraintes spécifiques
+comme le SVCD, VCD, ou encore le DVD.
+Les exigences particulières de ces formats sont expliqués dans
+la section du
+<a class="link" href="menc-feat-vcd-dvd.html" title="7.8. Utiliser MEncoder pour créer des fichiers compatibles VCD/SVCD/DVD.">guide de création d'un VCD ou DVD</a>.
+</p><p>
+Pour changer le format du fichier final produit par
+<span class="application">MEncoder</span>
+utilisez l'option <tt class="option">-of mpeg</tt>.
+</p><div class="informalexample"><p>
+Exemple :
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.avi</code></em> -of mpeg -ovc lavc
+-lavcopts vcodec=mpeg1video -oac copy
+<em class="replaceable"><code>autres_options</code></em> -o
+<em class="replaceable"><code>sortie.mpg</code></em>
+</pre><p>
+Création d'un fichier MPEG-1 lisible sur un système basique
+comme peu l'être un MS Windows fraîchement installé :
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>entree.avi</code></em> -of mpeg -mpegopts
+format=mpeg1:tsaf:muxrate=2000 -o
+<em class="replaceable"><code>output.mpg</code></em> -oac lavc -ovc lavc \
+-lavcopts acodec=mp2:abitrate=224:vcodec=mpeg1video:vbitrate=1152:keyint=15:mbd=2:aspect=4/3
+</pre><p>
+Le même encodage, mais en utilisant le multiplexeur MPEG <code class="systemitem">libavformat</code> :
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>entree.avi</code></em> -o <em class="replaceable"><code>VCD.mpg</code></em> -ofps 25 -vf scale=352:288,harddup -of lavf \
+    -lavfopts format=mpg -oac lavc -lavcopts acodec=mp2:abitrate=224 -ovc lavc \
+    -lavcopts vcodec=mpeg1video:vrc_buf_size=327:keyint=15:vrc_maxrate=1152:vbitrate=1152:vmax_b_frames=0
+</pre><p>
+</p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Astuce:</h3><p>
+Si, pour quelques raisons, la qualité vidéo de la seconde passe
+n'est pas satisfaisante, vous pouvez recommencer l'encodage avec
+un débit cible différent, à condition que vous ayez sauvegardé
+le fichier de statistiques de la passe précédente.
+Ceci est possible car le rôle premier du fichier de statistiques
+est d'enregistrer la compléxité de chaque trame, ce qui ne dépend pas
+fortement du débit. Cependant, if faut noter que vous obtiendrez de meilleurs
+résultats si toutes les passes utilisent un débit cible similaire.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-handheld-psp.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-rescale.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">6.4. Encodage au format vidéo Sony PSP </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 6.6. Redimensionnement des films</td></tr></table></div></body></html>

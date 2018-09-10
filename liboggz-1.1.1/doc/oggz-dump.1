@@ -1,0 +1,122 @@
+.TH "oggz-dump" "1" 
+.SH "NAME" 
+oggz-dump \(em Hexdump packets of an Ogg file, or revert an Ogg file from 
+such a hexdump 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-dump\fR [\-b  | \-\-binary ]  [\-x  | \-\-hexadecimal ]  [\-n  | \-\-new ]  [\-o \fBfilename\fR  | \-\-output \fBfilename\fR ]  [\-c \fBcontent-type\fR  | \-\-content-type \fBcontent-type\fR ]  [\-s \fBserialno\fR  | \-\-serialno \fBserialno\fR ]  [\-O  | \-\-hide-offset ]  [\-S  | \-\-hide-serialno ]  [\-G  | \-\-hide-granulepos ]  [\-P  | \-\-hide-packetno ] filename  
+.PP 
+\fBoggz-dump\fR [\-r  | \-\-revert ]  [\-o \fBfilename\fR  | \-\-output \fBfilename\fR ] filename  
+.PP 
+\fBoggz-dump\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-dump\fR generates a hexadecimal or binary dump 
+of packets in an Ogg file, or creates an Ogg file from a hexadecimal 
+oggz-dump file. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-dump\fR accepts the following options: 
+ 
+.SS "Dump format options" 
+.IP "\-b, \-\-binary" 10 
+Generate a binary dump of each packet 
+ 
+.IP "\-x, \-\-hexadecimal" 10 
+Generate a hexadecimal dump of each packet 
+ 
+.SS "Filtering options" 
+.IP "\-n, \-\-new" 10 
+Only dump the first packet of each new logical 
+bitstream found; for correctly formed Ogg files, this dumps 
+only the beginning-of-stream packets. 
+ 
+.IP "\-c \fBcontent-type\fR, \-\-content-type \fBcontent-type\fR" 10 
+Dump only the logical bitstreams for a specific 
+\fBcontent-type\fR.
+Run \fBoggz-known-codecs\fP\fB(1)\fP for a full list
+of codecs known by the installed version of oggz.
+ 
+.IP "\-s \fBserialno\fR, \-\-serialno \fBserialno\fR" 10 
+Dump only the logical bitstream with specified 
+\fBserialno\fR. 
+ 
+.IP "\-O, \-\-hide-offset" 10 
+Hide the byte offset field of the preamble for 
+each packet dumped. This is particularly useful in 
+conjunction with 
+\fBoggzdiff\fP\fB(1)\fP when comparing Ogg bitstreams that differ 
+only in page structure. 
+ 
+.IP "\-S, \-\-hide-serialno" 10 
+Hide the serialno field of the preamble for 
+each packet dumped. This is particularly useful in 
+conjunction with 
+\fBoggzdiff\fP\fB(1)\fP when comparing Ogg bitstreams that differ 
+only in serialno assignment. 
+ 
+.IP "\-G, \-\-hide-granulepos" 10 
+Hide the granulepos field of the preamble for 
+each packet dumped. 
+ 
+.IP "\-P, \-\-hide-packetno" 10 
+Hide the packetno field of the preamble for 
+each packet dumped. 
+ 
+.SS "Mode options" 
+.IP "\-r, \-\-revert" 10 
+Revert an oggz-dump. Generates an Ogg bitstream as prescribed 
+in the input oggz-dump. 
+ 
+.IP "" 10 
+The serialno, granulepos and packetno fields of the packet 
+preambles in the oggz-dump, as well as any bos or eos markers 
+if present, are used to structure the packets into logical 
+bitstreams. Hence it is advised that the original input 
+oggz-dump not be generated with any hiding filters. 
+ 
+.IP "" 10 
+Only the hexadecimal data columns of the input oggz-dump are 
+parsed when generating Ogg packet data; the printable character 
+representation is ignored. 
+ 
+.SS "Miscellaneous options" 
+.IP "\-o \fBfilename\fR, \-\-output \fBfilename\fR" 10 
+Write output to the specified 
+\fBfilename\fR instead of printing it to 
+standard output. 
+ 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+
+.SH EXAMPLES
+.PP
+Dump all bitstreams in file.ogg:
+.PP
+.RS
+\f(CWoggz dump file.ogg\fP
+.RE
+.PP
+Dump only the Theora bitstream in file.ogv:
+.PP
+.RS
+\f(CWoggz dump \-c theora file.ogv\fP
+.RE
+
+.SH "AUTHOR" 
+.PP 
+Conrad Parker        November 17, 2003;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2003 CSIRO Australia 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-diff\fP\fB(1)\fP, 
+\fBhogg\fP\fB(1)\fP       \fBxxd\fP\fB(1)\fP, 
+\fBhexdump\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

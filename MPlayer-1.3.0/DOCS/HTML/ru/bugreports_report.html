@@ -1,0 +1,42 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.4. Как сообщить об ошибке</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="prev" href="bugreports_regression_test.html" title="A.3. Как провести проверку на деградацию, используя Subversion"><link rel="next" href="bugreports_where.html" title="A.5. Куда сообщать об ошибках"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.4. Как сообщить об ошибке</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_regression_test.html">Пред.</a> </td><th width="60%" align="center">Приложение A. Как сообщать об ошибках</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_where.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_report"></a>A.4. Как сообщить об ошибке</h2></div></div></div><p>
+Прежде всего, пожалуйста, попробуйте использовать новейшую Subversion версию
+<span class="application">MPlayer</span>'а, поскольку Ваша ошибка уже может быть исправлена.
+Разработка продвигается очень быстро, большинство проблем в официальных релизах
+сообщается в течение дней, и даже часов, после релиза, поэтому, пожалуйста, для
+сообщений об ошибках используйте <span class="bold"><strong>только Subversion</strong></span>.
+Это включает и бинарные пакеты <span class="application">MPlayer</span>'а. Вы найдёте
+инструкции по Subversion внизу
+<a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">этой страницы</a>
+или в README. Если это не помогло, пожалуйста, обратитесь к остальной документации. Если
+Ваша проблема не известна или не решается с помощью наших инструкций,
+пожалуйста, сообщите об ошибке.
+</p><p>
+Пожалуйста, не присылайте сообщения об ошибках лично какому-нибудь разработчику.
+Это командная работа, и, поэтому, Вашим сообщением могут заинтересоваться
+несколько человек. Довольно часто бывает, что пользователи уже сталкивались
+с Вашей проблемой и знают, как обойти проблему, даже если это ошибка в коде
+<span class="application">MPlayer</span>'а.
+</p><p>
+Пожалуйста, опишите Вашу проблему настолько подробно, насколько возможно.
+Проведите маленькое расследование, чтобы выяснить условия, при которых возникает
+проблема. Проявляется ли ошибка только в каких-то конкретных ситуациях?
+Она специфична только для каких-то файлов или типов файлов? Происходит ли это
+с каким-то одним кодеком, или это не зависит от кодека? Можете ли Вы
+воспроизвести это со всеми драйверами вывода? Чем больше Вы предоставите
+информации, тем выше вероятность того, что мы сможем исправить ошибку.
+Пожалуйста, не забудьте включить важную информацию, которую мы просим ниже,
+иначе мы не сможем должным образом диагностировать Вашу проблему.
+</p><p>
+Великолепное, отлично написанное руководство по задаванию вопросов
+на общедоступных форумах — это
+<a class="ulink" href="http://www.catb.org/~esr/faqs/smart-questions.html" target="_top">How To Ask
+Questions The Smart Way[Как Задавать Вопросы. Правильный Путь.]</a>,
+написанное <a class="ulink" href="http://www.catb.org/~esr/" target="_top">Eric S. Raymond</a>.
+Есть и другое —
+<a class="ulink" href="http://www.chiark.greenend.org.uk/~sgtatham/bugs.html" target="_top">How to Report
+Bugs Effectively[Как Эффективно Сообщить об Ошибке]</a>, написанное <a class="ulink" href="http://www.chiark.greenend.org.uk/~sgtatham/" target="_top">Simon Tatham</a>.
+Если Вы будете следовать этим указаниям, Вы сможете получить помощь. Но,
+пожалуйста, учтите, что мы добровольно отслеживаем рассылки в свободное время.
+Мы очень заняты и не можем гарантировать, что Вы получите решение для Вашей
+проблемы (или хотя бы ответ).
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_regression_test.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_where.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">A.3. Как провести проверку на деградацию, используя Subversion </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> A.5. Куда сообщать об ошибках</td></tr></table></div></body></html>

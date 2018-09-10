@@ -1,0 +1,51 @@
+\section{Fish\-Sound, the sound of fish!}\label{index_intro}
+This is the documentation for the Fish\-Sound C A\-P\-I. Fish\-Sound provides a simple programming interface for decoding and encoding audio data using Xiph.\-Org codecs (F\-L\-A\-C, Speex and Vorbis).
+
+libfishsound by itself is designed to handle raw codec streams from a lower level layer such as U\-D\-P datagrams. When these codecs are used in files, they are commonly encapsulated in {\tt Ogg} to produce {\itshape Ogg F\-L\-A\-C}, {\itshape Speex} and {\itshape Ogg Vorbis} files. Example C programs using {\tt liboggz} to read and write these files are provided in the libfishsound sources.
+
+For more information on the design and history of libfishsound, see the \doxyref{About }{p.}{group__about} section of this documentation, and the {\tt libfishsound} homepage.\subsection{Contents}\label{index_contents}
+
+\begin{DoxyItemize}
+\item \doxyref{fishsound.\-h }{p.}{fishsound_8h}\-: Documentation of the Fish\-Sound A\-P\-I.
+\item \doxyref{Handling comments }{p.}{comments_8h}\-: How to add and retrieve {\itshape name} = {\itshape value} metadata in Vorbis and Speex streams.
+\item \doxyref{Decoding audio data }{p.}{group__decode}\-: How to decode audio data with Fish\-Sound, including source for a fully working Ogg F\-L\-A\-C, Speex and Ogg Vorbis decoder.
+\item \doxyref{Encoding audio data }{p.}{group__encode}\-: How to encode audio data with Fish\-Sound, including source for a fully working Ogg F\-L\-A\-C, Speex and Ogg Vorbis encoder.
+\item \doxyref{Configuration }{p.}{group__configuration}\-: Customizing libfishsound to only decode or encode, or to disable support for a particular codec.
+\item \doxyref{Building }{p.}{group__building}\-: Information related to building software that uses libfishsound.
+\item \doxyref{About }{p.}{group__about}\-: Design, motivation, history and acknowledgements.
+\end{DoxyItemize}\section{Licensing}\label{index_Licensing}
+libfishsound is provided under the following B\-S\-D-\/style open source license\-:
+
+
+\begin{DoxyCodeInclude}
+   Copyright (C) 2003 CSIRO Australia
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions
+   are met:
+   
+   - Redistributions of source code must retain the above copyright
+   notice, \textcolor{keyword}{this} list of conditions and the following disclaimer.
+   
+   - Redistributions in binary form must reproduce the above copyright
+   notice, \textcolor{keyword}{this} list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+   
+   - Neither the name of the CSIRO nor the names of its
+   contributors may be used to endorse or promote products derived from
+   \textcolor{keyword}{this} software without specific prior written permission.
+   
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   ``AS IS\textcolor{stringliteral}{''} AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+   PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE ORGANISATION OR
+   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+\end{DoxyCodeInclude}
+ 

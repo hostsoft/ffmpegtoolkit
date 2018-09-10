@@ -1,0 +1,36 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.6. RTC</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="install.html" title="Kapitola 2. Instalace"><link rel="prev" href="codec-installation.html" title="2.5. Codec installation"><link rel="next" href="usage.html" title="Kapitola 3. Použití"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.6. RTC</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="codec-installation.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 2. Instalace</th><td width="20%" align="right"> <a accesskey="n" href="usage.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="rtc"></a>2.6. RTC</h2></div></div></div><p>
+V <span class="application">MPlayer</span> jsou zabudovány tři metody časování.
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Abyste použili starou metodu</strong></span>, nemusíte dělat
+  vůbec nic. Ta používá <code class="systemitem">usleep()</code> pro hlídání
+  A/V synchronizace s přesností +/- 10ms. Ačkoli někdy může být synchronizace
+  hlídána ještě jemněji.
+</p></li><li class="listitem"><p>
+  Kód <span class="bold"><strong>nového časovače</strong></span> používá pro tento účel RTC
+  (hodiny reálného času), protože mají přesné 1ms časovače.
+  Volba <tt class="option">-rtc</tt> to zapíná, je však nutné vhodně nastavené jádro.
+  Pokud používáte jádro 2.4.19pre8 nebo pozdější, můžete nastavit maximální RTC
+  kmitočet pro normální uživatele pomocí systému souborů
+  <code class="systemitem">/proc
+  </code>. Použijte jeden z těchto dvou příkazů pro zapnutí RTC
+  pro obyčejné uživatele:
+  </p><pre class="screen">echo 1024 &gt; /proc/sys/dev/rtc/max-user-freq</pre><p>
+  </p><pre class="screen">sysctl dev/rtc/max-user-freq=1024</pre><p>
+  Můžete tuto volbu učinit trvalou přidáním druhého příkazu do
+  <tt class="filename">/etc/sysctl.conf</tt>.
+  </p><p>
+   Efektivitu nového časovače uvidíte na stavovém řádku.
+   Funkce power managementu některých notebookových BIOSů s speedstep procesory
+   špatně komunikují s RTC. Audio a video se mohou rozejít. Zdá se že pomáhá
+   připojení vnějšího napájení před zapnutím notebooku.
+   V některých hardwarových kombinacích (zjištěno během používání ne-DMA DVD
+   mechaniky na ALi1541 boardu) způsobuje použití RTC časování trhavé přehrávání.
+   Pak doporučujeme
+   použít třetí metodu.
+  </p></li><li class="listitem"><p>
+  <span class="bold"><strong>Třetí kód časovače</strong></span> se zapíná volbou
+  <tt class="option">-softsleep</tt>. Je stejně efektní jako RTC, ale nepoužívá RTC.
+  Na druhou stranu více zatěžuje CPU.
+</p></li></ul></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="codec-installation.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="usage.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">2.5. Codec installation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> Kapitola 3. Použití</td></tr></table></div></body></html>

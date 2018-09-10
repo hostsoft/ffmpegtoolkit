@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.6. Uscita su framebuffer (FBdev)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="prev" href="svgalib.html" title="4.5. SVGAlib"><link rel="next" href="mga_vid.html" title="4.7. Framebuffer Matrox (mga_vid)"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.6. Uscita su framebuffer (FBdev)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="svgalib.html">Indietro</a> </td><th width="60%" align="center">Capitolo 4. Dispositivi di uscita video</th><td width="20%" align="right"> <a accesskey="n" href="mga_vid.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fbdev"></a>4.6. Uscita su framebuffer (FBdev)</h2></div></div></div><p>
+Se compilare l'uscita FBdev o no viene rilevato automaticamente da
+<tt class="filename">./configure</tt>. Leggi nei sorgenti del kernel la
+documentazione sul framebuffer (<tt class="filename">Documentation/fb/*</tt>) per
+ulteriori informazioni.
+</p><p>
+Se la tua scheda non supporta lo standard VBE 2.0 (vecchie schede ISA/PCI, come
+la S3 Trio64), ma solo VBE 1.2 (o precedente?): bene, c'è ancora VESAfb, ma
+ddovrai caricare SciTech Display Doctor (conosciuto precedentemente come UniVBE)
+prima di avviare Linux. Usa un disco di avvio DOS o qualcosa del genere. E non
+dimenticare di registrare il tuo UniVBE ;))
+</p><p>
+L'uscita su FBdev richiede principalmente alcuni parametri addizionali:
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><tt class="option">-fb</tt></span></dt><dd><p>
+    specifica il dispositivo framebuffer da usare (default:
+    <tt class="filename">/dev/fb0</tt>)
+  </p></dd><dt><span class="term"><tt class="option">-fbmode</tt></span></dt><dd><p>
+    nome della modalità da usare (come in <tt class="filename">/etc/fb.modes</tt>)
+  </p></dd><dt><span class="term"><tt class="option">-fbmodeconfig</tt></span></dt><dd><p>
+    file di configirazione delle modalità (default:
+    <tt class="filename">/etc/fb.modes</tt>)
+  </p></dd><dt><span class="term"><tt class="option">-monitor-hfreq</tt>, </span><span class="term"><tt class="option">-monitor-vfreq</tt>, </span><span class="term"><tt class="option">-monitor-dotclock</tt></span></dt><dd><p>
+    valori <span class="bold"><strong>importanti</strong></span>, vedi
+    <tt class="filename">example.conf</tt>
+  </p></dd></dl></div><p>
+Se vuoi passare a una modalità particolare, allora usa
+</p><pre class="screen">
+mplayer -vm -fbmode <em class="replaceable"><code>nome_modalità</code></em> <em class="replaceable"><code>nomefile</code></em>
+</pre><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <tt class="option">-vm</tt> da sola può scegliere la modalità più adatta da
+  <tt class="filename">/etc/fb.modes</tt>. Può essere usata anche insieme con le
+  opzioni <tt class="option">-x</tt> e <tt class="option">-y</tt>. L'opzione
+  <tt class="option">-flip</tt> è supportata solo se il formato pixel del film
+  corrisponde al formato pixel della modalità video. Stai attento al valore
+  di bpp, il driver fbdev cerca di usare prima quello corrente, poi quello che
+  indichi tramite l'opzione <tt class="option">-bpp</tt> option.
+</p></li><li class="listitem"><p>
+  l'opzione <tt class="option">-zoom</tt> non è supportata
+  (usa <tt class="option">-vf scale</tt>). Non puoi usare modalità a 8bbp (o meno).
+</p></li><li class="listitem"><p>
+  Probabilmente vuoi disabilitare il cursore:
+  </p><pre class="screen">echo -e '\033[?25l'</pre><p>
+  o
+  </p><pre class="screen">setterm -cursor off</pre><p>
+  e il salvaschermo:
+  </p><pre class="screen">setterm -blank 0</pre><p>
+  Per riabilitare il cursore:
+  </p><pre class="screen">echo -e '\033[?25h'</pre><p>
+  o
+  </p><pre class="screen">setterm -cursor on</pre><p>
+</p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nota</h3><p>
+La modifica della modalità video di FBdev <span class="emphasis"><em>non funziona</em></span>
+con il framebuffer VESA, e non chiederla, visto che non è una limitazione di
+<span class="application">MPlayer</span>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="svgalib.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="mga_vid.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">4.5. SVGAlib </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 4.7. Framebuffer Matrox (mga_vid)</td></tr></table></div></body></html>

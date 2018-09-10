@@ -1,0 +1,26 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.7. 媒体流复制</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="prev" href="menc-feat-rescale.html" title="6.6. 改变电影大小"><link rel="next" href="menc-feat-enc-images.html" title="6.8. 从多个输入图像文件进行编码(JPEG, PNG, TGA等)"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.7. 媒体流复制</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-rescale.html">上一页</a> </td><th width="60%" align="center">第 6 章 <span class="application">MEncoder</span>的基础用法</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-streamcopy"></a>6.7. 媒体流复制</h2></div></div></div><p>
+<span class="application">MEncoder</span>能以两种方式处理输入媒体流：
+<span class="bold"><strong>编码</strong></span>或<span class="bold"><strong>复制</strong></span>。
+本节是关于<span class="bold"><strong>复制</strong></span>的。
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>视频流</strong></span> (选项<tt class="option">-ovc copy</tt>)：
+  一系列工作可以完成的很好 :) 好像把FLI或VIVO或MPEG-1视频放入（不是转换）到
+  一个AVI文件中！当然，只有<span class="application">MPlayer</span>能播放这样的文
+  件:)并且也许它并没有生活上的实际价值。实际意义上：当只有音频流要被编码（
+  例如从无压缩的PCM到MP3）时，视频流才可能有用。
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>音频流</strong></span> (选项<tt class="option">-oac copy</tt>)：
+  直接的。你可能提取一个外部音频文件（MP3，WAV）并将其合成到一个输出媒体流里。
+  为此可使用<tt class="option">-audiofile <em class="replaceable"><code>文件名</code></em></tt>选项。
+</p></li></ul></div><p>
+使用<tt class="option">-oac copy</tt>从一种容器格式复制到另一种容器格式时，你可能需要
+使用<tt class="option">-fafmttag</tt>选项以保持原始文件的音频格式标签。例如，如果你将
+一个使用AAC音频的NSV文件转换到AVI容器中，音频格式文件标签可能是错误的，需要被
+转换。对于详细的音频格式标签，查看<tt class="filename">codecs.conf</tt>。
+</p><p>
+例子：
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.nsv</code></em> -oac copy -fafmttag 0x706D \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-rescale.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">6.6. 改变电影大小 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 6.8. 从多个输入图像文件进行编码(JPEG, PNG, TGA等)</td></tr></table></div></body></html>

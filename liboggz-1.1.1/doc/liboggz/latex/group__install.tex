@@ -1,0 +1,189 @@
+\section{Installation}
+\label{group__install}\index{Installation@{Installation}}
+\subsection{I\-N\-S\-T\-A\-L\-L}\label{group__install_install}
+
+\begin{DoxyCodeInclude}
+Basic Installation
+==================
+
+   These are \textcolor{keyword}{generic} installation instructions.
+
+   The `configure\textcolor{stringliteral}{' shell script attempts to guess correct values for}
+\textcolor{stringliteral}{various system-dependent variables used during compilation.  It uses}
+\textcolor{stringliteral}{those values to create a `Makefile'} in each directory of the package.
+It may also create one or more `.h\textcolor{stringliteral}{' files containing system-dependent}
+\textcolor{stringliteral}{definitions.  Finally, it creates a shell script `config.status'} that
+you can run in the future to recreate the current configuration, a file
+`config.cache\textcolor{stringliteral}{' that saves the results of its tests to speed up}
+\textcolor{stringliteral}{reconfiguring, and a file `config.log'} containing compiler output
+(useful mainly \textcolor{keywordflow}{for} debugging `configure\textcolor{stringliteral}{').}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   If you need to do unusual things to compile the package, please try}
+\textcolor{stringliteral}{to figure out how `configure'} could check whether to \textcolor{keywordflow}{do} them, and mail
+diffs or instructions to the address given in the `README\textcolor{stringliteral}{' so they can}
+\textcolor{stringliteral}{be considered for the next release.  If at some point `config.cache'}
+contains results you don\textcolor{stringliteral}{'t want to keep, you may remove or edit it.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   The file `configure.in'} is used to create `configure\textcolor{stringliteral}{' by a program}
+\textcolor{stringliteral}{called `autoconf'}.  You only need `configure.in\textcolor{stringliteral}{' if you want to change}
+\textcolor{stringliteral}{it or regenerate `configure'} \textcolor{keyword}{using} a newer version of `autoconf\textcolor{stringliteral}{'.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{The simplest way to compile this package is:}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{  1. `cd'} to the directory containing the package\textcolor{stringliteral}{'s source code and type}
+\textcolor{stringliteral}{     `./configure'} to configure the package \textcolor{keywordflow}{for} your system.  If you\textcolor{stringliteral}{'re}
+\textcolor{stringliteral}{     using `csh'} on an old version of System V, you might need to type
+     `sh ./configure\textcolor{stringliteral}{' instead to prevent `csh'} from trying to execute
+     `configure\textcolor{stringliteral}{' itself.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{     Running `configure'} takes awhile.  While running, it prints some
+     messages telling which features it is checking \textcolor{keywordflow}{for}.
+
+  2. Type `make\textcolor{stringliteral}{' to compile the package.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{  3. Optionally, type `make check'} to run any \textcolor{keyword}{self}-tests that come with
+     the package.
+
+  4. Type `make install\textcolor{stringliteral}{' to install the programs and any data files and}
+\textcolor{stringliteral}{     documentation.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{  5. You can remove the program binaries and object files from the}
+\textcolor{stringliteral}{     source code directory by typing `make clean'}.  To also \textcolor{keyword}{remove} the
+     files that `configure\textcolor{stringliteral}{' created (so you can compile the package for}
+\textcolor{stringliteral}{     a different kind of computer), type `make distclean'}.  There is
+     also a `make maintainer-clean\textcolor{stringliteral}{' target, but that is intended mainly}
+\textcolor{stringliteral}{     for the package'}s developers.  If you use it, you may have to \textcolor{keyword}{get}
+     all sorts of other programs in order to regenerate files that came
+     with the distribution.
+
+Compilers and Options
+=====================
+
+   Some systems require unusual options \textcolor{keywordflow}{for} compilation or linking that
+the `configure\textcolor{stringliteral}{' script does not know about.  You can give `configure'}
+initial values \textcolor{keywordflow}{for} variables by setting them in the environment.  Using
+a Bourne-compatible shell, you can \textcolor{keywordflow}{do} that on the command line like
+\textcolor{keyword}{this}:
+     CC=c89 CFLAGS=-O2 LIBS=-lposix ./configure
+
+Or on systems that have the `env\textcolor{stringliteral}{' program, you can do it like this:}
+\textcolor{stringliteral}{     env CPPFLAGS=-I/usr/local/include LDFLAGS=-s ./configure}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{Compiling For Multiple Architectures}
+\textcolor{stringliteral}{====================================}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   You can compile the package for more than one kind of computer at the}
+\textcolor{stringliteral}{same time, by placing the object files for each architecture in their}
+\textcolor{stringliteral}{own directory.  To do this, you must use a version of `make'} that
+supports the `VPATH\textcolor{stringliteral}{' variable, such as GNU `make'}.  `cd\textcolor{stringliteral}{' to the}
+\textcolor{stringliteral}{directory where you want the object files and executables to go and run}
+\textcolor{stringliteral}{the `configure'} script.  `configure\textcolor{stringliteral}{' automatically checks for the}
+\textcolor{stringliteral}{source code in the directory that `configure'} is in and in `..\textcolor{stringliteral}{'.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   If you have to use a `make'} that does not supports the `VPATH\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{variable, you have to compile the package for one architecture at a time}
+\textcolor{stringliteral}{in the source code directory.  After you have installed the package for}
+\textcolor{stringliteral}{one architecture, use `make distclean'} before reconfiguring \textcolor{keywordflow}{for} another
+architecture.
+
+Installation Names
+==================
+
+   By \textcolor{keywordflow}{default}, `make install\textcolor{stringliteral}{' will install the package'}s files in
+`/usr/local/bin\textcolor{stringliteral}{', `/usr/local/man'}, etc.  You can specify an
+installation prefix other than `/usr/local\textcolor{stringliteral}{' by giving `configure'} the
+option `--prefix=PATH\textcolor{stringliteral}{'.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   You can specify separate installation prefixes for}
+\textcolor{stringliteral}{architecture-specific files and architecture-independent files.  If you}
+\textcolor{stringliteral}{give `configure'} the option `--exec-prefix=PATH\textcolor{stringliteral}{', the package will use}
+\textcolor{stringliteral}{PATH as the prefix for installing programs and libraries.}
+\textcolor{stringliteral}{Documentation and other data files will still use the regular prefix.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   In addition, if you use an unusual directory layout you can give}
+\textcolor{stringliteral}{options like `--bindir=PATH'} to specify different values \textcolor{keywordflow}{for} particular
+kinds of files.  Run `configure --help\textcolor{stringliteral}{' for a list of the directories}
+\textcolor{stringliteral}{you can set and what kinds of files go in them.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   If the package supports it, you can cause programs to be installed}
+\textcolor{stringliteral}{with an extra prefix or suffix on their names by giving `configure'} the
+option `--program-prefix=PREFIX\textcolor{stringliteral}{' or `--program-suffix=SUFFIX'}.
+
+Optional Features
+=================
+
+   Some packages pay attention to `--enable-FEATURE\textcolor{stringliteral}{' options to}
+\textcolor{stringliteral}{`configure'}, where FEATURE indicates an optional part of the package.
+They may also pay attention to `--with-PACKAGE\textcolor{stringliteral}{' options, where PACKAGE}
+\textcolor{stringliteral}{is something like `gnu-as'} or `x\textcolor{stringliteral}{' (for the X Window System).  The}
+\textcolor{stringliteral}{`README'} should mention any `--enable-\textcolor{stringliteral}{' and `--with-'} options that the
+package recognizes.
+
+   For packages that use the X Window System, `configure\textcolor{stringliteral}{' can usually}
+\textcolor{stringliteral}{find the X include and library files automatically, but if it doesn'}t,
+you can use the `configure\textcolor{stringliteral}{' options `--x-includes=DIR'} and
+`--x-libraries=DIR\textcolor{stringliteral}{' to specify their locations.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{Specifying the System Type}
+\textcolor{stringliteral}{==========================}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   There may be some features `configure'} can not figure out
+automatically, but needs to determine by the type of host the package
+will run on.  Usually `configure\textcolor{stringliteral}{' can figure that out, but if it prints}
+\textcolor{stringliteral}{a message saying it can not guess the host type, give it the}
+\textcolor{stringliteral}{`--host=TYPE'} option.  TYPE can either be a \textcolor{keywordtype}{short} name \textcolor{keywordflow}{for} the system
+type, such as `sun4\textcolor{stringliteral}{', or a canonical name with three fields:}
+\textcolor{stringliteral}{     CPU-COMPANY-SYSTEM}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{See the file `config.sub'} \textcolor{keywordflow}{for} the possible values of each field.  If
+`config.sub\textcolor{stringliteral}{' isn'}t included in \textcolor{keyword}{this} package, then \textcolor{keyword}{this} package doesn\textcolor{stringliteral}{'t}
+\textcolor{stringliteral}{need to know the host type.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   If you are building compiler tools for cross-compiling, you can also}
+\textcolor{stringliteral}{use the `--target=TYPE'} option to select the type of system they will
+produce code \textcolor{keywordflow}{for} and the `--build=TYPE\textcolor{stringliteral}{' option to select the type of}
+\textcolor{stringliteral}{system on which you are compiling the package.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{Sharing Defaults}
+\textcolor{stringliteral}{================}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   If you want to set default values for `configure'} scripts to share,
+you can create a site shell script called `config.site\textcolor{stringliteral}{' that gives}
+\textcolor{stringliteral}{default values for variables like `CC'}, `cache\_file\textcolor{stringliteral}{', and `prefix'}.
+`configure\textcolor{stringliteral}{' looks for `PREFIX/share/config.site'} \textcolor{keywordflow}{if} it exists, then
+`PREFIX/etc/config.site\textcolor{stringliteral}{' if it exists.  Or, you can set the}
+\textcolor{stringliteral}{`CONFIG\_SITE'} environment variable to the location of the site script.
+A warning: not all `configure\textcolor{stringliteral}{' scripts look for a site script.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{Operation Controls}
+\textcolor{stringliteral}{==================}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{   `configure'} recognizes the following options to control how it
+operates.
+
+`--cache-file=FILE\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{     Use and save the results of the tests in FILE instead of}
+\textcolor{stringliteral}{     `./config.cache'}.  Set FILE to `/dev/null\textcolor{stringliteral}{' to disable caching, for}
+\textcolor{stringliteral}{     debugging `configure'}.
+
+`--help\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{     Print a summary of the options to `configure'}, and exit.
+
+`--quiet\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{`--silent'}
+`-q\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{     Do not print messages saying which checks are being made.  To}
+\textcolor{stringliteral}{     suppress all normal output, redirect it to `/dev/null'} (any error
+     messages will still be shown).
+
+`--srcdir=DIR\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{     Look for the package'}s source code in directory DIR.  Usually
+     `configure\textcolor{stringliteral}{' can determine that directory automatically.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{`--version'}
+     Print the version of Autoconf used to generate the `configure\textcolor{stringliteral}{'}
+\textcolor{stringliteral}{     script, and exit.}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{`configure'} also accepts some other, not widely useful, options.
+\end{DoxyCodeInclude}
+ 

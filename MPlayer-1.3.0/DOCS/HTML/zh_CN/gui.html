@@ -1,0 +1,22 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.3. What about the GUI?</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="install.html" title="第 2 章 Installation"><link rel="prev" href="features.html" title="2.2. Features"><link rel="next" href="fonts-osd.html" title="2.4. Fonts and OSD"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.3. What about the GUI?</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="features.html">上一页</a> </td><th width="60%" align="center">第 2 章 Installation</th><td width="20%" align="right"> <a accesskey="n" href="fonts-osd.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gui"></a>2.3. What about the GUI?</h2></div></div></div><p>
+The GUI needs GTK 1.2.x or GTK 2.0 (it isn't fully GTK, but the panels are),
+so <code class="systemitem">GTK</code> (and the devel stuff, usually
+called <code class="systemitem">gtk-dev</code>) has to be installed.
+You can build it by specifying <tt class="option">--enable-gui</tt> during
+<tt class="filename">./configure</tt>. Then, to turn on GUI mode, you have to
+execute the <span class="command"><strong>gmplayer</strong></span> binary.
+</p><p>
+As <span class="application">MPlayer</span> doesn't have a skin included, you
+have to download at least one if you want to use the GUI. See Skins at the <a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">download page</a>.
+A skin should be extracted to the usual system-wide directory <tt class="filename">$PREFIX/share/mplayer/skins</tt> or to the user
+specific directory <tt class="filename">$HOME/.mplayer/skins</tt>
+and resides as a subdirectory there.
+<span class="application">MPlayer</span> by default first looks in the user specific
+directory, then the system-wide directory for a subdirectory named
+<tt class="filename">default</tt> (which
+simply can be a link to your favourite skin) to load the skin, but
+you can use the <tt class="option">-skin <em class="replaceable"><code>myskin</code></em></tt>
+option, or the <code class="literal">skin=myskin</code> config file directive to use
+a different skin from the <tt class="filename">skins</tt>
+directories.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="features.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="fonts-osd.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">2.2. Features </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 2.4. Fonts and OSD</td></tr></table></div></body></html>

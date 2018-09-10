@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.1. Xv</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="next" href="dga.html" title="6.2. DGA"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.1. Xv</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="video.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="dga.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="xv"></a>6.1. Xv</h2></div></div></div><p>
+XFree86 4.0.2 vagy újabb alatt használhatod a kártyád YUV rutinjait
+az XVideo kiterjesztés használatával. Ez az, amit a <tt class="option">-vo xv</tt>
+kapcsoló használ. Ez a vezérlő támogatja a
+fényerősség/kontraszt/árnyalat/stb. állítását (hacsak nem a régi, lassú
+DirectShow DivX codec-et használod, ami mindenhol támogatja), lásd a man oldalt.
+</p><p>
+A beüzemeléséhez ellenőrizd a következőket:
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  XFree86 4.0.2 vagy újabbat kell használnod (korábbi verziókban nincs XVideo)
+</p></li><li class="listitem"><p>
+  A kártyádnak támogatnia kell a hardveres gyorsítást (a modern kártyák tudják)
+</p></li><li class="listitem"><p>
+  Az X-nek írnia kell az XVideo kiegészítés betöltését valahogy így:
+  </p><pre class="programlisting">(II) Loading extension XVideo</pre><p>
+  a <tt class="filename">/var/log/XFree86.0.log</tt> fájlban.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Megjegyzés</h3><p>
+   Ez csak az XFree86 kiegészítését tölti be. Egy jó telepítésben ez
+   mindig betöltődik, de ez nem jelenti azt, hogy a
+   <span class="bold"><strong>kártya</strong></span> XVideo támogatása is be van töltve!
+  </p></div><p>
+</p></li><li class="listitem"><p>
+  A kártyádnak van Xv támogatása Linux alatt. Ennek az ellenőrzéséhez add ki az
+  <span class="command"><strong>xvinfo</strong></span> parancsot, ez része az XFree86 disztribúciónak. Egy
+  hosszú szöveget kell kiírnia, valami ilyesmit:
+  </p><pre class="screen">
+X-Video Extension version 2.2
+screen #0
+  Adaptor #0: "Savage Streams Engine"
+    number of ports: 1
+    port base: 43
+    operations supported: PutImage
+    supported visuals:
+      depth 16, visualID 0x22
+      depth 16, visualID 0x23
+    number of attributes: 5
+(...)
+    Number of image formats: 7
+      id: 0x32595559 (YUY2)
+        guid: 59555932-0000-0010-8000-00aa00389b71
+        bits per pixel: 16
+        number of planes: 1
+        type: YUV (packed)
+      id: 0x32315659 (YV12)
+        guid: 59563132-0000-0010-8000-00aa00389b71
+        bits per pixel: 12
+        number of planes: 3
+        type: YUV (planar)
+(...stb...)</pre><p>
+  Támogatnia kell a tömörített YUY2 és a YV12 planar pixel formátumokat, hogy az
+  <span class="application">MPlayer</span> használni tudja.
+</p></li><li class="listitem"><p>
+  És végül, nézd meg, hogy az <span class="application">MPlayer</span> 'xv' támogatással
+  lett-e fordítva. Írd be ezt: <span class="command"><strong>mplayer -vo help | grep xv </strong></span>.
+  Ha az 'xv' támogatás be van építve, egy ehhez hasonló sornak szerepelnie kell:
+  </p><pre class="screen">  xv      X11/Xv</pre><p>
+</p></li></ol></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="video.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="dga.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6. fejezet - Videó kimeneti eszközök </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.2. DGA</td></tr></table></div></body></html>

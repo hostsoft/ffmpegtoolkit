@@ -1,0 +1,97 @@
+#
+# Export file for liboggz
+#
+# Only the symbols listed in the global section will be callable from
+# applications linking to liboggz.
+#
+
+@PACKAGE@.so.0.2
+{
+        global:
+		oggz_new;
+		oggz_open;
+		oggz_open_stdio;
+		oggz_flush;
+		oggz_close;
+		oggz_get_bos;
+		oggz_get_eos;
+		oggz_get_numtracks;
+
+		oggz_run_set_blocksize;
+		oggz_run;
+
+		oggz_set_read_callback;
+		oggz_set_read_page;
+		oggz_read;
+		oggz_read_input;
+		oggz_purge;
+
+		oggz_write_set_hungry_callback;
+		oggz_write_feed;
+		oggz_write;
+		oggz_write_output;
+		oggz_write_get_next_page_size;
+
+		oggz_set_metric;
+		oggz_set_metric_linear;
+		oggz_set_granulerate;
+		oggz_get_granulerate;
+		oggz_set_granuleshift;
+		oggz_get_granuleshift;
+		oggz_set_preroll;
+		oggz_get_preroll;
+
+		oggz_tell;
+                oggz_tell_granulepos;
+		oggz_tell_units;
+		oggz_seek;
+		oggz_seek_units;
+		oggz_set_data_start;
+		oggz_serialno_new;
+
+		oggz_io_set_read;
+		oggz_io_get_read_user_handle;
+		oggz_io_set_write;
+		oggz_io_get_write_user_handle;
+		oggz_io_set_seek;
+		oggz_io_get_seek_user_handle;
+		oggz_io_set_tell;
+		oggz_io_get_tell_user_handle;
+		oggz_io_set_flush;
+		oggz_io_get_flush_user_handle;
+
+                oggz_stream_get_content;
+                oggz_stream_get_content_type;
+                oggz_stream_get_numheaders;
+
+		oggz_table_new;
+		oggz_table_delete;
+		oggz_table_insert;
+		oggz_table_remove;
+		oggz_table_lookup;
+		oggz_table_size;
+		oggz_table_nth;
+
+                oggz_comment_get_vendor;
+                oggz_comment_set_vendor;
+                oggz_comment_first;
+                oggz_comment_first_byname;
+                oggz_comment_next;
+                oggz_comment_next_byname;
+                oggz_comment_add;
+                oggz_comment_add_byname;
+                oggz_comment_remove;
+                oggz_comment_remove_byname;
+
+                oggz_comment_generate;
+
+                oggz_comments_generate;
+		oggz_comments_copy;
+
+                oggz_packet_destroy;
+
+		oggz_content_type;
+
+        local:
+                *;
+};

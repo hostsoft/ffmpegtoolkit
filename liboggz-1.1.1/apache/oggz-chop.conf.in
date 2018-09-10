@@ -1,0 +1,6 @@
+<IfModule mod_actions.c>
+  ScriptAlias /oggz-chop @BINDIR@/oggz-chop
+  Action application/ogg /oggz-chop
+  Action video/ogg /oggz-chop
+  Action audio/ogg /oggz-chop
+</IfModule>

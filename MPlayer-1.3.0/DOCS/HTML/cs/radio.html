@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.11. Rádio</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="usage.html" title="Kapitola 3. Použití"><link rel="prev" href="tv-input.html" title="3.10. TV vstup"><link rel="next" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="radio.html#radio-input" title="3.11.1. Rádio vstup"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.11. Rádio</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-input.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 3. Použití</th><td width="20%" align="right"> <a accesskey="n" href="video.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="radio"></a>3.11. Rádio</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-input"></a>3.11.1. Rádio vstup</h3></div></div></div><p>
+Tato sekce se zabývá tím, jak zprovoznit poslech rozhlasu
+z V4L-kompatibilního rozhlasového tuneru.
+Popis voleb a ovládání z klávesnice naleznete v man stránce.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-compilation"></a>3.11.1.1. Kompilace</h4></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Nejprve musíte znovupřeložit <span class="application">MPlayer</span> pomocí
+  <tt class="filename">./configure</tt> s <tt class="option">--enable-radio</tt> a
+  (pokud chcete i nahrávat) <tt class="option">--enable-radio-capture</tt>.
+</p></li><li class="step"><p>
+  Ujistěte se, že váš tuner pracuje s jiným softwarem v Linuxu, například
+  <span class="application">XawTV</span>.
+</p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-tips"></a>3.11.1.2. Uživatelské tipy</h4></div></div></div><p>
+Plný výčet voleb je v manuálové stránce.
+Zde uvádíme jen několik tipů:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Použití volby <tt class="option">channels</tt>. Příklad:
+  </p><pre class="screen">-radio channels=104.4-Sibir,103.9-Maximum</pre><p>
+  Vysvětlení: Pomocí této volby budou k dispozici pouze stanice 104.4
+  a 103.9. Budete mít krásný OSD text během přepínání kanálů,
+  který zobrazí jméno kanálu. Mezery v názvech kanálů musí být
+  nahrazeny znakem "_".
+</p></li><li class="listitem"><p>
+  Je mnoho způsobů, jak zachytávat (nahrávat) zvuk. Můžete buď zachytávat pomocí
+  vstupu line-in zvukové karty propojeného vnější linkou s videokartou,
+  nebo použitím vestavěného ADC v čipu saa7134. V druhém případě musíte
+  zavést ovladač <code class="systemitem">saa7134-alsa</code> nebo
+ <code class="systemitem">saa7134-oss</code>.
+</p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span> nelze použít pro zachytávání zvuku, jelikož
+  vyžaduje videoproud, aby fungoval. Takže buď použijete
+  <span class="application">arecord</span> z projektu ALSA, nebo
+  volbu <tt class="option">-ao pcm:file=file.wav</tt>. V druhém případě neuslyšíte nic
+  (pokud ovšem nemáte propojku s line-in a vypnuté mute na kanále line-in).
+</p></li></ul></div><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-examples"></a>3.11.1.3. Příklady</h4></div></div></div><div class="informalexample"><p>
+Vstup ze standardního V4L (pomocí line-in kablu, zachytávání vypnuto):
+</p><pre class="screen">mplayer radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+Vstup ze standardního V4L (pomocí line-in kablu, zachytávání vypnuto,
+rozhraní V4Lv1):
+</p><pre class="screen">mplayer -radio driver=v4l radio://104.4</pre><p>
+</p></div><div class="informalexample"><p>
+Přehrávání druhé stanice ze seznamu:
+</p><pre class="screen">mplayer -radio channels=104.4=Sibir,103.9=Maximm  radio://2</pre><p>
+</p></div><div class="informalexample"><p>
+Průchod zvuku přes PCI sběrnici z interního ADC rádio karty.
+V tomto příkladu se tuner používá jako druhá zvuková karta
+(ALSA zařízení hw:1,0). Pro zařízení založené na saa7134 musí
+být zaveden buď modul <code class="systemitem">saa7134-alsa</code> nebo
+modul <code class="systemitem">saa7134-oss</code>.
+</p><pre class="screen">
+mplayer -rawaudio rate=32000 radio://2/capture \
+    -radio adevice=hw=1.0:arate=32000:channels=104.4=Sibir,103.9=Maximm
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+Když používáte názvy zařízení ALSA, dvojtečky musí být
+nahrazeny znaky rovnáse, čárky tečkami.
+</p></div><p>
+</p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-input.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="video.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">3.10. TV vstup </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> Kapitola 4. Výstupní video zařízení/rozhraní</td></tr></table></div></body></html>

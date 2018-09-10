@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.7. VCD回放</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="usage.html" title="第 3 章 Usage"><link rel="prev" href="dvd.html" title="3.6. DVD回放"><link rel="next" href="edl.html" title="3.8. Edit Decision Lists (EDL)"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.7. VCD回放</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dvd.html">上一页</a> </td><th width="60%" align="center">第 3 章 Usage</th><td width="20%" align="right"> <a accesskey="n" href="edl.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vcd"></a>3.7. VCD回放</h2></div></div></div><p>
+对于可用选项的详细列表，请阅读man页。对于标准视频CD (VCD)的语法如下：
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>&lt;track&gt;</code></em> [-cdrom-device <em class="replaceable"><code>&lt;device&gt;</code></em>]</pre><p>
+例如：
+</p><pre class="screen">mplayer vcd://2 -cdrom-device /dev/hdc</pre><p>
+默认的VCD设备是<tt class="filename">/dev/cdrom</tt>。如果你的设置不同，建
+立个连接或者在命令行通过<tt class="option">-cdrom-device</tt>选项指定正确设备。
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">注意</h3><p>
+至少Plextor及一些Toshiba SCSI CD-ROM驱动器对读取VCD有着恐怖的性能。这是因为
+针对这些设备的CDROMREADRAW <code class="systemitem">ioctl</code>没有完成。如果你有
+SCSI编程知识，请<a class="ulink" href="../../tech/patches.txt" target="_top">帮我们</a>实现对SCSI
+VCD的支持。
+</p></div><p>
+同时，你可以通过
+In the meantime you can extract data from VCDs with
+<a class="ulink" href="http://ftp.ntut.edu.tw/ftp/OS/Linux/packages/X/viewers/readvcd/" target="_top">readvcd</a>
+从VCD提取数据并用<span class="application">MPlayer</span>播放最终文件。
+</p><p><b>VCD结构. </b>
+视频CD (VCD)由CD-ROM XA簇组成，例如CD-ROM 模式 2
+表格1及2轨：
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  第一个轨道处于模式2表格2格式下，这意味着他使用L2错误恢复。此轨道含有
+  ISO-9660文件系统，其拥有2048字节/簇。此文件系统含有VCD属性数据信息，
+  以及经常用于菜单上的静态桢。对菜单的MPEG块也能存于这第一个轨道上，但
+  MPEG不得不被分散成一系列的150个簇的块。ISO-9660文件系统可以包含其它
+  对于VCD操作不重要的文件或程序。
+</p></li><li class="listitem"><p>
+  第二及余下的轨道通常是原始的2324字节/簇的MPEG(影片)轨道，每个簇包含
+  一个MPEG PS数据包。这些处于模式2表格1格式，所以他们没簇存储更多数据，
+  损失了一些纠错。在一个VCD的第一个轨道后也包含CD-DA轨道也是合法的。在
+  一些操作系统中，有些技巧是这些非ISO-9660轨道出现在文件系统中。在另外
+  一些操作系统中如GNU/Linux，这还（未）被实现。在此，MPEG数据
+  <span class="bold"><strong>不能被挂载</strong></span>。因为大部分电影在这种轨道
+  内，你应先试<tt class="option">vcd://2</tt>。
+</p></li><li class="listitem"><p>
+  还存在没有第一个轨道的VCD（单一轨道根本没有文件系统）。他们仍然是可
+  播放的，但不能被挂载。
+</p></li><li class="listitem"><p>
+  视频CD的定义被称为Philips"白皮书"，它通常并不出现在网上因为它要从
+  Philips购买。对于视频CD更详细的资料可从
+  <a class="ulink" href="http://www.vcdimager.org/pub/vcdimager/manuals/0.7/vcdimager.html#SEC4" target="_top">vcdimager文档</a>
+  获取。
+</p></li></ul></div><p>
+</p><p><b>关于.DAT文件. </b>
+被挂载的VCD上处于第一个轨道上的~600MB的文件并不是真正的文件！它是所谓的ISO网
+关，其被创建以便Windows处理这些轨道（Windows根本不允许应用程序直接访问原始设
+备）。在Linux下你不能复制或播放这些文件（它们包含垃圾）。在Windows下，这是可
+能的因为他的iso9660驱动模拟了在文件内直接读取轨道。要播放.DAT文件，你需要内核
+驱动，岂可再PowerDVD的Linux版本中找到。其有一个更改的iso9660文件系统
+(<tt class="filename">vcdfs/isofs-2.4.X.o</tt>)驱动，你可以通过<span class="application">MPlayer</span>
+复制甚至播放.DAT文件。但在Linux内核的标准的iso9660驱动上它不能工作！另外使用
+使用<tt class="option">vcd://</tt>。对于VCD复制另外的方法是内核新的
+<a class="ulink" href="http://www.elis.rug.ac.be/~ronsse/cdfs/" target="_top">cdfs</a>驱动（不是
+官方内核的一部分）其将CD会话显示为镜像文件及<a class="ulink" href="http://cdrdao.sf.net/" target="_top">cdrdao</a>，
+一个逐位的ＣＤ抓轨／复制程序。
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dvd.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="edl.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">3.6. DVD回放 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 3.8. Edit Decision Lists (EDL)</td></tr></table></div></body></html>

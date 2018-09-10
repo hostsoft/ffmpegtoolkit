@@ -1,0 +1,54 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.3. 如何用Subversion进行倒退测试</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="prev" href="bugreports_fix.html" title="A.2. 如何修正错误"><link rel="next" href="bugreports_report.html" title="A.4. 如何提交错误"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.3. 如何用Subversion进行倒退测试</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_fix.html">上一页</a> </td><th width="60%" align="center">附录 A. 如何报告错误</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_report.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_regression_test"></a>A.3. 如何用Subversion进行倒退测试</h2></div></div></div><p>
+一个经常发生的问题是‘它从前可以工作，但现在不行了’。
+此处将提供一步步的过程以帮助定位问题何时产生。这
+<span class="bold"><strong>不</strong></span>是为普通用户而设。
+</p><p>
+首先，你需要从Subversion处获得MPlayer的代码树。
+<a class="ulink" href="http://www.mplayerhq.hu/dload.html" target="_top">此页面</a>
+底部你将会发现相应指示。
+</p><p>
+在客户端，你现在将在mplayer/目录下得到一份Subversion的镜像。
+现在把此镜像更新到你所想要的日期：
+</p><pre class="screen">
+cd mplayer/
+svn update -r {"2004-08-23"}
+</pre><p>
+日期格式是YYYY-MM-DD HH:MM:SS。
+用此日期格式你将根据补丁提交的日期将其提取出来，如
+<a class="ulink" href="http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/" target="_top">MPlayer-cvslog archive</a>.
+所示
+</p><p>
+现在继续对于普通更新所需步骤：
+</p><pre class="screen">
+./configure
+make
+</pre><p>
+</p><p>
+如果有非程序员阅读至此，找到问题发生处的最快方法是使用二分法查找—，
+即循环不断地将搜索间隔日期除二。
+例如，如果问题发生在2003年，从这一年的中间查起，然后自问"问题已经在这里了
+么？"
+如果回答肯定，回溯到四月一号；如不在，前进到十月一号，以此类推。
+</p><p>
+如果你有很多空余的硬盘空间（完全编译现在将占用100MB，如果调试标志被指定，
+大概占用300-350MB），在更新前复制一份最近的正常版本；如果你要返回，这将
+节约一些时间。
+（在重新编译一份较早版本前经常需要执行'make distclean'，所以如果你没有
+备份你原始的代码树，当你回到当前代码时，你将不得不重新编译其中的所有代
+码。）
+</p><p>
+当你发现问题发生的那日期，使用mplayer-cvslog压缩文档（按日期排序）继续查找，
+并且用更精确的包含小时，分钟，秒的查询。
+</p><pre class="screen">
+svn update -r {"2004-08-23 15:17:25"}
+</pre><p>
+这将使你很容易的发现是哪个补丁引起的问题。
+</p><p>
+如果你发现了引起问题的补丁，你几乎成功了；把它报告到：
+<a class="ulink" href="http://bugzilla.mplayerhq.hu/" target="_top">MPlayer Bugzilla</a>或者
+注册到
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users" target="_top">MPlayer-users</a>
+并且把错误发送到那里。
+有可能原始作者站出来提交一个修正。
+你也可以仔细阅读补丁直到发现错误产生的地方:-)。
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_fix.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_report.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. 如何修正错误 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> A.4. 如何提交错误</td></tr></table></div></body></html>

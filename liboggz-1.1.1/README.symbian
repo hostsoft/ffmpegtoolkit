@@ -1,0 +1,5 @@
+The symbian/ directory contains the following files for Symbian's abuild tool:
+
+  bld.inf        Component definition file
+  liboggz.mmp    Project specification file
+  config.h       Configuration options for both emulator and device builds

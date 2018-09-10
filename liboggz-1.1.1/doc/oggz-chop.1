@@ -1,0 +1,110 @@
+.TH "oggz-chop" "1" 
+.SH "NAME" 
+oggz-chop \(em Extract the part of an Ogg file between given start and/or end times. 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz-chop\fR [\-o \fBfilename\fR  | \-\-output \fBfilename\fR ]  [\-s \fBstart_time\fR  | \-\-start \fBstart_time\fR ]  [\-e \fBend_time\fR  | \-\-end \fBend_time\fR ]  [\-k  | \-\-no-skeleton ] filename  
+.PP 
+\fBoggz-chop\fR [\-h  | \-\-help ]  [\-v  | \-\-version ]  
+.SH "Description" 
+.PP 
+\fBoggz-chop\fR chops a section of an Ogg file. 
+It correctly interprets the granulepos timestamps of
+Ogg CELT, CMML, Dirac, FLAC, Kate, PCM, Speex, Theora and Vorbis
+bitstreams.
+Run \fBoggz-known-codecs\fP\fB(1)\fP for a full list
+of codecs known by the installed version of oggz.
+ 
+.PP 
+The output file contains copies of the headers of the input file, and 
+all the codec data required to correctly decode the content between the 
+start and end times specified on the commandline. For codecs with data 
+dependencies like video keyframes, the keyframe prior to the starting 
+time will be included in the output. 
+ 
+.PP 
+Note that \fBoggz-chop\fR operates by copying pages of  
+Ogg data; it does not strip partial packets from the first or last 
+data page included in the output. It does however ensure to set the 
+end of stream flag on the last page of each logical bitstream. 
+ 
+.PP 
+Skeleton handling: By default, the output will contain a Skeleton track 
+specifying the start of the chop as presentation time. 
+ 
+.SH "Options" 
+.PP 
+\fBoggz-chop\fR accepts the following options: 
+ 
+.SS "Output options" 
+.IP "\-o \fBfilename\fR, \-\-output \fBfilename\fR" 10 
+Write output to the specified 
+\fBfilename\fR instead of printing it to 
+standard output. 
+ 
+.IP "\-s \fBstart_time\fR, \-\-start \fBstart_time\fR" 10 
+Specify the start time of the chopped section to output. 
+ 
+.IP "\-e \fBend_time\fR, \-\-end \fBend_time\fR" 10 
+Specify the end time of the chopped section to output. 
+ 
+.IP "\-k , \-\-no-skeleton" 10 
+Do NOT include a Skeleton bitstream in the output. 
+ 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+
+.SH EXAMPLES
+.PP
+Extract the first minute of file.ogx:
+.PP
+.RS
+\f(CWoggz chop \-e 1:00 file.ogx\fP
+.RE
+.PP
+Extract from the second to the fifth minute of file.ogx:
+.PP
+.RS
+\f(CWoggz chop \-s 2:00 \-e 5:00 \-o output.ogx file.ogx\fP
+.RE
+.PP
+Extract, specifying SMPTE-25 frame offsets:
+.PP
+.RS
+\f(CWoggz chop \-s smpte\-25:00:02:03::12 \-e smpte\-25:00:05:02::04 \-o output.ogv file.ogv\fP
+.RE
+
+
+.SH "Server configuration" 
+.PP 
+The following configuration for Apache httpd will enable oggz-chop. As with 
+most Apache directives, this may of course be restricted to particular 
+Directories or Locations: 
+.PP 
+ScriptAlias /oggz-chop /usr/bin/oggz-chop 
+ 
+.PP 
+Action application/ogg /oggz-chop 
+ 
+.SS "HTTP/1.1 Cacheability" 
+.PP 
+oggz-chop generates Last-Modified HTTP headers, and 
+responds correctly to If-Modified-Since conditional GET requests.  
+ 
+.SH "AUTHOR" 
+.PP 
+Conrad Parker        February 25, 2008;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2008 Annodex Association 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBoggz-validate\fP\fB(1)\fP, 
+\fBoggz-merge\fP\fB(1)\fP, 
+\fBoggz-dump\fP\fB(1)\fP, 
+\fBhogg\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Mon 23 Feb 2009, 12:35 

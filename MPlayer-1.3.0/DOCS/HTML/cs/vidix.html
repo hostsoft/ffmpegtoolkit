@@ -1,0 +1,147 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.15. VIDIX</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="prev" href="x11.html" title="4.14. X11"><link rel="next" href="directfb.html" title="4.16. DirectFB"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="vidix.html#vidix-ati" title="4.15.1. Karty ATI"><link rel="subsection" href="vidix.html#vidix-mga" title="4.15.2. Karty Matrox"><link rel="subsection" href="vidix.html#vidix-trident" title="4.15.3. Karty Trident"><link rel="subsection" href="vidix.html#vidix-3dlabs" title="4.15.4. Karty 3DLabs"><link rel="subsection" href="vidix.html#vidix-nvidia" title="4.15.5. Karty nVidia"><link rel="subsection" href="vidix.html#vidix-sis" title="4.15.6. Karty SiS"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.15. VIDIX</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="x11.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 4. Výstupní video zařízení/rozhraní</th><td width="20%" align="right"> <a accesskey="n" href="directfb.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vidix"></a>4.15. VIDIX</h2></div></div></div><p><b>PŘEDMLUVA. </b>
+<acronym class="acronym">VIDIX</acronym> je zkratka pro
+<span class="bold"><strong>VID</strong></span>eo
+<span class="bold"><strong>I</strong></span>nterface
+for *ni<span class="bold"><strong>X</strong></span>
+(video rozhraní pro *nix).
+VIDIX bylo navrženo a představeno jako rozhraní pro rychlé uživatelské ovladače
+dosahujících video výkonu jako dosahuje mga_vid na kartách Matrox. Je rovněž
+dobře přenositelné.
+</p><p>
+Toto rozhraní bylo navrženo jako pokus napasovat existující video akcelerující
+rozhraní (známé jako mga_vid, rage128_vid, radeon_vid, pm3_vid) do pevného
+schéma. Poskytuje vysokoúrovňové rozhraní k čipům známým jako BES
+(BackEnd scalers) nebo OV (Video Overlays). Neposkytuje nízkoúrovňové rozhraní
+k věcem známým jako grafické servery.
+(Nechci konkurovat X11 týmu v přepínání grafických režimů). Čili hlavním cílem
+tohoto rozhraní je maximalizace rychlosti přehrávání videa.
+</p><div class="itemizedlist"><p class="title"><b>POUŽITÍ</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Můžete použít samostatné video rozhraní: <tt class="option">-vo xvidix</tt>.
+  Toto rozhraní bylo vytvořeno jako front end X11 k technologii VIDIX.
+  Vyžaduje X server a může pracovat pouze pod X serverem. Poznamenejme, že
+  jelikož přímo komunikuje s hardwarem a obchází X ovladač, pixmapy uložené
+  v paměti grafické karty můžou být poškozeny. Můžete se tomu vyhnout omezením
+  množství video paměti použité X pomocí volby "VideoRam" v XF86Config o 4MB.
+  Pokud máte méně než 8MB video ram, můžete místo toho použít volbu
+  "XaaNoPixmapCache" v sekci screen.
+</p></li><li class="listitem"><p>
+  Existuje konzolové VIDIX rozhraní: <tt class="option">-vo cvidix</tt>.
+  To vyžaduje pro většinu karet funkční inicializovaný framebuffer (jinak pouze
+  rozhodíte obrazovku) a dosáhnete podobného efektu jako s
+  <tt class="option">-vo mga</tt> nebo <tt class="option">-vo fbdev</tt>. nVidia karty však
+  jsou schopny zobrazit plně grafické video na reálné textové konzoli. Viz
+  sekci <a class="link" href="vidix.html#vidix-nvidia" title="4.15.5. Karty nVidia">nvidia_vid</a> pro více informací.
+  Abyste se zbavili textu na okrajích a blikajícího kursoru, zkuste něco jako
+  </p><pre class="screen">setterm -cursor off &gt; /dev/tty9</pre><p>
+  (předpokládáme, že <code class="systemitem">tty9</code> není dosud používaná) a pak
+  se přepneme do <code class="systemitem">tty9</code>.
+  Na druhou stranu volba <tt class="option">-colorkey 0</tt> by měla poskytnout
+  video běžící na "pozadí", zprávná funkce však závisí na funkčnosti colorkey.
+  </p></li><li class="listitem"><p>
+  Můžete použít VIDIXové podzařízení, které bylo zabudováno do několika video
+  ovladačů, například: <tt class="option">-vo vesa:vidix</tt>
+  (<span class="bold"><strong>pouze Linux</strong></span>) a
+  <tt class="option">-vo fbdev:vidix</tt>.
+</p></li></ul></div><p>
+Nezáleží na tom, které video výstupní rozhraní je použito s
+<span class="bold"><strong>VIDIX</strong></span>.
+</p><div class="itemizedlist"><p class="title"><b>POŽADAVKY</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Video karta by měla být v grafickém režimu (vyjma karet nVidia s výstupním
+  rozhraním <tt class="option">-vo cvidix</tt>).
+</p></li><li class="listitem"><p>
+  Výstupní video rozhraní <span class="application">MPlayer</span>u by mělo znát
+  aktivní video režim a být schopno sdělit VIDIXovému podzařízení některé video
+  charakteristiky serveru.
+</p></li></ul></div><p><b>METODY POUŽITÍ. </b>
+Když použijete VIDIX jako <span class="bold"><strong>subdevice</strong></span>
+(<tt class="option">-vo vesa:vidix</tt>), pak je konfigurace video režimu je provedeno
+výstupním video rozhraním (zkrátka <span class="bold"><strong>vo_server</strong></span>em).
+Takže můžete zadat na příkazovém řádku <span class="application">MPlayer</span>u
+stejné volby jako pro vo_server. Návdavkem rozeznává volbu
+<tt class="option">-double</tt> jako globální parametr. (Doporučuji použít tuto volbu
+s VIDIX aspoň pro ATI kartu). Stejně jako <tt class="option">-vo xvidix</tt>, dosud
+zná následující volby: <tt class="option">-fs -zoom -x -y -double</tt>.
+</p><p>
+Rovněž můžete uvést VIDIXový ovladač jako třetí podvolbu na příkazovém řádku:
+</p><pre class="screen">
+mplayer -vo xvidix:mga_vid.so -fs -zoom -double <em class="replaceable"><code>soubor.avi</code></em>
+</pre><p>
+nebo
+</p><pre class="screen">
+mplayer -vo vesa:vidix:radeon_vid.so -fs -zoom -double -bpp 32 <em class="replaceable"><code>soubor.avi</code></em>
+</pre><p>
+Ale je to nebezpečné a neměli byste to dělat. V tomto případě bude zadaný
+ovladač vynucen a výsledek je nepředvídatelný (může vám
+<span class="bold"><strong>zatuhnout</strong></span> počítač). Měli byste to použít
+POUZE pokud jste si absolutně jistí, že to bude fungovat a
+<span class="application">MPlayer</span> to neudělá automaticky. Řekněte o tom prosím
+vývojářům. Správný způsob je použití VIDIX bez argumentů, aby proběhla
+autodetekce.
+</p><p>
+Jelikož VIDIX vyžaduje přímý přístup k hardware, můžete jej buď spustit jako
+root, nebo nastavit SETUID bit binárce <span class="application">MPlayer</span>u
+(<span class="bold"><strong>Varování: Toto je bezpečnostní risk!</strong></span>).
+Alternativně můžete použít speciální jaderný modul, například:
+</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Stáhněte si
+  <a class="ulink" href="http://www.arava.co.il/matan/svgalib/" target="_top">vývojovou verzi</a>
+  svgalib (například 1.9.17), <span class="bold"><strong>NEBO</strong></span> si
+  stáhněte verzi vytvořenou Alexem speciálně pro použití s
+  <span class="application">MPlayer</span>em (ke kompilaci nepotřebuje zdrojový kód
+  svgalib) z
+  <a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/svgalib/svgalib_helper-1.9.17-mplayer.tar.bz2" target="_top">odtud</a>.
+</p></li><li class="step"><p>
+  Skompilujte modul v adresáři
+  <tt class="filename">svgalib_helper</tt>
+  (naleznete ji v <tt class="filename">svgalib-1.9.17/kernel/</tt>,
+  pokud jste si stáhli zdrojový kód ze serveru svgalib) a nahrajte (insmod) jej.
+</p></li><li class="step"><p>
+  Pro vytvoření potřebných zařízení v adresáři
+  <tt class="filename">/dev</tt> proveďte jako root
+  </p><pre class="screen">make device</pre><p> v adresáři
+  <tt class="filename">svgalib_helper</tt>.
+</p></li><li class="step"><p>
+  Přesuňte adresář <tt class="filename">svgalib_helper</tt> do
+  podadresáře <tt class="filename">vidix</tt> zdrojových
+  kódů <span class="application">MPlayer</span>u.
+</p></li><li class="step"><p>
+ Odkomentujte řádek CFLAGS obsahující text "svgalib_helper"
+ v souboru <tt class="filename">vidix/Makefile</tt>.
+</p></li><li class="step"><p>
+  Překompilujte.
+</p></li></ol></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-ati"></a>4.15.1. Karty ATI</h3></div></div></div><p>
+V současnosti je většina ATI karet podporována nativně od Mach64 až po
+nejnovější Radeony.
+</p><p>
+Existují dvě skompilované binárky: <tt class="filename">radeon_vid</tt> pro Radeony a
+<tt class="filename">rage128_vid</tt> pro karty Rage 128. Můžete některou vynutit,
+ nebo nechat VIDIX rozhraní autodetekovat všechny dostupné ovladače.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-mga"></a>4.15.2. Karty Matrox</h3></div></div></div><p>
+Matrox G200, G400, G450 a G550 jsou hlášeny jako funkční.
+</p><p>
+Ovladač podporuje video ekvalizéry a měl by být téměř tak rychlý jako
+<a class="link" href="mga_vid.html" title="4.7. Matrox framebuffer (mga_vid)">Matrox framebuffer</a>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-trident"></a>4.15.3. Karty Trident</h3></div></div></div><p>
+Existuje ovladač pro čipset Trident Cyberblade/i1, který lze nalézt na
+motherboardech VIA Epia.
+</p><p>
+Ovladač byl napsán a je udržován
+<a class="ulink" href="http://www.blackfiveservices.co.uk/EPIAVidix.shtml" target="_top">Alastairem M. Robinsonem</a>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-3dlabs"></a>4.15.4. Karty 3DLabs</h3></div></div></div><p>
+Ačkoli existuje ovladač pro čipy 3DLabs GLINT R3 a Permedia3, nikdo je
+netestoval, takže hlášení vítáme.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-nvidia"></a>4.15.5. Karty nVidia</h3></div></div></div><p>
+Unikátní vlastností ovladače nvidia_vid je jeho schopnost zobrazit video na
+<span class="bold"><strong>jednoduché, čisté, pouze textové konzoli</strong></span>
+– bez framebufferu nebo nějaké X magie. Pro tento účel budete muset
+použít video rozhraní <tt class="option">cvidix</tt>, jak to ukazuje následující
+příklad:
+</p><pre class="screen">mplayer -vo cvidix <em class="replaceable"><code>příklad.avi</code></em></pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-sis"></a>4.15.6. Karty SiS</h3></div></div></div><p>
+Toto je velmi experimentální kód, stejně jako nvidia_vid.
+</p><p>
+Byl testován na SiS 650/651/740 (nejobvyklejší čipsety použité v SiS
+verzích "Shuttle XPC" barebones boxes out there)
+</p><p>
+Hlášení očekávána!
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="x11.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="directfb.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">4.14. X11 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 4.16. DirectFB</td></tr></table></div></body></html>

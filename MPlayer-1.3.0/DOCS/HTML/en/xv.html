@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.1. Xv</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="Chapter 4. Video output devices"><link rel="prev" href="video.html" title="Chapter 4. Video output devices"><link rel="next" href="dga.html" title="4.2. DGA"><link rel="preface" href="howtoread.html" title="How to read this documentation"><link rel="chapter" href="intro.html" title="Chapter 1. Introduction"><link rel="chapter" href="install.html" title="Chapter 2. Installation"><link rel="chapter" href="usage.html" title="Chapter 3. Usage"><link rel="chapter" href="video.html" title="Chapter 4. Video output devices"><link rel="chapter" href="ports.html" title="Chapter 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapter 6. Basic usage of MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapter 7. Encoding with MEncoder"><link rel="chapter" href="faq.html" title="Chapter 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendix A. How to report bugs"><link rel="appendix" href="skin.html" title="Appendix B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.1. Xv</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="video.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Video output devices</th><td width="20%" align="right"> <a accesskey="n" href="dga.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="xv"></a>4.1. Xv</h2></div></div></div><p>
+Under XFree86 4.0.2 or newer, you can use your card's hardware YUV routines
+using the XVideo extension. This is what the option
+<tt class="option">-vo xv</tt> uses. Also, this driver supports adjusting
+brightness/contrast/hue/etc. (unless you use the old, slow DirectShow DivX
+codec, which supports it everywhere), see the man page.
+</p><p>
+In order to make this work, be sure to check the following:
+
+</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+  You have to use XFree86 4.0.2 or newer (former versions don't have XVideo)
+</p></li><li class="listitem"><p>
+  Your card actually supports hardware acceleration (modern cards do)
+</p></li><li class="listitem"><p>
+  X loads the XVideo extension, it's something like this:
+  </p><pre class="programlisting">(II) Loading extension XVideo</pre><p>
+  in <tt class="filename">/var/log/XFree86.0.log</tt>
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+   This loads only the XFree86's extension. In a good install, this is
+   always loaded, and doesn't mean that the
+   <span class="bold"><strong>card's</strong></span> XVideo support is loaded!
+  </p></div><p>
+</p></li><li class="listitem"><p>
+  Your card has Xv support under Linux. To check, try
+  <span class="command"><strong>xvinfo</strong></span>, it is the part of the XFree86 distribution. It
+  should display a long text, similar to this:
+  </p><pre class="screen">
+X-Video Extension version 2.2
+screen #0
+  Adaptor #0: "Savage Streams Engine"
+    number of ports: 1
+    port base: 43
+    operations supported: PutImage
+    supported visuals:
+      depth 16, visualID 0x22
+      depth 16, visualID 0x23
+    number of attributes: 5
+(...)
+    Number of image formats: 7
+      id: 0x32595559 (YUY2)
+        guid: 59555932-0000-0010-8000-00aa00389b71
+        bits per pixel: 16
+        number of planes: 1
+        type: YUV (packed)
+      id: 0x32315659 (YV12)
+        guid: 59563132-0000-0010-8000-00aa00389b71
+        bits per pixel: 12
+        number of planes: 3
+        type: YUV (planar)
+(...etc...)</pre><p>
+  It must support YUY2 packed, and YV12 planar pixel formats to be usable
+  with <span class="application">MPlayer</span>.
+</p></li><li class="listitem"><p>
+  And finally, check if <span class="application">MPlayer</span> was compiled
+  with 'xv' support. Do a <span class="command"><strong>mplayer -vo help | grep xv </strong></span>.
+  If 'xv' support was built a line similar to this should appear:
+  </p><pre class="screen">  xv      X11/Xv</pre><p>
+</p></li></ol></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="video.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="dga.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 4. Video output devices </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 4.2. DGA</td></tr></table></div></body></html>

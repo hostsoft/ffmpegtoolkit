@@ -1,0 +1,41 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.5. SVGAlib</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="prev" href="sdl.html" title="4.4. SDL"><link rel="next" href="fbdev.html" title="4.6. Вывод во фреймбуфер (FBdev)"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.5. SVGAlib</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sdl.html">Пред.</a> </td><th width="60%" align="center">Глава 4. Устройства вывода видео</th><td width="20%" align="right"> <a accesskey="n" href="fbdev.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="svgalib"></a>4.5. SVGAlib</h2></div></div></div><p><b>УСТАНОВКА. </b>
+потребуется установить svgalib и ее пакет разработки, чтобы
+<span class="application">MPlayer</span> собрал свой SVGAlib драйвер (определяется
+автоматически, но можко включить принудительно), и отредактировать
+<tt class="filename">/etc/vga/libvga.config</tt> в соответствии с вашией картой и монитором.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+Убедитесь, что не используете опцию <tt class="option">-fs</tt>, поскольку она включает
+использование программного масштабирования и работает медленно. Если вам действительно
+это необходимо, используйте опцию <tt class="option">-sws 4</tt>, которая будет давать плохое
+качество, но несколько быстрее.
+</p></div><p><b>ПОДДЕРЖКА EGA (4BPP). </b>
+SVGAlib включает в себя EGAlib, и <span class="application">MPlayer</span> имеет
+возможность выводить любой фильм в 16-ти цветах. Используется в таких вариантах:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  EGA карта с EGA монитором: 320x200x4bpp, 640x200x4bpp, 640x350x4bpp
+</p></li><li class="listitem"><p>
+  EGA карта с CGA монитором: 320x200x4bpp, 640x200x4bpp
+</p></li></ul></div><p>
+Значение bpp (бит на пиксел) должно быть вручную установлено в 4:
+<tt class="option">-bpp 4</tt>
+</p><p>
+Возможно потребуется отмасштабировать фильм, чтобы уместить в размеры EGA режима:
+</p><pre class="screen">-vf scale=640:350</pre><p>
+or
+</p><pre class="screen">-vf scale=320:200</pre><p>
+</p><p>
+Для масштабирования требуется быстрый алгоритм с плохим качеством:
+</p><pre class="screen">-sws 4</pre><p>
+</p><p>
+Возможно надо отключить автоматическую коррекцию пропорций:
+</p><pre class="screen">-noaspect</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+Как показывает мой опыт, лучшее качество на EGA экране получается
+при небольшом уменьшении яркости:
+<tt class="option">-vf eq=-20:0</tt>. Мне также пришлось уменьшить частоту дискретизации [samplerate]
+на моей машине, поскольку звук не работал на 44kГц.
+<tt class="option">-srate 22050</tt>.
+</p></div><p>
+ВЫ можете включить OSD и субтитры только с плагином <tt class="option">expand</tt>,
+смотрите страницу руководства man для точных параметров.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sdl.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="fbdev.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">4.4. SDL </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 4.6. Вывод во фреймбуфер (FBdev)</td></tr></table></div></body></html>

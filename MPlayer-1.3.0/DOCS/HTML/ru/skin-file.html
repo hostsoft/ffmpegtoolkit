@@ -1,0 +1,280 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.2. Файл skin</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="prev" href="skin-overview.html" title="B.1. Обзор"><link rel="next" href="skin-fonts.html" title="B.3. Шрифты"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="skin-file.html#skin-file-main" title="B.2.1. Главное окно и полоса воспроизведения"><link rel="subsection" href="skin-file.html#skin-file-subwindow" title="B.2.2. Вспомогательное окно"><link rel="subsection" href="skin-file.html#skin-file-menu" title="B.2.3. Меню со скинами"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.2. Файл skin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-overview.html">Пред.</a> </td><th width="60%" align="center">Приложение B. Формат скинов <span class="application">MPlayer</span></th><td width="20%" align="right"> <a accesskey="n" href="skin-fonts.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-file"></a>B.2. Файл skin</h2></div></div></div><p>
+Как описано выше, это файл конфигурации скина. он строчно-орентирован:
+строки комментариев начинаются с символа '<code class="literal">;</code>' в начале
+строки (только пробелы и табуляция допускается перед символом '<code class="literal">;</code>').
+</p><p>
+Файл создается из разделов. Каждый описывает скин для приложения и
+имеет следующую форму:
+</p><pre class="programlisting">
+section = <em class="replaceable"><code>название раздела</code></em>
+.
+.
+.
+end
+</pre><p>
+</p><p>
+В данный момент приложение одно, так что вам потребуется только один раздел: его название
+<span class="bold"><strong>movieplayer</strong></span>.
+</p><p>
+В пределах раздела каждое окно описывается блоком следующей структуры:
+</p><pre class="programlisting">
+window = <em class="replaceable"><code>название окна</code></em>
+.
+.
+.
+end
+</pre><p>
+</p><p>
+где  <em class="replaceable"><code>название окна</code></em> может быть одной из этих строк:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>main</strong></span> - главное окно
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>sub</strong></span> - вспомогательное окно
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>menu</strong></span> - меню со скинами
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>playbar</strong></span> - полоса воспроизведения
+</p></li></ul></div><p>
+</p><p>
+(Блоки sub и menu опциональные - необязательно создавать меню или оформлять вспомогательное
+окно.)
+</p><p>
+В пределах блока window вы можете описать каждый элемент окна строкой в следующем формате:
+</p><pre class="programlisting">item = parameter</pre><p>
+Где <code class="literal">item</code> - это строка, определяющая тип элемента GUI,
+<code class="literal">parameter</code> - числовое или текстовое значение (или список значений, разделенных
+запятой).
+</p><p>
+Если собрать все вместе, файл целиком будет выглядеть примерно так:
+</p><pre class="programlisting">
+section = movieplayer
+  window = main
+  ; ... items for main window ...
+  end
+
+  window = sub
+  ; ... items for subwindow ...
+  end
+
+  window = menu
+  ; ... items for menu ...
+  end
+
+  window = playbar
+  ; ... items for playbar ...
+  end
+end
+</pre><p>
+</p><p>
+Название файла с изображением  должно указываться без лидирующих каталогов -
+изображения ищутся в каталоге <tt class="filename">skins</tt>.
+Вы можете (но не обязаны) указать расширение файла. Если файл не существует,
+<span class="application">MPlayer</span> пытается загрузить файл
+<tt class="filename">&lt;filename&gt;.&lt;ext&gt;</tt>, где <code class="literal">png</code>
+и <code class="literal">PNG</code> пробуются вместо <tt class="filename">&lt;ext&gt;</tt>
+(в этом порядке). Будет использоваться первый найденный файл.
+</p><p>
+Вот пример, чтобы было понятнее. Предположим вы имеете изображение, называющееся
+<tt class="filename">main.png</tt>, которое используете для главного окна:
+</p><pre class="programlisting">base = main, -1, -1</pre><p>
+<span class="application">MPlayer</span> пытается загрузить файлы <tt class="filename">main</tt>,
+<tt class="filename">main.png</tt>, <tt class="filename">main.PNG</tt>.
+</p><p>
+И наконец несколько слов о позиционировании. Главное и вспомогательное окна могут
+быть размещены в разных углах экрана указанием <code class="literal">X</code> и
+<code class="literal">Y</code> координат. <code class="literal">0</code> -  это верхний и левый край,
+<code class="literal">-1</code> - центр и <code class="literal">-2</code> - правый или нижний, как
+указано на иллюстрации:
+</p><div class="informalfigure"><pre class="screen">
+(0, 0)----(-1, 0)----(-2, 0)
+  |          |          |
+  |          |          |
+(0,-1)----(-1,-1)----(-2,-1)
+  |          |          |
+  |          |          |
+(0,-2)----(-1,-2)----(-2,-2)
+</pre></div><p>
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-main"></a>B.2.1. Главное окно и полоса воспроизведения</h3></div></div></div><p>
+Ниже  - список элементов, которые можно указывать в
+'<code class="literal">window = main</code>' ... '<code class="literal">end</code>',
+и '<code class="literal">window = playbar</code>' ... '<code class="literal">end</code>'
+блоках.
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">
+  <a name="skin-decoration"></a>decoration = enable|disable
+  </code></span></dt><dd><p>
+  Включает или выключает декорации главного окна, осуществляемые window manager . По-умолчанию
+  <span class="bold"><strong>disable</strong></span>.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+  Это не работает для окна отображения, в этом нет надобности.
+  </p></div></dd><dt><span class="term"><code class="literal">
+  <a name="skin-main-base"></a>base = image, X, Y
+  </code></span></dt><dd><p>
+  Позволяет вам указать фоновое изображение, используемое в главном окне.
+  Окно будет появляться в указанной <code class="literal">X,Y</code> позиции на экране и
+  иметь размер изображения.
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+  Эти координаты пока не работают для окна отображения.
+  </p></div><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Предупреждение</h3><p>Прозрачные регионы в изображении (цвет #FF00FF) станут черными
+  на X сервере без расширения XShape. Ширина картинки должна делиться
+  на 8.</p></div></dd><dt><span class="term"><code class="literal">
+  <a name="skin-button"></a>button = image, X, Y, width, height, message
+  </code></span></dt><dd><p>
+  Размещает кнопку размера <code class="literal">width</code> * <code class="literal">height</code> на
+  позиции <code class="literal">X,Y</code>. Указанное сообщение <code class="literal">message</code>
+  генерируется при щелчке на кнопку. Изображение <code class="literal">image</code>,
+  должно иметь три части одна ниже другой (в соответствии с возможными состояниями
+  кнопки), как здесь:
+  </p><div class="informalfigure"><pre class="screen">
++------------+
+|  нажата    |
++------------+
+|  отпущена  |
++------------+
+|  отключена |
++------------+</pre></div></dd><dt><span class="term"><code class="literal">
+  <a name="skin-hpotmeter"></a>hpotmeter = button, bwidth, bheight, phases, numphases, default, X, Y, width, height, message
+  </code></span></dt><dd><p>
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-vpotmeter"></a>vpotmeter = button, bwidth, bheight, phases, numphases, default, X, Y, width, height, message
+  </code></span></dt><dd><p>
+  Размещает горизонтальный (hpotmeter) или вертикальный (vpotmeter) ползунок размера
+  <code class="literal">width</code> * <code class="literal">height</code> на позиции
+  <code class="literal">X,Y</code>. Изображение может быть разделено на разные части для
+  указания различных положений ползунка (например, вы можете иметь регулятор для
+  управления громкостью звука, изменяющийся с красного на зеленый при изменении его
+  уровня с минимального на максимальный.). <code class="literal">hpotmeter</code> может иметь
+  кнопку, которую можно таскать горизонтально. Параметры:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+    <code class="literal">button</code> - изображение, используемое для
+    кнопки (должно иметь три части одна под другой, как в случае
+    <a class="link" href="skin-file.html#skin-button">кнопки</a>)
+  </p></li><li class="listitem"><p>
+    <code class="literal">bwidth</code>, <code class="literal">bheight</code> - размер кнопки
+  </p></li><li class="listitem"><p>
+    <code class="literal">phases</code> - изображение, используемое для
+    различных положений hpotmeter. Специальное значение <code class="literal">NULL</code>
+    может использоваться, если подобное изображение вам не нужно. Изображение
+    должно быть разделено вертикально на
+    <code class="literal">numphases</code> частей, как указано ниже:
+    </p><div class="informalfigure"><pre class="screen">
++--------------+
+| положение #1 |
++--------------+
+| положение #2 |
++--------------+
+     ...
++--------------+
+| положение #n |
++--------------+</pre></div><p>
+  </p></li><li class="listitem"><p>
+    <code class="literal">numphases</code> - количество положений в изображении
+    <code class="literal">phases</code>
+  </p></li><li class="listitem"><p>
+    <code class="literal">default</code> - положение hpotmeter по-умолчанию
+    (в диапазоне от <code class="literal">0</code> до <code class="literal">100</code>)
+  </p></li><li class="listitem"><p>
+    <code class="literal">X</code>, <code class="literal">Y</code> - позиция hpotmeter
+    </p></li><li class="listitem"><p>
+    <code class="literal">width</code>, <code class="literal">height</code> - ширина и высота
+    <code class="literal">hpotmeter</code>
+  </p></li><li class="listitem"><p>
+    <code class="literal">message</code> - сообщение, генерируемое  при изменении значения
+    <code class="literal">hpotmeter</code>
+  </p></li></ul></div><p>
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-font"></a>font = fontfile, fontid
+  </code></span></dt><dd><p>
+  Определяет шрифт. <code class="literal">fontfile</code> - это название файла описания шрифта
+  с расширением <tt class="filename">.fnt</tt> (не указывайте расширение здесь).
+  <code class="literal">fontid</code> используется для ссылки на шрифт
+  (смотрите <a class="link" href="skin-file.html#skin-dlabel">dlabel</a> и
+  <a class="link" href="skin-file.html#skin-slabel">slabel</a>). Может быть определено до 25 шрифтов.
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-slabel"></a>slabel = X, Y, fontid, "text"
+  </code></span></dt><dd><p>
+  Размещает  статическую метку на позиции <code class="literal">X,Y</code>. <code class="literal">text</code>
+  отображается, используя шрифт, определенный по <code class="literal">fontid</code>.
+  Текст - просто обычная строка (<code class="literal">$x</code> переменные не работают), которая должна
+  быть заключена в двойные кавычки (но символ " не может быть частью текста).
+  Метка отображается, используя шрифт определенный по <code class="literal">fontid</code>.
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-dlabel"></a>dlabel = X, Y, width, align, fontid, "text"
+  </code></span></dt><dd><p>
+  Размещает динамическую метку на позиции <code class="literal">X,Y</code>. Метка зовется
+  динамической, потому что ее текст периодически обновляется. Максимальная длина
+  метки задается параметром <code class="literal">width</code> (ее высота равна высоте символа).
+  Если отображаемый текст шире этого значения, он будет скроллироваться,
+  иначе он выравнивается в пределах указанного пространства в соответствии со
+  значением параметра
+  <code class="literal">align</code>: <code class="literal">0</code> - влево,
+  <code class="literal">1</code> - по центру, <code class="literal">2</code> - вправо.
+  </p><p>
+  Отображаемый текст задается параметром <code class="literal">text</code>: Он должен быть
+  заключен в двойные кавычки (но символ " не может быть частью текста).
+  Метка отображается, используя шрифт, определяемый по <code class="literal">fontid</code>.
+  Вы можете использовать следующие переменные в тексте:
+  </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Переменная</th><th>Значение</th></tr></thead><tbody><tr><td>$1</td><td>время воспроизведения в формате <span class="emphasis"><em>чч:мм:сс</em></span></td></tr><tr><td>$2</td><td>время воспроизведения в формате <span class="emphasis"><em>мммм:сс</em></span></td></tr><tr><td>$3</td><td>время воспроизведения формате <span class="emphasis"><em>чч</em></span>(часы)</td></tr><tr><td>$4</td><td>время воспроизведения в формате <span class="emphasis"><em>мм</em></span>(минуты)</td></tr><tr><td>$5</td><td>время воспроизведения в формате <span class="emphasis"><em>сс</em></span>(секунды)</td></tr><tr><td>$6</td><td>длительность фильма в формате <span class="emphasis"><em>чч:мм:сс</em></span></td></tr><tr><td>$7</td><td>длительность фильма в формате <span class="emphasis"><em>мммм:сс</em></span></td></tr><tr><td>$8</td><td>время воспроизведения формате <span class="emphasis"><em>ч:мм:сс</em></span></td></tr><tr><td>$v</td><td>кромкость в формате <span class="emphasis"><em>xxx.xx</em></span>%</td></tr><tr><td>$V</td><td>кромкость в формате <span class="emphasis"><em>xxx.x</em></span></td></tr><tr><td>$U</td><td>кромкость в формате <span class="emphasis"><em>xxx</em></span></td></tr><tr><td>$b</td><td>баланс в формате <span class="emphasis"><em>xxx.xx</em></span>%</td></tr><tr><td>$B</td><td>баланс в формате <span class="emphasis"><em>xxx.x</em></span></td></tr><tr><td>$D</td><td>баланс в формате <span class="emphasis"><em>xxx</em></span></td></tr><tr><td>$$</td><td>символ $</td></tr><tr><td>$a</td><td>символ ,соответствующий типу звука (нет: <code class="literal">n</code>,
+    моно: <code class="literal">m</code>, стерео: <code class="literal">t</code>)</td></tr><tr><td>$t</td><td>номер дорожки (в плейлисте)</td></tr><tr><td>$o</td><td>имя файла</td></tr><tr><td>$f</td><td>имя файла в нижнем регистре</td></tr><tr><td>$F</td><td>имя файла в верхнем регистре</td></tr><tr><td>$T</td><td>
+    символ, соответствующий типу потока (файл: <code class="literal">f</code>,
+    Video CD: <code class="literal">v</code>, DVD: <code class="literal">d</code>,
+    URL: <code class="literal">u</code>)
+    </td></tr><tr><td>$p</td><td>
+    символ <span class="keycap"><b>p</b></span> (если фильм воспроизводится и шрифт имеет
+    символ <span class="keycap"><b>p</b></span>)
+    </td></tr><tr><td>$s</td><td>
+    символ <span class="keycap"><b>s</b></span> (если фильм остановлен и шрифт имеет
+    символ <span class="keycap"><b>s</b></span>)
+    </td></tr><tr><td>$e</td><td>
+    символ <span class="keycap"><b>e</b></span> (если фильм на паузе и шрифт имеет
+    символ <span class="keycap"><b>e</b></span>)
+    </td></tr><tr><td>$x</td><td>ширина фильма</td></tr><tr><td>$y</td><td>высота фильма</td></tr><tr><td>$C</td><td>название используемого кодека</td></tr></tbody></table></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+  Переменные <code class="literal">$a, $T, $p, $s</code> и <code class="literal">$e</code> все
+  возвращают символы, которые должны быть отображены в качестве специальных значков
+  (например, <span class="keycap"><b>e</b></span> - для значка паузы, который обычно выглядит как ||).
+  Вы должны иметь шрифт для обычных символов и отличающийся шрифт для значков.
+  Смотрите раздел о <a class="link" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Значки">значках</a>
+  для дополнительной информации.
+  </p></div></dd></dl></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-subwindow"></a>B.2.2. Вспомогательное окно</h3></div></div></div><p>
+Следующие элементы могут быть использованы в блоке
+'<code class="literal">window = sub</code>' . . . '<code class="literal">end</code>' .
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">
+  <a name="skin-sub-base"></a>base = image, X, Y, width, height
+  </code></span></dt><dd><p>
+  Изображение, отображаемое в окне. Окно будет появляться в указанной позиции
+  <code class="literal">X,Y</code> экрана (<code class="literal">0,0</code> - верхний левый угол).
+  Вы можете указать <code class="literal">-1</code> для центра и <code class="literal">-2</code>
+  для правого (<code class="literal">X</code>) и нижнего (<code class="literal">Y</code>) края.
+  Окно будет того же размера, что и изображение. <code class="literal">width</code> и
+  <code class="literal">height</code> означают размер окна; они необязательны
+  (если отсутствуют, окно будет иметь те же размеры, что и изображение).
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-background"></a>background = R, G, B
+  </code></span></dt><dd><p>
+  Позволяет указать цвет фона. Это полезно, если изображение меньше окна.
+  <code class="literal">R</code>, <code class="literal">G</code> и <code class="literal">B</code>
+  указывают красную, зеленую и синюю составляющие цвета (каждое из них -
+  десятичное число от 0 до 255).
+  </p></dd></dl></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-file-menu"></a>B.2.3. Меню со скинами</h3></div></div></div><p>
+Как было описано выше, меню отображается при помощи двух картинок. Нормальные
+элементы меню берутся из изображения, указанного элементом <code class="literal">base</code>,
+в то время как выделенный в данный момент элемент берется  из изображения,
+указанного элементом <code class="literal">selected</code>. Вы должны определить позицию и
+размер каждого элемента меню.
+</p><p>
+Следующие элементы можно использовать в блоке
+'<code class="literal">window = menu</code>'. . .'<code class="literal">end</code>'.
+</p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">
+  <a name="skin-menu-base"></a>base = image
+  </code></span></dt><dd><p>
+  Изображение для нормальных элементов меню.
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-selected"></a>selected = image
+  </code></span></dt><dd><p>
+  Изображение, показывающее меню со всеми выделенными элементами.
+  </p></dd><dt><span class="term"><code class="literal">
+  <a name="skin-menu"></a>menu = X, Y, width, height, message
+  </code></span></dt><dd><p>
+  Определяет позицию <code class="literal">X,Y</code> и размер элемента меню в изображении.
+  <code class="literal">message</code> - это сообщение, генерируемое, когда кнопка мыши будет отпущена
+  над элементом меню.
+  </p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-overview.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-fonts.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">B.1. Обзор </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> B.3. Шрифты</td></tr></table></div></body></html>

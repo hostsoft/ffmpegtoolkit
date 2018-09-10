@@ -1,0 +1,45 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.2. Sélection d'un fichier d'entrée ou un périphérique</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="prev" href="menc-feat-selecting-codec.html" title="6.1. Sélection des codecs et du format du container"><link rel="next" href="menc-feat-mpeg4.html" title='6.3. Encodage MPEG-4 deux passes ("DivX")'><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. Sélection d'un fichier d'entrée ou un périphérique</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Précédent</a> </td><th width="60%" align="center">Chapitre 6. Utilisation basique de <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-input"></a>6.2. Sélection d'un fichier d'entrée ou un périphérique</h2></div></div></div><p>
+<span class="application">MEncoder</span> peut encoder depuis un fichier
+ou directement depuis un DVD ou VCD.
+Il suffit simplement d'inclure le nom du fichier dans la ligne de
+commande pour encoder depuis un fichier ou avec l'option
+<tt class="option">dvd://</tt><em class="replaceable"><code>numerochapitre</code></em>
+ou
+<tt class="option">vcd://</tt><em class="replaceable"><code>numéropiste</code></em> pour
+encoder depuis un chapitre DVD ou une piste VCD.
+
+Si vous avez déjà copié le DVD sur votre disque dur (en
+utilisant par exemple un logiciel comme
+<span class="application">dvdbackup</span>,
+généralement disponible sur la plupart des systèmes), et que vous souhaitez
+encoder depuis cette copie, vous devrez quand même utiliser la
+syntaxe <tt class="option">dvd://</tt>, avec l'option
+<tt class="option">-dvd-device</tt> pointant vers la racine du répertoire
+où se trouve le DVD copié
+Les options <tt class="option">-dvd-device</tt> et
+<tt class="option">-cdrom-device</tt>
+peuvent être aussi utilisées pour forcer le chemin vers le
+périphérique utilisé (ceux utilisés par défaut sont
+<tt class="filename">/dev/dvd</tt> et
+<tt class="filename">/dev/cdrom</tt>).
+</p><p>
+Pour un encodage depuis un DVD, il est souvent préférable de
+selectionner un ou plusieurs chapitres à encoder.
+Vous pouvez utiliser l'option <tt class="option">-chapter</tt> prévu
+à cet effet.
+Par exemple, <tt class="option">-chapter</tt>
+<em class="replaceable"><code>1-4</code></em>
+encodera seulement les chapitres 1 à 4 du DVD.
+Ceci est particulièrement utile si vous voulez faire un encodage
+sur 2 Cds soit 1400Mo.
+Ceci permettant de couper votre film sur un chapitre et non au
+milieu d'une scène.
+</p><p>
+Si vous disposez d'une carte d'acquisition TV,
+vous pouvez sans soucis encoder le signal d'entrée.
+Utilisez l'option
+<tt class="option">tv://</tt><em class="replaceable"><code>NuméroChaine</code></em>
+comme nom de fichier et l'option <tt class="option">-tv</tt> afin de
+configurer les nombreux paramètres de captures.
+Les entrées DVB marchent sur le même principe.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-selecting-codec.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-mpeg4.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. Sélection des codecs et du format du container </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 6.3. Encodage MPEG-4 deux passes ("DivX")</td></tr></table></div></body></html>

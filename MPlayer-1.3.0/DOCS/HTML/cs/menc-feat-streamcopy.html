@@ -1,0 +1,33 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.7. Proudové kopírování</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="prev" href="menc-feat-rescale.html" title="6.6. Škálování (změna velikosti) filmů"><link rel="next" href="menc-feat-enc-images.html" title="6.8. Enkódování z množství vstupních obrázkových souborů (JPEG, PNG, TGA, atd.)"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.7. Proudové kopírování</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-rescale.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 6. Základní použití <span class="application">MEncoder</span>u</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-streamcopy"></a>6.7. Proudové kopírování</h2></div></div></div><p>
+<span class="application">MEncoder</span> může zpracovat vstupní datové proudy dvěma
+způsoby:
+<span class="bold"><strong>enkóduje</strong></span> je, nebo je
+<span class="bold"><strong>kopíruje</strong></span>. Tato část je o
+<span class="bold"><strong>kopírování</strong></span>.
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  <span class="bold"><strong>Video proud</strong></span> (volba <tt class="option">-ovc copy</tt>):
+  můžete dělat pěkné věci :) Jako umístění (nikoli konverze!) FLI nebo VIVO nebo
+  MPEG-1 videa do AVI souboru! Samozřejmě takové soubory přehraje pouze
+  <span class="application">MPlayer</span> :) A proto to nejspíš nemá žádnou rozumnou
+  hodnotu. A teď vážně: kopírování video proudu může být užitečné například
+  tehdy, když má být enkódován pouze zvuk (např. nekomprimovaný PCM do MP3).
+</p></li><li class="listitem"><p>
+  <span class="bold"><strong>Audio proud</strong></span> (volba <tt class="option">-oac copy</tt>):
+  jednoduché. Je možné vzít externí zvukový soubor (MP3, WAV) a namultiplexovat
+  jej do výstupního proudu. K tomu použijte volbu
+  <tt class="option">-audiofile <em class="replaceable"><code>soubor</code></em></tt>.
+</p></li></ul></div><p>
+Použití <tt class="option">-oac copy</tt> pro kopírování z jednoho nosného fomátu
+do jiného může vyžadovat použití <tt class="option">-fafmttag</tt> pro zachování
+příznaku formátu zvuku původního souboru.
+Například pokud konvertujete NSV soubor s AAC zvukem do nosného formátu AVI,
+bude příznak formátu zvuku nesprávný a bude jej nutno změnit.
+Seznam příznaků audio formátu naleznete v souboru
+<tt class="filename">codecs.conf</tt>.
+</p><p>
+Příklad:
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>vstupní.nsv</code></em> -oac copy -fafmttag 0x706D \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -o <em class="replaceable"><code>výstupní.avi</code></em>
+</pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-rescale.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-enc-images.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">6.6. Škálování (změna velikosti) filmů </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 6.8. Enkódování z množství vstupních obrázkových souborů (JPEG, PNG, TGA, atd.)</td></tr></table></div></body></html>

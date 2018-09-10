@@ -1,0 +1,67 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.12. Radio</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="prev" href="tv-input.html" title="3.11. Wejście TV"><link rel="next" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"><link rel="subsection" href="radio.html#radio-input" title="3.12.1. Słuchanie radia"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.12. Radio</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-input.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 3. Sposób użycia</th><td width="20%" align="right"> <a accesskey="n" href="video.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="radio"></a>3.12. Radio</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="radio-input"></a>3.12.1. Słuchanie radia</h3></div></div></div><p>
+Ten rozdział opisuje jak włączyć możliwość słuchania radia przy użyciu tunera
+radiowego kompatybilnego z V4L. Opis opcji i sterowania klawiaturą znajduje się
+na stronie man.
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-compilation"></a>3.12.1.1. Kompilacja</h4></div></div></div><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Najpierw, musisz przekompilować <span class="application">MPlayera</span> używając
+  <tt class="filename">./configure</tt> z opcją <tt class="option">--enable-radio</tt>
+  i (jeśli chcesz móc przechwytywać radio)
+  <tt class="option">--enable-radio-capture</tt>.
+</p></li><li class="step"><p>
+  Upewnij się że Twój tuner działa z innym oprogramowaniem do radia w Linuksie,
+  na przykład z <span class="application">XawTV</span>.
+</p></li></ol></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-tips"></a>3.12.1.2. Rady przy stosowaniu</h4></div></div></div><p>
+Pełna lista opcji jest dostępna na stronie man.
+Tu jest tylko kilka porad:
+
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Używaj opcji <tt class="option">channels</tt>. Na przykład:
+  </p><pre class="screen">-radio channels=104.4-Sibir,103.9-Maximum</pre><p>
+  Wyjaśnienie: Przy użyciu tej opcji dostępne będą tylko stacje na
+  częstotliwościach 104.4 i 103.9. Przy przełączaniu kanału OSD będzie
+  wyświetlać nazwę kanału. Spacje w nazwie kanału muszą zostać zastąpione przez
+  znak "_".
+</p></li><li class="listitem"><p>
+  Jest kilka metod przechwytywania audio. Możesz przechwytywać dźwięk albo
+  korzystając ze swojej karty dźwiękowej i zewnętrznego kabelka łączącego kartę
+  video z wejściem dźwięku, albo używając wbudowanego w chip saa7134 konwertera
+  ADC. W tym drugim przypadku, musisz załadować sterownik
+  <code class="systemitem">saa7134-alsa</code> lub <code class="systemitem">saa7134-oss</code>.
+</p></li><li class="listitem"><p>
+  Do przechwytywania dźwięku nie można użyć
+  <span class="application">MEncodera</span>, ponieważ wymaga on do działania
+  strumienia video. Możesz więc albo użyć <span class="application">arecord</span>
+  z projektu ALSA albo opcji <tt class="option">-ao pcm:file=file.wav</tt>.
+  W tym drugim przypadku nie będziesz słyszał dźwięku
+  (chyba że masz kabelek do line-in i wyłączyłeś jego wyciszenie).
+</p></li></ul></div><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="radio-examples"></a>3.12.1.3. Przykłady</h4></div></div></div><div class="informalexample"><p>
+Wejście ze standardowego V4L (przy użyciu kabelka line-in, bez przechwytywania):
+</p><pre class="screen">
+mplayer radio://104.4
+</pre><p>
+</p></div><div class="informalexample"><p>
+Wejście ze standardowego V4L (przy użyciu kabelka line-in, bez przechwytywania,
+interface V4Lv1):
+</p><pre class="screen">
+mplayer -radio driver=v4l radio://104.4
+</pre><p>
+</p></div><div class="informalexample"><p>
+Odtwarzanie drugiego kanału z listy:
+</p><pre class="screen">
+mplayer -radio channels=104.4=Sibir,103.9=Maximm radio://2
+</pre><p>
+</p></div><div class="informalexample"><p>
+Przesyłanie dźwięku szyną PCI z wewnętrznego konwertera ADC na karcie radiowej.
+W tym przykładzie tuner jest używany jako druga karta dźwiękowa (urządzenia
+alsa hw:1,0). Dla kart opartych na saa7134 musi być załadowany moduł
+<code class="systemitem">saa7134-alsa</code> lub <code class="systemitem">saa7134-oss</code>.
+</p><pre class="screen">
+mplayer -rawaudio rate=32000 radio://2/capture \
+  -radio adevice=hw=1.0:arate=32000:channels=104.4=Sibir,103.9=Maximm
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Uwaga</h3><p>
+Jeśli używasz nazw urządzeń ALSA dwukropki muszą być zastąpione
+znakami równości a przecinki kropkami.
+</p></div><p>
+</p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-input.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="video.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">3.11. Wejście TV </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> Rozdział 4. Urządzenia wyjścia video</td></tr></table></div></body></html>

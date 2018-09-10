@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.1. Příkazový řádek</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="usage.html" title="Kapitola 3. Použití"><link rel="prev" href="usage.html" title="Kapitola 3. Použití"><link rel="next" href="subosd.html" title="3.2. Titulky a OSD"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.1. Příkazový řádek</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="usage.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 3. Použití</th><td width="20%" align="right"> <a accesskey="n" href="subosd.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="commandline"></a>3.1. Příkazový řádek</h2></div></div></div><p>
+<span class="application">MPlayer</span> využívá komplexní strukturu voleb. Ta sestává
+z globálních voleb uváděných jako první, například:
+</p><pre class="screen">mplayer -vfm 5</pre><p>
+a voleb zapisovaných za jménem souboru, které se projeví pouze u tohoto jména
+souboru/URL/čehokoli, například:
+</p><pre class="screen">
+mplayer -vfm 5 <em class="replaceable"><code>film1.avi</code></em> <em class="replaceable"><code>film2.avi</code></em> -vfm 4
+</pre><p>
+</p><p>
+Můžete seskupovat jména souborů/adresy URL pomocí <code class="literal">{</code> a
+<code class="literal">}</code>. Toho se dá využít s volbou <tt class="option">-loop</tt>:
+</p><pre class="screen">mplayer { 1.avi -loop 2 2.avi } -loop 3</pre><p>
+Výše uvedený příkaz přehraje soubory v tomto pořadí: 1, 1, 2, 1, 1, 2, 1, 1, 2.
+</p><p>
+Přehrávání souboru:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>volby</code></em>] [<em class="replaceable"><code>cesta</code></em>/]<em class="replaceable"><code>soubor</code></em>
+</pre><p>
+</p><p>
+Jiný způsob přehrání souboru:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>volby</code></em>] <em class="replaceable"><code>file:///uri-eskejpovaná-cesta-k-souboru</code></em>
+</pre><p>
+</p><p>
+Přehrávání více souborů:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>výchozí volby</code></em>] [<em class="replaceable"><code>cesta</code></em>/]<em class="replaceable"><code>soubor1</code></em> [<em class="replaceable"><code>volby pro soubor1</code></em>] <em class="replaceable"><code>soubor2</code></em> [<em class="replaceable"><code>volby pro soubor2</code></em>] ...
+</pre><p>
+</p><p>
+Přehrávání VCD:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>volby</code></em>] vcd://<em class="replaceable"><code>číslo_stopy</code></em> [-cdrom-device <em class="replaceable"><code>/dev/cdrom</code></em>]
+</pre><p>
+</p><p>
+Přehrávání DVD:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>volby</code></em>] dvd://<em class="replaceable"><code>číslo_titulu</code></em> [-dvd-device <em class="replaceable"><code>/dev/dvd</code></em>]
+</pre><p>
+</p><p>
+Přehrávání z WWW:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>volby</code></em>] http://<em class="replaceable"><code>doména.com/soubor.asf</code></em>
+</pre><p>
+(rovněž lze použít playlisty)
+</p><p>
+Přehrávání z RTSP:
+</p><pre class="synopsis">
+<span class="command"><strong>mplayer</strong></span> [<em class="replaceable"><code>volby</code></em>] rtsp://<em class="replaceable"><code>server.priklad.com/JmenoProudu</code></em>
+</pre><p>
+</p><p>
+Příklady:
+</p><pre class="screen">
+mplayer -vo x11 <em class="replaceable"><code>/mnt/Filmy/Kontakt/kontakt2.mpg</code></em>
+mplayer vcd://<em class="replaceable"><code>2</code></em> -cdrom-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -afm 3 <em class="replaceable"><code>/mnt/DVDtrailery/alien4.vob</code></em>
+mplayer dvd://<em class="replaceable"><code>1</code></em> -dvd-device <em class="replaceable"><code>/dev/hdc</code></em>
+mplayer -abs 65536 -delay -0.4 -nobps <em class="replaceable"><code>~/filmy/test.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="usage.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="subosd.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">Kapitola 3. Použití </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 3.2. Titulky a OSD</td></tr></table></div></body></html>

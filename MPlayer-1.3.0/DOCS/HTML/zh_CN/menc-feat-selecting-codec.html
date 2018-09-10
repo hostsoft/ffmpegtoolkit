@@ -1,0 +1,53 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.1. 选择编解码器及容器格式</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - 电影播放器"><link rel="up" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="prev" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="next" href="menc-feat-selecting-input.html" title="6.2. 选择输入文件或设备"><link rel="preface" href="howtoread.html" title="如何阅读此文档"><link rel="chapter" href="intro.html" title="第 1 章 介绍"><link rel="chapter" href="install.html" title="第 2 章 Installation"><link rel="chapter" href="usage.html" title="第 3 章 Usage"><link rel="chapter" href="video.html" title="第 4 章 Video output devices"><link rel="chapter" href="ports.html" title="第 5 章 Ports"><link rel="chapter" href="mencoder.html" title="第 6 章 MEncoder的基础用法"><link rel="chapter" href="encoding-guide.html" title="第 7 章 Encoding with MEncoder"><link rel="chapter" href="faq.html" title="第 8 章 Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="附录 A. 如何报告错误"><link rel="appendix" href="skin.html" title="附录 B. MPlayer skin format"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.1. 选择编解码器及容器格式</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mencoder.html">上一页</a> </td><th width="60%" align="center">第 6 章 <span class="application">MEncoder</span>的基础用法</th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-selecting-input.html">下一页</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-selecting-codec"></a>6.1. 选择编解码器及容器格式</h2></div></div></div><p>
+编码使用的音频及视频编码器分别通过<tt class="option">-oac</tt>及
+<tt class="option">-ovc</tt>选项指定
+例如输入如下命令
+</p><pre class="screen">mencoder -ovc help</pre><p>
+可列出你机器上相应版本的<span class="application">MEncoder</span>所支持的所有视频编码。
+下列选择也是可用的：
+</p><p>
+音频编码器：
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>音频编码器名称</th><th>描述</th></tr></thead><tbody><tr><td>mp3lame</td><td>通过LAME编码为VBR，ABR或CBR格式的MP3文件</td></tr><tr><td>lavc</td><td>利用<a class="link" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-audio-codecs" title="7.3.2. libavcodec's audio codecs"><code class="systemitem">libavcodec</code>中的一个编码器</a>
+  </td></tr><tr><td>faac</td><td>FAAC AAC音频编码器</td></tr><tr><td>toolame</td><td>MPEG音频Layer 2编码器</td></tr><tr><td>twolame</td><td>基于tooLAME的MPEG音频Layer 2编码器</td></tr><tr><td>pcm</td><td>未压缩的PCM音频</td></tr><tr><td>copy</td><td>不要重新编码，这是复制已压缩的各桢</td></tr></tbody></table></div><p>
+</p><p>
+是频编码器：
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>是频编码器名称</th><th>描述</th></tr></thead><tbody><tr><td>lavc</td><td>使用<a class="link" href="menc-feat-enc-libavcodec.html#menc-feat-enc-libavcodec-video-codecs" title="7.3.1. libavcodec's video codecs"><code class="systemitem">libavcodec</code>中的一个是频编码器</a>
+  </td></tr><tr><td>xvid</td><td>Xvid, MPEG-4高级简单格式(ASP)编码器</td></tr><tr><td>x264</td><td>x264, MPEG-4高级视频编码(AVC), AKA H.264编码器</td></tr><tr><td>nuv</td><td>nuppel视频，为一些实时程序所用</td></tr><tr><td>raw</td><td>未压缩的视频桢</td></tr><tr><td>copy</td><td>不要重新编码，只是复制已压缩的各桢</td></tr><tr><td>frameno</td><td>用于三通道编码（不推荐）</td></tr></tbody></table></div><p>
+</p><p>
+输出容器格式通过<tt class="option">-of</tt>选项选择。
+输入：
+</p><pre class="screen">mencoder -of help</pre><p>
+以便列出你机器上相应版本的<span class="application">MEncoder</span>所支持的
+所有容器。
+如下选项也是可用的
+</p><p>
+容器格式：
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>容器格式名称</th><th>描述</th></tr></thead><tbody><tr><td>lavf</td><td>由<code class="systemitem">libavformat</code>
+  支持的一种容器</td></tr><tr><td>avi</td><td>音-视频混合</td></tr><tr><td>mpeg</td><td>MPEG-1及MPEG-2节目流</td></tr><tr><td>rawvideo</td><td>原始视频流（未经混合 - 只含一视频流）</td></tr><tr><td>rawaudio</td><td>原始音频流（未经混合 - 只含一音频流）</td></tr></tbody></table></div><p>
+AVI容器是<span class="application">MEncoder</span>的基本容器格式，也就是说它能够
+被最好的处理，<span class="application">MEncoder</span>也是为之而设计。
+如上所述，其他容器格式也可被使用，但你使用的时候可能遇到问题。
+</p><p>
+<code class="systemitem">libavformat</code>容器：
+</p><p>
+如果你选择了<code class="systemitem">libavformat</code>
+来做输出文件的混编（通过使用<tt class="option">-of lavf</tt>选项），
+适当的容器将由文件扩展名而定。
+你也可以通过<code class="systemitem">libavformat</code>的
+<tt class="option">format</tt>选项强制一种容器格式。
+
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th><code class="systemitem">libavformat</code>容器名称</th><th>描述</th></tr></thead><tbody><tr><td>mpg</td><td>MPEG-1及MPEG-2节目流</td></tr><tr><td>asf</td><td>高级流格式</td></tr><tr><td>avi</td><td>音-视频混合</td></tr><tr><td>wav</td><td>波形音频</td></tr><tr><td>swf</td><td>Macromedia Flash</td></tr><tr><td>flv</td><td>Macromedia Flash视频</td></tr><tr><td>rm</td><td>RealMedia</td></tr><tr><td>au</td><td>SUN AU</td></tr><tr><td>nut</td><td>NUT开放容器（实验中，不兼容标准）</td></tr><tr><td>mov</td><td>QuickTime</td></tr><tr><td>mp4</td><td>MPEG-4格式</td></tr><tr><td>dv</td><td>Sony数字视频容器</td></tr></tbody></table></div><p>
+如你所见，<code class="systemitem">libavformat</code>允许
+<span class="application">MEncoder</span>把媒体混合到各种格式的容器内。
+不巧的是，因为<span class="application">MEncoder</span>从开始设计的时候
+没有支持AVI之外的其他容器，你要小心最终生成的文件。
+请多次检查以确认音频/视频同步是正确的以及文件能在
+<span class="application">MPlayer</span>之外的播放器中播放。
+</p><div class="example"><a name="encode_to_macromedia_flash_format"></a><p class="title"><b>例 6.1. 编码为Macromedia Flash格式</b></p><div class="example-contents"><p>
+生成Macromedia Flash视频，以便在安装有Macromedia Flash插件的网页浏览器中播放：
+</p><pre class="screen">
+mencoder <em class="replaceable"><code>input.avi</code></em> -o <em class="replaceable"><code>output.flv</code></em> -of lavf \
+    -oac mp3lame -lameopts abr:br=56 -srate 22050 -ovc lavc \
+    -lavcopts vcodec=flv:vbitrate=500:mbd=2:mv0:trell:v4mv:cbp:last_pred=3
+</pre><p>
+</p></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mencoder.html">上一页</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">上一级</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-selecting-input.html">下一页</a></td></tr><tr><td width="40%" align="left" valign="top">第 6 章 <span class="application">MEncoder</span>的基础用法 </td><td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td><td width="40%" align="right" valign="top"> 6.2. 选择输入文件或设备</td></tr></table></div></body></html>

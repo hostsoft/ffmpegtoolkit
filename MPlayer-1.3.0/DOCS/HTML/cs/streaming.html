@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.4. Přehrávání datových proudů ze sítě nebo rour</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="usage.html" title="Kapitola 3. Použití"><link rel="prev" href="control.html" title="3.3. Ovládání"><link rel="next" href="drives.html" title="3.5. CD/DVD mechaniky"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"><link rel="subsection" href="streaming.html#streaming-save" title="3.4.1. Uložení proudového obsahu"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.4. Přehrávání datových proudů ze sítě nebo rour</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="control.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 3. Použití</th><td width="20%" align="right"> <a accesskey="n" href="drives.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="streaming"></a>3.4. Přehrávání datových proudů ze sítě nebo rour</h2></div></div></div><p>
+<span class="application">MPlayer</span> umí přehrávat soubory ze sítě s použitím protokolu
+HTTP, FTP, MMS nebo RTSP/RTP.
+</p><p>
+Přehrávání pracuje jednoduše tak, že uvedete URL na příkazovém řádku.
+<span class="application">MPlayer</span> ctí systémovou proměnnou <code class="envar">http_proxy</code>
+a použije proxy pokud je k dispozici. Proxy může být rovněž vynucena:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>http_proxy://proxy.micorsops.com:3128/http://micorsops.com:80/stream.asf</code></em>
+</pre><p>
+</p><p>
+<span class="application">MPlayer</span> umí číst ze std. vstupu
+(<span class="emphasis"><em>ne</em></span> z pojmenovaných rour). To může být například použito
+pro přehrávání z FTP:
+</p><pre class="screen">
+wget <em class="replaceable"><code>ftp://micorsops.com/something.avi</code></em> -O - | mplayer -
+</pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Poznámka</h3><p>
+Také doporučujeme zapnout <tt class="option">-cache</tt> při přehrávání
+ze sítě:
+</p><pre class="screen">
+wget <em class="replaceable"><code>ftp://micorsops.com/something.avi</code></em> -O - | mplayer -cache 8192 -
+</pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="streaming-save"></a>3.4.1. Uložení proudového obsahu</h3></div></div></div><p>
+Jakmile jste přiměli <span class="application">MPlayer</span> přehrát
+váš oblíbený internetový proud, můžete použít volbu
+<tt class="option">-dumpstream</tt> k uložení datového proudu do souboru.
+For example:
+</p><pre class="screen">
+mplayer <em class="replaceable"><code>http://217.71.208.37:8006</code></em> -dumpstream -dumpfile <em class="replaceable"><code>proud.asf</code></em>
+</pre><p>
+uloží proudové video z
+<em class="replaceable"><code>http://217.71.208.37:8006</code></em> do
+<em class="replaceable"><code>proud.asf</code></em>.
+Pracovat to bude se všemi <span class="application">MPlayer</span>em podporovanými
+protokoly, jako MMS, RTSP, a tak dále.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="control.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="drives.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">3.3. Ovládání </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> 3.5. CD/DVD mechaniky</td></tr></table></div></body></html>

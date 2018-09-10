@@ -1,0 +1,75 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.8. Кодирование из нескольких входных файлов изображений (JPEG, PNG, TGA, SGI)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="prev" href="menc-feat-streamcopy.html" title="6.7. копирование потока"><link rel="next" href="menc-feat-extractsub.html" title="6.9. Извлечение DVD субтитров в файл VOBsub"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.8. Кодирование из нескольких входных файлов изображений (JPEG, PNG, TGA, SGI)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-streamcopy.html">Пред.</a> </td><th width="60%" align="center">Глава 6. Основы использования <span class="application">MEncoder</span></th><td width="20%" align="right"> <a accesskey="n" href="menc-feat-extractsub.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-enc-images"></a>6.8. Кодирование из нескольких входных файлов изображений (JPEG, PNG, TGA, SGI)</h2></div></div></div><p>
+<span class="application">MEncoder</span> может создавать фильмы из одного или более
+JPEG, PNG, TGA или других файлов изображений. Простым копированием кадров он может создавать MJPEG
+(Motion JPEG), MPNG (Motion PNG) или MTGA (Motion TGA) файлы.
+</p><div class="orderedlist"><p class="title"><b>Разъяснение процесса:</b></p><ol class="orderedlist" type="1"><li class="listitem"><p>
+  <span class="application">MEncoder</span> <span class="emphasis"><em>декодирует</em></span> изображение(я) с помощью
+  <code class="systemitem">libjpeg</code> (при декодировании PNG, он будет
+  использовать <code class="systemitem">libpng</code>).
+</p></li><li class="listitem"><p>
+  <span class="application">MEncoder</span> затем скармливает декодированное изображение выбранному
+  видео компрессору (DivX4, Xvid, FFmpeg msmpeg4, и .т.д).
+</p></li></ol></div><p><b>примеры. </b>
+The explanation of the <tt class="option">-mf</tt> option is in the man page.
+
+</p><div class="informalexample"><p>
+Создание файла MPEG-4 из всех JPEG файлов текущего каталога:
+</p><pre class="screen">
+mencoder mf://*.jpg -mf w=800:h=600:fps=25:type=jpg -ovc lavc \
+    -lavcopts vcodec=mpeg4:mbd=2:trell -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Создание файла MPEG-4 из некоторых JPEG файлов текущего каталога:
+</p><pre class="screen">
+mencoder mf://<em class="replaceable"><code>frame001.jpg,frame002.jpg</code></em> -mf w=800:h=600:fps=25:type=jpg \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Создание файла MPEG-4 из явного списка JPEG файлов (list.txt в текущем каталоге содержит
+список файлов, используемых в качестве источника, по одному в строке):
+</p><pre class="screen">
+mencoder mf://<em class="replaceable"><code>@list.txt</code></em> -mf w=800:h=600:fps=25:type=jpg \
+    -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+Вы можете смешивать различные типы изображений независимо от используемого
+метода — отдельные файлы, маска или файл со списком — при условии,
+конечно, что они имеют одинаковое разрешение.
+Так что вы можете, например, взять титульный кадр из PNG файла, а затем
+поместить слайдшоу из JPEG фотографий.
+
+</p><div class="informalexample"><p>
+Создание файла Motion JPEG (MJPEG) из всех JPEG файлов текущего каталога:
+</p><pre class="screen">
+mencoder mf://*.jpg -mf w=800:h=600:fps=25:type=jpg -ovc copy -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Создание несжатого файла из всех PNG файлов текущего каталога:
+</p><pre class="screen">
+mencoder mf://*.png -mf w=800:h=600:fps=25:type=png -ovc raw -oac copy -o <em class="replaceable"><code>output.avi</code></em>
+</pre><p>
+</p></div><p>
+
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>
+Ширина должна быть целым числом, кратным 4, это ограничение формата RAW RGB AVI.
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Создание файла Motion PNG (MPNG) из всех PNG файлов текущего каталога:
+</p><pre class="screen">
+mencoder mf://*.png -mf w=800:h=600:fps=25:type=png -ovc copy -oac copy -o <em class="replaceable"><code>output.avi</code></em></pre><p>
+</p></div><p>
+
+</p><div class="informalexample"><p>
+Создание файла Motion TGA (MTGA) из всех TGA файлов текущего каталога:
+</p><pre class="screen">
+mencoder mf://*.tga -mf w=800:h=600:fps=25:type=tga -ovc copy -oac copy -o <em class="replaceable"><code>output.avi</code></em></pre><p>
+</p></div><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-streamcopy.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="menc-feat-extractsub.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">6.7. копирование потока </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 6.9. Извлечение DVD субтитров в файл VOBsub</td></tr></table></div></body></html>

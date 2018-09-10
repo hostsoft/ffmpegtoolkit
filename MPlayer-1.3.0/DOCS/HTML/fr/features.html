@@ -1,0 +1,63 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>2.2. Fonctionalités</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="install.html" title="Chapitre 2. Installation"><link rel="prev" href="softreq.html" title="2.1. Logiciels nécessaires"><link rel="next" href="gui.html" title="2.3. À propos de l'interface graphique"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.2. Fonctionalités</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="softreq.html">Précédent</a> </td><th width="60%" align="center">Chapitre 2. Installation</th><td width="20%" align="right"> <a accesskey="n" href="gui.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="features"></a>2.2. Fonctionalités</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+  Si vous souhaitez une interface graphique (GUI), lisez la section <a class="link" href="gui.html" title="2.3. À propos de l'interface graphique">GUI</a> avant de compiler.
+  </p></li><li class="listitem"><p>
+  Si vous voulez installer <span class="application">MEncoder</span> (notre excellent
+  encodeur multi-usages), voir la section <a class="link" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><span class="application">MEncoder</span></a>.
+  </p></li><li class="listitem"><p>
+  Si vous possédez une carte <span class="bold"><strong>tuner TV</strong></span> compatible
+  V4L, et désirez voir/enregistrer et encoder des films avec <span class="application">MPlayer</span>, voyez la section
+  <a class="link" href="tv-input.html" title="3.11. Entrée TV">Entrée TV</a>.
+  </p></li><li class="listitem"><p>
+  Si vous possédez un carte <span class="bold"><strong>tuner radio</strong></span> compatible
+  V4L, et désirez écouter et capturer du son avec <span class="application">MPlayer</span>,
+  lisez la rubrique <a class="link" href="radio.html" title="3.13. Radio">Entrée Radio</a>.
+  </p></li><li class="listitem"><p>
+  Il y a un élégant <span class="bold"><strong>Menu OSD</strong></span> prêt à être utilisé.
+  Regardez la section <a class="link" href="fonts-osd.html#osdmenu" title="2.4.3. Menu OSD">menu OSD</a>.
+  </p></li></ul></div><p>
+Ensuite compilez <span class="application">MPlayer</span> :
+</p><pre class="screen">
+./configure
+make
+make install</pre><p>
+</p><p>
+A ce point, <span class="application">MPlayer</span> est prêt à fonctionner.
+Le répertoire <tt class="filename">$PREFIX/share/mplayer</tt>
+contient le fichier <tt class="filename">codecs.conf</tt>, qui est utilisé pour
+donner au programme la liste des codecs et de leurs capacités. Ce fichier n'est requis
+que si vous voulez changer ses propriétés, car le binaire principal en contient une
+copie interne. Vérifiez si vous avez un <tt class="filename">codecs.conf</tt> dans votre
+répertoire personnel (<tt class="filename">~/.mplayer/codecs.conf</tt>) provenant d'une
+ancienne installation de <span class="application">MPlayer</span>, et supprimez-le.
+</p><p>
+Notez que si vous avez un <tt class="filename">codecs.conf</tt> dans
+<tt class="filename">~/.mplayer/</tt>, les fichiers <tt class="filename">codecs.conf</tt>
+du système ou celui intégré seront complètement ignorés.
+Ne faites pas cela à moins de vouloir jouer avec le fonctionnement interne de
+<span class="application">MPlayer</span> car cela peut poser des problèmes. Si vous voulez changer l'ordre de
+recherche des codecs, utilisez les options <tt class="option">-vc</tt>, <tt class="option">-ac</tt>,
+<tt class="option">-vfm</tt>, ou <tt class="option">-afm</tt> soit en ligne de commande soit dans
+votre fichier de config (voir la page de man).
+</p><p>
+Les utilisateurs Debian peuvent construire un paquet .deb pour leur propre usage,
+c'est très simple. Exécutez
+</p><pre class="screen">fakeroot debian/rules binary</pre><p>
+dans le répertoire racine de <span class="application">MPlayer</span>. Voir
+<a class="link" href="linux.html#debian" title="5.1.1. Paquets Debian">Création de paquets Debian</a> pour de plus amples
+instructions.
+</p><p>
+<span class="bold"><strong>Regardez toujours le listing généré par</strong></span>
+<tt class="filename">./configure</tt>, ainsi que le fichier
+<tt class="filename">config.log</tt>, ils contiennent des informations sur
+ce qui sera compilé, et ce qui ne le sera pas. Vous pouvez également consulter
+les fichiers <tt class="filename">config.h</tt> et <tt class="filename">config.mak</tt>.
+Si vous avez quelques librairies installées, mais pas détectées par
+<tt class="filename">./configure</tt>, alors vérifiez que vous avez les fichiers
+d'en-tête (généralement les paquets -dev) et que leur version correspond. Le fichier
+<tt class="filename">config.log</tt> vous dit généralement ce qui manque.
+</p><p>
+Bien que n'étant pas indispensables, les polices peuvent être installées pour
+l'affichage de l'OSD, et le support des sous-titres. La méthode recommandée est
+d'installer un fichier de police TTF et de dire à <span class="application">MPlayer</span> de l'utiliser. Voir la
+section <a class="link" href="fonts-osd.html#osdmenu" title="2.4.3. Menu OSD">Sous-titres et OSD</a> pour les détails.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="softreq.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="install.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="gui.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">2.1. Logiciels nécessaires </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 2.3. À propos de l'interface graphique</td></tr></table></div></body></html>

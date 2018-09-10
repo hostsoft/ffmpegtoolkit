@@ -1,0 +1,43 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>B.3. Schriften</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Movie Player"><link rel="up" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="prev" href="skin-file.html" title="B.2. Die skin-Datei"><link rel="next" href="skin-gui.html" title="B.4. GUI-Nachrichten"><link rel="preface" href="howtoread.html" title="Wie diese Dokumentation gelesen werden soll"><link rel="chapter" href="intro.html" title="Kapitel 1. Einführung"><link rel="chapter" href="install.html" title="Kapitel 2. Installation"><link rel="chapter" href="usage.html" title="Kapitel 3. Gebrauch"><link rel="chapter" href="video.html" title="Kapitel 4. Videoausgabegeräte"><link rel="chapter" href="ports.html" title="Kapitel 5. Portierungen"><link rel="chapter" href="mencoder.html" title="Kapitel 6. Allgemeiner Gebrauch von MEncoder"><link rel="chapter" href="encoding-guide.html" title="Kapitel 7. Encodieren mit MEncoder"><link rel="chapter" href="faq.html" title="Kapitel 8. Häufig gestellte Fragen"><link rel="appendix" href="bugreports.html" title="Anhang A. Wie Fehler (Bugs) berichtet werden"><link rel="appendix" href="skin.html" title="Anhang B. MPlayers Skinformat"><link rel="subsection" href="skin-fonts.html#skin-fonts-symbols" title="B.3.1. Symbole"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.3. Schriften</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="skin-file.html">Zurück</a> </td><th width="60%" align="center">Anhang B. <span class="application">MPlayer</span>s Skinformat</th><td width="20%" align="right"> <a accesskey="n" href="skin-gui.html">Weiter</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="skin-fonts"></a>B.3. Schriften</h2></div></div></div><p>
+      Wie im Abschnitt über die Skin-Teile beschrieben, wird eine Schrift durch eine
+      Grafik und eine Beschreibungsdatei definiert. Du kannst die Buchstaben und Zeichen irgendwo
+      innerhalb der Grafik platzieren, aber stell sicher, dass Position und Größe
+      der Zeichen in der Beschreibungsdatei exakt angegeben sind.
+    </p><p>
+      Die Schrift-Beschreibungsdatei (mit Erweiterung <tt class="filename">.fnt</tt>)
+      darf wie die skin-Konfigurationsdatei mit '<code class="literal">;</code>' beginnende
+      Kommentare enthalten (oder Kommentare mit '<code class="literal">#</code>', aber
+      nur am Zeilenanfang).
+      Die Datei muss eine Zeile in der Form
+      <a name="skin-font-image"></a>
+      </p><pre class="programlisting">image = <em class="replaceable"><code>image</code></em></pre><p>
+      enthalten, wobei <code class="literal"><em class="replaceable"><code>image</code></em></code> der Name der für
+      die Schrift anzuwendenden Grafikdatei ist (du musst keine Erweiterung angeben).
+      <a name="skin-font-char"></a>
+      </p><pre class="programlisting">"char" = X, Y, width, hight</pre><p>
+      Hier legen <code class="literal">X</code> und <code class="literal">Y</code> die Position des
+      Zeichens (hier mit <code class="literal">char</code> bezeichnet) innerhalb der Grafik fest
+      (<code class="literal">0,0</code> steht für die obere linke Ecke).
+      <code class="literal">width</code> und <code class="literal">height</code> sind die Maße des
+      Zeichens in Pixel. Das Zeichen <code class="literal">char</code> wird in UTF-8-Kodierung angegeben.
+    </p><p>
+      Dieses Beispiel definiert die Buchstaben A, B, C unter Anwendung von
+      <tt class="filename">font.png</tt>.
+      </p><pre class="programlisting">
+; Kann eine "Schrift" anstatt "font.png" sein.
+image = font.png
+
+; Drei Buchstaben reichen zu Demonstrationszwecken :-)
+"A" =  0,0, 7,13
+"B" =  7,0, 7,13
+"C" = 14,0, 7,13</pre><p>
+    </p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="skin-fonts-symbols"></a>B.3.1. Symbole</h3></div></div></div><p>
+        Einige Buchstaben haben spezielle Bedeutungen, wenn sie von bestimmten
+        Variablen in <a class="link" href="skin-file.html#skin-dlabel">dlabel</a> zurückgegeben
+        werden. Diese Buchstaben sind dazu gedacht, als Symbole angezeigt zu werden,
+        so dass Dinge wie ein hübsches DVD-Logo an Stelle des Buchstabens
+        '<code class="literal">d</code>' für einen DVD-Stream angezeigt werden können.
+      </p><p>
+        Die folgende Tabelle listet alle Buchstaben auf, die zum Anzeigen von
+        Symbolen genutzt werden können (und daher eine andere Schrift benötigen).
+      </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Buchstabe</th><th>Symbol</th></tr></thead><tbody><tr><td><span class="keycap"><b>p</b></span></td><td>Play</td></tr><tr><td><span class="keycap"><b>s</b></span></td><td>Stop</td></tr><tr><td><span class="keycap"><b>e</b></span></td><td>Pause</td></tr><tr><td><span class="keycap"><b>n</b></span></td><td>Kein Sound</td></tr><tr><td><span class="keycap"><b>m</b></span></td><td>Mono-Sound</td></tr><tr><td><span class="keycap"><b>t</b></span></td><td>Stereo-Sound</td></tr><tr><td><span class="keycap"><b>r</b></span></td><td>Surround-Sound</td></tr><tr><td><span class="keycap"><b>Leerzeichen</b></span></td><td>kein (bekannter) Stream</td></tr><tr><td><span class="keycap"><b>f</b></span></td><td>Stream ist eine Datei</td></tr><tr><td><span class="keycap"><b>a</b></span></td><td>Stream ist eine CD</td></tr><tr><td><span class="keycap"><b>v</b></span></td><td>Stream ist eine Video-CD</td></tr><tr><td><span class="keycap"><b>d</b></span></td><td>Stream ist eine DVD</td></tr><tr><td><span class="keycap"><b>u</b></span></td><td>Stream ist eine URL</td></tr><tr><td><span class="keycap"><b>b</b></span></td><td>Stream ist eine TV/DVB-Übertragung</td></tr><tr><td><span class="keycap"><b>c</b></span></td><td>Stream ist ein Cuesheet</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="skin-file.html">Zurück</a> </td><td width="20%" align="center"><a accesskey="u" href="skin.html">Nach oben</a></td><td width="40%" align="right"> <a accesskey="n" href="skin-gui.html">Weiter</a></td></tr><tr><td width="40%" align="left" valign="top">B.2. Die skin-Datei </td><td width="20%" align="center"><a accesskey="h" href="index.html">Zum Anfang</a></td><td width="40%" align="right" valign="top"> B.4. GUI-Nachrichten</td></tr></table></div></body></html>

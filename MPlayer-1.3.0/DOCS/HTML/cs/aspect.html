@@ -1,0 +1,26 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.10. Zachování poměru stran</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Multimediální přehrávač"><link rel="up" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="prev" href="menc-feat-extractsub.html" title="6.9. Extrakce DVD titulků do VOBsub souboru"><link rel="next" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="preface" href="howtoread.html" title="Jak číst tuto dokumentaci"><link rel="chapter" href="intro.html" title="Kapitola 1. Představení"><link rel="chapter" href="install.html" title="Kapitola 2. Instalace"><link rel="chapter" href="usage.html" title="Kapitola 3. Použití"><link rel="chapter" href="video.html" title="Kapitola 4. Výstupní video zařízení/rozhraní"><link rel="chapter" href="ports.html" title="Kapitola 5. Porty"><link rel="chapter" href="mencoder.html" title="Kapitola 6. Základní použití MEncoderu"><link rel="chapter" href="encoding-guide.html" title="Kapitola 7. Enkódování s MEncoderem"><link rel="chapter" href="faq.html" title="Kapitola 8. Často Kladené Dotazy (FAQ)"><link rel="appendix" href="bugreports.html" title="Příloha A. Jak hlásit chyby"><link rel="appendix" href="skin.html" title="Příloha B. Formát skinů MPlayeru"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10. Zachování poměru stran</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Předcházející</a> </td><th width="60%" align="center">Kapitola 6. Základní použití <span class="application">MEncoder</span>u</th><td width="20%" align="right"> <a accesskey="n" href="encoding-guide.html">Další</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aspect"></a>6.10. Zachování poměru stran</h2></div></div></div><p>
+DVD a SVCD (čili MPEG-1/2) soubory obsahují hodnotu poměru stran,
+popisující, jak by měl přehrávač škálovat video proud, takže lidé nebudou mít
+šišaté hlavy (př.: 480x480 + 4:3 = 640x480). Pokud ovšem enkódujeme do AVI
+(DivX) souborů, mějte na paměti, že AVI hlavičky neukládají tuto hodnotu.
+Přeškálování videa je odporné a časově náročné, takže musí být lepší způsob!
+</p><p>A zde jej máte</p><p>
+MPEG-4 má unikátní vlastnost: video proud může obsahovat svůj požadovaný poměr
+stran. Ano, přesně jako MPEG-1/2 (DVD, SVCD) a H.263 soubory. Naneštěstí kromě
+<span class="application">MPlayer</span>u jen málo video přehrávačů podporuje
+tento atribut MPEG-4.
+</p><p>
+Tato vlastnost může být použita pouze s kodekem <code class="systemitem">mpeg4</code> z
+<code class="systemitem">libavcodec</code>u.
+Mějte na paměti: ačkoli
+<span class="application">MPlayer</span> korektně přehraje vytvořený soubor, ostatní
+přehrávače použijí špatný poměr stran.
+</p><p>
+Opravdu byste měli oříznout černé okraje nad a pod filmem.
+Nastudujte si použití filtrů <code class="systemitem">cropdetect</code> a
+<code class="systemitem">crop</code> v man stránce.
+</p><p>
+Použití
+</p><pre class="screen">mencoder <em class="replaceable"><code>sample-svcd.mpg</code></em> -vf crop=714:548:0:14 -oac copy -ovc lavc \
+    -lavcopts vcodec=mpeg4:mbd=2:trell:autoaspect -o <em class="replaceable"><code>output.avi</code></em></pre><p>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-extractsub.html">Předcházející</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Nahoru</a></td><td width="40%" align="right"> <a accesskey="n" href="encoding-guide.html">Další</a></td></tr><tr><td width="40%" align="left" valign="top">6.9. Extrakce DVD titulků do VOBsub souboru </td><td width="20%" align="center"><a accesskey="h" href="index.html">Domů</a></td><td width="40%" align="right" valign="top"> Kapitola 7. Enkódování s <span class="application">MEncoder</span>em</td></tr></table></div></body></html>

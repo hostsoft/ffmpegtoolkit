@@ -1,0 +1,773 @@
+--- interf_dec.c
++++ interf_dec.c
+@@ -49,8 +49,6 @@
+ 
+ }dec_interface_State;
+ 
+-#ifdef ETSI
+-
+ 
+ /*
+  * Bin2Int
+@@ -172,9 +170,6 @@
+    return;
+ }
+ 
+-#else
+-
+-#ifndef IF2
+ 
+ /*
+  * DecoderMMS
+@@ -361,7 +356,6 @@
+    return mode;
+ }
+ 
+-#else
+ 
+ /*
+  * Decoder3GPP
+@@ -545,8 +539,6 @@
+       *frame_type = RX_SPEECH_BAD;
+    return mode;
+ }
+-#endif
+-#endif
+ 
+ /*
+  * Decoder_Interface_reset
+--- interf_dec.h
++++ interf_dec.h
+@@ -41,6 +41,16 @@
+ 
+       short *synth, int bfi );
+ 
++#ifdef ETSI
++#define Decoder_Interface_Decode ETSIDecoder_Interface_Decode
++#else
++#ifdef IF2
++#define Decoder_Interface_Decode IF2Decoder_Interface_Decode
++#else
++#define Decoder_Interface_Decode GP3Decoder_Interface_Decode
++#endif
++#endif
++
+ /*
+  * Reserve and init. memory
+  */
+--- interf_enc.c
++++ interf_enc.c
+@@ -56,7 +56,6 @@
+ } enc_interface_State;
+ 
+ 
+-#ifdef ETSI
+ /*
+  * Prm2Bits
+  *
+@@ -178,9 +177,6 @@
+    return;
+ }
+ 
+-#else
+-
+-#ifndef IF2
+ 
+ /*
+  * EncoderMMS
+@@ -206,7 +202,7 @@
+    Word32 j = 0, k;
+    Word16 *mask;
+ 
+-   memset(stream, 0, block_size[mode]);
++   memset(stream, 0, GP3block_size[mode]);
+ 
+    *stream = toc_byte[mode];
+    stream++;
+@@ -356,10 +352,9 @@
+ 
+    /* shift remaining bits */
+    if ( k = j % 8 )	*stream <<= ( 8 - k );
+-   return( (int)block_size[mode] );
++   return( (int)GP3block_size[mode] );
+ }
+ 
+-#else
+ 
+ /*
+  * Encoder3GPP
+@@ -384,7 +379,7 @@
+    Word32 j = 0;
+    Word16 *mask;
+ 
+-   memset(stream, 0, block_size[mode]);
++   memset(stream, 0, IF2block_size[mode]);
+ 
+    if ( mode == 15 ) {
+       *stream = 0xF;
+@@ -539,10 +534,8 @@
+ 
+    /* shift remaining bits */
+    *stream >>= ( 8 - j % 8 );
+-   return( (int)block_size[mode] );
++   return( (int)IF2block_size[mode] );
+ }
+-#endif
+-#endif
+ 
+ /*
+  * Sid_Sync_reset
+@@ -583,7 +576,7 @@
+  * Returns:
+  *    number of octets
+  */
+-int Encoder_Interface_Encode( void *st, enum Mode mode, Word16 *speech,
++int VADxEncoder_Interface_Encode( void *st, enum Mode mode, Word16 *speech,
+ 
+ #ifndef ETSI
+       UWord8 *serial,
+@@ -592,7 +585,7 @@
+       Word16 *serial,
+ #endif
+ 
+-      int force_speech )
++      int force_speech, char vad2_code )
+ {
+    Word16 prm[PRMNO_MR122];   /* speech parameters, max size */
+    const Word16 *homing;   /* pointer to homing frame */
+@@ -626,7 +619,7 @@
+    }
+ 
+    if (noHoming){
+-      Speech_Encode_Frame( s->encoderState, mode, speech, prm, &used_mode );
++      VADxSpeech_Encode_Frame( s->encoderState, mode, speech, prm, &used_mode, vad2_code );
+    }
+    else {
+       switch ( mode ) {
+@@ -718,7 +711,7 @@
+    s->prev_ft = txFrameType;
+ 
+    if ( noHoming == 0 ) {
+-      Speech_Encode_Frame_reset( s->encoderState, s->dtx );
++      VADxSpeech_Encode_Frame_reset( s->encoderState, s->dtx, vad2_code );
+       Sid_Sync_reset( s );
+    }
+ 
+@@ -754,7 +747,7 @@
+  * Returns:
+  *    pointer to encoder interface structure
+  */
+-void * Encoder_Interface_init( int dtx )
++void * VADxEncoder_Interface_init( int dtx, char vad2_code )
+ {
+    enc_interface_State * s;
+ 
+@@ -765,7 +758,7 @@
+             "can not malloc state structure\n" );
+       return NULL;
+    }
+-   s->encoderState = Speech_Encode_Frame_init( dtx );
++   s->encoderState = VADxSpeech_Encode_Frame_init( dtx, vad2_code );
+    Sid_Sync_reset( s );
+    s->dtx = dtx;
+    return s;
+--- interf_enc.h
++++ interf_enc.h
+@@ -35,7 +35,7 @@
+  * Encodes one frame of speech
+  * Returns packed octets
+  */
+-int Encoder_Interface_Encode( void *st, enum Mode mode, short *speech,
++int VADxEncoder_Interface_Encode( void *st, enum Mode mode, short *speech,
+ 
+ #ifndef ETSI
+       unsigned char *serial,  /* max size 31 bytes */
+@@ -44,12 +44,45 @@
+       short *serial, /* size 500 bytes */
+ #endif
+ 
+-      int forceSpeech );   /* use speech mode */
++      int forceSpeech, char vad2_code );   /* use speech mode */
++
++#ifdef VAD2
++#ifdef ETSI
++#define Encoder_Interface_Encode(st, mode, speech, serial, force_speech )\
++        ETSIVADxEncoder_Interface_Encode(st, mode, speech, serial, force_speech, 1 )
++#else
++#ifdef IF2
++#define Encoder_Interface_Encode(st, mode, speech, serial, force_speech )\
++        IF2VADxEncoder_Interface_Encode(st, mode, speech, serial, force_speech, 1 )
++#else
++#define Encoder_Interface_Encode(st, mode, speech, serial, force_speech )\
++        GP3VADxEncoder_Interface_Encode(st, mode, speech, serial, force_speech, 1 )
++#endif
++#endif
++#else
++#ifdef ETSI
++#define Encoder_Interface_Encode(st, mode, speech, serial, force_speech )\
++        ETSIVADxEncoder_Interface_Encode(st, mode, speech, serial, force_speech, 0 )
++#else
++#ifdef IF2
++#define Encoder_Interface_Encode(st, mode, speech, serial, force_speech )\
++        IF2VADxEncoder_Interface_Encode(st, mode, speech, serial, force_speech, 0 )
++#else
++#define Encoder_Interface_Encode(st, mode, speech, serial, force_speech )\
++        GP3VADxEncoder_Interface_Encode(st, mode, speech, serial, force_speech, 0 )
++#endif
++#endif
++#endif
+ 
+ /*
+  * Reserve and init. memory
+  */
+-void *Encoder_Interface_init( int dtx );
++void *VADxEncoder_Interface_init( int dtx, char vad2_code );
++#ifdef VAD2
++#define Encoder_Interface_init( dtx ) VADxEncoder_Interface_init( dtx, 1 )
++#else
++#define Encoder_Interface_init( dtx ) VADxEncoder_Interface_init( dtx, 0 )
++#endif
+ 
+ /*
+  * Exit and free memory
+--- interf_rom.h
++++ interf_rom.h
+@@ -48,20 +48,22 @@
+ /*
+  * tables
+  */
+-#ifndef IF2
+-#ifndef ETSI
+-static const UWord8 block_size[16]={ 13, 14, 16, 18, 20, 21, 27, 32,
++static const UWord8 GP3block_size[16]={ 13, 14, 16, 18, 20, 21, 27, 32,
+                                     6 , 0 , 0 , 0 , 0 , 0 , 0 , 1  };
+ 
+ static const UWord8 toc_byte[16]={0x04, 0x0C, 0x14, 0x1C, 0x24, 0x2C, 0x34, 0x3C,
+ 								  0x44, 0x4C, 0x54, 0x5C, 0x64, 0x6C, 0x74, 0x7C};
+-#endif
+-#else
+ /* One encoded frame (bytes) */
+-static const UWord8 block_size[16]={ 13, 14, 16, 18, 19, 21, 26, 31,
++static const UWord8 IF2block_size[16]={ 13, 14, 16, 18, 19, 21, 26, 31,
+                                     5 , 0 , 0 , 0 , 0 , 0 , 0 , 1  };
+-#endif
+ 
++#ifndef IF2
++#ifndef ETSI
++#define block_size GP3block_size
++#endif
++#else
++#define block_size IF2block_size
++#endif
+ /* Subjective importance of the speech encoded bits */
+ static Word16 order_MR475[] =
+ {
+--- sp_enc.c
++++ sp_enc.c
+@@ -40,7 +40,6 @@
+ 
+ }Pre_ProcessState;
+ 
+-#ifdef VAD2
+ 
+ /* Defines for VAD2 */
+ #define	FRM_LEN1		80
+@@ -110,8 +109,7 @@
+   Float32 R0;
+   Float32 Rmax;
+   Word16  LTP_flag;
+-}vadState;
+-#else
++}vad2State;
+ typedef struct
+ {
+    Float32 bckr_est[COMPLEN];   /* background noise estimate */
+@@ -147,8 +145,8 @@
+    Word16 sp_burst_count;
+ 
+ 
+-}vadState;
+-#endif
++}vad1State;
++typedef struct _vadState vadState;
+ #define DTX_HIST_SIZE 8
+ #define DTX_ELAPSED_FRAMES_THRESH (24 + 7 -1)
+ #define DTX_HANG_CONST 7   /* yields eight frames of SP HANGOVER */
+@@ -2135,14 +2133,12 @@
+  * Returns:
+  *    void
+  */
+-#ifndef VAD2
+-static void vad_tone_detection( vadState *st, Float32 T0, Float32 t1 )
++static void vad_tone_detection( vad1State *st, Float32 T0, Float32 t1 )
+ {
+    if ( ( t1 > 0 ) && ( T0 > t1 * TONE_THR ) ) {
+       st->tone = st->tone | 0x00004000;
+    }
+ }
+-#endif
+ 
+ /*
+  * Lag_max
+@@ -2164,12 +2160,13 @@
+  * Returns:
+  *    p_max             lag found
+  */
++static Word16 Lag_max(
+ #ifdef VAD2
+-static Word16 Lag_max( Float32 corr[], Float32 sig[], Word16 L_frame,
++		       Float32 corr[], Float32 sig[], Word16 L_frame,
+ 		       Word32 lag_max, Word32 lag_min, Float32 *cor_max,
+ 		       Word32 dtx, Float32 *rmax, Float32 *r0 )
+ #else
+-static Word16 Lag_max( vadState *vadSt, Float32 corr[], Float32 sig[], Word16
++		       vadState *vadSt, Float32 corr[], Float32 sig[], Word16
+       L_frame, Word32 lag_max, Word32 lag_min, Float32 *cor_max, Word32 dtx )
+ #endif
+ {
+@@ -2241,7 +2238,6 @@
+  * Returns:
+  *    void
+  */
+-#ifndef VAD2
+ static void hp_max( Float32 corr[], Float32 sig[], Word32 L_frame, Word32
+       lag_max, Word32 lag_min, Float32 *cor_hp_max )
+ {
+@@ -2291,7 +2287,6 @@
+       *cor_hp_max = 0;
+    }
+ }
+-#endif
+ 
+ /*
+  * vad_tone_detection_update
+@@ -2307,8 +2302,7 @@
+  * Returns:
+  *    void
+  */
+-#ifndef VAD2
+-static void vad_tone_detection_update( vadState *st, Word16 one_lag_per_frame )
++static void vad_tone_detection_update( vad1State *st, Word16 one_lag_per_frame )
+ {
+    /* Shift tone flags right by one bit */
+    st->tone = st->tone >> 1;
+@@ -2323,7 +2317,6 @@
+       st->tone = st->tone | 0x00002000;
+    }
+ }
+-#endif
+ 
+ /*
+  * Pitch_ol
+@@ -8925,8 +8918,7 @@
+  * Returns:
+  *    void
+  */
+-#ifndef VAD2
+-static void complex_estimate_adapt( vadState *st, Word16 low_power )
++static void complex_estimate_adapt( vad1State *st, Word16 low_power )
+ {
+    Float32 alpha;
+ 
+@@ -8965,7 +8957,6 @@
+       st->corr_hp_fast = CVAD_MIN_CORR;
+    }
+ }
+-#endif
+ 
+ /*
+  * complex_vad
+@@ -8986,8 +8977,7 @@
+  * Returns:
+  *    void
+  */
+-#ifndef VAD2
+-static Word32 complex_vad( vadState *st, Word16 low_power )
++static Word32 complex_vad( vad1State *st, Word16 low_power )
+ {
+    st->complex_high = st->complex_high >> 1;
+    st->complex_low = st->complex_low >> 1;
+@@ -9011,7 +9001,6 @@
+    return( Word16 )( ( ( st->complex_high & 0x00007f80 ) == 0x00007f80 ) || ( (
+          st->complex_low & 0x00007fff ) == 0x00007fff ) );
+ }
+-#endif
+ 
+ /*
+  * complex_vad
+@@ -9032,8 +9021,7 @@
+  * Returns:
+  *    void
+  */
+-#ifndef VAD2
+-static void update_cntrl( vadState *st, Float32 level[] )
++static void update_cntrl( vad1State *st, Float32 level[] )
+ {
+    Float32 stat_rat, num, denom;
+    Float32 alpha;
+@@ -9118,7 +9106,6 @@
+       st->ave_level[i] += alpha * ( level[i] - st->ave_level[i] );
+    }
+ }
+-#endif
+ 
+ /*
+  * noise_estimate_update
+@@ -9140,8 +9127,7 @@
+  * Returns:
+  *    void
+  */
+-#ifndef VAD2
+-static void noise_estimate_update( vadState *st, Float32 level[] )
++static void noise_estimate_update( vad1State *st, Float32 level[] )
+ {
+    Float32 alpha_up, alpha_down, bckr_add;
+    Word32 i;
+@@ -9204,7 +9190,6 @@
+       st->old_level[i] = level[i];
+    }
+ }
+-#endif
+ 
+ /*
+  * hangover_addition
+@@ -9226,8 +9211,7 @@
+  * Returns:
+  *    VAD_flag indicating final VAD decision
+  */
+-#ifndef VAD2
+-static Word16 hangover_addition( vadState *st, Float32 noise_level, Word16
++static Word16 hangover_addition( vad1State *st, Float32 noise_level, Word16
+       low_power )
+ {
+    Word16 hang_len, burst_len;
+@@ -9299,7 +9283,6 @@
+    }
+    return 0;
+ }
+-#endif
+ 
+ /*
+  * vad_decision
+@@ -9320,8 +9303,7 @@
+  * Returns:
+  *    VAD_flag indicating final VAD decision
+  */
+-#ifndef VAD2
+-static Word16 vad_decision( vadState *st, Float32 level[COMPLEN], Float32
++static Word16 vad_decision( vad1State *st, Float32 level[COMPLEN], Float32
+       pow_sum )
+ {
+    Float32 snr_sum, temp, vad_thr, noise_level;
+@@ -9393,7 +9375,6 @@
+          );
+    return( st->speech_vad_decision );
+ }
+-#endif
+ 
+ /*
+  * level_calculation
+@@ -9418,7 +9399,6 @@
+  * Returns:
+  *    signal level
+  */
+-#ifndef VAD2
+ static Float32 level_calculation( Float32 data[], Float32 *sub_level, Word16
+       count1, Word16 count2, Word16 ind_m, Word16 ind_a, Word16 scale )
+ {
+@@ -9439,7 +9419,6 @@
+    }
+    return( scale * level );
+ }
+-#endif
+ 
+ /*
+  * filter3
+@@ -9456,7 +9435,6 @@
+  * Returns:
+  *   void
+  */
+-#ifndef VAD2
+ static void filter3( Float32 *in0, Float32 *in1, Float32 *data )
+ {
+    Float32 temp1, temp2;
+@@ -9468,7 +9446,6 @@
+    *in1 = ( *in0 - temp2 ) * 0.5F;
+    *in0 = ( *in0 + temp2 ) * 0.5F;
+ }
+-#endif
+ 
+ /*
+  * filter5
+@@ -9485,7 +9462,6 @@
+  * Returns:
+  *   void
+  */
+-#ifndef VAD2
+ static void filter5( Float32 *in0, Float32 *in1, Float32 data[] )
+ {
+    Float32 temp0, temp1, temp2;
+@@ -9500,7 +9476,6 @@
+    *in0 = ( temp1 + temp2 ) * 0.5F;
+    *in1 = ( temp1 - temp2 ) * 0.5F;
+ }
+-#endif
+ 
+ /*
+  * first_filter_stage
+@@ -9519,7 +9494,6 @@
+  * Returns:
+  *   void
+  */
+-#ifndef VAD2
+ static void first_filter_stage( Float32 in[], Float32 out[], Float32 data[] )
+ {
+    Float32 temp0, temp1, temp2, temp3;
+@@ -9547,7 +9521,6 @@
+    data[0] = data0;
+    data[1] = data1;
+ }
+-#endif
+ 
+ /*
+  * filter_bank
+@@ -9566,8 +9539,7 @@
+  * Returns:
+  *    void
+  */
+-#ifndef VAD2
+-static void filter_bank( vadState *st, Float32 in[], Float32 level[] )
++static void filter_bank( vad1State *st, Float32 in[], Float32 level[] )
+ {
+    Word32 i;
+    Float32 tmp_buf[FRAME_LEN];
+@@ -9629,7 +9601,6 @@
+    level[0] = level_calculation( tmp_buf, &st->sub_level[0], FRAME_LEN /16 - 2,
+          FRAME_LEN /16, 16, 0, 2 );
+ }
+-#endif
+ 
+ /*
+  * vad
+@@ -9647,8 +9618,7 @@
+  * Returns:
+  *    VAD Decision, 1 = speech, 0 = noise
+  */
+-#ifndef VAD2
+-static Word16 vad( vadState *st, Float32 in_buf[] )
++static Word16 vad( vad1State *st, Float32 in_buf[] )
+ {
+    Float32 level[COMPLEN];
+    Float32 pow_sum;
+@@ -9689,7 +9659,6 @@
+    filter_bank( st, in_buf, level );
+    return( vad_decision( st, level, pow_sum ) );
+ }
+-#endif
+ 
+ /*
+  * vad_pitch_detection
+@@ -9709,8 +9678,7 @@
+  * Returns:
+  *    Boolean voiced / unvoiced decision in state variable
+  */
+-#ifndef VAD2
+-static void vad_pitch_detection( vadState *st, Word32 T_op[] )
++static void vad_pitch_detection( vad1State *st, Word32 T_op[] )
+ {
+    Word32 lagcount, i;
+ 
+@@ -9739,10 +9707,8 @@
+    /* Update oldlagcount */
+    st->oldlag_count = lagcount;
+ }
+-#endif
+ 
+ 
+-#ifdef VAD2
+ 
+ /***************************************************************************
+  *
+@@ -9773,7 +9739,7 @@
+  *
+  *************************************************************************/
+ 
+-int		vad2 (vadState *st, Float32 *farray_ptr)
++int		vad2 (vad2State *st, Float32 *farray_ptr)
+ {
+ 
+   /* Static variables */
+@@ -10376,7 +10342,7 @@
+  *
+  *************************************************************************/
+ 
+-void LTP_flag_update (vadState * st, Word16 mode)
++void LTP_flag_update (vad2State * st, Word16 mode)
+ {
+   Float32 thresh;
+ 
+@@ -10396,7 +10362,6 @@
+ }
+ 
+ /***************************************************************************/
+-#endif
+ 
+ /*
+  * cod_amr
+@@ -10558,7 +10523,7 @@
+ 
+       /* Find open loop pitch lag for two subframes */
+       if ( ( mode != MR475 ) && ( mode != MR515 ) ) {
+-         ol_ltp( mode, st->vadSt, &st->wsp[i_subfr], &T_op[subfrNr], st->
++         ol_ltp( mode, ((vadState*)(st->vadSt)), &st->wsp[i_subfr], &T_op[subfrNr], st->
+                ol_gain_flg, &st->pitchOLWghtSt->old_T0_med, &st->pitchOLWghtSt->
+                wght_flg, &st->pitchOLWghtSt->ada_w, st->old_lags, st->dtx,
+                subfrNr );
+@@ -10570,7 +10535,7 @@
+        * Find open loop pitch lag for ONE FRAME ONLY
+        * search on 160 samples
+        */
+-      ol_ltp( mode, st->vadSt, &st->wsp[0], &T_op[0], st->ol_gain_flg, &st->
++      ol_ltp( mode, ((vadState*)(st->vadSt)), &st->wsp[0], &T_op[0], st->ol_gain_flg, &st->
+             pitchOLWghtSt->old_T0_med, &st->pitchOLWghtSt->wght_flg, &st->
+             pitchOLWghtSt->ada_w, st->old_lags, st->dtx, 1 );
+       T_op[1] = T_op[0];
+@@ -11092,7 +11057,7 @@
+  * Returns:
+  *    succeed = 0
+  */
+-static Word32 cod_amr_init( cod_amrState **state, Word32 dtx )
++static Word32 VADxcod_amr_init( cod_amrState **state, Word32 dtx, char vad2_code )
+ {
+    cod_amrState * s;
+ 
+@@ -11182,7 +11147,9 @@
+       return-1;
+    }
+ 
+-   if ( ( s->vadSt = ( vadState * ) malloc( sizeof( vadState ) ) ) == NULL ) {
++   if ( ( s->vadSt = ( vadState * ) malloc(
++         (vad2_code ? sizeof( vad2State ) : sizeof( vad1State ) )
++        ) ) == NULL ) {
+       fprintf( stderr, "can not malloc state structure\n" );
+       return-1;
+    }
+@@ -11193,7 +11160,10 @@
+       fprintf( stderr, "can not malloc state structure\n" );
+       return-1;
+    }
+-   cod_amr_reset( s, dtx );
++   if (vad2_code)
++     VAD2cod_amr_reset( s, dtx );
++   else
++     VAD1cod_amr_reset( s, dtx );
+    *state = s;
+    return 0;
+ }
+@@ -11252,7 +11222,7 @@
+  * Returns:
+  *    succeed = 0
+  */
+-void * Speech_Encode_Frame_init( int dtx )
++void * VADxSpeech_Encode_Frame_init( int dtx, char vad2_code )
+ {
+    void * s;
+ 
+@@ -11267,8 +11237,8 @@
+    (( Speech_Encode_FrameState * )s)->cod_amr_state = NULL;
+    (( Speech_Encode_FrameState * )s)->dtx = dtx;
+ 
+-   if ( Pre_Process_init( &(( Speech_Encode_FrameState * )s)->pre_state ) || cod_amr_init( &(( Speech_Encode_FrameState * )s)->cod_amr_state,
+-         dtx ) ) {
++   if ( Pre_Process_init( &(( Speech_Encode_FrameState * )s)->pre_state ) || VADxcod_amr_init( &(( Speech_Encode_FrameState * )s)->cod_amr_state,
++         dtx, vad2_code ) ) {
+       Speech_Encode_Frame_exit( &s );
+       return NULL;
+    }
+@@ -11289,7 +11259,7 @@
+  * Returns:
+  *
+  */
+-int Speech_Encode_Frame_reset( void *st, int dtx )
++int VADxSpeech_Encode_Frame_reset( void *st, int dtx, char vad2_code )
+ {
+    Speech_Encode_FrameState * state;
+    state = ( Speech_Encode_FrameState * )st;
+@@ -11299,7 +11269,10 @@
+       return-1;
+    }
+    Pre_Process_reset( state->pre_state );
+-   cod_amr_reset( state->cod_amr_state, dtx );
++   if (vad2_code)
++     VAD2cod_amr_reset( state->cod_amr_state, dtx );
++   else
++     VAD1cod_amr_reset( state->cod_amr_state, dtx );
+    return 0;
+ }
+ 
+@@ -11349,8 +11322,8 @@
+  * Returns:
+  *    Void
+  */
+-void Speech_Encode_Frame( void *st, enum Mode mode, Word16 *new_speech, Word16 *
+-      prm, enum Mode *used_mode )
++void VADxSpeech_Encode_Frame( void *st, enum Mode mode, Word16 *new_speech, Word16 *
++      prm, enum Mode *used_mode, char vad2_code )
+ {
+    Float32 syn[L_FRAME];   /* Buffer for synthesis speech */
+    Float32 speech[160];
+@@ -11369,6 +11342,9 @@
+          ->x0, &state->pre_state->x1, new_speech, speech );
+ 
+    /* Call the speech encoder */
+-   cod_amr( state->cod_amr_state, mode, speech, prm, used_mode, syn );
++   if (vad2_code)
++     VAD2cod_amr( state->cod_amr_state, mode, speech, prm, used_mode, syn );
++   else
++     VAD1cod_amr( state->cod_amr_state, mode, speech, prm, used_mode, syn );
+ 
+ }
+--- sp_enc.h
++++ sp_enc.h
+@@ -51,12 +51,22 @@
+  * be passed to Speech_Encode_Frame in each call.
+  * returns 0 on success
+  */
+-void *Speech_Encode_Frame_init (int dtx);
++void *VADxSpeech_Encode_Frame_init (int dtx, char vad2_code);
++#ifdef VAD2
++#define Speech_Encode_Frame_init(dtx) VADxSpeech_Encode_Frame_init (dtx, 1)
++#else
++#define Speech_Encode_Frame_init(dtx) VADxSpeech_Encode_Frame_init (dtx, 0)
++#endif
+ /*
+  * reset speech encoder (i.e. set state memory to zero)
+  * returns 0 on success
+  */
+-int Speech_Encode_Frame_reset(void *st, int dtx);
++int VADxSpeech_Encode_Frame_reset(void *st, int dtx, char vad2_code);
++#ifdef VAD2
++#define Speech_Encode_Frame_reset(st, dtx) VADxSpeech_Encode_Frame_reset(st, dtx, 1)
++#else
++#define Speech_Encode_Frame_reset(st, dtx) VADxSpeech_Encode_Frame_reset(st, dtx, 0)
++#endif
+ 
+ /*
+  * de-initialize speech encoder (i.e. free status struct)
+@@ -68,7 +78,14 @@
+  * Encodes one speech frame
+  * Returns analysis parameters
+  */
+-void Speech_Encode_Frame (void *st, enum Mode mode, short *newSpeech,
+-                   short *prm, enum Mode *usedMode);
++void VADxSpeech_Encode_Frame (void *st, enum Mode mode, short *newSpeech,
++                   short *prm, enum Mode *usedMode, char vad2_code);
++#ifdef VAD2
++#define Speech_Encode_Frame(st, mode, newSpeech, prm, usedMode)\
++        VADxSpeech_Encode_Frame (st, mode, newSpeech, prm, usedMode, 1)
++#else
++#define Speech_Encode_Frame(st, mode, newSpeech, prm, usedMode)\
++        VADxSpeech_Encode_Frame (st, mode, newSpeech, prm, usedMode, 0)
++#endif
+ 
+ #endif

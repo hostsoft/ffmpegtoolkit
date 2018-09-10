@@ -1,0 +1,58 @@
+.TH "oggz" "1" 
+.SH "NAME" 
+oggz \(em inspect and manipulate Ogg multimedia files 
+ 
+.SH "SYNOPSIS" 
+.PP 
+\fBoggz\fRhelp \fBcommand\fR command \fBargs\fR  
+.SH "Description" 
+.PP 
+\fBoggz\fR is a suite of tools for manipulating 
+Ogg multimedia files. 
+It supports multiplexed files conformant with RFC3533. Oggz can parse headers for 
+CELT, CMML, Dirac, FLAC, Kate, PCM, Speex, Theora and Vorbis, and can read and write 
+Ogg Skeleton logical bitstreams. 
+ 
+.SH "Commands" 
+.IP "   \(bu" 6 
+\fBhelp\fRDisplay help for a specific subcommand (eg. "oggz help chop") 
+.SS "Reporting" 
+.IP "   \(bu" 6 
+\fBdiff\fRHexdump the packets of two Ogg files and output differences. 
+.IP "   \(bu" 6 
+\fBdump\fRHexdump packets of an Ogg file, or revert an Ogg file from such a hexdump. 
+.IP "   \(bu" 6 
+\fBinfo\fRDisplay information about one or more Ogg files and their bitstreams. 
+.IP "   \(bu" 6 
+\fBscan\fRScan an Ogg file and output characteristic landmarks. 
+.IP "   \(bu" 6 
+\fBvalidate\fRValidate the Ogg framing of one or more files. 
+.SS "Extraction" 
+.IP "   \(bu" 6 
+\fBrip\fRExtract one or more logical bitstreams from an Ogg file. 
+.SS "Editing" 
+.IP "   \(bu" 6 
+\fBchop\fRExtract the part of an Ogg file between given start and/or end times. 
+.IP "   \(bu" 6 
+\fBcomment\fRList or edit comments in an Ogg file. 
+\fBmerge\fRMerge Ogg files together, interleaving pages in order of presentation time.\fBsort\fRSort the pages of an Ogg file in order of presentation time. 
+.SH "Options" 
+.PP 
+\fBoggz\fR accepts the following options: 
+ 
+.SS "Miscellaneous options" 
+.IP "\-h, \-\-help" 10 
+Display usage information and exit. 
+.IP "\-v, \-\-version" 10 
+Output version information and exit. 
+.SH "AUTHOR" 
+.PP 
+Conrad Parker        July  9, 2008;      
+.SH "COPYRIGHT" 
+.PP 
+Copyright \(co 2008 Annodex Association 
+ 
+.SH "SEE ALSO" 
+.PP 
+\fBogginfo\fP\fB(1)\fP       \fBhogg\fP\fB(1)\fP      
+.\" created by instant / docbook-to-man, Tue 14 Apr 2009, 16:08 

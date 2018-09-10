@@ -1,0 +1,33 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.9. Wydobywanie napisów z DVD do pliku VOBsub</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Odtwarzacz filmów"><link rel="up" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="prev" href="menc-feat-enc-images.html" title="6.8. Kodowanie z wielu wejściowych plików obrazkowych (JPEG, PNG, TGA itp.)"><link rel="next" href="aspect.html" title="6.10. Utrzymywanie proporcji obrazu (aspect ratio)"><link rel="preface" href="howtoread.html" title="Jak czytać tę dokumentację"><link rel="chapter" href="intro.html" title="Rozdział 1. Wprowadzenie"><link rel="chapter" href="install.html" title="Rozdział 2. Instalacja"><link rel="chapter" href="usage.html" title="Rozdział 3. Sposób użycia"><link rel="chapter" href="video.html" title="Rozdział 4. Urządzenia wyjścia video"><link rel="chapter" href="ports.html" title="Rozdział 5. Porty"><link rel="chapter" href="mencoder.html" title="Rozdział 6. Podstawy używania MEncodera"><link rel="chapter" href="encoding-guide.html" title="Rozdział 7. Kodowanie przy użyciu MEncodera"><link rel="chapter" href="faq.html" title="Rozdział 8. FAQ - Często Zadawane Pytania"><link rel="appendix" href="bugreports.html" title="Dodatek A. Jak zgłaszać błędy"><link rel="appendix" href="skin.html" title="Dodatek B. Format skórki MPlayera"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.9. Wydobywanie napisów z DVD do pliku VOBsub</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="menc-feat-enc-images.html">Poprzedni</a> </td><th width="60%" align="center">Rozdział 6. Podstawy używania <span class="application">MEncodera</span></th><td width="20%" align="right"> <a accesskey="n" href="aspect.html">Następny</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="menc-feat-extractsub"></a>6.9. Wydobywanie napisów z DVD do pliku VOBsub</h2></div></div></div><p>
+<span class="application">MEncoder</span> jest w stanie wyciągnąć napisy z DVD do
+pliku w formacie VOBsub. Tworzy je para plików z rozszerzeniem
+<tt class="filename">.idx</tt> i <tt class="filename">.sub</tt>, które są zazwyczaj
+spakowane do pojedyńczego archiwum <tt class="filename">.rar</tt>.
+<span class="application">MPlayer</span> może je odtwarzać z opcjami
+<tt class="option">-vobsub</tt> i <tt class="option">-vobsubid</tt>.
+</p><p>
+Podajesz nazwę bazową (tzn. bez rozszerzenia <tt class="filename">.idx</tt> lub
+<tt class="filename">.sub</tt>) pliku wyjściowego opcją <tt class="option">-vobsubout</tt>
+oraz indeks dla tego pliku opcją <tt class="option">-vobsuboutindex</tt>.
+</p><p>
+Jeżeli źródłem nie jest DVD powinieneś użyć opcji <tt class="option">-ifo</tt>, aby
+wskazać plik <tt class="filename">.ifo</tt> potrzebny do stworzenia pliku wynikowego
+<tt class="filename">.idx</tt>.
+</p><p>
+Jeżeli źródłem nie jest DVD i nie masz pliku <tt class="filename">.ifo</tt>,
+będziesz musiał użyć opcji <tt class="option">-vobsubid</tt>, aby podać id języka,
+które będzie umieszczone w pliku <tt class="filename">.idx</tt>.
+</p><p>
+Każde uruchomienie dołączy do istniejących napisów, jeżeli pliki
+<tt class="filename">.idx</tt> i <tt class="filename">.sub</tt> istnieją.
+Powinieneś więc usunąć je przed uruchomieniem.
+</p><div class="example"><a name="copying_two_subtitles_from_a_dvd_while_doing_two_pass_encoding"></a><p class="title"><b>Przykład 6.5. Kopiowanie dwóch napisów z DVD podczas dwu-przebiegowego kodowania</b></p><div class="example-contents"><pre class="screen">
+rm <em class="replaceable"><code>napisy.idx</code></em> <em class="replaceable"><code>napisy.sub</code></em>
+mencoder dvd://1 -oac copy -ovc lavc -lavcopts vcodec=mpeg4:vpass=1 \
+    -vobsubout <em class="replaceable"><code>napisy</code></em> -vobsuboutindex 0 -sid 2
+mencoder dvd://1 -oac copy -ovc lavc -lavcopts vcodec=mpeg4:mbd=2:trell:vpass=2 \
+    -vobsubout <em class="replaceable"><code>napisy</code></em> -vobsuboutindex 1 -sid 5</pre></div></div><br class="example-break"><div class="example"><a name="copying_a_french_subtitle_from_an_mpeg_file"></a><p class="title"><b>Przykład 6.6. Kopiowanie francuskich napisów z pliku MPEG</b></p><div class="example-contents"><pre class="screen">
+rm <em class="replaceable"><code>napisy.idx</code></em> <em class="replaceable"><code>napisy.sub</code></em>
+mencoder <em class="replaceable"><code>film.mpg</code></em> -ifo <em class="replaceable"><code>film.ifo</code></em> -vobsubout <em class="replaceable"><code>napisy</code></em> -vobsuboutindex 0 \
+    -vobsuboutid fr -sid 1 -nosound -ovc copy</pre></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="menc-feat-enc-images.html">Poprzedni</a> </td><td width="20%" align="center"><a accesskey="u" href="mencoder.html">Początek rozdziału</a></td><td width="40%" align="right"> <a accesskey="n" href="aspect.html">Następny</a></td></tr><tr><td width="40%" align="left" valign="top">6.8. Kodowanie z wielu wejściowych plików obrazkowych
+  (JPEG, PNG, TGA itp.) </td><td width="20%" align="center"><a accesskey="h" href="index.html">Spis treści</a></td><td width="40%" align="right" valign="top"> 6.10. Utrzymywanie proporcji obrazu (aspect ratio)</td></tr></table></div></body></html>

@@ -1,0 +1,126 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>5.4. Windows</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Медиа Проигрыватель"><link rel="up" href="ports.html" title="Глава 5. Портинг"><link rel="prev" href="unix.html" title="5.3. Коммерческие Unix"><link rel="next" href="macos.html" title="5.5. Mac OS"><link rel="preface" href="howtoread.html" title="Как читать эту документацию"><link rel="chapter" href="intro.html" title="Глава 1. Введение"><link rel="chapter" href="install.html" title="Глава 2. Установка"><link rel="chapter" href="usage.html" title="Глава 3. Использование"><link rel="chapter" href="video.html" title="Глава 4. Устройства вывода видео"><link rel="chapter" href="ports.html" title="Глава 5. Портинг"><link rel="chapter" href="mencoder.html" title="Глава 6. Основы использования MEncoder"><link rel="chapter" href="encoding-guide.html" title="Глава 7. Кодирование с MEncoder"><link rel="chapter" href="faq.html" title="Глава 8. Часто Задаваемые вопросы"><link rel="appendix" href="bugreports.html" title="Приложение A. Как сообщать об ошибках"><link rel="appendix" href="skin.html" title="Приложение B. Формат скинов MPlayer"><link rel="subsection" href="windows.html#cygwin" title="5.4.1. Cygwin"><link rel="subsection" href="windows.html#mingw" title="5.4.2. MinGW"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">5.4. Windows</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="unix.html">Пред.</a> </td><th width="60%" align="center">Глава 5. Портинг</th><td width="20%" align="right"> <a accesskey="n" href="macos.html">След.</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="windows"></a>5.4. Windows</h2></div></div></div><p>
+Да, <span class="application">MPlayer</span> работает под Windows под
+<a class="ulink" href="http://www.cygwin.com/" target="_top"><span class="application">Cygwin</span></a> и
+<a class="ulink" href="http://www.mingw.org/" target="_top"><span class="application">MinGW</span></a>.
+Пока ещё нет официального GUI, но версия командной строки полностью функциональна.
+Обратитесь к списку рассылки
+<a class="ulink" href="http://lists.mplayerhq.hu/mailman/listinfo/mplayer-cygwin/" target="_top">MPlayer-cygwin</a>
+за помощью и дополнительной информацией.
+Официальные бинарники под Windows могут быть найдены на
+<a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html" target="_top">странице загрузки</a>.
+Пакеты установки и простые GUI фронтенды доступны из внешних
+источников, мы собрали их в разделе Windows на
+<a class="ulink" href="http://www.mplayerhq.hu/design7/projects.html#windows" target="_top">нашей
+странице проектов</a>.
+</p><p>
+При нежелании использовать командную строку поможет простой трюк:
+поместите на рабочий стол ссылку, со следующим содержимым в секции execute:
+</p><pre class="screen"><em class="replaceable"><code>c:\путь\к\</code></em>mplayer.exe %1</pre><p>
+Это позволит <span class="application">MPlayer</span> воспроизводить любой фильм,
+который вы перетащите на созданный ярлык. Добавьте <tt class="option">-fs</tt>
+для полноэкранного режима.
+</p><p>
+Лучшие результаты получаются при использовании родного DirectX видео
+вывода (<tt class="option">-vo directx</tt>). Альтернативой является использование OpenGL или
+SDL, но производительность OpenGL сильно зависит от машины, а SDL на некоторых
+системах искажает видео или вылетает.
+Если изображение искажено, попробуйте отключить аппаратное ускорение, указав
+<tt class="option">-vo directx:noaccel</tt>. Скачайте
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/win32/dx7headers.tgz" target="_top">файлы заголовков
+DirectX 7</a>, чтобы скомпилировать видео драйвер DirectX. Кроме того,
+вам потребуется установленный DirectX 7, чтобы работал DirectX видеодрайвер.
+</p><p>
+<a class="link" href="vidix.html" title="4.15. VIDIX">VIDIX</a> теперь доступен и под Windows, как
+<tt class="option">-vo winvidix</tt>, хотя это ещё экспериментально и требует небольшой
+ручной установки. Скачайте
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/dhahelperwin/dhahelper.sys" target="_top">dhahelper.sys</a> или
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/releases/win32/dhahelperwin/withmtrr/dhahelper.sys" target="_top">dhahelper.sys (с поддержкой MTRR)</a>
+и скопируйте его в каталог
+<tt class="filename">vidix/dhahelperwin</tt> в Вашем дереве
+исходного кода <span class="application">MPlayer</span>'а.
+Откройте консоль и перейдите в этот каталог. Теперь наберите
+</p><pre class="screen">gcc -o dhasetup.exe dhasetup.c</pre><p>
+и запустите
+</p><pre class="screen">dhasetup.exe install</pre><p>
+под Администратором. Теперь Вам нужно перезагрузить машину.
+</p><p>
+Для получения наилучших результатов, <span class="application">MPlayer</span>
+должен использовать пространство цветов, аппаратно поддерживаемое Вашей
+видеокартой. К сожалению, многие графические драйверы под Windows ошибочно
+сообщают, что некоторые пространства цветов поддерживаются аппаратно.
+Чтобы найти какие именно, попробуйте
+</p><pre class="screen">
+mplayer -benchmark -nosound -frames 100 -vf format=<em class="replaceable"><code>colorspace</code></em> <em class="replaceable"><code>movie</code></em>
+</pre><p>,
+где <em class="replaceable"><code>colorspace</code></em> может быть любым пространством
+цветов из вывода опции <tt class="option">-vf format=fmt=help</tt>. Если Вы найдёте
+пространство цветов, которое Ваша карта особенно плохо поддерживает,
+опция <tt class="option">-vf noformat=<em class="replaceable"><code>colorspace</code></em></tt>
+помешает его использованию. Добавьте это в ваш конфигурационный файл, чтобы
+это пространство цветов больше никогда не использовалось.
+</p><p>Существуют специальные пакеты кодеков для Windows, доступные на нашей
+  <a class="ulink" href="http://www.mplayerhq.hu/design7/dload.html" target="_top">странице загрузки</a>,
+  позволяющие воспроизводить форматы, для которых пока нет родной поддержки.
+  Поместите их куда-нибудь в пути или укажите
+  <tt class="filename">configure</tt> опцию
+  <tt class="option">--codecsdir=<em class="replaceable"><code>c:/path/to/your/codecs</code></em></tt>
+  (или <tt class="option">--codecsdir=<em class="replaceable"><code>/path/to/your/codecs</code></em></tt>, но
+  только под <span class="application">Cygwin</span>).
+  У нас были сообщения о том,
+  что Real DLL должны быть доступны пользователю, запускающему
+  <span class="application">MPlayer</span>, для записи, но только на
+  некоторых системах (NT4). Если у Вас проблемы с ними, попробуйте сделать их
+  доступными на запись.
+</p><p>
+Вы можете воспроизводить VCD, проигрывая <tt class="filename">.DAT</tt>
+или <tt class="filename">.MPG</tt> файлы, которые Windows показывает на VCD.
+Вот как это работает (указывайте букву диска Вашего CD-ROM):
+</p><pre class="screen">mplayer <em class="replaceable"><code>d:/mpegav/avseq01.dat</code></em></pre><p>
+В качестве альтернативы вы можете напрямую воспроизводить VCD дорожки, указав:
+</p><pre class="screen">mplayer vcd://<em class="replaceable"><code>&lt;дорожка&gt;</code></em> -cdrom-device <em class="replaceable"><code>d:</code></em>
+</pre><p>
+DVDs также работают, укажите <tt class="option">-dvd-device</tt> с буквой Вашего DVD-ROM:
+</p><pre class="screen">
+mplayer dvd://<em class="replaceable"><code>&lt;title&gt;</code></em> -dvd-device <em class="replaceable"><code>d:</code></em>:
+</pre><p>
+Консоль <span class="application">Cygwin</span>/<span class="application">MinGW</span>
+весьма медленная. Перенаправление вывода или
+использование опции <tt class="option">-quiet</tt> улучшает производительность на
+некоторых системах. Прямой рендеринг (<tt class="option">-dr</tt>)
+также может помочь.  Если воспроизведение
+прерывисто, попробуйте <tt class="option">-autosync 100</tt>. Если какие-то из этих
+опций Вам помогут, стоит поместить их в конфигурационный файл.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Примечание</h3><p>Если у Вас Pentium 4 и Вы заметили крахи при использовании кодеков RealPlayer,
+  попробуйте отключить hyperthreading.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="cygwin"></a>5.4.1. <span class="application">Cygwin</span></h3></div></div></div><p>
+Для компиляции <span class="application">MPlayer</span> требуется запустить
+<span class="application">Cygwin</span> версии 1.5.0 или старше.
+</p><p>
+Файлы заголовков DirectX надо распаковать в
+<tt class="filename">/usr/include/</tt> или
+<tt class="filename">/usr/local/include/</tt>.
+</p><p>
+Вы можете найти инструкции и файлы для запуска SDL под
+<span class="application">Cygwin</span> на
+<a class="ulink" href="http://www.libsdl.org/extras/win32/cygwin/" target="_top">сайте libsdl</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mingw"></a>5.4.2. <span class="application">MinGW</span></h3></div></div></div><p>
+Прежде, установка версии <span class="application">MinGW</span>,
+способной скомпилировать <span class="application">MPlayer</span>, была
+сложновата, но сейчас все работает с самого начала. Просто установите
+<span class="application">MinGW</span> 3.1.0 или более новый и MSYS 1.0.9 или старше и
+укажите постустановщику MSYS, что <span class="application">MinGW</span>
+установлен.
+</p><p>
+Распакуйте файлы заголовков DirectX в
+<tt class="filename">/mingw/include/</tt>.
+</p><p>
+Для поддержки сжатых заголовкоав MOV необходима
+<a class="ulink" href="http://www.gzip.org/zlib/" target="_top">zlib</a>, которую
+<span class="application">MinGW</span> по умолчанию не предоставляет.
+Сконфигурируйте её, указав <tt class="option">--prefix=/mingw</tt> и установите
+её до компиляции <span class="application">MPlayer</span>'а.
+</p><p>
+Полные инструкции по сборке <span class="application">MPlayer</span> и необходимых
+библиотек могут быть найдены на странице
+<a class="ulink" href="http://www.mplayerhq.hu/MPlayer/contrib/win32/MPlayer-MinGW-Howto.txt" target="_top">MPlayer MinGW HOWTO</a>.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="unix.html">Пред.</a> </td><td width="20%" align="center"><a accesskey="u" href="ports.html">Наверх</a></td><td width="40%" align="right"> <a accesskey="n" href="macos.html">След.</a></td></tr><tr><td width="40%" align="left" valign="top">5.3. Коммерческие Unix </td><td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td><td width="40%" align="right" valign="top"> 5.5. Mac OS</td></tr></table></div></body></html>

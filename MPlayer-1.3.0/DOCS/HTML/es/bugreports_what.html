@@ -1,0 +1,128 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>A.4. De qué informar</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - El reproductor de Películas para LINUX"><link rel="up" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="prev" href="bugreports_where.html" title="A.3. Dónde informar de los errores"><link rel="next" href="bugreports_advusers.html" title="A.5. Yo sé lo que estoy haciendo..."><link rel="preface" href="howtoread.html" title="Como leer esta documentación"><link rel="chapter" href="intro.html" title="Capítulo 1. Introducción"><link rel="chapter" href="install.html" title="Capítulo 2. Instalación"><link rel="chapter" href="usage.html" title="Capítulo 3. Uso"><link rel="chapter" href="video-dev.html" title="Capítulo 4. Dispositivos de salida de video"><link rel="chapter" href="ports.html" title="Capítulo 5. Adaptaciones"><link rel="chapter" href="mencoder.html" title="Capítulo 6. Codificación básica con MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capítulo 7. Codificando con MEncoder"><link rel="chapter" href="faq.html" title="Capítulo 8. Preguntas de Usuario Frecuentes"><link rel="appendix" href="bugreports.html" title="Apéndice A. Cómo reportar errores"><link rel="appendix" href="skin.html" title="Apéndice B. Formato del skin de MPlayer"><link rel="subsection" href="bugreports_what.html#bugreports_system" title="A.4.1. Información del Sistema"><link rel="subsection" href="bugreports_what.html#bugreports_hardware" title="A.4.2. Hardware y controladores"><link rel="subsection" href="bugreports_what.html#bugreports_configure" title="A.4.3. Problemas de configuración"><link rel="subsection" href="bugreports_what.html#bugreports_conpilation" title="A.4.4. Problemas de compilación"><link rel="subsection" href="bugreports_what.html#bugreports_playback" title="A.4.5. Problemas de reproducción"><link rel="subsection" href="bugreports_what.html#bugreports_crash" title="A.4.6. Cuelgues"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">A.4. De qué informar</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bugreports_where.html">Anterior</a> </td><th width="60%" align="center">Apéndice A. Cómo reportar errores</th><td width="20%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Siguiente</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bugreports_what"></a>A.4. De qué informar</h2></div></div></div><p>
+Necesita incluir un historial, archivos de configuración o muestras en su informe
+de error. Si alguno de estos es muy grande entonces es mejor subirlos a nuestro
+<a class="ulink" href="ftp://upload.mplayerhq.hu/incoming/" target="_top">servidor FTP</a> en un
+formato comprimido (gzip y bzip2 preferentemente) e incluir solo la ruta al nombre
+del archivo en su informe de error. Nuestras listas de correo tienen un límite
+en el tamaño del mensaje de 80k, si tiene algo más grande entonces deberá comprimirlo
+y subirlo.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_system"></a>A.4.1. Información del Sistema</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+Si distribución de Linux o sistema operativo y versión p.e.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Red Hat 7.1</p></li><li class="listitem"><p>Slackware 7.0 + devel packs from 7.1 ...</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+versión del kernel:
+</p><pre class="screen">uname -a</pre><p>
+</p></li><li class="listitem"><p>
+versión de libc:
+</p><pre class="screen">ls -l /lib/libc[.-]*</pre><p>
+</p></li><li class="listitem"><p>
+versiones de gcc y ld:
+</p><pre class="screen">
+gcc -v
+ld -v
+</pre><p>
+</p></li><li class="listitem"><p>
+versión de binutils:
+</p><pre class="screen">
+as --version
+</pre><p>
+</p></li><li class="listitem"><p>
+Si tiene problemas con el modo de pantalla completa:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Administrador de ventanas, tipo y versión</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Si tiene problemas con XVIDIX:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Profundidad de color de las X:
+</p><pre class="screen">xdpyinfo | grep "depth of root"</pre><p>
+    </p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Si solo el GUI está fallando:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>versión de GTK</p></li><li class="listitem"><p>versión de GLIB</p></li><li class="listitem"><p>versión de libpng</p></li><li class="listitem"><p>situación del GUI cuando ocurre el error</p></li></ul></div><p>
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_hardware"></a>A.4.2. Hardware y controladores</h3></div></div></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
+Información de la CPU (esto funciona solo en Linux):
+</p><pre class="screen">cat /proc/cpuinfo</pre><p>
+</p></li><li class="listitem"><p>
+Fabricante de la tarjeta gráfica y modelo, p.e.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>ASUS V3800U chip: nVidia TNT2 Ultra pro 32MB SDRAM</p></li><li class="listitem"><p>Matrox G400 DH 32MB SGRAM</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Tipo y versión del controlador de video, p.e.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>X built-in driver</p></li><li class="listitem"><p>nVidia 0.9.623</p></li><li class="listitem"><p>Utah-GLX CVS 2001-02-17</p></li><li class="listitem"><p>DRI from X 4.0.3</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+Tipo y controlador de la tarjeta de sonido, p.e.:
+  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: circle; "><li class="listitem"><p>Creative SBLive! Gold con controlador OSS de oss.creative.com</p></li><li class="listitem"><p>Creative SB16 con controlador del kernel OSS</p></li><li class="listitem"><p>GUS PnP con emulación ALSA OSS</p></li></ul></div><p>
+</p></li><li class="listitem"><p>
+En caso de duda incluya la salida de <span class="command"><strong>lspci -vv</strong></span>
+en sistemas Linux.
+</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_configure"></a>A.4.3. Problemas de configuración</h3></div></div></div><p>
+Si obtiene errores cuando ejecuta <span class="command"><strong>./configure</strong></span>, o la
+autodetección o algo falla, lea <tt class="filename">config.log</tt>. Puede
+encontrar la respuesta ahí, por ejemplo múltiples versiones de la misma
+biblioteca mezcladas en su sistema, o ha olvidado instalar los paquetes
+de desarrollo (los que tienen el sufijo -dev). Si cree que puede ser un error,
+incluya <tt class="filename">config.log</tt> en su informe.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_conpilation"></a>A.4.4. Problemas de compilación</h3></div></div></div><p>
+Por favor incluya los siguientes archivos:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>config.h</p></li><li class="listitem"><p>config.mak</p></li></ul></div><p>
+Solo si falla la compilación bajo uno de los siguientes directorios, incluya
+estos archivos:
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Gui/config.mak</p></li><li class="listitem"><p>libvo/config.mak</p></li><li class="listitem"><p>libao2/config.mak</p></li></ul></div><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_playback"></a>A.4.5. Problemas de reproducción</h3></div></div></div><p>
+Por favor incluya la salida de <span class="application">MPlayer</span> con nivel
+de prolijo 1, pero recuerde <span class="bold"><strong>no truncar la salida</strong></span>
+cuando pegue esto en su correo. Los desarrolladores necesitan todos los mensajes
+para diagnosticar correctamente el problema. Puede dirigir la salida a un archivo
+así:
+</p><pre class="screen">mplayer -v <em class="replaceable"><code>opciones</code></em> <em class="replaceable"><code>nombre-archivo</code></em> &gt; mplayer.log 2&gt;&amp;1</pre><p>
+</p><p>
+Si su problema es específico con uno o más archivos, suba las víctimas a:
+<a class="ulink" href="ftp://mplayerhq.hu/incoming/" target="_top">ftp://mplayerhq.hu/incoming/</a>
+</p><p>
+Suba también un pequeño archivo de texto que tenga la misma base en el nombre de
+su archivo con una extensión .txt. Describa el problema que tiene con el archivo
+en particular e incluya su dirección de correo electrónico así como la salida de
+<span class="application">MPlayer</span> con nivel de prolijo 1.
+Usualmente los primeros 1-5 MB del archivo son suficientes para reproducir
+el problema, pero para asegurarse haga:
+</p><pre class="screen">dd if=<em class="replaceable"><code>su-archivo</code></em> of=<em class="replaceable"><code>archivo-pequeño</code></em> bs=1024k count=5</pre><p>
+Esto coje los primeros cinco megabytes de '<span class="bold"><strong>su-archivo</strong></span>'
+y los escribe a '<span class="bold"><strong>archivo-pequeño</strong></span>. Entonces pruebe de
+nuevo con este archivo pequeño y si el error sigue apareciendo su muestra será suficiente
+para nosotros.
+Por favor, ¡<span class="bold"><strong>nunca</strong></span> envíe estos archivos por correo!
+Súbalos, y envío solo la ruta/nombre del archivo en nuestro servidor FTP. Si el
+archivo está disponible en la red, entonces enviar la URL
+<span class="bold"><strong>exacta</strong></span> es suficiente.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="bugreports_crash"></a>A.4.6. Cuelgues</h3></div></div></div><p>
+Debería ejecutar <span class="application">MPlayer</span> dentro de <span class="command"><strong>gdb</strong></span>
+y enviarnos la salida completa o si tiene un volcado <tt class="filename">core</tt> de
+cuelgue puede extraer información útil desde el archivo Core. Aquí tiene cómo:
+</p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_debug"></a>A.4.6.1. Cómo conservar información acerca de un error reproducible</h4></div></div></div><p>
+Recompile <span class="application">MPlayer</span> con debug de código activado:
+</p><pre class="screen">
+./configure --enable-debug=3
+make
+</pre><p>
+y luego ejecute <span class="application">MPlayer</span> dentro de gdb usando:
+</p><pre class="screen">gdb ./mplayer</pre><p>
+Ahora ya está dentro de gdb. Escriba:
+</p><pre class="screen">run -v <em class="replaceable"><code>opciones-para-mplayer</code></em>
+<em class="replaceable"><code>nombre-archivo</code></em></pre><p> y reproduzca el error.
+Tan pronto como muera, gdb le devuelve a la línea de órdenes donde entró
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="bugreports_core"></a>A.4.6.2. Cómo extraer información significativa desde un volcado core</h4></div></div></div><p>
+Cree el siguiente archivo de órdenes:
+</p><pre class="screen">
+bt
+disass $pc-32,$pc+32
+info all-registers
+</pre><p>
+y después ejecute ésta orden:
+</p><pre class="screen">gdb mplayer --core=core -batch --command=<em class="replaceable"><code>command_file</code></em> &gt; mplayer.bug</pre><p>
+</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bugreports_where.html">Anterior</a> </td><td width="20%" align="center"><a accesskey="u" href="bugreports.html">Subir</a></td><td width="40%" align="right"> <a accesskey="n" href="bugreports_advusers.html">Siguiente</a></td></tr><tr><td width="40%" align="left" valign="top">A.3. Dónde informar de los errores </td><td width="20%" align="center"><a accesskey="h" href="index.html">Inicio</a></td><td width="40%" align="right" valign="top"> A.5. Yo sé lo que estoy haciendo...</td></tr></table></div></body></html>

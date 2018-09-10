@@ -1,0 +1,358 @@
+\section{Using Oggz\-Metric}
+\label{group__metric}\index{Using Oggz\-Metric@{Using Oggz\-Metric}}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef ogg\-\_\-int64\-\_\-t($\ast$ {\bf Oggz\-Metric} )({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, ogg\-\_\-int64\-\_\-t granulepos, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em This is the signature of a function to correlate Ogg streams. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf oggz\-\_\-get\-\_\-preroll} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Retrieve the preroll of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-preroll} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, int preroll)
+\begin{DoxyCompactList}\small\item\em Specify the preroll of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-get\-\_\-granuleshift} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno)
+\begin{DoxyCompactList}\small\item\em Retrieve the granuleshift of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-granuleshift} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, int granuleshift)
+\begin{DoxyCompactList}\small\item\em Specify the granuleshift of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-get\-\_\-granulerate} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, ogg\-\_\-int64\-\_\-t $\ast$granulerate\-\_\-n, ogg\-\_\-int64\-\_\-t $\ast$granulerate\-\_\-d)
+\begin{DoxyCompactList}\small\item\em Retrieve the granulerate of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-granulerate} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, ogg\-\_\-int64\-\_\-t granule\-\_\-rate\-\_\-numerator, ogg\-\_\-int64\-\_\-t granule\-\_\-rate\-\_\-denominator)
+\begin{DoxyCompactList}\small\item\em Specify the granulerate of a logical bitstream. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-metric} ({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, {\bf Oggz\-Metric} metric, void $\ast$user\-\_\-data)
+\begin{DoxyCompactList}\small\item\em Set the Oggz\-Metric to use for an O\-G\-G\-Z handle. \end{DoxyCompactList}\item 
+int {\bf oggz\-\_\-set\-\_\-data\-\_\-start} ({\bf O\-G\-G\-Z} $\ast$oggz, {\bf oggz\-\_\-off\-\_\-t} offset)
+\begin{DoxyCompactList}\small\item\em Tell Oggz to remember the given offset as the start of data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsection{Introduction}\label{group__metric_metric_intro}
+An Oggz\-Metric is a helper function for Oggz's seeking mechanism.
+
+If every position in an Ogg stream can be described by a metric such as time, then it is possible to define a function that, given a serialno and granulepos, returns a measurement in units such as milliseconds. Oggz will use this function repeatedly while seeking in order to navigate through the Ogg stream.
+
+The meaning of the units is arbitrary, but must be consistent across all logical bitstreams. This allows Oggz to seek accurately through Ogg bitstreams containing multiple logical bitstreams such as tracks of media.\subsection{How to set metrics}\label{group__metric_setting}
+You don't need to set metrics for Speex, Vorbis, F\-L\-A\-C, Theora, C\-M\-M\-L or Annodex. These can be handled \doxyref{automatically }{p.}{group__seek__api} by Oggz.
+
+For most others it is simply a matter of providing a \char`\"{}granulerate\char`\"{}\-: a frame or sampling rate, if each packet's granulepos represents a sample number.
+
+
+\begin{DoxyItemize}
+\item Set the {\itshape granule\-\_\-rate\-\_\-numerator} and {\itshape granule\-\_\-rate\-\_\-denominator} appropriately using \doxyref{oggz\-\_\-set\-\_\-granulerate()}{p.}{group__metric_gaa2a86ec590161bc2295a2c8e91cefa49}
+\end{DoxyItemize}
+
+Some codecs use a \char`\"{}granuleshift\char`\"{} to divide a granulepos into two halves; the first describing a dependency on a previous packet, the second giving the offset since that packet. This is used to mark keyframes and intermediate frames.
+
+
+\begin{DoxyItemize}
+\item Set the {\itshape granuleshift} appropriately using \doxyref{oggz\-\_\-set\-\_\-granuleshift()}{p.}{group__metric_ga7ca67e0344580bf1541b9fbde39d481b}
+\end{DoxyItemize}\subsubsection{Custom Metrics}\label{group__metric_custom}
+For streams with non-\/linear granulepos, you need to set a custom metric\-:
+
+
+\begin{DoxyItemize}
+\item Implement an Oggz\-Metric callback
+\item Set the Oggz\-Metric callback using \doxyref{oggz\-\_\-set\-\_\-metric()}{p.}{group__metric_ga5a630e8dcd04e1dd6601d8f56f0af3f6}
+\end{DoxyItemize}\subsection{Seeking with Oggz\-Metrics}\label{group__metric_using}
+To seek, use \doxyref{oggz\-\_\-seek\-\_\-units()}{p.}{group__seek__api_ga60bac88ef3695629efacec43a21927e5}. Oggz will perform a ratio search through the Ogg bitstream, using the Oggz\-Metric callback to determine its position relative to the desired unit.
+
+\begin{DoxyNote}{Note}
+
+\end{DoxyNote}
+Many data streams begin with headers describing such things as codec setup parameters. One of the assumptions Monty makes is\-:
+
+
+\begin{DoxyItemize}
+\item Given pre-\/cached decode headers, a player may seek into a stream at any point and begin decode.
+\end{DoxyItemize}
+
+Thus, the first action taken by applications dealing with such data is to read in and cache the decode headers; thereafter the application can safely seek to arbitrary points in the data.
+
+This impacts seeking because the portion of the bitstream containing decode headers should not be considered part of the metric space. To inform Oggz not to seek earlier than the end of the decode headers, use \doxyref{oggz\-\_\-set\-\_\-data\-\_\-start()}{p.}{group__metric_gaaec9a54e9b231797d245042ce23b619a}. 
+
+\subsection{Typedef Documentation}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!Oggz\-Metric@{Oggz\-Metric}}
+\index{Oggz\-Metric@{Oggz\-Metric}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{Oggz\-Metric}]{\setlength{\rightskip}{0pt plus 5cm}typedef ogg\-\_\-int64\-\_\-t($\ast$ Oggz\-Metric)({\bf O\-G\-G\-Z} $\ast$oggz, long serialno, ogg\-\_\-int64\-\_\-t granulepos, void $\ast$user\-\_\-data)}\label{group__metric_ga8803bb406015a32f5172902e3e4e76e8}
+
+
+This is the signature of a function to correlate Ogg streams. 
+
+If every position in an Ogg stream can be described by a metric (eg. time) then define this function that returns some arbitrary unit value. This is the normal use of Oggz for media streams. The meaning of units is arbitrary, but must be consistent across all logical bitstreams; for example a conversion of the time offset of a given packet into nanoseconds or a similar stream-\/specific subdivision may be appropriate.
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identifies a logical bitstream within {\itshape oggz} \\
+\hline
+{\em granulepos} & A granulepos within the logical bitstream identified by {\itshape serialno} \\
+\hline
+{\em user\-\_\-data} & Arbitrary data you wish to pass to your callback \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A conversion of the (serialno, granulepos) pair into a measure in units which is consistent across all logical bitstreams within {\itshape oggz} 
+\end{DoxyReturn}
+
+
+\subsection{Function Documentation}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!oggz\-\_\-get\-\_\-granulerate@{oggz\-\_\-get\-\_\-granulerate}}
+\index{oggz\-\_\-get\-\_\-granulerate@{oggz\-\_\-get\-\_\-granulerate}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{oggz\-\_\-get\-\_\-granulerate}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-get\-\_\-granulerate (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{ogg\-\_\-int64\-\_\-t $\ast$}]{granulerate\-\_\-n, }
+\item[{ogg\-\_\-int64\-\_\-t $\ast$}]{granulerate\-\_\-d}
+\end{DoxyParamCaption}
+)}\label{group__metric_ga72a9a24e6f8483986859d7697fa611b6}
+
+
+Retrieve the granulerate of a logical bitstream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify the logical bitstream in {\itshape oggz} \\
+\hline
+{\em granulerate\-\_\-n} & Return location for the granulerate numerator \\
+\hline
+{\em granulerate\-\_\-d} & Return location for the granulerate denominator \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 Success 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+\end{DoxyRetVals}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!oggz\-\_\-get\-\_\-granuleshift@{oggz\-\_\-get\-\_\-granuleshift}}
+\index{oggz\-\_\-get\-\_\-granuleshift@{oggz\-\_\-get\-\_\-granuleshift}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{oggz\-\_\-get\-\_\-granuleshift}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-get\-\_\-granuleshift (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{group__metric_gad9b55e525a6e0b994a133314fd78e2c0}
+
+
+Retrieve the granuleshift of a logical bitstream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify the logical bitstream in {\itshape oggz} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The granuleshift of the specified logical bitstream. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+\end{DoxyRetVals}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!oggz\-\_\-get\-\_\-preroll@{oggz\-\_\-get\-\_\-preroll}}
+\index{oggz\-\_\-get\-\_\-preroll@{oggz\-\_\-get\-\_\-preroll}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{oggz\-\_\-get\-\_\-preroll}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-get\-\_\-preroll (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno}
+\end{DoxyParamCaption}
+)}\label{group__metric_gab411ab113d5f0f67bf77506724c25633}
+
+
+Retrieve the preroll of a logical bitstream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify the logical bitstream in {\itshape oggz} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The preroll of the specified logical bitstream. 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+\end{DoxyRetVals}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!oggz\-\_\-set\-\_\-data\-\_\-start@{oggz\-\_\-set\-\_\-data\-\_\-start}}
+\index{oggz\-\_\-set\-\_\-data\-\_\-start@{oggz\-\_\-set\-\_\-data\-\_\-start}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{oggz\-\_\-set\-\_\-data\-\_\-start}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-set\-\_\-data\-\_\-start (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{{\bf oggz\-\_\-off\-\_\-t}}]{offset}
+\end{DoxyParamCaption}
+)}\label{group__metric_gaaec9a54e9b231797d245042ce23b619a}
+
+
+Tell Oggz to remember the given offset as the start of data. 
+
+This informs the seeking mechanism that when seeking back to unit 0, go to the given offset, not to the start of the file, which is usually codec headers. The usual usage is\-: 
+\begin{DoxyPre}
+    oggz\_set\_data\_start (oggz, oggz\_tell (oggz));
+\end{DoxyPre}
+ 
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle previously opened for reading \\
+\hline
+{\em offset} & The offset of the start of data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!oggz\-\_\-set\-\_\-granulerate@{oggz\-\_\-set\-\_\-granulerate}}
+\index{oggz\-\_\-set\-\_\-granulerate@{oggz\-\_\-set\-\_\-granulerate}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{oggz\-\_\-set\-\_\-granulerate}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-set\-\_\-granulerate (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{ogg\-\_\-int64\-\_\-t}]{granule\-\_\-rate\-\_\-numerator, }
+\item[{ogg\-\_\-int64\-\_\-t}]{granule\-\_\-rate\-\_\-denominator}
+\end{DoxyParamCaption}
+)}\label{group__metric_gaa2a86ec590161bc2295a2c8e91cefa49}
+
+
+Specify the granulerate of a logical bitstream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify the logical bitstream in {\itshape oggz} to attach this linear metric to. A value of -\/1 indicates that the metric should be attached to all unattached logical bitstreams in {\itshape oggz}. \\
+\hline
+{\em granule\-\_\-rate\-\_\-numerator} & The numerator of the granule rate \\
+\hline
+{\em granule\-\_\-rate\-\_\-denominator} & The denominator of the granule rate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 Success 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+\end{DoxyRetVals}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!oggz\-\_\-set\-\_\-granuleshift@{oggz\-\_\-set\-\_\-granuleshift}}
+\index{oggz\-\_\-set\-\_\-granuleshift@{oggz\-\_\-set\-\_\-granuleshift}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{oggz\-\_\-set\-\_\-granuleshift}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-set\-\_\-granuleshift (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{int}]{granuleshift}
+\end{DoxyParamCaption}
+)}\label{group__metric_ga7ca67e0344580bf1541b9fbde39d481b}
+
+
+Specify the granuleshift of a logical bitstream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify the logical bitstream in {\itshape oggz} to attach this granuleshift metric to. A value of -\/1 indicates that the metric should be attached to all unattached logical bitstreams in {\itshape oggz}. \\
+\hline
+{\em granuleshift} & The granuleshift \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 Success 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+\end{DoxyRetVals}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!oggz\-\_\-set\-\_\-metric@{oggz\-\_\-set\-\_\-metric}}
+\index{oggz\-\_\-set\-\_\-metric@{oggz\-\_\-set\-\_\-metric}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{oggz\-\_\-set\-\_\-metric}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-set\-\_\-metric (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{{\bf Oggz\-Metric}}]{metric, }
+\item[{void $\ast$}]{user\-\_\-data}
+\end{DoxyParamCaption}
+)}\label{group__metric_ga5a630e8dcd04e1dd6601d8f56f0af3f6}
+
+
+Set the Oggz\-Metric to use for an O\-G\-G\-Z handle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify the logical bitstream in {\itshape oggz} to attach this metric to. A value of -\/1 indicates that this metric should be attached to all unattached logical bitstreams in {\itshape oggz}. \\
+\hline
+{\em metric} & An Oggz\-Metric callback \\
+\hline
+{\em user\-\_\-data} & arbitrary data to pass to the metric callback\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 Success 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}, and is not -\/1 \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+Specifying values of {\itshape serialno} other than -\/1 allows you to pass logical bitstream specific user\-\_\-data to the same metric. 
+
+Alternatively, you may use a different {\itshape metric} for each {\itshape serialno}, but all metrics used must return mutually consistent unit measurements. 
+\end{DoxyNote}
+\index{Using Oggz\-Metric@{Using Oggz\-Metric}!oggz\-\_\-set\-\_\-preroll@{oggz\-\_\-set\-\_\-preroll}}
+\index{oggz\-\_\-set\-\_\-preroll@{oggz\-\_\-set\-\_\-preroll}!Using OggzMetric@{Using Oggz\-Metric}}
+\subsubsection[{oggz\-\_\-set\-\_\-preroll}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-set\-\_\-preroll (
+\begin{DoxyParamCaption}
+\item[{{\bf O\-G\-G\-Z} $\ast$}]{oggz, }
+\item[{long}]{serialno, }
+\item[{int}]{preroll}
+\end{DoxyParamCaption}
+)}\label{group__metric_gaa2b4ab5be298a11b5b91147b76996c83}
+
+
+Specify the preroll of a logical bitstream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em oggz} & An O\-G\-G\-Z handle \\
+\hline
+{\em serialno} & Identify the logical bitstream in {\itshape oggz} to attach this preroll to. \\
+\hline
+{\em preroll} & The preroll \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 Success 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{Return values}
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} & {\itshape serialno} does not identify an existing logical bitstream in {\itshape oggz}. \\
+\hline
+{\em O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} & {\itshape oggz} does not refer to an existing O\-G\-G\-Z \\
+\hline
+\end{DoxyRetVals}

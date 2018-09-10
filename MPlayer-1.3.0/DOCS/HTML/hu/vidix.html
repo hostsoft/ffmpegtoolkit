@@ -1,0 +1,143 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>6.13. VIDIX</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - The Movie Player"><link rel="up" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="prev" href="x11.html" title="6.12. X11"><link rel="next" href="directfb.html" title="6.14. DirectFB"><link rel="preface" href="howtoread.html" title="Hogyan olvasd ezt a dokumentációt"><link rel="chapter" href="intro.html" title="1. fejezet - Bevezetés"><link rel="chapter" href="install.html" title="2. fejezet - Telepítés"><link rel="chapter" href="usage.html" title="3. fejezet - Használat"><link rel="chapter" href="tv-input.html" title="4. fejezet - TV bemenet"><link rel="chapter" href="tv-teletext.html" title="5. fejezet - Teletext"><link rel="chapter" href="video.html" title="6. fejezet - Videó kimeneti eszközök"><link rel="chapter" href="ports.html" title="7. fejezet - Portok"><link rel="chapter" href="mencoder.html" title="8. fejezet - A MEncoder használatának alapjai"><link rel="chapter" href="encoding-guide.html" title="9. fejezet - Kódolás a MEncoderrel"><link rel="chapter" href="faq.html" title="10. fejezet - Gyakran ismételt kérdések"><link rel="appendix" href="bugreports.html" title="A. függelék - Hogyan jelentsd a hibákat"><link rel="appendix" href="skin.html" title="B. függelék - MPlayer skin formátum"><link rel="subsection" href="vidix.html#svgalib_helper" title="6.13.1. svgalib_helper"><link rel="subsection" href="vidix.html#vidix-ati" title="6.13.2. ATI kártyák"><link rel="subsection" href="vidix.html#vidix-mga" title="6.13.3. Matrox kártyák"><link rel="subsection" href="vidix.html#vidix-trident" title="6.13.4. Trident kártyák"><link rel="subsection" href="vidix.html#vidix-3dlabs" title="6.13.5. 3DLabs kártyák"><link rel="subsection" href="vidix.html#vidix-nvidia" title="6.13.6. nVidia kártya"><link rel="subsection" href="vidix.html#vidix-sis" title="6.13.7. SiS kártyák"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.13. VIDIX</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="x11.html">Vissza</a> </td><th width="60%" align="center">6. fejezet - Videó kimeneti eszközök</th><td width="20%" align="right"> <a accesskey="n" href="directfb.html">Előre</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vidix"></a>6.13. VIDIX</h2></div></div></div><p><b>BEVEZETÉS. </b>
+A <acronym class="acronym">VIDIX</acronym> a
+<span class="bold"><strong>VID</strong></span>eo
+<span class="bold"><strong>I</strong></span>nterface
+for *ni<span class="bold"><strong>X</strong></span> rövidítése.
+A VIDIX-et egy felhasználói térben használható vezérlőként tervezték és
+mutatták be, mely olyan videó teljesítményt nyújt, mint az mga_vid a
+Matrox kártyákon. Ráadásul könnyen portolható.
+</p><p>
+Ezt az interfészt úgy tervezték meg, hogy illeszkedjen a már létező videó
+gyorsító interfészekhez (mga_vid, rage128_vid, radeon_vid, pm3_vid) egy
+állandó sémával. Magas szintű interfészt biztosít a BES (BackEnd Scalers)
+néven ismert chip-ekhez vagy az OV-hoz (Video Overlays). Nem nyújt a
+grafikus szerverekhez hasonló alacsony szintű interfészt. (Nem akarok
+versenyezni a z X11 csapattal a grafikus mód váltásban). Pl. ezen
+interfész fő célja a videó lejátszás sebességének maximalizálása.
+</p><div class="itemizedlist"><p class="title"><b>HASZNÁLAT</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  Használhatsz egyedülálló videó kimeneti vezérlőt: <tt class="option">-vo xvidix</tt>.
+  Ez a vezérlő a VIDIX-es technológia X11-es front end-je. X szerver kell hozzá
+  és csak X szerverrel működik. Jegyezd meg, hogy mivel közvetlenül éri el a
+  hardvert az X vezérlő megkerülésével, a grafikus kártya memóriájában lévő
+  pixmap-ok sérülhetnek. Ezt elkerülheted az X által használt videó memória
+  korlátozásával, amit az XF86Config "VideoRam" opciójával adhatsz meg az
+  eszköz részben. Ajánlott ezt a kártyádon lévő memória mínusz 4 MB-ra állítani.
+  Ha kevesebb, mint 8 MB videó ram-od van, akkor ehelyett használhatod az
+  "XaaNoPixmapCache" opciót a képernyő részben.
+</p></li><li class="listitem"><p>
+  Van egy konzolos VIDIX vezérlő: <tt class="option">-vo cvidix</tt>.
+  Ehhez egy működő és inicializált frambuffer kell a legtöbb kártyánál (vagy
+  különben csak összeszemeteled a képernyőd), és hasonló eredményt kapsz, mint
+  a <tt class="option">-vo mga</tt> vagy <tt class="option">-vo fbdev</tt> kapcsolókkal. Az
+  nVidia kártyák azonban képesek tényleges grafikus kimenetre igazi szöveges
+  konzolon. Lásd az <a class="link" href="vidix.html#vidix-nvidia" title="6.13.6. nVidia kártya">nvidia_vid</a> részt a
+  további információkért. Hogy megszabadulj a határoló szövegektől és a
+  villogó kurzortól, próbálj ki valami ilyesmit:
+  </p><pre class="screen">setterm -cursor off &gt; /dev/tty9</pre><p>
+  (feltéve, hogy a <code class="systemitem">tty9</code> eddig nem volt használva)
+  és ezután válts a <code class="systemitem">tty9</code>-re.
+  Másrész a <tt class="option">-colorkey 0</tt>-t ajánlott megadni egy "háttérben"
+  futó videónál, mivel a helyes működése a colorkey funkcionalításától
+  függ.
+  </p></li><li class="listitem"><p>
+  Használhatod a VIDIX aleszközt, ami számos videó kimeneti vezérlővel együtt használható,
+  például: <tt class="option">-vo vesa:vidix</tt>
+  (<span class="bold"><strong>csak Linux</strong></span>) és
+  <tt class="option">-vo fbdev:vidix</tt>.
+</p></li></ul></div><p>
+Igazából nem számít, hogy melyik videó kimeneti vezérlőt használod együtt a
+<span class="bold"><strong>VIDIX</strong></span>-szel.
+</p><div class="itemizedlist"><p class="title"><b>KÖVETELMÉNYEK</b></p><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
+  A videó kártyának grafikus módban kell lennie (kivéve az nVidia kártyákat a
+  <tt class="option">-vo cvidix</tt> kimeneti vezérlővel).
+</p></li><li class="listitem"><p>
+  Az <span class="application">MPlayer</span> videó kimeneti vezérlőnek tudnia kell
+  aktiválni a videó módot és információkat kell tudnia átadni a VIDIX aleszköznek
+  a szerver videó karakterisztikájáról.
+</p></li></ul></div><p><b>HASZNÁLATI MÓDOK. </b>
+Ha a VIDIX-et <span class="bold"><strong>aleszközként</strong></span> használod (<tt class="option">-vo
+vesa:vidix</tt>), akkor a videó mód konfigurációt a videó kimeneti vezérlő
+(röviden <span class="bold"><strong>vo_server</strong></span>) végzi. Ezért az
+<span class="application">MPlayer</span> parancssorában ugyan azokat a kulcsokat
+használhatod, mint a vo_server-rel. Ráadásul ismeri a <tt class="option">-double</tt>
+kulcsot mint globálisan látható paramétert. (Javaslom ezen kulcs VIDIX-szel
+történő használatát legalább az ATI kártyával). Ami a <tt class="option">-vo xvidix</tt>-et
+illeti, most csak a következő kapcsolókat ismeri: <tt class="option">-fs -zoom -x -y -double</tt>.
+</p><p>
+A parancssorban harmadik alkapcsolóként megadhatod közvetlenül a VIDIX vezérlőjét:
+</p><pre class="screen">
+mplayer -vo xvidix:mga_vid.so -fs -zoom -double <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+vagy
+</p><pre class="screen">
+mplayer -vo vesa:vidix:radeon_vid.so -fs -zoom -double -bpp 32 <em class="replaceable"><code>file.avi</code></em>
+</pre><p>
+De ez veszélyes, inkább ne használd. Ebben az esetben a megadott vezérlő
+lesz kényszerítve, így az eredmény megjósolhatatlan
+(<span class="bold"><strong>lefagyaszthatja</strong></span> a számítógéped). CSAK akkor
+csinálj ilyet, ha teljesen biztos vagy benne, hogy működik és az
+<span class="application">MPlayer</span> nem teszi meg automatikusan. Ez esetben
+kérjük jelezd ezt a fejlesztőknek is. A helyes módszer a VIDIX argumentumok
+nélküli használata, és így az automatikus detektálás engedélyezése.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="svgalib_helper"></a>6.13.1. svgalib_helper</h3></div></div></div><p>
+Mivel a VIDIX-nek direkt hardver elérés kell, futtathatod root-ként vagy
+beállíthatod a SUID bit-et az <span class="application">MPlayer</span> binárisán
+(<span class="bold"><strong>Figyelem: Ez biztonsági kockázatot jelent!</strong></span>).
+Alternatívaként használhatsz egy speciális kernel modult, így:
+</p><div class="procedure"><ol class="procedure" type="1"><li class="step"><p>
+  Töltsd le az svgalib (pl. 1.9.x-es)
+  <a class="ulink" href="http://www.arava.co.il/matan/svgalib/" target="_top">fejlesztői verzióját</a>.
+</p></li><li class="step"><p>
+  Fordítsd le a modult az
+  <tt class="filename">svgalib_helper</tt> könyvtárban (az
+  <tt class="filename">svgalib-1.9.17/kernel/</tt> könyvtáron
+  belül található, ha az svgalib oldaláról töltötted le a forrást) és insmod-old.
+</p></li><li class="step"><p>
+  A <tt class="filename">/dev</tt> könyvtárban a megfelelő
+  eszközök létrehozásához add ki a
+  </p><pre class="screen">make device</pre><p> parancsot az
+  <tt class="filename">svgalib_helper</tt> könyvtárban rootként.
+</p></li><li class="step"><p>
+  Ezután futtasd le a <tt class="filename">configure</tt>-t újra és add meg neki a
+  <tt class="option">--enable-svgalib_helper</tt> és a
+  <tt class="option">--extra-cflags=<em class="replaceable"><code>/eleresi/ut/svgalib_helper/forrasahoz/</code></em>kernel/svgalib_helper</tt>
+  paramétereket, ahol a <em class="replaceable"><code>/eleresi/ut/svgalib_helper/forrasahoz/</code></em> könyvtárat
+  az svgalib_helper kicsomagolt forrását tartalmazó könyvtárnak megfelelően kell beállítani.
+</p></li><li class="step"><p>
+  Forgass újra.
+</p></li></ol></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-ati"></a>6.13.2. ATI kártyák</h3></div></div></div><p>
+Jelenleg a legtöbb ATI kártya natívan támogatott, a Mach64-től a
+legújabb Radeonokig.
+</p><p>
+Két lefordított bináris van: <tt class="filename">radeon_vid</tt> a Radeonhoz és
+<tt class="filename">rage128_vid</tt> a Rage 128 kártyákhoz. Előírhatsz egyet vagy
+hagyhatod a VIDIX rendszernek automatikusan kipróbálni az összes elérhető vezérlőt.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-mga"></a>6.13.3. Matrox kártyák</h3></div></div></div><p>
+A Matrox G200, G400, G450 és G550 működik a jelentések szerint.
+</p><p>
+A vezérlő támogatja a videó equalizereket és majdnem olyan gyors, mint a
+<a class="link" href="mga_vid.html" title="6.5. Matrox framebuffer (mga_vid)">Matrox framebuffer</a>.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-trident"></a>6.13.4. Trident kártyák</h3></div></div></div><p>
+Van egy vezérlő a Trident Cyberblade/i1 chipset-hez, ami
+a VIA Epia alaplapokon található.
+</p><p>
+A vezérlőt
+<a class="ulink" href="http://www.blackfiveservices.co.uk/EPIAVidix.shtml" target="_top">Alastair M. Robinson</a>
+írta és tartja karban.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-3dlabs"></a>6.13.5. 3DLabs kártyák</h3></div></div></div><p>
+Habár van vezérlő a 3DLabs GLINT R3 és Permedia3 chip-ekhez, senki sem
+tesztelte le, így örömmel fogadjuk a jelentéseket.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-nvidia"></a>6.13.6. nVidia kártya</h3></div></div></div><p>
+Egy egyedülálló tulajdonsága az nvidia_vid vezérlőnek a
+<span class="bold"><strong>sima, egyszerű, csak szöveges konzolon</strong></span> történő
+videó megjelenítés - framebuffer vagy X varázslat és egyebek nélkül. Ehhez a
+<tt class="option">cvidix</tt> videó kimenetet kell használni, amint az itt látható:
+</p><pre class="screen">mplayer -vo cvidix <em class="replaceable"><code>pelda.avi</code></em></pre><p>
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="vidix-sis"></a>6.13.7. SiS kártyák</h3></div></div></div><p>
+Ez nagyon kísérleti kód, csakúgy mint az nvidia_vid.
+</p><p>
+Tesztelték SiS 650/651/740-en (a leggyakrabban használt SiS chipset verziók
+a "Shuttle XPC" dobozokban).
+</p><p>
+Várjuk a visszajelzéseket!
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="x11.html">Vissza</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Fel</a></td><td width="40%" align="right"> <a accesskey="n" href="directfb.html">Előre</a></td></tr><tr><td width="40%" align="left" valign="top">6.12. X11 </td><td width="20%" align="center"><a accesskey="h" href="index.html">Főoldal</a></td><td width="40%" align="right" valign="top"> 6.14. DirectFB</td></tr></table></div></body></html>

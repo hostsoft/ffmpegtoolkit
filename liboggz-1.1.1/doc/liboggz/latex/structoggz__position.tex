@@ -1,0 +1,58 @@
+\section{oggz\-\_\-position Struct Reference}
+\label{structoggz__position}\index{oggz\-\_\-position@{oggz\-\_\-position}}
+
+
+The position of an \doxyref{oggz\-\_\-packet}{p.}{structoggz__packet}.  
+
+
+
+
+{\ttfamily \#include $<$oggz\-\_\-packet.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+ogg\-\_\-int64\-\_\-t {\bf calc\-\_\-granulepos}
+\begin{DoxyCompactList}\small\item\em Granulepos calculated by inspection of codec data. \end{DoxyCompactList}\item 
+{\bf oggz\-\_\-off\-\_\-t} {\bf begin\-\_\-page\-\_\-offset}\label{structoggz__position_ae9c2a34bd23aea39a2136415b2666487}
+
+\begin{DoxyCompactList}\small\item\em Byte offset of the start of the page on which this packet begins. \end{DoxyCompactList}\item 
+{\bf oggz\-\_\-off\-\_\-t} {\bf end\-\_\-page\-\_\-offset}\label{structoggz__position_a7130786ffc28acab7c3a9a77c7cfbbb6}
+
+\begin{DoxyCompactList}\small\item\em Byte offset of the start of the page on which this packet ends. \end{DoxyCompactList}\item 
+int {\bf pages}
+\begin{DoxyCompactList}\small\item\em Number of pages this packet spans. \end{DoxyCompactList}\item 
+int {\bf begin\-\_\-segment\-\_\-index}
+\begin{DoxyCompactList}\small\item\em Index into begin\-\_\-page's lacing values for the segment that begins this packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The position of an \doxyref{oggz\-\_\-packet}{p.}{structoggz__packet}. 
+
+\subsection{Field Documentation}
+\index{oggz\-\_\-position@{oggz\-\_\-position}!begin\-\_\-segment\-\_\-index@{begin\-\_\-segment\-\_\-index}}
+\index{begin\-\_\-segment\-\_\-index@{begin\-\_\-segment\-\_\-index}!oggz_position@{oggz\-\_\-position}}
+\subsubsection[{begin\-\_\-segment\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-position\-::begin\-\_\-segment\-\_\-index}\label{structoggz__position_a8ca77b0acf589531d9970c3f6b589164}
+
+
+Index into begin\-\_\-page's lacing values for the segment that begins this packet. 
+
+N\-B. if begin\-\_\-page is continued then the first of these packets will not be reported by ogg\-\_\-sync\-\_\-packetout() after a seek. -\/1 if unknown. \index{oggz\-\_\-position@{oggz\-\_\-position}!calc\-\_\-granulepos@{calc\-\_\-granulepos}}
+\index{calc\-\_\-granulepos@{calc\-\_\-granulepos}!oggz_position@{oggz\-\_\-position}}
+\subsubsection[{calc\-\_\-granulepos}]{\setlength{\rightskip}{0pt plus 5cm}ogg\-\_\-int64\-\_\-t oggz\-\_\-position\-::calc\-\_\-granulepos}\label{structoggz__position_af7eb619f0da5c818b49cbabc29c540b4}
+
+
+Granulepos calculated by inspection of codec data. 
+
+-\/1 if unknown \index{oggz\-\_\-position@{oggz\-\_\-position}!pages@{pages}}
+\index{pages@{pages}!oggz_position@{oggz\-\_\-position}}
+\subsubsection[{pages}]{\setlength{\rightskip}{0pt plus 5cm}int oggz\-\_\-position\-::pages}\label{structoggz__position_ad2e55a8276c03f83c6e40b88991305b2}
+
+
+Number of pages this packet spans. 
+
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+{\bf oggz\-\_\-packet.\-h}\end{DoxyCompactItemize}

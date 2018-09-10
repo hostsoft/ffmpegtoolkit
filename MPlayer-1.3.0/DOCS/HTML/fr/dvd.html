@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.7. Lecture de DVD</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="usage.html" title="Chapitre 3. Utilisation"><link rel="prev" href="drives.html" title="3.6. Lecteurs CD/DVD"><link rel="next" href="vcd.html" title="3.8. Lecture de VCDs"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"><link rel="subsection" href="dvd.html#region_code" title="3.7.1. Code zone"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.7. Lecture de DVD</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="drives.html">Précédent</a> </td><th width="60%" align="center">Chapitre 3. Utilisation</th><td width="20%" align="right"> <a accesskey="n" href="vcd.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="dvd"></a>3.7. Lecture de DVD</h2></div></div></div><p>
+Pour voir la liste complète des options disponibles, veuillez lire la page de man.
+La syntaxe pour lire un Digital Versatile Disc (DVD) est la suivante :
+</p><pre class="screen">mplayer dvd://<em class="replaceable"><code>&lt;piste&gt;</code></em> [-dvd-device <em class="replaceable"><code>&lt;périphérique&gt;</code></em>]</pre><p>
+</p><p>
+  Exemple :
+  </p><pre class="screen">mplayer dvd://1 -dvd-device /dev/hdc</pre><p>
+</p><p>
+Si vous avez compilé <span class="application">MPlayer</span> avec la gestion de dvdnav, la
+syntaxe est la même, sauf que que vous devrez utiliser dvdnav:// au lieu de dvd://.
+</p><p>
+Le périphérique DVD par défaut est <tt class="filename">/dev/dvd</tt>. Si votre configuration
+est différente, faites un lien symbolique (symlink) ou spécifiez le bon périphérique en
+ligne de commande avec l'option <tt class="option">-dvd-device</tt>.
+</p><p>
+<span class="application">MPlayer</span> utilise <code class="systemitem">libdvdread</code> et
+<code class="systemitem">libdvdcss</code> pour le décryptage et la lecture de DVD.
+Ces deux bibliothèques sont contenues dans le répertoire
+source de <span class="application">MPlayer</span>, vous n'avez donc pas besoin de les
+installer séparément. Vous pouvez aussi utiliser les versions de ces deux bibliothèques
+qui sont peut-être déjà présentes sur votre système, mais cette solution n'est pas
+recommandée, dans la mesure où elle peut provoquer des bogues, des incompatibilités
+de bibliothèque et une vitesse réduite.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+En cas de problème de décodage de DVD, essayez de désactiver supermount, ou
+tous les outils de ce genre. Certains lecteurs RPC-2 peuvent aussi nécessiter
+le réglage de leur code de région.
+</p></div><p><b>Décodage DVD. </b>
+    Le décodage DVD est réalisé par <code class="systemitem">libdvdcss</code>. La
+    méthode peut être spécifiée par la variable d'environnement
+    <code class="envar">DVDCSS_METHOD</code>. Voir le manuel pour plus de détails.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="region_code"></a>3.7.1. Code zone</h3></div></div></div><p>
+  Les lecteurs DVD d'aujourd'hui sont équipés d'une restriction sans queue ni
+  tête appelée <a class="ulink" href="http://fr.wikipedia.org/wiki/DVD#Protections_commerciales_par_zones" target="_top">
+    protection commerciale par zones </a>.
+  C'est un système qui oblige les lecteurs DVD à accepter uniquement les DVDs
+  produits pour l'une des six zones qui découpent le monde.  Il est
+  impensable qu'un groupe de personne se réunisse pour arriver à élaborer une
+  telle idée et pense que la Terre entière se pliera à leur volonté.
+</p><p>
+  Les lecteurs qui appliquent le réglage des zones uniquement via logiciel
+  sont connus comme des lecteurs RPC-1, ceux qui le font via matériel comme
+  des lecteurs RPC-2.
+  Les lecteurs RPC-2 permettent de changer de zone cinq fois avant qu'il ne
+  se bloque.
+  Sous Linux, vous pouvez utiliser l'outil <a class="ulink" href="http://linvdr.org/projects/regionset/" target="_top">regionset</a> pour modifier
+  le code zone de votre lecteur DVD.
+</p><p>
+  Heureusement, il est possible de convertir les lecteurs RPC-2 en RPC-1 lors
+  d'une mise à jours du micrologiciel.
+  Saisissez la référence de votre lecteur DVD dans votre moteur de recherche
+  favori ou jetez un œil au forum et à la section téléchargement de <a class="ulink" href="http://www.rpc1.org/" target="_top">"The firmware page"</a>.
+  Les mises en garde habituelles des mises à jours de micrologiciels restent
+  valables mais les expériences de suppressions de restrictions de zones sont
+  généralement fructueuses.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="drives.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="vcd.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">3.6. Lecteurs CD/DVD </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 3.8. Lecture de VCDs</td></tr></table></div></body></html>

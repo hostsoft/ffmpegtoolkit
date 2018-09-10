@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>3.11. Televideo (teletext)</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Il Visualizzatore di film"><link rel="up" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="prev" href="tv-input.html" title="3.10. Ingresso TV"><link rel="next" href="radio.html" title="3.12. Radio"><link rel="preface" href="howtoread.html" title="Come leggere questa documentazione"><link rel="chapter" href="intro.html" title="Capitolo 1. Introduzione"><link rel="chapter" href="install.html" title="Capitolo 2. Installazione"><link rel="chapter" href="usage.html" title="Capitolo 3. Utilizzo"><link rel="chapter" href="video.html" title="Capitolo 4. Dispositivi di uscita video"><link rel="chapter" href="ports.html" title="Capitolo 5. Ports"><link rel="chapter" href="mencoder.html" title="Capitolo 6. Utilizzo base di MEncoder"><link rel="chapter" href="encoding-guide.html" title="Capitolo 7. La codifica con MEncoder"><link rel="chapter" href="faq.html" title="Capitolo 8. Frequently Asked Questions"><link rel="appendix" href="bugreports.html" title="Appendice A. Come segnalare i bug (errori)"><link rel="appendix" href="skin.html" title="Appendice B. MPlayer skin format"><link rel="subsection" href="tv-teletext.html#tv-teletext-implementation-notes" title="3.11.1. Note sull'implementazione"><link rel="subsection" href="tv-teletext.html#tv-teletext-usage" title="3.11.2. Usare il televideo"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.11. Televideo (teletext)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="tv-input.html">Indietro</a> </td><th width="60%" align="center">Capitolo 3. Utilizzo</th><td width="20%" align="right"> <a accesskey="n" href="radio.html">Avanti</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tv-teletext"></a>3.11. Televideo (teletext)</h2></div></div></div><p>
+Il televideo è attualmente disponibile solo in
+<span class="application">MPlayer</span> per i driver v4l e v4l2.
+</p><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-teletext-implementation-notes"></a>3.11.1. Note sull'implementazione</h3></div></div></div><p>
+<span class="application">MPlayer</span> gestisce il testo normale, la grafica e i
+collegamenti per la navigazione.
+Sfortunatamente, le pagine colorate non sono ancora decodificate completamente -
+tutte le pagine vengono mostrate in scala di grigi.
+Vengono gestite anche le pagine dei sottotitoli (conosciute anche come
+'Closed Captions').
+</p><p>
+<span class="application">MPlayer</span> inizia a memorizzare nella cache tutte le
+pagine di televideo sin dall'inizio della ricezione dall'ingresso TV, perciò
+non devi attendere fino a quando si carica la pagina voluta.
+</p><p>
+Nota: usare il televideo con <tt class="option">-vo xv</tt> genera strani colori.
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="tv-teletext-usage"></a>3.11.2. Usare il televideo</h3></div></div></div><p>
+Per abilitare la decodifica del televideo devi specificare il dispositivo VBI da
+cui ottenere i dati televideo (solitamente <tt class="filename">/dev/vbi0</tt> per
+Linux). Puoi fare ciò speificando <tt class="option">tdevice</tt> nel tuo file di
+configurazione, come mostrato qui sotto:
+</p><pre class="screen">tv=tdevice=/dev/vbi0</pre><p>
+</p><p>
+Potresti voler indicare il codice di lingua del televideo per la tua zona.
+Per elencare tutti i codici di zona disponibili usa
+</p><pre class="screen">tv=tdevice=/dev/vbi0:tlang=<em class="replaceable"><code>-1</code></em></pre><p>
+Qui c'è un esempio per il russo:
+</p><pre class="screen">tv=tdevice=/dev/vbi0:tlang=<em class="replaceable"><code>33</code></em></pre><p>
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="tv-input.html">Indietro</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Risali</a></td><td width="40%" align="right"> <a accesskey="n" href="radio.html">Avanti</a></td></tr><tr><td width="40%" align="left" valign="top">3.10. Ingresso TV </td><td width="20%" align="center"><a accesskey="h" href="index.html">Partenza</a></td><td width="40%" align="right" valign="top"> 3.12. Radio</td></tr></table></div></body></html>

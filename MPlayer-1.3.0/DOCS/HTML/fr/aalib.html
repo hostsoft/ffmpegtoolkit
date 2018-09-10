@@ -1,0 +1,76 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>4.11. AAlib – affichage en mode texte</title><link rel="stylesheet" type="text/css" href="default.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="MPlayer - Le Lecteur Vidéo"><link rel="up" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="prev" href="opengl.html" title="4.10. Sortie OpenGL"><link rel="next" href="caca.html" title="4.12.  libcaca – Librairie ASCII Art en couleur"><link rel="preface" href="howtoread.html" title="Comment lire cette documentation"><link rel="chapter" href="intro.html" title="Chapitre 1. Introduction"><link rel="chapter" href="install.html" title="Chapitre 2. Installation"><link rel="chapter" href="usage.html" title="Chapitre 3. Utilisation"><link rel="chapter" href="video.html" title="Chapitre 4. Sorties vidéo"><link rel="chapter" href="ports.html" title="Chapitre 5. Ports"><link rel="chapter" href="mencoder.html" title="Chapitre 6. Utilisation basique de MEncoder"><link rel="chapter" href="encoding-guide.html" title="Chapitre 7. L'encodage avec MEncoder"><link rel="chapter" href="faq.html" title="Chapitre 8. Foire Aux Questions"><link rel="appendix" href="bugreports.html" title="Annexe A. Comment rapporter les bogues"><link rel="appendix" href="skin.html" title="Annexe B. Format de skins MPlayer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.11. AAlib – affichage en mode texte</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="opengl.html">Précédent</a> </td><th width="60%" align="center">Chapitre 4. Sorties vidéo</th><td width="20%" align="right"> <a accesskey="n" href="caca.html">Suivant</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="aalib"></a>4.11. AAlib – affichage en mode texte</h2></div></div></div><p>
+AAlib est une librairie affichant des graphismes en mode texte, en utilisant
+un
+puissant moteur de rendu ASCII. De <span class="emphasis"><em>nombreux</em></span> programmes le
+supportent déjà, comme Doom, Quake, etc. <span class="application">MPlayer</span>
+possède
+pour cela un pilote parfaitement utilisable. Si
+<tt class="filename">./configure</tt>
+détecte une installation de aalib, le pilote aalib libvo sera compilé.
+
+</p><p>
+Vous pouvez utiliser certains raccourcis clavier dans le fenêtre AA pour
+changer les options de rendu :
+</p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>Touche</th><th>Action</th></tr></thead><tbody><tr><td><span class="keycap"><b>1</b></span></td><td>
+  diminue le contraste
+  </td></tr><tr><td><span class="keycap"><b>2</b></span></td><td>
+  augmente le contraste
+  </td></tr><tr><td><span class="keycap"><b>3</b></span></td><td>
+  diminue la luminosité
+  </td></tr><tr><td><span class="keycap"><b>4</b></span></td><td>
+  augmente la luminosité
+  </td></tr><tr><td><span class="keycap"><b>5</b></span></td><td>
+  active/désactive le rendu rapide
+  </td></tr><tr><td><span class="keycap"><b>6</b></span></td><td>
+  change le mode de dithering (none, error distribution, Floyd Steinberg)
+  </td></tr><tr><td><span class="keycap"><b>7</b></span></td><td>
+  inverse l'image
+  </td></tr><tr><td><span class="keycap"><b>8</b></span></td><td>
+   passe des contrôles de aa vers ceux de <span class="application">MPlayer</span>
+   et vice-versa
+  </td></tr></tbody></table></div><div class="variablelist"><p class="title"><b>Vous pouvez utiliser les lignes de commande suivantes :</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aaosdcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    change la couleur de l'OSD
+    </p></dd><dt><span class="term"><tt class="option">-aasubcolor=<em class="replaceable"><code>V</code></em></tt></span></dt><dd><p>
+    Change la couleur des sous-titres
+    </p><p>
+      where <em class="replaceable"><code>V</code></em> peut être :
+    <code class="literal">0</code> (normal),
+    <code class="literal">1</code> (noir),
+    <code class="literal">2</code> (gras),
+    <code class="literal">3</code> (fontes grasses),
+    <code class="literal">4</code> (inversé),
+    <code class="literal">5</code> (spécial).
+    </p></dd></dl></div><div class="variablelist"><p class="title"><b>AAlib elle-même propose de nombreuses options. En voici les
+  principales :</b></p><dl class="variablelist"><dt><span class="term"><tt class="option">-aapilote</tt></span></dt><dd><p>
+    Choisit le pilote aa (X11, curses, Linux)
+    </p></dd><dt><span class="term"><tt class="option">-aaextended</tt></span></dt><dd><p>
+    Utilise les 256 caractères
+    </p></dd><dt><span class="term"><tt class="option">-aaeight</tt></span></dt><dd><p>
+   Utilise l'ASCII 8 bits
+    </p></dd><dt><span class="term"><tt class="option">-aahelp</tt></span></dt><dd><p>
+    Affiche toutes les options de AAlib
+    </p></dd></dl></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+Le rendu prend beaucoup de temps CPU, spécialement en utilisant AA-on-X (AAlib
+sur X), et prend moins de CPU sur une console standard, sans framebuffer.
+Utilisez SVGATextMode pour passer en mode texte large, et appréciez !
+(une
+carte hercules en second écran, c'est génial :)) (mais à mon humble avis vous
+pouvez utiliser l'option <tt class="option">-vf 1bpp</tt> pour avoir des graphismes
+sur hgafb :)).
+</p></div><p>
+Utilisez l'option <tt class="option">-framedrop</tt> si votre machine n'est pas
+suffisamment rapide pour afficher toutes les trames !
+</p><p>
+Sur un terminal vous obtiendrez de meilleures performances en utilisant le
+pilote
+linux, et pas curses (<tt class="option">-aapilote linux</tt>). Cependant vous devez
+avoir
+un accès en écriture sur
+<tt class="filename">/dev/vcsa<em class="replaceable"><code>&lt;terminal&gt;</code></em></tt>. Ce
+n'est
+pas autodétecté par aalib, mais vo_aa essaie de déterminer le meilleur mode.
+Voir
+<a class="ulink" href="http://aa-project.sf.net/tune" target="_top">http://aa-project.sf.net/tune</a> pour une meilleure optimisation.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="opengl.html">Précédent</a> </td><td width="20%" align="center"><a accesskey="u" href="video.html">Niveau supérieur</a></td><td width="40%" align="right"> <a accesskey="n" href="caca.html">Suivant</a></td></tr><tr><td width="40%" align="left" valign="top">4.10. Sortie OpenGL </td><td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td><td width="40%" align="right" valign="top"> 4.12. 
+  <code class="systemitem">libcaca</code> – Librairie ASCII Art
+en couleur</td></tr></table></div></body></html>

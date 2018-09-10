@@ -1,0 +1,215 @@
+\section{oggz\-\_\-constants.\-h File Reference}
+\label{oggz__constants_8h}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}
+
+
+General constants used by liboggz.  
+
+
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum {\bf Oggz\-Stream\-Content} {\bf Oggz\-Stream\-Content}\label{oggz__constants_8h_a69a05fe277d156358f300e3968ddc70f}
+
+\begin{DoxyCompactList}\small\item\em Definition of stream content types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Oggz\-Flags} \{ \\*
+{\bf O\-G\-G\-Z\-\_\-\-R\-E\-A\-D} = 0x00, 
+{\bf O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E} = 0x01, 
+{\bf O\-G\-G\-Z\-\_\-\-N\-O\-N\-S\-T\-R\-I\-C\-T} = 0x10, 
+{\bf O\-G\-G\-Z\-\_\-\-A\-U\-T\-O} = 0x20, 
+\\*
+{\bf O\-G\-G\-Z\-\_\-\-P\-R\-E\-F\-I\-X} = 0x40, 
+{\bf O\-G\-G\-Z\-\_\-\-S\-U\-F\-F\-I\-X} = 0x80
+ \}
+\begin{DoxyCompactList}\small\item\em Flags to \doxyref{oggz\-\_\-new()}{p.}{oggz_8h_a6eb34d123389ae38d993601f9e7bb9d6}, \doxyref{oggz\-\_\-open()}{p.}{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db}, and oggz\-\_\-openfd(). \end{DoxyCompactList}\item 
+enum {\bf Oggz\-Stop\-Ctl} \{ {\bf O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E} = 0, 
+{\bf O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K} = 1, 
+{\bf O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R} = -\/1
+ \}
+\item 
+enum {\bf Oggz\-Flush\-Opts} \{ {\bf O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-B\-E\-F\-O\-R\-E} = 0x01, 
+{\bf O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-A\-F\-T\-E\-R} = 0x02
+ \}
+\begin{DoxyCompactList}\small\item\em Flush options for oggz\-\_\-write\-\_\-feed; can be or'ed together. \end{DoxyCompactList}\item 
+enum {\bf Oggz\-Stream\-Content} \{ \\*
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-T\-H\-E\-O\-R\-A} = 0, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-V\-O\-R\-B\-I\-S}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-S\-P\-E\-E\-X}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-P\-C\-M}, 
+\\*
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-C\-M\-M\-L}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-A\-N\-X2}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-S\-K\-E\-L\-E\-T\-O\-N}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-F\-L\-A\-C0}, 
+\\*
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-F\-L\-A\-C}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-A\-N\-X\-D\-A\-T\-A}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-C\-E\-L\-T}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-K\-A\-T\-E}, 
+\\*
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-D\-I\-R\-A\-C}, 
+{\bfseries O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-U\-N\-K\-N\-O\-W\-N}
+ \}
+\begin{DoxyCompactList}\small\item\em Definition of stream content types. \end{DoxyCompactList}\item 
+enum {\bf Oggz\-Error} \{ \\*
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-K} = 0, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C} = -\/1, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z} = -\/2, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D} = -\/3, 
+\\*
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-\_\-\-S\-T\-R\-E\-A\-M\-S} = -\/4, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-O\-S} = -\/5, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-E\-O\-S} = -\/6, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-M\-E\-T\-R\-I\-C} = -\/7, 
+\\*
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M} = -\/10, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D} = -\/11, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-S\-E\-E\-K} = -\/13, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K} = -\/14, 
+\\*
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R} = -\/15, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-O\-\_\-\-A\-G\-A\-I\-N} = -\/16, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-H\-O\-L\-E\-\_\-\-I\-N\-\_\-\-D\-A\-T\-A} = -\/17, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y} = -\/18, 
+\\*
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O} = -\/20, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-Y\-T\-E\-S} = -\/21, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-\_\-\-O\-\_\-\-S} = -\/22, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-E\-\_\-\-O\-\_\-\-S} = -\/23, 
+\\*
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-R\-A\-N\-U\-L\-E\-P\-O\-S} = -\/24, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-P\-A\-C\-K\-E\-T\-N\-O} = -\/25, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D} = -\/129, 
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-U\-A\-R\-D} = -\/210, 
+\\*
+{\bf O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-R\-E\-C\-U\-R\-S\-I\-V\-E\-\_\-\-W\-R\-I\-T\-E} = -\/266
+ \}
+\begin{DoxyCompactList}\small\item\em Definitions of error return values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+General constants used by liboggz. 
+
+\subsection{Enumeration Type Documentation}
+\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!Oggz\-Error@{Oggz\-Error}}
+\index{Oggz\-Error@{Oggz\-Error}!oggz_constants.h@{oggz\-\_\-constants.\-h}}
+\subsubsection[{Oggz\-Error}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Oggz\-Error}}\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83e}
+
+
+Definitions of error return values. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-K@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-K}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-K@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-K}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-K\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea9c2ac780c03b38ba06e9ffe9c7f95a08}
+}]No error. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-G\-E\-N\-E\-R\-I\-C\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea9cb5d186a7de1c24f0b72894ebc9886b}
+}]generic error \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-O\-G\-G\-Z\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea195b205e2a10b746a9426da0d8fd22f6}
+}]oggz is not a valid O\-G\-G\-Z \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-N\-V\-A\-L\-I\-D\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83eadcd2c8d2d0624da6b5faa5c26fc87628}
+}]The requested operation is not suitable for this O\-G\-G\-Z. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-\_\-\-S\-T\-R\-E\-A\-M\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-\_\-\-S\-T\-R\-E\-A\-M\-S}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-\_\-\-S\-T\-R\-E\-A\-M\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-\_\-\-S\-T\-R\-E\-A\-M\-S}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-\_\-\-S\-T\-R\-E\-A\-M\-S\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83eafd7a0ff230f3892aae44a8003203afd7}
+}]oggz contains no logical bitstreams \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-O\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-O\-S}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-O\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-O\-S}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-O\-S\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83eac447250ac1367c84c875df0d01b70661}
+}]Operation is inappropriate for oggz in current bos state. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-E\-O\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-E\-O\-S}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-E\-O\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-E\-O\-S}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-E\-O\-S\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83eafb09184b514aee32f1b512937fa618e0}
+}]Operation is inappropriate for oggz in current eos state. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-M\-E\-T\-R\-I\-C@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-M\-E\-T\-R\-I\-C}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-M\-E\-T\-R\-I\-C@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-M\-E\-T\-R\-I\-C}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-M\-E\-T\-R\-I\-C\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea82714dc1b1505af8e373c2b877ce0a04}
+}]Operation requires a valid metric, but none has been set. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-Y\-S\-T\-E\-M\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea607f17c9c37f2d5c40d1ed55cb1d7e17}
+}]System specific error; check errno for details. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea77029ff6686a406f966209f78f62c3ff}
+}]Functionality disabled at build time. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-S\-E\-E\-K@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-S\-E\-E\-K}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-S\-E\-E\-K@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-S\-E\-E\-K}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-N\-O\-S\-E\-E\-K\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea761cede14a1d709ea722b607c59723ed}
+}]Seeking operation is not possible for this O\-G\-G\-Z. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea5f9bde92dc6e7cc407e52e5dd61fdbf4}
+}]Reading was stopped by an Oggz\-Read\-Callback returning O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K or writing was stopped by an Oggz\-Write\-Hungry callback returning O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea59dffeb8be96b2ac026735f7e5bb8a2a}
+}]Reading was stopped by an Oggz\-Read\-Callback returning O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R or writing was stopped by an Oggz\-Write\-Hungry callback returning O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-O\-\_\-\-A\-G\-A\-I\-N@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-O\-\_\-\-A\-G\-A\-I\-N}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-O\-\_\-\-A\-G\-A\-I\-N@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-O\-\_\-\-A\-G\-A\-I\-N}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-I\-O\-\_\-\-A\-G\-A\-I\-N\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83eab837c50e1cd4b858c02e1f89842bd134}
+}]no data available from I\-O, try again \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-H\-O\-L\-E\-\_\-\-I\-N\-\_\-\-D\-A\-T\-A@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-H\-O\-L\-E\-\_\-\-I\-N\-\_\-\-D\-A\-T\-A}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-H\-O\-L\-E\-\_\-\-I\-N\-\_\-\-D\-A\-T\-A@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-H\-O\-L\-E\-\_\-\-I\-N\-\_\-\-D\-A\-T\-A}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-H\-O\-L\-E\-\_\-\-I\-N\-\_\-\-D\-A\-T\-A\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83eaed1eccb86408055f065009e64b88a7d4}
+}]Hole (sequence number gap) detected in input data. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-O\-U\-T\-\_\-\-O\-F\-\_\-\-M\-E\-M\-O\-R\-Y\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea3edc55802c7a9052f14608b9c101b92c}
+}]Out of memory. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-S\-E\-R\-I\-A\-L\-N\-O\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ead19554f4b1f544a1b575664b4a38694d}
+}]The requested serialno does not exist in this O\-G\-G\-Z. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-Y\-T\-E\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-Y\-T\-E\-S}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-Y\-T\-E\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-Y\-T\-E\-S}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-Y\-T\-E\-S\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83eacf1a748ac6d70d304c193ac4d8a0142a}
+}]Packet disallowed due to invalid byte length. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-\_\-\-O\-\_\-\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-\_\-\-O\-\_\-\-S}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-\_\-\-O\-\_\-\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-\_\-\-O\-\_\-\-S}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-B\-\_\-\-O\-\_\-\-S\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea82a9669e837d20e2fb392c9f1f5eb960}
+}]Packet disallowed due to invalid b\-\_\-o\-\_\-s (beginning of stream) flag. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-E\-\_\-\-O\-\_\-\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-E\-\_\-\-O\-\_\-\-S}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-E\-\_\-\-O\-\_\-\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-E\-\_\-\-O\-\_\-\-S}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-E\-\_\-\-O\-\_\-\-S\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83eae2352f40f9376e4b9dc234db18a93798}
+}]Packet disallowed due to invalid e\-\_\-o\-\_\-s (end of stream) flag. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-R\-A\-N\-U\-L\-E\-P\-O\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-R\-A\-N\-U\-L\-E\-P\-O\-S}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-R\-A\-N\-U\-L\-E\-P\-O\-S@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-R\-A\-N\-U\-L\-E\-P\-O\-S}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-R\-A\-N\-U\-L\-E\-P\-O\-S\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea9d49be12111ae95d12252528496a88a7}
+}]Packet disallowed due to invalid granulepos. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-P\-A\-C\-K\-E\-T\-N\-O@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-P\-A\-C\-K\-E\-T\-N\-O}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-P\-A\-C\-K\-E\-T\-N\-O@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-P\-A\-C\-K\-E\-T\-N\-O}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-P\-A\-C\-K\-E\-T\-N\-O\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea5e0116f755d019616406ac341f1f6e98}
+}]Packet disallowed due to invalid packetno. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-C\-O\-M\-M\-E\-N\-T\-\_\-\-I\-N\-V\-A\-L\-I\-D\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ead27c93cddea5ddaeaf168426f14833de}
+}]Comment violates Vorbis\-Comment restrictions. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-U\-A\-R\-D@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-U\-A\-R\-D}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-U\-A\-R\-D@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-U\-A\-R\-D}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-G\-U\-A\-R\-D\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea57d5c64dce5d60f559e13dbe3e3c1c22}
+}]Guard provided by user has non-\/zero value. \index{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-R\-E\-C\-U\-R\-S\-I\-V\-E\-\_\-\-W\-R\-I\-T\-E@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-R\-E\-C\-U\-R\-S\-I\-V\-E\-\_\-\-W\-R\-I\-T\-E}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-R\-E\-C\-U\-R\-S\-I\-V\-E\-\_\-\-W\-R\-I\-T\-E@{O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-R\-E\-C\-U\-R\-S\-I\-V\-E\-\_\-\-W\-R\-I\-T\-E}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-E\-R\-R\-\_\-\-R\-E\-C\-U\-R\-S\-I\-V\-E\-\_\-\-W\-R\-I\-T\-E\label{oggz__constants_8h_a68ad49468cba9eb61380abd603b0f83ea8f0a11d443e4bf9f89a2cc4d44548081}
+}]Attempt to call \doxyref{oggz\-\_\-write()}{p.}{group__write__api_ga3c97d94ea425d64546adf9c368b71904} or \doxyref{oggz\-\_\-write\-\_\-output()}{p.}{group__write__api_ga5606dff01964caec4582eb172fde0c1c} from within a hungry() callback. \end{description}
+\end{Desc}
+\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!Oggz\-Flags@{Oggz\-Flags}}
+\index{Oggz\-Flags@{Oggz\-Flags}!oggz_constants.h@{oggz\-\_\-constants.\-h}}
+\subsubsection[{Oggz\-Flags}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Oggz\-Flags}}\label{oggz__constants_8h_a12afc3c052f6e84eff5a99ac9f1ccdd3}
+
+
+Flags to \doxyref{oggz\-\_\-new()}{p.}{oggz_8h_a6eb34d123389ae38d993601f9e7bb9d6}, \doxyref{oggz\-\_\-open()}{p.}{oggz_8h_a65197cdd03f755f7ebfabf2fdff4c7db}, and oggz\-\_\-openfd(). 
+
+Can be or'ed together in the following combinations\-:
+\begin{DoxyItemize}
+\item O\-G\-G\-Z\-\_\-\-R\-E\-A\-D $|$ O\-G\-G\-Z\-\_\-\-A\-U\-T\-O
+\item O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E $|$ O\-G\-G\-Z\-\_\-\-N\-O\-N\-S\-T\-R\-I\-C\-T $|$ O\-G\-G\-Z\-\_\-\-P\-R\-E\-F\-I\-X $|$ O\-G\-G\-Z\-\_\-\-S\-U\-F\-F\-I\-X 
+\end{DoxyItemize}\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{O\-G\-G\-Z\-\_\-\-R\-E\-A\-D@{O\-G\-G\-Z\-\_\-\-R\-E\-A\-D}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-R\-E\-A\-D@{O\-G\-G\-Z\-\_\-\-R\-E\-A\-D}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-R\-E\-A\-D\label{oggz__constants_8h_a12afc3c052f6e84eff5a99ac9f1ccdd3a95bd4a2b27d6e9e119ee11a7c5c26c50}
+}]Read only. \index{O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E@{O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E@{O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-W\-R\-I\-T\-E\label{oggz__constants_8h_a12afc3c052f6e84eff5a99ac9f1ccdd3a8819c3d01c84191dbf846b5e0a98d757}
+}]Write only. \index{O\-G\-G\-Z\-\_\-\-N\-O\-N\-S\-T\-R\-I\-C\-T@{O\-G\-G\-Z\-\_\-\-N\-O\-N\-S\-T\-R\-I\-C\-T}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-N\-O\-N\-S\-T\-R\-I\-C\-T@{O\-G\-G\-Z\-\_\-\-N\-O\-N\-S\-T\-R\-I\-C\-T}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-N\-O\-N\-S\-T\-R\-I\-C\-T\label{oggz__constants_8h_a12afc3c052f6e84eff5a99ac9f1ccdd3a24e9b4267730b726756241d7de2e8cf2}
+}]Disable strict adherence to mapping constraints, eg for handling an incomplete stream. \index{O\-G\-G\-Z\-\_\-\-A\-U\-T\-O@{O\-G\-G\-Z\-\_\-\-A\-U\-T\-O}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-A\-U\-T\-O@{O\-G\-G\-Z\-\_\-\-A\-U\-T\-O}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-A\-U\-T\-O\label{oggz__constants_8h_a12afc3c052f6e84eff5a99ac9f1ccdd3af5b915c8762126bff52a0499745d1732}
+}]Scan for known headers while reading, and automatically set metrics appropriately. Opening a file for reading with {\itshape flags} = O\-G\-G\-Z\-\_\-\-R\-E\-A\-D $|$ O\-G\-G\-Z\-\_\-\-A\-U\-T\-O will allow seeking on Speex, Vorbis, F\-L\-A\-C, Theora, C\-M\-M\-L and all Annodex streams in units of milliseconds, once all bos pages have been delivered. \index{O\-G\-G\-Z\-\_\-\-P\-R\-E\-F\-I\-X@{O\-G\-G\-Z\-\_\-\-P\-R\-E\-F\-I\-X}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-P\-R\-E\-F\-I\-X@{O\-G\-G\-Z\-\_\-\-P\-R\-E\-F\-I\-X}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-P\-R\-E\-F\-I\-X\label{oggz__constants_8h_a12afc3c052f6e84eff5a99ac9f1ccdd3acb0fc6d8842462d7a1624c3312c299fb}
+}]Write Prefix\-: Assume that we are only writing the prefix of an Ogg stream, ie. disable checking for conformance with end-\/of-\/stream constraints. \index{O\-G\-G\-Z\-\_\-\-S\-U\-F\-F\-I\-X@{O\-G\-G\-Z\-\_\-\-S\-U\-F\-F\-I\-X}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-S\-U\-F\-F\-I\-X@{O\-G\-G\-Z\-\_\-\-S\-U\-F\-F\-I\-X}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-S\-U\-F\-F\-I\-X\label{oggz__constants_8h_a12afc3c052f6e84eff5a99ac9f1ccdd3a70e2ea0bfd95ff858125a4f777eb90e8}
+}]Write Suffix\-: Assume that we are only writing the suffix of an Ogg stream, ie. disable checking for conformance with beginning-\/of-\/stream constraints. \end{description}
+\end{Desc}
+\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!Oggz\-Flush\-Opts@{Oggz\-Flush\-Opts}}
+\index{Oggz\-Flush\-Opts@{Oggz\-Flush\-Opts}!oggz_constants.h@{oggz\-\_\-constants.\-h}}
+\subsubsection[{Oggz\-Flush\-Opts}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Oggz\-Flush\-Opts}}\label{oggz__constants_8h_a6a09e7685c864a9116473b236c847237}
+
+
+Flush options for oggz\-\_\-write\-\_\-feed; can be or'ed together. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-B\-E\-F\-O\-R\-E@{O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-B\-E\-F\-O\-R\-E}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-B\-E\-F\-O\-R\-E@{O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-B\-E\-F\-O\-R\-E}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-B\-E\-F\-O\-R\-E\label{oggz__constants_8h_a6a09e7685c864a9116473b236c847237a9dc1d61b8f27fe00ba9d0a8005a9bcfb}
+}]Flush all streams before beginning this packet. \index{O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-A\-F\-T\-E\-R@{O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-A\-F\-T\-E\-R}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-A\-F\-T\-E\-R@{O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-A\-F\-T\-E\-R}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-F\-L\-U\-S\-H\-\_\-\-A\-F\-T\-E\-R\label{oggz__constants_8h_a6a09e7685c864a9116473b236c847237a42efb730f40edcdb0dfdb8a6294619c4}
+}]Flush after this packet. \end{description}
+\end{Desc}
+\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!Oggz\-Stop\-Ctl@{Oggz\-Stop\-Ctl}}
+\index{Oggz\-Stop\-Ctl@{Oggz\-Stop\-Ctl}!oggz_constants.h@{oggz\-\_\-constants.\-h}}
+\subsubsection[{Oggz\-Stop\-Ctl}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Oggz\-Stop\-Ctl}}\label{oggz__constants_8h_a0dacf1292b80037e9aefeaee1b90f5ff}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E@{O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E@{O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-C\-O\-N\-T\-I\-N\-U\-E\label{oggz__constants_8h_a0dacf1292b80037e9aefeaee1b90f5ffaf5242099c219d1330ddd861585cc3bf3}
+}]Continue calling read callbacks. \index{O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K@{O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K@{O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-O\-K\label{oggz__constants_8h_a0dacf1292b80037e9aefeaee1b90f5ffac05c70a0c2213533267f8494eb928282}
+}]Stop calling callbacks, but retain buffered packet data. \index{O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R@{O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R}!oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}}\index{oggz\-\_\-constants.\-h@{oggz\-\_\-constants.\-h}!O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R@{O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R}}\item[{\em 
+O\-G\-G\-Z\-\_\-\-S\-T\-O\-P\-\_\-\-E\-R\-R\label{oggz__constants_8h_a0dacf1292b80037e9aefeaee1b90f5ffa09454b9448ae3d93439b644243b6e552}
+}]Stop calling callbacks, and purge buffered packet data. \end{description}
+\end{Desc}
