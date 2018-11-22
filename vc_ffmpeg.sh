@@ -7,7 +7,7 @@ function _install_ffmpeg() {
 	echo -e $RED"Installation of $_package ....... started"$RESET
 	cd $SOURCE_DIR/
 	rm -vrf ffmpeg*
-	git clone -b 'n3.0.11' --single-branch --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
+	git clone -b 'n3.0.12' --single-branch --depth 1 https://github.com/FFmpeg/FFmpeg.git ffmpeg
 	cd ffmpeg/
 	ldconfig
         export LD_LIBRARY_PATH=/usr/local/ffmpegtoolkit/lib:/usr/local/lib:/usr/lib:$LD_LIBRARY_PATH
