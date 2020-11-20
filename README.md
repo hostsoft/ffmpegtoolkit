@@ -1,7 +1,7 @@
 
 # FFMPEG Toolkit
----
-The script is written in Bash language，it's can automatically install ffmpeg and related on you system
+The script is written in Bash language  
+it's can automatically install ffmpeg and related on you system
 Current version **V2**
 
 	Notice: working CentOS 7/8 64bit, other system not testing
@@ -38,12 +38,12 @@ sh install.sh
 ```
   
 ### Verify
-	verify and check path, included *ImageMagick*
+* verify and check path, included *ImageMagick*
 ```
 which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc}  
 ```
 
-	Return
+* Return
 ```
 [root@dev ~]# which {ffmpeg,ffprobe,qt-faststart,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc,x264,x265}
 /usr/local/bin/ffmpeg
