@@ -37,11 +37,13 @@ cd ffmpegtoolkit
 sh install.sh
 ```
   
-### Check Path  , Included  *ImageMagick*
+### Verify
+	verify and check path, included *ImageMagick*
 ```
 which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc}  
 ```
 
+	Return
 ```
 [root@dev ~]# which {ffmpeg,ffprobe,qt-faststart,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc,x264,x265}
 /usr/local/bin/ffmpeg
