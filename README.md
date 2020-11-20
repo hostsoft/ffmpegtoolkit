@@ -1,29 +1,40 @@
 
-##  FFMPEG Toolkit v1  
-  
-# Automatically installer ffmpeg on you system
-it's free  
+# FFMPEG Toolkit
+---
+The script is written in Bash language，it's can automatically install ffmpeg and related on you system
+Current version **V2**
+
+	Notice: working CentOS 7/8 64bit, other system not testing
+
+### Requirements
+
+| Name | Version |
+|--|--|
+| CentOS | 8 or higher |
+
+
+### Features
 
  * install ffmpeg ffprobe qt-faststart
- * install mplayer mencoder
  * install mp4box flvtool2 yamdi
  * install mediainfo neroaccenc 
- * working CentOS 7.* 64bit, other not testing
+ * install imagemagick
 
-### Update
+### Changelog
+ * remove mplayer mencoder (v2)
  * add libass support (16/03/2018)
  * add NVIDIA CUDA   (New versions wait add it)
  * add libvpx
  * add x265
- * update something soft to latest version
+ * update something soft and library to latest version
 
-### Installer  
+### Usage
 ```
-yum install git wget -y 
+yum install -y git wget
 cd /opt
 git clone https://github.com/hostsoft/ffmpegtoolkit.git ffmpegtoolkit
 cd ffmpegtoolkit
-sh latest.sh
+sh install.sh
 ```
   
 ### Check Path  , Included  *ImageMagick*
@@ -32,12 +43,10 @@ which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediai
 ```
 
 ```
-[root@dev ~]# which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc,x264,x265}
+[root@dev ~]# which {ffmpeg,ffprobe,qt-faststart,flvtool2,MP4Box,yamdi,mediainfo,neroAacEnc,x264,x265}
 /usr/local/bin/ffmpeg
 /usr/local/bin/ffprobe
 /usr/local/bin/qt-faststart
-/usr/local/bin/mplayer
-/usr/local/bin/mencoder
 /usr/local/bin/flvtool2
 /usr/local/bin/MP4Box
 /usr/local/bin/yamdi
@@ -46,8 +55,6 @@ which {ffmpeg,ffprobe,qt-faststart,mplayer,mencoder,flvtool2,MP4Box,yamdi,mediai
 /usr/local/bin/x264
 /usr/local/bin/x265
       
-[root@dev ~]# echo "ImageMagick Command Path"
-ImageMagick Command Path
 [root@dev ~]# which {identify,convert,composite}
 /usr/bin/identify
 /usr/bin/convert
