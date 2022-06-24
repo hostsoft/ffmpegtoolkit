@@ -69,10 +69,11 @@ if [ ! -e ~/.ffmpegtookit ]; then
     yum install -y yum-utils
     yum install -y epel-release
     REQPKGS=(epel-release)
-    REQPKGS+=(gcc gcc-c++ git subversion libgcc glib2 bzip2 xz unzip make cmake automake autoconf patch ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib)
+    REQPKGS+=(gcc gcc-c++ git subversion libgcc glib2 bzip2 xz unzip make python3 cmake cmake3 automake autoconf patch ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib)
     REQPKGS+=(zlib zlib-devel libjpeg libjpeg-devel libpng libpng-devel gd gd-devel gettext freetype freetype-devel ImageMagick ImageMagick-devel)
-    REQPKGS+=(libstdc++ libstdc++-devel numactl numactl-devel mediainfo giflib libtiff libtiff-devel libtool libxml2 libxml2-devel re2c giflib-devel doxygen)
-    REQPKGS+=(libmediainfo SDL-devel freeglut-devel openssl-devel fribidi-devel fribidi libva-devel libwayland-cursor libwayland-egl wayland-devel)
+    REQPKGS+=(libstdc++ libstdc++-devel numactl numactl-devel libmediainfo mediainfo giflib libtiff libtiff-devel libtool libxml2 libxml2-devel re2c giflib-devel)
+    REQPKGS+=(doxygen SDL-devel SDL2 SDL2-devel freeglut-devel openssl-devel fribidi-devel fribidi libffi libffi-devel gmp-devel libxslt-devel libxslt xmlto jansson-devel mesa-filesystem)
+    REQPKGS+=(redhat-lsb-core libdrm-devel libX11-devel libXi-devel opencl-headers ocl-icd ocl-icd-devel libpciaccess-devel intel-gpu-tools ocl-icd-*) #Intel QSV
     for pkg in "${REQPKGS[@]}"; do
         if ${T} -q list installed "${pkg}" > /dev/null 2>&1; then
             printf "${CRED}Skip:\e[0m [${pkg}] is already installed \n${CEND}"
@@ -87,15 +88,14 @@ if [ ! -e ~/.ffmpegtookit ]; then
     sed -i s/SELINUX=permissive/SELINUX=disabled/g /etc/selinux/config
     setenforce 0
     #active Python
-    sudo /usr/sbin/alternatives --set python /usr/bin/python3
-    pip3 install meson
-    pip3 install ninja
+    #sudo /usr/sbin/alternatives --set python /usr/bin/python3
+    pip3 install meson ninja
     # Start Sync Time
     systemctl enable chronyd
   fi
   touch ~/.ffmpegtookit
 fi
-
+# Create
 cat >/etc/ld.so.conf.d/ffmpegtoolkit.conf <<EOF
 /usr/local/lib
 /usr/local/lib64
@@ -104,6 +104,7 @@ cat >/etc/ld.so.conf.d/ffmpegtoolkit.conf <<EOF
 /usr/local/ffmpegtoolkit/lib64
 /usr/local/cuda-11.1/targets/x86_64-linux/lib
 EOF
+sudo ln -sf /usr/lib64/libOpenCL.so.1 /usr/lib/libOpenCL.so
 ldconfig -vvvv
 
 #ARG_NUM START
@@ -158,16 +159,28 @@ if [ ${ARG_NUM} == 0 ]; then
 fi
 # ARG_NUM END
 
-
 # Install Process
-if [ "${memcached_flag}" == 'y' ]; then
-  echo -e "";
-fi
+#if [ "${memcached_flag}" == 'y' ]; then
+#  echo -e "";
+#fi
 
-_Install_nv_header | tee -a ${install_dir}/installer.log
-_Install_nv_cuda | tee -a ${install_dir}/installer.log
+#_Install_ | tee -a ${install_dir}/installer.log
+
 _Install_nasm | tee -a ${install_dir}/installer.log
 _Install_yasm | tee -a ${install_dir}/installer.log
+# Nvidia
+#_Install_nv_header | tee -a ${install_dir}/installer.log
+#_Install_nv_cuda | tee -a ${install_dir}/installer.log
+# Intel
+_Install_libmfx | tee -a ${install_dir}/installer.log
+_Install_wanyland | tee -a ${install_dir}/installer.log
+_Install_libva | tee -a ${install_dir}/installer.log
+_Install_libva-utils | tee -a ${install_dir}/installer.log
+_Install_intel-vaapi-driver | tee -a ${install_dir}/installer.log
+_Install_intel-gmmlib | tee -a ${install_dir}/installer.log
+_Install_intel-media-driver | tee -a ${install_dir}/installer.log
+_Install_intel-media-sdk | tee -a ${install_dir}/installer.log
+## Lib
 _Install_libsrt | tee -a ${install_dir}/installer.log
 _Install_libass | tee -a ${install_dir}/installer.log
 _Install_libaribb24 | tee -a ${install_dir}/installer.log
