@@ -1,8 +1,6 @@
 
 
-
-
-echo root:Cc@258369 |sudo chpasswd root
+echo root:test123456 |sudo chpasswd root
 sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
 sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
 sudo service sshd restart
