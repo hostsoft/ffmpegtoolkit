@@ -3,8 +3,8 @@
 # FFMPEG Toolkit Installation Scripts
 # Many credits to GPL for the package repo
 #
-# Author : Matt Xu  (2018-2021)
-# Package installers copyright IDCLayer.COM (2018-2021) where applicable.
+# Author : Matt Xu  (2018-2022)
+# Package installers copyright IDCLayer.COM (2018-2022) where applicable.
 # All other work copyright InfoCube  (2018)
 # Licensed under GNU General Public License v3.0 GPL-3 (in short)
 #
@@ -206,7 +206,9 @@ _Install_libvpx | tee -a ${install_dir}/installer.log
 _Install_libaom | tee -a ${install_dir}/installer.log
 _Install_libx264 | tee -a ${install_dir}/installer.log
 _Install_libx265 | tee -a ${install_dir}/installer.log
-_Install_ffmpeg | tee -a ${install_dir}/installer.log
+
+#_Install_ffmpeg | tee -a ${install_dir}/installer.log
+exit 1;
 
 echo -e "Created Soft Links"
 ln -sf /usr/local/ffmpegtoolkit/bin/ffmpeg /bin/ffmpeg
