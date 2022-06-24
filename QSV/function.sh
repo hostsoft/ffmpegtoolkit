@@ -1,5 +1,156 @@
 #!/usr/bin/env bash
 
+# QSV
+dnf -y
+
+## LibMFX
+_Install_libmfx() {
+  local name='libmfx';
+  local LIBMFX_VERSION=1.35
+  pushd ${SOURCE_DIR}/src > /dev/null
+  echo -e "${CBLUE} Install ${name} ${CEND}";
+  [[ -f "${LIBMFX_VERSION}.tar.gz" ]] && rm -rf "${LIBMFX_VERSION}.tar.gz";
+  [[ -d "mfx_dispatch-${LIBMFX_VERSION}" ]] && rm -rf "mfx_dispatch-${LIBMFX_VERSION}";
+  wget https://github.com/lu-zero/mfx_dispatch/archive/refs/tags/${LIBMFX_VERSION}.tar.gz
+  tar xfz ${LIBMFX_VERSION}.tar.gz
+  cd mfx_dispatch-${LIBMFX_VERSION}
+  autoreconf -i
+  ./configure --prefix=${INSTALL_DIR}
+  make
+  make install
+  popd > /dev/null
+}
+## Wanyland
+_Install_wanyland() {
+  local name='wayland';
+  local WAYLAND_VERSION=1.20.0
+  pushd ${SOURCE_DIR}/src > /dev/null
+  echo -e "${CBLUE} Install ${name} ${CEND}";
+  [[ -f "wayland-${WAYLAND_VERSION}.tar.xz" ]] && rm -rf "wayland-${WAYLAND_VERSION}.tar.xz";
+  [[ -d "wayland-${WAYLAND_VERSION}" ]] && rm -rf "wayland-${WAYLAND_VERSION}";
+  wget https://wayland.freedesktop.org/releases/wayland-${WAYLAND_VERSION}.tar.xz
+  tar xf wayland-${WAYLAND_VERSION}.tar.xz
+  cd wayland-${WAYLAND_VERSION}
+  meson build/ --prefix=${INSTALL_DIR}
+  ninja -C build/ install
+  echo -e "Install Done";
+  popd > /dev/null
+}
+## Libva
+_Install_libva() {
+  local name='libva';
+  local version="";
+  pushd ${SOURCE_DIR}/src > /dev/null
+  echo -e "${CBLUE} Install ${name} ${CEND}";
+  [[ -f "libva-2.14.0.tar.bz2" ]] && rm -rf "libva-2.14.0.tar.bz2";
+  [[ -d "libva-2.14.0" ]] && rm -rf "libva-2.14.0";
+  wget https://github.com/intel/libva/releases/download/2.14.0/libva-2.14.0.tar.bz2
+  tar xvjf libva-2.14.0.tar.bz2
+  cd libva-2.14.0
+  autoreconf -i
+  ./configure --prefix=${INSTALL_DIR}
+  make -j 18
+  make install
+  echo -e "Install Done";
+  popd > /dev/null
+}
+## Libva Utils
+_Install_libva-utils() {
+  local name='libva-utils';
+  local version="";
+  pushd ${SOURCE_DIR}/src > /dev/null
+  echo -e "${CBLUE} Install ${name} ${CEND}";
+  [[ -f "2.14.0.tar.gz" ]] && rm -rf "2.14.0.tar.gz";
+  [[ -d "libva-utils-2.14.0" ]] && rm -rf "libva-utils-2.14.0";
+  wget https://github.com/intel/libva-utils/archive/refs/tags/2.14.0.tar.gz
+  tar xfz 2.14.0.tar.gz
+  cd libva-utils-2.14.0
+  ./autogen.sh
+  autoreconf -i
+  ./configure --prefix="${INSTALL_DIR}"
+  make -j$(nproc)
+  sudo make install
+  echo -e "Install Done";
+  popd > /dev/null
+}
+## Intel VAAPI Driver
+_Install_intel-vaapi-driver() {
+  local name='Intel Vaapi Driver';
+  local version="";
+  pushd ${SOURCE_DIR}/src > /dev/null
+  echo -e "${CBLUE} Install ${name} ${CEND}";
+  [[ -f "2.4.1.tar.gz" ]] && rm -rf "2.4.1.tar.gz";
+  [[ -d "intel-vaapi-driver-2.4.1" ]] && rm -rf "intel-vaapi-driver-2.4.1";
+  wget https://github.com/intel/intel-vaapi-driver/archive/refs/tags/2.4.1.tar.gz
+  tar xfz 2.4.1.tar.gz
+  cd intel-vaapi-driver-2.4.1
+  ./autogen.sh
+  autoreconf -i
+  ./configure --prefix=${INSTALL_DIR}
+  make
+  make install
+  echo -e "Install Done";
+  popd > /dev/null
+}
+## Intel GmmLib
+_Install_intel-gmmlib() {
+  local name='Intel GMMLib';
+  local GMMLIB_VERSION=22.1.2
+  pushd ${SOURCE_DIR}/src > /dev/null
+  echo -e "${CBLUE} Install ${name} ${CEND}";
+  [[ -f "intel-gmmlib-${GMMLIB_VERSION}.tar.gz" ]] && rm -rf "intel-gmmlib-${GMMLIB_VERSION}.tar.gz";
+  [[ -d "gmmlib-intel-gmmlib-${GMMLIB_VERSION}" ]] && rm -rf "gmmlib-intel-gmmlib-${GMMLIB_VERSION}";
+  wget https://github.com/intel/gmmlib/archive/refs/tags/intel-gmmlib-${GMMLIB_VERSION}.tar.gz
+  tar xfz intel-gmmlib-${GMMLIB_VERSION}.tar.gz
+  cd gmmlib-intel-gmmlib-${GMMLIB_VERSION}
+  mkdir -p build
+  cd build;
+  cmake -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" ..
+  make -j$(nproc)
+  sudo make install
+  echo -e "Install Done";
+  popd > /dev/null
+}
+## Intel Media Driver
+_Install_intel-media-driver() {
+  local name='Intel Media Driver';
+  local version="";
+  pushd ${SOURCE_DIR}/src > /dev/null
+  echo -e "${CBLUE} Install ${name} ${CEND}";
+  [[ -f "intel-media-22.3.1.tar.gz" ]] && rm -rf "intel-media-22.3.1.tar.gz";
+  [[ -d "" ]] && rm -rf "";
+  wget https://github.com/intel/media-driver/archive/refs/tags/intel-media-22.3.1.tar.gz
+  tar xfz intel-media-22.3.1.tar.gz
+  cd media-driver-intel-media-22.3.1
+  mkdir build
+  cd build
+  cmake -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" ..
+  make -j"$(nproc)"
+  make install
+  echo -e "Install Done";
+  popd > /dev/null
+}
+## Intel Media SDK
+_Install_intel-media-sdk() {
+  export LIBVA_DRIVERS_PATH=${INSTALL_DIR}/lib
+  export LIBVA_DRIVER_NAME=iHD
+  local name='Intel Media SDK';
+  local INTEL_MEDIA_DRIVER_VERSION=22.3.1
+  pushd ${SOURCE_DIR}/src > /dev/null
+  echo -e "${CBLUE} Install ${name} ${CEND}";
+  [[ -d "msdk" ]] && rm -rf "msdk";
+  git clone https://github.com/Intel-Media-SDK/MediaSDK msdk
+  cd msdk
+  mkdir build && cd build
+  cmake3 -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} ..
+  make -j"$(nproc)"
+  make install
+  echo -e "Install Done";
+  popd > /dev/null
+}
+
+# Nvadia
+## NvHeader
 _Install_nv_header() {
   local name='Nv Coder Header';
   pushd ${SOURCE_DIR}/src > /dev/null
@@ -10,7 +161,7 @@ _Install_nv_header() {
   make && make install
   popd > /dev/null
 }
-
+## Cuda
 _Install_nv_cuda() {
   local name='CUDA';
   pushd ${SOURCE_DIR}/src > /dev/null
@@ -696,11 +847,14 @@ _Install_libx265() {
   popd > /dev/null
 }
 
+## FFMPEG
 _Install_ffmpeg() {
   local name='FFMPEG';
   pushd ${SOURCE_DIR}/src > /dev/null
   echo -e "${CBLUE} Install ${name} ${CEND}";
   [[ -d "ffmpeg" ]] && rm -rf "ffmpeg";
+  systemctl daemon-reload
+  ldconfig
   #git clone https://git.ffmpeg.org/ffmpeg.git
   git clone https://github.com/FFmpeg/FFmpeg ffmpeg
   cd ffmpeg
@@ -709,18 +863,14 @@ _Install_ffmpeg() {
   --pkg-config-flags="--static" \
   --extra-libs=-lpthread \
   --extra-libs=-lm \
-  --extra-cflags="-I/usr/local/include -I/usr/local/cuda/include -I/include -I/usr/local/ffmpegtoolkit/include" \
-  --extra-ldflags="-L/usr/local/lib -L/usr/local/cuda/lib64 -L/usr/local/ffmpegtoolkit/lib -L/usr/local/ffmpegtoolkit/lib64" \
+  --extra-cflags="-I/usr/local/include -I/usr/local/cuda/include -I/include -I/usr/local/ffmpegtoolkit/include -I/tmp/medka-sdk/build/__bin/release" \
+  --extra-ldflags="-L/usr/local/lib -L/usr/local/cuda/lib64 -L/usr/local/ffmpegtoolkit/lib -L/usr/local/ffmpegtoolkit/lib64 -L/tmp/medka-sdk/build/__bin/release/" \
   --enable-cross-compile \
   --disable-debug \
   --enable-fontconfig \
   --enable-gray \
   --enable-gpl \
   --enable-version3 \
-  --enable-cuvid \
-  --enable-libnpp \
-  --enable-nvenc \
-  --enable-nvdec \
   --enable-nonfree \
   --enable-runtime-cpudetect \
   --enable-shared \
@@ -762,11 +912,4 @@ _Install_ffmpeg() {
   popd > /dev/null
 }
 
-#--enable-libcelt \
-#--enable-libilbc \
-#--enable-libgsm \
-#--enable-libuavs3d \
 
-#--enable-libmfx \
-#--enable-vaapi \
-#--enable-opencl \
