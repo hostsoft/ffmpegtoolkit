@@ -531,7 +531,7 @@ _Install_libkvazaar() {
   echo -e "${CBLUE} Install ${name} ${CEND}";
   [[ -d "kvazaar" ]] && rm -rf "kvazaar";
   git clone --depth 1 https://github.com/ultravideo/kvazaar.git
-  cd kvazaar
+  cd kvazaarfz
   ./autogen.sh
   ./configure --prefix=${INSTALL_DIR} --bindir=${INSTALL_DIR}/bin
   make
@@ -582,6 +582,7 @@ _Install_libzimg() {
   [[ -d "zimg" ]] && rm -rf "zimg";
   git clone https://github.com/sekrit-twc/zimg
   cd zimg
+  git checkout tags/release-3.0.4 -b main
   ./autogen.sh
   ./configure --prefix=${INSTALL_DIR} --bindir=${INSTALL_DIR}/bin
   make && make install

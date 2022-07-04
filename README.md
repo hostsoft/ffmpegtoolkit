@@ -37,6 +37,7 @@ yum install -y git wget
 cd /opt
 git clone https://github.com/hostsoft/ffmpegtoolkit.git ffmpegtoolkit
 cd ffmpegtoolkit
+git checkout -b main origin/main
 bash install.sh
 
 mkdir -p /opt/ffmpegtoolkit
