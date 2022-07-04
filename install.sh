@@ -3,8 +3,8 @@
 # FFMPEG Toolkit Installation Scripts
 # Many credits to GPL for the package repo
 #
-# Author : Matt Xu  (2018-2021)
-# Package installers copyright IDCLayer.COM (2018-2021) where applicable.
+# Author : Matt Xu  (2018-2022)
+# Package installers copyright IDCLayer.COM (2018-2022) where applicable.
 # All other work copyright InfoCube  (2018)
 # Licensed under GNU General Public License v3.0 GPL-3 (in short)
 #
@@ -72,7 +72,7 @@ if [ ! -e ~/.ffmpegtookit ]; then
     REQPKGS+=(gcc gcc-c++ git subversion libgcc glib2 bzip2 xz unzip make cmake automake autoconf patch ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib)
     REQPKGS+=(zlib zlib-devel libjpeg libjpeg-devel libpng libpng-devel gd gd-devel gettext freetype freetype-devel ImageMagick ImageMagick-devel)
     REQPKGS+=(libstdc++ libstdc++-devel numactl numactl-devel mediainfo giflib libtiff libtiff-devel libtool libxml2 libxml2-devel re2c giflib-devel doxygen)
-    REQPKGS+=(libmediainfo SDL-devel freeglut-devel openssl-devel fribidi-devel fribidi libva-devel libwayland-cursor libwayland-egl wayland-devel)
+    REQPKGS+=(libmediainfo SDL-devel freeglut-devel openssl-devel fribidi-devel fribidi)
     for pkg in "${REQPKGS[@]}"; do
         if ${T} -q list installed "${pkg}" > /dev/null 2>&1; then
             printf "${CRED}Skip:\e[0m [${pkg}] is already installed \n${CEND}"
@@ -87,6 +87,7 @@ if [ ! -e ~/.ffmpegtookit ]; then
     sed -i s/SELINUX=permissive/SELINUX=disabled/g /etc/selinux/config
     setenforce 0
     #active Python
+    dnf -y install python3
     sudo /usr/sbin/alternatives --set python /usr/bin/python3
     pip3 install meson
     pip3 install ninja
