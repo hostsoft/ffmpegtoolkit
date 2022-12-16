@@ -25,7 +25,7 @@ Chinese
 * install mediainfo neroaccenc
 * install imagemagick
 
-### 变更日志
+### 更新日志
 
 * remove mplayer mencoder (v2)
 * add libass support (16/03/2018)
