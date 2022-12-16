@@ -36,7 +36,7 @@ Chinese
 * add libvpx
 * update something soft and library to latest version
 
-### 用法
+### 一键安装脚本
 ```
 yum install -y git wget
 cd /opt
