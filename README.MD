@@ -79,7 +79,7 @@ ffmpeg version N-102560-g4718d74c58 Copyright (c) 2000-2021 the FFmpeg developer
   libswresample   4.  0.100 /  4.  0.100
   libpostproc    56.  0.100 / 56.  0.100
 超快音视频编码器
-使用: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
+使用: ffmpeg [选项] [[文件选项] -i 文件]... {[输出文件选项] 输出文件}...
 
 使用 -h 获得完整的帮助, 甚至更好, 运行 'man ffmpeg'
 
