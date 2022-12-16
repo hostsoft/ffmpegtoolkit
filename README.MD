@@ -1,4 +1,9 @@
 Chinese
+
+原作者：hostsoft
+
+原项目地址：https://github.com/hostsoft/ffmpegtoolkit
+
 # FFMPEG 工具包
  该脚本是用 Bash 语言编写的
  它可以自动在你的系统上安装 ffmpeg 和相关的
@@ -35,7 +40,7 @@ Chinese
 ```
 yum install -y git wget
 cd /opt
-git clone https://github.com/hostsoft/ffmpegtoolkit.git ffmpegtoolkit
+git clone https://github.com/linkea131/ffmpegtoolkit.git ffmpegtoolkit
 cd ffmpegtoolkit
 bash install.sh
 ```
@@ -118,6 +123,11 @@ total 14340
 -rwxr-xr-x. 1 root root  117888
 
 English
+
+Original author：hostsoft
+
+Original project address：https://github.com/hostsoft/ffmpegtoolkit
+
 # FFMPEG Toolkit
 The script is written in Bash language  
 it's can automatically install ffmpeg and related on you system
@@ -154,7 +164,7 @@ Current version **V2**
 ```
 yum install -y git wget
 cd /opt
-git clone https://github.com/hostsoft/ffmpegtoolkit.git ffmpegtoolkit
+git clone https://github.com/linkea131/ffmpegtoolkit.git ffmpegtoolkit
 cd ffmpegtoolkit
 bash install.sh
 ```
