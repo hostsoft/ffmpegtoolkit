@@ -9,7 +9,7 @@ Chinese
  它可以自动在你的系统上安装 ffmpeg 和相关的
 当前版本 **V2**
 
-	注意: 当前仅工作 CentOS 8 64bit, 其他系统包括 centos 7 不测试
+	注意: 当前仅工作 CentOS 8 64bit, 其他系统包括 centos 7 未测试
 
 ### 要求
 
