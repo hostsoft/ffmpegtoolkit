@@ -531,7 +531,7 @@ _Install_libkvazaar() {
   echo -e "${CBLUE} Install ${name} ${CEND}";
   [[ -d "kvazaar" ]] && rm -rf "kvazaar";
   git clone --depth 1 https://github.com/ultravideo/kvazaar.git
-  cd kvazaarfz
+  cd kvazaar
   ./autogen.sh
   ./configure --prefix=${INSTALL_DIR} --bindir=${INSTALL_DIR}/bin
   make
@@ -687,10 +687,10 @@ _Install_libx265() {
   local name='X265';
   pushd ${SOURCE_DIR}/src > /dev/null
   echo -e "${CBLUE} Install ${name} ${CEND}";
-  [[ -d "x265" ]] && rm -rf "x265";
-  hg clone http://hg.videolan.org/x265
-  cd x265/build/linux
-  cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR} -DENABLE_SHARED:bool=ON ../../source
+  [[ -d "x265_git" ]] && rm -rf "x265_git";
+  git clone --branch stable --depth 2 https://bitbucket.org/multicoreware/x265_git
+  cd x265_git/build/linux
+  cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}" -DENABLE_SHARED:bool=ON ../../source
   make
   make install
   #make distclean
