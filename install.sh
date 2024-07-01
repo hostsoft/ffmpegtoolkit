@@ -66,13 +66,14 @@ if [ ! -e ~/.ffmpegtookit ]; then
     echo "${CMSG}Installing Dependencies Packages...${CEND}"
     ${T} config-manager --set-enabled powertools
     dnf config-manager --set-enabled powertools
+    dnf config-manager --set-enabled crb
     yum install -y yum-utils
     yum install -y epel-release
     REQPKGS=(epel-release)
     REQPKGS+=(gcc gcc-c++ git subversion libgcc glib2 bzip2 xz unzip make cmake automake autoconf patch ruby ncurses ncurses-devel mercurial hg neon expat expat-devel alsa-lib)
     REQPKGS+=(zlib zlib-devel libjpeg libjpeg-devel libpng libpng-devel gd gd-devel gettext freetype freetype-devel ImageMagick ImageMagick-devel)
     REQPKGS+=(libstdc++ libstdc++-devel numactl numactl-devel mediainfo giflib libtiff libtiff-devel libtool libxml2 libxml2-devel re2c giflib-devel doxygen)
-    REQPKGS+=(libmediainfo SDL-devel freeglut-devel openssl-devel fribidi-devel fribidi)
+    REQPKGS+=(libmediainfo SDL-devel freeglut-devel openssl-devel fribidi-devel fribidi meson ninja-build)
     for pkg in "${REQPKGS[@]}"; do
         if ${T} -q list installed "${pkg}" > /dev/null 2>&1; then
             printf "${CRED}Skip:\e[0m [${pkg}] is already installed \n${CEND}"
