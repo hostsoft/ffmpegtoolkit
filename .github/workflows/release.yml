@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fix permissions
+        run: chmod +x build.sh scripts/*.sh scripts/build_modules/*.sh 2>/dev/null || chmod +x build.sh
+
+      - name: Install deps
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq wget xz-utils tar git
+
+      - name: Test deps
+        run: sudo ./build.sh deps
+
+      - name: Fetch sources
+        run: sudo ./build.sh fetch
+
+      - name: Build
+        run: sudo ./build.sh build
+
+      - name: Create dist package
+        run: sudo ./build.sh dist
+
+      - name: Copy dist to workspace
+        run: cp ../ffmpegtoolkit-*.tar.gz . && ls -la ffmpegtoolkit-*.tar.gz
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ffmpegtoolkit-*.tar.gz
+          generate_release_notes: true
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

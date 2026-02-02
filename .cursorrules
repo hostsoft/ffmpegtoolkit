@@ -1,0 +1,24 @@
+代码编写环境为 Windows, 部署和运行环境为Linux
+默认所有代码注释语言要求为英文
+TOOLKIT_ROOT: 项目根目录。
+PREFIX: 编译安装的目标路径（默认 /opt/ffmpeg-toolkit）。
+SRC_DIR: 存放下载好的 .tar.gz 源码包。
+BUILD_DIR: 源码解压及编译的临时工作空间。
+MANIFEST: 核心状态文件（存储版本号、编译参数、安装日期）。
+DEP_PROVIDER: 依赖安装器（识别是 apt, dnf 还是 source）。
+STAMP: 断点标记点。每成功一步，在 BUILD_DIR 产生一个 .done_{name} 文件。
+
+所有脚本必须严格遵循此目录结构，不得在非指定目录产生临时文件。
+
+ffmpegtoolkit/
+├── .github/workflows/   # CI/CD 自动化测试
+├── build.sh             # 主入口脚本 (类似 DA 的 ./build)
+├── versions.txt         # 统一的版本控制中心 (Source of Truth)
+├── scripts/
+│   ├── core_env.sh      # 环境变量、日志初始化、硬件探测
+│   ├── dep_manager.sh   # 依赖检查与断点逻辑 (Version Match)
+│   ├── build_modules/   # 各组件编译逻辑 (x264.sh, x265.sh, etc.)
+│   └── installer.sh     # 静态包部署逻辑
+├── templates/           # 编译参数模板
+└── logs/                # 详细日志输出
+

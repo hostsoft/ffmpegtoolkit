@@ -1,0 +1,93 @@
+name: Build Test
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fix permissions
+        run: chmod +x build.sh scripts/*.sh scripts/build_modules/*.sh 2>/dev/null || chmod +x build.sh
+
+      - name: Install deps
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq wget xz-utils tar git
+
+      - name: Test help
+        run: sudo ./build.sh --help
+
+      - name: Test deps
+        run: sudo ./build.sh deps
+
+      - name: Test fetch
+        run: sudo ./build.sh fetch
+
+      - name: Verify downloads
+        run: ls -la downloads/ 2>/dev/null || true
+
+      - name: Test build
+        run: sudo ./build.sh build
+
+      - name: Test link
+        run: sudo ./build.sh --link
+
+      - name: Test ldconfig
+        run: sudo ./build.sh ldconfig
+
+      - name: Test ffmpeg
+        run: sudo ffmpeg -version
+
+      - name: Test ffprobe
+        run: sudo ffprobe -version
+
+      - name: Test dist
+        run: sudo ./build.sh dist
+
+      - name: Verify dist
+        run: tar tzf ../ffmpegtoolkit-*.tar.gz | head -20
+
+        
+  almalinux:
+    runs-on: ubuntu-22.04
+    container: almalinux:9
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fix permissions
+        run: chmod +x build.sh scripts/*.sh scripts/build_modules/*.sh 2>/dev/null || chmod +x build.sh
+
+      - name: Test deps
+        run: ./build.sh deps
+
+      - name: Test fetch
+        run: ./build.sh fetch
+
+      - name: Verify downloads
+        run: ls -la downloads/ 2>/dev/null || true
+
+      - name: Test build
+        run: ./build.sh build
+
+      - name: Test link
+        run: ./build.sh --link
+
+      - name: Test ldconfig
+        run: ./build.sh ldconfig
+
+      - name: Test ffmpeg
+        run: ffmpeg -version
+
+      - name: Test ffprobe
+        run: ffprobe -version
+
+      - name: Test dist
+        run: ./build.sh dist
+
+      - name: Verify dist
+        run: tar tzf ../ffmpegtoolkit-*.tar.gz | head -20
+
